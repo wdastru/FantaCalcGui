@@ -1,0 +1,8 @@
+release\*.o
+release/*.o
+release\*.exe
+release/*.exe
+debug\*.o
+debug/*.o
+debug\*.exe
+debug/*.exe
