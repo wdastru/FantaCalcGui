@@ -277,12 +277,10 @@ void FormazioniFileReader::execute() {
 							v_WhichOfTheseLevenshtein.push_back(tmpStr);
 						}
 
-						//tmp2.close(); //durante il dialogo seguente il programma potrebbe terminare: se tmp2 fosse aperto non potrebbe essere rimosso
 						WhichOfLevenshteinDialog whichOfLevenshteinDialog;
 						whichOfLevenshteinDialog.setListOfLevenshtein(
 								v_WhichOfTheseLevenshtein);
 						whichOfLevenshteinDialog.exec();
-						//tmp2.open(TOFILEOut_2.c_str(), ios::app);
 
 						v_Found.push_back(
 								Levenshteins.at(
@@ -376,30 +374,30 @@ void FormazioniFileReader::execute() {
 }
 void FormazioniFileReader::printTitolo2(std::string str) {
 	QString tmp = "";
-	LOG(TOFILE, "<br>+");
+	LOG(TOFILE, "\n +");
 	for (unsigned int i = 0; i < str.size() + 6; i++) {
 		tmp += "-";
 	}
-	LOG(TOFILE, tmp + "+<br>" + "| +");
+	LOG(TOFILE, tmp + "+\n" + " | +");
 
 	tmp = "";
 	for (unsigned int i = 0; i < str.size() + 2; i++) {
 		tmp += "-";
 	}
-	LOG(TOFILE, tmp + "+ |");
+	LOG(TOFILE, tmp + "+ |\n");
 
-	LOG(TOFILE, "| | " + QString::fromStdString(str) + " | |<br>");
+	LOG(TOFILE, " | | " + QString::fromStdString(str) + " | |\n");
 
-	LOG(TOFILE, "| +");
+	LOG(TOFILE, " | +");
 	for (unsigned int i = 0; i < str.size() + 2; i++)
 		LOG(TOFILE, "-");
-	LOG(TOFILE, "+ |<br>");
+	LOG(TOFILE, "+ |\n");
 
-	LOG(TOFILE, "+");
+	LOG(TOFILE, " +");
 	for (unsigned int i = 0; i < str.size() + 6; i++)
 		LOG(TOFILE, "-");
-	LOG(TOFILE, "+<br><br>");
+	LOG(TOFILE, "+\n\n");
 }
 void FormazioniFileReader::printTitolo3(std::string str) {
-	LOG(TOFILE, "<br>!!!! " + QString::fromStdString(str) + " !!!!<br>");
+	LOG(TOFILE, "\n!!!! " + QString::fromStdString(str) + " !!!!\n");
 }
