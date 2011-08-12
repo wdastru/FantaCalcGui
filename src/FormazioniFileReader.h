@@ -9,6 +9,8 @@
 #define FORMAZIONIFILEREADER_H_
 
 #include <fstream>
+#include <string>
+#include <vector>
 #include "QtCore/QString"
 
 #include "Fanta.h"
@@ -18,6 +20,9 @@
 #include "WhichOfLevenshteinDialog.h"
 #include "toString.h"
 #include "defines.h"
+
+using namespace std;
+
 
 class FormazioniFileReader {
 public:

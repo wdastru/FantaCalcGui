@@ -135,15 +135,15 @@ void FormazioniFileReader::execute() {
 						QString::fromStdString(STR_MOD->leftString(line, 15)));
 
 				size_t i = 0;
-				while (msk(line, " ", i) != "TnotF!") {
+				while (STR_MOD->msk(line, " ", i) != "TnotF!") {
 					i++;
 				} // trova l'ultimo token
 				i--;
 
-				if (msk(line, " ", i) == "GDV") {
+				if (STR_MOD->msk(line, " ", i) == "GDV") {
 					gdv = true;
 					line.erase(line.size() - 4, 4);// toglie gdv
-				} else if (msk(line, " ", i) == "GDP") {
+				} else if (STR_MOD->msk(line, " ", i) == "GDP") {
 					gdp = true;
 					line.erase(line.size() - 4, 4);// toglie gdp
 				}
@@ -162,7 +162,7 @@ void FormazioniFileReader::execute() {
 					string tempStrGazz = this->allThePlayers[xx - 65].at(j);
 
 					size_t found =
-							msk(tempStrGazz, DELIM, ColNomeCognome).find(line,
+							STR_MOD->msk(tempStrGazz, DELIM, ColNomeCognome).find(line,
 									0);
 					// cerca nella riga della Gazzetta il nome del giocatore
 
@@ -178,7 +178,7 @@ void FormazioniFileReader::execute() {
 					if (v_Found.size() > 1) {
 						wasAThese = true;
 						for (unsigned int j = 0; j < v_Found.size(); j++) {
-							string tmpRuolo = msk(v_Found.at(j), DELIM,
+							string tmpRuolo = STR_MOD->msk(v_Found.at(j), DELIM,
 									ColRuolo);
 							if (tmpRuolo == "P")
 								tmpRuolo = "Portiere";
@@ -193,11 +193,11 @@ void FormazioniFileReader::execute() {
 							tmpStr += ('[' + my::toString<unsigned int>(j + 1)
 									+ ']');
 							tmpStr += " ";
-							tmpStr += msk(v_Found.at(j), DELIM, ColNomeCognome);
+							tmpStr += STR_MOD->msk(v_Found.at(j), DELIM, ColNomeCognome);
 							tmpStr += " - ";
 							tmpStr += tmpRuolo;
 							tmpStr += " - ";
-							tmpStr += msk(v_Found.at(j), DELIM, ColSquadra);
+							tmpStr += STR_MOD->msk(v_Found.at(j), DELIM, ColSquadra);
 
 							v_WhichOfThese.push_back(tmpStr);
 						}
@@ -219,12 +219,12 @@ void FormazioniFileReader::execute() {
 							for (size_t jj = 0; jj
 									< this->allThePlayers[ii].size(); jj++) {
 								// Threshold
-								if (msk(this->allThePlayers[ii].at(jj), DELIM,
+								if (STR_MOD->msk(this->allThePlayers[ii].at(jj), DELIM,
 										ColNomeCognome) != "TnotF!") {
 									if (FANTA->LevenshteinDistance(
 											line,
 											STR_MOD->onlySurname(
-													msk(
+													STR_MOD->msk(
 															this->allThePlayers[ii].at(
 																	jj), DELIM,
 															ColNomeCognome)))
@@ -250,7 +250,7 @@ void FormazioniFileReader::execute() {
 						}
 
 						for (unsigned int j = 0; j < Levenshteins.size(); j++) {
-							string tmpRuolo = msk(Levenshteins.at(j), DELIM,
+							string tmpRuolo = STR_MOD->msk(Levenshteins.at(j), DELIM,
 									ColRuolo);
 							if (tmpRuolo == "P")
 								tmpRuolo = "Portiere";
@@ -265,13 +265,13 @@ void FormazioniFileReader::execute() {
 							tmpStr += ('[' + my::toString<unsigned int>(j + 1)
 									+ ']');
 							tmpStr += " ";
-							tmpStr += msk(Levenshteins.at(j), DELIM,
+							tmpStr += STR_MOD->msk(Levenshteins.at(j), DELIM,
 									ColNomeCognome);
 							tmpStr += " - ";
 							tmpStr += tmpRuolo;
 							tmpStr += " - ";
 							tmpStr
-									+= msk(Levenshteins.at(j), DELIM,
+									+= STR_MOD->msk(Levenshteins.at(j), DELIM,
 											ColSquadra);
 
 							v_WhichOfTheseLevenshtein.push_back(tmpStr);
@@ -308,10 +308,10 @@ void FormazioniFileReader::execute() {
 							LOG(
 									ERROR,
 									QString::fromStdString(
-											msk(v_Found.at(answer), DELIM,
+											STR_MOD->msk(v_Found.at(answer), DELIM,
 													ColNomeCognome)) + " ( "
 											+ QString::fromStdString(
-													msk(v_Found.at(answer),
+													STR_MOD->msk(v_Found.at(answer),
 															DELIM, ColSquadra))
 											+ "<br>Giocatore ripetuto !!!<br>Controllare il TOFILE di input.");
 							//goto restart;
@@ -321,10 +321,10 @@ void FormazioniFileReader::execute() {
 							LOG(
 									ERROR,
 									QString::fromStdString(
-											msk(v_Found.at(answer), DELIM,
+											STR_MOD->msk(v_Found.at(answer), DELIM,
 													ColNomeCognome)) + " ( "
 											+ QString::fromStdString(
-													msk(v_Found.at(answer),
+													STR_MOD->msk(v_Found.at(answer),
 															DELIM, ColSquadra))
 											+ "<br>Giocatore indicato con goal decisivo vittoria senza che abbia segnato !!!<br/>Controllare il TOFILE di input.");
 							//goto restart;
@@ -334,10 +334,10 @@ void FormazioniFileReader::execute() {
 							LOG(
 									ERROR,
 									QString::fromStdString(
-											msk(v_Found.at(answer), DELIM,
+											STR_MOD->msk(v_Found.at(answer), DELIM,
 													ColNomeCognome)) + " ( "
 											+ QString::fromStdString(
-													msk(v_Found.at(answer),
+													STR_MOD->msk(v_Found.at(answer),
 															DELIM, ColSquadra))
 											+ "<br>Giocatore indicato con goal decisivo pareggio senza che abbia segnato !!!<br/>Controllare il TOFILE di input.<br>");
 							//goto restart;
@@ -351,10 +351,10 @@ void FormazioniFileReader::execute() {
 							LOG(
 									TOFILE,
 									"--> " + QString::fromStdString(
-											msk(v_Found.at(answer), DELIM,
+											STR_MOD->msk(v_Found.at(answer), DELIM,
 													ColNomeCognome)) + " ( "
 											+ QString::fromStdString(
-													msk(v_Found.at(answer),
+													STR_MOD->msk(v_Found.at(answer),
 															DELIM, ColSquadra))
 											+ " )");
 						} else
