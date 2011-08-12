@@ -28,7 +28,7 @@ void FormazioniFileReader::execute() {
 
 	std::string line;
 
-	// --> lettura TOFILE Squadre
+	// --> lettura file Squadre
 	for (unsigned int k = 0; k < 2; k++) // k indice delle squadre
 	{
 		while (!fSqua.eof()) {
@@ -46,7 +46,7 @@ void FormazioniFileReader::execute() {
 				continue;
 			} else if (line.find("###***###", 0) != std::string::npos) {
 				/*
-				 *  ###***### serve per separare le due squadre nel TOFILE di input
+				 *  ###***### serve per separare le due squadre nel file di input
 				 *  se trovato passa alla prossima squadra o esce dal loop for
 				 */
 
@@ -76,8 +76,6 @@ void FormazioniFileReader::execute() {
 
 				this->printTitolo2(
 						STR_MOD->centerString(FANTA->getTeamName(k), 10));
-				//printTitolo1_toTOFILE(FANTA->getTeamName(k), tmp2);
-				//tmp2 << endl;
 
 				continue;
 			} else if (line.find("modulo", 0) != std::string::npos) {
@@ -91,13 +89,13 @@ void FormazioniFileReader::execute() {
 				if (xx == EXIT_FAILURE) {
 					LOG(
 							ERROR,
-							"Modulo non consentito!<br>Controllare il TOFILE di input."
+							"Modulo non consentito!<br>Controllare il file di input."
 									+ QString::fromStdString(
 											FANTA->getModuloSquadra(k)));
 					//goto restart;
 				} else {
 					LOG(
-							TOFILE,
+							DEBUG,
 							" Modulo : " + QString::fromStdString(
 									FANTA->getModuloSquadra(k)));
 					continue;
@@ -105,7 +103,7 @@ void FormazioniFileReader::execute() {
 			} else if (line.find("in casa", 0) != std::string::npos) {
 				FANTA->setAtHome(k);
 				if (FANTA->atHome[k] == 2)
-					LOG(TOFILE, " In casa ");
+					LOG(DEBUG, " In casa ");
 
 				LOG(
 						DEBUG,
@@ -131,7 +129,7 @@ void FormazioniFileReader::execute() {
 				if (line.size() <= 1) // evitare le righe con un solo carattere rimasto
 					continue;
 
-				LOG(TOFILE,
+				LOG(DEBUG,
 						QString::fromStdString(STR_MOD->leftString(line, 15)));
 
 				size_t i = 0;
@@ -202,11 +200,9 @@ void FormazioniFileReader::execute() {
 							v_WhichOfThese.push_back(tmpStr);
 						}
 
-						//tmp2.close(); //durante il dialogo seguente il programma potrebbe terminare: se tmp2 fosse aperto non potrebbe essere rimosso
 						WhichOfTheseDialog whichOfTheseDialog;
 						whichOfTheseDialog.setListOfThese(v_WhichOfThese);
 						whichOfTheseDialog.exec();
-						//tmp2.open(TOFILEOut_2.c_str(), ios::app);
 
 						answer = whichOfTheseDialog.chosenThese;
 						answer--;
@@ -234,7 +230,7 @@ void FormazioniFileReader::execute() {
 								} else {
 									LOG(
 											ERROR,
-											"Il TOFILE della Gazzetta non sembra essere valido !<br/>Controllare il TOFILE di input.");
+											"Il file della Gazzetta non sembra essere valido !<br/>Controllare il file di input.");
 									//									return EXIT_FAILURE;
 									return;
 								}
@@ -245,7 +241,7 @@ void FormazioniFileReader::execute() {
 							LOG(
 									ERROR,
 									QString::fromStdString(line)
-											+ "<br>Giocatore non trovato!<br>Controllare il TOFILE di input.");
+											+ "<br>Giocatore non trovato!<br>Controllare il file di input.");
 							//goto restart;
 						}
 
@@ -311,7 +307,7 @@ void FormazioniFileReader::execute() {
 											+ QString::fromStdString(
 													STR_MOD->msk(v_Found.at(answer),
 															DELIM, ColSquadra))
-											+ "<br>Giocatore ripetuto !!!<br>Controllare il TOFILE di input.");
+											+ "<br>Giocatore ripetuto !!!<br>Controllare il file di input.");
 							//goto restart;
 							break;
 
@@ -324,7 +320,7 @@ void FormazioniFileReader::execute() {
 											+ QString::fromStdString(
 													STR_MOD->msk(v_Found.at(answer),
 															DELIM, ColSquadra))
-											+ "<br>Giocatore indicato con goal decisivo vittoria senza che abbia segnato !!!<br/>Controllare il TOFILE di input.");
+											+ "<br>Giocatore indicato con goal decisivo vittoria senza che abbia segnato !!!<br/>Controllare il file di input.");
 							//goto restart;
 							break;
 
@@ -337,7 +333,7 @@ void FormazioniFileReader::execute() {
 											+ QString::fromStdString(
 													STR_MOD->msk(v_Found.at(answer),
 															DELIM, ColSquadra))
-											+ "<br>Giocatore indicato con goal decisivo pareggio senza che abbia segnato !!!<br/>Controllare il TOFILE di input.<br>");
+											+ "<br>Giocatore indicato con goal decisivo pareggio senza che abbia segnato !!!<br/>Controllare il file di input.<br>");
 							//goto restart;
 							break;
 
