@@ -83,4 +83,12 @@
 #define ColGoalDecPar 			15 // non presente nel file gazzetta, ma aggiunto dal programma
 #endif /* COLUMNS */
 
+#ifndef ADDPLAYER_RETURN_CODES
+#define ADDPLAYER_RETURN_CODES
+#define PLAYER_OK 			0
+#define PLAYER_REPEATED 	1
+#define PLAYER_GDV_NO_GOAL 	2
+#define PLAYER_GDP_NO_GOAL 	3
+#endif /* ADDPLAYER_RETURN_CODES */
+
 #endif /* DEFINES_H_ */

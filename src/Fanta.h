@@ -87,10 +87,10 @@ private:
 	player NonHaGiocato;
 	std::vector<std::string> teamName;
 	unsigned int getModulo(size_t, size_t) const;
+	std::vector<Fanta::player> Team[2];
 
 	/*
 	 std::vector<std::string> scorers[2];
-	 std::vector<CFanta::player> Team[2];
 	 std::vector<CFanta::player> teamOrderedByRuolo[2][4];
 	 void orderByRuolo();
 	 void checkNonHaGiocato();
