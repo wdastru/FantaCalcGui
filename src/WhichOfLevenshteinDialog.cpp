@@ -3,8 +3,6 @@
 #include "WhichOfLevenshteinDialog.h"
 #include <sstream>
 
-//extern std::string msk (std::string, std::string, size_t);
-
 WhichOfLevenshteinDialog::WhichOfLevenshteinDialog(QWidget *parent)
         : QDialog(parent)
 {
@@ -60,7 +58,7 @@ void WhichOfLevenshteinDialog::setItem()
         itemLabel->setText(item);
         std::ostringstream oss;
         oss << item.toAscii().constData();
-        this->chosenLevenshtein = atoi( msk( oss.str(), "[]", 0 ).c_str() );
+        this->chosenLevenshtein = atoi( STR_MOD->msk( oss.str(), "[]", 0 ).c_str() );
         this->enableOkButton();
         this->enableQuitButton();
     }

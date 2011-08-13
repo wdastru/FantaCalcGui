@@ -2,7 +2,7 @@
 #include "string"
 #include <fstream>
 
-#include <QtGui>
+#include <QtGui/QtGui>
 #include <QApplication>
 
 #include "singletonQtLogger.h"

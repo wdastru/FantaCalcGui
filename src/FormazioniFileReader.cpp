@@ -95,11 +95,6 @@ void FormazioniFileReader::execute() {
 											FANTA->getModuloSquadra(k)));
 					//goto restart;
 				} else {
-					LOG(
-							DEBUG,
-							"In FormazioniFileReader::execute() --> "
-									+ QString::fromStdString(
-											FANTA->getModuloSquadra(k)));
 					continue;
 				}
 			} else if (line.find("in casa", 0) != std::string::npos) {
@@ -117,11 +112,11 @@ void FormazioniFileReader::execute() {
 				if (line.size() <= 1) // evitare le righe con un solo carattere rimasto
 					continue;
 
-				LOG(
-						DEBUG,
-						"In FormazioniFileReader::execute() --> "
-								+ QString::fromStdString(
-										STR_MOD->leftString(line, 15)));
+				//				LOG(
+				//						DEBUG,
+				//						"In FormazioniFileReader::execute() --> "
+				//								+ QString::fromStdString(
+				//										STR_MOD->leftString(line, 15)));
 
 				size_t i = 0;
 				while (STR_MOD->msk(line, " ", i) != "TnotF!") {
@@ -162,7 +157,6 @@ void FormazioniFileReader::execute() {
 				bool wasALeven = false;
 				bool wasAThese = false;
 
-				//				try {
 				if (v_Found.size() > 1) {
 					wasAThese = true;
 					for (unsigned int j = 0; j < v_Found.size(); j++) {
@@ -334,29 +328,38 @@ void FormazioniFileReader::execute() {
 						break;
 					}
 
-					if (wasAThese || wasALeven) {
-						LOG(
-								TOFILE,
-								"--> " + QString::fromStdString(
-										STR_MOD->msk(v_Found.at(answer), DELIM,
-												ColNomeCognome)) + " ( "
-										+ QString::fromStdString(
-												STR_MOD->msk(
-														v_Found.at(answer),
-														DELIM, ColSquadra))
-										+ " )");
-					} else
-						LOG(TOFILE, "--> trovato");
+//					if (wasAThese || wasALeven) {
+//						LOG(
+//								DEBUG,
+//								"In FormazioniFileReader::execute() --> "
+//										+ QString::fromStdString(
+//												STR_MOD->msk(
+//														v_Found.at(answer),
+//														DELIM, ColNomeCognome))
+//										+ " ( " + QString::fromStdString(
+//										STR_MOD->msk(v_Found.at(answer), DELIM,
+//												ColSquadra)) + " ) trovato.");
+//					} else {
+//						LOG(
+//								DEBUG,
+//								"In FormazioniFileReader::execute() --> "
+//										+ QString::fromStdString(line)
+//										+ " trovato.");
+//					}
+
+					LOG(
+							DEBUG,
+							"In FormazioniFileReader::execute() --> "
+									+ QString::fromStdString(
+											STR_MOD->msk(v_Found.at(answer),
+													DELIM, ColNomeCognome))
+									+ " ( " + QString::fromStdString(
+									STR_MOD->msk(v_Found.at(answer), DELIM,
+											ColSquadra)) + " ) trovato.");
+
 				} else {
 					;
 				}
-				//				} catch (...) {
-				//					remove("tmp");
-				//					remove("tmp2");
-				//					remove("tmp3");
-				//					//return EXIT_FAILURE;
-				//					return;
-				//				}
 			}
 		}
 	}

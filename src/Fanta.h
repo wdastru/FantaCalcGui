@@ -28,8 +28,7 @@ public:
 	unsigned int setModulo(std::string &, size_t);
 	std::string getModuloSquadra(size_t) const ;
 	void setAtHome(unsigned int);
-	unsigned int LevenshteinDistance(const std::string& s1,
-			const std::string& s2);
+	unsigned int LevenshteinDistance(const std::string& s1,	const std::string& s2);
 	unsigned int addPlayer(std::string &, unsigned int);
 
 	/*

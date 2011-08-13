@@ -1,7 +1,10 @@
 #ifndef WHICHOFLEVENSHTEINDIALOG_H
 #define WHICHOFLEVENSHTEINDIALOG_H
 
-#include <QDialog>
+#include <QtGui/QDialog>
+
+#include "defines.h"
+#include "StringModifier.h"
 
 class QLabel;
 class QErrorMessage;

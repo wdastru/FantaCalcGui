@@ -12,6 +12,7 @@ SET( SRCS src/main.cpp
         src/FormazioniFileReader.cpp 
         src/Fanta.cpp        
         src/WhichOfTheseDialog.cpp
+        src/WhichOfLevenshteinDialog.cpp
         src/StringModifier.cpp )
 SET( HDRS src/CVersion.h
         src/IniFileManager.h
@@ -23,6 +24,7 @@ SET( HDRS src/CVersion.h
         src/FormazioniFileReader.h 
         src/Fanta.h        
         src/WhichOfTheseDialog.h
+        src/WhichOfLevenshteinDialog.h
         src/StringModifier.h )
 SET( UIS  src/authenticationdialog.ui
 		src/UseTheNetDialog.ui
