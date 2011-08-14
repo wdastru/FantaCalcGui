@@ -23,12 +23,12 @@ unsigned int FormazioniFileReader::execute() {
 		LOG(
 				FATAL,
 				"In FormazioniFileReader::execute() --> il file gazzetta  : "
-						+ this->fileFormazioni + " non esiste!");
+						+ this->fileFormazioni + " non esiste o non è leggibile!");
+		return FORMFILEREAD_NO_FORM_FILE;
 	}
 
 	std::string line;
 
-	// --> lettura file Squadre
 	for (unsigned int k = 0; k < 2; k++) // k indice delle squadre
 	{
 		while (!fSqua.eof()) {
@@ -212,7 +212,7 @@ unsigned int FormazioniFileReader::execute() {
 							} else {
 								LOG(
 										ERROR,
-										"Il file della Gazzetta non sembra essere valido !<br/>Controllare il file di input.");
+										"In FormazioniFileReader::execute() --> il file della Gazzetta non sembra essere valido !");
 								return FORMFILEREAD_BAD_GAZ_FILE;
 							}
 						}
@@ -363,7 +363,6 @@ unsigned int FormazioniFileReader::execute() {
 			}
 		}
 	}
-	// <-- lettura file Squadre
 	return FORMFILEREAD_OK;
 }
 //void FormazioniFileReader::printTitolo2(std::string str) {
