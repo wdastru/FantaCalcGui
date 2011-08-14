@@ -213,8 +213,7 @@ unsigned int FormazioniFileReader::execute() {
 								LOG(
 										ERROR,
 										"Il file della Gazzetta non sembra essere valido !<br/>Controllare il file di input.");
-								//									return EXIT_FAILURE;
-								return;
+								return FORMFILEREAD_BAD_GAZ_FILE;
 							}
 						}
 					}
