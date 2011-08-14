@@ -241,6 +241,68 @@ unsigned int Fanta::LevenshteinDistance(const std::string& s1, const std::string
 
 	return tmp;
 }
+void Fanta::execute() {
+	Fanta::checkGiocatoSenzaVoto();
+	Fanta::checkNonHaGiocato();
+	Fanta::orderByRuolo();
+	Fanta::fillWithNonHaGiocato();
+	Fanta::substitutions();
+	Fanta::calculateFantaVoto();
+	Fanta::calculateDefenseMean();
+	Fanta::calculateDefenseModifier();
+	Fanta::calculateSfide();
+	Fanta::calculateTotal();
+	Fanta::calculateGoals();
+	Fanta::calculateScorers();
+}
+void Fanta::checkGiocatoSenzaVoto() {
+	for (size_t k = 0; k < 2; k++) // squadra
+	{
+		for (size_t j = 0; j < Fanta::Team[k].size(); j++) // loop sui giocatori
+		{
+			if (Fanta::Team[k].at(j).VotoGazzetta == -1) {
+				if (Fanta::Team[k].at(j).Ruolo == 0) // se è un portiere
+				{
+					Fanta::Team[k].at(j).VotoGazzetta = 6.0; // il portiere non si sostituisce se ha giocato (ma non ha preso voto),
+					Fanta::Team[k].at(j).FantaVotoGazzetta = Fanta::Team[k].at(
+							j).VotoGazzetta - Fanta::Team[k].at(j).Esp - 0.5
+							* Fanta::Team[k].at(j).Amm - 2 * Fanta::Team[k].at(
+							j).Autoreti + Fanta::Team[k].at(j).Assist
+							- Fanta::Team[k].at(j).GoalSubiti; // subiti x un portiere !
+				} else //se non è un portiere
+				{
+					string answer;
+
+					Less25MinDialog less25MinDialog;
+					less25MinDialog.setPlayer(Fanta::Team[k].at(j).Nome);
+					less25MinDialog.exec();
+
+					answer = less25MinDialog.getAnswer();
+
+					if (answer == "Yes") {
+						Fanta::Team[k].at(j).VotoGazzetta = 6.0;
+						Fanta::Team[k].at(j).FantaVotoGazzetta
+								= Fanta::Team[k].at(j).VotoGazzetta
+										- Fanta::Team[k].at(j).Esp - 0.5
+										* Fanta::Team[k].at(j).Amm - 2
+										* Fanta::Team[k].at(j).Autoreti
+										+ Fanta::Team[k].at(j).Assist + 3
+										* Fanta::Team[k].at(j).GoalFatti;
+
+						if (Fanta::Team[k].at(j).FantaVotoGazzetta == 6.0) {
+							Fanta::Team[k].at(j).VotoGazzetta = 5.5;
+							Fanta::Team[k].at(j).FantaVotoGazzetta = 5.5;
+						}
+					} else
+						Fanta::Team[k].at(j).daSostituire = 1; // viene marcato per l'eliminazione
+
+					continue;
+				}
+			}
+		}
+		//cout << "<-- checkGiocatoSenzaVoto" << endl;
+	}
+}
 
 /*
 unsigned int Fanta::getSubstitutions(size_t k) const {
@@ -1082,20 +1144,6 @@ void Fanta::printRiepilogo_toHtml(ofstream & fOut) {
 	}
 	fOut << ")" << endl << endl;
 }
-void Fanta::execute() {
-	Fanta::checkGiocatoSenzaVoto();
-	Fanta::checkNonHaGiocato();
-	Fanta::orderByRuolo();
-	Fanta::fillWithNonHaGiocato();
-	Fanta::substitutions();
-	Fanta::calculateFantaVoto();
-	Fanta::calculateDefenseMean();
-	Fanta::calculateDefenseModifier();
-	Fanta::calculateSfide();
-	Fanta::calculateTotal();
-	Fanta::calculateGoals();
-	Fanta::calculateScorers();
-}
 void Fanta::checkNonHaGiocato() {
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
@@ -1118,54 +1166,6 @@ void Fanta::checkNonHaGiocato() {
 		}
 	}
 	//cout << "<-- checkNonHaGiocato" << endl;
-}
-void Fanta::checkGiocatoSenzaVoto() {
-	for (size_t k = 0; k < 2; k++) // squadra
-	{
-		for (size_t j = 0; j < Fanta::Team[k].size(); j++) // loop sui giocatori
-		{
-			if (Fanta::Team[k].at(j).VotoGazzetta == -1) {
-				if (Fanta::Team[k].at(j).Ruolo == 0) // se è un portiere
-				{
-					Fanta::Team[k].at(j).VotoGazzetta = 6.0; // il portiere non si sostituisce se ha giocato (ma non ha preso voto),
-					Fanta::Team[k].at(j).FantaVotoGazzetta = Fanta::Team[k].at(
-							j).VotoGazzetta - Fanta::Team[k].at(j).Esp - 0.5
-							* Fanta::Team[k].at(j).Amm - 2 * Fanta::Team[k].at(
-							j).Autoreti + Fanta::Team[k].at(j).Assist
-							- Fanta::Team[k].at(j).GoalSubiti; // subiti x un portiere !
-				} else //se non è un portiere
-				{
-					string answer;
-
-					Less25MinDialog less25MinDialog;
-					less25MinDialog.setPlayer(Fanta::Team[k].at(j).Nome);
-					less25MinDialog.exec();
-
-					answer = less25MinDialog.getAnswer();
-
-					if (answer == "Yes") {
-						Fanta::Team[k].at(j).VotoGazzetta = 6.0;
-						Fanta::Team[k].at(j).FantaVotoGazzetta
-								= Fanta::Team[k].at(j).VotoGazzetta
-										- Fanta::Team[k].at(j).Esp - 0.5
-										* Fanta::Team[k].at(j).Amm - 2
-										* Fanta::Team[k].at(j).Autoreti
-										+ Fanta::Team[k].at(j).Assist + 3
-										* Fanta::Team[k].at(j).GoalFatti;
-
-						if (Fanta::Team[k].at(j).FantaVotoGazzetta == 6.0) {
-							Fanta::Team[k].at(j).VotoGazzetta = 5.5;
-							Fanta::Team[k].at(j).FantaVotoGazzetta = 5.5;
-						}
-					} else
-						Fanta::Team[k].at(j).daSostituire = 1; // viene marcato per l'eliminazione
-
-					continue;
-				}
-			}
-		}
-		//cout << "<-- checkGiocatoSenzaVoto" << endl;
-	}
 }
 void Fanta::orderByRuolo() {
 	for (size_t k = 0; k < 2; k++)// loop sulle squadre

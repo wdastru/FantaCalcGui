@@ -9,12 +9,17 @@
 #define FANTA_H_
 
 #include <math.h>
-#include <QMessageBox>
 #include <fstream>
+#include <string>
+
+#include <QtGui/QMessageBox>
 
 #include "defines.h"
 #include "singletonQtLogger.h"
 #include "StringModifier.h"
+#include "Less25MinDialog.h"
+
+using namespace std;
 
 class Fanta {
 public:
@@ -30,9 +35,9 @@ public:
 	void setAtHome(unsigned int);
 	unsigned int LevenshteinDistance(const std::string& s1,	const std::string& s2);
 	unsigned int addPlayer(std::string &, unsigned int);
+	void execute();
 
 	/*
-	 void execute();
 	 std::string getVariablesValues();
 	 void bSort(std::vector<CFanta::player> &);
 	 void calculateScorers();
@@ -87,13 +92,13 @@ private:
 	std::vector<std::string> teamName;
 	unsigned int getModulo(size_t, size_t) const;
 	std::vector<Fanta::player> Team[2];
+	void checkGiocatoSenzaVoto();
 
 	/*
 	 std::vector<std::string> scorers[2];
 	 std::vector<CFanta::player> teamOrderedByRuolo[2][4];
 	 void orderByRuolo();
 	 void checkNonHaGiocato();
-	 void checkGiocatoSenzaVoto();
 	 void substitutions();
 	 void reorderPlayers();
 	 void fillWithNonHaGiocato();
