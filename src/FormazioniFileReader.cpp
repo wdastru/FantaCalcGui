@@ -17,7 +17,7 @@ void FormazioniFileReader::setPlayers(
 		std::vector<std::vector<std::string> > & _allThePlayers) {
 	this->allThePlayers = _allThePlayers;
 }
-void FormazioniFileReader::execute() {
+unsigned int FormazioniFileReader::execute() {
 	std::ifstream fSqua(this->fileFormazioni.toStdString().c_str());
 	if (!fSqua) {
 		LOG(
@@ -74,9 +74,6 @@ void FormazioniFileReader::execute() {
 						DEBUG,
 						"In FormazioniFileReader::execute() --> nome squadra : "
 								+ QString::fromStdString(line));
-
-				//				this->printTitolo2(
-				//						STR_MOD->centerString(FANTA->getTeamName(k), 10));
 
 				continue;
 			} else if (line.find("modulo", 0) != std::string::npos) {
@@ -270,6 +267,10 @@ void FormazioniFileReader::execute() {
 
 				if (line.size() > 1) // se rimane solo un carattere "non-lettera" va avanti senza aggiungere nulla
 				{
+					/*
+					 *  aggiungo le due colonne mancanti
+					 *  nel file della Gazzetta : GDV e GDP
+					 */
 					if (gdv) {
 						v_Found.at(answer) += "\t1\t0";
 					} else if (gdp) {
@@ -285,15 +286,16 @@ void FormazioniFileReader::execute() {
 					case 1:
 						LOG(
 								ERROR,
-								QString::fromStdString(
-										STR_MOD->msk(v_Found.at(answer), DELIM,
-												ColNomeCognome)) + " ( "
+								"In FormazioniFileReader::execute() --> "
 										+ QString::fromStdString(
 												STR_MOD->msk(
 														v_Found.at(answer),
-														DELIM, ColSquadra))
-										+ "<br>Giocatore ripetuto !!!<br>Controllare il file di input.");
-						//goto restart;
+														DELIM, ColNomeCognome))
+										+ " ( " + QString::fromStdString(
+										STR_MOD->msk(v_Found.at(answer), DELIM,
+												ColSquadra))
+										+ ") ripetuto !!! Controllare il file di input.");
+						return FORMFILEREAD_REPEATED;
 						break;
 
 					case 2:
@@ -307,7 +309,7 @@ void FormazioniFileReader::execute() {
 														v_Found.at(answer),
 														DELIM, ColSquadra))
 										+ "<br>Giocatore indicato con goal decisivo vittoria senza che abbia segnato !!!<br/>Controllare il file di input.");
-						//goto restart;
+						return FORMFILEREAD_GDV_NO_GOAL;
 						break;
 
 					case 3:
@@ -321,32 +323,31 @@ void FormazioniFileReader::execute() {
 														v_Found.at(answer),
 														DELIM, ColSquadra))
 										+ "<br>Giocatore indicato con goal decisivo pareggio senza che abbia segnato !!!<br/>Controllare il file di input.<br>");
-						//goto restart;
+						return FORMFILEREAD_GDP_NO_GOAL;
 						break;
 
 					default:
 						break;
 					}
 
-//					if (wasAThese || wasALeven) {
-//						LOG(
-//								DEBUG,
-//								"In FormazioniFileReader::execute() --> "
-//										+ QString::fromStdString(
-//												STR_MOD->msk(
-//														v_Found.at(answer),
-//														DELIM, ColNomeCognome))
-//										+ " ( " + QString::fromStdString(
-//										STR_MOD->msk(v_Found.at(answer), DELIM,
-//												ColSquadra)) + " ) trovato.");
-//					} else {
-//						LOG(
-//								DEBUG,
-//								"In FormazioniFileReader::execute() --> "
-//										+ QString::fromStdString(line)
-//										+ " trovato.");
-//					}
-
+					//					if (wasAThese || wasALeven) {
+					//						LOG(
+					//								DEBUG,
+					//								"In FormazioniFileReader::execute() --> "
+					//										+ QString::fromStdString(
+					//												STR_MOD->msk(
+					//														v_Found.at(answer),
+					//														DELIM, ColNomeCognome))
+					//										+ " ( " + QString::fromStdString(
+					//										STR_MOD->msk(v_Found.at(answer), DELIM,
+					//												ColSquadra)) + " ) trovato.");
+					//					} else {
+					//						LOG(
+					//								DEBUG,
+					//								"In FormazioniFileReader::execute() --> "
+					//										+ QString::fromStdString(line)
+					//										+ " trovato.");
+					//					}
 					LOG(
 							DEBUG,
 							"In FormazioniFileReader::execute() --> "
@@ -363,34 +364,35 @@ void FormazioniFileReader::execute() {
 			}
 		}
 	}
-	// <-- lettura TOFILE Squadre
+	// <-- lettura file Squadre
+	return FORMFILEREAD_OK;
 }
-void FormazioniFileReader::printTitolo2(std::string str) {
-	QString tmp = "";
-	LOG(TOFILE, "\n +");
-	for (unsigned int i = 0; i < str.size() + 6; i++) {
-		tmp += "-";
-	}
-	LOG(TOFILE, tmp + "+\n" + " | +");
-
-	tmp = "";
-	for (unsigned int i = 0; i < str.size() + 2; i++) {
-		tmp += "-";
-	}
-	LOG(TOFILE, tmp + "+ |\n");
-
-	LOG(TOFILE, " | | " + QString::fromStdString(str) + " | |\n");
-
-	LOG(TOFILE, " | +");
-	for (unsigned int i = 0; i < str.size() + 2; i++)
-		LOG(TOFILE, "-");
-	LOG(TOFILE, "+ |\n");
-
-	LOG(TOFILE, " +");
-	for (unsigned int i = 0; i < str.size() + 6; i++)
-		LOG(TOFILE, "-");
-	LOG(TOFILE, "+\n\n");
-}
-void FormazioniFileReader::printTitolo3(std::string str) {
-	LOG(TOFILE, "\n!!!! " + QString::fromStdString(str) + " !!!!\n");
-}
+//void FormazioniFileReader::printTitolo2(std::string str) {
+//	QString tmp = "";
+//	LOG(TOFILE, "\n +");
+//	for (unsigned int i = 0; i < str.size() + 6; i++) {
+//		tmp += "-";
+//	}
+//	LOG(TOFILE, tmp + "+\n" + " | +");
+//
+//	tmp = "";
+//	for (unsigned int i = 0; i < str.size() + 2; i++) {
+//		tmp += "-";
+//	}
+//	LOG(TOFILE, tmp + "+ |\n");
+//
+//	LOG(TOFILE, " | | " + QString::fromStdString(str) + " | |\n");
+//
+//	LOG(TOFILE, " | +");
+//	for (unsigned int i = 0; i < str.size() + 2; i++)
+//		LOG(TOFILE, "-");
+//	LOG(TOFILE, "+ |\n");
+//
+//	LOG(TOFILE, " +");
+//	for (unsigned int i = 0; i < str.size() + 6; i++)
+//		LOG(TOFILE, "-");
+//	LOG(TOFILE, "+\n\n");
+//}
+//void FormazioniFileReader::printTitolo3(std::string str) {
+//	LOG(TOFILE, "\n!!!! " + QString::fromStdString(str) + " !!!!\n");
+//}

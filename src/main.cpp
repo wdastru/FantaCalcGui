@@ -3,7 +3,7 @@
 #include <fstream>
 
 #include <QtGui/QtGui>
-#include <QApplication>
+#include <QtGui/QApplication>
 
 #include "singletonQtLogger.h"
 #include "defines.h"

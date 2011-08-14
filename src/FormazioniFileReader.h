@@ -30,9 +30,9 @@ public:
 	virtual ~FormazioniFileReader();
 	void setPlayers(
 			std::vector<std::vector<std::string> > &);
-	void execute();
-	void printTitolo2(std::string);
-	void printTitolo3(std::string);
+	unsigned int execute();
+//	void printTitolo2(std::string);
+//	void printTitolo3(std::string);
 
 private:
 	QString fileFormazioni;
