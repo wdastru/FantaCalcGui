@@ -83,22 +83,19 @@ int main(int argc, char *argv[]) {
 	// <-- fine controllo dell'input dell'utente a UseTheNetDialog
 
 	/*
-	 * --> lettura file Gazzetta
+	 * --> lettura file Gazzetta e Formazioni
 	 */
 	GazzettaFileReader * gazzettaFileReader = new GazzettaFileReader(
 			fileGazzetta);
-	std::vector<std::vector<std::string> > allThePlayers =
-			gazzettaFileReader->getOutput();
-	// <-- fine lettura file Gazzetta
+	//	std::vector<std::vector<std::string> > allThePlayers =
+	//			gazzettaFileReader->getOutput();
 
-	/*
-	 * --> lettura file Formazioni
-	 */
 	FormazioniFileReader * formazioniFileReader = new FormazioniFileReader(
 			fileFormazioni);
-	formazioniFileReader->setPlayers(allThePlayers);
+	formazioniFileReader->setPlayers(gazzettaFileReader->getOutput());
 	formazioniFileReader->execute();
-	// <-- fine lettura file Formazioni
+	// <-- lettura file Gazzetta e Formazioni
+
 
 	return a.exec();
 }

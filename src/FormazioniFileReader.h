@@ -29,7 +29,7 @@ public:
 	FormazioniFileReader(QString);
 	virtual ~FormazioniFileReader();
 	void setPlayers(
-			std::vector<std::vector<std::string> > &);
+			std::vector<std::vector<std::string> >);
 	unsigned int execute();
 //	void printTitolo2(std::string);
 //	void printTitolo3(std::string);

@@ -14,7 +14,7 @@ FormazioniFileReader::~FormazioniFileReader() {
 	// TODO Auto-generated destructor stub
 }
 void FormazioniFileReader::setPlayers(
-		std::vector<std::vector<std::string> > & _allThePlayers) {
+		std::vector<std::vector<std::string> > _allThePlayers) {
 	this->allThePlayers = _allThePlayers;
 }
 unsigned int FormazioniFileReader::execute() {
