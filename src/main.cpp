@@ -96,6 +96,7 @@ int main(int argc, char *argv[]) {
 	formazioniFileReader->execute();
 	// <-- lettura file Gazzetta e Formazioni
 
+	FANTA->execute();
 
 	return a.exec();
 }
