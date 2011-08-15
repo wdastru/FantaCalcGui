@@ -76,8 +76,5 @@ std::string Less25MinDialog::getAnswer()
 }
 void Less25MinDialog::exit()
 {
-    remove("tmp");
-    remove("tmp2");
-    remove("tmp3");
     exit();
 }
