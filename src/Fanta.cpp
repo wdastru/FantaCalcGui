@@ -246,8 +246,8 @@ unsigned int Fanta::LevenshteinDistance(const std::string& s1, const std::string
 }
 void Fanta::execute() {
 	this->checkGiocatoSenzaVoto();
+	this->checkNonHaGiocato();
 	return;
-//	this->checkNonHaGiocato();
 //	this->orderByRuolo();
 //	this->fillWithNonHaGiocato();
 //	this->substitutions();
