@@ -130,6 +130,9 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 	// nome
 	tmpPlayer.Nome = STR_MOD->msk(str, DELIM, ColNomeCognome);
 
+	// squadra
+	tmpPlayer.Squadra = STR_MOD->msk(str, DELIM, ColSquadra);
+
 	// goal e rigori
 	if (STR_MOD->msk(str, DELIM, ColRuolo) == "P") {
 		tmpPlayer.Ruolo = 0;

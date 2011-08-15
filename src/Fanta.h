@@ -72,6 +72,7 @@ private:
 	float modifierVoti[10];
 	struct player {
 		std::string Nome;
+		std::string Squadra;
 		unsigned int Ruolo;
 		float FantaVoto;
 		float FantaVotoGazzetta;
