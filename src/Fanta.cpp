@@ -426,11 +426,14 @@ void Fanta::fillWithNonHaGiocato() {
 			for (size_t j = Fanta::teamOrderedByRuolo[k][i].size(); j
 					< modulo[k][i] + 2; j++) {
 				Fanta::teamOrderedByRuolo[k][i].push_back(Fanta::NonHaGiocato);
+				LOG(
+						DEBUG,
+						"In Fanta::fillWithNonHaGiocato() --> Squadra "
+								+ QString::fromStdString(this->getTeamName(k))
+								+ " : aggiunto un Fanta::NonHaGiocato");
 			}
-			// aggiungere giocatori NonHaGiocato fino a completare il modulo + 2 sostituzioni
 		}
 	}
-	//cout << "<-- fillWithNonHaGiocato" << endl;
 }
 /*
 unsigned int Fanta::getSubstitutions(size_t k) const {
