@@ -243,17 +243,18 @@ unsigned int Fanta::LevenshteinDistance(const std::string& s1, const std::string
 }
 void Fanta::execute() {
 	Fanta::checkGiocatoSenzaVoto();
-	Fanta::checkNonHaGiocato();
-	Fanta::orderByRuolo();
-	Fanta::fillWithNonHaGiocato();
-	Fanta::substitutions();
-	Fanta::calculateFantaVoto();
-	Fanta::calculateDefenseMean();
-	Fanta::calculateDefenseModifier();
-	Fanta::calculateSfide();
-	Fanta::calculateTotal();
-	Fanta::calculateGoals();
-	Fanta::calculateScorers();
+	return;
+//	Fanta::checkNonHaGiocato();
+//	Fanta::orderByRuolo();
+//	Fanta::fillWithNonHaGiocato();
+//	Fanta::substitutions();
+//	Fanta::calculateFantaVoto();
+//	Fanta::calculateDefenseMean();
+//	Fanta::calculateDefenseModifier();
+//	Fanta::calculateSfide();
+//	Fanta::calculateTotal();
+//	Fanta::calculateGoals();
+//	Fanta::calculateScorers();
 }
 void Fanta::checkGiocatoSenzaVoto() {
 	for (size_t k = 0; k < 2; k++) // squadra
