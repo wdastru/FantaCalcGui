@@ -281,8 +281,8 @@ void Fanta::checkGiocatoSenzaVoto() {
 							"In Fanta::checkGiocatoSenzaVoto() --> "
 									+ QString::fromStdString(
 											this->Team[k].at(j).Nome) + " ("
-									/*+ QString::fromStdString(
-									 this->Team[k].at(j).Squadra)*/
+									+ QString::fromStdString(
+											this->Team[k].at(j).Squadra)
 									+ ", portiere) senza voto ma ha giocato. Fantavoto :  "
 									+ QString::fromStdString(
 											my::toString<float>(
@@ -317,10 +317,9 @@ void Fanta::checkGiocatoSenzaVoto() {
 									"In Fanta::checkGiocatoSenzaVoto() --> "
 											+ QString::fromStdString(
 													this->Team[k].at(j).Nome)
-											+ " ("
-									/*+ QString::fromStdString(
-									 this->Team[k].at(j).Squadra)*/
-									+ ") ha giocato 25'.");
+											+ " (" + QString::fromStdString(
+											this->Team[k].at(j).Squadra)
+											+ ") ha giocato 25'.");
 						}
 					} else {
 						this->Team[k].at(j).daSostituire = 1; // viene marcato per l'eliminazione
@@ -330,9 +329,8 @@ void Fanta::checkGiocatoSenzaVoto() {
 								"In Fanta::checkGiocatoSenzaVoto() --> "
 										+ QString::fromStdString(
 												this->Team[k].at(j).Nome)
-										+ " ("
-										/*+ QString::fromStdString(
-										 this->Team[k].at(j).Squadra)*/
+										+ " (" + QString::fromStdString(
+										this->Team[k].at(j).Squadra)
 										+ ") non ha giocato 25' : verrà effettuata una sostituzione.");
 					}
 
