@@ -248,8 +248,8 @@ void Fanta::execute() {
 	this->checkGiocatoSenzaVoto();
 	this->checkNonHaGiocato();
 	this->orderByRuolo();
+	this->fillWithNonHaGiocato();
 	return;
-//	this->fillWithNonHaGiocato();
 //	this->substitutions();
 //	this->calculateFantaVoto();
 //	this->calculateDefenseMean();
@@ -417,6 +417,20 @@ void Fanta::orderByRuolo() {
 			}
 		}
 	}
+}
+void Fanta::fillWithNonHaGiocato() {
+	for (size_t k = 0; k < 2; k++) // squadra
+	{
+		for (size_t i = 0; i < 4; i++) // ruolo
+		{
+			for (size_t j = Fanta::teamOrderedByRuolo[k][i].size(); j
+					< modulo[k][i] + 2; j++) {
+				Fanta::teamOrderedByRuolo[k][i].push_back(Fanta::NonHaGiocato);
+			}
+			// aggiungere giocatori NonHaGiocato fino a completare il modulo + 2 sostituzioni
+		}
+	}
+	//cout << "<-- fillWithNonHaGiocato" << endl;
 }
 /*
 unsigned int Fanta::getSubstitutions(size_t k) const {
@@ -1368,20 +1382,6 @@ void Fanta::substitutions() {
 		}
 	}
 
-}
-void Fanta::fillWithNonHaGiocato() {
-	for (size_t k = 0; k < 2; k++) // squadra
-	{
-		for (size_t i = 0; i < 4; i++) // ruolo
-		{
-			for (size_t j = Fanta::teamOrderedByRuolo[k][i].size(); j
-					< modulo[k][i] + 2; j++) {
-				Fanta::teamOrderedByRuolo[k][i].push_back(Fanta::NonHaGiocato);
-			}
-			// aggiungere giocatori NonHaGiocato fino a completare il modulo + 2 sostituzioni
-		}
-	}
-	//cout << "<-- fillWithNonHaGiocato" << endl;
 }
 void Fanta::calculateFantaVoto() {
 	for (size_t k = 0; k < 2; k++) // squadra

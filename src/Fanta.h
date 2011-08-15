@@ -97,12 +97,12 @@ private:
 	void checkNonHaGiocato();
 	void orderByRuolo();
 	std::vector<Fanta::player> teamOrderedByRuolo[2][4];
+	void fillWithNonHaGiocato();
 
 	/*
 	 std::vector<std::string> scorers[2];
 	 void substitutions();
 	 void reorderPlayers();
-	 void fillWithNonHaGiocato();
 	 void calculateFantaVoto();
 	 void calculateTotal();
 	 void calculateGoals();
