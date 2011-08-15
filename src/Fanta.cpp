@@ -340,7 +340,29 @@ void Fanta::checkGiocatoSenzaVoto() {
 		}
 	}
 }
-
+void Fanta::checkNonHaGiocato() {
+	for (size_t k = 0; k < 2; k++) // squadra
+	{
+		for (size_t j = 0; j < this->Team[k].size(); j++) // loop sui giocatori
+		{
+			if (this->Team[k].at(j).VotoGazzetta == 0) {
+				if (this->Team[k].at(j).FantaVotoGazzetta == 0) {
+					ofstream tmp2;
+					string fileOut_2 = "tmp2";
+					tmp2.open(fileOut_2.c_str(), ios_base::app);
+					tmp2 << " Non ha giocato : " << STR_MOD->leftString(
+							this->Team[k].at(j).Nome, 15) << endl;
+					tmp2.close();
+					this->Team[k].at(j).daSostituire = 1; // viene marcato per l'eliminazione
+				} else
+					// ma ha ricevuto voto dalla Gazzetta (caso di partite sospese ??? )
+					this->Team[k].at(j).VotoGazzetta
+							= this->Team[k].at(j).FantaVotoGazzetta;
+			}
+		}
+	}
+	//cout << "<-- checkNonHaGiocato" << endl;
+}
 /*
 unsigned int Fanta::getSubstitutions(size_t k) const {
 	return Fanta::sostituzioni[k];
@@ -1180,29 +1202,6 @@ void Fanta::printRiepilogo_toHtml(ofstream & fOut) {
 			fOut << " ";
 	}
 	fOut << ")" << endl << endl;
-}
-void Fanta::checkNonHaGiocato() {
-	for (size_t k = 0; k < 2; k++) // squadra
-	{
-		for (size_t j = 0; j < this->Team[k].size(); j++) // loop sui giocatori
-		{
-			if (this->Team[k].at(j).VotoGazzetta == 0) {
-				if (this->Team[k].at(j).FantaVotoGazzetta == 0) {
-					ofstream tmp2;
-					string fileOut_2 = "tmp2";
-					tmp2.open(fileOut_2.c_str(), ios_base::app);
-					tmp2 << " Non ha giocato : " << leftString(
-							this->Team[k].at(j).Nome, 15) << endl;
-					tmp2.close();
-					this->Team[k].at(j).daSostituire = 1; // viene marcato per l'eliminazione
-				} else
-					// ma ha ricevuto voto dalla Gazzetta (caso di partite sospese ??? )
-					this->Team[k].at(j).VotoGazzetta
-							= this->Team[k].at(j).FantaVotoGazzetta;
-			}
-		}
-	}
-	//cout << "<-- checkNonHaGiocato" << endl;
 }
 void Fanta::orderByRuolo() {
 	for (size_t k = 0; k < 2; k++)// loop sulle squadre
