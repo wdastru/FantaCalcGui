@@ -249,8 +249,8 @@ void Fanta::execute() {
 	this->checkNonHaGiocato();
 	this->orderByRuolo();
 	this->fillWithNonHaGiocato();
+	this->substitutions();
 	return;
-//	this->substitutions();
 //	this->calculateFantaVoto();
 //	this->calculateDefenseMean();
 //	this->calculateDefenseModifier();
@@ -434,6 +434,117 @@ void Fanta::fillWithNonHaGiocato() {
 			}
 		}
 	}
+}
+void Fanta::substitutions() {
+	for (size_t k = 0; k < 2; k++) // squadra
+	{
+		for (size_t i = 0; i < 4; i++) // ruolo
+		{
+			for (size_t j = 0; j < Fanta::teamOrderedByRuolo[k][i].size(); j++) // loop sui tutti i giocatori
+			{
+				if (Fanta::teamOrderedByRuolo[k][i].at(j).daSostituire == 1)
+					Fanta::teamOrderedByRuolo[k][i].at(j) = Fanta::NonHaGiocato;
+			}
+		}
+	}
+
+	// sposta i 'NON HA GIOCATO' al fondo dei giocatori in campo
+	for (size_t k = 0; k < 2; k++) // squadra
+	{
+		for (size_t i = 0; i < 4; i++) // ruolo
+		{
+			//			debug << endl;
+			//			for(size_t yy = 0; yy < Fanta::teamOrderedByRuolo[ k ][ i ].size(); yy++ )
+			//				debug << Fanta::teamOrderedByRuolo[ k ][ i ].at( yy ).Nome << endl;
+
+			size_t xx = Fanta::modulo[k][i] - 1;
+
+			for (size_t j = 0; j < xx; j++) {
+				for (size_t t = 0; t < xx - j; t++) {
+					if (Fanta::teamOrderedByRuolo[k][i].at(t).Nome == "---")
+						swap(Fanta::teamOrderedByRuolo[k][i].at(t),
+								Fanta::teamOrderedByRuolo[k][i].at(t + 1));
+				}
+			}
+		}
+	}
+
+	// se il primo panchinaro non ha giocato lo swappa con il secondo:
+	// se anch'esso non ha giocato non serve a nulla, se ha giocato lo porta in prima posizione
+	for (size_t k = 0; k < 2; k++) // squadre
+	{
+		for (size_t i = 0; i < 4; i++) // ruolo
+		{
+			if (Fanta::teamOrderedByRuolo[k][i].at(Fanta::modulo[k][i]).Nome
+					== "---")
+				swap(
+						Fanta::teamOrderedByRuolo[k][i].at(Fanta::modulo[k][i]),
+						Fanta::teamOrderedByRuolo[k][i].at(
+								Fanta::modulo[k][i] + 1));
+		}
+	}
+
+	unsigned int a[7] = { 0, 3, 2, 1, 3, 2, 1 }; // ordine delle sostituzioni
+
+	for (size_t k = 0; k < 2; k++) {
+		for (size_t t = 0; t < 3; t++) // ripetere il loop sottostante per esaurire tutte le sostituzioni
+		{
+			for (size_t i = 0; i < 7; i++) // loop sulla dimensione di a[]
+			{
+				unsigned int w = Fanta::modulo[k][a[i]];
+
+				//				debug << endl << "#### modulo : " << w << endl;
+
+				for (size_t j = 0; j < w; j++) // loop sui giocatori
+				{
+					if (Fanta::teamOrderedByRuolo[k][a[i]].at(j).Nome == "---"
+							&& sostituzioni[k] < 3) {
+						//						debug << endl;
+						//						for(size_t yy = 0; yy < Fanta::teamOrderedByRuolo[ k ][ a[ i ] ].size(); yy++ )
+						//							debug << Fanta::teamOrderedByRuolo[ k ][ a[ i ] ].at( yy ).Nome << endl;
+
+						//						debug << endl << "if j( " << j << " ) : " << Fanta::teamOrderedByRuolo[ k ][ a[ i ] ].at( j ).Nome << tab << sostituzioni[ k ] << endl;
+
+						for (size_t x = w; x
+								< Fanta::teamOrderedByRuolo[k][a[i]].size(); x++) {
+							if (Fanta::teamOrderedByRuolo[k][a[i]].at(x).Nome
+									!= "---") {
+								sostituzioni[k]++;
+								//debug << endl << tab << "if x( " << x << " ) : " << Fanta::teamOrderedByRuolo[ k ][ a[ i ] ].at( x ).Nome  << tab << sostituzioni[ k ] << endl;
+								swap(
+										Fanta::teamOrderedByRuolo[k][a[i]].at(x),
+										Fanta::teamOrderedByRuolo[k][a[i]].at(j));
+								//debug << endl << tab << "if x( " << x << " ) : " << Fanta::teamOrderedByRuolo[ k ][ a[ i ] ].at( x ).Nome  << tab << sostituzioni[ k ] << endl;
+
+								//debug << endl;
+								//for(size_t yy = 0; yy < Fanta::teamOrderedByRuolo[ k ][ a[ i ] ].size(); yy++ )
+								//debug << Fanta::teamOrderedByRuolo[ k ][ a[ i ] ].at( yy ).Nome << endl;
+
+								//break;
+								goto label;
+								// serve per poter uscire da due loop contemporaneamente
+							}
+						}
+					}
+				}
+				label: // solo una sostituzione per ruolo ( per volta )
+				;
+			}
+		}
+	}
+
+	for (size_t k = 0; k < 2; k++) // squadra
+	{
+		for (size_t i = 0; i < 4; i++) // ruolo
+		{
+			Fanta::teamOrderedByRuolo[k][i].resize(Fanta::modulo[k][i]);
+
+			// debug << endl;
+			// for(size_t yy = 0; yy < Fanta::teamOrderedByRuolo[ k ][ i ].size(); yy++ )
+			// debug << Fanta::teamOrderedByRuolo[ k ][ i ].at( yy ).Nome << endl;
+		}
+	}
+
 }
 /*
 unsigned int Fanta::getSubstitutions(size_t k) const {
@@ -1274,117 +1385,6 @@ void Fanta::printRiepilogo_toHtml(ofstream & fOut) {
 			fOut << " ";
 	}
 	fOut << ")" << endl << endl;
-}
-void Fanta::substitutions() {
-	for (size_t k = 0; k < 2; k++) // squadra
-	{
-		for (size_t i = 0; i < 4; i++) // ruolo
-		{
-			for (size_t j = 0; j < Fanta::teamOrderedByRuolo[k][i].size(); j++) // loop sui tutti i giocatori
-			{
-				if (Fanta::teamOrderedByRuolo[k][i].at(j).daSostituire == 1)
-					Fanta::teamOrderedByRuolo[k][i].at(j) = Fanta::NonHaGiocato;
-			}
-		}
-	}
-
-	// sposta i 'NON HA GIOCATO' al fondo dei giocatori in campo
-	for (size_t k = 0; k < 2; k++) // squadra
-	{
-		for (size_t i = 0; i < 4; i++) // ruolo
-		{
-			//			debug << endl;
-			//			for(size_t yy = 0; yy < Fanta::teamOrderedByRuolo[ k ][ i ].size(); yy++ )
-			//				debug << Fanta::teamOrderedByRuolo[ k ][ i ].at( yy ).Nome << endl;
-
-			size_t xx = Fanta::modulo[k][i] - 1;
-
-			for (size_t j = 0; j < xx; j++) {
-				for (size_t t = 0; t < xx - j; t++) {
-					if (Fanta::teamOrderedByRuolo[k][i].at(t).Nome == "---")
-						swap(Fanta::teamOrderedByRuolo[k][i].at(t),
-								Fanta::teamOrderedByRuolo[k][i].at(t + 1));
-				}
-			}
-		}
-	}
-
-	// se il primo panchinaro non ha giocato lo swappa con il secondo:
-	// se anch'esso non ha giocato non serve a nulla, se ha giocato lo porta in prima posizione
-	for (size_t k = 0; k < 2; k++) // squadre
-	{
-		for (size_t i = 0; i < 4; i++) // ruolo
-		{
-			if (Fanta::teamOrderedByRuolo[k][i].at(Fanta::modulo[k][i]).Nome
-					== "---")
-				swap(
-						Fanta::teamOrderedByRuolo[k][i].at(Fanta::modulo[k][i]),
-						Fanta::teamOrderedByRuolo[k][i].at(
-								Fanta::modulo[k][i] + 1));
-		}
-	}
-
-	unsigned int a[7] = { 0, 3, 2, 1, 3, 2, 1 }; // ordine delle sostituzioni
-
-	for (size_t k = 0; k < 2; k++) {
-		for (size_t t = 0; t < 3; t++) // ripetere il loop sottostante per esaurire tutte le sostituzioni
-		{
-			for (size_t i = 0; i < 7; i++) // loop sulla dimensione di a[]
-			{
-				unsigned int w = Fanta::modulo[k][a[i]];
-
-				//				debug << endl << "#### modulo : " << w << endl;
-
-				for (size_t j = 0; j < w; j++) // loop sui giocatori
-				{
-					if (Fanta::teamOrderedByRuolo[k][a[i]].at(j).Nome == "---"
-							&& sostituzioni[k] < 3) {
-						//						debug << endl;
-						//						for(size_t yy = 0; yy < Fanta::teamOrderedByRuolo[ k ][ a[ i ] ].size(); yy++ )
-						//							debug << Fanta::teamOrderedByRuolo[ k ][ a[ i ] ].at( yy ).Nome << endl;
-
-						//						debug << endl << "if j( " << j << " ) : " << Fanta::teamOrderedByRuolo[ k ][ a[ i ] ].at( j ).Nome << tab << sostituzioni[ k ] << endl;
-
-						for (size_t x = w; x
-								< Fanta::teamOrderedByRuolo[k][a[i]].size(); x++) {
-							if (Fanta::teamOrderedByRuolo[k][a[i]].at(x).Nome
-									!= "---") {
-								sostituzioni[k]++;
-								//debug << endl << tab << "if x( " << x << " ) : " << Fanta::teamOrderedByRuolo[ k ][ a[ i ] ].at( x ).Nome  << tab << sostituzioni[ k ] << endl;
-								swap(
-										Fanta::teamOrderedByRuolo[k][a[i]].at(x),
-										Fanta::teamOrderedByRuolo[k][a[i]].at(j));
-								//debug << endl << tab << "if x( " << x << " ) : " << Fanta::teamOrderedByRuolo[ k ][ a[ i ] ].at( x ).Nome  << tab << sostituzioni[ k ] << endl;
-
-								//debug << endl;
-								//for(size_t yy = 0; yy < Fanta::teamOrderedByRuolo[ k ][ a[ i ] ].size(); yy++ )
-								//debug << Fanta::teamOrderedByRuolo[ k ][ a[ i ] ].at( yy ).Nome << endl;
-
-								//break;
-								goto label;
-								// serve per poter uscire da due loop contemporaneamente
-							}
-						}
-					}
-				}
-				label: // solo una sostituzione per ruolo ( per volta )
-				;
-			}
-		}
-	}
-
-	for (size_t k = 0; k < 2; k++) // squadra
-	{
-		for (size_t i = 0; i < 4; i++) // ruolo
-		{
-			Fanta::teamOrderedByRuolo[k][i].resize(Fanta::modulo[k][i]);
-
-			// debug << endl;
-			// for(size_t yy = 0; yy < Fanta::teamOrderedByRuolo[ k ][ i ].size(); yy++ )
-			// debug << Fanta::teamOrderedByRuolo[ k ][ i ].at( yy ).Nome << endl;
-		}
-	}
-
 }
 void Fanta::calculateFantaVoto() {
 	for (size_t k = 0; k < 2; k++) // squadra
