@@ -347,21 +347,49 @@ void Fanta::checkNonHaGiocato() {
 		{
 			if (this->Team[k].at(j).VotoGazzetta == 0) {
 				if (this->Team[k].at(j).FantaVotoGazzetta == 0) {
-					ofstream tmp2;
-					string fileOut_2 = "tmp2";
-					tmp2.open(fileOut_2.c_str(), ios_base::app);
-					tmp2 << " Non ha giocato : " << STR_MOD->leftString(
-							this->Team[k].at(j).Nome, 15) << endl;
-					tmp2.close();
+
 					this->Team[k].at(j).daSostituire = 1; // viene marcato per l'eliminazione
-				} else
+
+					LOG(
+							DEBUG,
+							"In Fanta::checkNonHaGiocato() --> "
+									+ QString::fromStdString(
+											this->Team[k].at(j).Nome) + " ("
+									+ QString::fromStdString(
+											this->Team[k].at(j).Squadra)
+									+ ") non ha giocato.");
+				} else {
 					// ma ha ricevuto voto dalla Gazzetta (caso di partite sospese ??? )
 					this->Team[k].at(j).VotoGazzetta
 							= this->Team[k].at(j).FantaVotoGazzetta;
+					LOG(
+							DEBUG,
+							"In Fanta::checkNonHaGiocato() --> "
+									+ QString::fromStdString(
+											this->Team[k].at(j).Nome) + " ("
+									+ QString::fromStdString(
+											this->Team[k].at(j).Squadra)
+									+ ") non ha giocato, ma ha ricevuto voto("
+									+ QString::fromStdString(
+											my::toString<float>(
+													this->Team[k].at(j).FantaVotoGazzetta))
+									+ ").");
+				}
+			} else {
+				LOG(
+						DEBUG,
+						"In Fanta::checkNonHaGiocato() --> "
+								+ QString::fromStdString(
+										this->Team[k].at(j).Nome) + " ("
+								+ QString::fromStdString(
+										this->Team[k].at(j).Squadra)
+								+ ") fantavoto : " + QString::fromStdString(
+								my::toString<float>(
+										this->Team[k].at(j).FantaVotoGazzetta))
+								+ ".");
 			}
 		}
 	}
-	//cout << "<-- checkNonHaGiocato" << endl;
 }
 /*
 unsigned int Fanta::getSubstitutions(size_t k) const {
