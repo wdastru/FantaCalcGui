@@ -247,8 +247,8 @@ unsigned int Fanta::LevenshteinDistance(const std::string& s1, const std::string
 void Fanta::execute() {
 	this->checkGiocatoSenzaVoto();
 	this->checkNonHaGiocato();
+	this->orderByRuolo();
 	return;
-//	this->orderByRuolo();
 //	this->fillWithNonHaGiocato();
 //	this->substitutions();
 //	this->calculateFantaVoto();
@@ -387,6 +387,20 @@ void Fanta::checkNonHaGiocato() {
 								my::toString<float>(
 										this->Team[k].at(j).FantaVotoGazzetta))
 								+ ".");
+			}
+		}
+	}
+}
+void Fanta::orderByRuolo() {
+	for (size_t k = 0; k < 2; k++)// loop sulle squadre
+	{
+		for (size_t i = 0; i < 4; i++) // loop sui ruoli
+		{
+			for (size_t j = 0; j < this->Team[k].size(); j++) // loop sui giocatori
+			{
+				if (this->Team[k].at(j).Ruolo == i)
+					Fanta::teamOrderedByRuolo[k][i].push_back(
+							this->Team[k].at(j));
 			}
 		}
 	}
@@ -1230,20 +1244,6 @@ void Fanta::printRiepilogo_toHtml(ofstream & fOut) {
 			fOut << " ";
 	}
 	fOut << ")" << endl << endl;
-}
-void Fanta::orderByRuolo() {
-	for (size_t k = 0; k < 2; k++)// loop sulle squadre
-	{
-		for (size_t i = 0; i < 4; i++) // loop sui ruoli
-		{
-			for (size_t j = 0; j < this->Team[k].size(); j++) // loop sui giocatori
-			{
-				if (this->Team[k].at(j).Ruolo == i)
-					Fanta::teamOrderedByRuolo[k][i].push_back(
-							this->Team[k].at(j));
-			}
-		}
-	}
 }
 void Fanta::substitutions() {
 	for (size_t k = 0; k < 2; k++) // squadra
