@@ -401,6 +401,10 @@ void Fanta::orderByRuolo() {
 				if (this->Team[k].at(j).Ruolo == i)
 					Fanta::teamOrderedByRuolo[k][i].push_back(
 							this->Team[k].at(j));
+				LOG(
+						DEBUG,
+						"In Fanta::orderByRuolo() --> "
+								+ QString::fromStdString(this->Team[k].at(j).Nome));
 			}
 		}
 	}
