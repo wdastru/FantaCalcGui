@@ -394,17 +394,26 @@ void Fanta::checkNonHaGiocato() {
 void Fanta::orderByRuolo() {
 	for (size_t k = 0; k < 2; k++)// loop sulle squadre
 	{
+		LOG(
+				DEBUG,
+				"In Fanta::orderByRuolo() --> Squadra : " + QString::fromStdString(
+						this->getTeamName(k)));
+
 		for (size_t i = 0; i < 4; i++) // loop sui ruoli
 		{
 			for (size_t j = 0; j < this->Team[k].size(); j++) // loop sui giocatori
 			{
-				if (this->Team[k].at(j).Ruolo == i)
+				if (this->Team[k].at(j).Ruolo == i) {
 					Fanta::teamOrderedByRuolo[k][i].push_back(
 							this->Team[k].at(j));
-				LOG(
-						DEBUG,
-						"In Fanta::orderByRuolo() --> "
-								+ QString::fromStdString(this->Team[k].at(j).Nome));
+					LOG(
+							DEBUG,
+							"In Fanta::orderByRuolo() --> "
+									+ QString::fromStdString(
+											my::toString<unsigned int>(i))
+									+ " " + QString::fromStdString(
+									this->Team[k].at(j).Nome));
+				}
 			}
 		}
 	}
