@@ -242,66 +242,101 @@ unsigned int Fanta::LevenshteinDistance(const std::string& s1, const std::string
 	return tmp;
 }
 void Fanta::execute() {
-	Fanta::checkGiocatoSenzaVoto();
+	this->checkGiocatoSenzaVoto();
 	return;
-//	Fanta::checkNonHaGiocato();
-//	Fanta::orderByRuolo();
-//	Fanta::fillWithNonHaGiocato();
-//	Fanta::substitutions();
-//	Fanta::calculateFantaVoto();
-//	Fanta::calculateDefenseMean();
-//	Fanta::calculateDefenseModifier();
-//	Fanta::calculateSfide();
-//	Fanta::calculateTotal();
-//	Fanta::calculateGoals();
-//	Fanta::calculateScorers();
+//	this->checkNonHaGiocato();
+//	this->orderByRuolo();
+//	this->fillWithNonHaGiocato();
+//	this->substitutions();
+//	this->calculateFantaVoto();
+//	this->calculateDefenseMean();
+//	this->calculateDefenseModifier();
+//	this->calculateSfide();
+//	this->calculateTotal();
+//	this->calculateGoals();
+//	this->calculateScorers();
 }
 void Fanta::checkGiocatoSenzaVoto() {
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
-		for (size_t j = 0; j < Fanta::Team[k].size(); j++) // loop sui giocatori
+		for (size_t j = 0; j < this->Team[k].size(); j++) // loop sui giocatori
 		{
-			if (Fanta::Team[k].at(j).VotoGazzetta == -1) {
-				if (Fanta::Team[k].at(j).Ruolo == 0) // se è un portiere
+			if (this->Team[k].at(j).VotoGazzetta == -1) {
+				if (this->Team[k].at(j).Ruolo == 0) // se è un portiere
 				{
-					Fanta::Team[k].at(j).VotoGazzetta = 6.0; // il portiere non si sostituisce se ha giocato (ma non ha preso voto),
-					Fanta::Team[k].at(j).FantaVotoGazzetta = Fanta::Team[k].at(
-							j).VotoGazzetta - Fanta::Team[k].at(j).Esp - 0.5
-							* Fanta::Team[k].at(j).Amm - 2 * Fanta::Team[k].at(
-							j).Autoreti + Fanta::Team[k].at(j).Assist
-							- Fanta::Team[k].at(j).GoalSubiti; // subiti x un portiere !
+					this->Team[k].at(j).VotoGazzetta = 6.0; // il portiere non si sostituisce se ha giocato (ma non ha preso voto),
+					this->Team[k].at(j).FantaVotoGazzetta
+							= this->Team[k].at(j).VotoGazzetta
+									- this->Team[k].at(j).Esp - 0.5
+									* this->Team[k].at(j).Amm - 2
+									* this->Team[k].at(j).Autoreti
+									+ this->Team[k].at(j).Assist
+									- this->Team[k].at(j).GoalSubiti; // subiti x un portiere !
+
+					LOG(
+							DEBUG,
+							"In Fanta::checkGiocatoSenzaVoto() --> "
+									+ QString::fromStdString(
+											this->Team[k].at(j).Nome) + " ("
+									/*+ QString::fromStdString(
+									 this->Team[k].at(j).Squadra)*/
+									+ ", portiere) senza voto ma ha giocato. Fantavoto :  "
+									+ QString::fromStdString(
+											my::toString<float>(
+													this->Team[k].at(j).FantaVotoGazzetta)));
+
 				} else //se non è un portiere
 				{
 					string answer;
 
 					Less25MinDialog less25MinDialog;
-					less25MinDialog.setPlayer(Fanta::Team[k].at(j).Nome);
+					less25MinDialog.setPlayer(this->Team[k].at(j).Nome);
 					less25MinDialog.exec();
 
 					answer = less25MinDialog.getAnswer();
 
 					if (answer == "Yes") {
-						Fanta::Team[k].at(j).VotoGazzetta = 6.0;
-						Fanta::Team[k].at(j).FantaVotoGazzetta
-								= Fanta::Team[k].at(j).VotoGazzetta
-										- Fanta::Team[k].at(j).Esp - 0.5
-										* Fanta::Team[k].at(j).Amm - 2
-										* Fanta::Team[k].at(j).Autoreti
-										+ Fanta::Team[k].at(j).Assist + 3
-										* Fanta::Team[k].at(j).GoalFatti;
+						this->Team[k].at(j).VotoGazzetta = 6.0;
+						this->Team[k].at(j).FantaVotoGazzetta
+								= this->Team[k].at(j).VotoGazzetta
+										- this->Team[k].at(j).Esp - 0.5
+										* this->Team[k].at(j).Amm - 2
+										* this->Team[k].at(j).Autoreti
+										+ this->Team[k].at(j).Assist + 3
+										* this->Team[k].at(j).GoalFatti;
 
-						if (Fanta::Team[k].at(j).FantaVotoGazzetta == 6.0) {
-							Fanta::Team[k].at(j).VotoGazzetta = 5.5;
-							Fanta::Team[k].at(j).FantaVotoGazzetta = 5.5;
+						if (this->Team[k].at(j).FantaVotoGazzetta == 6.0) {
+							this->Team[k].at(j).VotoGazzetta = 5.5;
+							this->Team[k].at(j).FantaVotoGazzetta = 5.5;
+
+							LOG(
+									DEBUG,
+									"In Fanta::checkGiocatoSenzaVoto() --> "
+											+ QString::fromStdString(
+													this->Team[k].at(j).Nome)
+											+ " ("
+									/*+ QString::fromStdString(
+									 this->Team[k].at(j).Squadra)*/
+									+ ") ha giocato 25'.");
 						}
-					} else
-						Fanta::Team[k].at(j).daSostituire = 1; // viene marcato per l'eliminazione
+					} else {
+						this->Team[k].at(j).daSostituire = 1; // viene marcato per l'eliminazione
+
+						LOG(
+								DEBUG,
+								"In Fanta::checkGiocatoSenzaVoto() --> "
+										+ QString::fromStdString(
+												this->Team[k].at(j).Nome)
+										+ " ("
+										/*+ QString::fromStdString(
+										 this->Team[k].at(j).Squadra)*/
+										+ ") non ha giocato 25' : verrà effettuata una sostituzione.");
+					}
 
 					continue;
 				}
 			}
 		}
-		//cout << "<-- checkGiocatoSenzaVoto" << endl;
 	}
 }
 
@@ -1148,21 +1183,21 @@ void Fanta::printRiepilogo_toHtml(ofstream & fOut) {
 void Fanta::checkNonHaGiocato() {
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
-		for (size_t j = 0; j < Fanta::Team[k].size(); j++) // loop sui giocatori
+		for (size_t j = 0; j < this->Team[k].size(); j++) // loop sui giocatori
 		{
-			if (Fanta::Team[k].at(j).VotoGazzetta == 0) {
-				if (Fanta::Team[k].at(j).FantaVotoGazzetta == 0) {
+			if (this->Team[k].at(j).VotoGazzetta == 0) {
+				if (this->Team[k].at(j).FantaVotoGazzetta == 0) {
 					ofstream tmp2;
 					string fileOut_2 = "tmp2";
 					tmp2.open(fileOut_2.c_str(), ios_base::app);
 					tmp2 << " Non ha giocato : " << leftString(
-							Fanta::Team[k].at(j).Nome, 15) << endl;
+							this->Team[k].at(j).Nome, 15) << endl;
 					tmp2.close();
-					Fanta::Team[k].at(j).daSostituire = 1; // viene marcato per l'eliminazione
+					this->Team[k].at(j).daSostituire = 1; // viene marcato per l'eliminazione
 				} else
 					// ma ha ricevuto voto dalla Gazzetta (caso di partite sospese ??? )
-					Fanta::Team[k].at(j).VotoGazzetta
-							= Fanta::Team[k].at(j).FantaVotoGazzetta;
+					this->Team[k].at(j).VotoGazzetta
+							= this->Team[k].at(j).FantaVotoGazzetta;
 			}
 		}
 	}
@@ -1173,11 +1208,11 @@ void Fanta::orderByRuolo() {
 	{
 		for (size_t i = 0; i < 4; i++) // loop sui ruoli
 		{
-			for (size_t j = 0; j < Fanta::Team[k].size(); j++) // loop sui giocatori
+			for (size_t j = 0; j < this->Team[k].size(); j++) // loop sui giocatori
 			{
-				if (Fanta::Team[k].at(j).Ruolo == i)
+				if (this->Team[k].at(j).Ruolo == i)
 					Fanta::teamOrderedByRuolo[k][i].push_back(
-							Fanta::Team[k].at(j));
+							this->Team[k].at(j));
 			}
 		}
 	}
