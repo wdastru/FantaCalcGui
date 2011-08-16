@@ -442,21 +442,29 @@ void Fanta::substitutions() {
 		{
 			for (size_t j = 0; j < Fanta::teamOrderedByRuolo[k][i].size(); j++) // loop sui tutti i giocatori
 			{
-				if (Fanta::teamOrderedByRuolo[k][i].at(j).daSostituire == 1)
-					Fanta::teamOrderedByRuolo[k][i].at(j) = Fanta::NonHaGiocato;
+				LOG(
+						DEBUG,
+						"In Fanta::substitutions() --> Squadra "
+								+ QString::fromStdString(this->getTeamName(k))
+								+ " : " + my::toQString<unsigned int>(
+								this->teamOrderedByRuolo[k][i].at(j).Ruolo)
+								+ " " + QString::fromStdString(
+								this->teamOrderedByRuolo[k][i].at(j).Nome)
+								+ ".");
+
+				if (this->teamOrderedByRuolo[k][i].at(j).daSostituire == 1)
+					this->teamOrderedByRuolo[k][i].at(j) = Fanta::NonHaGiocato;
 			}
 		}
 	}
 
-	// sposta i 'NON HA GIOCATO' al fondo dei giocatori in campo
+	/*
+	 *  sposta i 'NON HA GIOCATO' al fondo dei giocatori in campo
+	 */
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
 		for (size_t i = 0; i < 4; i++) // ruolo
 		{
-			//			debug << endl;
-			//			for(size_t yy = 0; yy < Fanta::teamOrderedByRuolo[ k ][ i ].size(); yy++ )
-			//				debug << Fanta::teamOrderedByRuolo[ k ][ i ].at( yy ).Nome << endl;
-
 			size_t xx = Fanta::modulo[k][i] - 1;
 
 			for (size_t j = 0; j < xx; j++) {
@@ -469,8 +477,29 @@ void Fanta::substitutions() {
 		}
 	}
 
-	// se il primo panchinaro non ha giocato lo swappa con il secondo:
-	// se anch'esso non ha giocato non serve a nulla, se ha giocato lo porta in prima posizione
+	for (size_t k = 0; k < 2; k++) // squadra
+	{
+		for (size_t i = 0; i < 4; i++) // ruolo
+		{
+			for (size_t j = 0; j < Fanta::teamOrderedByRuolo[k][i].size(); j++) {
+				LOG(
+						DEBUG,
+						"In Fanta::substitutions() --> Squadra "
+								+ QString::fromStdString(this->getTeamName(k))
+								+ " : " + my::toQString<unsigned int>(
+								this->teamOrderedByRuolo[k][i].at(j).Ruolo)
+								+ " " + QString::fromStdString(
+								this->teamOrderedByRuolo[k][i].at(j).Nome)
+								+ ".");
+			}
+		}
+	}
+
+	/*
+	 *  se il primo panchinaro non ha giocato lo swappa con il secondo:
+	 *  se anch'esso non ha giocato non serve a nulla, se ha giocato lo porta in prima posizione
+	 */
+
 	for (size_t k = 0; k < 2; k++) // squadre
 	{
 		for (size_t i = 0; i < 4; i++) // ruolo
