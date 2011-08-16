@@ -73,7 +73,7 @@ private:
 	struct player {
 		std::string Nome;
 		std::string Squadra;
-		unsigned int Ruolo;
+		signed int Ruolo;
 		float FantaVoto;
 		float FantaVotoGazzetta;
 		float VotoGazzetta;

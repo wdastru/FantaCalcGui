@@ -446,7 +446,7 @@ void Fanta::substitutions() {
 						DEBUG,
 						"In Fanta::substitutions() --> Squadra "
 								+ QString::fromStdString(this->getTeamName(k))
-								+ " : " + my::toQString<unsigned int>(
+								+ " : " + my::toQString<signed int>(
 								this->teamOrderedByRuolo[k][i].at(j).Ruolo)
 								+ " " + QString::fromStdString(
 								this->teamOrderedByRuolo[k][i].at(j).Nome)
@@ -486,7 +486,7 @@ void Fanta::substitutions() {
 						DEBUG,
 						"In Fanta::substitutions() --> Squadra "
 								+ QString::fromStdString(this->getTeamName(k))
-								+ " : " + my::toQString<unsigned int>(
+								+ " : " + my::toQString<signed int>(
 								this->teamOrderedByRuolo[k][i].at(j).Ruolo)
 								+ " " + QString::fromStdString(
 								this->teamOrderedByRuolo[k][i].at(j).Nome)
