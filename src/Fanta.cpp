@@ -582,6 +582,16 @@ void Fanta::calculateFantaVoto() {
 								+ Fanta::teamOrderedByRuolo[k][i].at(j).GoalDecVitt
 								+ Fanta::teamOrderedByRuolo[k][i].at(j).GoalDecPar
 										* 0.5;
+
+				LOG(
+						DEBUG,
+						"In Fanta::calculateFantaVoto() --> Squadra "
+								+ QString::fromStdString(this->getTeamName(k))
+								+ " : " + QString::fromStdString(
+								this->teamOrderedByRuolo[k][i].at(j).Nome)
+								+ " FV = " + my::toQString<float>(
+								this->teamOrderedByRuolo[k][i].at(j).FantaVoto)
+								+ ".");
 				j++;
 			}
 		}
