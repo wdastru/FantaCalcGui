@@ -103,12 +103,12 @@ private:
 	void fillWithNonHaGiocato();
 	void substitutions();
 	void calculateFantaVoto();
+	void calculateDefenseMean();
 	/*
 	 std::vector<std::string> scorers[2];
 	 void reorderPlayers();
 	 void calculateTotal();
 	 void calculateGoals();
-	 void calculateDefenseMean();
 	 void calculateDefenseModifier();
 	 void calculateSfide();
 	 unsigned int getAmmonizioniTot(unsigned int) const ;

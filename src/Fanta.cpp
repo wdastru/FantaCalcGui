@@ -254,8 +254,8 @@ void Fanta::execute() {
 	this->fillWithNonHaGiocato();
 	this->substitutions();
 	this->calculateFantaVoto();
+	this->calculateDefenseMean();
 	return;
-//	this->calculateDefenseMean();
 //	this->calculateDefenseModifier();
 //	this->calculateSfide();
 //	this->calculateTotal();
@@ -596,6 +596,22 @@ void Fanta::calculateFantaVoto() {
 			}
 		}
 	}
+}
+void Fanta::calculateDefenseMean() {
+	for (size_t k = 0; k < 2; k++) // squadra
+	{
+		size_t j = 0;
+		while (j < Fanta::modulo[k][1]) {
+			if (Fanta::teamOrderedByRuolo[k][1].at(j).VotoGazzetta != 0) {
+				Fanta::defenseMean[k]
+						+= Fanta::teamOrderedByRuolo[k][1].at(j).VotoGazzetta;
+				Fanta::defenders[k]++;
+			}
+			j++;
+		}
+		Fanta::defenseMean[k] /= Fanta::defenders[k];
+	}
+	//cout << "<-- calculateDefenseMean" << endl;
 }
 /*
 unsigned int Fanta::getSubstitutions(size_t k) const {
@@ -1436,22 +1452,6 @@ void Fanta::printRiepilogo_toHtml(ofstream & fOut) {
 			fOut << " ";
 	}
 	fOut << ")" << endl << endl;
-}
-void Fanta::calculateDefenseMean() {
-	for (size_t k = 0; k < 2; k++) // squadra
-	{
-		size_t j = 0;
-		while (j < Fanta::modulo[k][1]) {
-			if (Fanta::teamOrderedByRuolo[k][1].at(j).VotoGazzetta != 0) {
-				Fanta::defenseMean[k]
-						+= Fanta::teamOrderedByRuolo[k][1].at(j).VotoGazzetta;
-				Fanta::defenders[k]++;
-			}
-			j++;
-		}
-		Fanta::defenseMean[k] /= Fanta::defenders[k];
-	}
-	//cout << "<-- calculateDefenseMean" << endl;
 }
 void Fanta::calculateDefenseModifier() {
 	for (size_t i = 0; i < 9; i++) {
