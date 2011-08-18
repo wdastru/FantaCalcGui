@@ -610,8 +610,15 @@ void Fanta::calculateDefenseMean() {
 			j++;
 		}
 		Fanta::defenseMean[k] /= Fanta::defenders[k];
+
+		LOG(
+				DEBUG,
+				"In Fanta::calculateDefenseMean() --> Squadra "
+						+ QString::fromStdString(this->getTeamName(k)) + " : "
+						+ my::toQString<unsigned int>(Fanta::defenders[k])
+						+ " difensori, media = " + my::toQString<double>(
+						Fanta::defenseMean[k]) + ".");
 	}
-	//cout << "<-- calculateDefenseMean" << endl;
 }
 /*
 unsigned int Fanta::getSubstitutions(size_t k) const {
