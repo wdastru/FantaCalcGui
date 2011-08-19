@@ -256,8 +256,8 @@ void Fanta::execute() {
 	this->calculateFantaVoto();
 	this->calculateDefenseMean();
 	this->calculateDefenseModifier();
+	this->calculateSfide();
 	return;
-//	this->calculateSfide();
 //	this->calculateTotal();
 //	this->calculateGoals();
 //	this->calculateScorers();
@@ -642,6 +642,30 @@ void Fanta::calculateDefenseModifier() {
 						+ " modificatore = " + my::toQString<signed int>(
 						Fanta::modifier[k]) + ".");
 	}
+}
+void Fanta::calculateSfide() {
+	if (Fanta::teamOrderedByRuolo[0][1].at(0).VotoGazzetta
+			> Fanta::teamOrderedByRuolo[1][3].at(0).VotoGazzetta)
+		Fanta::sfide[0]++;
+	else if (Fanta::teamOrderedByRuolo[0][1].at(0).VotoGazzetta
+			< Fanta::teamOrderedByRuolo[1][3].at(0).VotoGazzetta)
+		Fanta::sfide[1]++;
+
+	if (Fanta::teamOrderedByRuolo[0][2].at(0).VotoGazzetta
+			> Fanta::teamOrderedByRuolo[1][2].at(0).VotoGazzetta)
+		Fanta::sfide[0]++;
+	else if (Fanta::teamOrderedByRuolo[0][2].at(0).VotoGazzetta
+			< Fanta::teamOrderedByRuolo[1][2].at(0).VotoGazzetta)
+		Fanta::sfide[1]++;
+
+	if (Fanta::teamOrderedByRuolo[0][3].at(0).VotoGazzetta
+			> Fanta::teamOrderedByRuolo[1][1].at(0).VotoGazzetta)
+		Fanta::sfide[0]++;
+	else if (Fanta::teamOrderedByRuolo[0][3].at(0).VotoGazzetta
+			< Fanta::teamOrderedByRuolo[1][1].at(0).VotoGazzetta)
+		Fanta::sfide[1]++;
+
+	//cout << "<-- calculateSfide" << endl;
 }
 /*
 unsigned int Fanta::getSubstitutions(size_t k) const {
@@ -1482,30 +1506,6 @@ void Fanta::printRiepilogo_toHtml(ofstream & fOut) {
 			fOut << " ";
 	}
 	fOut << ")" << endl << endl;
-}
-void Fanta::calculateSfide() {
-	if (Fanta::teamOrderedByRuolo[0][1].at(0).VotoGazzetta
-			> Fanta::teamOrderedByRuolo[1][3].at(0).VotoGazzetta)
-		Fanta::sfide[0]++;
-	else if (Fanta::teamOrderedByRuolo[0][1].at(0).VotoGazzetta
-			< Fanta::teamOrderedByRuolo[1][3].at(0).VotoGazzetta)
-		Fanta::sfide[1]++;
-
-	if (Fanta::teamOrderedByRuolo[0][2].at(0).VotoGazzetta
-			> Fanta::teamOrderedByRuolo[1][2].at(0).VotoGazzetta)
-		Fanta::sfide[0]++;
-	else if (Fanta::teamOrderedByRuolo[0][2].at(0).VotoGazzetta
-			< Fanta::teamOrderedByRuolo[1][2].at(0).VotoGazzetta)
-		Fanta::sfide[1]++;
-
-	if (Fanta::teamOrderedByRuolo[0][3].at(0).VotoGazzetta
-			> Fanta::teamOrderedByRuolo[1][1].at(0).VotoGazzetta)
-		Fanta::sfide[0]++;
-	else if (Fanta::teamOrderedByRuolo[0][3].at(0).VotoGazzetta
-			< Fanta::teamOrderedByRuolo[1][1].at(0).VotoGazzetta)
-		Fanta::sfide[1]++;
-
-	//cout << "<-- calculateSfide" << endl;
 }
 void Fanta::calculateTotal() {
 	for (size_t k = 0; k < 2; k++) // squadra
