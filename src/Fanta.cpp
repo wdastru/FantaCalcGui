@@ -735,6 +735,15 @@ void Fanta::calculateSfide() {
 void Fanta::calculateTotal() {
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
+		QString message = "In Fanta::calculateTotal() --> Totale squadra "
+						+ QString::fromStdString(this->getTeamName(k))
+						+ " :    <br /> in casa --> " + my::toQString<
+						unsigned int>(Fanta::atHome[k])
+						+ "<br />    modificatore difesa --> " + my::toQString<
+						signed int>(Fanta::modifier[k])
+						+ "<br />    sfide vinte --> " + my::toQString<
+						unsigned int>(Fanta::sfide[k]);
+
 		Fanta::Total[k] += Fanta::atHome[k];
 		Fanta::Total[k] += Fanta::modifier[k];
 		Fanta::Total[k] += Fanta::sfide[k];
@@ -745,9 +754,19 @@ void Fanta::calculateTotal() {
 			while (j < Fanta::modulo[k][i]) {
 				Fanta::Total[k]
 						+= Fanta::teamOrderedByRuolo[k][i].at(j).FantaVoto;
+
+				message += ("    <br /> " + QString::fromStdString(
+								Fanta::teamOrderedByRuolo[k][i].at(j).Nome)
+								+ " --> "
+								+ my::toQString<float>(
+										Fanta::teamOrderedByRuolo[k][i].at(j).FantaVoto));
+
 				j++;
 			}
 		}
+
+		message += ("    <br /> Totale : " + my::toQString<double>(Fanta::Total[k]));
+		LOG(DEBUG, message);
 	}
 }
 /*
