@@ -62,7 +62,7 @@ private:
 	unsigned int modulo[2][4];// moduli delle squadre
 	unsigned int inCampo[2][4];// giocatori effettivamenti scesi in campo
 	double Total[2];
-	int modifier[2];
+	signed int modifier[2];
 	double defenseMean[2];
 	unsigned int defenders[2];
 	unsigned int sfide[2];

@@ -632,7 +632,16 @@ void Fanta::calculateDefenseModifier() {
 			Fanta::modifier[0] = Fanta::modifierValues[i][Fanta::defenders[1]
 					- 1];
 	}
-	//cout << "<-- calculateDefenseModifier" << endl;
+
+	for (size_t k = 0; k < 2; k++) // squadra
+	{
+		LOG(
+				DEBUG,
+				"In Fanta::calculateDefenseModifier() --> Squadra "
+						+ QString::fromStdString(this->getTeamName(k))
+						+ " modificatore = " + my::toQString<signed int>(
+						Fanta::modifier[k]) + ".");
+	}
 }
 /*
 unsigned int Fanta::getSubstitutions(size_t k) const {
