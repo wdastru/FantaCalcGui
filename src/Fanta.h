@@ -104,12 +104,12 @@ private:
 	void substitutions();
 	void calculateFantaVoto();
 	void calculateDefenseMean();
-	/*
+	void calculateDefenseModifier();
+	 /*
 	 std::vector<std::string> scorers[2];
 	 void reorderPlayers();
 	 void calculateTotal();
 	 void calculateGoals();
-	 void calculateDefenseModifier();
 	 void calculateSfide();
 	 unsigned int getAmmonizioniTot(unsigned int) const ;
 	 unsigned int getEspulsioniTot(unsigned int) const ;

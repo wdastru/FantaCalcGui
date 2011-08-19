@@ -255,8 +255,8 @@ void Fanta::execute() {
 	this->substitutions();
 	this->calculateFantaVoto();
 	this->calculateDefenseMean();
+	this->calculateDefenseModifier();
 	return;
-//	this->calculateDefenseModifier();
 //	this->calculateSfide();
 //	this->calculateTotal();
 //	this->calculateGoals();
@@ -619,6 +619,20 @@ void Fanta::calculateDefenseMean() {
 						+ " difensori, media = " + my::toQString<double>(
 						Fanta::defenseMean[k]) + ".");
 	}
+}
+void Fanta::calculateDefenseModifier() {
+	for (size_t i = 0; i < 9; i++) {
+		if (Fanta::defenseMean[0] >= Fanta::modifierVoti[i]
+				&& Fanta::defenseMean[0] < Fanta::modifierVoti[i + 1])
+			Fanta::modifier[1] = Fanta::modifierValues[i][Fanta::defenders[0]
+					- 1];
+
+		if (Fanta::defenseMean[1] >= Fanta::modifierVoti[i]
+				&& Fanta::defenseMean[1] < Fanta::modifierVoti[i + 1])
+			Fanta::modifier[0] = Fanta::modifierValues[i][Fanta::defenders[1]
+					- 1];
+	}
+	//cout << "<-- calculateDefenseModifier" << endl;
 }
 /*
 unsigned int Fanta::getSubstitutions(size_t k) const {
@@ -1459,20 +1473,6 @@ void Fanta::printRiepilogo_toHtml(ofstream & fOut) {
 			fOut << " ";
 	}
 	fOut << ")" << endl << endl;
-}
-void Fanta::calculateDefenseModifier() {
-	for (size_t i = 0; i < 9; i++) {
-		if (Fanta::defenseMean[0] >= Fanta::modifierVoti[i]
-				&& Fanta::defenseMean[0] < Fanta::modifierVoti[i + 1])
-			Fanta::modifier[1] = Fanta::modifierValues[i][Fanta::defenders[0]
-					- 1];
-
-		if (Fanta::defenseMean[1] >= Fanta::modifierVoti[i]
-				&& Fanta::defenseMean[1] < Fanta::modifierVoti[i + 1])
-			Fanta::modifier[0] = Fanta::modifierValues[i][Fanta::defenders[1]
-					- 1];
-	}
-	//cout << "<-- calculateDefenseModifier" << endl;
 }
 void Fanta::calculateSfide() {
 	if (Fanta::teamOrderedByRuolo[0][1].at(0).VotoGazzetta
