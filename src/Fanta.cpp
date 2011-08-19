@@ -257,8 +257,8 @@ void Fanta::execute() {
 	this->calculateDefenseMean();
 	this->calculateDefenseModifier();
 	this->calculateSfide();
+	this->calculateTotal();
 	return;
-//	this->calculateTotal();
 //	this->calculateGoals();
 //	this->calculateScorers();
 }
@@ -730,6 +730,24 @@ void Fanta::calculateSfide() {
 						+ QString::fromStdString(this->getTeamName(k))
 						+ " sfide = " + my::toQString<unsigned int>(
 						Fanta::sfide[k]) + ".");
+	}
+}
+void Fanta::calculateTotal() {
+	for (size_t k = 0; k < 2; k++) // squadra
+	{
+		Fanta::Total[k] += Fanta::atHome[k];
+		Fanta::Total[k] += Fanta::modifier[k];
+		Fanta::Total[k] += Fanta::sfide[k];
+
+		for (size_t i = 0; i < 4; i++) // ruolo
+		{
+			size_t j = 0;
+			while (j < Fanta::modulo[k][i]) {
+				Fanta::Total[k]
+						+= Fanta::teamOrderedByRuolo[k][i].at(j).FantaVoto;
+				j++;
+			}
+		}
 	}
 }
 /*
@@ -1571,25 +1589,6 @@ void Fanta::printRiepilogo_toHtml(ofstream & fOut) {
 			fOut << " ";
 	}
 	fOut << ")" << endl << endl;
-}
-void Fanta::calculateTotal() {
-	for (size_t k = 0; k < 2; k++) // squadra
-	{
-		Fanta::Total[k] += Fanta::atHome[k];
-		Fanta::Total[k] += Fanta::modifier[k];
-		Fanta::Total[k] += Fanta::sfide[k];
-
-		for (size_t i = 0; i < 4; i++) // ruolo
-		{
-			size_t j = 0;
-			while (j < Fanta::modulo[k][i]) {
-				Fanta::Total[k]
-						+= Fanta::teamOrderedByRuolo[k][i].at(j).FantaVoto;
-				j++;
-			}
-		}
-	}
-	//cout << "<-- calculateTotal" << endl;
 }
 void Fanta::calculateGoals() {
 	for (size_t k = 0; k < 2; k++) {
