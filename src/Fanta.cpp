@@ -644,28 +644,93 @@ void Fanta::calculateDefenseModifier() {
 	}
 }
 void Fanta::calculateSfide() {
+	/*
+	 *  difensori - attaccanti
+	 */
 	if (Fanta::teamOrderedByRuolo[0][1].at(0).VotoGazzetta
-			> Fanta::teamOrderedByRuolo[1][3].at(0).VotoGazzetta)
+			> Fanta::teamOrderedByRuolo[1][3].at(0).VotoGazzetta) {
 		Fanta::sfide[0]++;
-	else if (Fanta::teamOrderedByRuolo[0][1].at(0).VotoGazzetta
-			< Fanta::teamOrderedByRuolo[1][3].at(0).VotoGazzetta)
+	} else if (Fanta::teamOrderedByRuolo[0][1].at(0).VotoGazzetta
+			< Fanta::teamOrderedByRuolo[1][3].at(0).VotoGazzetta) {
 		Fanta::sfide[1]++;
+	}
 
+	LOG(
+			DEBUG,
+			"In Fanta::calculateSfide() --> sfida 1 : "
+					+ QString::fromStdString(
+							Fanta::teamOrderedByRuolo[0][1].at(0).Nome) + " ("
+					+ my::toQString<float>(
+							Fanta::teamOrderedByRuolo[0][1].at(0).VotoGazzetta)
+					+ ", " + QString::fromStdString(this->getTeamName(0))
+					+ ") - " + QString::fromStdString(
+					Fanta::teamOrderedByRuolo[1][3].at(0).Nome) + " ("
+					+ my::toQString<float>(
+							Fanta::teamOrderedByRuolo[1][3].at(0).VotoGazzetta)
+					+ ", " + QString::fromStdString(this->getTeamName(1))
+					+ ").");
+
+	/*
+	 *  centrocampisti - centrocampisti
+	 */
 	if (Fanta::teamOrderedByRuolo[0][2].at(0).VotoGazzetta
-			> Fanta::teamOrderedByRuolo[1][2].at(0).VotoGazzetta)
+			> Fanta::teamOrderedByRuolo[1][2].at(0).VotoGazzetta) {
 		Fanta::sfide[0]++;
-	else if (Fanta::teamOrderedByRuolo[0][2].at(0).VotoGazzetta
-			< Fanta::teamOrderedByRuolo[1][2].at(0).VotoGazzetta)
+	} else if (Fanta::teamOrderedByRuolo[0][2].at(0).VotoGazzetta
+			< Fanta::teamOrderedByRuolo[1][2].at(0).VotoGazzetta) {
 		Fanta::sfide[1]++;
+	}
 
+	LOG(
+			DEBUG,
+			"In Fanta::calculateSfide() --> sfida 2 : "
+					+ QString::fromStdString(
+							Fanta::teamOrderedByRuolo[0][2].at(0).Nome) + " ("
+					+ my::toQString<float>(
+							Fanta::teamOrderedByRuolo[0][2].at(0).VotoGazzetta)
+					+ ", " + QString::fromStdString(this->getTeamName(0))
+					+ ") - " + QString::fromStdString(
+					Fanta::teamOrderedByRuolo[1][2].at(0).Nome) + " ("
+					+ my::toQString<float>(
+							Fanta::teamOrderedByRuolo[1][2].at(0).VotoGazzetta)
+					+ ", " + QString::fromStdString(this->getTeamName(1))
+					+ ").");
+
+	/*
+	 *  attaccanti - difensori
+	 */
 	if (Fanta::teamOrderedByRuolo[0][3].at(0).VotoGazzetta
-			> Fanta::teamOrderedByRuolo[1][1].at(0).VotoGazzetta)
+			> Fanta::teamOrderedByRuolo[1][1].at(0).VotoGazzetta) {
 		Fanta::sfide[0]++;
-	else if (Fanta::teamOrderedByRuolo[0][3].at(0).VotoGazzetta
-			< Fanta::teamOrderedByRuolo[1][1].at(0).VotoGazzetta)
+	} else if (Fanta::teamOrderedByRuolo[0][3].at(0).VotoGazzetta
+			< Fanta::teamOrderedByRuolo[1][1].at(0).VotoGazzetta) {
 		Fanta::sfide[1]++;
+	}
 
-	//cout << "<-- calculateSfide" << endl;
+	LOG(
+			DEBUG,
+			"In Fanta::calculateSfide() --> sfida 3 : "
+					+ QString::fromStdString(
+							Fanta::teamOrderedByRuolo[0][3].at(0).Nome) + " ("
+					+ my::toQString<float>(
+							Fanta::teamOrderedByRuolo[0][3].at(0).VotoGazzetta)
+					+ ", " + QString::fromStdString(this->getTeamName(0))
+					+ ") - " + QString::fromStdString(
+					Fanta::teamOrderedByRuolo[1][1].at(0).Nome) + " ("
+					+ my::toQString<float>(
+							Fanta::teamOrderedByRuolo[1][1].at(0).VotoGazzetta)
+					+ ", " + QString::fromStdString(this->getTeamName(1))
+					+ ").");
+
+	for (size_t k = 0; k < 2; k++) // squadra
+	{
+		LOG(
+				DEBUG,
+				"In Fanta::calculateSfide() --> Squadra "
+						+ QString::fromStdString(this->getTeamName(k))
+						+ " sfide = " + my::toQString<unsigned int>(
+						Fanta::sfide[k]) + ".");
+	}
 }
 /*
 unsigned int Fanta::getSubstitutions(size_t k) const {
