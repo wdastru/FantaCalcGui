@@ -258,8 +258,8 @@ void Fanta::execute() {
 	this->calculateDefenseModifier();
 	this->calculateSfide();
 	this->calculateTotal();
+	this->calculateGoals();
 	return;
-//	this->calculateGoals();
 //	this->calculateScorers();
 }
 void Fanta::checkGiocatoSenzaVoto() {
@@ -772,6 +772,41 @@ void Fanta::calculateTotal() {
 
 		message += ("<br />Totale : " + my::toQString<double>(Fanta::Total[k]));
 		LOG(DEBUG, message);
+	}
+}
+void Fanta::calculateGoals() {
+	for (size_t k = 0; k < 2; k++) {
+		for (size_t i = 0;; i++) {
+			if (Fanta::Total[k] >= (6 * i))
+				continue;
+
+			if ((i - 10) > 0) {
+				Fanta::goals[k] = i - 11;
+				break;
+			} else {
+				Fanta::goals[k] = 0;
+				break;
+			}
+		}
+	}
+
+	if (Fanta::Total[0] < 66 && Fanta::Total[1] < 66) {
+		if (Fanta::Total[0] >= Fanta::Total[1] + 6) {
+			Fanta::goals[0] = 1;
+			Fanta::goals[1] = 0;
+		} else if (Fanta::Total[1] >= Fanta::Total[0] + 6) {
+			Fanta::goals[1] = 1;
+			Fanta::goals[0] = 0;
+		} else {
+			Fanta::goals[1] = 0;
+			Fanta::goals[0] = 0;
+		}
+	}
+
+	for (size_t k = 0; k < 2; k++) {
+		if (Fanta::goals[k] < 0)
+			Fanta::goals[k] = 0;
+
 	}
 }
 /*
@@ -1613,41 +1648,6 @@ void Fanta::printRiepilogo_toHtml(ofstream & fOut) {
 			fOut << " ";
 	}
 	fOut << ")" << endl << endl;
-}
-void Fanta::calculateGoals() {
-	for (size_t k = 0; k < 2; k++) {
-		for (size_t i = 0;; i++) {
-			if (Fanta::Total[k] >= (6 * i))
-				continue;
-
-			if ((i - 10) > 0) {
-				Fanta::goals[k] = i - 11;
-				break;
-			} else {
-				Fanta::goals[k] = 0;
-				break;
-			}
-		}
-	}
-
-	if (Fanta::Total[0] < 66 && Fanta::Total[1] < 66) {
-		if (Fanta::Total[0] >= Fanta::Total[1] + 6) {
-			Fanta::goals[0] = 1;
-			Fanta::goals[1] = 0;
-		} else if (Fanta::Total[1] >= Fanta::Total[0] + 6) {
-			Fanta::goals[1] = 1;
-			Fanta::goals[0] = 0;
-		} else {
-			Fanta::goals[1] = 0;
-			Fanta::goals[0] = 0;
-		}
-	}
-
-	for (size_t k = 0; k < 2; k++) {
-		if (Fanta::goals[k] < 0)
-			Fanta::goals[k] = 0;
-
-	}
 }
 void Fanta::calculateScorers() {
 	//debug << "--> calculateScorers" << endl;

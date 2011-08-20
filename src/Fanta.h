@@ -107,11 +107,11 @@ private:
 	void calculateDefenseModifier();
 	void calculateSfide();
 	void calculateTotal();
+	void calculateGoals();
 
 	/*
 	 std::vector<std::string> scorers[2];
 	 void reorderPlayers();
-	 void calculateGoals();
 	 unsigned int getAmmonizioniTot(unsigned int) const ;
 	 unsigned int getEspulsioniTot(unsigned int) const ;
 	 unsigned int getGoalDecVittTot(unsigned int) const ;
