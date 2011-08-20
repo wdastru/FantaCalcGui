@@ -735,18 +735,23 @@ void Fanta::calculateSfide() {
 void Fanta::calculateTotal() {
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
-		QString message = "In Fanta::calculateTotal() --> Totale squadra "
-						+ QString::fromStdString(this->getTeamName(k))
-						+ " :    <br /> in casa --> " + my::toQString<
-						unsigned int>(Fanta::atHome[k])
-						+ "<br />    modificatore difesa --> " + my::toQString<
-						signed int>(Fanta::modifier[k])
-						+ "<br />    sfide vinte --> " + my::toQString<
-						unsigned int>(Fanta::sfide[k]);
-
 		Fanta::Total[k] += Fanta::atHome[k];
+		QString message = "In Fanta::calculateTotal() --> Calcolo squadra "
+				+ QString::fromStdString(this->getTeamName(k)) + " :<br />"
+				+ my::toQString<double>(Fanta::Total[k]) + " / "
+				+ my::toQString<unsigned int>(Fanta::atHome[k])
+				+ " : in casa.<br />";
+
 		Fanta::Total[k] += Fanta::modifier[k];
+		message += (my::toQString<double>(Fanta::Total[k]) + " / "
+				+ my::toQString<signed int>(Fanta::modifier[k])
+				+ " : modificatore difesa.<br />");
+
 		Fanta::Total[k] += Fanta::sfide[k];
+		message
+				+= (my::toQString<double>(Fanta::Total[k]) + " / "
+						+ my::toQString<unsigned int>(Fanta::sfide[k])
+						+ " : sfide vinte.");
 
 		for (size_t i = 0; i < 4; i++) // ruolo
 		{
@@ -755,17 +760,17 @@ void Fanta::calculateTotal() {
 				Fanta::Total[k]
 						+= Fanta::teamOrderedByRuolo[k][i].at(j).FantaVoto;
 
-				message += ("    <br /> " + QString::fromStdString(
-								Fanta::teamOrderedByRuolo[k][i].at(j).Nome)
-								+ " --> "
-								+ my::toQString<float>(
-										Fanta::teamOrderedByRuolo[k][i].at(j).FantaVoto));
+				message += ("<br />" + my::toQString<double>(Fanta::Total[k])
+						+ " / " + my::toQString<float>(
+						Fanta::teamOrderedByRuolo[k][i].at(j).FantaVoto))
+						+ " : " + QString::fromStdString(
+						Fanta::teamOrderedByRuolo[k][i].at(j).Nome) + ".";
 
 				j++;
 			}
 		}
 
-		message += ("    <br /> Totale : " + my::toQString<double>(Fanta::Total[k]));
+		message += ("<br />Totale : " + my::toQString<double>(Fanta::Total[k]));
 		LOG(DEBUG, message);
 	}
 }
