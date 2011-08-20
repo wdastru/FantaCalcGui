@@ -782,9 +782,27 @@ void Fanta::calculateGoals() {
 
 			if ((i - 10) > 0) {
 				Fanta::goals[k] = i - 11;
+
+				LOG(
+						DEBUG,
+						"In Fanta::calculateGoals() --> squadra "
+								+ QString::fromStdString(this->getTeamName(k))
+								+ " : " + my::toQString<unsigned int>(
+								Fanta::goals[k]) + " (" + my::toQString<
+								double>(Fanta::Total[k]) + ")");
+
 				break;
 			} else {
 				Fanta::goals[k] = 0;
+
+				LOG(
+						DEBUG,
+						"In Fanta::calculateGoals() --> squadra "
+								+ QString::fromStdString(this->getTeamName(k))
+								+ " : " + my::toQString<unsigned int>(
+								Fanta::goals[k]) + " (" + my::toQString<
+								double>(Fanta::Total[k]) + ")");
+
 				break;
 			}
 		}
@@ -801,12 +819,28 @@ void Fanta::calculateGoals() {
 			Fanta::goals[1] = 0;
 			Fanta::goals[0] = 0;
 		}
+
+		LOG(
+				DEBUG,
+				"In Fanta::calculateGoals() --> caso in cui le due squadre hanno totalizzato entrambe meno di 66 punti.<br/>squadra " + QString::fromStdString(
+						this->getTeamName(0)) + " : " + my::toQString<
+						unsigned int>(Fanta::goals[0]) + " (" + my::toQString<
+						double>(Fanta::Total[0]) + ")<br/>" + "squadra "
+						+ QString::fromStdString(this->getTeamName(1)) + " : "
+						+ my::toQString<unsigned int>(Fanta::goals[1]) + " (" + my::toQString<
+						double>(Fanta::Total[1]) + ")");
 	}
 
 	for (size_t k = 0; k < 2; k++) {
 		if (Fanta::goals[k] < 0)
-			Fanta::goals[k] = 0;
+			LOG(
+					DEBUG,
+					"In Fanta::calculateGoals() --> la squadra "
+							+ QString::fromStdString(this->getTeamName(k))
+							+ " ha totalizzato un numero negativo di goals ("
+							+ my::toQString<unsigned int>(Fanta::goals[k])+").");
 
+		Fanta::goals[k] = 0;
 	}
 }
 /*
