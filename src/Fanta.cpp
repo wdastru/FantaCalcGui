@@ -835,16 +835,6 @@ void Fanta::calculateGoals() {
 							+ my::toQString<double>(Fanta::Total[1]) + ")");
 		}
 	}
-
-	LOG(
-			DEBUG,
-			"In Fanta::calculateGoals() --> Goals finali	 :<br/>"
-					+ QString::fromStdString(this->getTeamName(0)) + " : "
-					+ my::toQString<signed int>(Fanta::goals[0]) + " ("
-					+ my::toQString<double>(Fanta::Total[0]) + ")<br/>"
-					+ QString::fromStdString(this->getTeamName(1)) + " : "
-					+ my::toQString<signed int>(Fanta::goals[1]) + " ("
-					+ my::toQString<double>(Fanta::Total[1]) + ")");
 }
 /*
 unsigned int Fanta::getSubstitutions(size_t k) const {
