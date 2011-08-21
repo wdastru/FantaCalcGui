@@ -259,8 +259,8 @@ void Fanta::execute() {
 	this->calculateSfide();
 	this->calculateTotal();
 	this->calculateGoals();
+	this->calculateScorers();
 	return;
-//	this->calculateScorers();
 }
 void Fanta::checkGiocatoSenzaVoto() {
 	for (size_t k = 0; k < 2; k++) // squadra
@@ -834,6 +834,33 @@ void Fanta::calculateGoals() {
 							+ my::toQString<signed int>(Fanta::goals[1]) + " ("
 							+ my::toQString<double>(Fanta::Total[1]) + ")");
 		}
+	}
+}
+void Fanta::calculateScorers() {
+	vector<Fanta::player> tmpVector[2];
+
+	for (size_t k = 0; k < 2; k++) // squadra
+	{
+		for (size_t i = 0; i < 4; i++) // ruolo
+		{
+			size_t j = 0;
+			while (j < Fanta::modulo[k][i]) {
+				// preparing a single vector
+				tmpVector[k].push_back(Fanta::teamOrderedByRuolo[k][i].at(j));
+				j++;
+			}
+		}
+	}
+
+	for (size_t k = 0; k < 2; k++) // squadra
+	{
+		if (Fanta::goals[k] == 0)
+			continue;
+		do {
+			Fanta::bSort(tmpVector[k]);
+			Fanta::scorers[k].push_back(tmpVector[k].at(0).Nome);
+			tmpVector[k].at(0).FantaVoto -= 3.0;
+		} while (Fanta::scorers[k].size() < Fanta::goals[k]);
 	}
 }
 /*
@@ -1675,36 +1702,6 @@ void Fanta::printRiepilogo_toHtml(ofstream & fOut) {
 			fOut << " ";
 	}
 	fOut << ")" << endl << endl;
-}
-void Fanta::calculateScorers() {
-	//debug << "--> calculateScorers" << endl;
-
-	vector<Fanta::player> tmpVector[2];
-
-	for (size_t k = 0; k < 2; k++) // squadra
-	{
-		for (size_t i = 0; i < 4; i++) // ruolo
-		{
-			size_t j = 0;
-			while (j < Fanta::modulo[k][i]) {
-				// preparing a single vector
-				tmpVector[k].push_back(Fanta::teamOrderedByRuolo[k][i].at(j));
-				j++;
-			}
-		}
-	}
-
-	for (size_t k = 0; k < 2; k++) // squadra
-	{
-		if (Fanta::goals[k] == 0)
-			continue;
-		do {
-			Fanta::bSort(tmpVector[k]);
-			Fanta::scorers[k].push_back(tmpVector[k].at(0).Nome);
-			tmpVector[k].at(0).FantaVoto -= 3.0;
-		} while (Fanta::scorers[k].size() < Fanta::goals[k]);
-	}
-	//debug << "<-- calculateScorers" << endl;
 }
 void Fanta::bSort(std::vector<Fanta::player> & vect) {
 	size_t xx = vect.size() - 1;

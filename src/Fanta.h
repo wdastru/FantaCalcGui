@@ -41,7 +41,6 @@ public:
 	/*
 	 std::string getVariablesValues();
 	 void bSort(std::vector<CFanta::player> &);
-	 void calculateScorers();
 	 void printRiepilogo();
 	 void printRiepilogo_toFile(ofstream &);
 	 void printRiepilogo_toHtml(ofstream &);
@@ -108,6 +107,7 @@ private:
 	void calculateSfide();
 	void calculateTotal();
 	void calculateGoals();
+	void calculateScorers();
 
 	/*
 	 std::vector<std::string> scorers[2];
