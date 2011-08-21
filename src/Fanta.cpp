@@ -822,7 +822,7 @@ void Fanta::calculateGoals() {
 
 		LOG(
 				DEBUG,
-				"In Fanta::calculateGoals() --> caso in cui le due squadre hanno totalizzato entrambe meno di 66 punti.<br/>squadra " + QString::fromStdString(
+				"In Fanta::calculateGoals() --> entrambe le due squadre hanno totalizzato meno di 66 punti.<br/>squadra " + QString::fromStdString(
 						this->getTeamName(0)) + " : " + my::toQString<
 						unsigned int>(Fanta::goals[0]) + " (" + my::toQString<
 						double>(Fanta::Total[0]) + ")<br/>" + "squadra "
