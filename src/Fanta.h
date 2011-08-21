@@ -22,39 +22,6 @@
 using namespace std;
 
 class Fanta {
-public:
-	Fanta();
-	virtual ~Fanta();
-	static Fanta * Inst();
-	void initialize();
-	unsigned int atHome[2];
-	void setTeamName(const std::string, unsigned int);
-	std::string getTeamName(unsigned int);
-	unsigned int setModulo(std::string &, size_t);
-	std::string getModuloSquadra(size_t) const ;
-	void setAtHome(unsigned int);
-	unsigned int LevenshteinDistance(const std::string& s1,
-			const std::string& s2);
-	unsigned int addPlayer(std::string &, unsigned int);
-	void execute();
-
-	/*
-	 std::string getVariablesValues();
-	 void bSort(std::vector<CFanta::player> &);
-	 void printRiepilogo();
-	 void printRiepilogo_toFile(ofstream &);
-	 void printRiepilogo_toHtml(ofstream &);
-	 void printPlayersInfo(unsigned int);
-	 void printPlayersInfo_toFile(unsigned int, ofstream &);
-	 void printPlayersInfo_toHtml(unsigned int, ofstream &);
-	 void printFormationPor2Att(unsigned int);
-	 void printFormationPor2Att_toFile(unsigned int, ofstream &);
-	 void printFormationPor2Att_toHtml(unsigned int, ofstream &);
-	 void printFormationAtt2Por(unsigned int);
-	 void printFormationAtt2Por_toFile(unsigned int, ofstream &);
-	 void printFormationAtt2Por_toHtml(unsigned int, ofstream &);
-	 bool repeated;
-	 */
 
 private:
 	static Fanta * pInstance;
@@ -108,9 +75,9 @@ private:
 	void calculateTotal();
 	void calculateGoals();
 	void calculateScorers();
+	std::vector<std::string> scorers[2];
 
 	/*
-	 std::vector<std::string> scorers[2];
 	 void reorderPlayers();
 	 unsigned int getAmmonizioniTot(unsigned int) const ;
 	 unsigned int getEspulsioniTot(unsigned int) const ;
@@ -118,6 +85,40 @@ private:
 	 unsigned int getGoalDecParTot(unsigned int) const ;
 	 unsigned int getAssistTot(unsigned int) const ;
 	 unsigned int getSubstitutions(unsigned int) const ;
+	 */
+
+public:
+	Fanta();
+	virtual ~Fanta();
+	static Fanta * Inst();
+	void initialize();
+	unsigned int atHome[2];
+	void setTeamName(const std::string, unsigned int);
+	std::string getTeamName(unsigned int);
+	unsigned int setModulo(std::string &, size_t);
+	std::string getModuloSquadra(size_t) const ;
+	void setAtHome(unsigned int);
+	unsigned int LevenshteinDistance(const std::string& s1,
+			const std::string& s2);
+	unsigned int addPlayer(std::string &, unsigned int);
+	void execute();
+	void bSort(std::vector<Fanta::player> &);
+
+	/*
+	 std::string getVariablesValues();
+	 void printRiepilogo();
+	 void printRiepilogo_toFile(ofstream &);
+	 void printRiepilogo_toHtml(ofstream &);
+	 void printPlayersInfo(unsigned int);
+	 void printPlayersInfo_toFile(unsigned int, ofstream &);
+	 void printPlayersInfo_toHtml(unsigned int, ofstream &);
+	 void printFormationPor2Att(unsigned int);
+	 void printFormationPor2Att_toFile(unsigned int, ofstream &);
+	 void printFormationPor2Att_toHtml(unsigned int, ofstream &);
+	 void printFormationAtt2Por(unsigned int);
+	 void printFormationAtt2Por_toFile(unsigned int, ofstream &);
+	 void printFormationAtt2Por_toHtml(unsigned int, ofstream &);
+	 bool repeated;
 	 */
 };
 

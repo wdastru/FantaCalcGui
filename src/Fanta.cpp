@@ -863,6 +863,27 @@ void Fanta::calculateScorers() {
 		} while (Fanta::scorers[k].size() < Fanta::goals[k]);
 	}
 }
+
+void Fanta::bSort(std::vector<Fanta::player> & vect) {
+	size_t xx = vect.size() - 1;
+
+	// sorting with bubble-sort algorithm
+	for (size_t j = 0; j < xx; j++) {
+		for (size_t i = 0; i < xx - j; i++) {
+			if (vect.at(i).FantaVoto < vect.at(i + 1).FantaVoto) // ordina per FantaVoto
+				swap(vect.at(i), vect.at(i + 1));
+			else if (vect.at(i).FantaVoto == vect.at(i + 1).FantaVoto) {
+				if (vect.at(i).VotoGazzetta < vect.at(i + 1).VotoGazzetta) // poi per Voto
+					swap(vect.at(i), vect.at(i + 1));
+				else if (vect.at(i).VotoGazzetta == vect.at(i + 1).VotoGazzetta) {
+					if (vect.at(i).Ruolo < vect.at(i + 1).Ruolo) // poi per Ruolo
+						swap(vect.at(i), vect.at(i + 1));
+				}
+			}
+		}
+	}
+}
+
 /*
 unsigned int Fanta::getSubstitutions(size_t k) const {
 	return Fanta::sostituzioni[k];
@@ -1702,24 +1723,5 @@ void Fanta::printRiepilogo_toHtml(ofstream & fOut) {
 			fOut << " ";
 	}
 	fOut << ")" << endl << endl;
-}
-void Fanta::bSort(std::vector<Fanta::player> & vect) {
-	size_t xx = vect.size() - 1;
-
-	// sorting with bubble-sort algorithm
-	for (size_t j = 0; j < xx; j++) {
-		for (size_t i = 0; i < xx - j; i++) {
-			if (vect.at(i).FantaVoto < vect.at(i + 1).FantaVoto) // ordina per FantaVoto
-				swap(vect.at(i), vect.at(i + 1));
-			else if (vect.at(i).FantaVoto == vect.at(i + 1).FantaVoto) {
-				if (vect.at(i).VotoGazzetta < vect.at(i + 1).VotoGazzetta) // poi per Voto
-					swap(vect.at(i), vect.at(i + 1));
-				else if (vect.at(i).VotoGazzetta == vect.at(i + 1).VotoGazzetta) {
-					if (vect.at(i).Ruolo < vect.at(i + 1).Ruolo) // poi per Ruolo
-						swap(vect.at(i), vect.at(i + 1));
-				}
-			}
-		}
-	}
 }
 */
