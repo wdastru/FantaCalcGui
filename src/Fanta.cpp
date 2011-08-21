@@ -859,6 +859,15 @@ void Fanta::calculateScorers() {
 		do {
 			Fanta::bSort(tmpVector[k]);
 			Fanta::scorers[k].push_back(tmpVector[k].at(0).Nome);
+
+			LOG(
+					DEBUG,
+					"In Fanta::calculateScorers() --> squadra "
+							+ QString::fromStdString(this->getTeamName(k))
+							+ " : " + QString::fromStdString(
+							tmpVector[k].at(0).Nome) + " (" + my::toQString<float>(
+							tmpVector[k].at(0).FantaVoto)+ ").");
+
 			tmpVector[k].at(0).FantaVoto -= 3.0;
 		} while (Fanta::scorers[k].size() < Fanta::goals[k]);
 	}
