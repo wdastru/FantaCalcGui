@@ -892,7 +892,9 @@ void Fanta::bSort(std::vector<Fanta::player> & vect) {
 		}
 	}
 }
-
+std::string Fanta::getFileGazzetta(){
+	return this->fileGazzetta;
+}
 /*
 unsigned int Fanta::getSubstitutions(size_t k) const {
 	return Fanta::sostituzioni[k];

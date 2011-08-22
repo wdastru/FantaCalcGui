@@ -76,6 +76,7 @@ private:
 	void calculateGoals();
 	void calculateScorers();
 	std::vector<std::string> scorers[2];
+	std::string fileGazzetta;
 
 	/*
 	 void reorderPlayers();
@@ -103,6 +104,7 @@ public:
 	unsigned int addPlayer(std::string &, unsigned int);
 	void execute();
 	void bSort(std::vector<Fanta::player> &);
+	std::string getFileGazzetta();
 
 	/*
 	 std::string getVariablesValues();
