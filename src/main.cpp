@@ -31,12 +31,12 @@ int main(int argc, char *argv[]) {
 	singletonQtLogger::Inst()->setTitle(loggerTitle);
 	singletonQtLogger::Inst()->setDebugStatus(IniFileManager::Inst()->getDebugStatus());
 
-	LOG(DEBUG, "In main(): Logger started.<br/>");
+	LOG(DEBUG, "In main(): Logger started.");
 
 	LOG(
 			DEBUG,
 			"Contenuto iniFile (" + IniFileManager::Inst()->getIniFilePath()
-					+ "):<br /><br />" + IniFileManager::Inst()->showIniFile());
+					+ "):<br />" + IniFileManager::Inst()->showIniFile());
 
 	QDir qdir(IniFileManager::Inst()->getWorkDir());
 	qdir.mkdir("formazioni");
@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
 	} else if (useTheNetDialog->hasBeenAborted) {
 		LOG(DEBUG, "In main --> useTheNetDialog aborted.");
 	} else {
-		LOG(FATAL, "In main --> Caso strano, che si f&aacute;?");
+		LOG(FATAL, "In main --> Caso strano, che si fa?");
 	}
 	// <-- fine controllo dell'input dell'utente a UseTheNetDialog
 
@@ -106,7 +106,6 @@ int main(int argc, char *argv[]) {
 			FANTA->getFileGazzetta()).fileName();
 
 	singletonQtLogger::Inst()->setLogFileName(match);
-	singletonQtLogger::Inst()->saveLogFile();
 
 	 	/*
 		string fileOut = "tmp";
@@ -179,6 +178,8 @@ int main(int argc, char *argv[]) {
 		remove("tmp2");
 		remove("tmp3");
 		*/
+
+	singletonQtLogger::Inst()->saveLogFile();
 
 	return a.exec();
 }
