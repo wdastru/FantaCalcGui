@@ -107,6 +107,9 @@ int main(int argc, char *argv[]) {
 
 	LOG(DEBUG, "In main --> match : " + match);
 
+	singletonQtLogger::Inst()->setLogFileName(match);
+	singletonQtLogger::Inst()->saveLogFile();
+
 	 	/*
 		string fileOut = "tmp";
 		fOut.open( fileOut.c_str() );
