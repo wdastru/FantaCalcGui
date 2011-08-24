@@ -150,6 +150,13 @@ void IniFileManager::readIniFile() {
 		iniFile->readLine(buf, sizeof(buf));
 		this->gazzettaUrl = QString::fromAscii(buf).trimmed();
 
+		iniFile->readLine(buf, sizeof(buf)); // [Debug]
+		iniFile->readLine(buf, sizeof(buf));
+		if (QString::fromAscii(buf).trimmed() == "TRUE")
+			this->debugStatus = TRUE;
+		else
+			this->debugStatus = FALSE;
+
 		iniFile->close();
 	} else {
 		LOG(
