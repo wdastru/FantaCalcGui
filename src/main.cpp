@@ -100,12 +100,10 @@ int main(int argc, char *argv[]) {
 	FANTA->execute();
 
 	std::string riepilogo = "RIEPILOGO";
-	QString match = "risultato_"
+	QString match = IniFileManager::Inst()->getRisultatiPath() + "risultato_"
 			+ QString::fromStdString(FANTA->getTeamName(0)) + "-"
 			+ QString::fromStdString(FANTA->getTeamName(1)) + "_" + QFileInfo(
 			FANTA->getFileGazzetta()).fileName();
-
-	LOG(DEBUG, "In main --> match : " + match);
 
 	singletonQtLogger::Inst()->setLogFileName(match);
 	singletonQtLogger::Inst()->saveLogFile();
