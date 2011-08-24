@@ -65,6 +65,12 @@ void IniFileManager::writeIniFile() {
 		iniFile->write("\n[File Gazzetta Url]\n");
 		iniFile->write(this->gazzettaUrl.toAscii().trimmed());
 
+		iniFile->write("\n[Debug]\n");
+		if (this->debugStatus)
+			iniFile->write("TRUE");
+		else
+			iniFile->write("FALSE");
+
 		iniFile->close();
 	} else {
 		LOG(
@@ -213,4 +219,7 @@ QString IniFileManager::getFormazioniUrl() {
 }
 QString IniFileManager::getGazzettaUrl() {
 	return this->gazzettaUrl;
+}
+bool IniFileManager::getDebugStatus() {
+	return this->debugStatus;
 }

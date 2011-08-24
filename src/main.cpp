@@ -28,10 +28,12 @@ int main(int argc, char *argv[]) {
 	CVersion version;
 	QString loggerTitle = "FantaCalcGui v" + version.getVersion();
 
-	singletonQtLogger::Inst()->setTitle(loggerTitle);
-	singletonQtLogger::Inst()->setDebugStatus(TRUE);
+	IniFileManager::Inst()->getDebugStatus();
 
-	LOG(DEBUG, "In main(): Logger started.");
+	singletonQtLogger::Inst()->setTitle(loggerTitle);
+	singletonQtLogger::Inst()->setDebugStatus(FALSE);
+
+	LOG(DEBUG, "In main(): Logger started.<br/>");
 
 	LOG(
 			DEBUG,

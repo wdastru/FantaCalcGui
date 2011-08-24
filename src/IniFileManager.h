@@ -36,6 +36,7 @@ public:
 	QString getWorkDir();
 	QString getFormazioniUrl();
 	QString getGazzettaUrl();
+	bool getDebugStatus();
 
 private:
 	static IniFileManager* pInstance;
@@ -48,6 +49,7 @@ private:
 	QString downloadPath;
 	QString formazioniUrl;
 	QString gazzettaUrl;
+	bool debugStatus;
 };
 
 #endif /* INIFILEMANAGER_H_ */
