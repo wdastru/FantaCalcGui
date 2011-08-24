@@ -10,6 +10,7 @@
 
 GazzettaFileReader::GazzettaFileReader(QString _fileGazzetta) {
 	this->fileGazzetta = _fileGazzetta;
+	FANTA->setFileGazzetta(_fileGazzetta);
 }
 
 GazzettaFileReader::~GazzettaFileReader() {

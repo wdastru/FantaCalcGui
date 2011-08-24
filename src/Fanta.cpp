@@ -872,7 +872,6 @@ void Fanta::calculateScorers() {
 		} while (Fanta::scorers[k].size() < Fanta::goals[k]);
 	}
 }
-
 void Fanta::bSort(std::vector<Fanta::player> & vect) {
 	size_t xx = vect.size() - 1;
 
@@ -892,8 +891,11 @@ void Fanta::bSort(std::vector<Fanta::player> & vect) {
 		}
 	}
 }
-std::string Fanta::getFileGazzetta(){
+QString Fanta::getFileGazzetta(){
 	return this->fileGazzetta;
+}
+void Fanta::setFileGazzetta(QString _fileGazzetta){
+	this->fileGazzetta = _fileGazzetta;
 }
 /*
 unsigned int Fanta::getSubstitutions(size_t k) const {

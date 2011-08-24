@@ -10,6 +10,7 @@
 
 #include "singletonQtLogger.h"
 #include "defines.h"
+#include "Fanta.h"
 
 #include <fstream>
 #include <QtCore/QString>

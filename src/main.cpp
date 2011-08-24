@@ -4,6 +4,7 @@
 
 #include <QtGui/QtGui>
 #include <QtGui/QApplication>
+#include <QtCore/QFileInfo>
 
 #include "singletonQtLogger.h"
 #include "defines.h"
@@ -71,7 +72,7 @@ int main(int argc, char *argv[]) {
 		chooseFileFromAListDialog->exec();
 		fileGazzetta = chooseFileFromAListDialog->getFileGazzetta();
 		fileFormazioni = chooseFileFromAListDialog->getFileFormazioni();
-		// <-- scegli e scarica i file dalla rete
+		// <-- Scegli e scarica i file dalla rete e crea file squadre
 	} else if (useTheNetDialog->getNoClicked()) {
 		fileGazzetta = useTheNetDialog->getNoNetGazzettaFile();
 		fileFormazioni = useTheNetDialog->getNoNetSquadreFile();
@@ -99,14 +100,12 @@ int main(int argc, char *argv[]) {
 	FANTA->execute();
 
 	std::string riepilogo = "RIEPILOGO";
-	std::string match;
+	QString match = "risultato_"
+			+ QString::fromStdString(FANTA->getTeamName(0)) + "-"
+			+ QString::fromStdString(FANTA->getTeamName(1)) + "_" + QFileInfo(
+			FANTA->getFileGazzetta()).fileName();
 
-	if ( (FANTA->atHome[0] == 0 && FANTA->atHome[1] = 0) || FANTA->atHome[0] == 2)
-		match = "risultato_"+FANTA->getTeamName(0) + "-" + FANTA->getTeamName(1)+"_";
-	else
-		match = "risultato_"+FANTA->getTeamName(1) + "-" + FANTA->getTeamName(0)+"_";
-
-	LOG(DEBUG, "In main --> " + QString::fromStdString(match));
+	LOG(DEBUG, "In main --> match : " + match);
 
 	 	/*
 		string fileOut = "tmp";
