@@ -198,7 +198,7 @@ unsigned int FormazioniFileReader::execute() {
 					 *  se non viene trovato nulla si ripete
 					 *  con un valore di distance piu' grande
 					 */
-					for (signed int distance = 1; distance < line.size(); distance++) {
+					for (signed int distance = 1; ; distance++) { // loop infinito: fino a trovare qualcosa
 						Levenshteins.clear();
 						for (size_t ii = 0; ii < 26; ii++) { // giocatori della squadra
 							for (size_t jj = 0; jj
@@ -237,24 +237,26 @@ unsigned int FormazioniFileReader::execute() {
 												Levenshteins.size()));
 
 						if (Levenshteins.size() <= 1) {
-//							LOG(
-//									ERROR,
-//									QString::fromStdString(line)
-//											+ "<br>Levenshtein distance "
-//											+ my::toQString<signed int>(
-//													distance)
-//											+ " : giocatore non trovato.<br/>");
 							continue;
 						} else
 							break;
 					}
 
-					LOG(
-							DEBUG,
-							"In FormazioniFileReader::execute() --> trovati "
-									+ my::toQString<signed int>(
-											Levenshteins.size())
-									+ " possibili sostituti.");
+					if (Levenshteins.empty()) {
+						LOG(
+								ERROR,
+								"In FormazioniFileReader::execute() --> "
+										+ QString::fromStdString(line)
+										+ " : nessun giocatore trovato.<br/>");
+					} else {
+						LOG(
+								DEBUG,
+								"In FormazioniFileReader::execute() --> trovati "
+										+ my::toQString<signed int>(
+												Levenshteins.size())
+										+ " possibili sostituti.");
+
+					}
 
 					for (unsigned int j = 0; j < Levenshteins.size(); j++) {
 						LOG(
