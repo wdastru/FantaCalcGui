@@ -190,7 +190,7 @@ unsigned int FormazioniFileReader::execute() {
 
 					LOG(
 							DEBUG,
-							"In FormazioniFileReader::execute() --> giocato non trovato : "
+							"In FormazioniFileReader::execute() --> giocatore non trovato : "
 									+ QString::fromStdString(line));
 
 					/*
@@ -206,15 +206,6 @@ unsigned int FormazioniFileReader::execute() {
 								if (STR_MOD->msk(
 										this->allThePlayers[ii].at(jj), DELIM,
 										ColNomeCognome) != "TnotF!") {
-
-									/*
-									 * TODO trovare un buon sistema per individuare
-									 * 	    i possibili sostituti.
-									 *
-									 * 	    HINT:
-									 * 	    	- loop variando distance in modo da trovare
-									 * 	    	  almeno uno (o più) sostituti?
-									 */
 
 									if (FANTA->LevenshteinDistance(
 											line,
@@ -236,19 +227,48 @@ unsigned int FormazioniFileReader::execute() {
 							}
 						}
 
-						if (Levenshteins.size() == 0) {
-							LOG(
-									ERROR,
-									QString::fromStdString(line)
-											+ "<br>Levenshtein distance "
-											+ my::toQString<signed int>(
-													distance)
-											+ " : giocatore non trovato.<br/>");
+						LOG(
+								DEBUG,
+								"In FormazioniFileReader::execute() --> distance : "
+										+ my::toQString<signed int>(distance)
+										+ " - line size : " + my::toQString<
+										size_t>(line.size()) + " - trovati : "
+										+ my::toQString<signed int>(
+												Levenshteins.size()));
+
+						if (Levenshteins.size() <= 1) {
+//							LOG(
+//									ERROR,
+//									QString::fromStdString(line)
+//											+ "<br>Levenshtein distance "
+//											+ my::toQString<signed int>(
+//													distance)
+//											+ " : giocatore non trovato.<br/>");
 							continue;
-						}
+						} else
+							break;
 					}
 
+					LOG(
+							DEBUG,
+							"In FormazioniFileReader::execute() --> trovati "
+									+ my::toQString<signed int>(
+											Levenshteins.size())
+									+ " possibili sostituti.");
 					for (unsigned int j = 0; j < Levenshteins.size(); j++) {
+						LOG(
+								DEBUG,
+								"In FormazioniFileReader::execute() --> ["
+										+ my::toQString<unsigned int>(j + 1)
+										+ "] "
+										+ QString::fromStdString(
+												STR_MOD->onlySurname(
+														STR_MOD->msk(
+																Levenshteins.at(
+																		j),
+																DELIM,
+																ColNomeCognome))));
+
 						string tmpRuolo = STR_MOD->msk(Levenshteins.at(j),
 								DELIM, ColRuolo);
 						if (tmpRuolo == "P")
@@ -353,24 +373,6 @@ unsigned int FormazioniFileReader::execute() {
 						break;
 					}
 
-					//					if (wasAThese || wasALeven) {
-					//						LOG(
-					//								DEBUG,
-					//								"In FormazioniFileReader::execute() --> "
-					//										+ QString::fromStdString(
-					//												STR_MOD->msk(
-					//														v_Found.at(answer),
-					//														DELIM, ColNomeCognome))
-					//										+ " ( " + QString::fromStdString(
-					//										STR_MOD->msk(v_Found.at(answer), DELIM,
-					//												ColSquadra)) + " ) trovato.");
-					//					} else {
-					//						LOG(
-					//								DEBUG,
-					//								"In FormazioniFileReader::execute() --> "
-					//										+ QString::fromStdString(line)
-					//										+ " trovato.");
-					//					}
 					LOG(
 							DEBUG,
 							"In FormazioniFileReader::execute() --> "

@@ -15,10 +15,6 @@ class WhichOfLevenshteinDialog : public QDialog
     Q_OBJECT
 
 public:
-    /*
-     *  TODO Indicare nel dialogo il nome del giocatore
-     *  per il quale si cerca un sostituto
-     */
     WhichOfLevenshteinDialog(QWidget *parent = 0);
     void setListOfLevenshtein( std::vector < std::string > );
     void setPlayer(QString);
