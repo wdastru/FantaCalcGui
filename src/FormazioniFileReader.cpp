@@ -11,7 +11,6 @@ FormazioniFileReader::FormazioniFileReader(QString _fileFormazioni) {
 	this->fileFormazioni = _fileFormazioni;
 }
 FormazioniFileReader::~FormazioniFileReader() {
-	// TODO Auto-generated destructor stub
 }
 void FormazioniFileReader::setPlayers(
 		std::vector<std::vector<std::string> > _allThePlayers) {
@@ -23,7 +22,8 @@ unsigned int FormazioniFileReader::execute() {
 		LOG(
 				FATAL,
 				"In FormazioniFileReader::execute() --> il file gazzetta  : "
-						+ this->fileFormazioni + " non esiste o non è leggibile!");
+						+ this->fileFormazioni
+						+ " non esiste o non è leggibile!");
 		return FORMFILEREAD_NO_FORM_FILE;
 	}
 
@@ -87,7 +87,7 @@ unsigned int FormazioniFileReader::execute() {
 				if (xx == EXIT_FAILURE) {
 					LOG(
 							ERROR,
-							"Modulo non consentito!<br>Controllare il file di input."
+							"In FormazioniFileReader::execute() --> Modulo non consentito!<br>Controllare il file di input."
 									+ QString::fromStdString(
 											FANTA->getModuloSquadra(k)));
 					//goto restart;
@@ -108,12 +108,6 @@ unsigned int FormazioniFileReader::execute() {
 
 				if (line.size() <= 1) // evitare le righe con un solo carattere rimasto
 					continue;
-
-				//				LOG(
-				//						DEBUG,
-				//						"In FormazioniFileReader::execute() --> "
-				//								+ QString::fromStdString(
-				//										STR_MOD->leftString(line, 15)));
 
 				size_t i = 0;
 				while (STR_MOD->msk(line, " ", i) != "TnotF!") {
@@ -193,37 +187,65 @@ unsigned int FormazioniFileReader::execute() {
 				} else if (v_Found.size() == 0) {
 					wasALeven = true;
 					vector<string> Levenshteins; // possibili giocatori
-					Levenshteins.clear();
 
-					for (size_t ii = 0; ii < 26; ii++) {
-						for (size_t jj = 0; jj < this->allThePlayers[ii].size(); jj++) {
-							// Threshold
-							if (STR_MOD->msk(this->allThePlayers[ii].at(jj),
-									DELIM, ColNomeCognome) != "TnotF!") {
-								if (FANTA->LevenshteinDistance(
-										line,
-										STR_MOD->onlySurname(
-												STR_MOD->msk(
-														this->allThePlayers[ii].at(
-																jj), DELIM,
-														ColNomeCognome))) < 3)
-									Levenshteins.push_back(
-											this->allThePlayers[ii].at(jj));
-							} else {
-								LOG(
-										ERROR,
-										"In FormazioniFileReader::execute() --> il file della Gazzetta non sembra essere valido !");
-								return FORMFILEREAD_BAD_GAZ_FILE;
+					LOG(
+							DEBUG,
+							"In FormazioniFileReader::execute() --> giocato non trovato : "
+									+ QString::fromStdString(line));
+
+					/*
+					 *  loop per cercare corrispondenze;
+					 *  se non viene trovato nulla si ripete
+					 *  con un valore di distance piu' grande
+					 */
+					for (signed int distance = 1; distance < line.size(); distance++) {
+						Levenshteins.clear();
+						for (size_t ii = 0; ii < 26; ii++) { // giocatori della squadra
+							for (size_t jj = 0; jj
+									< this->allThePlayers[ii].size(); jj++) { // giocatori della Gazzetta
+								if (STR_MOD->msk(
+										this->allThePlayers[ii].at(jj), DELIM,
+										ColNomeCognome) != "TnotF!") {
+
+									/*
+									 * TODO trovare un buon sistema per individuare
+									 * 	    i possibili sostituti.
+									 *
+									 * 	    HINT:
+									 * 	    	- loop variando distance in modo da trovare
+									 * 	    	  almeno uno (o più) sostituti?
+									 */
+
+									if (FANTA->LevenshteinDistance(
+											line,
+											STR_MOD->onlySurname(
+													STR_MOD->msk(
+															this->allThePlayers[ii].at(
+																	jj), DELIM,
+															ColNomeCognome)))
+											<= distance) {
+										Levenshteins.push_back(
+												this->allThePlayers[ii].at(jj));
+									}
+								} else {
+									LOG(
+											ERROR,
+											"In FormazioniFileReader::execute() --> il file della Gazzetta non sembra essere valido !");
+									return FORMFILEREAD_BAD_GAZ_FILE;
+								}
 							}
 						}
-					}
 
-					if (Levenshteins.size() == 0) {
-						LOG(
-								ERROR,
-								QString::fromStdString(line)
-										+ "<br>Giocatore non trovato!<br>Controllare il file di input.");
-						//goto restart;
+						if (Levenshteins.size() == 0) {
+							LOG(
+									ERROR,
+									QString::fromStdString(line)
+											+ "<br>Levenshtein distance "
+											+ my::toQString<signed int>(
+													distance)
+											+ " : giocatore non trovato.<br/>");
+							continue;
+						}
 					}
 
 					for (unsigned int j = 0; j < Levenshteins.size(); j++) {
@@ -254,6 +276,8 @@ unsigned int FormazioniFileReader::execute() {
 					}
 
 					WhichOfLevenshteinDialog whichOfLevenshteinDialog;
+					whichOfLevenshteinDialog.setPlayer(
+							QString::fromStdString(line));
 					whichOfLevenshteinDialog.setListOfLevenshtein(
 							v_WhichOfTheseLevenshtein);
 					whichOfLevenshteinDialog.exec();

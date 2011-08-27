@@ -6,7 +6,7 @@
 WhichOfLevenshteinDialog::WhichOfLevenshteinDialog(QWidget *parent)
         : QDialog(parent)
 {
-    int frameStyle = QFrame::Sunken | QFrame::Panel;
+	int frameStyle = QFrame::Sunken | QFrame::Panel;
 
     itemLabel = new QLabel;
     itemLabel->setFrameStyle(frameStyle);
@@ -52,7 +52,7 @@ void WhichOfLevenshteinDialog::setItem()
 
     bool ok;
     QString item = QInputDialog::getItem(this, tr("Scegli"),
-                                         tr("Quale di questi?"), items, 0, false, &ok);
+                                         this->player + " non trovato. Giocatori con nome simile:", items, 0, false, &ok);
     if (ok && !item.isEmpty())
     {
         itemLabel->setText(item);
@@ -83,4 +83,7 @@ void WhichOfLevenshteinDialog::exit()
 void WhichOfLevenshteinDialog::setListOfLevenshtein( std::vector < std::string > list)
 {
     WhichOfLevenshteinDialog::ListOfLevenshtein = list;
+}
+void WhichOfLevenshteinDialog::setPlayer(QString _player) {
+	this->player = _player;
 }

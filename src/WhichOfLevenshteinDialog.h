@@ -5,6 +5,7 @@
 
 #include "defines.h"
 #include "StringModifier.h"
+#include "singletonQtLogger.h"
 
 class QLabel;
 class QErrorMessage;
@@ -14,8 +15,13 @@ class WhichOfLevenshteinDialog : public QDialog
     Q_OBJECT
 
 public:
+    /*
+     *  TODO Indicare nel dialogo il nome del giocatore
+     *  per il quale si cerca un sostituto
+     */
     WhichOfLevenshteinDialog(QWidget *parent = 0);
     void setListOfLevenshtein( std::vector < std::string > );
+    void setPlayer(QString);
     std::vector < std::string > ListOfLevenshtein;
     unsigned int chosenLevenshtein;
 
@@ -29,6 +35,7 @@ private:
     QPushButton *abortButton;
     void enableOkButton();
     void enableQuitButton();
+    QString player;
 
 protected:
     void closeEvent(QCloseEvent *event);

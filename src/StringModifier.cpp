@@ -15,11 +15,8 @@ StringModifier * StringModifier::Inst() {
 }
 StringModifier * StringModifier::pInstance = NULL;
 StringModifier::StringModifier() {
-	// TODO Auto-generated constructor stub
-
 }
 StringModifier::~StringModifier() {
-	// TODO Auto-generated destructor stub
 }
 void StringModifier::onlyLettersBegin(std::string & str) {
 	while ((str.at(0) < 'A' || (str.at(0) > 'Z' && str.at(0) < 'a')

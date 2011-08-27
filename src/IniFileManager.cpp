@@ -33,7 +33,6 @@ IniFileManager::IniFileManager() {
 	readIniFile();
 }
 IniFileManager::~IniFileManager() {
-	// TODO Auto-generated destructor stub
 }
 void IniFileManager::writeIniFile() {
 	QFile * iniFile = new QFile(this->iniFileName);

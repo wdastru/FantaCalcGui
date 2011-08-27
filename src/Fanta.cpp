@@ -20,7 +20,6 @@ Fanta::Fanta() {
 	this->initialize();
 }
 Fanta::~Fanta() {
-	// TODO Auto-generated destructor stub
 }
 void Fanta::initialize() {
 	for (size_t k = 0; k < 2; k++) {
