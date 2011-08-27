@@ -255,6 +255,7 @@ unsigned int FormazioniFileReader::execute() {
 									+ my::toQString<signed int>(
 											Levenshteins.size())
 									+ " possibili sostituti.");
+
 					for (unsigned int j = 0; j < Levenshteins.size(); j++) {
 						LOG(
 								DEBUG,

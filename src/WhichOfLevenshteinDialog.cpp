@@ -6,6 +6,8 @@
 WhichOfLevenshteinDialog::WhichOfLevenshteinDialog(QWidget *parent)
         : QDialog(parent)
 {
+	setWindowTitle(tr("Nessun giocatore trovato !"));
+
 	int frameStyle = QFrame::Sunken | QFrame::Panel;
 
     itemLabel = new QLabel;
@@ -36,32 +38,30 @@ WhichOfLevenshteinDialog::WhichOfLevenshteinDialog(QWidget *parent)
     layout->addWidget(itemLabel, 0, 1);
     layout->addWidget(buttonBox, 1, 0);
     setLayout(layout);
-
-    setWindowTitle(tr("Nessun giocatore trovato !"));
 }
 void WhichOfLevenshteinDialog::closeEvent(QCloseEvent *event)
 {
     event->ignore();
 }
-void WhichOfLevenshteinDialog::setItem()
-{
-    QStringList items;
+void WhichOfLevenshteinDialog::setItem() {
+	QStringList items;
 
-    for (size_t i = 0; i < WhichOfLevenshteinDialog::ListOfLevenshtein.size(); i++)
-        items << tr( WhichOfLevenshteinDialog::ListOfLevenshtein.at( i ).c_str() );
+	for (size_t i = 0; i < WhichOfLevenshteinDialog::ListOfLevenshtein.size(); i++)
+		items << tr(WhichOfLevenshteinDialog::ListOfLevenshtein.at(i).c_str());
 
-    bool ok;
-    QString item = QInputDialog::getItem(this, tr("Scegli"),
-                                         this->player + " non trovato. Giocatori con nome simile:", items, 0, false, &ok);
-    if (ok && !item.isEmpty())
-    {
-        itemLabel->setText(item);
-        std::ostringstream oss;
-        oss << item.toAscii().constData();
-        this->chosenLevenshtein = atoi( STR_MOD->msk( oss.str(), "[]", 0 ).c_str() );
-        this->enableOkButton();
-        this->enableQuitButton();
-    }
+	bool ok;
+	QString item = QInputDialog::getItem(this, tr("Scegli"),
+			this->player + " non trovato. Giocatori con nome simile:", items,
+			0, false, &ok);
+	if (ok && !item.isEmpty()) {
+		itemLabel->setText(item);
+		std::ostringstream oss;
+		oss << item.toAscii().constData();
+		this->chosenLevenshtein
+				= atoi(STR_MOD->msk(oss.str(), "[]", 0).c_str());
+		this->enableOkButton();
+		this->enableQuitButton();
+	}
 }
 void WhichOfLevenshteinDialog::enableOkButton()
 {
