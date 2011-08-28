@@ -417,7 +417,7 @@ std::vector < std::string > FormazioniFileReader::findLevenstheins(std::string l
 				} else {
 					LOG(
 							ERROR,
-							"In FormazioniFileReader::execute() --> il file della Gazzetta non sembra essere valido !");
+							"In FormazioniFileReader::findLevenstheins(line) --> il file della Gazzetta non sembra essere valido !");
 					//return FORMFILEREAD_BAD_GAZ_FILE;
 				}
 			}
@@ -425,7 +425,7 @@ std::vector < std::string > FormazioniFileReader::findLevenstheins(std::string l
 
 		LOG(
 				DEBUG,
-				"In FormazioniFileReader::execute() --> distance : "
+				"In FormazioniFileReader::findLevenstheins(line) --> distance : "
 						+ my::toQString<signed int>(distance)
 						+ " - line size : "
 						+ my::toQString<size_t>(line.size()) + " - trovati : "
