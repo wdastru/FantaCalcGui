@@ -40,7 +40,7 @@ unsigned int FormazioniFileReader::execute() {
 			if (line.size() == 0) // salta le righe nulle
 			{
 				continue;
-			} else if (line.find("###***###", 0) != std::string::npos) {
+			} else if (line.find("###***###", 0) != std::string::npos) { // separatore
 				/*
 				 *  ###***### serve per separare le due squadre nel file di input
 				 *  se trovato passa alla prossima squadra o esce dal loop for
@@ -51,14 +51,13 @@ unsigned int FormazioniFileReader::execute() {
 						"In FormazioniFileReader::execute() --> separatore : "
 								+ QString::fromStdString(line));
 				break;
-			} else if (line.find("#", 0) != std::string::npos) {
-				// # indica linee di commento
+			} else if (line.find("#", 0) != std::string::npos) {// # indica linee di commento
 				LOG(
 						DEBUG,
 						"In FormazioniFileReader::execute() --> commento : "
 								+ QString::fromStdString(line));
 				continue;
-			} else if (line.find("nome squadra", 0) != std::string::npos) {
+			} else if (line.find("nome squadra", 0) != std::string::npos) { // nome squadra
 				/*
 				 * lettura del nome della squadra a partire dalla fine di "nome squadra"
 				 */
@@ -76,7 +75,7 @@ unsigned int FormazioniFileReader::execute() {
 								+ QString::fromStdString(line));
 
 				continue;
-			} else if (line.find("modulo", 0) != std::string::npos) {
+			} else if (line.find("modulo", 0) != std::string::npos) { // modulo
 				LOG(
 						DEBUG,
 						"In FormazioniFileReader::execute() --> "
@@ -94,11 +93,11 @@ unsigned int FormazioniFileReader::execute() {
 				} else {
 					continue;
 				}
-			} else if (line.find("in casa", 0) != std::string::npos) {
+			} else if (line.find("in casa", 0) != std::string::npos) { // in casa
 				FANTA->setAtHome(k);
 				LOG(DEBUG, "In FormazioniFileReader::execute() --> in casa");
 				continue;
-			} else {
+			} else { // riga "buona"
 				// --> sostituzione тащим ed eliminazione caratteri "non-lettera"
 				STR_MOD->modifyAccents(line);
 				STR_MOD->onlyLettersBegin(line);
@@ -123,12 +122,27 @@ unsigned int FormazioniFileReader::execute() {
 					line.erase(line.size() - 4, 4);// toglie gdp
 				}
 
-				vector<string> v_Found; // vettore con tutti i giocatori trovati che contengono il nome cercato
-				v_Found.clear(); // es.: con Toni si trovano TONI, ANTONIOLI, ...
+				/*
+				 *  v_Found: vettore con tutti i giocatori trovati che contengono
+				 *  il nome cercato es.: con Anto si trovano ANTONIOLI, ANTONINI, ...
+				 */
+				vector<string> v_Found;
+				v_Found.clear();
 
+				/*
+				 *  v_WhichOfThese: vettore con tutte le corrispondenze
+				 *  contenenti la string cercata.
+				 *  es.: per ANTO si trovano ANTONIOLI, ANTONINI
+				 */
 				vector<string> v_WhichOfThese;
-				vector<string> v_WhichOfTheseLevenshtein;
 				v_WhichOfThese.clear();
+
+				/*
+				 *  v_WhichOfTheseLevenshtein: vettore contenente le possibili
+				 *  corrispondenze nel caso la stringa cercata non sia stata
+				 *  trovata.
+				 */
+				vector<string> v_WhichOfTheseLevenshtein;
 				v_WhichOfTheseLevenshtein.clear();
 
 				unsigned int xx = line[0]; // xx e' il valore ASCII della prima lettera del cognome
@@ -136,56 +150,84 @@ unsigned int FormazioniFileReader::execute() {
 						< this->allThePlayers[xx - 65].size(); j++) {
 					string tempStrGazz = this->allThePlayers[xx - 65].at(j);
 
+					// cerca nella riga della Gazzetta il nome del giocatore
 					size_t found = STR_MOD->msk(tempStrGazz, DELIM,
 							ColNomeCognome).find(line, 0);
-					// cerca nella riga della Gazzetta il nome del giocatore
 
-					if (found != string::npos) // se vero il giocatore e' stato trovato
-						v_Found.push_back(this->allThePlayers[xx - 65].at(j)); // aggiungi al vettore con tutti i giocatori trovati
+					if (found != string::npos) { // se vero il giocatore e' stato trovato
+						// aggiungi al vettore con tutti i giocatori trovati
+						v_Found.push_back(this->allThePlayers[xx - 65].at(j));
+					}
 				}
 
+				LOG(
+						DEBUG,
+						"In FormazioniFileReader::execute() --> "
+								+ QString::fromStdString(line)
+								+ " : v_Found.size = " + my::toQString<size_t>(v_Found.size()));
+
 				unsigned int answer = 0;
-				bool wasALeven = false;
-				bool wasAThese = false;
+				bool found = FALSE;
 
 				if (v_Found.size() > 1) {
-					wasAThese = true;
 					for (unsigned int j = 0; j < v_Found.size(); j++) {
-						string tmpRuolo = STR_MOD->msk(v_Found.at(j), DELIM,
-								ColRuolo);
-						if (tmpRuolo == "P")
-							tmpRuolo = "Portiere";
-						else if (tmpRuolo == "D")
-							tmpRuolo = "Difensore";
-						else if (tmpRuolo == "C")
-							tmpRuolo = "Centrocampista";
-						else if (tmpRuolo == "A")
-							tmpRuolo = "Attaccante";
-
-						string tmpStr = "";
-						tmpStr += ('[' + my::toString<unsigned int>(j + 1)
-								+ ']');
-						tmpStr += " ";
-						tmpStr += STR_MOD->msk(v_Found.at(j), DELIM,
-								ColNomeCognome);
-						tmpStr += " - ";
-						tmpStr += tmpRuolo;
-						tmpStr += " - ";
-						tmpStr
-								+= STR_MOD->msk(v_Found.at(j), DELIM,
-										ColSquadra);
-
-						v_WhichOfThese.push_back(tmpStr);
+						if (FANTA->LevenshteinDistance(
+								line,
+								STR_MOD->onlySurname(
+										STR_MOD->msk(v_Found.at(j), DELIM,
+												ColNomeCognome))) == 0) { // trovata corrispondenza esatta
+							LOG(
+									DEBUG,
+									"In FormazioniFileReader::execute() --> trovata corrispondenza esatta : "
+											+ QString::fromStdString(line));
+							found = TRUE;
+							answer = j;
+						}
 					}
 
-					WhichOfTheseDialog whichOfTheseDialog;
-					whichOfTheseDialog.setListOfThese(v_WhichOfThese);
-					whichOfTheseDialog.exec();
+					if (!found) {
+						for (unsigned int j = 0; j < v_Found.size(); j++) {
+							string tmpRuolo = STR_MOD->msk(v_Found.at(j),
+									DELIM, ColRuolo);
+							if (tmpRuolo == "P")
+								tmpRuolo = "Portiere";
+							else if (tmpRuolo == "D")
+								tmpRuolo = "Difensore";
+							else if (tmpRuolo == "C")
+								tmpRuolo = "Centrocampista";
+							else if (tmpRuolo == "A")
+								tmpRuolo = "Attaccante";
 
-					answer = whichOfTheseDialog.chosenThese;
-					answer--;
+							string tmpStr = "";
+							tmpStr += ('[' + my::toString<unsigned int>(j + 1)
+									+ ']');
+							tmpStr += " ";
+							tmpStr += STR_MOD->msk(v_Found.at(j), DELIM,
+									ColNomeCognome);
+							tmpStr += " - ";
+							tmpStr += tmpRuolo;
+							tmpStr += " - ";
+							tmpStr += STR_MOD->msk(v_Found.at(j), DELIM,
+									ColSquadra);
+
+							v_WhichOfThese.push_back(tmpStr);
+						}
+
+						WhichOfTheseDialog whichOfTheseDialog;
+						whichOfTheseDialog.setListOfThese(v_WhichOfThese);
+						whichOfTheseDialog.exec();
+
+						answer = whichOfTheseDialog.chosenThese;
+						answer--;
+					}
 				} else if (v_Found.size() == 0) {
-					wasALeven = true;
+					/*
+					 *  Non sono stati trovati giocatori che contengono
+					 *  la string di ricerca.
+					 *  Ora si prova a cercare delle corrispondenze con
+					 *  la distanza di Levensthein
+					 */
+					//wasALeven = true;
 					vector<string> Levenshteins; // possibili giocatori
 
 					LOG(
