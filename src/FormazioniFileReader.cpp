@@ -160,17 +160,25 @@ unsigned int FormazioniFileReader::execute() {
 					}
 				}
 
-				LOG(
-						DEBUG,
-						"In FormazioniFileReader::execute() --> "
-								+ QString::fromStdString(line)
-								+ " : v_Found.size = " + my::toQString<size_t>(v_Found.size()));
+				if (v_Found.size() != 1) {
+					LOG(
+							DEBUG,
+							"In FormazioniFileReader::execute() --> "
+									+ QString::fromStdString(line)
+									+ " : v_Found.size = " + my::toQString<
+									size_t>(v_Found.size()));
+				}
 
 				unsigned int answer = 0;
 				bool found = FALSE;
 
 				if (v_Found.size() > 1) {
 					for (unsigned int j = 0; j < v_Found.size(); j++) {
+						LOG(
+								DEBUG,
+								"In FormazioniFileReader::execute() --> "
+										+ QString::fromStdString(this->prepareStringToPresent(v_Found.at(j),j)));
+
 						if (FANTA->LevenshteinDistance(
 								line,
 								STR_MOD->onlySurname(
@@ -187,29 +195,8 @@ unsigned int FormazioniFileReader::execute() {
 
 					if (!found) {
 						for (unsigned int j = 0; j < v_Found.size(); j++) {
-							string tmpRuolo = STR_MOD->msk(v_Found.at(j),
-									DELIM, ColRuolo);
-							if (tmpRuolo == "P")
-								tmpRuolo = "Portiere";
-							else if (tmpRuolo == "D")
-								tmpRuolo = "Difensore";
-							else if (tmpRuolo == "C")
-								tmpRuolo = "Centrocampista";
-							else if (tmpRuolo == "A")
-								tmpRuolo = "Attaccante";
-
-							string tmpStr = "";
-							tmpStr += ('[' + my::toString<unsigned int>(j + 1)
-									+ ']');
-							tmpStr += " ";
-							tmpStr += STR_MOD->msk(v_Found.at(j), DELIM,
-									ColNomeCognome);
-							tmpStr += " - ";
-							tmpStr += tmpRuolo;
-							tmpStr += " - ";
-							tmpStr += STR_MOD->msk(v_Found.at(j), DELIM,
-									ColSquadra);
-
+							std::string tmpStr = this->prepareStringToPresent(
+									v_Found.at(j), j);
 							v_WhichOfThese.push_back(tmpStr);
 						}
 
@@ -227,8 +214,6 @@ unsigned int FormazioniFileReader::execute() {
 					 *  Ora si prova a cercare delle corrispondenze con
 					 *  la distanza di Levensthein
 					 */
-					//wasALeven = true;
-
 					LOG(
 							DEBUG,
 							"In FormazioniFileReader::execute() --> giocatore non trovato : "
@@ -251,59 +236,29 @@ unsigned int FormazioniFileReader::execute() {
 												Levenshteins.size())
 										+ " possibili sostituti.");
 
+						for (unsigned int j = 0; j < Levenshteins.size(); j++) {
+							std::string tmpStr = this->prepareStringToPresent(
+									Levenshteins.at(j), j);
+							v_WhichOfTheseLevenshtein.push_back(tmpStr);
+
+							LOG(
+									DEBUG,
+									"In FormazioniFileReader::execute() --> "
+											+ QString::fromStdString(tmpStr));
+						}
+
+						WhichOfLevenshteinDialog whichOfLevenshteinDialog;
+						whichOfLevenshteinDialog.setPlayer(
+								QString::fromStdString(line));
+						whichOfLevenshteinDialog.setListOfLevenshtein(
+								v_WhichOfTheseLevenshtein);
+						whichOfLevenshteinDialog.exec();
+
+						v_Found.push_back(
+								Levenshteins.at(
+										whichOfLevenshteinDialog.chosenLevenshtein
+												- 1));
 					}
-
-					for (unsigned int j = 0; j < Levenshteins.size(); j++) {
-						LOG(
-								DEBUG,
-								"In FormazioniFileReader::execute() --> ["
-										+ my::toQString<unsigned int>(j + 1)
-										+ "] "
-										+ QString::fromStdString(
-												STR_MOD->onlySurname(
-														STR_MOD->msk(
-																Levenshteins.at(
-																		j),
-																DELIM,
-																ColNomeCognome))));
-
-						string tmpRuolo = STR_MOD->msk(Levenshteins.at(j),
-								DELIM, ColRuolo);
-						if (tmpRuolo == "P")
-							tmpRuolo = "Portiere";
-						else if (tmpRuolo == "D")
-							tmpRuolo = "Difensore";
-						else if (tmpRuolo == "C")
-							tmpRuolo = "Centrocampista";
-						else if (tmpRuolo == "A")
-							tmpRuolo = "Attaccante";
-
-						string tmpStr = "";
-						tmpStr += ('[' + my::toString<unsigned int>(j + 1)
-								+ ']');
-						tmpStr += " ";
-						tmpStr += STR_MOD->msk(Levenshteins.at(j), DELIM,
-								ColNomeCognome);
-						tmpStr += " - ";
-						tmpStr += tmpRuolo;
-						tmpStr += " - ";
-						tmpStr += STR_MOD->msk(Levenshteins.at(j), DELIM,
-								ColSquadra);
-
-						v_WhichOfTheseLevenshtein.push_back(tmpStr);
-					}
-
-					WhichOfLevenshteinDialog whichOfLevenshteinDialog;
-					whichOfLevenshteinDialog.setPlayer(
-							QString::fromStdString(line));
-					whichOfLevenshteinDialog.setListOfLevenshtein(
-							v_WhichOfTheseLevenshtein);
-					whichOfLevenshteinDialog.exec();
-
-					v_Found.push_back(
-							Levenshteins.at(
-									whichOfLevenshteinDialog.chosenLevenshtein
-											- 1));
 				}
 
 				if (line.size() > 1) // se rimane solo un carattere "non-lettera" va avanti senza aggiungere nulla
@@ -439,7 +394,28 @@ std::vector < std::string > FormazioniFileReader::findLevenstheins(std::string l
 
 	return Levenshteins;
 }
+std::string FormazioniFileReader::prepareStringToPresent(std::string str, signed int j) {
+	string tmpRuolo = STR_MOD->msk(str, DELIM, ColRuolo);
+	if (tmpRuolo == "P")
+		tmpRuolo = "Portiere";
+	else if (tmpRuolo == "D")
+		tmpRuolo = "Difensore";
+	else if (tmpRuolo == "C")
+		tmpRuolo = "Centrocampista";
+	else if (tmpRuolo == "A")
+		tmpRuolo = "Attaccante";
 
+	string tmpStr = "";
+	tmpStr += ('[' + my::toString<unsigned int>(j + 1) + ']');
+	tmpStr += " ";
+	tmpStr += STR_MOD->msk(str, DELIM, ColNomeCognome);
+	tmpStr += " - ";
+	tmpStr += tmpRuolo;
+	tmpStr += " - ";
+	tmpStr += STR_MOD->msk(str, DELIM, ColSquadra);
+
+	return tmpStr;
+}
 //void FormazioniFileReader::printTitolo2(std::string str) {
 //	QString tmp = "";
 //	LOG(TOFILE, "\n +");
