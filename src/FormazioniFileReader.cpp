@@ -177,7 +177,9 @@ unsigned int FormazioniFileReader::execute() {
 						LOG(
 								DEBUG,
 								"In FormazioniFileReader::execute() --> "
-										+ QString::fromStdString(this->prepareStringToPresent(v_Found.at(j),j)));
+										+ QString::fromStdString(
+												this->prepareStringToPresent(
+														v_Found.at(j), j)));
 
 						if (FANTA->LevenshteinDistance(
 								line,
@@ -213,8 +215,7 @@ unsigned int FormazioniFileReader::execute() {
 					 *  la string di ricerca.
 					 *  Ora si prova a cercare delle corrispondenze con
 					 *  la distanza di Levensthein
-					 */
-					LOG(
+					 */LOG(
 							DEBUG,
 							"In FormazioniFileReader::execute() --> giocatore non trovato : "
 									+ QString::fromStdString(line));
@@ -259,10 +260,7 @@ unsigned int FormazioniFileReader::execute() {
 										whichOfLevenshteinDialog.chosenLevenshtein
 												- 1));
 					}
-				}
-
-				if (line.size() > 1) // se rimane solo un carattere "non-lettera" va avanti senza aggiungere nulla
-				{
+				} else {
 					/*
 					 *  aggiungo le due colonne mancanti
 					 *  nel file della Gazzetta : GDV e GDP
@@ -336,22 +334,21 @@ unsigned int FormazioniFileReader::execute() {
 									STR_MOD->msk(v_Found.at(answer), DELIM,
 											ColSquadra)) + " ) trovato.");
 
-				} else {
-					;
 				}
 			}
 		}
 	}
 	return FORMFILEREAD_OK;
 }
-std::vector < std::string > FormazioniFileReader::findLevenstheins(std::string line) {
+std::vector<std::string> FormazioniFileReader::findLevenstheins(
+		std::string line) {
 	/*
 	 *  loop per cercare corrispondenze;
 	 *  se non viene trovato nulla si ripete
 	 *  con un valore di distance piu' grande
 	 */
 
-	std::vector < std::string > Levenshteins;
+	std::vector<std::string> Levenshteins;
 
 	for (signed int distance = 1;; distance++) { // loop infinito: fino a trovare qualcosa
 		Levenshteins.clear();
@@ -394,7 +391,8 @@ std::vector < std::string > FormazioniFileReader::findLevenstheins(std::string l
 
 	return Levenshteins;
 }
-std::string FormazioniFileReader::prepareStringToPresent(std::string str, signed int j) {
+std::string FormazioniFileReader::prepareStringToPresent(std::string str,
+		signed int j) {
 	string tmpRuolo = STR_MOD->msk(str, DELIM, ColRuolo);
 	if (tmpRuolo == "P")
 		tmpRuolo = "Portiere";
