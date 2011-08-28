@@ -175,7 +175,7 @@ unsigned int FormazioniFileReader::execute() {
 								line,
 								STR_MOD->onlySurname(
 										STR_MOD->msk(v_Found.at(j), DELIM,
-												ColNomeCognome))) == 0) { // trovata corrispondenza esatta
+												ColNomeCognome))) == 0) { // corrispondenza esatta
 							LOG(
 									DEBUG,
 									"In FormazioniFileReader::execute() --> trovata corrispondenza esatta : "
@@ -228,61 +228,14 @@ unsigned int FormazioniFileReader::execute() {
 					 *  la distanza di Levensthein
 					 */
 					//wasALeven = true;
-					vector<string> Levenshteins; // possibili giocatori
 
 					LOG(
 							DEBUG,
 							"In FormazioniFileReader::execute() --> giocatore non trovato : "
 									+ QString::fromStdString(line));
 
-					/*
-					 *  loop per cercare corrispondenze;
-					 *  se non viene trovato nulla si ripete
-					 *  con un valore di distance piu' grande
-					 */
-					for (signed int distance = 1; ; distance++) { // loop infinito: fino a trovare qualcosa
-						Levenshteins.clear();
-						for (size_t ii = 0; ii < 26; ii++) { // giocatori della squadra
-							for (size_t jj = 0; jj
-									< this->allThePlayers[ii].size(); jj++) { // giocatori della Gazzetta
-								if (STR_MOD->msk(
-										this->allThePlayers[ii].at(jj), DELIM,
-										ColNomeCognome) != "TnotF!") {
-
-									if (FANTA->LevenshteinDistance(
-											line,
-											STR_MOD->onlySurname(
-													STR_MOD->msk(
-															this->allThePlayers[ii].at(
-																	jj), DELIM,
-															ColNomeCognome)))
-											<= distance) {
-										Levenshteins.push_back(
-												this->allThePlayers[ii].at(jj));
-									}
-								} else {
-									LOG(
-											ERROR,
-											"In FormazioniFileReader::execute() --> il file della Gazzetta non sembra essere valido !");
-									return FORMFILEREAD_BAD_GAZ_FILE;
-								}
-							}
-						}
-
-						LOG(
-								DEBUG,
-								"In FormazioniFileReader::execute() --> distance : "
-										+ my::toQString<signed int>(distance)
-										+ " - line size : " + my::toQString<
-										size_t>(line.size()) + " - trovati : "
-										+ my::toQString<signed int>(
-												Levenshteins.size()));
-
-						if (Levenshteins.size() <= 1) {
-							continue;
-						} else
-							break;
-					}
+					vector<string> Levenshteins; // possibili giocatori
+					Levenshteins = this->findLevenstheins(line);
 
 					if (Levenshteins.empty()) {
 						LOG(
@@ -436,6 +389,57 @@ unsigned int FormazioniFileReader::execute() {
 	}
 	return FORMFILEREAD_OK;
 }
+std::vector < std::string > FormazioniFileReader::findLevenstheins(std::string line) {
+	/*
+	 *  loop per cercare corrispondenze;
+	 *  se non viene trovato nulla si ripete
+	 *  con un valore di distance piu' grande
+	 */
+
+	std::vector < std::string > Levenshteins;
+
+	for (signed int distance = 1;; distance++) { // loop infinito: fino a trovare qualcosa
+		Levenshteins.clear();
+		for (size_t ii = 0; ii < 26; ii++) { // giocatori della squadra
+			for (size_t jj = 0; jj < this->allThePlayers[ii].size(); jj++) { // giocatori della Gazzetta
+				if (STR_MOD->msk(this->allThePlayers[ii].at(jj), DELIM,
+						ColNomeCognome) != "TnotF!") {
+
+					if (FANTA->LevenshteinDistance(
+							line,
+							STR_MOD->onlySurname(
+									STR_MOD->msk(
+											this->allThePlayers[ii].at(jj),
+											DELIM, ColNomeCognome)))
+							<= distance) {
+						Levenshteins.push_back(this->allThePlayers[ii].at(jj));
+					}
+				} else {
+					LOG(
+							ERROR,
+							"In FormazioniFileReader::execute() --> il file della Gazzetta non sembra essere valido !");
+					//return FORMFILEREAD_BAD_GAZ_FILE;
+				}
+			}
+		}
+
+		LOG(
+				DEBUG,
+				"In FormazioniFileReader::execute() --> distance : "
+						+ my::toQString<signed int>(distance)
+						+ " - line size : "
+						+ my::toQString<size_t>(line.size()) + " - trovati : "
+						+ my::toQString<signed int>(Levenshteins.size()));
+
+		if (Levenshteins.size() <= 1) {
+			continue;
+		} else
+			break;
+	}
+
+	return Levenshteins;
+}
+
 //void FormazioniFileReader::printTitolo2(std::string str) {
 //	QString tmp = "";
 //	LOG(TOFILE, "\n +");

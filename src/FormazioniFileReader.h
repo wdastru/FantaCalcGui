@@ -37,6 +37,7 @@ public:
 private:
 	QString fileFormazioni;
 	std::vector<std::vector<std::string> > allThePlayers;
+	std::vector < std::string > findLevenstheins(std::string);
 };
 
 #endif /* FORMAZIONIFILEREADER_H_ */
