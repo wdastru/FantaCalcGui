@@ -106,6 +106,9 @@ public:
 	void bSort(std::vector<Fanta::player> &);
 	QString getFileGazzetta();
 	void setFileGazzetta(QString);
+	void printRiepilogo_toFile();
+	void printTitolo2(std::string);
+//	void printTitolo3(std::string);
 
 	/*
 	 std::string getVariablesValues();

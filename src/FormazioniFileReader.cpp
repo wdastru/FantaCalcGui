@@ -414,32 +414,4 @@ std::string FormazioniFileReader::prepareStringToPresent(std::string str,
 
 	return tmpStr;
 }
-//void FormazioniFileReader::printTitolo2(std::string str) {
-//	QString tmp = "";
-//	LOG(TOFILE, "\n +");
-//	for (unsigned int i = 0; i < str.size() + 6; i++) {
-//		tmp += "-";
-//	}
-//	LOG(TOFILE, tmp + "+\n" + " | +");
-//
-//	tmp = "";
-//	for (unsigned int i = 0; i < str.size() + 2; i++) {
-//		tmp += "-";
-//	}
-//	LOG(TOFILE, tmp + "+ |\n");
-//
-//	LOG(TOFILE, " | | " + QString::fromStdString(str) + " | |\n");
-//
-//	LOG(TOFILE, " | +");
-//	for (unsigned int i = 0; i < str.size() + 2; i++)
-//		LOG(TOFILE, "-");
-//	LOG(TOFILE, "+ |\n");
-//
-//	LOG(TOFILE, " +");
-//	for (unsigned int i = 0; i < str.size() + 6; i++)
-//		LOG(TOFILE, "-");
-//	LOG(TOFILE, "+\n\n");
-//}
-//void FormazioniFileReader::printTitolo3(std::string str) {
-//	LOG(TOFILE, "\n!!!! " + QString::fromStdString(str) + " !!!!\n");
-//}
+
