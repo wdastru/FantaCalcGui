@@ -108,6 +108,7 @@ public:
 	void setFileGazzetta(QString);
 	void printRiepilogo_toFile();
 	void printTitolo2(std::string);
+	unsigned int getAmmonizioniTot(unsigned int k) const;
 //	void printTitolo3(std::string);
 
 	/*
