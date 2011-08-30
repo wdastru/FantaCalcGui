@@ -936,13 +936,19 @@ void Fanta::printRiepilogo_toFile() {
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					unsigned int>(FANTA->getAmmonizioniTot(1)));
 
-LOG(TOFILE, " Espulsioni " + QString::fromStdString(STR_MOD->leftString(FANTA->getTeamName(0),
-						FANTA->longerNameLength)) + " : " + my::toQString<
-		unsigned int>(FANTA->getgetEspulsioniTot(0));
+	LOG(
+			TOFILE,
+			"<br/> Espulsioni " + QString::fromStdString(
+					STR_MOD->leftString(FANTA->getTeamName(0),
+							FANTA->longerNameLength)) + " : " + my::toQString<
+					unsigned int>(FANTA->getEspulsioniTot(0)));
 
-		LOG(TOFILE, " Espulsioni " + QString::fromStdString(STR_MOD->leftString(FANTA->getTeamName(1),
-								FANTA->longerNameLength)) + " : " + my::toQString<
-				unsigned int>(FANTA->getEspulsioniTot(1));
+	LOG(
+			TOFILE,
+			" Espulsioni " + QString::fromStdString(
+					STR_MOD->leftString(FANTA->getTeamName(1),
+							FANTA->longerNameLength)) + " : " + my::toQString<
+					unsigned int>(FANTA->getEspulsioniTot(1)));
 
 	/*		LOG(TOFILE, " Goal decisivi vittoria " + leftString(FANTA->getTeamName(0),
 			FANTA->longerNameLength) + " : " + FANTA->getGoalDecVittTot(0)
