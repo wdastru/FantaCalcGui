@@ -898,123 +898,123 @@ void Fanta::setFileGazzetta(QString _fileGazzetta){
 }
 void Fanta::printRiepilogo_toFile() {
 	LOG(
-			TOFILE,
+			INFO,
 			" Modulo " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : "
 					+ QString::fromStdString(FANTA->getModuloSquadra(0)));
 	LOG(
-			TOFILE,
+			INFO,
 			" Modulo " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
 							FANTA->longerNameLength)) + " : "
 					+ QString::fromStdString(FANTA->getModuloSquadra(1)));
 
 	LOG(
-			TOFILE,
+			INFO,
 			"<br/> Fattore Campo " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					unsigned int>(FANTA->atHome[0]));
 	LOG(
-			TOFILE,
+			INFO,
 			" Fattore Campo " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					unsigned int>(FANTA->atHome[1]));
 
 	LOG(
-			TOFILE,
+			INFO,
 			"<br/> Ammonizioni " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					unsigned int>(FANTA->getAmmonizioniTot(0)));
 	LOG(
-			TOFILE,
+			INFO,
 			" Ammonizioni " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					unsigned int>(FANTA->getAmmonizioniTot(1)));
 
 	LOG(
-			TOFILE,
+			INFO,
 			"<br/> Espulsioni " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					unsigned int>(FANTA->getEspulsioniTot(0)));
 
 	LOG(
-			TOFILE,
+			INFO,
 			" Espulsioni " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					unsigned int>(FANTA->getEspulsioniTot(1)));
 
 	LOG(
-			TOFILE,
+			INFO,
 			"<br/> Goal decisivi vittoria " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					unsigned int>(FANTA->getGoalDecVittTot(0)));
 
 	LOG(
-			TOFILE,
+			INFO,
 			" Goal decisivi vittoria " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					unsigned int>(FANTA->getGoalDecVittTot(1)));
 
 	LOG(
-			TOFILE,
+			INFO,
 			"<br/> Goal decisivi pareggio " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					unsigned int>(FANTA->getGoalDecParTot(0)));
 
 	LOG(
-			TOFILE,
+			INFO,
 			" Goal decisivi pareggio " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					unsigned int>(FANTA->getGoalDecParTot(1)));
 
 		LOG(
-			TOFILE,
+			INFO,
 			"<br/> Assist " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					unsigned int>(FANTA->getAssistTot(0)));
 
 	LOG(
-			TOFILE,
+			INFO,
 			" Assist " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					unsigned int>(FANTA->getAssistTot(1)));
 
 	LOG(
-			TOFILE,
+			INFO,
 			"<br/> Numero sfide " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					unsigned int>(FANTA->sfide[0]));
 
 	LOG(
-			TOFILE,
+			INFO,
 			" Numero sfide " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					unsigned int>(FANTA->sfide[1]));
 
 	LOG(
-			TOFILE,
+			INFO,
 			"<br/> Sostituzioni " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					unsigned int>(FANTA->sostituzioni[0]));
 
 	LOG(
-			TOFILE,
+			INFO,
 			" Sostituzioni " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
 							FANTA->longerNameLength)) + " : " + my::toQString<
