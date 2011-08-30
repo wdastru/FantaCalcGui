@@ -80,8 +80,6 @@ private:
 
 	/*
 	 void reorderPlayers();
-	 unsigned int getAssistTot(unsigned int) const ;
-	 unsigned int getSubstitutions(unsigned int) const ;
 	 */
 
 public:
@@ -108,6 +106,8 @@ public:
 	 unsigned int getEspulsioniTot(unsigned int) const ;
 	 unsigned int getGoalDecVittTot(unsigned int) const ;
 	 unsigned int getGoalDecParTot(unsigned int) const ;
+	 unsigned int getAssistTot(unsigned int) const ;
+	 unsigned int getSubstitutions(unsigned int) const ;
 //	void printTitolo3(std::string);
 
 	/*
