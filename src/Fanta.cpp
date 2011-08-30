@@ -938,7 +938,7 @@ void Fanta::printRiepilogo_toFile() {
 
 	LOG(
 			TOFILE,
-			"<br/> Espulsioni " + QString::fromStdString(
+			" Espulsioni " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					unsigned int>(FANTA->getEspulsioniTot(0)));
@@ -950,21 +950,36 @@ void Fanta::printRiepilogo_toFile() {
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					unsigned int>(FANTA->getEspulsioniTot(1)));
 
-	/*		LOG(TOFILE, " Goal decisivi vittoria " + leftString(FANTA->getTeamName(0),
-			FANTA->longerNameLength) + " : " + FANTA->getGoalDecVittTot(0)
-			+ endl;
-	LOG(TOFILE, " Goal decisivi vittoria " + leftString(FANTA->getTeamName(1),
-			FANTA->longerNameLength) + " : " + FANTA->getGoalDecVittTot(1)
-			+ endl + endl;
+	LOG(
+			TOFILE,
+			"<br/> Goal decisivi vittoria " + QString::fromStdString(
+					STR_MOD->leftString(FANTA->getTeamName(0),
+							FANTA->longerNameLength)) + " : " + my::toQString<
+					unsigned int>(FANTA->getGoalDecVittTot(0)));
 
-	LOG(TOFILE, " Goal decisivi pareggio " + leftString(FANTA->getTeamName(0),
-			FANTA->longerNameLength) + " : " + FANTA->getGoalDecParTot(0)
-			+ endl;
-	LOG(TOFILE, " Goal decisivi pareggio " + leftString(FANTA->getTeamName(1),
-			FANTA->longerNameLength) + " : " + FANTA->getGoalDecParTot(1)
-			+ endl + endl;
+	LOG(
+			TOFILE,
+			" Goal decisivi vittoria " + QString::fromStdString(
+					STR_MOD->leftString(FANTA->getTeamName(1),
+							FANTA->longerNameLength)) + " : " + my::toQString<
+					unsigned int>(FANTA->getGoalDecVittTot(1)));
 
-	LOG(TOFILE, " Assist " + leftString(FANTA->getTeamName(0),
+	LOG(
+			TOFILE,
+			"<br/> Goal decisivi pareggio " + QString::fromStdString(
+					STR_MOD->leftString(FANTA->getTeamName(0),
+							FANTA->longerNameLength)) + " : " + my::toQString<
+					unsigned int>(FANTA->getGoalDecParTot(0)));
+
+	LOG(
+			TOFILE,
+			" Goal decisivi pareggio " + QString::fromStdString(
+					STR_MOD->leftString(FANTA->getTeamName(1),
+							FANTA->longerNameLength)) + " : " + my::toQString<
+					unsigned int>(FANTA->getGoalDecParTot(1)));
+
+	/*
+		LOG(TOFILE, " Assist " + leftString(FANTA->getTeamName(0),
 			FANTA->longerNameLength) + " : " + FANTA->getAssistTot(0) + endl;
 	LOG(TOFILE, " Assist " + leftString(FANTA->getTeamName(1),
 			FANTA->longerNameLength) + " : " + FANTA->getAssistTot(1) + endl
@@ -1112,13 +1127,6 @@ unsigned int Fanta::getEspulsioniTot(unsigned int k) const {
 
 	return esp;
 }
-//void Fanta::printTitolo3(std::string str) {
-//	LOG(TOFILE, "\n!!!! " + QString::fromStdString(str) + " !!!!\n");
-//}
-/*
-unsigned int Fanta::getSubstitutions(size_t k) const {
-	return Fanta::sostituzioni[k];
-}
 unsigned int Fanta::getGoalDecVittTot(unsigned int k) const {
 	unsigned int GDVT = 0;
 
@@ -1146,6 +1154,14 @@ unsigned int Fanta::getGoalDecParTot(unsigned int k) const {
 	}
 
 	return GDPT;
+}
+
+//void Fanta::printTitolo3(std::string str) {
+//	LOG(TOFILE, "\n!!!! " + QString::fromStdString(str) + " !!!!\n");
+//}
+/*
+unsigned int Fanta::getSubstitutions(size_t k) const {
+	return Fanta::sostituzioni[k];
 }
 unsigned int Fanta::getAssistTot(unsigned int k) const {
 	unsigned int AssTot = 0;
