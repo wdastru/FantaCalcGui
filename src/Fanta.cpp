@@ -936,14 +936,15 @@ void Fanta::printRiepilogo_toFile() {
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					unsigned int>(FANTA->getAmmonizioniTot(1)));
 
-/*	LOG(TOFILE, " Espulsioni " + leftString(FANTA->getTeamName(0),
-			FANTA->longerNameLength) + " : " + FANTA->getEspulsioniTot(0)
-			+ endl;
-	LOG(TOFILE, " Espulsioni " + leftString(FANTA->getTeamName(1),
-			FANTA->longerNameLength) + " : " + FANTA->getEspulsioniTot(1)
-			+ endl + endl;
+LOG(TOFILE, " Espulsioni " + QString::fromStdString(STR_MOD->leftString(FANTA->getTeamName(0),
+						FANTA->longerNameLength)) + " : " + my::toQString<
+		unsigned int>(FANTA->getgetEspulsioniTot(0));
 
-	LOG(TOFILE, " Goal decisivi vittoria " + leftString(FANTA->getTeamName(0),
+		LOG(TOFILE, " Espulsioni " + QString::fromStdString(STR_MOD->leftString(FANTA->getTeamName(1),
+								FANTA->longerNameLength)) + " : " + my::toQString<
+				unsigned int>(FANTA->getEspulsioniTot(1));
+
+	/*		LOG(TOFILE, " Goal decisivi vittoria " + leftString(FANTA->getTeamName(0),
 			FANTA->longerNameLength) + " : " + FANTA->getGoalDecVittTot(0)
 			+ endl;
 	LOG(TOFILE, " Goal decisivi vittoria " + leftString(FANTA->getTeamName(1),
@@ -1091,13 +1092,6 @@ unsigned int Fanta::getAmmonizioniTot(unsigned int k) const {
 
 	return amm;
 }
-//void Fanta::printTitolo3(std::string str) {
-//	LOG(TOFILE, "\n!!!! " + QString::fromStdString(str) + " !!!!\n");
-//}
-/*
-unsigned int Fanta::getSubstitutions(size_t k) const {
-	return Fanta::sostituzioni[k];
-}
 unsigned int Fanta::getEspulsioniTot(unsigned int k) const {
 	unsigned int esp = 0;
 
@@ -1111,6 +1105,13 @@ unsigned int Fanta::getEspulsioniTot(unsigned int k) const {
 	}
 
 	return esp;
+}
+//void Fanta::printTitolo3(std::string str) {
+//	LOG(TOFILE, "\n!!!! " + QString::fromStdString(str) + " !!!!\n");
+//}
+/*
+unsigned int Fanta::getSubstitutions(size_t k) const {
+	return Fanta::sostituzioni[k];
 }
 unsigned int Fanta::getGoalDecVittTot(unsigned int k) const {
 	unsigned int GDVT = 0;

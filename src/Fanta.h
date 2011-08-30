@@ -80,8 +80,6 @@ private:
 
 	/*
 	 void reorderPlayers();
-	 unsigned int getAmmonizioniTot(unsigned int) const ;
-	 unsigned int getEspulsioniTot(unsigned int) const ;
 	 unsigned int getGoalDecVittTot(unsigned int) const ;
 	 unsigned int getGoalDecParTot(unsigned int) const ;
 	 unsigned int getAssistTot(unsigned int) const ;
@@ -108,7 +106,8 @@ public:
 	void setFileGazzetta(QString);
 	void printRiepilogo_toFile();
 	void printTitolo2(std::string);
-	unsigned int getAmmonizioniTot(unsigned int k) const;
+	 unsigned int getAmmonizioniTot(unsigned int) const ;
+	 unsigned int getEspulsioniTot(unsigned int) const ;
 //	void printTitolo3(std::string);
 
 	/*
