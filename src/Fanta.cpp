@@ -1021,7 +1021,9 @@ void Fanta::printRiepilogo_toFile() {
 					unsigned int>(FANTA->sostituzioni[1]));
 
 	LOG(TOFILE, "<br/> Dettaglio Sfide : ");
+
 	LOG(TOFILE, "\t|");
+
 	LOG(
 			TOFILE,
 			"\t| Dif " + QString::fromStdString(
@@ -1031,58 +1033,60 @@ void Fanta::printRiepilogo_toFile() {
 					+ '\t' + QString::fromStdString(
 					FANTA->teamOrderedByRuolo[0][1].at(0).Nome));
 
-	/*
 	LOG(
 			TOFILE,
-			"\t|" + " Att " + QString::fromStdString(
+			"\t| Att " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
-							FANTA->longerNameLength)) + " : ");
-	LOG(
-			TOFILE,
-			FANTA->teamOrderedByRuolo[1][3].at(0).VotoGazzetta + '\t'
-					+ FANTA->teamOrderedByRuolo[1][3].at(0).Nome);
+							FANTA->longerNameLength)) + " : " + my::toQString<
+					float>(FANTA->teamOrderedByRuolo[1][3].at(0).VotoGazzetta)
+					+ '\t' + QString::fromStdString(
+					FANTA->teamOrderedByRuolo[1][3].at(0).Nome));
+
 	LOG(TOFILE, "\t|");
+
 	LOG(
 			TOFILE,
-			"\t|" + " Cen " + QString::fromStdString(
+			"\t| Cen " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
-							FANTA->longerNameLength)) + " : ");
+							FANTA->longerNameLength)) + " : " + my::toQString<
+					float>(FANTA->teamOrderedByRuolo[0][2].at(0).VotoGazzetta)
+					+ '\t' + QString::fromStdString(
+					FANTA->teamOrderedByRuolo[0][2].at(0).Nome));
+
 	LOG(
 			TOFILE,
-			FANTA->teamOrderedByRuolo[0][2].at(0).VotoGazzetta + '\t'
-					+ FANTA->teamOrderedByRuolo[0][2].at(0).Nome);
-	LOG(
-			TOFILE,
-			"\t|" + " Cen " + QString::fromStdString(
+			"\t| Cen " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
-							FANTA->longerNameLength)) + " : ");
-	LOG(
-			TOFILE,
-			FANTA->teamOrderedByRuolo[1][2].at(0).VotoGazzetta + '\t'
-					+ FANTA->teamOrderedByRuolo[1][2].at(0).Nome);
+							FANTA->longerNameLength)) + " : " + my::toQString<
+					float>(FANTA->teamOrderedByRuolo[1][2].at(0).VotoGazzetta)
+					+ '\t' + QString::fromStdString(
+					FANTA->teamOrderedByRuolo[1][2].at(0).Nome));
+
 	LOG(TOFILE, "\t|");
+
 	LOG(
 			TOFILE,
-			"\t|" + " Att " + QString::fromStdString(
+			"\t| Att " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
-							FANTA->longerNameLength)) + " : ");
+							FANTA->longerNameLength)) + " : " + my::toQString<
+					float>(FANTA->teamOrderedByRuolo[0][3].at(0).VotoGazzetta)
+					+ '\t' + QString::fromStdString(
+					FANTA->teamOrderedByRuolo[0][3].at(0).Nome));
 	LOG(
 			TOFILE,
-			FANTA->teamOrderedByRuolo[0][3].at(0).VotoGazzetta + '\t'
-					+ FANTA->teamOrderedByRuolo[0][3].at(0).Nome);
-	LOG(
-			TOFILE,
-			"\t|" + " Dif " + QString::fromStdString(
+			"\t| Dif " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
-							FANTA->longerNameLength)) + " : ");
-	LOG(
-			TOFILE,
-			FANTA->teamOrderedByRuolo[1][1].at(0).VotoGazzetta + '\t'
-					+ FANTA->teamOrderedByRuolo[1][1].at(0).Nome);
+							FANTA->longerNameLength)) + " : " + my::toQString<
+					float>(FANTA->teamOrderedByRuolo[1][1].at(0).VotoGazzetta)
+					+ '\t' + QString::fromStdString(
+					FANTA->teamOrderedByRuolo[1][1].at(0).Nome));
+
 	LOG(TOFILE, "\t|");
+
 	LOG(TOFILE, "\t+--------------------------------------------->");
 
-		LOG(TOFILE, " Media Difesa " + leftString(FANTA->getTeamName(0),
+	/*
+	LOG(TOFILE, " Media Difesa " + leftString(FANTA->getTeamName(0),
 			FANTA->longerNameLength) + " : " + FANTA->defenseMean[0] + " ( "
 			+ FANTA->defenders[0] + " )" + endl;
 	LOG(TOFILE, " Media Difesa " + leftString(FANTA->getTeamName(1),
