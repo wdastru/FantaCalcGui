@@ -108,8 +108,9 @@ public:
 	 unsigned int getGoalDecParTot(unsigned int) const ;
 	 unsigned int getAssistTot(unsigned int) const ;
 	 unsigned int getSubstitutions(unsigned int) const ;
-	 void printFormationPor2Att_toFile(unsigned int, ofstream &);
-	 void printFormationAtt2Por_toFile(unsigned int, ofstream &);
+	 void printFormationPor2Att_toFile(unsigned int);
+	 void printFormationAtt2Por_toFile(unsigned int);
+	 void printFormations_toFile();
 
 //	void printTitolo3(std::string);
 

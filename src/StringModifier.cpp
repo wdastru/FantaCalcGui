@@ -61,7 +61,7 @@ std::string StringModifier::onlyCapitalLetters(std::string str) {
 		str.erase(0, 1);
 	return str;
 }
-std::string StringModifier::centerString(std::string str, size_t i) {
+std::string StringModifier::centerString(std::string str, unsigned int i) {
 	std::string centeredString = "";
 
 	if (str.size() >= i) {

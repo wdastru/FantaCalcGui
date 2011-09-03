@@ -106,6 +106,7 @@ int main(int argc, char *argv[]) {
 
 	FANTA->printTitolo2(FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
 	FANTA->printRiepilogo_toFile();
+	FANTA->printFormations_toFile();
 
 	singletonQtLogger::Inst()->setLogFileName(match);
 

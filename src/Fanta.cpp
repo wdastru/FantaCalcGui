@@ -146,21 +146,24 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 		tmpPlayer.RigoreSbagliato = 0;
 	} else if (STR_MOD->msk(str, DELIM, ColRuolo) == "D") {
 		tmpPlayer.Ruolo = 1;
-		tmpPlayer.GoalFatti = atof(STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3;
+		tmpPlayer.GoalFatti = atof(
+				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3;
 		tmpPlayer.GoalSubiti = 0;
 		tmpPlayer.RigoreSbagliato = fabs(
 				atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3);
 		tmpPlayer.RigoreParato = 0;
 	} else if (STR_MOD->msk(str, DELIM, ColRuolo) == "C") {
 		tmpPlayer.Ruolo = 2;
-		tmpPlayer.GoalFatti = atof(STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3;
+		tmpPlayer.GoalFatti = atof(
+				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3;
 		tmpPlayer.GoalSubiti = 0;
 		tmpPlayer.RigoreSbagliato = fabs(
 				atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3);
 		tmpPlayer.RigoreParato = 0;
 	} else if (STR_MOD->msk(str, DELIM, ColRuolo) == "A") {
 		tmpPlayer.Ruolo = 3;
-		tmpPlayer.GoalFatti = atof(STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3;
+		tmpPlayer.GoalFatti = atof(
+				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3;
 		tmpPlayer.GoalSubiti = 0;
 		tmpPlayer.RigoreSbagliato = fabs(
 				atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3);
@@ -180,20 +183,25 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 	else if (STR_MOD->msk(str, DELIM, ColVotoGazzetta) == "S.V.")
 		tmpPlayer.VotoGazzetta = -1;
 	else
-		tmpPlayer.VotoGazzetta = atof(STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str());
+		tmpPlayer.VotoGazzetta = atof(
+				STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str());
 
 	// goal decisivi ed altro
-	tmpPlayer.GoalDecVitt = atoi(STR_MOD->msk(str, DELIM, ColGoalDecVitt).c_str());
+	tmpPlayer.GoalDecVitt = atoi(
+			STR_MOD->msk(str, DELIM, ColGoalDecVitt).c_str());
 	if (tmpPlayer.GoalDecVitt != 0 && tmpPlayer.GoalFatti == 0)
 		return PLAYER_GDV_NO_GOAL;
 
-	tmpPlayer.GoalDecPar = atoi(STR_MOD->msk(str, DELIM, ColGoalDecPar).c_str());
+	tmpPlayer.GoalDecPar
+			= atoi(STR_MOD->msk(str, DELIM, ColGoalDecPar).c_str());
 	if (tmpPlayer.GoalDecPar != 0 && tmpPlayer.GoalFatti == 0)
 		return PLAYER_GDP_NO_GOAL;
 
 	tmpPlayer.Assist = atoi(STR_MOD->msk(str, DELIM, ColAssist).c_str());
-	tmpPlayer.Autoreti = abs(atoi(STR_MOD->msk(str, DELIM, ColAutoreti).c_str()) / 2);
-	tmpPlayer.Amm = abs(int(atof(STR_MOD->msk(str, DELIM, ColAmm).c_str()) / 0.5));
+	tmpPlayer.Autoreti = abs(
+			atoi(STR_MOD->msk(str, DELIM, ColAutoreti).c_str()) / 2);
+	tmpPlayer.Amm = abs(
+			int(atof(STR_MOD->msk(str, DELIM, ColAmm).c_str()) / 0.5));
 	tmpPlayer.Esp = abs(atoi(STR_MOD->msk(str, DELIM, ColEsp).c_str()));
 
 	tmpPlayer.daSostituire = 0;
@@ -214,7 +222,8 @@ const unsigned int cost_del = 1;
 const unsigned int cost_ins = 1;
 const unsigned int cost_sub = 1;
 
-unsigned int Fanta::LevenshteinDistance(const std::string& s1, const std::string& s2) {
+unsigned int Fanta::LevenshteinDistance(const std::string& s1,
+		const std::string& s2) {
 	unsigned int n1 = s1.length();
 	unsigned int n2 = s2.length();
 
@@ -398,8 +407,8 @@ void Fanta::orderByRuolo() {
 	{
 		LOG(
 				DEBUG,
-				"In Fanta::orderByRuolo() --> Squadra : " + QString::fromStdString(
-						this->getTeamName(k)));
+				"In Fanta::orderByRuolo() --> Squadra : "
+						+ QString::fromStdString(this->getTeamName(k)));
 
 		for (size_t i = 0; i < 4; i++) // loop sui ruoli
 		{
@@ -446,8 +455,10 @@ void Fanta::substitutions() {
 			{
 				if (this->teamOrderedByRuolo[k][i].at(j).daSostituire == 1) {
 					Fanta::player tmpPlayer = Fanta::NonHaGiocato;
-					tmpPlayer.Nome_Sost = this->teamOrderedByRuolo[k][i].at(j).Nome;
-					tmpPlayer.Squadra_Sost = this->teamOrderedByRuolo[k][i].at(j).Squadra;
+					tmpPlayer.Nome_Sost
+							= this->teamOrderedByRuolo[k][i].at(j).Nome;
+					tmpPlayer.Squadra_Sost = this->teamOrderedByRuolo[k][i].at(
+							j).Squadra;
 					this->teamOrderedByRuolo[k][i].at(j) = tmpPlayer;
 				}
 			}
@@ -747,10 +758,9 @@ void Fanta::calculateTotal() {
 				+ " : modificatore difesa.<br />");
 
 		Fanta::Total[k] += Fanta::sfide[k];
-		message
-				+= (my::toQString<double>(Fanta::Total[k]) + " / "
-						+ my::toQString<unsigned int>(Fanta::sfide[k])
-						+ " : sfide vinte.");
+		message += (my::toQString<double>(Fanta::Total[k]) + " / "
+				+ my::toQString<unsigned int>(Fanta::sfide[k])
+				+ " : sfide vinte.");
 
 		for (size_t i = 0; i < 4; i++) // ruolo
 		{
@@ -864,8 +874,8 @@ void Fanta::calculateScorers() {
 					"In Fanta::calculateScorers() --> squadra "
 							+ QString::fromStdString(this->getTeamName(k))
 							+ " : " + QString::fromStdString(
-							tmpVector[k].at(0).Nome) + " (" + my::toQString<float>(
-							tmpVector[k].at(0).FantaVoto)+ ").");
+							tmpVector[k].at(0).Nome) + " (" + my::toQString<
+							float>(tmpVector[k].at(0).FantaVoto) + ").");
 
 			tmpVector[k].at(0).FantaVoto -= 3.0;
 		} while (Fanta::scorers[k].size() < Fanta::goals[k]);
@@ -890,10 +900,10 @@ void Fanta::bSort(std::vector<Fanta::player> & vect) {
 		}
 	}
 }
-QString Fanta::getFileGazzetta(){
+QString Fanta::getFileGazzetta() {
 	return this->fileGazzetta;
 }
-void Fanta::setFileGazzetta(QString _fileGazzetta){
+void Fanta::setFileGazzetta(QString _fileGazzetta) {
 	this->fileGazzetta = _fileGazzetta;
 }
 void Fanta::printRiepilogo_toFile() {
@@ -910,12 +920,12 @@ void Fanta::printRiepilogo_toFile() {
 							FANTA->longerNameLength)) + " : "
 					+ QString::fromStdString(FANTA->getModuloSquadra(1)));
 
-	LOG(
-			INFO,
-			"<br/> Fattore Campo " + QString::fromStdString(
-					STR_MOD->leftString(FANTA->getTeamName(0),
-							FANTA->longerNameLength)) + " : " + my::toQString<
-					unsigned int>(FANTA->atHome[0]));
+	LOG(INFO,
+			"<br/> Fattore Campo "
+					+ QString::fromStdString(
+							STR_MOD->leftString(FANTA->getTeamName(0),
+									FANTA->longerNameLength)) + " : "
+					+ my::toQString<unsigned int>(FANTA->atHome[0]));
 	LOG(
 			INFO,
 			" Fattore Campo " + QString::fromStdString(
@@ -978,7 +988,7 @@ void Fanta::printRiepilogo_toFile() {
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					unsigned int>(FANTA->getGoalDecParTot(1)));
 
-		LOG(
+	LOG(
 			INFO,
 			"<br/> Assist " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
@@ -1085,7 +1095,6 @@ void Fanta::printRiepilogo_toFile() {
 
 	LOG(TOFILE, "\t+---------------------------------------------><br/>");
 
-
 	for (size_t i = 0; i < 2; i++) {
 		QString string = " Media Difesa " + QString::fromStdString(
 				STR_MOD->leftString(FANTA->getTeamName(i),
@@ -1135,8 +1144,6 @@ void Fanta::printRiepilogo_toFile() {
 		else
 			LOG(TOFILE, string + ")");
 	}
-
-	LOG(TOFILE, ")");
 }
 void Fanta::printTitolo2(std::string str) {
 	QString tmp = "\n +";
@@ -1159,7 +1166,7 @@ void Fanta::printTitolo2(std::string str) {
 	tmp = " | +";
 	for (unsigned int i = 0; i < str.size() + 2; i++)
 		tmp += "-";
-	tmp+= "+ |";
+	tmp += "+ |";
 	LOG(TOFILE, tmp);
 
 	tmp = " +";
@@ -1242,643 +1249,782 @@ unsigned int Fanta::getAssistTot(unsigned int k) const {
 	return AssTot;
 
 }
-void Fanta::printFormationPor2Att_toFile(unsigned int k, ofstream & fOut) {
-	std::string tmpStringNomi = "";
-	std::string tmpStringVoti = "";
+void Fanta::printFormations_toFile() {
+	std::string tmpString = "|";
 	std::string
 			bordi =
 					"|                                                                                |";
 	std::string
 			linea =
+					"+--------------------------------------------------------------------------------+";
+
+	std::string
+			separatore =
 					"|--------------------------------------------------------------------------------|";
 
-	fOut << linea << endl << bordi << endl << bordi << endl;
-	for (size_t j = 0; j < 4; j++)// ruolo
+	LOG(
+			TOFILE,
+			QString::fromStdString(
+					linea + "<br/>" + bordi));
+
+	/*
+	 *  squadra in casa    : por --> att
+	 *  squadra fuori casa :                   att --> por
+	 */
+	unsigned int a[2][4] = { { 0, 1, 2, 3 }, { 3, 2, 1, 0 } };
+
+	for (size_t k = 0; k < 2; k++) // squadre
 	{
-		for (size_t i = 0; i < Fanta::modulo[k][j]; i++) {
-			if (Fanta::modulo[k][j] != 3) {
-				tmpStringNomi
-						+= centerString(
-								onlySurname(
-										Fanta::teamOrderedByRuolo[k][j].at(i).Nome),
-								80 / Fanta::modulo[k][j]);
+		for (size_t j = 0; j < 4; j++) // ruoli
+		{
+			if (Fanta::modulo[k][a[k][j]] == 3)
+				tmpString += " ";
 
-				tmpStringVoti
-						+= centerString(
-								(toString(
-										Fanta::teamOrderedByRuolo[k][j].at(i).FantaVoto)
-										+ " ("
-										+ toString(
-												Fanta::teamOrderedByRuolo[k][j].at(
-														i).VotoGazzetta) + ")"),
-								80 / Fanta::modulo[k][j]);
-			} else {
-				tmpStringNomi
-						+= centerString(
-								onlySurname(
-										Fanta::teamOrderedByRuolo[k][j].at(i).Nome),
-								25);
+			for (size_t i = 0; i < Fanta::modulo[k][a[k][j]]; i++) { // giocatori
+				if (Fanta::modulo[k][a[k][j]] == 3) {
+					tmpString
+							+= STR_MOD->centerString(
+									STR_MOD->onlySurname(
+											Fanta::teamOrderedByRuolo[k][a[k][j]].at(
+													i).Nome), 26);
+				} else {
+					tmpString
+							+= STR_MOD->centerString(
+									STR_MOD->onlySurname(
+											Fanta::teamOrderedByRuolo[k][a[k][j]].at(
+													i).Nome),
+									80 / Fanta::modulo[k][a[k][j]]);
+				}
+				/*
+				 *
+				 *
+				 * tmpString
+							+= STR_MOD->centerString(
+									(my::toString(
+											Fanta::teamOrderedByRuolo[k][a[k][j]].at(
+													i).FantaVoto) + " ("
 
-				tmpStringVoti
-						+= centerString(
-								(toString(
-										Fanta::teamOrderedByRuolo[k][j].at(i).FantaVoto)
-										+ " ("
-										+ toString(
-												Fanta::teamOrderedByRuolo[k][j].at(
-														i).VotoGazzetta) + ")"),
-								25);
+											+ my::toString(
+													Fanta::teamOrderedByRuolo[k][a[k][j]].at(
+															i).VotoGazzetta)
+											+ ")"),
+									80 / Fanta::modulo[k][a[k][j]]);
+				 *
+				 *
+				 * tmpString
+							+= STR_MOD->centerString(
+									(my::toString(
+											Fanta::teamOrderedByRuolo[k][a[k][j]].at(
+													i).FantaVoto) + " ("
+
+											+ my::toString(
+													Fanta::teamOrderedByRuolo[k][a[k][j]].at(
+															i).VotoGazzetta)
+											+ ")"), 25);
+				 *
+				 *
+				 if (Fanta::modulo[k][a[j]] != 3) {
+				 tmpString
+				 += centerString(
+				 onlySurname(
+				 Fanta::teamOrderedByRuolo[k][a[j]].at(
+				 i).Nome),
+
+				 80 / Fanta::modulo[k][a[j]]);
+
+				 tmpStringVoti
+				 += centerString(
+				 (toString(
+				 Fanta::teamOrderedByRuolo[k][a[j]].at(
+				 i).FantaVoto) + " ("
+
+				 + toString(
+				 Fanta::teamOrderedByRuolo[k][a[j]].at(
+				 i).VotoGazzetta)
+				 + ")"), 80 / Fanta::modulo[k][a[j]]);
+
+				 } else {
+				 tmpStringNomi
+				 += centerString(
+				 onlySurname(
+				 Fanta::teamOrderedByRuolo[k][a[j]].at(
+				 i).Nome), 25);
+
+				 tmpStringVoti
+				 += centerString(
+				 (toString(
+				 Fanta::teamOrderedByRuolo[k][a[j]].at(
+				 i).FantaVoto) + " ("
+
+				 + toString(
+				 Fanta::teamOrderedByRuolo[k][a[j]].at(
+				 i).VotoGazzetta)
+				 + ")"), 25);
+
+				 }
+				 */
 			}
+
+			if (Fanta::modulo[k][a[k][j]] == 3)
+				LOG(TOFILE, QString::fromStdString(tmpString + " |"));
+			else
+				LOG(TOFILE, QString::fromStdString(tmpString + "|"));
+
+			tmpString = "|";
 		}
 
-		fOut << "|" << centerString(tmpStringNomi, 80) << "|" << endl;
-		fOut << "|" << centerString(tmpStringVoti, 80) << "|" << endl;
-		fOut << bordi << endl << bordi << endl;
-
-		tmpStringNomi = "";
-		tmpStringVoti = "";
+		if (k == 0)
+			LOG(
+					TOFILE,
+					QString::fromStdString(
+						bordi + "<br/>" + separatore + "<br/>" + bordi));
 	}
-	fOut << linea;
+
+	LOG(TOFILE,
+			QString::fromStdString(
+					 bordi + "<br/>" + linea));
 }
-void Fanta::printFormationAtt2Por_toFile(unsigned int k, ofstream & fOut) {
-	std::string tmpStringNomi = "";
-	std::string tmpStringVoti = "";
-	std::string
-			bordi =
-					"|                                                                                |";
-	std::string
-			linea =
-					"|--------------------------------------------------------------------------------|";
+void Fanta::printFormationPor2Att_toFile(unsigned int k) {
+	/*
+	 std::string tmpStringNomi = "";
+	 std::string tmpStringVoti = "";
+	 std::string
+	 bordi =
+	 "|                                                                                |";
+	 std::string
+	 linea =
+	 "|--------------------------------------------------------------------------------|";
 
-	fOut << linea << endl << bordi << endl << bordi << endl;
-	for (size_t j = 0; j < 4; j++)// ruolo
-	{
-		for (size_t i = 0; i < Fanta::modulo[k][3 - j]; i++) {
-			if (Fanta::modulo[k][3 - j] != 3) {
-				tmpStringNomi
-						+= centerString(
-								onlySurname(
-										Fanta::teamOrderedByRuolo[k][3 - j].at(
-												i).Nome),
-								80 / Fanta::modulo[k][3 - j]);
+	 fOut << linea << endl << bordi << endl << bordi << endl;
+	 for (size_t j = 0; j < 4; j++)// ruolo
+	 {
+	 for (size_t i = 0; i < Fanta::modulo[k][j]; i++) {
+	 if (Fanta::modulo[k][j] != 3) {
+	 tmpStringNomi
+	 += centerString(
+	 onlySurname(
+	 Fanta::teamOrderedByRuolo[k][j].at(i).Nome),
+	 80 / Fanta::modulo[k][j]);
 
-				tmpStringVoti
-						+= centerString(
-								(toString(
-										Fanta::teamOrderedByRuolo[k][3 - j].at(
-												i).FantaVoto) + " ("
-										+ toString(
-												Fanta::teamOrderedByRuolo[k][3
-														- j].at(i).VotoGazzetta)
-										+ ")"), 80 / Fanta::modulo[k][3 - j]);
+	 tmpStringVoti
+	 += centerString(
+	 (toString(
+	 Fanta::teamOrderedByRuolo[k][j].at(i).FantaVoto)
+	 + " ("
+	 + toString(
+	 Fanta::teamOrderedByRuolo[k][j].at(
+	 i).VotoGazzetta) + ")"),
+	 80 / Fanta::modulo[k][j]);
+	 } else {
+	 tmpStringNomi
+	 += centerString(
+	 onlySurname(
+	 Fanta::teamOrderedByRuolo[k][j].at(i).Nome),
+	 25);
 
-			} else {
-				tmpStringNomi
-						+= centerString(
-								onlySurname(
-										Fanta::teamOrderedByRuolo[k][3 - j].at(
-												i).Nome), 25);
+	 tmpStringVoti
+	 += centerString(
+	 (toString(
+	 Fanta::teamOrderedByRuolo[k][j].at(i).FantaVoto)
+	 + " ("
+	 + toString(
+	 Fanta::teamOrderedByRuolo[k][j].at(
+	 i).VotoGazzetta) + ")"),
+	 25);
+	 }
+	 }
 
-				tmpStringVoti
-						+= centerString(
-								(toString(
-										Fanta::teamOrderedByRuolo[k][3 - j].at(
-												i).FantaVoto) + " ("
-										+ toString(
-												Fanta::teamOrderedByRuolo[k][3
-														- j].at(i).VotoGazzetta)
-										+ ")"), 25);
-			}
-		}
+	 fOut << "|" << centerString(tmpStringNomi, 80) << "|" << endl;
+	 fOut << "|" << centerString(tmpStringVoti, 80) << "|" << endl;
+	 fOut << bordi << endl << bordi << endl;
 
-		fOut << "|" << centerString(tmpStringNomi, 80) << "|" << endl;
-		fOut << "|" << centerString(tmpStringVoti, 80) << "|" << endl;
-		fOut << bordi << endl << bordi << endl;
+	 tmpStringNomi = "";
+	 tmpStringVoti = "";
+	 }
+	 fOut << linea;
+	 */
+}
+void Fanta::printFormationAtt2Por_toFile(unsigned int k) {
+	/*
+	 std::string tmpStringNomi = "";
+	 std::string tmpStringVoti = "";
+	 std::string
+	 bordi =
+	 "|                                                                                |";
+	 std::string
+	 linea =
+	 "|--------------------------------------------------------------------------------|";
 
-		tmpStringNomi = "";
-		tmpStringVoti = "";
-	}
-	fOut << linea;
+	 fOut << linea << endl << bordi << endl << bordi << endl;
+	 for (size_t j = 0; j < 4; j++)// ruolo
+	 {
+	 for (size_t i = 0; i < Fanta::modulo[k][3 - j]; i++) {
+	 if (Fanta::modulo[k][3 - j] != 3) {
+	 tmpStringNomi
+	 += centerString(
+	 onlySurname(
+	 Fanta::teamOrderedByRuolo[k][3 - j].at(
+	 i).Nome),
+	 80 / Fanta::modulo[k][3 - j]);
+
+	 tmpStringVoti
+	 += centerString(
+	 (toString(
+	 Fanta::teamOrderedByRuolo[k][3 - j].at(
+	 i).FantaVoto) + " ("
+	 + toString(
+	 Fanta::teamOrderedByRuolo[k][3
+	 - j].at(i).VotoGazzetta)
+	 + ")"), 80 / Fanta::modulo[k][3 - j]);
+
+	 } else {
+	 tmpStringNomi
+	 += centerString(
+	 onlySurname(
+	 Fanta::teamOrderedByRuolo[k][3 - j].at(
+	 i).Nome), 25);
+
+	 tmpStringVoti
+	 += centerString(
+	 (toString(
+	 Fanta::teamOrderedByRuolo[k][3 - j].at(
+	 i).FantaVoto) + " ("
+	 + toString(
+	 Fanta::teamOrderedByRuolo[k][3
+	 - j].at(i).VotoGazzetta)
+	 + ")"), 25);
+	 }
+	 }
+
+	 fOut << "|" << centerString(tmpStringNomi, 80) << "|" << endl;
+	 fOut << "|" << centerString(tmpStringVoti, 80) << "|" << endl;
+	 fOut << bordi << endl << bordi << endl;
+
+	 tmpStringNomi = "";
+	 tmpStringVoti = "";
+	 }
+	 fOut << linea;
+	 */
 }
 /*
-void Fanta::printTitolo3(std::string str) {
-	LOG(TOFILE, "\n!!!! " + QString::fromStdString(str) + " !!!!\n");
-}
-std::string Fanta::getVariablesValues() {
-	std::string message;
-	message += "START of message: \n--------------------\n\n";
-	for (size_t kk = 0; kk < 2; kk++) {
-		for (size_t i = 0; i < Team[kk].size(); i++) {
-			message += (Team[kk].at(i).Nome + '\n');
-			message += ("    GoalDecVitt : " + QString::number(
-					Team[kk].at(i).GoalDecVitt).toStdString() + '\n');
-			message += ("    GoalDecPar  : " + QString::number(
-					Team[kk].at(i).GoalDecPar).toStdString() + '\n');
-		}
-	}
-	return message;
-}
+ void Fanta::printTitolo3(std::string str) {
+ LOG(TOFILE, "\n!!!! " + QString::fromStdString(str) + " !!!!\n");
+ }
+ std::string Fanta::getVariablesValues() {
+ std::string message;
+ message += "START of message: \n--------------------\n\n";
+ for (size_t kk = 0; kk < 2; kk++) {
+ for (size_t i = 0; i < Team[kk].size(); i++) {
+ message += (Team[kk].at(i).Nome + '\n');
+ message += ("    GoalDecVitt : " + QString::number(
+ Team[kk].at(i).GoalDecVitt).toStdString() + '\n');
+ message += ("    GoalDecPar  : " + QString::number(
+ Team[kk].at(i).GoalDecPar).toStdString() + '\n');
+ }
+ }
+ return message;
+ }
 
-#define PLAYER_OK 			0
-#define PLAYER_REPEATED 	1
-#define PLAYER_GDV_NO_GOAL 	2
-#define PLAYER_GDP_NO_GOAL 	3
+ #define PLAYER_OK 			0
+ #define PLAYER_REPEATED 	1
+ #define PLAYER_GDV_NO_GOAL 	2
+ #define PLAYER_GDP_NO_GOAL 	3
 
-void Fanta::printFormationPor2Att(unsigned int k) {
-	std::string tmpStringNomi = "";
-	std::string tmpStringVoti = "";
-	std::string
-			bordi =
-					"|                                                                                |";
-	std::string
-			linea =
-					"|--------------------------------------------------------------------------------|";
+ void Fanta::printFormationPor2Att(unsigned int k) {
+ std::string tmpStringNomi = "";
+ std::string tmpStringVoti = "";
+ std::string
+ bordi =
+ "|                                                                                |";
+ std::string
+ linea =
+ "|--------------------------------------------------------------------------------|";
 
-	cout << linea << endl << bordi << endl << bordi << endl;
-	for (size_t j = 0; j < 4; j++)// ruolo
-	{
-		for (size_t i = 0; i < Fanta::modulo[k][j]; i++) {
-			if (Fanta::modulo[k][j] != 3) {
-				tmpStringNomi
-						+= centerString(
-								onlySurname(
-										Fanta::teamOrderedByRuolo[k][j].at(i).Nome),
-								80 / Fanta::modulo[k][j]);
+ cout << linea << endl << bordi << endl << bordi << endl;
+ for (size_t j = 0; j < 4; j++)// ruolo
+ {
+ for (size_t i = 0; i < Fanta::modulo[k][j]; i++) {
+ if (Fanta::modulo[k][j] != 3) {
+ tmpStringNomi
+ += centerString(
+ onlySurname(
+ Fanta::teamOrderedByRuolo[k][j].at(i).Nome),
+ 80 / Fanta::modulo[k][j]);
 
-				tmpStringVoti
-						+= centerString(
-								(toString(
-										Fanta::teamOrderedByRuolo[k][j].at(i).FantaVoto)
-										+ " ("
-										+ toString(
-												Fanta::teamOrderedByRuolo[k][j].at(
-														i).VotoGazzetta) + ")"),
-								80 / Fanta::modulo[k][j]);
-			} else {
-				tmpStringNomi
-						+= centerString(
-								onlySurname(
-										Fanta::teamOrderedByRuolo[k][j].at(i).Nome),
-								25);
+ tmpStringVoti
+ += centerString(
+ (toString(
+ Fanta::teamOrderedByRuolo[k][j].at(i).FantaVoto)
+ + " ("
+ + toString(
+ Fanta::teamOrderedByRuolo[k][j].at(
+ i).VotoGazzetta) + ")"),
+ 80 / Fanta::modulo[k][j]);
+ } else {
+ tmpStringNomi
+ += centerString(
+ onlySurname(
+ Fanta::teamOrderedByRuolo[k][j].at(i).Nome),
+ 25);
 
-				tmpStringVoti
-						+= centerString(
-								(toString(
-										Fanta::teamOrderedByRuolo[k][j].at(i).FantaVoto)
-										+ " ("
-										+ toString(
-												Fanta::teamOrderedByRuolo[k][j].at(
-														i).VotoGazzetta) + ")"),
-								25);
-			}
-		}
+ tmpStringVoti
+ += centerString(
+ (toString(
+ Fanta::teamOrderedByRuolo[k][j].at(i).FantaVoto)
+ + " ("
+ + toString(
+ Fanta::teamOrderedByRuolo[k][j].at(
+ i).VotoGazzetta) + ")"),
+ 25);
+ }
+ }
 
-		cout << "|" << centerString(tmpStringNomi, 80) << "|" << endl;
-		cout << "|" << centerString(tmpStringVoti, 80) << "|" << endl;
-		cout << bordi << endl << bordi << endl;
+ cout << "|" << centerString(tmpStringNomi, 80) << "|" << endl;
+ cout << "|" << centerString(tmpStringVoti, 80) << "|" << endl;
+ cout << bordi << endl << bordi << endl;
 
-		tmpStringNomi = "";
-		tmpStringVoti = "";
-	}
-	cout << linea;
-}
-void Fanta::printFormationAtt2Por(unsigned int k) {
-	std::string tmpStringNomi = "";
-	std::string tmpStringVoti = "";
-	std::string
-			bordi =
-					"|                                                                                |";
-	std::string
-			linea =
-					"|--------------------------------------------------------------------------------|";
+ tmpStringNomi = "";
+ tmpStringVoti = "";
+ }
+ cout << linea;
+ }
+ void Fanta::printFormationAtt2Por(unsigned int k) {
+ std::string tmpStringNomi = "";
+ std::string tmpStringVoti = "";
+ std::string
+ bordi =
+ "|                                                                                |";
+ std::string
+ linea =
+ "|--------------------------------------------------------------------------------|";
 
-	cout << linea << endl << bordi << endl << bordi << endl;
-	for (size_t j = 0; j < 4; j++)// ruolo
-	{
-		for (size_t i = 0; i < Fanta::modulo[k][3 - j]; i++) {
-			if (Fanta::modulo[k][3 - j] != 3) {
-				tmpStringNomi
-						+= centerString(
-								onlySurname(
-										Fanta::teamOrderedByRuolo[k][3 - j].at(
-												i).Nome),
-								80 / Fanta::modulo[k][3 - j]);
+ cout << linea << endl << bordi << endl << bordi << endl;
+ for (size_t j = 0; j < 4; j++)// ruolo
+ {
+ for (size_t i = 0; i < Fanta::modulo[k][3 - j]; i++) {
+ if (Fanta::modulo[k][3 - j] != 3) {
+ tmpStringNomi
+ += centerString(
+ onlySurname(
+ Fanta::teamOrderedByRuolo[k][3 - j].at(
+ i).Nome),
+ 80 / Fanta::modulo[k][3 - j]);
 
-				tmpStringVoti
-						+= centerString(
-								(toString(
-										Fanta::teamOrderedByRuolo[k][3 - j].at(
-												i).FantaVoto) + " ("
-										+ toString(
-												Fanta::teamOrderedByRuolo[k][3
-														- j].at(i).VotoGazzetta)
-										+ ")"), 80 / Fanta::modulo[k][3 - j]);
+ tmpStringVoti
+ += centerString(
+ (toString(
+ Fanta::teamOrderedByRuolo[k][3 - j].at(
+ i).FantaVoto) + " ("
+ + toString(
+ Fanta::teamOrderedByRuolo[k][3
+ - j].at(i).VotoGazzetta)
+ + ")"), 80 / Fanta::modulo[k][3 - j]);
 
-			} else {
-				tmpStringNomi
-						+= centerString(
-								onlySurname(
-										Fanta::teamOrderedByRuolo[k][3 - j].at(
-												i).Nome), 25);
+ } else {
+ tmpStringNomi
+ += centerString(
+ onlySurname(
+ Fanta::teamOrderedByRuolo[k][3 - j].at(
+ i).Nome), 25);
 
-				tmpStringVoti
-						+= centerString(
-								(toString(
-										Fanta::teamOrderedByRuolo[k][3 - j].at(
-												i).FantaVoto) + " ("
-										+ toString(
-												Fanta::teamOrderedByRuolo[k][3
-														- j].at(i).VotoGazzetta)
-										+ ")"), 25);
-			}
-		}
+ tmpStringVoti
+ += centerString(
+ (toString(
+ Fanta::teamOrderedByRuolo[k][3 - j].at(
+ i).FantaVoto) + " ("
+ + toString(
+ Fanta::teamOrderedByRuolo[k][3
+ - j].at(i).VotoGazzetta)
+ + ")"), 25);
+ }
+ }
 
-		cout << "|" << centerString(tmpStringNomi, 80) << "|" << endl;
-		cout << "|" << centerString(tmpStringVoti, 80) << "|" << endl;
-		cout << bordi << endl << bordi << endl;
+ cout << "|" << centerString(tmpStringNomi, 80) << "|" << endl;
+ cout << "|" << centerString(tmpStringVoti, 80) << "|" << endl;
+ cout << bordi << endl << bordi << endl;
 
-		tmpStringNomi = "";
-		tmpStringVoti = "";
-	}
-	cout << linea;
-}
-void Fanta::printPlayersInfo(unsigned k) {
-	for (size_t i = 0; i < 4; i++) // ruolo
-	{
-		size_t j = 0;
-		while (j < Fanta::modulo[k][i]) {
-			cout << endl << '\t' << "---> "
-					<< Fanta::teamOrderedByRuolo[k][i].at(j).Nome << " <---"
-					<< endl;
-			cout << endl;
+ tmpStringNomi = "";
+ tmpStringVoti = "";
+ }
+ cout << linea;
+ }
+ void Fanta::printPlayersInfo(unsigned k) {
+ for (size_t i = 0; i < 4; i++) // ruolo
+ {
+ size_t j = 0;
+ while (j < Fanta::modulo[k][i]) {
+ cout << endl << '\t' << "---> "
+ << Fanta::teamOrderedByRuolo[k][i].at(j).Nome << " <---"
+ << endl;
+ cout << endl;
 
-			cout.width(17);
-			cout << " Voto : ";
-			cout.width(3);
-			cout << Fanta::teamOrderedByRuolo[k][i].at(j).VotoGazzetta;
-			cout.width(17);
-			cout << "FantaVoto : ";
-			cout.width(3);
-			cout << Fanta::teamOrderedByRuolo[k][i].at(j).FantaVoto << endl;
-			cout.width(17);
-			cout << " Goal Fatti : ";
-			cout.width(3);
-			cout << Fanta::teamOrderedByRuolo[k][i].at(j).GoalFatti;
-			cout.width(17);
-			cout << "Goal Subiti : ";
-			cout.width(3);
-			cout << Fanta::teamOrderedByRuolo[k][i].at(j).GoalSubiti << endl;
-			cout.width(17);
-			cout << " Goal Dec Vitt : ";
-			cout.width(3);
-			cout << Fanta::teamOrderedByRuolo[k][i].at(j).GoalDecVitt;
-			cout.width(17);
-			cout << "Goal Dec Par : ";
-			cout.width(3);
-			cout << Fanta::teamOrderedByRuolo[k][i].at(j).GoalDecPar << endl;
-			cout.width(17);
-			cout << " Ammonizioni : ";
-			cout.width(3);
-			cout << Fanta::teamOrderedByRuolo[k][i].at(j).Amm;
-			cout.width(17);
-			cout << "Espulsioni : ";
-			cout.width(3);
-			cout << Fanta::teamOrderedByRuolo[k][i].at(j).Esp << endl;
-			cout.width(17);
-			cout << " Assist : ";
-			cout.width(3);
-			cout << Fanta::teamOrderedByRuolo[k][i].at(j).Assist << endl
-					<< endl;
-			j++;
-		}
-	}
-}
-void Fanta::printPlayersInfo_toFile(unsigned k, ofstream & fOut) {
-	for (size_t i = 0; i < 4; i++) // ruolo
-	{
-		size_t j = 0;
-		while (j < Fanta::modulo[k][i]) {
-			if (Fanta::teamOrderedByRuolo[k][i].at(j).Nome != "---") {
-				fOut << endl << '\t' << "---> "
-						<< Fanta::teamOrderedByRuolo[k][i].at(j).Nome
-						<< " <---" << endl;
-				fOut << endl;
+ cout.width(17);
+ cout << " Voto : ";
+ cout.width(3);
+ cout << Fanta::teamOrderedByRuolo[k][i].at(j).VotoGazzetta;
+ cout.width(17);
+ cout << "FantaVoto : ";
+ cout.width(3);
+ cout << Fanta::teamOrderedByRuolo[k][i].at(j).FantaVoto << endl;
+ cout.width(17);
+ cout << " Goal Fatti : ";
+ cout.width(3);
+ cout << Fanta::teamOrderedByRuolo[k][i].at(j).GoalFatti;
+ cout.width(17);
+ cout << "Goal Subiti : ";
+ cout.width(3);
+ cout << Fanta::teamOrderedByRuolo[k][i].at(j).GoalSubiti << endl;
+ cout.width(17);
+ cout << " Goal Dec Vitt : ";
+ cout.width(3);
+ cout << Fanta::teamOrderedByRuolo[k][i].at(j).GoalDecVitt;
+ cout.width(17);
+ cout << "Goal Dec Par : ";
+ cout.width(3);
+ cout << Fanta::teamOrderedByRuolo[k][i].at(j).GoalDecPar << endl;
+ cout.width(17);
+ cout << " Ammonizioni : ";
+ cout.width(3);
+ cout << Fanta::teamOrderedByRuolo[k][i].at(j).Amm;
+ cout.width(17);
+ cout << "Espulsioni : ";
+ cout.width(3);
+ cout << Fanta::teamOrderedByRuolo[k][i].at(j).Esp << endl;
+ cout.width(17);
+ cout << " Assist : ";
+ cout.width(3);
+ cout << Fanta::teamOrderedByRuolo[k][i].at(j).Assist << endl
+ << endl;
+ j++;
+ }
+ }
+ }
+ void Fanta::printPlayersInfo_toFile(unsigned k, ofstream & fOut) {
+ for (size_t i = 0; i < 4; i++) // ruolo
+ {
+ size_t j = 0;
+ while (j < Fanta::modulo[k][i]) {
+ if (Fanta::teamOrderedByRuolo[k][i].at(j).Nome != "---") {
+ fOut << endl << '\t' << "---> "
+ << Fanta::teamOrderedByRuolo[k][i].at(j).Nome
+ << " <---" << endl;
+ fOut << endl;
 
-				fOut.width(18);
-				fOut << " Voto : ";
-				fOut.width(3);
-				fOut << Fanta::teamOrderedByRuolo[k][i].at(j).VotoGazzetta;
-				fOut.width(18);
-				fOut << "FantaVoto : ";
-				fOut.width(3);
-				fOut << Fanta::teamOrderedByRuolo[k][i].at(j).FantaVoto << endl;
-				fOut.width(18);
-				fOut << " Goal Fatti : ";
-				fOut.width(3);
-				fOut << Fanta::teamOrderedByRuolo[k][i].at(j).GoalFatti;
-				fOut.width(18);
-				fOut << "Goal Subiti : ";
-				fOut.width(3);
-				fOut << Fanta::teamOrderedByRuolo[k][i].at(j).GoalSubiti
-						<< endl;
-				fOut.width(18);
-				fOut << " Goal Dec Vitt : ";
-				fOut.width(3);
-				fOut << Fanta::teamOrderedByRuolo[k][i].at(j).GoalDecVitt;
-				fOut.width(18);
-				fOut << "Goal Dec Par : ";
-				fOut.width(3);
-				fOut << Fanta::teamOrderedByRuolo[k][i].at(j).GoalDecPar
-						<< endl;
-				fOut.width(18);
-				fOut << " Rig. Parato : ";
-				fOut.width(3);
-				fOut << Fanta::teamOrderedByRuolo[k][i].at(j).RigoreParato;
-				fOut.width(18);
-				fOut << "Rig. Sbagliato : ";
-				fOut.width(3);
-				fOut << Fanta::teamOrderedByRuolo[k][i].at(j).RigoreSbagliato
-						<< endl;
-				fOut.width(18);
-				fOut << " Ammonizioni : ";
-				fOut.width(3);
-				fOut << Fanta::teamOrderedByRuolo[k][i].at(j).Amm;
-				fOut.width(18);
-				fOut << "Espulsioni : ";
-				fOut.width(3);
-				fOut << Fanta::teamOrderedByRuolo[k][i].at(j).Esp << endl;
-				fOut.width(18);
-				fOut << " Assist : ";
-				fOut.width(3);
-				fOut << Fanta::teamOrderedByRuolo[k][i].at(j).Assist;
-				fOut.width(18);
-				fOut << "Autoreti : ";
-				fOut.width(3);
-				fOut << Fanta::teamOrderedByRuolo[k][i].at(j).Autoreti << endl
-						<< endl;
-			}
-			j++;
-		}
-	}
-}
-void Fanta::printRiepilogo() {
-	cout << " Modulo " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << getModuloSquadra(0) << endl;
-	cout << " Modulo " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << getModuloSquadra(1) << endl
-			<< endl;
+ fOut.width(18);
+ fOut << " Voto : ";
+ fOut.width(3);
+ fOut << Fanta::teamOrderedByRuolo[k][i].at(j).VotoGazzetta;
+ fOut.width(18);
+ fOut << "FantaVoto : ";
+ fOut.width(3);
+ fOut << Fanta::teamOrderedByRuolo[k][i].at(j).FantaVoto << endl;
+ fOut.width(18);
+ fOut << " Goal Fatti : ";
+ fOut.width(3);
+ fOut << Fanta::teamOrderedByRuolo[k][i].at(j).GoalFatti;
+ fOut.width(18);
+ fOut << "Goal Subiti : ";
+ fOut.width(3);
+ fOut << Fanta::teamOrderedByRuolo[k][i].at(j).GoalSubiti
+ << endl;
+ fOut.width(18);
+ fOut << " Goal Dec Vitt : ";
+ fOut.width(3);
+ fOut << Fanta::teamOrderedByRuolo[k][i].at(j).GoalDecVitt;
+ fOut.width(18);
+ fOut << "Goal Dec Par : ";
+ fOut.width(3);
+ fOut << Fanta::teamOrderedByRuolo[k][i].at(j).GoalDecPar
+ << endl;
+ fOut.width(18);
+ fOut << " Rig. Parato : ";
+ fOut.width(3);
+ fOut << Fanta::teamOrderedByRuolo[k][i].at(j).RigoreParato;
+ fOut.width(18);
+ fOut << "Rig. Sbagliato : ";
+ fOut.width(3);
+ fOut << Fanta::teamOrderedByRuolo[k][i].at(j).RigoreSbagliato
+ << endl;
+ fOut.width(18);
+ fOut << " Ammonizioni : ";
+ fOut.width(3);
+ fOut << Fanta::teamOrderedByRuolo[k][i].at(j).Amm;
+ fOut.width(18);
+ fOut << "Espulsioni : ";
+ fOut.width(3);
+ fOut << Fanta::teamOrderedByRuolo[k][i].at(j).Esp << endl;
+ fOut.width(18);
+ fOut << " Assist : ";
+ fOut.width(3);
+ fOut << Fanta::teamOrderedByRuolo[k][i].at(j).Assist;
+ fOut.width(18);
+ fOut << "Autoreti : ";
+ fOut.width(3);
+ fOut << Fanta::teamOrderedByRuolo[k][i].at(j).Autoreti << endl
+ << endl;
+ }
+ j++;
+ }
+ }
+ }
+ void Fanta::printRiepilogo() {
+ cout << " Modulo " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << getModuloSquadra(0) << endl;
+ cout << " Modulo " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << getModuloSquadra(1) << endl
+ << endl;
 
-	cout << " Fattore Campo " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << Fanta::atHome[0] << endl;
-	cout << " Fattore Campo " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << Fanta::atHome[1] << endl
-			<< endl;
+ cout << " Fattore Campo " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << Fanta::atHome[0] << endl;
+ cout << " Fattore Campo " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << Fanta::atHome[1] << endl
+ << endl;
 
-	cout << " Ammonizioni " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << Fanta::getAmmonizioniTot(0)
-			<< endl;
-	cout << " Ammonizioni " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << Fanta::getAmmonizioniTot(1)
-			<< endl << endl;
+ cout << " Ammonizioni " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << Fanta::getAmmonizioniTot(0)
+ << endl;
+ cout << " Ammonizioni " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << Fanta::getAmmonizioniTot(1)
+ << endl << endl;
 
-	cout << " Espulsioni " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << Fanta::getEspulsioniTot(0)
-			<< endl;
-	cout << " Espulsioni " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << Fanta::getEspulsioniTot(1)
-			<< endl << endl;
+ cout << " Espulsioni " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << Fanta::getEspulsioniTot(0)
+ << endl;
+ cout << " Espulsioni " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << Fanta::getEspulsioniTot(1)
+ << endl << endl;
 
-	cout << " Goal decisivi vittoria " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << Fanta::getGoalDecVittTot(0)
-			<< endl;
-	cout << " Goal decisivi vittoria " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << Fanta::getGoalDecVittTot(1)
-			<< endl << endl;
+ cout << " Goal decisivi vittoria " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << Fanta::getGoalDecVittTot(0)
+ << endl;
+ cout << " Goal decisivi vittoria " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << Fanta::getGoalDecVittTot(1)
+ << endl << endl;
 
-	cout << " Goal decisivi pareggio " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << Fanta::getGoalDecParTot(0)
-			<< endl;
-	cout << " Goal decisivi pareggio " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << Fanta::getGoalDecParTot(1)
-			<< endl << endl;
+ cout << " Goal decisivi pareggio " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << Fanta::getGoalDecParTot(0)
+ << endl;
+ cout << " Goal decisivi pareggio " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << Fanta::getGoalDecParTot(1)
+ << endl << endl;
 
-	cout << " Assist " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << Fanta::getAssistTot(0) << endl;
-	cout << " Assist " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << Fanta::getAssistTot(1) << endl
-			<< endl;
+ cout << " Assist " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << Fanta::getAssistTot(0) << endl;
+ cout << " Assist " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << Fanta::getAssistTot(1) << endl
+ << endl;
 
-	cout << " Numero sfide " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << Fanta::sfide[0] << endl;
-	cout << " Numero sfide " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << Fanta::sfide[1] << endl
-			<< endl;
+ cout << " Numero sfide " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << Fanta::sfide[0] << endl;
+ cout << " Numero sfide " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << Fanta::sfide[1] << endl
+ << endl;
 
-	cout << " Sostituzioni " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << Fanta::sostituzioni[0] << endl;
-	cout << " Sostituzioni " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << Fanta::sostituzioni[1] << endl
-			<< endl;
+ cout << " Sostituzioni " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << Fanta::sostituzioni[0] << endl;
+ cout << " Sostituzioni " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << Fanta::sostituzioni[1] << endl
+ << endl;
 
-	cout << " Dettaglio Sfide : " << endl;
-	cout << "\t|" << endl;
-	cout << "\t|" << " Dif " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : ";
-	cout.width(3);
-	cout << Fanta::teamOrderedByRuolo[0][1].at(0).VotoGazzetta << '\t'
-			<< Fanta::teamOrderedByRuolo[0][1].at(0).Nome << endl;
-	cout << "\t|" << " Att " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : ";
-	cout.width(3);
-	cout << Fanta::teamOrderedByRuolo[1][3].at(0).VotoGazzetta << '\t'
-			<< Fanta::teamOrderedByRuolo[1][3].at(0).Nome << endl;
-	cout << "\t|" << endl;
-	cout << "\t|" << " Cen " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : ";
-	cout.width(3);
-	cout << Fanta::teamOrderedByRuolo[0][2].at(0).VotoGazzetta << '\t'
-			<< Fanta::teamOrderedByRuolo[0][2].at(0).Nome << endl;
-	cout << "\t|" << " Cen " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : ";
-	cout.width(3);
-	cout << Fanta::teamOrderedByRuolo[1][2].at(0).VotoGazzetta << '\t'
-			<< Fanta::teamOrderedByRuolo[1][2].at(0).Nome << endl;
-	cout << "\t|" << endl;
-	cout << "\t|" << " Att " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : ";
-	cout.width(3);
-	cout << Fanta::teamOrderedByRuolo[0][3].at(0).VotoGazzetta << '\t'
-			<< Fanta::teamOrderedByRuolo[0][3].at(0).Nome << endl;
-	cout << "\t|" << " Dif " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : ";
-	cout.width(3);
-	cout << Fanta::teamOrderedByRuolo[1][1].at(0).VotoGazzetta << '\t'
-			<< Fanta::teamOrderedByRuolo[1][1].at(0).Nome << endl;
-	cout << "\t|" << endl;
-	cout << "\t+--------------------------------------------->" << endl << endl;
+ cout << " Dettaglio Sfide : " << endl;
+ cout << "\t|" << endl;
+ cout << "\t|" << " Dif " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : ";
+ cout.width(3);
+ cout << Fanta::teamOrderedByRuolo[0][1].at(0).VotoGazzetta << '\t'
+ << Fanta::teamOrderedByRuolo[0][1].at(0).Nome << endl;
+ cout << "\t|" << " Att " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : ";
+ cout.width(3);
+ cout << Fanta::teamOrderedByRuolo[1][3].at(0).VotoGazzetta << '\t'
+ << Fanta::teamOrderedByRuolo[1][3].at(0).Nome << endl;
+ cout << "\t|" << endl;
+ cout << "\t|" << " Cen " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : ";
+ cout.width(3);
+ cout << Fanta::teamOrderedByRuolo[0][2].at(0).VotoGazzetta << '\t'
+ << Fanta::teamOrderedByRuolo[0][2].at(0).Nome << endl;
+ cout << "\t|" << " Cen " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : ";
+ cout.width(3);
+ cout << Fanta::teamOrderedByRuolo[1][2].at(0).VotoGazzetta << '\t'
+ << Fanta::teamOrderedByRuolo[1][2].at(0).Nome << endl;
+ cout << "\t|" << endl;
+ cout << "\t|" << " Att " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : ";
+ cout.width(3);
+ cout << Fanta::teamOrderedByRuolo[0][3].at(0).VotoGazzetta << '\t'
+ << Fanta::teamOrderedByRuolo[0][3].at(0).Nome << endl;
+ cout << "\t|" << " Dif " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : ";
+ cout.width(3);
+ cout << Fanta::teamOrderedByRuolo[1][1].at(0).VotoGazzetta << '\t'
+ << Fanta::teamOrderedByRuolo[1][1].at(0).Nome << endl;
+ cout << "\t|" << endl;
+ cout << "\t+--------------------------------------------->" << endl << endl;
 
-	cout << " Media Difesa " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << Fanta::defenseMean[0] << " ( "
-			<< Fanta::defenders[0] << " )" << endl;
-	cout << " Media Difesa " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << Fanta::defenseMean[1] << " ( "
-			<< Fanta::defenders[1] << " )" << endl << endl;
+ cout << " Media Difesa " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << Fanta::defenseMean[0] << " ( "
+ << Fanta::defenders[0] << " )" << endl;
+ cout << " Media Difesa " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << Fanta::defenseMean[1] << " ( "
+ << Fanta::defenders[1] << " )" << endl << endl;
 
-	cout << " Modificatore " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << Fanta::modifier[0] << endl;
-	cout << " Modificatore " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << Fanta::modifier[1] << endl
-			<< endl;
+ cout << " Modificatore " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << Fanta::modifier[0] << endl;
+ cout << " Modificatore " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << Fanta::modifier[1] << endl
+ << endl;
 
-	cout << " " << leftString(Fanta::getTeamName(0), Fanta::longerNameLength)
-			<< " : " << Fanta::goals[0] << " ( " << Fanta::Total[0] << " : ";
-	for (size_t i = 0; i < Fanta::scorers[0].size(); i++) {
-		cout << onlySurname(Fanta::scorers[0].at(i));
-		if (i < Fanta::scorers[0].size() - 1)
-			cout << ", ";
-		else
-			cout << " ";
-	}
-	cout << ")" << endl;
-	cout << " " << leftString(Fanta::getTeamName(1), Fanta::longerNameLength)
-			<< " : " << Fanta::goals[1] << " ( " << Fanta::Total[1] << " : ";
-	for (size_t i = 0; i < Fanta::scorers[1].size(); i++) {
-		cout << onlySurname(Fanta::scorers[1].at(i));
-		if (i < Fanta::scorers[1].size() - 1)
-			cout << ", ";
-		else
-			cout << " ";
-	}
-	cout << ")" << endl << endl;
-}
-void Fanta::printRiepilogo_toHtml(ofstream & fOut) {
-	fOut << " Modulo " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << getModuloSquadra(0) << endl;
-	fOut << " Modulo " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << getModuloSquadra(1) << endl
-			<< endl;
+ cout << " " << leftString(Fanta::getTeamName(0), Fanta::longerNameLength)
+ << " : " << Fanta::goals[0] << " ( " << Fanta::Total[0] << " : ";
+ for (size_t i = 0; i < Fanta::scorers[0].size(); i++) {
+ cout << onlySurname(Fanta::scorers[0].at(i));
+ if (i < Fanta::scorers[0].size() - 1)
+ cout << ", ";
+ else
+ cout << " ";
+ }
+ cout << ")" << endl;
+ cout << " " << leftString(Fanta::getTeamName(1), Fanta::longerNameLength)
+ << " : " << Fanta::goals[1] << " ( " << Fanta::Total[1] << " : ";
+ for (size_t i = 0; i < Fanta::scorers[1].size(); i++) {
+ cout << onlySurname(Fanta::scorers[1].at(i));
+ if (i < Fanta::scorers[1].size() - 1)
+ cout << ", ";
+ else
+ cout << " ";
+ }
+ cout << ")" << endl << endl;
+ }
+ void Fanta::printRiepilogo_toHtml(ofstream & fOut) {
+ fOut << " Modulo " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << getModuloSquadra(0) << endl;
+ fOut << " Modulo " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << getModuloSquadra(1) << endl
+ << endl;
 
-	fOut << " Fattore Campo " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << Fanta::atHome[0] << endl;
-	fOut << " Fattore Campo " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << Fanta::atHome[1] << endl
-			<< endl;
+ fOut << " Fattore Campo " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << Fanta::atHome[0] << endl;
+ fOut << " Fattore Campo " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << Fanta::atHome[1] << endl
+ << endl;
 
-	fOut << " Ammonizioni " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << Fanta::getAmmonizioniTot(0)
-			<< endl;
-	fOut << " Ammonizioni " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << Fanta::getAmmonizioniTot(1)
-			<< endl << endl;
+ fOut << " Ammonizioni " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << Fanta::getAmmonizioniTot(0)
+ << endl;
+ fOut << " Ammonizioni " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << Fanta::getAmmonizioniTot(1)
+ << endl << endl;
 
-	fOut << " Espulsioni " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << Fanta::getEspulsioniTot(0)
-			<< endl;
-	fOut << " Espulsioni " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << Fanta::getEspulsioniTot(1)
-			<< endl << endl;
+ fOut << " Espulsioni " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << Fanta::getEspulsioniTot(0)
+ << endl;
+ fOut << " Espulsioni " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << Fanta::getEspulsioniTot(1)
+ << endl << endl;
 
-	fOut << " Goal decisivi vittoria " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << Fanta::getGoalDecVittTot(0)
-			<< endl;
-	fOut << " Goal decisivi vittoria " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << Fanta::getGoalDecVittTot(1)
-			<< endl << endl;
+ fOut << " Goal decisivi vittoria " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << Fanta::getGoalDecVittTot(0)
+ << endl;
+ fOut << " Goal decisivi vittoria " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << Fanta::getGoalDecVittTot(1)
+ << endl << endl;
 
-	fOut << " Goal decisivi pareggio " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << Fanta::getGoalDecParTot(0)
-			<< endl;
-	fOut << " Goal decisivi pareggio " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << Fanta::getGoalDecParTot(1)
-			<< endl << endl;
+ fOut << " Goal decisivi pareggio " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << Fanta::getGoalDecParTot(0)
+ << endl;
+ fOut << " Goal decisivi pareggio " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << Fanta::getGoalDecParTot(1)
+ << endl << endl;
 
-	fOut << " Assist " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << Fanta::getAssistTot(0) << endl;
-	fOut << " Assist " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << Fanta::getAssistTot(1) << endl
-			<< endl;
+ fOut << " Assist " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << Fanta::getAssistTot(0) << endl;
+ fOut << " Assist " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << Fanta::getAssistTot(1) << endl
+ << endl;
 
-	fOut << " Numero sfide " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << Fanta::sfide[0] << endl;
-	fOut << " Numero sfide " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << Fanta::sfide[1] << endl
-			<< endl;
+ fOut << " Numero sfide " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << Fanta::sfide[0] << endl;
+ fOut << " Numero sfide " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << Fanta::sfide[1] << endl
+ << endl;
 
-	fOut << " Sostituzioni " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << Fanta::sostituzioni[0] << endl;
-	fOut << " Sostituzioni " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << Fanta::sostituzioni[1] << endl
-			<< endl;
+ fOut << " Sostituzioni " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << Fanta::sostituzioni[0] << endl;
+ fOut << " Sostituzioni " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << Fanta::sostituzioni[1] << endl
+ << endl;
 
-	fOut << " Dettaglio Sfide : " << endl;
-	fOut << "\t|" << endl;
-	fOut << "\t|" << " Dif " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : ";
-	fOut.width(3);
-	fOut << Fanta::teamOrderedByRuolo[0][1].at(0).VotoGazzetta << '\t'
-			<< Fanta::teamOrderedByRuolo[0][1].at(0).Nome << endl;
-	fOut << "\t|" << " Att " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : ";
-	fOut.width(3);
-	fOut << Fanta::teamOrderedByRuolo[1][3].at(0).VotoGazzetta << '\t'
-			<< Fanta::teamOrderedByRuolo[1][3].at(0).Nome << endl;
-	fOut << "\t|" << endl;
-	fOut << "\t|" << " Cen " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : ";
-	fOut.width(3);
-	fOut << Fanta::teamOrderedByRuolo[0][2].at(0).VotoGazzetta << '\t'
-			<< Fanta::teamOrderedByRuolo[0][2].at(0).Nome << endl;
-	fOut << "\t|" << " Cen " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : ";
-	fOut.width(3);
-	fOut << Fanta::teamOrderedByRuolo[1][2].at(0).VotoGazzetta << '\t'
-			<< Fanta::teamOrderedByRuolo[1][2].at(0).Nome << endl;
-	fOut << "\t|" << endl;
-	fOut << "\t|" << " Att " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : ";
-	fOut.width(3);
-	fOut << Fanta::teamOrderedByRuolo[0][3].at(0).VotoGazzetta << '\t'
-			<< Fanta::teamOrderedByRuolo[0][3].at(0).Nome << endl;
-	fOut << "\t|" << " Dif " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : ";
-	fOut.width(3);
-	fOut << Fanta::teamOrderedByRuolo[1][1].at(0).VotoGazzetta << '\t'
-			<< Fanta::teamOrderedByRuolo[1][1].at(0).Nome << endl;
-	fOut << "\t|" << endl;
-	fOut << "\t+--------------------------------------------->" << endl << endl;
+ fOut << " Dettaglio Sfide : " << endl;
+ fOut << "\t|" << endl;
+ fOut << "\t|" << " Dif " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : ";
+ fOut.width(3);
+ fOut << Fanta::teamOrderedByRuolo[0][1].at(0).VotoGazzetta << '\t'
+ << Fanta::teamOrderedByRuolo[0][1].at(0).Nome << endl;
+ fOut << "\t|" << " Att " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : ";
+ fOut.width(3);
+ fOut << Fanta::teamOrderedByRuolo[1][3].at(0).VotoGazzetta << '\t'
+ << Fanta::teamOrderedByRuolo[1][3].at(0).Nome << endl;
+ fOut << "\t|" << endl;
+ fOut << "\t|" << " Cen " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : ";
+ fOut.width(3);
+ fOut << Fanta::teamOrderedByRuolo[0][2].at(0).VotoGazzetta << '\t'
+ << Fanta::teamOrderedByRuolo[0][2].at(0).Nome << endl;
+ fOut << "\t|" << " Cen " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : ";
+ fOut.width(3);
+ fOut << Fanta::teamOrderedByRuolo[1][2].at(0).VotoGazzetta << '\t'
+ << Fanta::teamOrderedByRuolo[1][2].at(0).Nome << endl;
+ fOut << "\t|" << endl;
+ fOut << "\t|" << " Att " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : ";
+ fOut.width(3);
+ fOut << Fanta::teamOrderedByRuolo[0][3].at(0).VotoGazzetta << '\t'
+ << Fanta::teamOrderedByRuolo[0][3].at(0).Nome << endl;
+ fOut << "\t|" << " Dif " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : ";
+ fOut.width(3);
+ fOut << Fanta::teamOrderedByRuolo[1][1].at(0).VotoGazzetta << '\t'
+ << Fanta::teamOrderedByRuolo[1][1].at(0).Nome << endl;
+ fOut << "\t|" << endl;
+ fOut << "\t+--------------------------------------------->" << endl << endl;
 
-	fOut << " Media Difesa " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << Fanta::defenseMean[0] << " ( "
-			<< Fanta::defenders[0] << " )" << endl;
-	fOut << " Media Difesa " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << Fanta::defenseMean[1] << " ( "
-			<< Fanta::defenders[1] << " )" << endl << endl;
+ fOut << " Media Difesa " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << Fanta::defenseMean[0] << " ( "
+ << Fanta::defenders[0] << " )" << endl;
+ fOut << " Media Difesa " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << Fanta::defenseMean[1] << " ( "
+ << Fanta::defenders[1] << " )" << endl << endl;
 
-	fOut << " Modificatore " << leftString(Fanta::getTeamName(0),
-			Fanta::longerNameLength) << " : " << Fanta::modifier[0] << endl;
-	fOut << " Modificatore " << leftString(Fanta::getTeamName(1),
-			Fanta::longerNameLength) << " : " << Fanta::modifier[1] << endl
-			<< endl;
+ fOut << " Modificatore " << leftString(Fanta::getTeamName(0),
+ Fanta::longerNameLength) << " : " << Fanta::modifier[0] << endl;
+ fOut << " Modificatore " << leftString(Fanta::getTeamName(1),
+ Fanta::longerNameLength) << " : " << Fanta::modifier[1] << endl
+ << endl;
 
-	fOut << " " << leftString(Fanta::getTeamName(0), Fanta::longerNameLength)
-			<< " : " << Fanta::goals[0] << " ( " << Fanta::Total[0] << " : ";
-	for (size_t i = 0; i < Fanta::scorers[0].size(); i++) {
-		fOut << onlySurname(Fanta::scorers[0].at(i));
-		if (i < Fanta::scorers[0].size() - 1)
-			fOut << ", ";
-		else
-			fOut << " ";
-	}
-	fOut << ")" << endl;
-	fOut << " " << leftString(Fanta::getTeamName(1), Fanta::longerNameLength)
-			<< " : " << Fanta::goals[1] << " ( " << Fanta::Total[1] << " : ";
-	for (size_t i = 0; i < Fanta::scorers[1].size(); i++) {
-		fOut << onlySurname(Fanta::scorers[1].at(i));
-		if (i < Fanta::scorers[1].size() - 1)
-			fOut << ", ";
-		else
-			fOut << " ";
-	}
-	fOut << ")" << endl << endl;
-}
-*/
+ fOut << " " << leftString(Fanta::getTeamName(0), Fanta::longerNameLength)
+ << " : " << Fanta::goals[0] << " ( " << Fanta::Total[0] << " : ";
+ for (size_t i = 0; i < Fanta::scorers[0].size(); i++) {
+ fOut << onlySurname(Fanta::scorers[0].at(i));
+ if (i < Fanta::scorers[0].size() - 1)
+ fOut << ", ";
+ else
+ fOut << " ";
+ }
+ fOut << ")" << endl;
+ fOut << " " << leftString(Fanta::getTeamName(1), Fanta::longerNameLength)
+ << " : " << Fanta::goals[1] << " ( " << Fanta::Total[1] << " : ";
+ for (size_t i = 0; i < Fanta::scorers[1].size(); i++) {
+ fOut << onlySurname(Fanta::scorers[1].at(i));
+ if (i < Fanta::scorers[1].size() - 1)
+ fOut << ", ";
+ else
+ fOut << " ";
+ }
+ fOut << ")" << endl << endl;
+ }
+ */
