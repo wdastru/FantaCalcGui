@@ -1083,43 +1083,60 @@ void Fanta::printRiepilogo_toFile() {
 
 	LOG(TOFILE, "\t|");
 
-	LOG(TOFILE, "\t+--------------------------------------------->");
+	LOG(TOFILE, "\t+---------------------------------------------><br/>");
 
-	/*
-	LOG(TOFILE, " Media Difesa " + leftString(FANTA->getTeamName(0),
-			FANTA->longerNameLength) + " : " + FANTA->defenseMean[0] + " ( "
-			+ FANTA->defenders[0] + " )" + endl;
-	LOG(TOFILE, " Media Difesa " + leftString(FANTA->getTeamName(1),
-			FANTA->longerNameLength) + " : " + FANTA->defenseMean[1] + " ( "
-			+ FANTA->defenders[1] + " )" + endl + endl;
 
-	LOG(TOFILE, " Modificatore " + leftString(FANTA->getTeamName(0),
-			FANTA->longerNameLength) + " : " + FANTA->modifier[0] + endl;
-	LOG(TOFILE, " Modificatore " + leftString(FANTA->getTeamName(1),
-			FANTA->longerNameLength) + " : " + FANTA->modifier[1] + endl
-			+ endl;
+	for (size_t i = 0; i < 2; i++) {
+		QString string = " Media Difesa " + QString::fromStdString(
+				STR_MOD->leftString(FANTA->getTeamName(i),
+						FANTA->longerNameLength)) + " : " + my::toQString<
+				double>(FANTA->defenseMean[i]) + " ( " + my::toQString<
+				unsigned int>(FANTA->defenders[i]) + " )";
 
-	LOG(TOFILE, " " + leftString(FANTA->getTeamName(0), FANTA->longerNameLength)
-			+ " : " + FANTA->goals[0] + " ( " + FANTA->Total[0] + " : ";
-	for (size_t i = 0; i < FANTA->scorers[0].size(); i++) {
-		LOG(TOFILE, onlySurname(FANTA->scorers[0].at(i));
-		if (i < FANTA->scorers[0].size() - 1)
-			LOG(TOFILE, ", ";
+		if (i == 1)
+			LOG(TOFILE, string + "<br/>");
 		else
-			LOG(TOFILE, " ";
+			LOG(TOFILE, string);
 	}
-	LOG(TOFILE, ")" + endl;
-	LOG(TOFILE, " " + leftString(FANTA->getTeamName(1), FANTA->longerNameLength)
-			+ " : " + FANTA->goals[1] + " ( " + FANTA->Total[1] + " : ";
-	for (size_t i = 0; i < FANTA->scorers[1].size(); i++) {
-		LOG(TOFILE, onlySurname(FANTA->scorers[1].at(i));
-		if (i < FANTA->scorers[1].size() - 1)
-			LOG(TOFILE, ", ";
+
+	for (size_t i = 0; i < 2; i++) {
+		QString string = " Modificatore " + QString::fromStdString(
+				STR_MOD->leftString(FANTA->getTeamName(i),
+						FANTA->longerNameLength)) + " : " + my::toQString<
+				signed int>(FANTA->modifier[i]);
+
+		if (i == 1)
+			LOG(TOFILE, string + "<br/>");
 		else
-			LOG(TOFILE, " ";
+			LOG(TOFILE, string);
 	}
-	LOG(TOFILE, ")" + endl + endl;
-	*/
+
+	for (size_t i = 0; i < 2; i++) {
+		QString string = " " + QString::fromStdString(
+				STR_MOD->leftString(FANTA->getTeamName(i),
+						FANTA->longerNameLength)) + " : " + my::toQString<
+				signed int>(FANTA->goals[i]) + " ( " + my::toQString<double>(
+				FANTA->Total[i]) + " ";
+
+		if (FANTA->goals[i] > 0)
+			string += ": ";
+
+		for (size_t j = 0; j < FANTA->scorers[i].size(); j++) {
+			string += QString::fromStdString(
+					STR_MOD->onlySurname(FANTA->scorers[i].at(j)));
+			if (j < (FANTA->scorers[i].size() - 1))
+				string += ", ";
+			else
+				string += " ";
+		}
+
+		if (i == 1)
+			LOG(TOFILE, string + ")<br/>");
+		else
+			LOG(TOFILE, string + ")");
+	}
+
+	LOG(TOFILE, ")");
 }
 void Fanta::printTitolo2(std::string str) {
 	QString tmp = "\n +";
