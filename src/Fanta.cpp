@@ -1242,11 +1242,128 @@ unsigned int Fanta::getAssistTot(unsigned int k) const {
 	return AssTot;
 
 }
+void Fanta::printFormationPor2Att_toFile(unsigned int k, ofstream & fOut) {
+	std::string tmpStringNomi = "";
+	std::string tmpStringVoti = "";
+	std::string
+			bordi =
+					"|                                                                                |";
+	std::string
+			linea =
+					"|--------------------------------------------------------------------------------|";
 
-//void Fanta::printTitolo3(std::string str) {
-//	LOG(TOFILE, "\n!!!! " + QString::fromStdString(str) + " !!!!\n");
-//}
+	fOut << linea << endl << bordi << endl << bordi << endl;
+	for (size_t j = 0; j < 4; j++)// ruolo
+	{
+		for (size_t i = 0; i < Fanta::modulo[k][j]; i++) {
+			if (Fanta::modulo[k][j] != 3) {
+				tmpStringNomi
+						+= centerString(
+								onlySurname(
+										Fanta::teamOrderedByRuolo[k][j].at(i).Nome),
+								80 / Fanta::modulo[k][j]);
+
+				tmpStringVoti
+						+= centerString(
+								(toString(
+										Fanta::teamOrderedByRuolo[k][j].at(i).FantaVoto)
+										+ " ("
+										+ toString(
+												Fanta::teamOrderedByRuolo[k][j].at(
+														i).VotoGazzetta) + ")"),
+								80 / Fanta::modulo[k][j]);
+			} else {
+				tmpStringNomi
+						+= centerString(
+								onlySurname(
+										Fanta::teamOrderedByRuolo[k][j].at(i).Nome),
+								25);
+
+				tmpStringVoti
+						+= centerString(
+								(toString(
+										Fanta::teamOrderedByRuolo[k][j].at(i).FantaVoto)
+										+ " ("
+										+ toString(
+												Fanta::teamOrderedByRuolo[k][j].at(
+														i).VotoGazzetta) + ")"),
+								25);
+			}
+		}
+
+		fOut << "|" << centerString(tmpStringNomi, 80) << "|" << endl;
+		fOut << "|" << centerString(tmpStringVoti, 80) << "|" << endl;
+		fOut << bordi << endl << bordi << endl;
+
+		tmpStringNomi = "";
+		tmpStringVoti = "";
+	}
+	fOut << linea;
+}
+void Fanta::printFormationAtt2Por_toFile(unsigned int k, ofstream & fOut) {
+	std::string tmpStringNomi = "";
+	std::string tmpStringVoti = "";
+	std::string
+			bordi =
+					"|                                                                                |";
+	std::string
+			linea =
+					"|--------------------------------------------------------------------------------|";
+
+	fOut << linea << endl << bordi << endl << bordi << endl;
+	for (size_t j = 0; j < 4; j++)// ruolo
+	{
+		for (size_t i = 0; i < Fanta::modulo[k][3 - j]; i++) {
+			if (Fanta::modulo[k][3 - j] != 3) {
+				tmpStringNomi
+						+= centerString(
+								onlySurname(
+										Fanta::teamOrderedByRuolo[k][3 - j].at(
+												i).Nome),
+								80 / Fanta::modulo[k][3 - j]);
+
+				tmpStringVoti
+						+= centerString(
+								(toString(
+										Fanta::teamOrderedByRuolo[k][3 - j].at(
+												i).FantaVoto) + " ("
+										+ toString(
+												Fanta::teamOrderedByRuolo[k][3
+														- j].at(i).VotoGazzetta)
+										+ ")"), 80 / Fanta::modulo[k][3 - j]);
+
+			} else {
+				tmpStringNomi
+						+= centerString(
+								onlySurname(
+										Fanta::teamOrderedByRuolo[k][3 - j].at(
+												i).Nome), 25);
+
+				tmpStringVoti
+						+= centerString(
+								(toString(
+										Fanta::teamOrderedByRuolo[k][3 - j].at(
+												i).FantaVoto) + " ("
+										+ toString(
+												Fanta::teamOrderedByRuolo[k][3
+														- j].at(i).VotoGazzetta)
+										+ ")"), 25);
+			}
+		}
+
+		fOut << "|" << centerString(tmpStringNomi, 80) << "|" << endl;
+		fOut << "|" << centerString(tmpStringVoti, 80) << "|" << endl;
+		fOut << bordi << endl << bordi << endl;
+
+		tmpStringNomi = "";
+		tmpStringVoti = "";
+	}
+	fOut << linea;
+}
 /*
+void Fanta::printTitolo3(std::string str) {
+	LOG(TOFILE, "\n!!!! " + QString::fromStdString(str) + " !!!!\n");
+}
 std::string Fanta::getVariablesValues() {
 	std::string message;
 	message += "START of message: \n--------------------\n\n";
@@ -1325,64 +1442,6 @@ void Fanta::printFormationPor2Att(unsigned int k) {
 	}
 	cout << linea;
 }
-void Fanta::printFormationPor2Att_toFile(unsigned int k, ofstream & fOut) {
-	std::string tmpStringNomi = "";
-	std::string tmpStringVoti = "";
-	std::string
-			bordi =
-					"|                                                                                |";
-	std::string
-			linea =
-					"|--------------------------------------------------------------------------------|";
-
-	fOut << linea << endl << bordi << endl << bordi << endl;
-	for (size_t j = 0; j < 4; j++)// ruolo
-	{
-		for (size_t i = 0; i < Fanta::modulo[k][j]; i++) {
-			if (Fanta::modulo[k][j] != 3) {
-				tmpStringNomi
-						+= centerString(
-								onlySurname(
-										Fanta::teamOrderedByRuolo[k][j].at(i).Nome),
-								80 / Fanta::modulo[k][j]);
-
-				tmpStringVoti
-						+= centerString(
-								(toString(
-										Fanta::teamOrderedByRuolo[k][j].at(i).FantaVoto)
-										+ " ("
-										+ toString(
-												Fanta::teamOrderedByRuolo[k][j].at(
-														i).VotoGazzetta) + ")"),
-								80 / Fanta::modulo[k][j]);
-			} else {
-				tmpStringNomi
-						+= centerString(
-								onlySurname(
-										Fanta::teamOrderedByRuolo[k][j].at(i).Nome),
-								25);
-
-				tmpStringVoti
-						+= centerString(
-								(toString(
-										Fanta::teamOrderedByRuolo[k][j].at(i).FantaVoto)
-										+ " ("
-										+ toString(
-												Fanta::teamOrderedByRuolo[k][j].at(
-														i).VotoGazzetta) + ")"),
-								25);
-			}
-		}
-
-		fOut << "|" << centerString(tmpStringNomi, 80) << "|" << endl;
-		fOut << "|" << centerString(tmpStringVoti, 80) << "|" << endl;
-		fOut << bordi << endl << bordi << endl;
-
-		tmpStringNomi = "";
-		tmpStringVoti = "";
-	}
-	fOut << linea;
-}
 void Fanta::printFormationAtt2Por(unsigned int k) {
 	std::string tmpStringNomi = "";
 	std::string tmpStringVoti = "";
@@ -1442,66 +1501,6 @@ void Fanta::printFormationAtt2Por(unsigned int k) {
 		tmpStringVoti = "";
 	}
 	cout << linea;
-}
-void Fanta::printFormationAtt2Por_toFile(unsigned int k, ofstream & fOut) {
-	std::string tmpStringNomi = "";
-	std::string tmpStringVoti = "";
-	std::string
-			bordi =
-					"|                                                                                |";
-	std::string
-			linea =
-					"|--------------------------------------------------------------------------------|";
-
-	fOut << linea << endl << bordi << endl << bordi << endl;
-	for (size_t j = 0; j < 4; j++)// ruolo
-	{
-		for (size_t i = 0; i < Fanta::modulo[k][3 - j]; i++) {
-			if (Fanta::modulo[k][3 - j] != 3) {
-				tmpStringNomi
-						+= centerString(
-								onlySurname(
-										Fanta::teamOrderedByRuolo[k][3 - j].at(
-												i).Nome),
-								80 / Fanta::modulo[k][3 - j]);
-
-				tmpStringVoti
-						+= centerString(
-								(toString(
-										Fanta::teamOrderedByRuolo[k][3 - j].at(
-												i).FantaVoto) + " ("
-										+ toString(
-												Fanta::teamOrderedByRuolo[k][3
-														- j].at(i).VotoGazzetta)
-										+ ")"), 80 / Fanta::modulo[k][3 - j]);
-
-			} else {
-				tmpStringNomi
-						+= centerString(
-								onlySurname(
-										Fanta::teamOrderedByRuolo[k][3 - j].at(
-												i).Nome), 25);
-
-				tmpStringVoti
-						+= centerString(
-								(toString(
-										Fanta::teamOrderedByRuolo[k][3 - j].at(
-												i).FantaVoto) + " ("
-										+ toString(
-												Fanta::teamOrderedByRuolo[k][3
-														- j].at(i).VotoGazzetta)
-										+ ")"), 25);
-			}
-		}
-
-		fOut << "|" << centerString(tmpStringNomi, 80) << "|" << endl;
-		fOut << "|" << centerString(tmpStringVoti, 80) << "|" << endl;
-		fOut << bordi << endl << bordi << endl;
-
-		tmpStringNomi = "";
-		tmpStringVoti = "";
-	}
-	fOut << linea;
 }
 void Fanta::printPlayersInfo(unsigned k) {
 	for (size_t i = 0; i < 4; i++) // ruolo

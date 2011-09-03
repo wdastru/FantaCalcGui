@@ -108,6 +108,9 @@ public:
 	 unsigned int getGoalDecParTot(unsigned int) const ;
 	 unsigned int getAssistTot(unsigned int) const ;
 	 unsigned int getSubstitutions(unsigned int) const ;
+	 void printFormationPor2Att_toFile(unsigned int, ofstream &);
+	 void printFormationAtt2Por_toFile(unsigned int, ofstream &);
+
 //	void printTitolo3(std::string);
 
 	/*
@@ -119,10 +122,8 @@ public:
 	 void printPlayersInfo_toFile(unsigned int, ofstream &);
 	 void printPlayersInfo_toHtml(unsigned int, ofstream &);
 	 void printFormationPor2Att(unsigned int);
-	 void printFormationPor2Att_toFile(unsigned int, ofstream &);
 	 void printFormationPor2Att_toHtml(unsigned int, ofstream &);
 	 void printFormationAtt2Por(unsigned int);
-	 void printFormationAtt2Por_toFile(unsigned int, ofstream &);
 	 void printFormationAtt2Por_toHtml(unsigned int, ofstream &);
 	 bool repeated;
 	 */
