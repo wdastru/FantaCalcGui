@@ -1250,17 +1250,17 @@ unsigned int Fanta::getAssistTot(unsigned int k) const {
 
 }
 void Fanta::printFormations_toFile() {
-	std::string tmpString = "|";
+	std::string tmpString = " |";
 	std::string
 			bordi =
-					"|                                                                                |";
+					" |                                                                                |";
 	std::string
 			linea =
-					"+--------------------------------------------------------------------------------+";
+					" +--------------------------------------------------------------------------------+";
 
 	std::string
 			separatore =
-					"|--------------------------------------------------------------------------------|";
+					" |--------------------------------------------------------------------------------|";
 
 	LOG(
 			TOFILE,
@@ -1280,6 +1280,9 @@ void Fanta::printFormations_toFile() {
 			if (Fanta::modulo[k][a[k][j]] == 3)
 				tmpString += " ";
 
+			/*
+			 *  nomi giocatori
+			 */
 			for (size_t i = 0; i < Fanta::modulo[k][a[k][j]]; i++) { // giocatori
 				if (Fanta::modulo[k][a[k][j]] == 3) {
 					tmpString
@@ -1295,10 +1298,35 @@ void Fanta::printFormations_toFile() {
 													i).Nome),
 									80 / Fanta::modulo[k][a[k][j]]);
 				}
-				/*
-				 *
-				 *
-				 * tmpString
+			}
+
+			if (Fanta::modulo[k][a[k][j]] == 3)
+				LOG(TOFILE, QString::fromStdString(tmpString + " |"));
+			else
+				LOG(TOFILE, QString::fromStdString(tmpString + "|"));
+
+			tmpString = " |";
+
+			if (Fanta::modulo[k][a[k][j]] == 3)
+				tmpString += " ";
+
+			/*
+			 *  voti giocatori
+			 */
+			for (size_t i = 0; i < Fanta::modulo[k][a[k][j]]; i++) { // giocatori
+				if (Fanta::modulo[k][a[k][j]] == 3) {
+					tmpString
+							+= STR_MOD->centerString(
+									(my::toString(
+											Fanta::teamOrderedByRuolo[k][a[k][j]].at(
+													i).FantaVoto) + " ("
+
+											+ my::toString(
+													Fanta::teamOrderedByRuolo[k][a[k][j]].at(
+															i).VotoGazzetta)
+											+ ")"), 26);
+				} else {
+					tmpString
 							+= STR_MOD->centerString(
 									(my::toString(
 											Fanta::teamOrderedByRuolo[k][a[k][j]].at(
@@ -1309,80 +1337,32 @@ void Fanta::printFormations_toFile() {
 															i).VotoGazzetta)
 											+ ")"),
 									80 / Fanta::modulo[k][a[k][j]]);
-				 *
-				 *
-				 * tmpString
-							+= STR_MOD->centerString(
-									(my::toString(
-											Fanta::teamOrderedByRuolo[k][a[k][j]].at(
-													i).FantaVoto) + " ("
-
-											+ my::toString(
-													Fanta::teamOrderedByRuolo[k][a[k][j]].at(
-															i).VotoGazzetta)
-											+ ")"), 25);
-				 *
-				 *
-				 if (Fanta::modulo[k][a[j]] != 3) {
-				 tmpString
-				 += centerString(
-				 onlySurname(
-				 Fanta::teamOrderedByRuolo[k][a[j]].at(
-				 i).Nome),
-
-				 80 / Fanta::modulo[k][a[j]]);
-
-				 tmpStringVoti
-				 += centerString(
-				 (toString(
-				 Fanta::teamOrderedByRuolo[k][a[j]].at(
-				 i).FantaVoto) + " ("
-
-				 + toString(
-				 Fanta::teamOrderedByRuolo[k][a[j]].at(
-				 i).VotoGazzetta)
-				 + ")"), 80 / Fanta::modulo[k][a[j]]);
-
-				 } else {
-				 tmpStringNomi
-				 += centerString(
-				 onlySurname(
-				 Fanta::teamOrderedByRuolo[k][a[j]].at(
-				 i).Nome), 25);
-
-				 tmpStringVoti
-				 += centerString(
-				 (toString(
-				 Fanta::teamOrderedByRuolo[k][a[j]].at(
-				 i).FantaVoto) + " ("
-
-				 + toString(
-				 Fanta::teamOrderedByRuolo[k][a[j]].at(
-				 i).VotoGazzetta)
-				 + ")"), 25);
-
-				 }
-				 */
+				}
 			}
 
 			if (Fanta::modulo[k][a[k][j]] == 3)
-				LOG(TOFILE, QString::fromStdString(tmpString + " |"));
+				LOG(
+						TOFILE,
+						QString::fromStdString(
+								tmpString + " |" + "<br/>" + bordi));
 			else
-				LOG(TOFILE, QString::fromStdString(tmpString + "|"));
+				LOG(
+						TOFILE,
+						QString::fromStdString(
+								tmpString + "|" + "<br/>" + bordi));
 
-			tmpString = "|";
+			tmpString = " |";
 		}
 
 		if (k == 0)
 			LOG(
 					TOFILE,
 					QString::fromStdString(
-						bordi + "<br/>" + separatore + "<br/>" + bordi));
+							bordi + "<br/>" + separatore + "<br/>" + bordi
+									+ "<br/>" + bordi));
 	}
 
-	LOG(TOFILE,
-			QString::fromStdString(
-					 bordi + "<br/>" + linea));
+	LOG(TOFILE, QString::fromStdString(linea));
 }
 void Fanta::printFormationPor2Att_toFile(unsigned int k) {
 	/*
