@@ -1259,8 +1259,12 @@ void Fanta::printFormations_toFile() {
 					" +------------------------------+------------------+------------------------------+";
 
 	std::string
-			area =
-					" |                              +------------------+                              |";
+				area =
+						" |                              |__________________|                              |";
+
+	std::string
+				area_sotto =
+						" |                                      \\__/                                      |";
 
 	std::string
 			separatore =
@@ -1350,7 +1354,7 @@ void Fanta::printFormations_toFile() {
 													+ ")"), 18)
 									+ "|                              |";
 
-					tmpString += "<br/>" + area;
+					tmpString += "<br/>" + area + "<br/>" + area_sotto+ "<br/>" + bordi;
 				} else {
 					tmpString
 							+= STR_MOD->centerString(
