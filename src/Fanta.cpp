@@ -1250,22 +1250,23 @@ unsigned int Fanta::getAssistTot(unsigned int k) const {
 
 }
 void Fanta::printFormations_toFile() {
-	std::string tmpString = " |";
+	std::string tmpString = " ";
 	std::string
 			bordi =
 					" |                                                                                |";
 	std::string
-			linea =
-					" +--------------------------------------------------------------------------------+";
+			fondo =
+					" +------------------------------+------------------+------------------------------+";
+
+	std::string
+			area =
+					" |                              +------------------+                              |";
 
 	std::string
 			separatore =
-					" |--------------------------------------------------------------------------------|";
+					" |----------------------------------------o---------------------------------------|";
 
-	LOG(
-			TOFILE,
-			QString::fromStdString(
-					linea + "<br/>" + bordi));
+	LOG(TOFILE, QString::fromStdString(fondo));
 
 	/*
 	 *  squadra in casa    : por --> att
@@ -1277,8 +1278,7 @@ void Fanta::printFormations_toFile() {
 	{
 		for (size_t j = 0; j < 4; j++) // ruoli
 		{
-			if (Fanta::modulo[k][a[k][j]] == 3)
-				tmpString += " ";
+				tmpString += "|";
 
 			/*
 			 *  nomi giocatori
@@ -1290,6 +1290,14 @@ void Fanta::printFormations_toFile() {
 									STR_MOD->onlySurname(
 											Fanta::teamOrderedByRuolo[k][a[k][j]].at(
 													i).Nome), 26);
+				} else if (a[k][j] == 0) { // portiere
+					tmpString
+							+= "                              |"
+									+ STR_MOD->centerString(
+											STR_MOD->onlySurname(
+													Fanta::teamOrderedByRuolo[k][a[k][j]].at(
+															i).Nome), 18)
+									+ "|                              |";
 				} else {
 					tmpString
 							+= STR_MOD->centerString(
@@ -1301,14 +1309,16 @@ void Fanta::printFormations_toFile() {
 			}
 
 			if (Fanta::modulo[k][a[k][j]] == 3)
-				LOG(TOFILE, QString::fromStdString(tmpString + " |"));
+				LOG(TOFILE, QString::fromStdString(tmpString + "  |"));
+			else if (a[k][j] == 0)
+				LOG(TOFILE, QString::fromStdString(tmpString));
 			else
 				LOG(TOFILE, QString::fromStdString(tmpString + "|"));
 
-			tmpString = " |";
+			tmpString = " ";
 
-			if (Fanta::modulo[k][a[k][j]] == 3)
-				tmpString += " ";
+			if (a[k][j] != 0)
+				tmpString += "|";
 
 			/*
 			 *  voti giocatori
@@ -1325,6 +1335,22 @@ void Fanta::printFormations_toFile() {
 													Fanta::teamOrderedByRuolo[k][a[k][j]].at(
 															i).VotoGazzetta)
 											+ ")"), 26);
+				} else if (a[k][j] == 0) { // portiere
+					tmpString
+							+= "|                              |"
+									+ STR_MOD->centerString(
+											(my::toString(
+													Fanta::teamOrderedByRuolo[k][a[k][j]].at(
+															i).FantaVoto)
+													+ " ("
+
+													+ my::toString(
+															Fanta::teamOrderedByRuolo[k][a[k][j]].at(
+																	i).VotoGazzetta)
+													+ ")"), 18)
+									+ "|                              |";
+
+					tmpString += "<br/>" + area;
 				} else {
 					tmpString
 							+= STR_MOD->centerString(
@@ -1340,18 +1366,19 @@ void Fanta::printFormations_toFile() {
 				}
 			}
 
-			if (Fanta::modulo[k][a[k][j]] == 3)
+			if (Fanta::modulo[k][a[k][j]] == 3) {
 				LOG(
 						TOFILE,
 						QString::fromStdString(
-								tmpString + " |" + "<br/>" + bordi));
-			else
-				LOG(
-						TOFILE,
-						QString::fromStdString(
-								tmpString + "|" + "<br/>" + bordi));
+								tmpString + "  |" + "<br/>" + bordi));
+			} else if (a[k][j] == 0) {
+				LOG(TOFILE, QString::fromStdString(tmpString));
+			}
+			else {
+				LOG(TOFILE, QString::fromStdString(tmpString + "|<br/>" + bordi));
+			}
 
-			tmpString = " |";
+			tmpString = " ";
 		}
 
 		if (k == 0)
@@ -1362,7 +1389,7 @@ void Fanta::printFormations_toFile() {
 									+ "<br/>" + bordi));
 	}
 
-	LOG(TOFILE, QString::fromStdString(linea));
+	LOG(TOFILE, QString::fromStdString(fondo));
 }
 void Fanta::printFormationPor2Att_toFile(unsigned int k) {
 	/*
