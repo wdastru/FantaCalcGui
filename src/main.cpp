@@ -29,14 +29,10 @@ int main(int argc, char *argv[]) {
 	QString loggerTitle = "FantaCalcGui v" + version.getVersion();
 
 	singletonQtLogger::Inst()->setTitle(loggerTitle);
-	singletonQtLogger::Inst()->setDebugStatus(IniFileManager::Inst()->getDebugStatus());
+	singletonQtLogger::Inst()->setDebugStatus(
+			IniFileManager::Inst()->getDebugStatus());
 
 	LOG(DEBUG, "In main(): Logger started.");
-
-	LOG(
-			DEBUG,
-			"Contenuto iniFile (" + IniFileManager::Inst()->getIniFilePath()
-					+ "):<br />" + IniFileManager::Inst()->showIniFile());
 
 	QDir qdir(IniFileManager::Inst()->getWorkDir());
 	qdir.mkdir("formazioni");
@@ -44,6 +40,11 @@ int main(int argc, char *argv[]) {
 	qdir.mkdir("gazzetta");
 	qdir.mkdir("risultati");
 	qdir.mkdir("liste");
+
+	LOG(
+			DEBUG,
+			"Contenuto iniFile (" + IniFileManager::Inst()->getIniFilePath()
+					+ "):<br />" + IniFileManager::Inst()->showIniFile());
 
 	UseTheNetDialog * useTheNetDialog = new UseTheNetDialog(THE_LOGGER);
 	useTheNetDialog->setQuestion(
@@ -96,7 +97,6 @@ int main(int argc, char *argv[]) {
 	formazioniFileReader->setPlayers(gazzettaFileReader->getOutput());
 	formazioniFileReader->execute();
 	// <-- lettura file Gazzetta e Formazioni
-
 	FANTA->execute();
 
 	QString match = IniFileManager::Inst()->getRisultatiPath() + "risultato_"
@@ -110,77 +110,77 @@ int main(int argc, char *argv[]) {
 
 	singletonQtLogger::Inst()->setLogFileName(match);
 
-	 	/*
-		string fileOut = "tmp";
-		fOut.open( fileOut.c_str() );
+	/*
+	 string fileOut = "tmp";
+	 fOut.open( fileOut.c_str() );
 
-		printTitolo2_toFile( match, fOut );
-		Fanta->printRiepilogo_toFile( fOut );
+	 printTitolo2_toFile( match, fOut );
+	 Fanta->printRiepilogo_toFile( fOut );
 
-		Fanta->printFormationPor2Att_toFile( 0, fOut );
-		fOut << endl;
-		Fanta->printFormationAtt2Por_toFile( 1, fOut );
-		fOut << endl;
+	 Fanta->printFormationPor2Att_toFile( 0, fOut );
+	 fOut << endl;
+	 Fanta->printFormationAtt2Por_toFile( 1, fOut );
+	 fOut << endl;
 
-		for (unsigned int k = 0; k < 2; k++)
-		{
-			printTitolo2_toFile( Fanta->getTeamName( k ), fOut );
-			Fanta->printPlayersInfo_toFile( k, fOut );
-		}
+	 for (unsigned int k = 0; k < 2; k++)
+	 {
+	 printTitolo2_toFile( Fanta->getTeamName( k ), fOut );
+	 Fanta->printPlayersInfo_toFile( k, fOut );
+	 }
 
-		fOut.close();
+	 fOut.close();
 
-		// concatenate tmp and tmp2 in tmp3
-		ifstream in1("tmp", ios::in | ios::binary);
-		if(!in1)
-		{
-			cout << "Cannot open tmp.\n";
-			remove("tmp");
-			remove("tmp2");
-			remove("tmp3");
-			return EXIT_FAILURE;
-		}
-		ifstream in2("tmp2", ios::in | ios::binary);
-		if(!in2)
-		{
-			cout << "Cannot open tmp2.\n";
-			remove("tmp");
-			remove("tmp2");
-			remove("tmp3");
-			return EXIT_FAILURE;
-		}
-		ofstream out("tmp3", ios::out | ios::binary);
-		if(!out)
-		{
-			cout << "can't open tmp3";
-			remove("tmp");
-			remove("tmp2");
-			remove("tmp3");
-			return EXIT_FAILURE;
-		}
+	 // concatenate tmp and tmp2 in tmp3
+	 ifstream in1("tmp", ios::in | ios::binary);
+	 if(!in1)
+	 {
+	 cout << "Cannot open tmp.\n";
+	 remove("tmp");
+	 remove("tmp2");
+	 remove("tmp3");
+	 return EXIT_FAILURE;
+	 }
+	 ifstream in2("tmp2", ios::in | ios::binary);
+	 if(!in2)
+	 {
+	 cout << "Cannot open tmp2.\n";
+	 remove("tmp");
+	 remove("tmp2");
+	 remove("tmp3");
+	 return EXIT_FAILURE;
+	 }
+	 ofstream out("tmp3", ios::out | ios::binary);
+	 if(!out)
+	 {
+	 cout << "can't open tmp3";
+	 remove("tmp");
+	 remove("tmp2");
+	 remove("tmp3");
+	 return EXIT_FAILURE;
+	 }
 
-		out << in1.rdbuf();
-		out << endl << flush;
-		out << in2.rdbuf();
-		out << endl << " File prodotto con FantaCalcGui.exe " << ver.getVersion() << endl;
+	 out << in1.rdbuf();
+	 out << endl << flush;
+	 out << in2.rdbuf();
+	 out << endl << " File prodotto con FantaCalcGui.exe " << ver.getVersion() << endl;
 
-		in1.close();
-		in2.close();
-		out.close();
+	 in1.close();
+	 in2.close();
+	 out.close();
 
-		OutputFileDialog outputFileDialog;
-		outputFileDialog.init("tmp3", fileDialog.getFileNameOutputPath());
-		outputFileDialog.setTitle("Risultato");
-		outputFileDialog.setFileName("risultato_" + \
+	 OutputFileDialog outputFileDialog;
+	 outputFileDialog.init("tmp3", fileDialog.getFileNameOutputPath());
+	 outputFileDialog.setTitle("Risultato");
+	 outputFileDialog.setFileName("risultato_" + \
 				QString::fromStdString(Fanta->getTeamName(0)) + \
 				"-" + \
 				QString::fromStdString(Fanta->getTeamName(1)));
-		outputFileDialog.exec();
+	 outputFileDialog.exec();
 
-		remove("tmp");
-		remove("tmp2");
-		remove("tmp3");
-		*/
+	 remove("tmp");
+	 remove("tmp2");
+	 remove("tmp3");
+	 */
 
 	singletonQtLogger::Inst()->saveLogFile();
 

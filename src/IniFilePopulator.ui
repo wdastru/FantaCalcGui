@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>420</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>100</y>
+     <y>10</y>
      <width>281</width>
      <height>51</height>
     </rect>
@@ -30,8 +30,120 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:24pt; font-weight:600;&quot;&gt;The Populator&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>80</y>
+     <width>351</width>
+     <height>271</height>
+    </rect>
+   </property>
+   <layout class="QFormLayout" name="formLayout">
+    <item row="0" column="0">
+     <widget class="QPushButton" name="formazioniButton">
+      <property name="text">
+       <string>Formazioni</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="formazioniLineEdit"/>
+    </item>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="gazzettaButton">
+      <property name="text">
+       <string>Gazzetta</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="gazzettaLineEdit"/>
+    </item>
+    <item row="2" column="0">
+     <widget class="QPushButton" name="risultatiButton">
+      <property name="text">
+       <string>Risultati</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="risultatiLineEdit"/>
+    </item>
+    <item row="3" column="0">
+     <widget class="QPushButton" name="downloadButton">
+      <property name="text">
+       <string>Download</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="downloadLineEdit"/>
+    </item>
+    <item row="4" column="0">
+     <widget class="QPushButton" name="listeButton">
+      <property name="text">
+       <string>Liste</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QLineEdit" name="listeLineEdit"/>
+    </item>
+    <item row="5" column="0">
+     <widget class="QPushButton" name="formazioniUrlButton">
+      <property name="text">
+       <string>Formazioni Url</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QLineEdit" name="formazioniUrlLineEdit"/>
+    </item>
+    <item row="6" column="1">
+     <widget class="QLineEdit" name="gazzettaUrlLineEdit"/>
+    </item>
+    <item row="6" column="0">
+     <widget class="QPushButton" name="gazzettaUrlButton">
+      <property name="text">
+       <string>Gazzetta Url</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0">
+     <widget class="QPushButton" name="debugButton">
+      <property name="text">
+       <string>Debug</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1">
+     <widget class="QLineEdit" name="debugLineEdit"/>
+    </item>
+   </layout>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>formazioniButton</sender>
+   <signal>clicked()</signal>
+   <receiver>IniFilePopulatorClass</receiver>
+   <slot>getDir()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>58</x>
+     <y>92</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>209</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>getDir()</slot>
+ </slots>
 </ui>
