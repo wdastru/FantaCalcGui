@@ -14,6 +14,7 @@ SET( SRCS src/main.cpp
         src/WhichOfTheseDialog.cpp
         src/WhichOfLevenshteinDialog.cpp
         src/Less25MinDialog.cpp
+        src/IniFilePopulator.cpp
         src/StringModifier.cpp )
 SET( HDRS src/CVersion.h
         src/IniFileManager.h
@@ -27,9 +28,11 @@ SET( HDRS src/CVersion.h
         src/WhichOfTheseDialog.h
         src/Less25MinDialog.h
         src/WhichOfLevenshteinDialog.h
+        src/IniFilePopulator.h
         src/StringModifier.h )
 SET( UIS  src/authenticationdialog.ui
 		src/UseTheNetDialog.ui
+        src/IniFilePopulator.ui
 		src/NoNetFileDialog.ui  )
 SET( RCS src/resources.qrc )
 

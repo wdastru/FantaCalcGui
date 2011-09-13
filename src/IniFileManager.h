@@ -12,6 +12,7 @@
 
 #include "singletonQtLogger.h"
 #include "defines.h"
+#include "IniFilePopulator.h"
 
 class IniFileManager {
 public:

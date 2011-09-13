@@ -26,10 +26,6 @@ IniFileManager::IniFileManager() {
 	dir.mkdir("FantaCalcGui");
 	workDir = QString::fromAscii(UserProfile) + "\\FantaCalcGui\\";
 	iniFileName = workDir + "FantaCalcGui.ini";
-	formazioniUrl
-			= "http://nmr.ch.unito.it/lab/Fantasito/777/formazioni/";
-	gazzettaUrl
-			= "http://nmr.ch.unito.it/lab/Fantasito/777/filesGazzetta/";
 	readIniFile();
 }
 IniFileManager::~IniFileManager() {
@@ -162,6 +158,10 @@ void IniFileManager::readIniFile() {
 				DEBUG,
 				"In IniFileManager::readIniFile() --> " + this->iniFileName
 						+ " does not exists.");
+
+		IniFilePopulator * iniFilePopulator = new IniFilePopulator(THE_LOGGER);
+		iniFilePopulator->exec();
+
 		this->writeIniFile();
 	}
 }
