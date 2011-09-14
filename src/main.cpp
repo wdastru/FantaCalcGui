@@ -34,13 +34,6 @@ int main(int argc, char *argv[]) {
 
 	LOG(DEBUG, "In main(): Logger started.");
 
-	QDir qdir(IniFileManager::Inst()->getWorkDir());
-	qdir.mkdir("formazioni");
-	qdir.mkdir("download");
-	qdir.mkdir("gazzetta");
-	qdir.mkdir("risultati");
-	qdir.mkdir("liste");
-
 	LOG(
 			DEBUG,
 			"Contenuto iniFile (" + IniFileManager::Inst()->getIniFilePath()

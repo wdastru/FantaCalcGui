@@ -79,25 +79,31 @@ void IniFileManager::writeIniFile() {
 		iniFile->open(QIODevice::WriteOnly);
 		if (iniFile->isOpen()) {
 			iniFile->write("[File Formazioni Path]\n");
-			iniFile->write((path + "formazioni\\").toAscii().trimmed());
+			iniFile->write(this->formazioniPath.toAscii().trimmed());
 
 			iniFile->write("\n[File Gazzetta Path]\n");
-			iniFile->write((path + "gazzetta\\").toAscii().trimmed());
+			iniFile->write(this->gazzettaPath.toAscii().trimmed());
 
 			iniFile->write("\n[File Output Path]\n");
-			iniFile->write((path + "risultati\\").toAscii().trimmed());
+			iniFile->write(this->risultatiPath.toAscii().trimmed());
 
 			iniFile->write("\n[Download Path]\n");
-			iniFile->write((path + "download\\").toAscii().trimmed());
+			iniFile->write(this->downloadPath.toAscii().trimmed());
 
 			iniFile->write("\n[Liste Path]\n");
-			iniFile->write((path + "liste\\").toAscii().trimmed());
+			iniFile->write(this->listePath.toAscii().trimmed());
 
 			iniFile->write("\n[File Formazioni Url]\n");
 			iniFile->write(this->formazioniUrl.toAscii().trimmed());
 
 			iniFile->write("\n[File Gazzetta Url]\n");
 			iniFile->write(this->gazzettaUrl.toAscii().trimmed());
+
+			iniFile->write("\n[Debug]\n");
+			if (this->debugStatus)
+				iniFile->write("TRUE");
+			else
+				iniFile->write("FALSE");
 
 		} else {
 			;
@@ -160,7 +166,23 @@ void IniFileManager::readIniFile() {
 						+ " does not exists.");
 
 		IniFilePopulator * iniFilePopulator = new IniFilePopulator(THE_LOGGER);
+
+		LOG(DEBUG, "In IniFileManager::readIniFile() --> " + this->workDir);
+
+		iniFilePopulator->setStartDir(this->workDir);
 		iniFilePopulator->exec();
+
+		this->formazioniPath = iniFilePopulator->getFormazioniPath();
+		this->gazzettaPath = iniFilePopulator->getGazzettaPath();
+		this->risultatiPath = iniFilePopulator->getRisultatiPath();
+		this->downloadPath = iniFilePopulator->getDownloadPath();
+		this->listePath = iniFilePopulator->getListePath();
+		this->formazioniUrl = iniFilePopulator->getFormazioniUrl();
+		this->gazzettaUrl = iniFilePopulator->getGazzettaUrl();
+		if (iniFilePopulator->getDebugStatus() == "TRUE")
+			this->debugStatus = TRUE;
+		else
+			this->debugStatus = FALSE;
 
 		this->writeIniFile();
 	}
@@ -225,6 +247,9 @@ QString IniFileManager::getFormazioniUrl() {
 }
 QString IniFileManager::getGazzettaUrl() {
 	return this->gazzettaUrl;
+}
+void IniFileManager::setFormazioniPath(QString dir) {
+	this->formazioniPath = dir;
 }
 bool IniFileManager::getDebugStatus() {
 	return this->debugStatus;

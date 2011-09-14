@@ -37,6 +37,7 @@ public:
 	QString getWorkDir();
 	QString getFormazioniUrl();
 	QString getGazzettaUrl();
+	void setFormazioniPath(QString dir);
 	bool getDebugStatus();
 
 private:

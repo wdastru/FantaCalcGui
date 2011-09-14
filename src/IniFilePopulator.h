@@ -2,6 +2,7 @@
 #define INIFILEPOPULATOR_H
 
 #include "singletonQtLogger.h"
+#include "IniFileManager.h"
 #include "defines.h"
 
 #include <QtGui/QDialog>
@@ -15,12 +16,27 @@ class IniFilePopulator : public QDialog
 public:
     IniFilePopulator(QWidget *parent = 0);
     ~IniFilePopulator();
+    void setStartDir(QString);
+    QString getFormazioniPath();
+    QString getGazzettaPath();
+    QString getRisultatiPath();
+    QString getDownloadPath();
+    QString getListePath();
+    QString getFormazioniUrl();
+    QString getGazzettaUrl();
+    QString getDebugStatus();
 
 private slots:
-	void getDir();
+	void chooseFormazioniPath();
+	void chooseGazzettaPath();
+	void chooseRisultatiPath();
+	void chooseDownloadPath();
+	void chooseListePath();
 
 private:
     Ui::IniFilePopulatorClass ui;
+    QString getDir(QString, QString);
+    QString startDir;
 
 };
 
