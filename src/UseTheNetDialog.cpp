@@ -76,6 +76,9 @@ void UseTheNetDialog::abortClicked() {
 	LOG(DEBUG, "UseTheNetDialog::abortClicked()");
 	this->close();
 }
+void UseTheNetDialog::configClicked() {
+	;
+}
 QString UseTheNetDialog::getNoNetSquadreFile() {
 	return this->noNetSquadreFile;
 }

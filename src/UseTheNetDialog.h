@@ -35,6 +35,7 @@ private slots:
 	void yesClicked();
 	void noClicked();
 	void abortClicked();
+	void configClicked();
 
 private:
 	Ui::UseTheNetDialogClass ui;

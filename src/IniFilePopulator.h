@@ -9,22 +9,22 @@
 #include <QtGui/QFileDialog>
 #include "ui_IniFilePopulator.h"
 
-class IniFilePopulator : public QDialog
-{
-    Q_OBJECT
+class IniFilePopulator: public QDialog {
+Q_OBJECT
 
 public:
-    IniFilePopulator(QWidget *parent = 0);
-    ~IniFilePopulator();
-    void setStartDir(QString);
-    QString getFormazioniPath();
-    QString getGazzettaPath();
-    QString getRisultatiPath();
-    QString getDownloadPath();
-    QString getListePath();
-    QString getFormazioniUrl();
-    QString getGazzettaUrl();
-    QString getDebugStatus();
+	static IniFilePopulator* Inst();
+	IniFilePopulator(QWidget *parent = 0);
+	~IniFilePopulator();
+	void setStartDir(QString);
+	QString getFormazioniPath();
+	QString getGazzettaPath();
+	QString getRisultatiPath();
+	QString getDownloadPath();
+	QString getListePath();
+	QString getFormazioniUrl();
+	QString getGazzettaUrl();
+	QString getDebugStatus();
 
 private slots:
 	void chooseFormazioniPath();
@@ -34,9 +34,10 @@ private slots:
 	void chooseListePath();
 
 private:
-    Ui::IniFilePopulatorClass ui;
-    QString getDir(QString, QString);
-    QString startDir;
+	static IniFilePopulator* pInstance;
+	Ui::IniFilePopulatorClass ui;
+	QString getDir(QString, QString);
+	QString startDir;
 
 };
 

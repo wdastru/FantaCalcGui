@@ -1,7 +1,18 @@
 #include "IniFilePopulator.h"
 
+IniFilePopulator* IniFilePopulator::Inst() {
+	if (pInstance == NULL) {
+		pInstance = new IniFilePopulator();
+	}
+	return pInstance;
+}
+
+IniFilePopulator* IniFilePopulator::pInstance = NULL;
+
+
 IniFilePopulator::IniFilePopulator(QWidget *parent) :
 	QDialog(parent) {
+	LOG(DEBUG, "In IniFilePopulator() constructor.");
 	ui.setupUi(this);
 	ui.formazioniUrlLineEdit->setText(
 			"http://nmr.ch.unito.it/lab/Fantasito/777/formazioni/");

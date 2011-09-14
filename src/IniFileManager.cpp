@@ -165,21 +165,19 @@ void IniFileManager::readIniFile() {
 				"In IniFileManager::readIniFile() --> " + this->iniFileName
 						+ " does not exists.");
 
-		IniFilePopulator * iniFilePopulator = new IniFilePopulator(THE_LOGGER);
-
 		LOG(DEBUG, "In IniFileManager::readIniFile() --> " + this->workDir);
 
-		iniFilePopulator->setStartDir(this->workDir);
-		iniFilePopulator->exec();
+		IniFilePopulator::Inst()->setStartDir(this->workDir);
+		IniFilePopulator::Inst()->exec();
 
-		this->formazioniPath = iniFilePopulator->getFormazioniPath();
-		this->gazzettaPath = iniFilePopulator->getGazzettaPath();
-		this->risultatiPath = iniFilePopulator->getRisultatiPath();
-		this->downloadPath = iniFilePopulator->getDownloadPath();
-		this->listePath = iniFilePopulator->getListePath();
-		this->formazioniUrl = iniFilePopulator->getFormazioniUrl();
-		this->gazzettaUrl = iniFilePopulator->getGazzettaUrl();
-		if (iniFilePopulator->getDebugStatus() == "TRUE")
+		this->formazioniPath = IniFilePopulator::Inst()->getFormazioniPath();
+		this->gazzettaPath = IniFilePopulator::Inst()->getGazzettaPath();
+		this->risultatiPath = IniFilePopulator::Inst()->getRisultatiPath();
+		this->downloadPath = IniFilePopulator::Inst()->getDownloadPath();
+		this->listePath = IniFilePopulator::Inst()->getListePath();
+		this->formazioniUrl = IniFilePopulator::Inst()->getFormazioniUrl();
+		this->gazzettaUrl = IniFilePopulator::Inst()->getGazzettaUrl();
+		if (IniFilePopulator::Inst()->getDebugStatus() == "TRUE")
 			this->debugStatus = TRUE;
 		else
 			this->debugStatus = FALSE;
