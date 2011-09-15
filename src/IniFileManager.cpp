@@ -30,6 +30,19 @@ IniFileManager::IniFileManager() {
 }
 IniFileManager::~IniFileManager() {
 }
+void IniFileManager::updateAndWriteIniFile() {
+
+	this->formazioniPath = IniFilePopulator::Inst()->getFormazioniPath();
+	this->gazzettaPath = IniFilePopulator::Inst()->getGazzettaPath();
+	this->risultatiPath = IniFilePopulator::Inst()->getRisultatiPath();
+	this->downloadPath = IniFilePopulator::Inst()->getDownloadPath();
+	this->listePath = IniFilePopulator::Inst()->getListePath();
+	this->formazioniUrl = IniFilePopulator::Inst()->getFormazioniUrl();
+	this->gazzettaUrl = IniFilePopulator::Inst()->getGazzettaUrl();
+	this->debugStatus = IniFilePopulator::Inst()->getDebugStatus();
+
+	this->writeIniFile();
+}
 void IniFileManager::writeIniFile() {
 	QFile * iniFile = new QFile(this->iniFileName);
 	if (iniFile->exists()) {
@@ -177,7 +190,7 @@ void IniFileManager::readIniFile() {
 		this->listePath = IniFilePopulator::Inst()->getListePath();
 		this->formazioniUrl = IniFilePopulator::Inst()->getFormazioniUrl();
 		this->gazzettaUrl = IniFilePopulator::Inst()->getGazzettaUrl();
-		if (IniFilePopulator::Inst()->getDebugStatus() == "TRUE")
+		if (IniFilePopulator::Inst()->getDebugStatus())
 			this->debugStatus = TRUE;
 		else
 			this->debugStatus = FALSE;

@@ -15,11 +15,14 @@
 #include "IniFilePopulator.h"
 
 class IniFileManager {
+
+	friend class IniFilePopulator;
+
 public:
 	IniFileManager();
 	virtual ~IniFileManager();
 	static IniFileManager* Inst();
-
+	void updateAndWriteIniFile();
 	void writeIniFile();
 	void readIniFile();
 	QString getListaFormazioni();

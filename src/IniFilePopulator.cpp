@@ -9,16 +9,15 @@ IniFilePopulator* IniFilePopulator::Inst() {
 
 IniFilePopulator* IniFilePopulator::pInstance = NULL;
 
-
 IniFilePopulator::IniFilePopulator(QWidget *parent) :
 	QDialog(parent) {
 	LOG(DEBUG, "In IniFilePopulator() constructor.");
 	ui.setupUi(this);
-	ui.formazioniUrlLineEdit->setText(
-			"http://nmr.ch.unito.it/lab/Fantasito/777/formazioni/");
-	ui.gazzettaUrlLineEdit->setText(
-			"http://nmr.ch.unito.it/lab/Fantasito/777/filesGazzetta/");
-	ui.falseCheckBox->setChecked(TRUE);
+//	ui.formazioniUrlLineEdit->setText(
+//			"http://nmr.ch.unito.it/lab/Fantasito/777/formazioni/");
+//	ui.gazzettaUrlLineEdit->setText(
+//			"http://nmr.ch.unito.it/lab/Fantasito/777/filesGazzetta/");
+//	ui.falseCheckBox->setChecked(TRUE);
 }
 
 IniFilePopulator::~IniFilePopulator() {
@@ -88,14 +87,41 @@ QString IniFilePopulator::getFormazioniUrl(){
 QString IniFilePopulator::getGazzettaUrl(){
 	return this->ui.gazzettaUrlLineEdit->text();
 }
-QString IniFilePopulator::getDebugStatus(){
+bool IniFilePopulator::getDebugStatus(){
 	if (this->ui.trueCheckBox->isChecked())
-		return "TRUE";
+		return TRUE;
 	else if (this->ui.falseCheckBox->isChecked())
-		return "FALSE";
+		return FALSE;
 	else {
 		LOG(DEBUG, "In QString IniFilePopulator::getDebugStatus() --> no checkBox is selected!");
-		return "FALSE";
+		return FALSE;
 	}
-
+}
+void IniFilePopulator::setFormazioniPath(QString str){
+	LOG(DEBUG, "In void IniFilePopulator::setFormazioniPath(QString str ) --> str : " + str);
+	this->ui.formazioniLineEdit->setText(str);
+}
+void IniFilePopulator::setGazzettaPath(QString str){
+	this->ui.gazzettaLineEdit->setText(str);
+}
+void IniFilePopulator::setRisultatiPath(QString str){
+	this->ui.risultatiLineEdit->setText(str);
+}
+void IniFilePopulator::setListePath(QString str){
+	this->ui.listeLineEdit->setText(str);
+}
+void IniFilePopulator::setDownloadPath(QString str){
+	this->ui.downloadLineEdit->setText(str);
+}
+void IniFilePopulator::setFormazioniUrl(QString str){
+	this->ui.formazioniUrlLineEdit->setText(str);
+}
+void IniFilePopulator::setGazzettaUrl(QString str){
+	this->ui.gazzettaUrlLineEdit->setText(str);
+}
+void IniFilePopulator::setDebugStatus(bool status){
+	if (status)
+		this->ui.trueCheckBox->setChecked(true);
+	else
+		this->ui.falseCheckBox->setChecked(true);
 }

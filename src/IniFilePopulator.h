@@ -13,7 +13,7 @@ class IniFilePopulator: public QDialog {
 Q_OBJECT
 
 public:
-	static IniFilePopulator* Inst();
+	static IniFilePopulator * Inst();
 	IniFilePopulator(QWidget *parent = 0);
 	~IniFilePopulator();
 	void setStartDir(QString);
@@ -24,7 +24,15 @@ public:
 	QString getListePath();
 	QString getFormazioniUrl();
 	QString getGazzettaUrl();
-	QString getDebugStatus();
+	bool getDebugStatus();
+	void setFormazioniPath(QString);
+	void setGazzettaPath(QString);
+	void setRisultatiPath(QString);
+	void setDownloadPath(QString);
+	void setListePath(QString);
+	void setFormazioniUrl(QString);
+	void setGazzettaUrl(QString);
+	void setDebugStatus(bool);
 
 private slots:
 	void chooseFormazioniPath();

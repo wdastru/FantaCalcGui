@@ -4,6 +4,7 @@
 #include <QtTest/QTest>
 #include "UseTheNetDialog.h"
 #include "IniFileManager.h"
+#include "IniFilePopulator.h"
 
 UseTheNetDialog::UseTheNetDialog(QWidget *parent) :
 	QDialog(parent) {
@@ -77,7 +78,25 @@ void UseTheNetDialog::abortClicked() {
 	this->close();
 }
 void UseTheNetDialog::configClicked() {
-	;
+	IniFilePopulator::Inst()->setFormazioniPath(
+			IniFileManager::Inst()->getFormazioniPath());
+	IniFilePopulator::Inst()->setGazzettaPath(
+			IniFileManager::Inst()->getGazzettaPath());
+	IniFilePopulator::Inst()->setRisultatiPath(
+			IniFileManager::Inst()->getRisultatiPath());
+	IniFilePopulator::Inst()->setListePath(
+			IniFileManager::Inst()->getListePath());
+	IniFilePopulator::Inst()->setDownloadPath(
+			IniFileManager::Inst()->getDownloadPath());
+	IniFilePopulator::Inst()->setFormazioniUrl(
+			IniFileManager::Inst()->getFormazioniUrl());
+	IniFilePopulator::Inst()->setGazzettaUrl(
+			IniFileManager::Inst()->getGazzettaUrl());
+	IniFilePopulator::Inst()->setDebugStatus(
+			IniFileManager::Inst()->getDebugStatus());
+	IniFilePopulator::Inst()->exec();
+
+	IniFileManager::Inst()->updateAndWriteIniFile();
 }
 QString UseTheNetDialog::getNoNetSquadreFile() {
 	return this->noNetSquadreFile;
