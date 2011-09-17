@@ -907,221 +907,201 @@ void Fanta::setFileGazzetta(QString _fileGazzetta) {
 	this->fileGazzetta = _fileGazzetta;
 }
 void Fanta::printRiepilogo() {
-	LOG(
-			INFO,
-			" Modulo " + QString::fromStdString(
+
+	QString output = "<br/> --- Modulo  ---<br/>"
+			+ QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : "
-					+ QString::fromStdString(FANTA->getModuloSquadra(0)));
-	LOG(
-			INFO,
-			" Modulo " + QString::fromStdString(
+			+ QString::fromStdString(FANTA->getModuloSquadra(0));
+
+	output += "<br/>"
+			+ QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
 							FANTA->longerNameLength)) + " : "
-					+ QString::fromStdString(FANTA->getModuloSquadra(1)));
+			+ QString::fromStdString(FANTA->getModuloSquadra(1));
 
-	LOG(INFO,
-			"<br/> Fattore Campo "
-					+ QString::fromStdString(
-							STR_MOD->leftString(FANTA->getTeamName(0),
-									FANTA->longerNameLength)) + " : "
-					+ my::toQString<unsigned int>(FANTA->atHome[0]));
-	LOG(
-			INFO,
-			" Fattore Campo " + QString::fromStdString(
-					STR_MOD->leftString(FANTA->getTeamName(1),
-							FANTA->longerNameLength)) + " : " + my::toQString<
-					unsigned int>(FANTA->atHome[1]));
-
-	LOG(
-			INFO,
-			"<br/> Ammonizioni " + QString::fromStdString(
+	output += "<br/><br/> --- Fattore Campo ---<br/>"
+			+ QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : " + my::toQString<
-					unsigned int>(FANTA->getAmmonizioniTot(0)));
-	LOG(
-			INFO,
-			" Ammonizioni " + QString::fromStdString(
+			unsigned int>(FANTA->atHome[0]);
+
+	output += "<br/>"
+			+ QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
 							FANTA->longerNameLength)) + " : " + my::toQString<
-					unsigned int>(FANTA->getAmmonizioniTot(1)));
+			unsigned int>(FANTA->atHome[1]);
 
-	LOG(
-			INFO,
-			"<br/> Espulsioni " + QString::fromStdString(
+	output += "<br/><br/> --- Ammonizioni ---<br/>"
+			+ QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : " + my::toQString<
-					unsigned int>(FANTA->getEspulsioniTot(0)));
-
-	LOG(
-			INFO,
-			" Espulsioni " + QString::fromStdString(
+			unsigned int>(FANTA->getAmmonizioniTot(0));
+	output += "<br/>"
+			+ QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
 							FANTA->longerNameLength)) + " : " + my::toQString<
-					unsigned int>(FANTA->getEspulsioniTot(1)));
+			unsigned int>(FANTA->getAmmonizioniTot(1));
 
-	LOG(
-			INFO,
-			"<br/> Goal decisivi vittoria " + QString::fromStdString(
+	output += "<br/><br/> --- Espulsioni ---<br/>"
+			+ QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : " + my::toQString<
-					unsigned int>(FANTA->getGoalDecVittTot(0)));
+			unsigned int>(FANTA->getEspulsioniTot(0));
 
-	LOG(
-			INFO,
-			" Goal decisivi vittoria " + QString::fromStdString(
+	output += "<br/>"
+			+ QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
 							FANTA->longerNameLength)) + " : " + my::toQString<
-					unsigned int>(FANTA->getGoalDecVittTot(1)));
+			unsigned int>(FANTA->getEspulsioniTot(1));
 
-	LOG(
-			INFO,
-			"<br/> Goal decisivi pareggio " + QString::fromStdString(
+	output += "<br/><br/> --- Goal decisivi vittoria ---<br/>"
+			+ QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : " + my::toQString<
-					unsigned int>(FANTA->getGoalDecParTot(0)));
+			unsigned int>(FANTA->getGoalDecVittTot(0));
 
-	LOG(
-			INFO,
-			" Goal decisivi pareggio " + QString::fromStdString(
+	output += "<br/>"
+			+ QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
 							FANTA->longerNameLength)) + " : " + my::toQString<
-					unsigned int>(FANTA->getGoalDecParTot(1)));
+			unsigned int>(FANTA->getGoalDecVittTot(1));
 
-	LOG(
-			INFO,
-			"<br/> Assist " + QString::fromStdString(
+	output += "<br/><br/> --- Goal decisivi pareggio ---<br/>"
+			+ QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : " + my::toQString<
-					unsigned int>(FANTA->getAssistTot(0)));
+			unsigned int>(FANTA->getGoalDecParTot(0));
 
-	LOG(
-			INFO,
-			" Assist " + QString::fromStdString(
+	output += "<br/>"
+			+ QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
 							FANTA->longerNameLength)) + " : " + my::toQString<
-					unsigned int>(FANTA->getAssistTot(1)));
+			unsigned int>(FANTA->getGoalDecParTot(1));
 
-	LOG(
-			INFO,
-			"<br/> Numero sfide " + QString::fromStdString(
+	output += "<br/><br/> --- Assist ---<br/>"
+			+ QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : " + my::toQString<
-					unsigned int>(FANTA->sfide[0]));
+			unsigned int>(FANTA->getAssistTot(0));
 
-	LOG(
-			INFO,
-			" Numero sfide " + QString::fromStdString(
+	output += "<br/>"
+			+ QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
 							FANTA->longerNameLength)) + " : " + my::toQString<
-					unsigned int>(FANTA->sfide[1]));
+			unsigned int>(FANTA->getAssistTot(1));
 
-	LOG(
-			INFO,
-			"<br/> Sostituzioni " + QString::fromStdString(
+	output += "<br/><br/> --- Numero sfide ---<br/>"
+			+ QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : " + my::toQString<
-					unsigned int>(FANTA->sostituzioni[0]));
+			unsigned int>(FANTA->sfide[0]);
 
-	LOG(
-			INFO,
-			" Sostituzioni " + QString::fromStdString(
+	output += "<br/>"
+			+ QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
 							FANTA->longerNameLength)) + " : " + my::toQString<
-					unsigned int>(FANTA->sostituzioni[1]));
+			unsigned int>(FANTA->sfide[1]);
 
-	LOG(TOFILE, "<br/> Dettaglio Sfide : ");
+	output += "<br/><br/> --- Sostituzioni ---<br/>"
+			+ QString::fromStdString(
+					STR_MOD->leftString(FANTA->getTeamName(0),
+							FANTA->longerNameLength)) + " : " + my::toQString<
+			unsigned int>(FANTA->sostituzioni[0]);
 
-	LOG(TOFILE, "\t|");
+	output += "<br/>"
+			+ QString::fromStdString(
+					STR_MOD->leftString(FANTA->getTeamName(1),
+							FANTA->longerNameLength)) + " : " + my::toQString<
+			unsigned int>(FANTA->sostituzioni[1]);
 
-	LOG(
-			TOFILE,
-			"\t| Dif " + QString::fromStdString(
+	output += "<br/><br/> --- Dettaglio Sfide ---<br/>";
+
+	output += "<br/>\t|";
+
+	output
+			+= "<br/>\t| Dif " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					float>(FANTA->teamOrderedByRuolo[0][1].at(0).VotoGazzetta)
 					+ '\t' + QString::fromStdString(
-					FANTA->teamOrderedByRuolo[0][1].at(0).Nome));
+					FANTA->teamOrderedByRuolo[0][1].at(0).Nome);
 
-	LOG(
-			TOFILE,
-			"\t| Att " + QString::fromStdString(
+	output
+			+= "<br/>\t| Att " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					float>(FANTA->teamOrderedByRuolo[1][3].at(0).VotoGazzetta)
 					+ '\t' + QString::fromStdString(
-					FANTA->teamOrderedByRuolo[1][3].at(0).Nome));
+					FANTA->teamOrderedByRuolo[1][3].at(0).Nome);
 
-	LOG(TOFILE, "\t|");
+	output += "<br/>\t|";
 
-	LOG(
-			TOFILE,
-			"\t| Cen " + QString::fromStdString(
+	output
+			+= "<br/>\t| Cen " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					float>(FANTA->teamOrderedByRuolo[0][2].at(0).VotoGazzetta)
 					+ '\t' + QString::fromStdString(
-					FANTA->teamOrderedByRuolo[0][2].at(0).Nome));
+					FANTA->teamOrderedByRuolo[0][2].at(0).Nome);
 
-	LOG(
-			TOFILE,
-			"\t| Cen " + QString::fromStdString(
+	output
+			+= "<br/>\t| Cen " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					float>(FANTA->teamOrderedByRuolo[1][2].at(0).VotoGazzetta)
 					+ '\t' + QString::fromStdString(
-					FANTA->teamOrderedByRuolo[1][2].at(0).Nome));
+					FANTA->teamOrderedByRuolo[1][2].at(0).Nome);
 
-	LOG(TOFILE, "\t|");
+	output += "<br/>\t|";
 
-	LOG(
-			TOFILE,
-			"\t| Att " + QString::fromStdString(
+	output
+			+= "<br/>\t| Att " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					float>(FANTA->teamOrderedByRuolo[0][3].at(0).VotoGazzetta)
 					+ '\t' + QString::fromStdString(
-					FANTA->teamOrderedByRuolo[0][3].at(0).Nome));
-	LOG(
-			TOFILE,
-			"\t| Dif " + QString::fromStdString(
+					FANTA->teamOrderedByRuolo[0][3].at(0).Nome);
+
+	output
+			+= "<br/>\t| Dif " + QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(1),
 							FANTA->longerNameLength)) + " : " + my::toQString<
 					float>(FANTA->teamOrderedByRuolo[1][1].at(0).VotoGazzetta)
 					+ '\t' + QString::fromStdString(
-					FANTA->teamOrderedByRuolo[1][1].at(0).Nome));
+					FANTA->teamOrderedByRuolo[1][1].at(0).Nome);
 
-	LOG(TOFILE, "\t|");
+	output += "<br/>\t|";
 
-	LOG(TOFILE, "\t+---------------------------------------------><br/>");
+	output += "<br/>\t+---------------------------------------------><br/>";
+
+	output += "<br/> --- Media Difesa ---<br/>";
 
 	for (size_t i = 0; i < 2; i++) {
-		QString string = " Media Difesa " + QString::fromStdString(
+		QString string = QString::fromStdString(
 				STR_MOD->leftString(FANTA->getTeamName(i),
 						FANTA->longerNameLength)) + " : " + my::toQString<
 				double>(FANTA->defenseMean[i]) + " ( " + my::toQString<
 				unsigned int>(FANTA->defenders[i]) + " )";
 
-		if (i == 1)
-			LOG(TOFILE, string + "<br/>");
-		else
-			LOG(TOFILE, string);
+		output += string + "<br/>";
 	}
 
+	output += "<br/> --- Modificatore ---<br/>";
+
 	for (size_t i = 0; i < 2; i++) {
-		QString string = " Modificatore " + QString::fromStdString(
+		QString string = QString::fromStdString(
 				STR_MOD->leftString(FANTA->getTeamName(i),
 						FANTA->longerNameLength)) + " : " + my::toQString<
 				signed int>(FANTA->modifier[i]);
 
-		if (i == 1)
-			LOG(TOFILE, string + "<br/>");
-		else
-			LOG(TOFILE, string);
+		output += string + "<br/>";
 	}
 
+	output += "<br/> --- Marcatori ---<br/>";
+
 	for (size_t i = 0; i < 2; i++) {
-		QString string = " " + QString::fromStdString(
+		QString string = QString::fromStdString(
 				STR_MOD->leftString(FANTA->getTeamName(i),
 						FANTA->longerNameLength)) + " : " + my::toQString<
 				signed int>(FANTA->goals[i]) + " ( " + my::toQString<double>(
@@ -1139,11 +1119,10 @@ void Fanta::printRiepilogo() {
 				string += " ";
 		}
 
-		if (i == 1)
-			LOG(TOFILE, string + ")<br/>");
-		else
-			LOG(TOFILE, string + ")");
+		output += string + ")<br/>";
 	}
+
+	LOG(INFO, output + "<br/>");
 }
 void Fanta::printTitolo2(std::string str) {
 	QString tmp = "\n +";
@@ -1272,9 +1251,11 @@ void Fanta::printFormations() {
 			area_sopra =
 					" |                                       __                                       |<br/> |                               _______/__\\_______                               |<br/> |                              |                  |                              |";
 
-	std::string separatore = " |                                       ___                                      |<br/> |                                      /   \\                                     |<br/> |-------------------------------------(--o--)------------------------------------|<br/> |                                      \\___/                                     |<br/> |                                                                                |";
+	std::string
+			separatore =
+					" |                                       ___                                      |<br/> |                                      /   \\                                     |<br/> |-------------------------------------(--o--)------------------------------------|<br/> |                                      \\___/                                     |<br/> |                                                                                |";
 
-	LOG(TOFILE, QString::fromStdString(fondo));
+	LOG(INFO, QString::fromStdString(fondo));
 
 	/*
 	 *  squadra in casa    : por --> att
@@ -1286,7 +1267,7 @@ void Fanta::printFormations() {
 	{
 		for (size_t j = 0; j < 4; j++) // ruoli
 		{
-				tmpString += "|";
+			tmpString += "|";
 
 			/*
 			 *  nomi giocatori
@@ -1300,7 +1281,7 @@ void Fanta::printFormations() {
 													i).Nome), 26);
 				} else if (a[k][j] == 0) { // portiere
 					if (k == 1)
-						LOG(TOFILE, QString::fromStdString(area_sopra));
+						LOG(INFO, QString::fromStdString(area_sopra));
 
 					tmpString
 							+= "                              |"
@@ -1320,11 +1301,11 @@ void Fanta::printFormations() {
 			}
 
 			if (Fanta::modulo[k][a[k][j]] == 3)
-				LOG(TOFILE, QString::fromStdString(tmpString + "  |"));
+				LOG(INFO, QString::fromStdString(tmpString + "  |"));
 			else if (a[k][j] == 0)
-				LOG(TOFILE, QString::fromStdString(tmpString));
+				LOG(INFO, QString::fromStdString(tmpString));
 			else
-				LOG(TOFILE, QString::fromStdString(tmpString + "|"));
+				LOG(INFO, QString::fromStdString(tmpString + "|"));
 
 			tmpString = " ";
 
@@ -1381,24 +1362,21 @@ void Fanta::printFormations() {
 
 			if (Fanta::modulo[k][a[k][j]] == 3) {
 				LOG(
-						TOFILE,
+						INFO,
 						QString::fromStdString(
 								tmpString + "  |" + "<br/>" + bordi));
 			} else if (a[k][j] == 0) {
-				LOG(TOFILE, QString::fromStdString(tmpString));
-			}
-			else {
-				LOG(TOFILE, QString::fromStdString(tmpString + "|<br/>" + bordi));
+				LOG(INFO, QString::fromStdString(tmpString));
+			} else {
+				LOG(INFO, QString::fromStdString(tmpString + "|<br/>" + bordi));
 			}
 
 			tmpString = " ";
 		}
 
 		if (k == 0)
-			LOG(
-					TOFILE,
-					QString::fromStdString(separatore+"<br/>"+bordi));
+			LOG(INFO, QString::fromStdString(separatore + "<br/>" + bordi));
 	}
 
-	LOG(TOFILE, QString::fromStdString(fondo + "<br/>"));
+	LOG(INFO, QString::fromStdString(fondo + "<br/>"));
 }
