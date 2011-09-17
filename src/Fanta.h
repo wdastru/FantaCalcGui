@@ -100,7 +100,7 @@ public:
 	void bSort(std::vector<Fanta::player> &);
 	QString getFileGazzetta();
 	void setFileGazzetta(QString);
-	void printRiepilogo_toFile();
+	void printRiepilogo();
 	void printTitolo2(std::string);
 	 unsigned int getAmmonizioniTot(unsigned int) const ;
 	 unsigned int getEspulsioniTot(unsigned int) const ;
@@ -108,9 +108,7 @@ public:
 	 unsigned int getGoalDecParTot(unsigned int) const ;
 	 unsigned int getAssistTot(unsigned int) const ;
 	 unsigned int getSubstitutions(unsigned int) const ;
-	 void printFormationPor2Att_toFile(unsigned int);
-	 void printFormationAtt2Por_toFile(unsigned int);
-	 void printFormations_toFile();
+	 void printFormations();
 
 //	void printTitolo3(std::string);
 

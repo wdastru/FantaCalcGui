@@ -35,7 +35,7 @@ void UseTheNetDialog::setQuestion(const std::string question) {
 					0, QApplication::UnicodeUTF8));
 }
 void UseTheNetDialog::yesClicked() {
-	LOG(INFO, "Network will be accessed.");
+	LOG(DEBUG, "Network will be accessed.");
 	this->yesHasBeenClicked = TRUE;
 	this->noHasBeenClicked = TRUE;
 
@@ -63,7 +63,7 @@ void UseTheNetDialog::yesClicked() {
 }
 void UseTheNetDialog::noClicked() {
 	this->hasFinished = true;
-	LOG(INFO, "Network will not be accessed.");
+	LOG(DEBUG, "Network will not be accessed.");
 	noNetFileDialog->exec();
 	this->noNetSquadreFile = noNetFileDialog->getFileNameSquadre();
 	this->noNetGazzettaFile = noNetFileDialog->getFileNameGazzetta();

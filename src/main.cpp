@@ -34,12 +34,10 @@ int main(int argc, char *argv[]) {
 
 	LOG(DEBUG, "In main(): Logger started.");
 
-	/*
-	 LOG(
-	 DEBUG,
-	 "Contenuto iniFile (" + IniFileManager::Inst()->getIniFilePath()
-	 + "):<br />" + IniFileManager::Inst()->showIniFile());
-	 */
+	LOG(
+			DEBUG,
+			"Contenuto iniFile (" + IniFileManager::Inst()->getIniFilePath()
+					+ "):<br />" + IniFileManager::Inst()->showIniFile());
 
 	UseTheNetDialog * useTheNetDialog = new UseTheNetDialog(THE_LOGGER);
 	useTheNetDialog->setQuestion(
@@ -100,8 +98,8 @@ int main(int argc, char *argv[]) {
 			FANTA->getFileGazzetta()).fileName();
 
 	FANTA->printTitolo2(FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
-	FANTA->printRiepilogo_toFile();
-	FANTA->printFormations_toFile();
+	FANTA->printRiepilogo();
+	FANTA->printFormations();
 
 	singletonQtLogger::Inst()->setLogFileName(match);
 
