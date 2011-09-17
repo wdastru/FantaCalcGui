@@ -431,14 +431,12 @@ void ChooseFileFromAListDialog::doDownload() {
 }
 unsigned int ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 	if (this->downloadSuccess) {
-		QFile
-				fHome(
-						IniFileManager::Inst()->getDownloadPath()
-								+ this->getHomeFile());
-		QFile
-				fAway(
-						IniFileManager::Inst()->getDownloadPath()
-								+ this->getAwayFile());
+		QFile fHome(
+				IniFileManager::Inst()->getDownloadPath() + "/"
+						+ this->getHomeFile());
+		QFile fAway(
+				IniFileManager::Inst()->getDownloadPath() + "/"
+						+ this->getAwayFile());
 
 		fHome.open(QIODevice::ReadOnly);
 		fAway.open(QIODevice::ReadOnly);

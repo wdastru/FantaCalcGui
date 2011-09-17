@@ -34,10 +34,12 @@ int main(int argc, char *argv[]) {
 
 	LOG(DEBUG, "In main(): Logger started.");
 
-	LOG(
-			DEBUG,
-			"Contenuto iniFile (" + IniFileManager::Inst()->getIniFilePath()
-					+ "):<br />" + IniFileManager::Inst()->showIniFile());
+	/*
+	 LOG(
+	 DEBUG,
+	 "Contenuto iniFile (" + IniFileManager::Inst()->getIniFilePath()
+	 + "):<br />" + IniFileManager::Inst()->showIniFile());
+	 */
 
 	UseTheNetDialog * useTheNetDialog = new UseTheNetDialog(THE_LOGGER);
 	useTheNetDialog->setQuestion(

@@ -210,20 +210,6 @@ QString IniFileManager::getRisultatiPath() {
 QString IniFileManager::getDownloadPath() {
 	return this->downloadPath;
 }
-QString IniFileManager::showIniFile() {
-	QFile *iniFile = new QFile(this->iniFileName);
-	QString content = "\n";
-
-	if (iniFile->exists()) {
-		iniFile->open(QIODevice::ReadOnly);
-		QTextStream in(iniFile);
-		while (!in.atEnd()) {
-			content += in.readLine(0) + "<br />";//reads a line of text file
-		}
-		iniFile->close();
-	}
-	return content;
-}
 QString IniFileManager::getIniFilePath() {
 	return this->iniFileName;
 }
@@ -234,17 +220,9 @@ QString IniFileManager::getListePath() {
 	return this->listePath;
 }
 QString IniFileManager::getListaFormazioni() {
-	LOG(
-			DEBUG,
-			"In IniFileManager::getListaFormazioni() : " + this->listePath
-					+ "listaFormazioni.txt");
 	return this->listePath + "listaFormazioni.txt";
 }
 QString IniFileManager::getListaGazFiles() {
-	LOG(
-			DEBUG,
-			"In IniFileManager::getListaGazFiles() : " + this->listePath
-					+ "listaFormazioni.txt");
 	return this->listePath + "listaGazFiles.txt";
 }
 QString IniFileManager::getFileFormazioniUrl() {
@@ -259,9 +237,23 @@ QString IniFileManager::getFormazioniUrl() {
 QString IniFileManager::getGazzettaUrl() {
 	return this->gazzettaUrl;
 }
+bool IniFileManager::getDebugStatus() {
+	return this->debugStatus;
+}
 void IniFileManager::setFormazioniPath(QString dir) {
 	this->formazioniPath = dir;
 }
-bool IniFileManager::getDebugStatus() {
-	return this->debugStatus;
+QString IniFileManager::showIniFile() {
+	QFile *iniFile = new QFile(this->iniFileName);
+	QString content = "\n";
+
+	if (iniFile->exists()) {
+		iniFile->open(QIODevice::ReadOnly);
+		QTextStream in(iniFile);
+		while (!in.atEnd()) {
+			content += in.readLine(0) + "<br />";//reads a line of text file
+		}
+		iniFile->close();
+	}
+	return content;
 }
