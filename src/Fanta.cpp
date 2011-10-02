@@ -1229,6 +1229,8 @@ unsigned int Fanta::getAssistTot(unsigned int k) const {
 
 }
 void Fanta::printFormations() {
+	QString output = "";
+
 	std::string tmpString = " ";
 	std::string
 			bordi =
@@ -1255,7 +1257,7 @@ void Fanta::printFormations() {
 			separatore =
 					" |                                       ___                                      |<br/> |                                      /   \\                                     |<br/> |-------------------------------------(--o--)------------------------------------|<br/> |                                      \\___/                                     |<br/> |                                                                                |";
 
-	LOG(TOFILE, QString::fromStdString(fondo));
+	output += QString::fromStdString(fondo);
 
 	/*
 	 *  squadra in casa    : por --> att
@@ -1267,7 +1269,7 @@ void Fanta::printFormations() {
 	{
 		for (size_t j = 0; j < 4; j++) // ruoli
 		{
-			tmpString += "|";
+			tmpString += "<br/> |";
 
 			/*
 			 *  nomi giocatori
@@ -1280,8 +1282,10 @@ void Fanta::printFormations() {
 											Fanta::teamOrderedByRuolo[k][a[k][j]].at(
 													i).Nome), 26);
 				} else if (a[k][j] == 0) { // portiere
-					if (k == 1)
-						LOG(TOFILE, QString::fromStdString(area_sopra));
+					if (k == 1) {
+						output += QString::fromStdString(area_sopra);
+						//LOG(TOFILE, QString::fromStdString(area_sopra));
+					}
 
 					tmpString
 							+= "                              |"
@@ -1300,12 +1304,16 @@ void Fanta::printFormations() {
 				}
 			}
 
-			if (Fanta::modulo[k][a[k][j]] == 3)
-				LOG(TOFILE, QString::fromStdString(tmpString + "  |"));
-			else if (a[k][j] == 0)
-				LOG(TOFILE, QString::fromStdString(tmpString));
-			else
-				LOG(TOFILE, QString::fromStdString(tmpString + "|"));
+			if (Fanta::modulo[k][a[k][j]] == 3) {
+				output += QString::fromStdString(tmpString + "  |");
+				//LOG(TOFILE, QString::fromStdString(tmpString + "  |"));
+			} else if (a[k][j] == 0) {
+				output += QString::fromStdString(tmpString);
+				//LOG(TOFILE, QString::fromStdString(tmpString));
+			} else {
+				output += QString::fromStdString(tmpString + "|");
+				//LOG(TOFILE, QString::fromStdString(tmpString + "|"));
+			}
 
 			tmpString = " ";
 
@@ -1329,7 +1337,7 @@ void Fanta::printFormations() {
 											+ ")"), 26);
 				} else if (a[k][j] == 0) { // portiere
 					tmpString
-							+= "|                              |"
+							+= "<br/> |                              |"
 									+ STR_MOD->centerString(
 											(my::toString(
 													Fanta::teamOrderedByRuolo[k][a[k][j]].at(
@@ -1361,22 +1369,28 @@ void Fanta::printFormations() {
 			}
 
 			if (Fanta::modulo[k][a[k][j]] == 3) {
-				LOG(
-						TOFILE,
-						QString::fromStdString(
-								tmpString + "  |" + "<br/>" + bordi));
+				output
+						+= QString::fromStdString(
+								tmpString + "  |<br/>" + bordi);
+				//LOG( TOFILE, QString::fromStdString(tmpString + "  |" + "<br/>" + bordi));
 			} else if (a[k][j] == 0) {
-				LOG(TOFILE, QString::fromStdString(tmpString));
+				output += QString::fromStdString(tmpString);
+				//LOG(TOFILE, QString::fromStdString(tmpString));
 			} else {
-				LOG(TOFILE, QString::fromStdString(tmpString + "|<br/>" + bordi));
+				output += QString::fromStdString(tmpString + "|<br/>" + bordi);
+				//LOG(TOFILE, QString::fromStdString(tmpString + "|<br/>" + bordi));
 			}
 
 			tmpString = " ";
 		}
 
-		if (k == 0)
-			LOG(TOFILE, QString::fromStdString(separatore + "<br/>" + bordi));
+		if (k == 0) {
+			output += QString::fromStdString(separatore + "<br/>" + bordi);
+			//LOG(TOFILE, QString::fromStdString(separatore + "<br/>" + bordi));
+		}
 	}
 
-	LOG(TOFILE, QString::fromStdString(fondo + "<br/>"));
+	output += QString::fromStdString("<br/>" + fondo + "<br/>");
+	//LOG(TOFILE, QString::fromStdString(fondo + "<br/>"));
+	LOG(TOFILE, output);
 }
