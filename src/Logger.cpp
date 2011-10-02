@@ -7,6 +7,6 @@ Logger::Logger(QWidget *parent) :
 	FileDialog * fileDialog;
 }
 
-virtual Logger::~Logger() {
+Logger::~Logger() {
 
 }

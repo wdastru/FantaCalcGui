@@ -18,7 +18,7 @@ UseTheNetDialog::UseTheNetDialog(QWidget *parent) :
 
 	LOG(DEBUG, "UseTheNetDialog object created.");
 }
-virtual UseTheNetDialog::~UseTheNetDialog() {
+UseTheNetDialog::~UseTheNetDialog() {
 	delete noNetFileDialog;
 }
 void UseTheNetDialog::setQuestion(const std::string question) {

@@ -15,7 +15,7 @@ NoNetFileDialog::NoNetFileDialog(QWidget *parent) :
 	ui.setupUi(this);
 	ui.okButton->setEnabled(false);
 }
-virtual NoNetFileDialog::~NoNetFileDialog() {
+NoNetFileDialog::~NoNetFileDialog() {
 
 }
 void NoNetFileDialog::setOpenFileNameSquadre() {

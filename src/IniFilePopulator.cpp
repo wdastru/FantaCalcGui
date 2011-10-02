@@ -20,7 +20,7 @@ IniFilePopulator::IniFilePopulator(QWidget *parent) :
 	ui.falseCheckBox->setChecked(TRUE);
 }
 
-virtual IniFilePopulator::~IniFilePopulator() {
+IniFilePopulator::~IniFilePopulator() {
 
 }
 
