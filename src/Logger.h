@@ -10,7 +10,7 @@ class Logger : public QDialog
 
 public:
     Logger(QWidget *parent = 0);
-    ~Logger();
+    virtual ~Logger();
     Ui::LoggerClass ui;
 
 private:

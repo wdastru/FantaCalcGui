@@ -22,7 +22,7 @@ Q_OBJECT
 
 public:
 	NoNetFileDialog(QWidget *parent);
-	~NoNetFileDialog();
+	virtual ~NoNetFileDialog();
 	QString getFileNameSquadre();
 	QString getFileNameGazzetta();
 

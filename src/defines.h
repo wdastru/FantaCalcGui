@@ -8,7 +8,7 @@
 #ifndef DEFINES_H_
 #define DEFINES_H_
 
-#include <QTime>
+#include <QtCore/QTime>
 #include "toString.h"
 
 #ifndef UPDATE_LOG_INFO

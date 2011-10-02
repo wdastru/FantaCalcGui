@@ -21,7 +21,7 @@ Q_OBJECT
 
 public:
 	UseTheNetDialog(QWidget *parent);
-	~UseTheNetDialog();
+	virtual ~UseTheNetDialog();
 	void setQuestion(const std::string question);
 	QString getNoNetSquadreFile();
 	QString getNoNetGazzettaFile();

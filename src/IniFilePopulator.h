@@ -15,7 +15,7 @@ Q_OBJECT
 public:
 	static IniFilePopulator * Inst();
 	IniFilePopulator(QWidget *parent = 0);
-	~IniFilePopulator();
+	virtual ~IniFilePopulator();
 	void setStartDir(QString);
 	QString getFormazioniPath();
 	QString getGazzettaPath();
