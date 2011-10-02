@@ -1255,7 +1255,7 @@ void Fanta::printFormations() {
 			separatore =
 					" |                                       ___                                      |<br/> |                                      /   \\                                     |<br/> |-------------------------------------(--o--)------------------------------------|<br/> |                                      \\___/                                     |<br/> |                                                                                |";
 
-	LOG(INFO, QString::fromStdString(fondo));
+	LOG(TOFILE, QString::fromStdString(fondo));
 
 	/*
 	 *  squadra in casa    : por --> att
@@ -1281,7 +1281,7 @@ void Fanta::printFormations() {
 													i).Nome), 26);
 				} else if (a[k][j] == 0) { // portiere
 					if (k == 1)
-						LOG(INFO, QString::fromStdString(area_sopra));
+						LOG(TOFILE, QString::fromStdString(area_sopra));
 
 					tmpString
 							+= "                              |"
@@ -1301,11 +1301,11 @@ void Fanta::printFormations() {
 			}
 
 			if (Fanta::modulo[k][a[k][j]] == 3)
-				LOG(INFO, QString::fromStdString(tmpString + "  |"));
+				LOG(TOFILE, QString::fromStdString(tmpString + "  |"));
 			else if (a[k][j] == 0)
-				LOG(INFO, QString::fromStdString(tmpString));
+				LOG(TOFILE, QString::fromStdString(tmpString));
 			else
-				LOG(INFO, QString::fromStdString(tmpString + "|"));
+				LOG(TOFILE, QString::fromStdString(tmpString + "|"));
 
 			tmpString = " ";
 
@@ -1362,21 +1362,21 @@ void Fanta::printFormations() {
 
 			if (Fanta::modulo[k][a[k][j]] == 3) {
 				LOG(
-						INFO,
+						TOFILE,
 						QString::fromStdString(
 								tmpString + "  |" + "<br/>" + bordi));
 			} else if (a[k][j] == 0) {
-				LOG(INFO, QString::fromStdString(tmpString));
+				LOG(TOFILE, QString::fromStdString(tmpString));
 			} else {
-				LOG(INFO, QString::fromStdString(tmpString + "|<br/>" + bordi));
+				LOG(TOFILE, QString::fromStdString(tmpString + "|<br/>" + bordi));
 			}
 
 			tmpString = " ";
 		}
 
 		if (k == 0)
-			LOG(INFO, QString::fromStdString(separatore + "<br/>" + bordi));
+			LOG(TOFILE, QString::fromStdString(separatore + "<br/>" + bordi));
 	}
 
-	LOG(INFO, QString::fromStdString(fondo + "<br/>"));
+	LOG(TOFILE, QString::fromStdString(fondo + "<br/>"));
 }
