@@ -1284,7 +1284,6 @@ void Fanta::printFormations() {
 				} else if (a[k][j] == 0) { // portiere
 					if (k == 1) {
 						output += QString::fromStdString(area_sopra);
-						//LOG(TOFILE, QString::fromStdString(area_sopra));
 					}
 
 					tmpString
@@ -1306,19 +1305,16 @@ void Fanta::printFormations() {
 
 			if (Fanta::modulo[k][a[k][j]] == 3) {
 				output += QString::fromStdString(tmpString + "  |");
-				//LOG(TOFILE, QString::fromStdString(tmpString + "  |"));
 			} else if (a[k][j] == 0) {
 				output += QString::fromStdString(tmpString);
-				//LOG(TOFILE, QString::fromStdString(tmpString));
 			} else {
 				output += QString::fromStdString(tmpString + "|");
-				//LOG(TOFILE, QString::fromStdString(tmpString + "|"));
 			}
 
 			tmpString = " ";
 
 			if (a[k][j] != 0)
-				tmpString += "|";
+				tmpString += "<br/> |";
 
 			/*
 			 *  voti giocatori
@@ -1372,13 +1368,10 @@ void Fanta::printFormations() {
 				output
 						+= QString::fromStdString(
 								tmpString + "  |<br/>" + bordi);
-				//LOG( TOFILE, QString::fromStdString(tmpString + "  |" + "<br/>" + bordi));
 			} else if (a[k][j] == 0) {
 				output += QString::fromStdString(tmpString);
-				//LOG(TOFILE, QString::fromStdString(tmpString));
 			} else {
 				output += QString::fromStdString(tmpString + "|<br/>" + bordi);
-				//LOG(TOFILE, QString::fromStdString(tmpString + "|<br/>" + bordi));
 			}
 
 			tmpString = " ";
@@ -1386,11 +1379,9 @@ void Fanta::printFormations() {
 
 		if (k == 0) {
 			output += QString::fromStdString(separatore + "<br/>" + bordi);
-			//LOG(TOFILE, QString::fromStdString(separatore + "<br/>" + bordi));
 		}
 	}
 
 	output += QString::fromStdString("<br/>" + fondo + "<br/>");
-	//LOG(TOFILE, QString::fromStdString(fondo + "<br/>"));
 	LOG(TOFILE, output);
 }
