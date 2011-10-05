@@ -48,61 +48,63 @@ int main(int argc, char *argv[]) {
 
 	useTheNetDialog->close();
 
-	QString fileGazzetta;
-	QString fileFormazioni;
+	if (!useTheNetDialog->hasBeenAborted) {
+		QString fileGazzetta;
+		QString fileFormazioni;
 
-	ChooseFileFromAListDialog * chooseFileFromAListDialog = NULL;
-	/*
-	 *  --> Controllo dell'input dell'utente a UseTheNetDialog
-	 */
-	if (useTheNetDialog->getYesClicked()
-			&& useTheNetDialog->getDownloadSuccess()) {
+		ChooseFileFromAListDialog * chooseFileFromAListDialog = NULL;
 		/*
-		 * --> Scegli, scarica i file dalla rete e crea file squadre
+		 *  --> Controllo dell'input dell'utente a UseTheNetDialog
 		 */
-		chooseFileFromAListDialog = new ChooseFileFromAListDialog(
-				IniFileManager::Inst()->getListaFormazioni(),
-				IniFileManager::Inst()->getListaGazFiles(), THE_LOGGER);
-		chooseFileFromAListDialog->exec();
-		fileGazzetta = chooseFileFromAListDialog->getFileGazzetta();
-		fileFormazioni = chooseFileFromAListDialog->getFileFormazioni();
-		// <-- Scegli e scarica i file dalla rete e crea file squadre
-	} else if (useTheNetDialog->getNoClicked()) {
-		fileGazzetta = useTheNetDialog->getNoNetGazzettaFile();
-		fileFormazioni = useTheNetDialog->getNoNetSquadreFile();
-	} else if (useTheNetDialog->hasBeenAborted) {
-		LOG(DEBUG, "In main --> useTheNetDialog aborted.");
-	} else {
-		LOG(FATAL, "In main --> Caso strano, che si fa?");
-	}
-	// <-- fine controllo dell'input dell'utente a UseTheNetDialog
+		if (useTheNetDialog->getYesClicked()
+				&& useTheNetDialog->getDownloadSuccess()) {
+			/*
+			 * --> Scegli, scarica i file dalla rete e crea file squadre
+			 */
+			chooseFileFromAListDialog = new ChooseFileFromAListDialog(
+					IniFileManager::Inst()->getListaFormazioni(),
+					IniFileManager::Inst()->getListaGazFiles(), THE_LOGGER);
+			chooseFileFromAListDialog->exec();
+			fileGazzetta = chooseFileFromAListDialog->getFileGazzetta();
+			fileFormazioni = chooseFileFromAListDialog->getFileFormazioni();
+			// <-- Scegli e scarica i file dalla rete e crea file squadre
+		} else if (useTheNetDialog->getNoClicked()) {
+			fileGazzetta = useTheNetDialog->getNoNetGazzettaFile();
+			fileFormazioni = useTheNetDialog->getNoNetSquadreFile();
+		} else if (useTheNetDialog->hasBeenAborted) {
+			LOG(DEBUG, "In main --> useTheNetDialog aborted.");
+		} else {
+			LOG(FATAL, "In main --> Caso strano, che si fa?");
+		}
+		// <-- fine controllo dell'input dell'utente a UseTheNetDialog
 
-	/*
-	 * --> lettura file Gazzetta e Formazioni
-	 */
-	GazzettaFileReader * gazzettaFileReader = new GazzettaFileReader(
-			fileGazzetta);
-	//	std::vector<std::vector<std::string> > allThePlayers =
-	//			gazzettaFileReader->getOutput();
+		/*
+		 * --> lettura file Gazzetta e Formazioni
+		 */
+		GazzettaFileReader * gazzettaFileReader = new GazzettaFileReader(
+				fileGazzetta);
+		//	std::vector<std::vector<std::string> > allThePlayers =
+		//			gazzettaFileReader->getOutput();
 
-	FormazioniFileReader * formazioniFileReader = new FormazioniFileReader(
-			fileFormazioni);
-	formazioniFileReader->setPlayers(gazzettaFileReader->getOutput());
-	formazioniFileReader->execute();
-	// <-- lettura file Gazzetta e Formazioni
-	FANTA->execute();
+		FormazioniFileReader * formazioniFileReader = new FormazioniFileReader(
+				fileFormazioni);
+		formazioniFileReader->setPlayers(gazzettaFileReader->getOutput());
+		formazioniFileReader->execute();
+		// <-- lettura file Gazzetta e Formazioni
+		FANTA->execute();
 
-	QString match = IniFileManager::Inst()->getRisultatiPath() + "risultato_"
-			+ QString::fromStdString(FANTA->getTeamName(0)) + "-"
-			+ QString::fromStdString(FANTA->getTeamName(1)) + "_" + QFileInfo(
-			FANTA->getFileGazzetta()).fileName();
+		QString match = IniFileManager::Inst()->getRisultatiPath()
+				+ "risultato_" + QString::fromStdString(FANTA->getTeamName(0))
+				+ "-" + QString::fromStdString(FANTA->getTeamName(1)) + "_"
+				+ QFileInfo(FANTA->getFileGazzetta()).fileName();
 
-	FANTA->printTitolo2(FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
-	FANTA->printRiepilogo();
-	FANTA->printFormations();
+		FANTA->printTitolo2(
+				FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
+		FANTA->printRiepilogo();
+		FANTA->printFormations();
 
-	singletonQtLogger::Inst()->setLogFileName(match);
-	singletonQtLogger::Inst()->saveLogFile();
-
-	return a.exec();
+		singletonQtLogger::Inst()->setLogFileName(match);
+		singletonQtLogger::Inst()->saveLogFile();
+	} else
+		return a.exec();
 }
