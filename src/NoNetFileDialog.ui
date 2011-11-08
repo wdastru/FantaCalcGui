@@ -155,7 +155,7 @@
    <sender>okButton</sender>
    <signal>clicked()</signal>
    <receiver>NoNetFileDialogClass</receiver>
-   <slot>accept()</slot>
+   <slot>okClicked()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>267</x>
@@ -171,7 +171,7 @@
    <sender>cancelButton</sender>
    <signal>clicked()</signal>
    <receiver>NoNetFileDialogClass</receiver>
-   <slot>reject()</slot>
+   <slot>cancelClicked()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>347</x>
@@ -188,5 +188,7 @@
   <slot>setOpenFileNameSquadre()</slot>
   <slot>setOpenFileNameGazzetta()</slot>
   <slot>createEmptyFile()</slot>
+  <slot>okClicked()</slot>
+  <slot>cancelClicked()</slot>
  </slots>
 </ui>

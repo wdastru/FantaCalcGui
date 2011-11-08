@@ -14,12 +14,9 @@ UseTheNetDialog::UseTheNetDialog(QWidget *parent) :
 	yesHasBeenClicked = FALSE;
 	downloadSuccess = FALSE;
 
-	noNetFileDialog = new NoNetFileDialog(this);
-
 	LOG(DEBUG, "UseTheNetDialog object created.");
 }
 UseTheNetDialog::~UseTheNetDialog() {
-	delete noNetFileDialog;
 }
 void UseTheNetDialog::setQuestion(const std::string question) {
 	const std::string
@@ -64,9 +61,15 @@ void UseTheNetDialog::yesClicked() {
 void UseTheNetDialog::noClicked() {
 	this->hasFinished = true;
 	LOG(DEBUG, "Network will not be accessed.");
+
+	noNetFileDialog = new NoNetFileDialog(this);
 	noNetFileDialog->exec();
-	this->noNetSquadreFile = noNetFileDialog->getFileNameSquadre();
-	this->noNetGazzettaFile = noNetFileDialog->getFileNameGazzetta();
+	if (!noNetFileDialog->hasBeenAborted) {
+		this->noNetSquadreFile = noNetFileDialog->getFileNameSquadre();
+		this->noNetGazzettaFile = noNetFileDialog->getFileNameGazzetta();
+	} else {
+		;
+	}
 	this->yesHasBeenClicked = FALSE;
 	this->noHasBeenClicked = TRUE;
 	this->close();

@@ -14,14 +14,16 @@ NoNetFileDialog::NoNetFileDialog(QWidget *parent) :
 	QDialog(parent) {
 	ui.setupUi(this);
 	ui.okButton->setEnabled(false);
+	hasFinished = FALSE;
+	hasBeenAborted = FALSE;
 }
 NoNetFileDialog::~NoNetFileDialog() {
 
 }
 void NoNetFileDialog::setOpenFileNameSquadre() {
 	QString path =
-			IniFileManager::Inst()->getFormazioniPath().trimmed().replace(
-					"\\", "\\\\");
+			IniFileManager::Inst()->getFormazioniPath().trimmed().replace("\\",
+					"\\\\");
 
 	this->fileNameSquadre = QFileDialog::getOpenFileName(this,
 			tr("Scegli il file con le squadre."), path,
@@ -62,10 +64,8 @@ void NoNetFileDialog::setOpenFileNameSquadre() {
 	IniFileManager::Inst()->writeIniFile();
 }
 void NoNetFileDialog::setOpenFileNameGazzetta() {
-	QString
-			path =
-					IniFileManager::Inst()->getGazzettaPath().trimmed().replace(
-							"\\", "\\\\");
+	QString path = IniFileManager::Inst()->getGazzettaPath().trimmed().replace(
+			"\\", "\\\\");
 
 	this->fileNameGazzetta = QFileDialog::getOpenFileName(this,
 			tr("Scegli il file della gazzetta."), path,
@@ -107,8 +107,8 @@ void NoNetFileDialog::setOpenFileNameGazzetta() {
 	IniFileManager::Inst()->writeIniFile();
 }
 void NoNetFileDialog::createEmptyFile() {
-	 ui.newFileLineEdit->setText("file nuovo");
-	 this->enableOkButton();
+	ui.newFileLineEdit->setText("file nuovo");
+	this->enableOkButton();
 }
 void NoNetFileDialog::enableOkButton() {
 	if (ui.fileSquadreLineEdit->text().isEmpty()
@@ -122,4 +122,14 @@ QString NoNetFileDialog::getFileNameSquadre() {
 }
 QString NoNetFileDialog::getFileNameGazzetta() {
 	return this->fileNameGazzetta;
+}
+void NoNetFileDialog::okClicked() {
+	this->hasBeenAborted = FALSE;
+	this->hasFinished = TRUE;
+	this->close();
+}
+void NoNetFileDialog::cancelClicked() {
+	this->hasBeenAborted = TRUE;
+	this->hasFinished = FALSE;
+	this->close();
 }

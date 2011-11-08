@@ -25,18 +25,20 @@ public:
 	virtual ~NoNetFileDialog();
 	QString getFileNameSquadre();
 	QString getFileNameGazzetta();
+	bool hasFinished;
+	bool hasBeenAborted;
 
 private slots:
 	void setOpenFileNameSquadre();
 	void setOpenFileNameGazzetta();
 	void createEmptyFile();
+	void okClicked();
+	void cancelClicked();
 
 private:
 	Ui::NoNetFileDialogClass ui;
 	QString fileNameSquadre;
 	QString fileNameGazzetta;
-//	void setFileNameGazzettaLineEdit(QString);
-//	void setFileNameSquadreLineEdit(QString);
 	void enableOkButton();
 };
 
