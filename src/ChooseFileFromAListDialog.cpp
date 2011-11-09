@@ -415,6 +415,8 @@ void ChooseFileFromAListDialog::doDownload() {
 			IniFileManager::Inst()->getGazzettaPath());
 	httpWin_3.exec();
 
+
+
 	if (httpWin_1.requestSucceded() && httpWin_2.requestSucceded()
 			&& httpWin_3.requestSucceded()) {
 		LOG(
