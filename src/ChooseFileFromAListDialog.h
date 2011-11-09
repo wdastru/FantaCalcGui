@@ -10,6 +10,7 @@
 
 #include "IniFileManager.h"
 #include "httpwindow.h"
+#include "MultiDownload.h"
 
 class QLabel;
 class QPushButton;
