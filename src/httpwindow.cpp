@@ -45,17 +45,20 @@
 #include "httpwindow.h"
 #include "ui_authenticationdialog.h"
 
-HttpWindow::HttpWindow(QWidget *parent, QString _url, QString _savePath) :
+HttpWindow::HttpWindow(QWidget *parent, std::vector<QString> _urls,
+		std::vector<QString> _paths) :
 	QDialog(parent) {
-	LOG(DEBUG,
-			"In HttpWindow::HttpWindow(QWidget *parent, QString _url, QString _savePath).");
+	LOG(
+			DEBUG,
+			"HttpWindow::HttpWindow(QWidget *parent, std::vector<QString> _urls, std::vector<QString> _paths).");
 #ifndef QT_NO_OPENSSL
 	urlLineEdit = new QLineEdit(_url);
 #else
 	urlLineEdit = new QLineEdit(_url);
 #endif
 
-	this->savePath = _savePath;
+	this->paths = _paths;
+	this->urls = _urls;
 
 	urlLabel = new QLabel(tr("&URL:"));
 	urlLabel->setBuddy(urlLineEdit);
@@ -85,7 +88,7 @@ HttpWindow::HttpWindow(QWidget *parent, QString _url, QString _savePath) :
 			SLOT(sslErrors(QNetworkReply*,QList<QSslError>)));
 #endif
 	connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
-	connect(downloadButton, SIGNAL(clicked()), this, SLOT(downloadFile()));
+	connect(downloadButton, SIGNAL(clicked()), this, SLOT(downloadAllFiles()));
 	connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
 
 	QHBoxLayout *topLayout = new QHBoxLayout;
@@ -112,8 +115,14 @@ void HttpWindow::startRequest(QUrl url) {
 			SLOT(updateDataReadProgress(qint64,qint64)));
 }
 
-void HttpWindow::downloadFile() {
-	url = urlLineEdit->text();
+void HttpWindow::downloadAllFiles(std::vector<QString> _urls) {
+	for (int i = 0; i < _urls.size(); i++) {
+		this->downloadFile(_urls.at(i));
+	}
+}
+
+void HttpWindow::downloadFile(QString _url) {
+	url = _url;
 
 	LOG(DEBUG, "In HttpWindow::downloadFile() --> url : " + url.path());
 

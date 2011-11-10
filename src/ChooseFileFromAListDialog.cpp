@@ -402,37 +402,34 @@ void ChooseFileFromAListDialog::doDownload() {
 	LOG(DEBUG,
 			"In ChooseFileFromAListDialog::doDownload() --> Network will be accessed.");
 
-	std::vector<QUrl> urls;
-	urls.push_back(IniFileManager::Inst()->getFormazioniUrl() + this->getHomeFile());
-	urls.push_back(IniFileManager::Inst()->getFormazioniUrl() + this->getAwayFile());
-	urls.push_back(IniFileManager::Inst()->getGazzettaUrl() + this->getGazFile());
+	std::vector<QString> urls;
+	urls.push_back(
+			IniFileManager::Inst()->getFormazioniUrl() + this->getHomeFile());
+	urls.push_back(
+			IniFileManager::Inst()->getFormazioniUrl() + this->getAwayFile());
+	urls.push_back(
+			IniFileManager::Inst()->getGazzettaUrl() + this->getGazFile());
 
 	std::vector<QString> paths;
 	paths.push_back(IniFileManager::Inst()->getDownloadPath());
 	paths.push_back(IniFileManager::Inst()->getDownloadPath());
 	paths.push_back(IniFileManager::Inst()->getGazzettaPath());
 
-	MultiDownload multiDownload(singletonQtLogger::Inst());
-	multiDownload.setUrls(urls);
-	multiDownload.setPaths(paths);
-
-	/*
-	HttpWindow httpWin_1(singletonQtLogger::Inst(),
+	HttpWindow httpWin(singletonQtLogger::Inst(),
 			IniFileManager::Inst()->getFormazioniUrl() + this->getHomeFile(),
 			IniFileManager::Inst()->getDownloadPath());
-	httpWin_1.exec();
-	HttpWindow httpWin_2(singletonQtLogger::Inst(),
-			IniFileManager::Inst()->getFormazioniUrl() + this->getAwayFile(),
-			IniFileManager::Inst()->getDownloadPath());
-	httpWin_2.exec();
-	HttpWindow httpWin_3(singletonQtLogger::Inst(),
-			IniFileManager::Inst()->getGazzettaUrl() + this->getGazFile(),
-			IniFileManager::Inst()->getGazzettaPath());
-	httpWin_3.exec();
-	*/
+	httpWin.exec();
 
-	/*
-	if (multiDownload.requestSucceded()) {
+//	HttpWindow httpWin_2(singletonQtLogger::Inst(),
+//			IniFileManager::Inst()->getFormazioniUrl() + this->getAwayFile(),
+//			IniFileManager::Inst()->getDownloadPath());
+//	httpWin_2.exec();
+//	HttpWindow httpWin_3(singletonQtLogger::Inst(),
+//			IniFileManager::Inst()->getGazzettaUrl() + this->getGazFile(),
+//			IniFileManager::Inst()->getGazzettaPath());
+//	httpWin_3.exec();
+
+	if (httpWin.requestSucceded()) {
 		LOG(
 				DEBUG,
 				"In ChooseFileFromAListDialog::doDownload() --> the download of files succeded: closing chooseFileFromAListaDialog.");
@@ -444,8 +441,8 @@ void ChooseFileFromAListDialog::doDownload() {
 				"In ChooseFileFromAListDialog::doDownload() --> the download of files failed.");
 		this->downloadSuccess = false;
 	}
-	*/
 }
+
 unsigned int ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 	if (this->downloadSuccess) {
 		QFile fHome(
