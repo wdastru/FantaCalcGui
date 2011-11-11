@@ -109,7 +109,7 @@ HttpWindow::HttpWindow(QWidget *parent, std::vector<QUrl>* _urls,
 
 void HttpWindow::startRequest(QUrl url) {
 	reply = qnam.get(QNetworkRequest(url));
-	connect(reply, SIGNAL(finished()), this, SLOT(httpFinished()));
+	connect(reply, SIGNAL(finished()), this, SLOT(httpFinished(url)));
 	connect(reply, SIGNAL(readyRead()), this, SLOT(httpReadyRead()));
 	connect(reply, SIGNAL(downloadProgress(qint64,qint64)), this,
 			SLOT(updateDataReadProgress(qint64,qint64)));
@@ -175,7 +175,7 @@ void HttpWindow::cancelDownload() {
 	downloadButton->setEnabled(true);
 }
 
-void HttpWindow::httpFinished() {
+void HttpWindow::httpFinished(QUrl _url) {
 	if (httpRequestAborted) {
 		if (file) {
 			file->close();
@@ -200,15 +200,14 @@ void HttpWindow::httpFinished() {
 				tr("Download failed: %1.") .arg(reply->errorString()));
 		downloadButton->setEnabled(true);
 	} else if (!redirectionTarget.isNull()) {
-		QUrl newUrl = url.resolved(redirectionTarget.toUrl());
+		QUrl newUrl = _url.resolved(redirectionTarget.toUrl());
 		if (QMessageBox::question(this, tr("HTTP"),
 				tr("Redirect to %1 ?").arg(newUrl.toString()),
 				QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes) {
-			url = newUrl;
 			reply->deleteLater();
 			file->open(QIODevice::WriteOnly);
 			file->resize(0);
-			startRequest(url);
+			startRequest(newUrl);
 			return;
 		}
 	} else {

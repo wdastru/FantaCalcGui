@@ -36,16 +36,22 @@ void UseTheNetDialog::yesClicked() {
 	this->yesHasBeenClicked = TRUE;
 	this->noHasBeenClicked = TRUE;
 
-	HttpWindow httpWin_1(singletonQtLogger::Inst(),
-			IniFileManager::Inst()->getFileFormazioniUrl(),
-			IniFileManager::Inst()->getListePath());
-	httpWin_1.exec();
-	HttpWindow httpWin_2(singletonQtLogger::Inst(),
-			IniFileManager::Inst()->getFileGazzettaUrl(),
-			IniFileManager::Inst()->getListePath());
-	httpWin_2.exec();
+	std::vector<QUrl> * urls;
+	urls->push_back(IniFileManager::Inst()->getFileFormazioniUrl());
+	urls->push_back(IniFileManager::Inst()->getFileGazzettaUrl());
 
-	if (httpWin_1.requestSucceded() && httpWin_2.requestSucceded()) {
+	std::vector<QString> * savePaths;
+	savePaths->push_back(IniFileManager::Inst()->getListePath());
+	savePaths->push_back(IniFileManager::Inst()->getListePath());
+
+	LOG(
+			DEBUG,
+			"In UseTheNetDialog::yesClicked() --> urls and savepath has been created.");
+
+	HttpWindow httpWin(singletonQtLogger::Inst(), urls, savePaths);
+	httpWin.exec();
+
+	if (httpWin.requestSucceded()) {
 		LOG(
 				DEBUG,
 				"In UseTheNetDialog::yesClicked() --> the download of files succeded: closing useTheNetDialog.");

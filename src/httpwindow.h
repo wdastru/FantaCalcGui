@@ -76,7 +76,7 @@ private slots:
 	void downloadFile(QUrl, QString);
 	void downloadAllFiles(std::vector<QUrl>*, std::vector<QString>*);
 	void cancelDownload();
-	void httpFinished();
+	void httpFinished(QUrl);
 	void httpReadyRead();
 	void updateDataReadProgress(qint64 bytesRead, qint64 totalBytes);
 	void enableDownloadButton();

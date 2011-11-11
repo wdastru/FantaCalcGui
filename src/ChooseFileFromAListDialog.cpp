@@ -403,38 +403,29 @@ void ChooseFileFromAListDialog::doDownload() {
 			"In ChooseFileFromAListDialog::doDownload() --> Network will be accessed.");
 
 	/*
-	std::vector<QString> urls;
-	urls.push_back(
+	 std::vector<QString> urls;
+	 urls.push_back(
+	 IniFileManager::Inst()->getFormazioniUrl() + this->getHomeFile());
+	 urls.push_back(
+	 IniFileManager::Inst()->getFormazioniUrl() + this->getAwayFile());
+	 urls.push_back(
+	 IniFileManager::Inst()->getGazzettaUrl() + this->getGazFile());
+	 */
+	std::vector<QUrl> * urls;
+	urls->push_back(
 			IniFileManager::Inst()->getFormazioniUrl() + this->getHomeFile());
-	urls.push_back(
+	urls->push_back(
 			IniFileManager::Inst()->getFormazioniUrl() + this->getAwayFile());
-	urls.push_back(
+	urls->push_back(
 			IniFileManager::Inst()->getGazzettaUrl() + this->getGazFile());
-			*/
-	std::vector<QUrl> urls;
-		urls.push_back(
-				IniFileManager::Inst()->getFormazioniUrl() + this->getHomeFile());
-		urls.push_back(
-				IniFileManager::Inst()->getFormazioniUrl() + this->getAwayFile());
-		urls.push_back(
-				IniFileManager::Inst()->getGazzettaUrl() + this->getGazFile());
 
-	std::vector<QString> savePaths;
-	savePaths.push_back(IniFileManager::Inst()->getDownloadPath());
-	savePaths.push_back(IniFileManager::Inst()->getDownloadPath());
-	savePaths.push_back(IniFileManager::Inst()->getGazzettaPath());
+	std::vector<QString> * savePaths;
+	savePaths->push_back(IniFileManager::Inst()->getDownloadPath());
+	savePaths->push_back(IniFileManager::Inst()->getDownloadPath());
+	savePaths->push_back(IniFileManager::Inst()->getGazzettaPath());
 
 	HttpWindow httpWin(singletonQtLogger::Inst(), urls, savePaths);
 	httpWin.exec();
-
-	//	HttpWindow httpWin_2(singletonQtLogger::Inst(),
-	//			IniFileManager::Inst()->getFormazioniUrl() + this->getAwayFile(),
-	//			IniFileManager::Inst()->getDownloadPath());
-	//	httpWin_2.exec();
-	//	HttpWindow httpWin_3(singletonQtLogger::Inst(),
-	//			IniFileManager::Inst()->getGazzettaUrl() + this->getGazFile(),
-	//			IniFileManager::Inst()->getGazzettaPath());
-	//	httpWin_3.exec();
 
 	if (httpWin.requestSucceded()) {
 		LOG(
