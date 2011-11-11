@@ -45,19 +45,19 @@
 #include "httpwindow.h"
 #include "ui_authenticationdialog.h"
 
-HttpWindow::HttpWindow(QWidget *parent, std::vector<QString> _urls,
-		std::vector<QString> _paths) :
+HttpWindow::HttpWindow(QWidget *parent, std::vector<QUrl>* _urls,
+		std::vector<QString>* _savePaths) :
 	QDialog(parent) {
 	LOG(
 			DEBUG,
-			"HttpWindow::HttpWindow(QWidget *parent, std::vector<QString> _urls, std::vector<QString> _paths).");
+			"HttpWindow::HttpWindow(QWidget *parent, std::vector<QUrl>* _urls, std::vector<QString>* _savePaths).");
 #ifndef QT_NO_OPENSSL
-	urlLineEdit = new QLineEdit(_url);
+	urlLineEdit = new QLineEdit(_urls->at(0).path());
 #else
-	urlLineEdit = new QLineEdit(_url);
+	urlLineEdit = new QLineEdit(_urls->at(0).path());
 #endif
 
-	this->paths = _paths;
+	this->savePaths = _savePaths;
 	this->urls = _urls;
 
 	urlLabel = new QLabel(tr("&URL:"));
@@ -115,24 +115,26 @@ void HttpWindow::startRequest(QUrl url) {
 			SLOT(updateDataReadProgress(qint64,qint64)));
 }
 
-void HttpWindow::downloadAllFiles(std::vector<QString> _urls) {
-	for (int i = 0; i < _urls.size(); i++) {
-		this->downloadFile(_urls.at(i));
+void HttpWindow::downloadAllFiles(std::vector<QUrl>* _urls,
+		std::vector<QString>* _savePaths) {
+	for (int i = 0; i < _urls->size(); i++) {
+		this->downloadFile(_urls->at(i), _savePaths->at(i));
 	}
 }
 
-void HttpWindow::downloadFile(QString _url) {
-	url = _url;
+void HttpWindow::downloadFile(QUrl _url, QString _savePath) {
+	QUrl url = _url;
+	QString savePath = _savePath;
 
 	LOG(DEBUG, "In HttpWindow::downloadFile() --> url : " + url.path());
 
 	QFileInfo fileInfo(url.path());
-	QString fileName = this->savePath + fileInfo.fileName();
+	QString fileName = savePath + fileInfo.fileName();
 
 	LOG(DEBUG, "In HttpWindow::downloadFile() --> fileName : " + fileName);
 
 	if (fileName.isEmpty())
-		fileName = this->savePath + "file.txt";
+		fileName = savePath + "file.txt";
 
 	if (QFile::exists(fileName)) {
 		if (QMessageBox::question(

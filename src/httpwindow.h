@@ -65,14 +65,16 @@ class HttpWindow: public QDialog {
 Q_OBJECT
 
 public:
-	HttpWindow(QWidget *parent = 0, QString url = "", QString savePath = ".");
+	HttpWindow(QWidget *parent = 0,
+			std::vector<QUrl>* urls = new std::vector<QUrl>,
+			std::vector<QString>* savePaths = new std::vector<QString>);
 
 	bool requestSucceded();
 	void startRequest(QUrl url);
 
 private slots:
-	void downloadFile(QString);
-	void downloadAllFiles(std::vector<QString>);
+	void downloadFile(QUrl, QString);
+	void downloadAllFiles(std::vector<QUrl>*, std::vector<QString>*);
 	void cancelDownload();
 	void httpFinished();
 	void httpReadyRead();
@@ -92,11 +94,11 @@ private:
 	QPushButton * quitButton;
 	QDialogButtonBox * buttonBox;
 
-	QUrl url;
 	QNetworkAccessManager qnam;
 	QNetworkReply * reply;
 	QFile * file;
-	QString savePath;
+	std::vector<QUrl>* urls;
+	std::vector<QString>* savePaths;
 	int httpGetId;
 	bool httpRequestAborted;
 	bool httpRequestSucceded;
