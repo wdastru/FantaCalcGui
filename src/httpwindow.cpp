@@ -116,10 +116,12 @@ void HttpWindow::startRequest(QUrl url) {
 }
 
 void HttpWindow::downloadAllFiles() {
-	LOG(
-			DEBUG,
-			"In void HttpWindow::downloadAllFiles(std::vector<QUrl>* _urls, std::vector<QString>* _savePaths)");
 	for (int i = 0; i < this->urls->size(); i++) {
+		LOG(
+				DEBUG,
+				"In void HttpWindow::downloadAllFiles(std::vector<QUrl>* _urls, std::vector<QString>* _savePaths).");
+		LOG(DEBUG, " downloading : " + this->urls->at(i).path());
+		LOG(DEBUG, " saving : " + this->savePaths->at(i));
 		this->downloadFile(this->urls->at(i), this->savePaths->at(i));
 	}
 }
