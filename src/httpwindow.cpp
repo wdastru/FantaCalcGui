@@ -128,7 +128,7 @@ void HttpWindow::downloadFile() {
 	if (QFile::exists(fileName)) {
 		if (QMessageBox::question(
 				this,
-				tr("HTTP"),
+				tr("HTTP - File exists !!!"),
 				tr("There already exists a file called %1. Overwrite?").arg(
 						fileName), QMessageBox::Yes | QMessageBox::No,
 				QMessageBox::No) == QMessageBox::No)
@@ -148,7 +148,7 @@ void HttpWindow::downloadFile() {
 		return;
 	}
 
-	progressDialog->setWindowTitle(tr("HTTP"));
+	progressDialog->setWindowTitle(tr("HTTP - Downloading ..."));
 	progressDialog->setLabelText(tr("Downloading %1.").arg(fileName));
 	downloadButton->setEnabled(false);
 
@@ -183,6 +183,7 @@ void HttpWindow::httpFinished() {
 
 	QVariant redirectionTarget = reply->attribute(
 			QNetworkRequest::RedirectionTargetAttribute);
+
 	if (reply->error()) {
 		file->remove();
 		QMessageBox::information(this, tr("HTTP"),
