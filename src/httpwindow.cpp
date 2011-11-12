@@ -50,7 +50,7 @@ HttpWindow::HttpWindow(QWidget *parent, std::vector<QUrl>* _urls,
 	QDialog(parent) {
 	LOG(
 			DEBUG,
-			"HttpWindow::HttpWindow(QWidget *parent, std::vector<QUrl>* _urls, std::vector<QString>* _savePaths).");
+			"In HttpWindow::HttpWindow(QWidget *parent, std::vector<QUrl>* _urls, std::vector<QString>* _savePaths) constructor.");
 #ifndef QT_NO_OPENSSL
 	urlLineEdit = new QLineEdit(_urls->at(0).path());
 #else
@@ -115,10 +115,12 @@ void HttpWindow::startRequest(QUrl url) {
 			SLOT(updateDataReadProgress(qint64,qint64)));
 }
 
-void HttpWindow::downloadAllFiles(std::vector<QUrl>* _urls,
-		std::vector<QString>* _savePaths) {
-	for (int i = 0; i < _urls->size(); i++) {
-		this->downloadFile(_urls->at(i), _savePaths->at(i));
+void HttpWindow::downloadAllFiles() {
+	LOG(
+			DEBUG,
+			"In void HttpWindow::downloadAllFiles(std::vector<QUrl>* _urls, std::vector<QString>* _savePaths)");
+	for (int i = 0; i < this->urls->size(); i++) {
+		this->downloadFile(this->urls->at(i), this->savePaths->at(i));
 	}
 }
 

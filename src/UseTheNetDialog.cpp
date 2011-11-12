@@ -36,17 +36,13 @@ void UseTheNetDialog::yesClicked() {
 	this->yesHasBeenClicked = TRUE;
 	this->noHasBeenClicked = TRUE;
 
-	std::vector<QUrl> * urls;
+	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	urls->push_back(IniFileManager::Inst()->getFileFormazioniUrl());
 	urls->push_back(IniFileManager::Inst()->getFileGazzettaUrl());
 
-	std::vector<QString> * savePaths;
+	std::vector<QString> * savePaths = new std::vector<QString>;
 	savePaths->push_back(IniFileManager::Inst()->getListePath());
 	savePaths->push_back(IniFileManager::Inst()->getListePath());
-
-	LOG(
-			DEBUG,
-			"In UseTheNetDialog::yesClicked() --> urls and savepath has been created.");
 
 	HttpWindow httpWin(singletonQtLogger::Inst(), urls, savePaths);
 	httpWin.exec();

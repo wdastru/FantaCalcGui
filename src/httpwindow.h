@@ -68,13 +68,12 @@ public:
 	HttpWindow(QWidget *parent = 0,
 			std::vector<QUrl>* urls = new std::vector<QUrl>,
 			std::vector<QString>* savePaths = new std::vector<QString>);
-
 	bool requestSucceded();
 	void startRequest(QUrl url);
 
 private slots:
 	void downloadFile(QUrl, QString);
-	void downloadAllFiles(std::vector<QUrl>*, std::vector<QString>*);
+	void downloadAllFiles();
 	void cancelDownload();
 	void httpFinished(QUrl);
 	void httpReadyRead();
