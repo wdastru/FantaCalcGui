@@ -23,6 +23,9 @@
 ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 		QString _fileGazzetta, QWidget *parent) :
 	QDialog(parent) {
+
+	LOG(DEBUG, "In ChooseFileFromAListDialog constructor.");
+
 	Tabs = new QTabWidget(this);
 	Tabs->setObjectName(QString::fromUtf8("Tabs"));
 	formazioniTab = new QWidget();
@@ -402,16 +405,7 @@ void ChooseFileFromAListDialog::doDownload() {
 	LOG(DEBUG,
 			"In ChooseFileFromAListDialog::doDownload() --> Network will be accessed.");
 
-	/*
-	 std::vector<QString> urls;
-	 urls.push_back(
-	 IniFileManager::Inst()->getFormazioniUrl() + this->getHomeFile());
-	 urls.push_back(
-	 IniFileManager::Inst()->getFormazioniUrl() + this->getAwayFile());
-	 urls.push_back(
-	 IniFileManager::Inst()->getGazzettaUrl() + this->getGazFile());
-	 */
-	std::vector<QUrl> * urls;
+	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	urls->push_back(
 			IniFileManager::Inst()->getFormazioniUrl() + this->getHomeFile());
 	urls->push_back(
@@ -419,10 +413,41 @@ void ChooseFileFromAListDialog::doDownload() {
 	urls->push_back(
 			IniFileManager::Inst()->getGazzettaUrl() + this->getGazFile());
 
-	std::vector<QString> * savePaths;
+	LOG(
+			DEBUG,
+			"In void ChooseFileFromAListDialog::doDownload() : download "
+					+ IniFileManager::Inst()->getFormazioniUrl()
+					+ this->getHomeFile());
+	LOG(
+			DEBUG,
+			"In void ChooseFileFromAListDialog::doDownload() : download "
+					+ IniFileManager::Inst()->getFormazioniUrl()
+					+ this->getAwayFile());
+	LOG(
+			DEBUG,
+			"In void ChooseFileFromAListDialog::doDownload() : download "
+					+ IniFileManager::Inst()->getGazzettaUrl()
+					+ this->getGazFile());
+
+	std::vector<QString> * savePaths = new std::vector<QString>;
 	savePaths->push_back(IniFileManager::Inst()->getDownloadPath());
 	savePaths->push_back(IniFileManager::Inst()->getDownloadPath());
 	savePaths->push_back(IniFileManager::Inst()->getGazzettaPath());
+
+	LOG(
+			DEBUG,
+			"In void ChooseFileFromAListDialog::doDownload() : saving in "
+					+ IniFileManager::Inst()->getDownloadPath());
+
+	LOG(
+			DEBUG,
+			"In void ChooseFileFromAListDialog::doDownload() : saving in "
+					+ IniFileManager::Inst()->getDownloadPath());
+
+	LOG(
+			DEBUG,
+			"In void ChooseFileFromAListDialog::doDownload() : saving in "
+					+ IniFileManager::Inst()->getGazzettaPath());
 
 	HttpWindow httpWin(singletonQtLogger::Inst(), urls, savePaths);
 	httpWin.exec();
@@ -440,7 +465,6 @@ void ChooseFileFromAListDialog::doDownload() {
 		this->downloadSuccess = false;
 	}
 }
-
 unsigned int ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 	if (this->downloadSuccess) {
 		QFile fHome(
@@ -690,9 +714,10 @@ unsigned int ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 	return EXIT_SUCCESS;
 }
 void ChooseFileFromAListDialog::execute() {
+	LOG(DEBUG, "In void ChooseFileFromAListDialog::execute().");
 	this->doDownload();
-	this->createFileSquadreFromWebFiles();
-	this->fileGazzetta = IniFileManager::Inst()->getGazzettaPath()
-			+ this->getGazFile();
-	this->accept();
+	//	this->createFileSquadreFromWebFiles();
+	//	this->fileGazzetta = IniFileManager::Inst()->getGazzettaPath()
+	//			+ this->getGazFile();
+	//	this->accept();
 }

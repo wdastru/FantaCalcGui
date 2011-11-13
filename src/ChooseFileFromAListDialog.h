@@ -4,6 +4,7 @@
 #include <QtGui/QDialog>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
+#include <QUrl>
 
 #include "singletonQtLogger.h"
 #include "defines.h"

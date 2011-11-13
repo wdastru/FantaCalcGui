@@ -86,8 +86,10 @@ private slots:
 
 private:
 	QLabel * statusLabel;
-	QLabel * urlLabel;
-	QLineEdit * urlLineEdit;
+	std::vector<QLabel * > urlLabelVector;
+	//QLabel * urlLabel;
+	std::vector<QLineEdit * > urlLineEditVector;
+	//QLineEdit * urlLineEdit;
 	QProgressDialog * progressDialog;
 	QPushButton * downloadButton;
 	QPushButton * quitButton;
