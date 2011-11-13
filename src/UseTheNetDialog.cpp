@@ -32,9 +32,9 @@ void UseTheNetDialog::setQuestion(const std::string question) {
 					0, QApplication::UnicodeUTF8));
 }
 void UseTheNetDialog::yesClicked() {
-	LOG(DEBUG, "Network will be accessed.");
+	LOG(DEBUG, "In void UseTheNetDialog::yesClicked() : network will be accessed.");
 	this->yesHasBeenClicked = TRUE;
-	this->noHasBeenClicked = TRUE;
+	this->noHasBeenClicked = FALSE;
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	urls->push_back(IniFileManager::Inst()->getFileFormazioniUrl());
@@ -110,14 +110,14 @@ QString UseTheNetDialog::getNoNetGazzettaFile() {
 	return this->noNetGazzettaFile;
 }
 bool UseTheNetDialog::getYesClicked() {
-	LOG(DEBUG, "In UseTheNetDialog::getYesClicked() : ");
+	LOG(DEBUG, "In UseTheNetDialog::getYesClicked()");
 	return this->yesHasBeenClicked;
 }
 bool UseTheNetDialog::getNoClicked() {
-	LOG(DEBUG, "In UseTheNetDialog::getNoClicked() : ");
+	LOG(DEBUG, "In UseTheNetDialog::getNoClicked()");
 	return this->noHasBeenClicked;
 }
 bool UseTheNetDialog::getDownloadSuccess() {
-	LOG(DEBUG, "In UseTheNetDialog::getDownloadSuccess() : ");
+	LOG(DEBUG, "In UseTheNetDialog::getDownloadSuccess()");
 	return this->downloadSuccess;
 }

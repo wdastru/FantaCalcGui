@@ -75,7 +75,7 @@ private slots:
 	void downloadFile(QUrl, QString);
 	void downloadAllFiles();
 	void cancelDownload();
-	void httpFinished(QUrl);
+	void httpFinished();
 	void httpReadyRead();
 	void updateDataReadProgress(qint64 bytesRead, qint64 totalBytes);
 	void enableDownloadButton();

@@ -2,6 +2,7 @@
 #define WHICHOFTHESEDIALOG_H
 
 #include <QDialog>
+#include <QtCore/QObject>
 
 class QLabel;
 class QErrorMessage;
