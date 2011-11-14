@@ -110,7 +110,7 @@ HttpWindow::HttpWindow(QWidget *parent, std::vector<QUrl>* _urls,
 	httpRequestSucceded = false;
 
 	setWindowTitle(tr("HTTP"));
-	urlLineEditVector.at(0)->setFocus();
+	//urlLineEditVector.at(0)->setFocus();
 }
 
 void HttpWindow::startRequest(QUrl url) {
