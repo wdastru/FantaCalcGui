@@ -98,7 +98,7 @@ int main(int argc, char *argv[]) {
 				+ "-" + QString::fromStdString(FANTA->getTeamName(1)) + "_"
 				+ QFileInfo(FANTA->getFileGazzetta()).fileName();
 
-		FANTA->printTitolo2(
+		FANTA->printTitolo(
 				FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
 		FANTA->printRiepilogo();
 		FANTA->printFormations();

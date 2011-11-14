@@ -1125,9 +1125,9 @@ void Fanta::printRiepilogo() {
 		output += string + ")<br/>";
 	}
 
-	LOG(INFO, output + "<br/>");
+	LOG(DEBUG, output + "<br/>");
 }
-void Fanta::printTitolo2(std::string str) {
+void Fanta::printTitolo(std::string str) {
 	QString tmp = "\n +";
 	for (unsigned int i = 0; i < str.size() + 6; i++) {
 		tmp += "-";

@@ -101,20 +101,19 @@ public:
 	QString getFileGazzetta();
 	void setFileGazzetta(QString);
 	void printRiepilogo();
-	void printTitolo2(std::string);
-	 unsigned int getAmmonizioniTot(unsigned int) const ;
-	 unsigned int getEspulsioniTot(unsigned int) const ;
-	 unsigned int getGoalDecVittTot(unsigned int) const ;
-	 unsigned int getGoalDecParTot(unsigned int) const ;
-	 unsigned int getAssistTot(unsigned int) const ;
-	 unsigned int getSubstitutions(unsigned int) const ;
-	 void printFormations();
+	void printTitolo(std::string);
+	unsigned int getAmmonizioniTot(unsigned int) const ;
+	unsigned int getEspulsioniTot(unsigned int) const ;
+	unsigned int getGoalDecVittTot(unsigned int) const ;
+	unsigned int getGoalDecParTot(unsigned int) const ;
+	unsigned int getAssistTot(unsigned int) const ;
+	unsigned int getSubstitutions(unsigned int) const ;
+	void printFormations();
 
-//	void printTitolo3(std::string);
+	//	void printTitolo3(std::string);
 
 	/*
 	 std::string getVariablesValues();
-	 void printRiepilogo();
 	 void printRiepilogo_toFile(ofstream &);
 	 void printRiepilogo_toHtml(ofstream &);
 	 void printPlayersInfo(unsigned int);
