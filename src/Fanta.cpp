@@ -1132,30 +1132,20 @@ void Fanta::printTitolo2(std::string str) {
 	for (unsigned int i = 0; i < str.size() + 6; i++) {
 		tmp += "-";
 	}
-	tmp += "+";
-	LOG(TOFILE, tmp);
-
-	tmp = " | +";
+	tmp += "+\n | +";
 
 	for (unsigned int i = 0; i < str.size() + 2; i++) {
 		tmp += "-";
 	}
-	tmp += "+ |";
-	LOG(TOFILE, tmp);
-
-	LOG(TOFILE, " | | " + QString::fromStdString(str) + " | |");
-
-	tmp = " | +";
+	tmp += "+ |\n | | " + QString::fromStdString(str) + " | |\n | +";
 	for (unsigned int i = 0; i < str.size() + 2; i++)
 		tmp += "-";
-	tmp += "+ |";
-	LOG(TOFILE, tmp);
-
-	tmp = " +";
+	tmp += "+ |\n +";
 	for (unsigned int i = 0; i < str.size() + 6; i++)
 		tmp += "-";
 	tmp += "+\n";
-	LOG(TOFILE, tmp);
+
+	LOG(DEBUG, tmp);
 }
 unsigned int Fanta::getAmmonizioniTot(unsigned int k) const {
 	unsigned int amm = 0;
