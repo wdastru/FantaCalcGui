@@ -32,20 +32,22 @@ void UseTheNetDialog::setQuestion(const std::string question) {
 					0, QApplication::UnicodeUTF8));
 }
 void UseTheNetDialog::yesClicked() {
-	LOG(DEBUG, "Network will be accessed.");
+	LOG(DEBUG, "In void UseTheNetDialog::yesClicked() : network will be accessed.");
 	this->yesHasBeenClicked = TRUE;
-	this->noHasBeenClicked = TRUE;
+	this->noHasBeenClicked = FALSE;
 
-	HttpWindow httpWin_1(singletonQtLogger::Inst(),
-			IniFileManager::Inst()->getFileFormazioniUrl(),
-			IniFileManager::Inst()->getListePath());
-	httpWin_1.exec();
-	HttpWindow httpWin_2(singletonQtLogger::Inst(),
-			IniFileManager::Inst()->getFileGazzettaUrl(),
-			IniFileManager::Inst()->getListePath());
-	httpWin_2.exec();
+	std::vector<QUrl> * urls = new std::vector<QUrl>;
+	urls->push_back(IniFileManager::Inst()->getFileFormazioniUrl());
+	urls->push_back(IniFileManager::Inst()->getFileGazzettaUrl());
 
-	if (httpWin_1.requestSucceded() && httpWin_2.requestSucceded()) {
+	std::vector<QString> * savePaths = new std::vector<QString>;
+	savePaths->push_back(IniFileManager::Inst()->getListePath());
+	savePaths->push_back(IniFileManager::Inst()->getListePath());
+
+	HttpWindow httpWin(singletonQtLogger::Inst(), urls, savePaths);
+	httpWin.exec();
+
+	if (httpWin.requestSucceded()) {
 		LOG(
 				DEBUG,
 				"In UseTheNetDialog::yesClicked() --> the download of files succeded: closing useTheNetDialog.");
@@ -108,14 +110,14 @@ QString UseTheNetDialog::getNoNetGazzettaFile() {
 	return this->noNetGazzettaFile;
 }
 bool UseTheNetDialog::getYesClicked() {
-	LOG(DEBUG, "In UseTheNetDialog::getYesClicked() : ");
+	LOG(DEBUG, "In UseTheNetDialog::getYesClicked()");
 	return this->yesHasBeenClicked;
 }
 bool UseTheNetDialog::getNoClicked() {
-	LOG(DEBUG, "In UseTheNetDialog::getNoClicked() : ");
+	LOG(DEBUG, "In UseTheNetDialog::getNoClicked()");
 	return this->noHasBeenClicked;
 }
 bool UseTheNetDialog::getDownloadSuccess() {
-	LOG(DEBUG, "In UseTheNetDialog::getDownloadSuccess() : ");
+	LOG(DEBUG, "In UseTheNetDialog::getDownloadSuccess()");
 	return this->downloadSuccess;
 }

@@ -45,20 +45,23 @@
 #include "httpwindow.h"
 #include "ui_authenticationdialog.h"
 
-HttpWindow::HttpWindow(QWidget *parent, QString _url, QString _savePath) :
+HttpWindow::HttpWindow(QWidget *parent, std::vector<QUrl>* _urls,
+		std::vector<QString>* _savePaths) :
 	QDialog(parent) {
-	LOG(DEBUG,
-			"In HttpWindow::HttpWindow(QWidget *parent, QString _url, QString _savePath).");
-#ifndef QT_NO_OPENSSL
-	urlLineEdit = new QLineEdit(_url);
-#else
-	urlLineEdit = new QLineEdit(_url);
-#endif
+	LOG(
+			DEBUG,
+			"In HttpWindow::HttpWindow(QWidget *parent, std::vector<QUrl>* _urls, std::vector<QString>* _savePaths) constructor.");
 
-	this->savePath = _savePath;
+	this->savePaths = _savePaths;
+	this->urls = _urls;
 
-	urlLabel = new QLabel(tr("&URL:"));
-	urlLabel->setBuddy(urlLineEdit);
+	for (size_t i = 0; i < this->urls->size(); i++) {
+		this->urlLineEditVector.push_back(
+				new QLineEdit(this->urls->at(i).path()));
+		this->urlLabelVector.push_back(new QLabel(tr("&URL:")));
+		this->urlLabelVector.at(i)->setBuddy(this->urlLineEditVector.at(i));
+	}
+
 	statusLabel = new QLabel(tr("Please enter the URL of a file you want to "
 		"download."));
 
@@ -73,8 +76,10 @@ HttpWindow::HttpWindow(QWidget *parent, QString _url, QString _savePath) :
 
 	progressDialog = new QProgressDialog(this);
 
-	connect(urlLineEdit, SIGNAL(textChanged(QString)), this,
-			SLOT(enableDownloadButton()));
+	for (size_t i = 0; i < this->urls->size(); i++) {
+		connect(this->urlLineEditVector.at(i), SIGNAL(textChanged(QString)),
+				this, SLOT(enableDownloadButton()));
+	}
 
 	connect(&qnam,
 			SIGNAL(authenticationRequired(QNetworkReply*,QAuthenticator*)),
@@ -85,15 +90,19 @@ HttpWindow::HttpWindow(QWidget *parent, QString _url, QString _savePath) :
 			SLOT(sslErrors(QNetworkReply*,QList<QSslError>)));
 #endif
 	connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
-	connect(downloadButton, SIGNAL(clicked()), this, SLOT(downloadFile()));
+	connect(downloadButton, SIGNAL(clicked()), this, SLOT(downloadAllFiles()));
 	connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
 
-	QHBoxLayout *topLayout = new QHBoxLayout;
-	topLayout->addWidget(urlLabel);
-	topLayout->addWidget(urlLineEdit);
+	QVBoxLayout *vLayout = new QVBoxLayout;
+	for (size_t i = 0; i < this->urls->size(); i++) {
+		QHBoxLayout *hLayout = new QHBoxLayout;
+		hLayout->addWidget(this->urlLabelVector.at(i));
+		hLayout->addWidget(this->urlLineEditVector.at(i));
+		vLayout->addLayout(hLayout);
+	}
 
 	QVBoxLayout *mainLayout = new QVBoxLayout;
-	mainLayout->addLayout(topLayout);
+	mainLayout->addLayout(vLayout);
 	mainLayout->addWidget(statusLabel);
 	mainLayout->addWidget(buttonBox);
 	setLayout(mainLayout);
@@ -101,10 +110,11 @@ HttpWindow::HttpWindow(QWidget *parent, QString _url, QString _savePath) :
 	httpRequestSucceded = false;
 
 	setWindowTitle(tr("HTTP"));
-	urlLineEdit->setFocus();
+	//urlLineEditVector.at(0)->setFocus();
 }
 
 void HttpWindow::startRequest(QUrl url) {
+	LOG(DEBUG, "In void HttpWindow::startRequest(QUrl url)");
 	reply = qnam.get(QNetworkRequest(url));
 	connect(reply, SIGNAL(finished()), this, SLOT(httpFinished()));
 	connect(reply, SIGNAL(readyRead()), this, SLOT(httpReadyRead()));
@@ -112,18 +122,36 @@ void HttpWindow::startRequest(QUrl url) {
 			SLOT(updateDataReadProgress(qint64,qint64)));
 }
 
-void HttpWindow::downloadFile() {
-	url = urlLineEdit->text();
+void HttpWindow::downloadAllFiles() {
+	for (int i = 0; i < this->urls->size(); i++) {
+		LOG(
+				DEBUG,
+				"In void HttpWindow::downloadAllFiles(std::vector<QUrl>* _urls, std::vector<QString>* _savePaths).");
+		LOG(
+				DEBUG,
+				" downloading : " + this->urls->at(i).authority()
+						+ this->urls->at(i).path());
+		LOG(DEBUG, " saving at : " + this->savePaths->at(i));
+		this->downloadFile(this->urls->at(i), this->savePaths->at(i));
+	}
+}
 
-	LOG(DEBUG, "In HttpWindow::downloadFile() --> url : " + url.path());
+void HttpWindow::downloadFile(QUrl _url, QString _savePath) {
+	QUrl url = _url;
+	QString savePath = _savePath;
+
+	LOG(
+			DEBUG,
+			"In HttpWindow::downloadFile() --> url : " + url.authority()
+					+ url.path());
 
 	QFileInfo fileInfo(url.path());
-	QString fileName = this->savePath + fileInfo.fileName();
+	QString fileName = savePath + fileInfo.fileName();
 
 	LOG(DEBUG, "In HttpWindow::downloadFile() --> fileName : " + fileName);
 
 	if (fileName.isEmpty())
-		fileName = this->savePath + "file.txt";
+		fileName = savePath + "file.txt";
 
 	if (QFile::exists(fileName)) {
 		if (QMessageBox::question(
@@ -134,6 +162,10 @@ void HttpWindow::downloadFile() {
 				QMessageBox::No) == QMessageBox::No)
 			return;
 		QFile::remove(fileName);
+		LOG(
+				DEBUG,
+				"In HttpWindow::downloadFile() --> " + fileName
+						+ " exists : it will be overwritten.");
 	}
 
 	file = new QFile(fileName);
@@ -165,6 +197,7 @@ void HttpWindow::cancelDownload() {
 }
 
 void HttpWindow::httpFinished() {
+	LOG(DEBUG, "In void HttpWindow::httpFinished()");
 	if (httpRequestAborted) {
 		if (file) {
 			file->close();
@@ -189,23 +222,14 @@ void HttpWindow::httpFinished() {
 		QMessageBox::information(this, tr("HTTP"),
 				tr("Download failed: %1.") .arg(reply->errorString()));
 		downloadButton->setEnabled(true);
-	} else if (!redirectionTarget.isNull()) {
-		QUrl newUrl = url.resolved(redirectionTarget.toUrl());
-		if (QMessageBox::question(this, tr("HTTP"),
-				tr("Redirect to %1 ?").arg(newUrl.toString()),
-				QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes) {
-			url = newUrl;
-			reply->deleteLater();
-			file->open(QIODevice::WriteOnly);
-			file->resize(0);
-			startRequest(url);
-			return;
-		}
 	} else {
-		QString fileName =
-				QFileInfo(QUrl(urlLineEdit->text()).path()).fileName();
-		statusLabel->setText(
-				tr("Downloaded %1 to current directory.").arg(fileName));
+		for (size_t i = 0; i < this->urls->size(); i++) {
+			QString fileName = QFileInfo(
+					QUrl(urlLineEditVector.at(i)->text()).path()).fileName();
+			statusLabel->setText(
+					tr("Downloaded %1 to current directory.").arg(fileName));
+		}
+
 		httpRequestSucceded = true;
 		//downloadButton->setEnabled(true);
 	}
@@ -217,6 +241,7 @@ void HttpWindow::httpFinished() {
 }
 
 void HttpWindow::httpReadyRead() {
+	LOG(DEBUG, "In void HttpWindow::httpReadyRead()");
 	// this slot gets called every time the QNetworkReply has new data.
 	// We read all of its new data and write it into the file.
 	// That way we use less RAM than when reading it at the finished()
@@ -234,7 +259,11 @@ void HttpWindow::updateDataReadProgress(qint64 bytesRead, qint64 totalBytes) {
 }
 
 void HttpWindow::enableDownloadButton() {
-	downloadButton->setEnabled(!urlLineEdit->text().isEmpty());
+	bool enable = TRUE;
+	for (size_t i = 0; i < this->urls->size(); i++) {
+		enable = enable && !urlLineEditVector.at(i)->text().isEmpty();
+	}
+	downloadButton->setEnabled(enable);
 }
 
 void HttpWindow::slotAuthenticationRequired(QNetworkReply*,
