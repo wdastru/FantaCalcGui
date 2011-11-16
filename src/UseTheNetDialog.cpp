@@ -14,7 +14,7 @@ UseTheNetDialog::UseTheNetDialog(QWidget *parent) :
 	yesHasBeenClicked = FALSE;
 	downloadSuccess = FALSE;
 
-	LOG(DEBUG, "UseTheNetDialog object created.");
+	LOG(DEBUG, "In UseTheNetDialog::UseTheNetDialog(QWidget *parent) -> object created.");
 }
 UseTheNetDialog::~UseTheNetDialog() {
 }
@@ -32,7 +32,8 @@ void UseTheNetDialog::setQuestion(const std::string question) {
 					0, QApplication::UnicodeUTF8));
 }
 void UseTheNetDialog::yesClicked() {
-	LOG(DEBUG, "In void UseTheNetDialog::yesClicked() : network will be accessed.");
+	LOG(DEBUG,
+			"In UseTheNetDialog::yesClicked() : network will be accessed.");
 	this->yesHasBeenClicked = TRUE;
 	this->noHasBeenClicked = FALSE;
 
@@ -53,27 +54,40 @@ void UseTheNetDialog::yesClicked() {
 				"In UseTheNetDialog::yesClicked() --> the download of files succeded: closing useTheNetDialog.");
 		this->hasFinished = TRUE;
 		this->downloadSuccess = TRUE;
-		this->close();
 	} else {
+
 		LOG(DEBUG,
 				"In UseTheNetDialog::yesClicked() --> the download of files failed.");
 		this->downloadSuccess = FALSE;
 	}
+	this->close();
 }
 void UseTheNetDialog::noClicked() {
-	this->hasFinished = true;
-	LOG(DEBUG, "Network will not be accessed.");
+	LOG(DEBUG,
+			"In UseTheNetDialog::noClicked() -> network will not be accessed.");
+
+	this->hasFinished = TRUE;
+	this->yesHasBeenClicked = FALSE;
+	this->noHasBeenClicked = TRUE;
 
 	noNetFileDialog = new NoNetFileDialog(this);
 	noNetFileDialog->exec();
+
 	if (!noNetFileDialog->hasBeenAborted) {
 		this->noNetSquadreFile = noNetFileDialog->getFileNameSquadre();
+		LOG(
+				DEBUG,
+				"In void UseTheNetDialog::noClicked() -> fileNameSquadre : "
+						+ this->noNetSquadreFile);
 		this->noNetGazzettaFile = noNetFileDialog->getFileNameGazzetta();
+		LOG(
+				DEBUG,
+				"In void UseTheNetDialog::noClicked() -> fileNameSquadre : "
+						+ this->noNetGazzettaFile);
+		this->hasFinished = TRUE;
 	} else {
-		;
+		this->hasFinished = FALSE;
 	}
-	this->yesHasBeenClicked = FALSE;
-	this->noHasBeenClicked = TRUE;
 	this->close();
 }
 void UseTheNetDialog::abortClicked() {

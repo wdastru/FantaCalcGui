@@ -129,10 +129,20 @@ void HttpWindow::downloadAllFiles() {
 				"In void HttpWindow::downloadAllFiles(std::vector<QUrl>* _urls, std::vector<QString>* _savePaths).");
 		LOG(
 				DEBUG,
-				" downloading : " + this->urls->at(i).authority()
+				" In void HttpWindow::downloadAllFiles(std::vector<QUrl>* _urls, std::vector<QString>* _savePaths) --> downloading : "
+						+ this->urls->at(i).authority()
 						+ this->urls->at(i).path());
 		LOG(DEBUG, " saving at : " + this->savePaths->at(i));
 		this->downloadFile(this->urls->at(i), this->savePaths->at(i));
+	}
+
+	if (httpRequestSucceded) {
+		this->close();
+		return;
+	} else {
+		LOG(
+				DEBUG,
+				" In void HttpWindow::downloadAllFiles(std::vector<QUrl>* _urls, std::vector<QString>* _savePaths) --> download of files failed.");
 	}
 }
 

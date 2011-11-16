@@ -32,12 +32,13 @@ int main(int argc, char *argv[]) {
 	singletonQtLogger::Inst()->setDebugStatus(
 			IniFileManager::Inst()->getDebugStatus());
 
-	LOG(DEBUG, "In main(): Logger started.");
+	LOG(DEBUG, "In main() -> Logger started.");
 
 	LOG(
 			DEBUG,
-			"Contenuto iniFile (" + IniFileManager::Inst()->getIniFilePath()
-					+ "):<br />" + IniFileManager::Inst()->showIniFile());
+			"In main() -> contenuto iniFile ("
+					+ IniFileManager::Inst()->getIniFilePath() + "):<br />"
+					+ IniFileManager::Inst()->showIniFile());
 
 	UseTheNetDialog * useTheNetDialog = new UseTheNetDialog(THE_LOGGER);
 	useTheNetDialog->setQuestion(
@@ -56,25 +57,29 @@ int main(int argc, char *argv[]) {
 		/*
 		 *  --> Controllo dell'input dell'utente a UseTheNetDialog
 		 */
-		if (useTheNetDialog->getYesClicked()
-				&& useTheNetDialog->getDownloadSuccess()) {
-			/*
-			 * --> Scegli, scarica i file dalla rete e crea file squadre
-			 */
-			chooseFileFromAListDialog = new ChooseFileFromAListDialog(
-					IniFileManager::Inst()->getListaFormazioni(),
-					IniFileManager::Inst()->getListaGazFiles(), THE_LOGGER);
-			chooseFileFromAListDialog->exec();
-			fileGazzetta = chooseFileFromAListDialog->getFileGazzetta();
-			fileFormazioni = chooseFileFromAListDialog->getFileFormazioni();
-			// <-- Scegli e scarica i file dalla rete e crea file squadre
+		if (useTheNetDialog->getYesClicked()) {
+			if (useTheNetDialog->getDownloadSuccess()) {
+				/*
+				 * --> Scegli, scarica i file dalla rete e crea file squadre
+				 */
+				chooseFileFromAListDialog = new ChooseFileFromAListDialog(
+						IniFileManager::Inst()->getListaFormazioni(),
+						IniFileManager::Inst()->getListaGazFiles(), THE_LOGGER);
+				chooseFileFromAListDialog->exec();
+				fileGazzetta = chooseFileFromAListDialog->getFileGazzetta();
+				fileFormazioni = chooseFileFromAListDialog->getFileFormazioni();
+				// <-- Scegli e scarica i file dalla rete e crea file squadre
+			} else {
+				LOG(FATAL, "In main() --> the net was used but the download failed.");
+				return EXIT_FAILURE;
+			}
 		} else if (useTheNetDialog->getNoClicked()) {
 			fileGazzetta = useTheNetDialog->getNoNetGazzettaFile();
 			fileFormazioni = useTheNetDialog->getNoNetSquadreFile();
 		} else if (useTheNetDialog->hasBeenAborted) {
-			LOG(DEBUG, "In main --> useTheNetDialog aborted.");
+			LOG(DEBUG, "In main() --> useTheNetDialog aborted.");
 		} else {
-			LOG(FATAL, "In main --> Caso strano, che si fa?");
+			LOG(FATAL, "In main() --> Caso strano, che si fa?");
 		}
 		// <-- fine controllo dell'input dell'utente a UseTheNetDialog
 
@@ -83,28 +88,25 @@ int main(int argc, char *argv[]) {
 		 */
 		GazzettaFileReader * gazzettaFileReader = new GazzettaFileReader(
 				fileGazzetta);
-		//	std::vector<std::vector<std::string> > allThePlayers =
-		//			gazzettaFileReader->getOutput();
 
 		FormazioniFileReader * formazioniFileReader = new FormazioniFileReader(
 				fileFormazioni);
 		formazioniFileReader->setPlayers(gazzettaFileReader->getOutput());
 		formazioniFileReader->execute();
-		// <-- lettura file Gazzetta e Formazioni
-		FANTA->execute();
+				// <-- lettura file Gazzetta e Formazioni
+		//		FANTA->execute();
+		//
+		//		QString match = IniFileManager::Inst()->getRisultatiPath()
+		//				+ "risultato_" + QString::fromStdString(FANTA->getTeamName(0))
+		//				+ "-" + QString::fromStdString(FANTA->getTeamName(1)) + "_"
+		//				+ QFileInfo(FANTA->getFileGazzetta()).fileName();
+		//
+		//		FANTA->printTitolo(
+		//				FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
+		//		FANTA->printRiepilogo();
+		//		FANTA->printFormations();
 
-		QString match = IniFileManager::Inst()->getRisultatiPath()
-				+ "risultato_" + QString::fromStdString(FANTA->getTeamName(0))
-				+ "-" + QString::fromStdString(FANTA->getTeamName(1)) + "_"
-				+ QFileInfo(FANTA->getFileGazzetta()).fileName();
-
-		FANTA->printTitolo(
-				FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
-		FANTA->printRiepilogo();
-		FANTA->printFormations();
-
-		singletonQtLogger::Inst()->setLogFileName(match);
-		singletonQtLogger::Inst()->saveLogFile();
+		//		singletonQtLogger::Inst()->setLogFileName(match);
 	} else
 		return a.exec();
 }
