@@ -44,6 +44,7 @@ int main(int argc, char *argv[]) {
 			"<span style='font-size:8pt; font-weight:600; color:#ff0000;'>Si vuole usare la rete per scaricare i files?</span><br /><br /><span style='font-size:8pt; font-weight:200; color:#000000;'>se s&iacute;, assicurarsi di essere connessi.</span>");
 	do
 		useTheNetDialog->exec();
+//		useTheNetDialog->show();
 	while (!useTheNetDialog->hasFinished);
 
 	useTheNetDialog->close();
@@ -104,7 +105,7 @@ int main(int argc, char *argv[]) {
 		FANTA->printFormations();
 
 		singletonQtLogger::Inst()->setLogFileName(match);
-		singletonQtLogger::Inst()->saveLogFile();
+		//singletonQtLogger::Inst()->saveLogFile();
 	} else
 		return a.exec();
 }
