@@ -80,15 +80,16 @@ private slots:
 	void updateDataReadProgress(qint64 bytesRead, qint64 totalBytes);
 	void enableDownloadButton();
 	void slotAuthenticationRequired(QNetworkReply*, QAuthenticator *);
+	void closeDialog();
 #ifndef QT_NO_OPENSSL
 	void sslErrors(QNetworkReply*, const QList<QSslError> &errors);
 #endif
 
 private:
 	QLabel * statusLabel;
-	std::vector<QLabel * > urlLabelVector;
+	std::vector<QLabel *> urlLabelVector;
 	//QLabel * urlLabel;
-	std::vector<QLineEdit * > urlLineEditVector;
+	std::vector<QLineEdit *> urlLineEditVector;
 	//QLineEdit * urlLineEdit;
 	QProgressDialog * progressDialog;
 	QPushButton * downloadButton;
