@@ -33,7 +33,7 @@ void UseTheNetDialog::setQuestion(const std::string question) {
 }
 void UseTheNetDialog::yesClicked() {
 	LOG(DEBUG,
-			"In UseTheNetDialog::yesClicked() : network will be accessed.");
+			"In void UseTheNetDialog::yesClicked() : network will be accessed.");
 	this->yesHasBeenClicked = TRUE;
 	this->noHasBeenClicked = FALSE;
 
@@ -63,10 +63,8 @@ void UseTheNetDialog::yesClicked() {
 	this->close();
 }
 void UseTheNetDialog::noClicked() {
-	LOG(DEBUG,
-			"In UseTheNetDialog::noClicked() -> network will not be accessed.");
+	LOG(DEBUG, "In UseTheNetDialog::noClicked() --> Network will not be accessed.");
 
-	this->hasFinished = TRUE;
 	this->yesHasBeenClicked = FALSE;
 	this->noHasBeenClicked = TRUE;
 
@@ -80,15 +78,12 @@ void UseTheNetDialog::noClicked() {
 				"In void UseTheNetDialog::noClicked() -> fileNameSquadre : "
 						+ this->noNetSquadreFile);
 		this->noNetGazzettaFile = noNetFileDialog->getFileNameGazzetta();
-		LOG(
-				DEBUG,
-				"In void UseTheNetDialog::noClicked() -> fileNameSquadre : "
-						+ this->noNetGazzettaFile);
 		this->hasFinished = TRUE;
+		this->close();
 	} else {
 		this->hasFinished = FALSE;
+		return;
 	}
-	this->close();
 }
 void UseTheNetDialog::abortClicked() {
 	this->hasBeenAborted = true;

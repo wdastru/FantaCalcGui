@@ -45,6 +45,7 @@ int main(int argc, char *argv[]) {
 			"<span style='font-size:8pt; font-weight:600; color:#ff0000;'>Si vuole usare la rete per scaricare i files?</span><br /><br /><span style='font-size:8pt; font-weight:200; color:#000000;'>se s&iacute;, assicurarsi di essere connessi.</span>");
 	do
 		useTheNetDialog->exec();
+//		useTheNetDialog->show();
 	while (!useTheNetDialog->hasFinished);
 
 	useTheNetDialog->close();
@@ -93,20 +94,21 @@ int main(int argc, char *argv[]) {
 				fileFormazioni);
 		formazioniFileReader->setPlayers(gazzettaFileReader->getOutput());
 		formazioniFileReader->execute();
-				// <-- lettura file Gazzetta e Formazioni
-		//		FANTA->execute();
-		//
-		//		QString match = IniFileManager::Inst()->getRisultatiPath()
-		//				+ "risultato_" + QString::fromStdString(FANTA->getTeamName(0))
-		//				+ "-" + QString::fromStdString(FANTA->getTeamName(1)) + "_"
-		//				+ QFileInfo(FANTA->getFileGazzetta()).fileName();
-		//
-		//		FANTA->printTitolo(
-		//				FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
-		//		FANTA->printRiepilogo();
-		//		FANTA->printFormations();
+		// <-- lettura file Gazzetta e Formazioni
+		FANTA->execute();
 
-		//		singletonQtLogger::Inst()->setLogFileName(match);
+		QString match = IniFileManager::Inst()->getRisultatiPath()
+				+ "risultato_" + QString::fromStdString(FANTA->getTeamName(0))
+				+ "-" + QString::fromStdString(FANTA->getTeamName(1)) + "_"
+				+ QFileInfo(FANTA->getFileGazzetta()).fileName();
+
+		FANTA->printTitolo(
+				FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
+		FANTA->printRiepilogo();
+		FANTA->printFormations();
+
+		singletonQtLogger::Inst()->setLogFileName(match);
+		//singletonQtLogger::Inst()->saveLogFile();
 	} else
 		return a.exec();
 }
