@@ -91,7 +91,7 @@ HttpWindow::HttpWindow(QWidget *parent, std::vector<QUrl>* _urls,
 #endif
 	connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
 	connect(downloadButton, SIGNAL(clicked()), this, SLOT(downloadAllFiles()));
-	connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
+	connect(quitButton, SIGNAL(clicked()), this, SLOT(closeDialog()));
 
 	QVBoxLayout *vLayout = new QVBoxLayout;
 	for (size_t i = 0; i < this->urls->size(); i++) {
@@ -111,6 +111,10 @@ HttpWindow::HttpWindow(QWidget *parent, std::vector<QUrl>* _urls,
 
 	setWindowTitle(tr("HTTP"));
 	//urlLineEditVector.at(0)->setFocus();
+}
+
+void HttpWindow::closeDialog() {
+	this->close();
 }
 
 void HttpWindow::startRequest(QUrl url) {

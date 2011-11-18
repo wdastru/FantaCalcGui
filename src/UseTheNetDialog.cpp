@@ -54,13 +54,14 @@ void UseTheNetDialog::yesClicked() {
 				"In UseTheNetDialog::yesClicked() --> the download of files succeded: closing useTheNetDialog.");
 		this->hasFinished = TRUE;
 		this->downloadSuccess = TRUE;
+		this->close();
 	} else {
 
 		LOG(DEBUG,
 				"In UseTheNetDialog::yesClicked() --> the download of files failed.");
 		this->downloadSuccess = FALSE;
+		return;
 	}
-	this->close();
 }
 void UseTheNetDialog::noClicked() {
 	LOG(DEBUG, "In UseTheNetDialog::noClicked() --> Network will not be accessed.");
