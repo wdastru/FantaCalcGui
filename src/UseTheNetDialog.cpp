@@ -56,7 +56,6 @@ void UseTheNetDialog::yesClicked() {
 		this->downloadSuccess = TRUE;
 		this->close();
 	} else {
-
 		LOG(DEBUG,
 				"In UseTheNetDialog::yesClicked() --> the download of files failed.");
 		this->downloadSuccess = FALSE;

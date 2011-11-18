@@ -130,9 +130,6 @@ void HttpWindow::downloadAllFiles() {
 	for (int i = 0; i < this->urls->size(); i++) {
 		LOG(
 				DEBUG,
-				"In void HttpWindow::downloadAllFiles(std::vector<QUrl>* _urls, std::vector<QString>* _savePaths).");
-		LOG(
-				DEBUG,
 				" In void HttpWindow::downloadAllFiles(std::vector<QUrl>* _urls, std::vector<QString>* _savePaths) --> downloading : "
 						+ this->urls->at(i).authority()
 						+ this->urls->at(i).path());
@@ -173,13 +170,15 @@ void HttpWindow::downloadFile(QUrl _url, QString _savePath) {
 				tr("HTTP - File exists !!!"),
 				tr("There already exists a file called %1. Overwrite?").arg(
 						fileName), QMessageBox::Yes | QMessageBox::No,
-				QMessageBox::No) == QMessageBox::No)
+				QMessageBox::No) == QMessageBox::No) {
 			return;
-		QFile::remove(fileName);
-		LOG(
-				DEBUG,
-				"In HttpWindow::downloadFile() --> " + fileName
-						+ " exists : it will be overwritten.");
+		} else {
+			QFile::remove(fileName);
+			LOG(
+					DEBUG,
+					"In HttpWindow::downloadFile() --> " + fileName
+							+ " exists : it will be overwritten.");
+		}
 	}
 
 	file = new QFile(fileName);
@@ -242,10 +241,15 @@ void HttpWindow::httpFinished() {
 					QUrl(urlLineEditVector.at(i)->text()).path()).fileName();
 			statusLabel->setText(
 					tr("Downloaded %1 to current directory.").arg(fileName));
+
+			LOG(
+					DEBUG,
+					"In void HttpWindow::httpFinished() --> " + QUrl(
+							urlLineEditVector.at(i)->text()).path()
+							+ " downloaded.");
 		}
 
 		httpRequestSucceded = true;
-		//downloadButton->setEnabled(true);
 	}
 
 	reply->deleteLater();
