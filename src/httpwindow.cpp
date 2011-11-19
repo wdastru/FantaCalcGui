@@ -138,7 +138,11 @@ void HttpWindow::downloadAllFiles() {
 	}
 
 	if (httpRequestSucceded) {
-		this->close();
+
+		LOG(
+				DEBUG,
+				" In void HttpWindow::downloadAllFiles(std::vector<QUrl>* _urls, std::vector<QString>* _savePaths) --> download of files succeded.");
+
 		return;
 	} else {
 		LOG(
