@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
 			"<span style='font-size:8pt; font-weight:600; color:#ff0000;'>Si vuole usare la rete per scaricare i files?</span><br /><br /><span style='font-size:8pt; font-weight:200; color:#000000;'>se s&iacute;, assicurarsi di essere connessi.</span>");
 	do
 		useTheNetDialog->exec();
-//		useTheNetDialog->show();
+	//		useTheNetDialog->show();
 	while (!useTheNetDialog->hasFinished);
 
 	useTheNetDialog->close();
@@ -61,17 +61,24 @@ int main(int argc, char *argv[]) {
 		if (useTheNetDialog->getYesClicked()) {
 			if (useTheNetDialog->getDownloadSuccess()) {
 				/*
-				 * --> Scegli, scarica i file dalla rete e crea file squadre
+				 * --> Scegli, scarica i file dalla rete
 				 */
 				chooseFileFromAListDialog = new ChooseFileFromAListDialog(
 						IniFileManager::Inst()->getListaFormazioni(),
 						IniFileManager::Inst()->getListaGazFiles(), THE_LOGGER);
 				chooseFileFromAListDialog->exec();
-				fileGazzetta = chooseFileFromAListDialog->getFileGazzetta();
-				fileFormazioni = chooseFileFromAListDialog->getFileFormazioni();
-				// <-- Scegli e scarica i file dalla rete e crea file squadre
+
+				if (!chooseFileFromAListDialog->wasCancelClicked()) {
+					fileGazzetta = chooseFileFromAListDialog->getFileGazzetta();
+					fileFormazioni
+							= chooseFileFromAListDialog->getFileFormazioni();
+				} else {
+					// ritornare a useTheNetDialog->exec()
+				}
+				// <-- Scegli e scarica i file dalla rete
 			} else {
-				LOG(FATAL, "In main() --> the net was used but the download failed.");
+				LOG(FATAL,
+						"In main() --> the net was used but the download failed.");
 				return EXIT_FAILURE;
 			}
 		} else if (useTheNetDialog->getNoClicked()) {
@@ -95,6 +102,7 @@ int main(int argc, char *argv[]) {
 		formazioniFileReader->setPlayers(gazzettaFileReader->getOutput());
 		formazioniFileReader->execute();
 		// <-- lettura file Gazzetta e Formazioni
+
 		FANTA->execute();
 
 		QString match = IniFileManager::Inst()->getRisultatiPath()

@@ -72,7 +72,6 @@ public:
 	void startRequest(QUrl url);
 
 private slots:
-	void downloadFile(QUrl, QString);
 	void downloadAllFiles();
 	void cancelDownload();
 	void httpFinished();
@@ -86,6 +85,7 @@ private slots:
 #endif
 
 private:
+	void downloadFile(QUrl, QString);
 	QLabel * statusLabel;
 	std::vector<QLabel *> urlLabelVector;
 	//QLabel * urlLabel;

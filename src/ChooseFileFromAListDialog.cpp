@@ -300,7 +300,7 @@ void ChooseFileFromAListDialog::quit() {
 	for (int i = 0; i < this->nGazFiles; i++)
 		gaz.at(i)->setChecked(false);
 
-	this->cancelClicked = true;
+	this->cancelClicked = TRUE;
 	this->close();
 }
 void ChooseFileFromAListDialog::enableOkButton() {
@@ -692,4 +692,10 @@ void ChooseFileFromAListDialog::execute() {
 	this->fileGazzetta = IniFileManager::Inst()->getGazzettaPath()
 			+ this->getGazFile();
 	this->accept();
+}
+bool ChooseFileFromAListDialog::wasCancelClicked() {
+	return this->cancelClicked;
+}
+bool ChooseFileFromAListDialog::isFinished() {
+	return this->hasFinished;
 }

@@ -33,6 +33,7 @@ public:
 	QString getGazFile();
 	QString getAwayFile();
 	bool wasCancelClicked();
+	bool isFinished();
 	bool getDownloadSuccess();
 	QTabWidget *Tabs;
 	QWidget *formazioniTab;
