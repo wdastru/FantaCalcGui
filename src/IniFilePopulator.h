@@ -1,7 +1,7 @@
 #ifndef INIFILEPOPULATOR_H
 #define INIFILEPOPULATOR_H
 
-#include "singletonQtLogger.h"
+#include "Logger.h"
 #include "IniFileManager.h"
 #include "defines.h"
 

@@ -5,7 +5,7 @@
 
 #include "defines.h"
 #include "StringModifier.h"
-#include "singletonQtLogger.h"
+#include "Logger.h"
 
 class QLabel;
 class QErrorMessage;

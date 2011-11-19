@@ -6,7 +6,7 @@
 #include <QtGui/QApplication>
 #include <QtCore/QFileInfo>
 
-#include "singletonQtLogger.h"
+#include "Logger.h"
 #include "defines.h"
 #include "stringModifiers.h"
 #include "toString.h"
@@ -19,6 +19,7 @@
 #include "FormazioniFileReader.h"
 #include "StringModifier.h"
 #include "Fanta.h"
+#include <iostream>
 
 using namespace std;
 
@@ -28,8 +29,7 @@ int main(int argc, char *argv[]) {
 	CVersion version;
 	QString loggerTitle = "FantaCalcGui v" + version.getVersion();
 
-	singletonQtLogger::Inst()->setTitle(loggerTitle);
-	singletonQtLogger::Inst()->setDebugStatus(
+	THE_LOGGER->setDebugStatus(
 			IniFileManager::Inst()->getDebugStatus());
 
 	LOG(DEBUG, "In main() -> Logger started.");
@@ -115,8 +115,7 @@ int main(int argc, char *argv[]) {
 		FANTA->printRiepilogo();
 		FANTA->printFormations();
 
-		singletonQtLogger::Inst()->setLogFileName(match);
-		//singletonQtLogger::Inst()->saveLogFile();
+		THE_LOGGER->setLogFileName(match);
 	} else
 		return a.exec();
 }

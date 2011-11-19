@@ -1,19 +1,19 @@
-#ifndef LOGGER_H
-#define LOGGER_H
+/*
+ * Logger.h
+ *
+ *  Created on: 19/nov/2011
+ *      Author: WAleViolaeIvan
+ */
 
-#include <QtGui/QDialog>
-#include "ui_Logger.h"
+#ifndef LOGGER_H_
+#define LOGGER_H_
 
-class Logger : public QDialog
-{
-    Q_OBJECT
+#include "singletonQtLogger.h"
 
+class Logger: public singletonQtLogger {
 public:
-    Logger(QWidget *parent = 0);
-    virtual ~Logger();
-    Ui::LoggerClass ui;
-
-private:
+	Logger();
+	~Logger();
 };
 
-#endif // LOGGER_H
+#endif /* LOGGER_H_ */

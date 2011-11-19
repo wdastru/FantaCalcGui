@@ -45,7 +45,7 @@ void UseTheNetDialog::yesClicked() {
 	savePaths->push_back(IniFileManager::Inst()->getListePath());
 	savePaths->push_back(IniFileManager::Inst()->getListePath());
 
-	HttpWindow httpWin(singletonQtLogger::Inst(), urls, savePaths);
+	HttpWindow httpWin(THE_LOGGER, urls, savePaths);
 	httpWin.exec();
 
 	if (httpWin.requestSucceded()) {

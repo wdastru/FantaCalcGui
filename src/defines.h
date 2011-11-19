@@ -46,7 +46,8 @@
 #endif /* TYPE_OF_LOG_MSG */
 
 #ifndef THE_LOGGER
-#define THE_LOGGER singletonQtLogger::Inst()
+//#define THE_LOGGER singletonQtLogger::Inst()
+#define THE_LOGGER Logger::Inst()
 #endif /* THE_LOGGER */
 
 #ifndef STR_MOD

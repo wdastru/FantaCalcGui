@@ -6,7 +6,7 @@
 #include <QtCore/QFileInfo>
 #include <QUrl>
 
-#include "singletonQtLogger.h"
+#include "Logger.h"
 #include "defines.h"
 
 #include "IniFileManager.h"

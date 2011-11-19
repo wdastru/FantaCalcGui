@@ -15,7 +15,7 @@
 #include <QtGui/QMessageBox>
 
 #include "defines.h"
-#include "singletonQtLogger.h"
+#include "Logger.h"
 #include "StringModifier.h"
 #include "Less25MinDialog.h"
 

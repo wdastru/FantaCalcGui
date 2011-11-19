@@ -10,7 +10,7 @@
 
 #include <QtCore/QString>
 
-#include "singletonQtLogger.h"
+#include "Logger.h"
 #include "defines.h"
 #include "IniFilePopulator.h"
 

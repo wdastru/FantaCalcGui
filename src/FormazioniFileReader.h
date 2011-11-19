@@ -14,7 +14,7 @@
 #include "QtCore/QString"
 
 #include "Fanta.h"
-#include "singletonQtLogger.h"
+#include "Logger.h"
 #include "StringModifier.h"
 #include "WhichOfTheseDialog.h"
 #include "WhichOfLevenshteinDialog.h"

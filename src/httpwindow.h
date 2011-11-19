@@ -45,7 +45,7 @@
 #include <QNetworkAccessManager>
 #include <QUrl>
 
-#include "singletonQtLogger.h"
+#include "Logger.h"
 #include "defines.h"
 
 QT_BEGIN_NAMESPACE

@@ -8,7 +8,7 @@
 #ifndef GAZZETTAFILEREADER_H_
 #define GAZZETTAFILEREADER_H_
 
-#include "singletonQtLogger.h"
+#include "Logger.h"
 #include "defines.h"
 #include "Fanta.h"
 

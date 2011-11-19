@@ -9,7 +9,7 @@
 #include <QNetworkAccessManager>
 #include "ui_UseTheNetDialog.h"
 
-#include "singletonQtLogger.h"
+#include "Logger.h"
 #include "defines.h"
 
 #include "NoNetFileDialog.h"

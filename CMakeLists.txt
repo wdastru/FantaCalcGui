@@ -10,12 +10,14 @@ SET( SRCS src/main.cpp
 		src/NoNetFileDialog.cpp 
         src/GazzettaFileReader.cpp 
         src/FormazioniFileReader.cpp 
-        src/Fanta.cpp        
+        src/Fanta.cpp
         src/WhichOfTheseDialog.cpp
         src/WhichOfLevenshteinDialog.cpp
         src/Less25MinDialog.cpp
+        src/Logger.cpp
         src/IniFilePopulator.cpp
-        src/StringModifier.cpp )
+        src/StringModifier.cpp 
+        src/singletonQtLogger.cpp )
 SET( HDRS src/CVersion.h
         src/IniFileManager.h
 		src/httpwindow.h
@@ -27,13 +29,16 @@ SET( HDRS src/CVersion.h
         src/Fanta.h        
         src/WhichOfTheseDialog.h
         src/Less25MinDialog.h
+        src/Logger.h
         src/WhichOfLevenshteinDialog.h
         src/IniFilePopulator.h
-        src/StringModifier.h )
+        src/StringModifier.h 
+        src/singletonQtLogger.h )
 SET( UIS  src/authenticationdialog.ui
 		src/UseTheNetDialog.ui
         src/IniFilePopulator.ui
-		src/NoNetFileDialog.ui  )
+		src/NoNetFileDialog.ui 
+		src/singletonQtLogger.ui )
 SET( RCS src/resources.qrc )
 
 # enable warnings
@@ -49,12 +54,9 @@ QT4_WRAP_CPP( MOC_SRCS ${HDRS} )
 INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} 
     C:/Qt/4.7.3/include/
     C:/Qt/4.7.3/include/QtNetwork 
-    D:/Sorgenti/FantaCalcGuiNew/src 
-    D:/Sorgenti/singletonQtLogger_CMake/src 
-    D:/Sorgenti/singletonQtLogger_CMake/build )
-LINK_DIRECTORIES( C:/Qt/4.7.3/bin/
-    D:/Sorgenti/singletonQtLogger_CMake/build )
+    D:/Sorgenti/FantaCalcGuiNew/src  )
+LINK_DIRECTORIES( C:/Qt/4.7.3/bin/ )
 
 ADD_EXECUTABLE( FantaCalcGui ${SRCS} ${MOC_SRCS} ${UI_HDRS} ${RC_SRCS} )
-TARGET_LINK_LIBRARIES( FantaCalcGui ${QT_LIBRARIES} QtNetwork4 QtTest4 SingletonQtLoggerShared )
+TARGET_LINK_LIBRARIES( FantaCalcGui ${QT_LIBRARIES} QtNetwork4 QtTest4 )
 

@@ -418,7 +418,7 @@ void ChooseFileFromAListDialog::doDownload() {
 	savePaths->push_back(IniFileManager::Inst()->getDownloadPath());
 	savePaths->push_back(IniFileManager::Inst()->getGazzettaPath());
 
-	HttpWindow httpWin(singletonQtLogger::Inst(), urls, savePaths);
+	HttpWindow httpWin(THE_LOGGER, urls, savePaths);
 	httpWin.exec();
 
 	if (httpWin.requestSucceded()) {
