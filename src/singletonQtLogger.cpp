@@ -1,4 +1,6 @@
 #include "singletonQtLogger.h"
+#include "IniFileManager.h"
+#include "IniFilePopulator.h"
 
 singletonQtLogger* singletonQtLogger::Inst() {
 	if (pInstance == NULL) {
@@ -111,4 +113,25 @@ void singletonQtLogger::saveLogFile() {
 void singletonQtLogger::saveLogAndClose() {
 	this->saveLogFile();
 	this->close();
+}
+void singletonQtLogger::configClicked() {
+	IniFilePopulator::Inst()->setFormazioniPath(
+			IniFileManager::Inst()->getFormazioniPath());
+	IniFilePopulator::Inst()->setGazzettaPath(
+			IniFileManager::Inst()->getGazzettaPath());
+	IniFilePopulator::Inst()->setRisultatiPath(
+			IniFileManager::Inst()->getRisultatiPath());
+	IniFilePopulator::Inst()->setListePath(
+			IniFileManager::Inst()->getListePath());
+	IniFilePopulator::Inst()->setDownloadPath(
+			IniFileManager::Inst()->getDownloadPath());
+	IniFilePopulator::Inst()->setFormazioniUrl(
+			IniFileManager::Inst()->getFormazioniUrl());
+	IniFilePopulator::Inst()->setGazzettaUrl(
+			IniFileManager::Inst()->getGazzettaUrl());
+	IniFilePopulator::Inst()->setDebugStatus(
+			IniFileManager::Inst()->getDebugStatus());
+	IniFilePopulator::Inst()->exec();
+
+	IniFileManager::Inst()->updateAndWriteIniFile();
 }

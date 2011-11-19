@@ -23,6 +23,7 @@ public:
 
 private slots:
 	void saveLogAndClose();
+	void configClicked();
 
 private:
 	void saveLogFile();
