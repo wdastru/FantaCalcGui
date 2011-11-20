@@ -25,20 +25,24 @@ using namespace std;
 int main(int argc, char *argv[]) {
 	QApplication a(argc, argv);
 
-	CVersion version;
-	QString loggerTitle = "FantaCalcGui v" + version.getVersion();
+//	CVersion version;
+//	QString loggerTitle = "FantaCalcGui v" + version.getVersion();
 
-	singletonQtLogger::Inst()->setTitle(loggerTitle);
-	singletonQtLogger::Inst()->setDebugStatus(
-			IniFileManager::Inst()->getDebugStatus());
+//	singletonQtLogger::Inst()->setTitle(loggerTitle);
+//	singletonQtLogger::Inst()->setDebugStatus(
+//			IniFileManager::Inst()->getDebugStatus());
 
-	LOG(DEBUG, "In main() -> Logger started.");
+	singletonQtLogger::Inst();
 
-	LOG(
-			DEBUG,
-			"In main() -> contenuto iniFile ("
-					+ IniFileManager::Inst()->getIniFilePath() + "):<br />"
-					+ IniFileManager::Inst()->showIniFile());
+//	LOG(DEBUG, "In main() -> Logger started.");
+//
+//	LOG(
+//			DEBUG,
+//			"In main() -> contenuto iniFile ("
+//					+ IniFileManager::Inst()->getIniFilePath() + "):<br />"
+//					+ IniFileManager::Inst()->showIniFile());
+
+	/*
 
 	UseTheNetDialog * useTheNetDialog = new UseTheNetDialog(THE_LOGGER);
 	useTheNetDialog->setQuestion(
@@ -55,14 +59,10 @@ int main(int argc, char *argv[]) {
 		QString fileFormazioni;
 
 		ChooseFileFromAListDialog * chooseFileFromAListDialog = NULL;
-		/*
-		 *  --> Controllo dell'input dell'utente a UseTheNetDialog
-		 */
+		//  --> Controllo dell'input dell'utente a UseTheNetDialog
 		if (useTheNetDialog->getYesClicked()) {
 			if (useTheNetDialog->getDownloadSuccess()) {
-				/*
-				 * --> Scegli, scarica i file dalla rete
-				 */
+				// --> Scegli, scarica i file dalla rete
 				chooseFileFromAListDialog = new ChooseFileFromAListDialog(
 						IniFileManager::Inst()->getListaFormazioni(),
 						IniFileManager::Inst()->getListaGazFiles(), THE_LOGGER);
@@ -91,9 +91,7 @@ int main(int argc, char *argv[]) {
 		}
 		// <-- fine controllo dell'input dell'utente a UseTheNetDialog
 
-		/*
-		 * --> lettura file Gazzetta e Formazioni
-		 */
+		// --> lettura file Gazzetta e Formazioni
 		GazzettaFileReader * gazzettaFileReader = new GazzettaFileReader(
 				fileGazzetta);
 
@@ -119,4 +117,6 @@ int main(int argc, char *argv[]) {
 		//singletonQtLogger::Inst()->saveLogFile();
 	} else
 		return a.exec();
+			 */
+
 }
