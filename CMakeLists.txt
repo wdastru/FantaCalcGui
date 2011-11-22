@@ -6,7 +6,6 @@ SET( SRCS src/main.cpp
         src/httpwindow.cpp
 		src/CVersion.cpp
 		src/ChooseFileFromAListDialog.cpp
-		src/UseTheNetDialog.cpp
 		src/NoNetFileDialog.cpp 
         src/GazzettaFileReader.cpp 
         src/FormazioniFileReader.cpp 
@@ -22,7 +21,6 @@ SET( HDRS src/CVersion.h
         src/IniFileManager.h
 		src/httpwindow.h
         src/ChooseFileFromAListDialog.h
-		src/UseTheNetDialog.h
 		src/NoNetFileDialog.h 
         src/GazzettaFileReader.h
         src/FormazioniFileReader.h 
@@ -35,8 +33,7 @@ SET( HDRS src/CVersion.h
         src/StringModifier.h 
         src/singletonQtLogger.h )
 SET( UIS  src/authenticationdialog.ui
-		src/UseTheNetDialog.ui
-        src/IniFilePopulator.ui
+		src/IniFilePopulator.ui
         src/NoNetFileDialog.ui 
 		src/singletonQtLogger.ui )
 SET( RCS src/resources.qrc )

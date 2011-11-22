@@ -6,12 +6,6 @@
 #include <QtCore/QFileInfo>
 #include <QUrl>
 
-#include "singletonQtLogger.h"
-#include "defines.h"
-
-#include "IniFileManager.h"
-#include "httpwindow.h"
-
 class QLabel;
 class QPushButton;
 class QGroupBox;

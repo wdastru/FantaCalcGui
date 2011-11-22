@@ -129,29 +129,22 @@ void singletonQtLogger::saveLogFile() {
 	file.close();
 }
 void singletonQtLogger::saveLogAndClose() {
+	THE_MANAGER->updateAndWriteIniFile();
 	this->saveLogFile();
 	this->close();
 }
 void singletonQtLogger::configClicked() {
-	IniFilePopulator::Inst()->setFormazioniPath(
-			IniFileManager::Inst()->getFormazioniPath());
-	IniFilePopulator::Inst()->setGazzettaPath(
-			IniFileManager::Inst()->getGazzettaPath());
-	IniFilePopulator::Inst()->setRisultatiPath(
-			IniFileManager::Inst()->getRisultatiPath());
-	IniFilePopulator::Inst()->setListePath(
-			IniFileManager::Inst()->getListePath());
-	IniFilePopulator::Inst()->setDownloadPath(
-			IniFileManager::Inst()->getDownloadPath());
-	IniFilePopulator::Inst()->setFormazioniUrl(
-			IniFileManager::Inst()->getFormazioniUrl());
-	IniFilePopulator::Inst()->setGazzettaUrl(
-			IniFileManager::Inst()->getGazzettaUrl());
-	IniFilePopulator::Inst()->setDebugStatus(
-			IniFileManager::Inst()->getDebugStatus());
-	IniFilePopulator::Inst()->exec();
+	THE_CONFIGURATOR->setFormazioniPath(THE_REPO->getFormazioniPath());
+	THE_CONFIGURATOR->setGazzettaPath(THE_REPO->getGazzettaPath());
+	THE_CONFIGURATOR->setRisultatiPath(THE_REPO->getRisultatiPath());
+	THE_CONFIGURATOR->setListePath(THE_REPO->getListePath());
+	THE_CONFIGURATOR->setDownloadPath(THE_REPO->getDownloadPath());
+	THE_CONFIGURATOR->setFormazioniUrl(THE_REPO->getFormazioniUrl());
+	THE_CONFIGURATOR->setGazzettaUrl(THE_REPO->getGazzettaUrl());
+	THE_CONFIGURATOR->setDebugStatus(THE_REPO->getDebugStatus());
+	THE_CONFIGURATOR->exec();
 
-	IniFileManager::Inst()->updateAndWriteIniFile();
+	THE_MANAGER->updateAndWriteIniFile();
 }
 void singletonQtLogger::onlineClicked() {
 	LOG(DEBUG,
@@ -160,16 +153,14 @@ void singletonQtLogger::onlineClicked() {
 	//	this->noHasBeenClicked = FALSE;
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
-	urls->push_back(
-			QUrl::fromLocalFile(IniFileManager::Inst()->getFileFormazioniUrl()));
-	urls->push_back(
-			QUrl::fromLocalFile(IniFileManager::Inst()->getFileGazzettaUrl()));
+	urls->push_back(QUrl::fromLocalFile(THE_REPO->getFileFormazioniUrl()));
+	urls->push_back(QUrl::fromLocalFile(THE_REPO->getFileGazzettaUrl()));
 
 	std::vector<QString> * savePaths = new std::vector<QString>;
-	savePaths->push_back(IniFileManager::Inst()->getListePath());
-	savePaths->push_back(IniFileManager::Inst()->getListePath());
+	savePaths->push_back(THE_REPO->getListePath());
+	savePaths->push_back(THE_REPO->getListePath());
 
-	HttpWindow httpWin(singletonQtLogger::Inst(), urls, savePaths);
+	HttpWindow httpWin(THE_LOGGER, urls, savePaths);
 	httpWin.exec();
 
 	if (httpWin.requestSucceded()) {

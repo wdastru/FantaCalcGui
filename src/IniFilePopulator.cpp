@@ -1,3 +1,4 @@
+#include "Repository.h"
 #include "IniFilePopulator.h"
 
 IniFilePopulator* IniFilePopulator::Inst() {
@@ -17,27 +18,31 @@ IniFilePopulator::~IniFilePopulator() {
 
 }
 void IniFilePopulator::chooseFormazioniPath() {
-	QString directory = this->getDir("Formazioni Path", this->startDir);
+	QString directory = this->getDir("Formazioni Path",
+			THE_REPO->getFormazioniPath());
 	if (!directory.isEmpty())
 		this->ui.formazioniLineEdit->setText(directory);
 }
 void IniFilePopulator::chooseGazzettaPath() {
-	QString directory = this->getDir("Gazzetta Path", this->startDir);
+	QString directory = this->getDir("Gazzetta Path",
+			THE_REPO->getGazzettaUrl());
 	if (!directory.isEmpty())
 		this->ui.gazzettaLineEdit->setText(directory);
 }
 void IniFilePopulator::chooseDownloadPath() {
-	QString directory = this->getDir("Download Path", this->startDir);
+	QString directory = this->getDir("Download Path",
+			THE_REPO->getDownloadPath());
 	if (!directory.isEmpty())
 		this->ui.downloadLineEdit->setText(directory);
 }
 void IniFilePopulator::chooseRisultatiPath() {
-	QString directory = this->getDir("Risultati Path", this->startDir);
+	QString directory = this->getDir("Risultati Path",
+			THE_REPO->getRisultatiPath());
 	if (!directory.isEmpty())
 		this->ui.risultatiLineEdit->setText(directory);
 }
 void IniFilePopulator::chooseListePath() {
-	QString directory = this->getDir("Liste Path", this->startDir);
+	QString directory = this->getDir("Liste Path", THE_REPO->getListePath());
 	if (!directory.isEmpty())
 		this->ui.listeLineEdit->setText(directory);
 }
@@ -49,9 +54,7 @@ QString IniFilePopulator::getDir(QString caption, QString startDir) {
 			| QFileDialog::ShowDirsOnly;
 	options |= QFileDialog::DontUseNativeDialog;
 
-	QString directory = QFileDialog::getExistingDirectory(this, caption,
-			startDir, options);
-	return directory + "/";
+	return QFileDialog::getExistingDirectory(this, caption, startDir, options);
 }
 void IniFilePopulator::setStartDir(QString _startDir) {
 	this->startDir = _startDir;

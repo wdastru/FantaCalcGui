@@ -24,23 +24,9 @@ public:
 	void updateAndWriteIniFile();
 	void writeIniFile();
 	void readIniFile();
-	QString getListaFormazioni();
-	QString getListaGazFiles();
-	QString getFormazioniPath();
-	QString getGazzettaPath();
-	QString getFileNameOutputPath();
-	QString getRisultatiPath();
-	QString getDownloadPath();
-	QString getListePath();
-	QString getFileFormazioniUrl();
-	QString getFileGazzettaUrl();
-	QString showIniFile();
 	QString getIniFilePath();
 	QString getWorkDir();
-	QString getFormazioniUrl();
-	QString getGazzettaUrl();
-	void setFormazioniPath(QString dir);
-	bool getDebugStatus();
+	QString showIniFile();
 
 private:
 	static IniFileManager* pInstance;

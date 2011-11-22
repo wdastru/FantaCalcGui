@@ -13,10 +13,16 @@
 #include <QtCore/QRect>
 #include <QPalette>
 #include <QtCore/QString>
+
 #include <cstdio>
 #include <cstdlib>
-
 #include <vector>
+
+#include "defines.h"
+#include "singletonQtLogger.h"
+#include "IniFileManager.h"
+#include "httpwindow.h"
+#include "Repository.h"
 #include "toString.h"
 #include "tokenize.h"
 
@@ -407,16 +413,16 @@ void ChooseFileFromAListDialog::doDownload() {
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	urls->push_back(
-			IniFileManager::Inst()->getFormazioniUrl() + this->getHomeFile());
+			THE_REPO->getFormazioniUrl() + this->getHomeFile());
 	urls->push_back(
-			IniFileManager::Inst()->getFormazioniUrl() + this->getAwayFile());
+			THE_REPO->getFormazioniUrl() + this->getAwayFile());
 	urls->push_back(
-			IniFileManager::Inst()->getGazzettaUrl() + this->getGazFile());
+			THE_REPO->getGazzettaUrl() + this->getGazFile());
 
 	std::vector<QString> * savePaths = new std::vector<QString>;
-	savePaths->push_back(IniFileManager::Inst()->getDownloadPath());
-	savePaths->push_back(IniFileManager::Inst()->getDownloadPath());
-	savePaths->push_back(IniFileManager::Inst()->getGazzettaPath());
+	savePaths->push_back(THE_REPO->getDownloadPath());
+	savePaths->push_back(THE_REPO->getDownloadPath());
+	savePaths->push_back(THE_REPO->getGazzettaPath());
 
 	HttpWindow httpWin(singletonQtLogger::Inst(), urls, savePaths);
 	httpWin.exec();
@@ -440,10 +446,10 @@ unsigned int ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 			"In unsigned int ChooseFileFromAListDialog::createFileSquadreFromWebFiles().");
 	if (this->downloadSuccess) {
 		QFile fHome(
-				IniFileManager::Inst()->getDownloadPath() + "/"
+				THE_REPO->getDownloadPath() + "/"
 						+ this->getHomeFile());
 		QFile fAway(
-				IniFileManager::Inst()->getDownloadPath() + "/"
+				THE_REPO->getDownloadPath() + "/"
 						+ this->getAwayFile());
 
 		fHome.open(QIODevice::ReadOnly);
@@ -466,7 +472,7 @@ unsigned int ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 		QFile fGaz(this->getGazFile());
 		QFileInfo FIfGaz(fGaz);
 
-		QString fileOut = IniFileManager::Inst()->getFormazioniPath()
+		QString fileOut = THE_REPO->getFormazioniPath()
 				+ FIfHome.baseName().split("_").at(0) + "_"
 				+ FIfAway.baseName().split("_").at(0) + "_" + FIfGaz.baseName()
 				+ ".txt";
@@ -689,7 +695,7 @@ void ChooseFileFromAListDialog::execute() {
 	LOG(DEBUG, "In void ChooseFileFromAListDialog::execute().");
 	this->doDownload();
 	this->createFileSquadreFromWebFiles();
-	this->fileGazzetta = IniFileManager::Inst()->getGazzettaPath()
+	this->fileGazzetta = THE_REPO->getGazzettaPath()
 			+ this->getGazFile();
 	this->accept();
 }
