@@ -11,12 +11,11 @@
 #include <QtCore/QString>
 
 #include "singletonQtLogger.h"
-#include "defines.h"
 #include "IniFilePopulator.h"
 
-class IniFileManager {
+#include "defines.h"
 
-	friend class IniFilePopulator;
+class IniFileManager {
 
 public:
 	IniFileManager();
@@ -47,14 +46,6 @@ private:
 	static IniFileManager* pInstance;
 	QString iniFileName;
 	QString workDir;
-	QString formazioniPath;
-	QString gazzettaPath;
-	QString risultatiPath;
-	QString listePath;
-	QString downloadPath;
-	QString formazioniUrl;
-	QString gazzettaUrl;
-	bool debugStatus;
 };
 
 #endif /* INIFILEMANAGER_H_ */

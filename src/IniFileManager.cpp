@@ -6,6 +6,7 @@
  */
 
 #include "IniFileManager.h"
+#include "Repository.h"
 
 #include <QtCore/QDir>
 #include <QtCore/QTextStream>
@@ -32,14 +33,14 @@ IniFileManager::~IniFileManager() {
 }
 void IniFileManager::updateAndWriteIniFile() {
 
-	this->formazioniPath = IniFilePopulator::Inst()->getFormazioniPath();
-	this->gazzettaPath = IniFilePopulator::Inst()->getGazzettaPath();
-	this->risultatiPath = IniFilePopulator::Inst()->getRisultatiPath();
-	this->downloadPath = IniFilePopulator::Inst()->getDownloadPath();
-	this->listePath = IniFilePopulator::Inst()->getListePath();
-	this->formazioniUrl = IniFilePopulator::Inst()->getFormazioniUrl();
-	this->gazzettaUrl = IniFilePopulator::Inst()->getGazzettaUrl();
-	this->debugStatus = IniFilePopulator::Inst()->getDebugStatus();
+	THE_REPO->formazioniPath = IniFilePopulator::Inst()->getFormazioniPath();
+	THE_REPO->gazzettaPath = IniFilePopulator::Inst()->getGazzettaPath();
+	THE_REPO->risultatiPath = IniFilePopulator::Inst()->getRisultatiPath();
+	THE_REPO->downloadPath = IniFilePopulator::Inst()->getDownloadPath();
+	THE_REPO->listePath = IniFilePopulator::Inst()->getListePath();
+	THE_REPO->formazioniUrl = IniFilePopulator::Inst()->getFormazioniUrl();
+	THE_REPO->gazzettaUrl = IniFilePopulator::Inst()->getGazzettaUrl();
+	THE_REPO->debugStatus = IniFilePopulator::Inst()->getDebugStatus();
 
 	this->writeIniFile();
 }
@@ -53,28 +54,28 @@ void IniFileManager::writeIniFile() {
 		iniFile->open(QIODevice::WriteOnly);
 
 		iniFile->write("[File Formazioni Path]\n");
-		iniFile->write(this->formazioniPath.toAscii().trimmed());
+		iniFile->write(THE_REPO->formazioniPath.toAscii().trimmed());
 
 		iniFile->write("\n[File Gazzetta Path]\n");
-		iniFile->write(this->gazzettaPath.toAscii().trimmed());
+		iniFile->write(THE_REPO->gazzettaPath.toAscii().trimmed());
 
 		iniFile->write("\n[File Output Path]\n");
-		iniFile->write(this->risultatiPath.toAscii().trimmed());
+		iniFile->write(THE_REPO->risultatiPath.toAscii().trimmed());
 
 		iniFile->write("\n[Download Path]\n");
-		iniFile->write(this->downloadPath.toAscii().trimmed());
+		iniFile->write(THE_REPO->downloadPath.toAscii().trimmed());
 
 		iniFile->write("\n[Liste Path]\n");
-		iniFile->write(this->listePath.toAscii().trimmed());
+		iniFile->write(THE_REPO->listePath.toAscii().trimmed());
 
 		iniFile->write("\n[File Formazioni Url]\n");
-		iniFile->write(this->formazioniUrl.toAscii().trimmed());
+		iniFile->write(THE_REPO->formazioniUrl.toAscii().trimmed());
 
 		iniFile->write("\n[File Gazzetta Url]\n");
-		iniFile->write(this->gazzettaUrl.toAscii().trimmed());
+		iniFile->write(THE_REPO->gazzettaUrl.toAscii().trimmed());
 
 		iniFile->write("\n[Debug]\n");
-		if (this->debugStatus)
+		if (THE_REPO->debugStatus)
 			iniFile->write("TRUE");
 		else
 			iniFile->write("FALSE");
@@ -92,28 +93,28 @@ void IniFileManager::writeIniFile() {
 		iniFile->open(QIODevice::WriteOnly);
 		if (iniFile->isOpen()) {
 			iniFile->write("[File Formazioni Path]\n");
-			iniFile->write(this->formazioniPath.toAscii().trimmed());
+			iniFile->write(THE_REPO->formazioniPath.toAscii().trimmed());
 
 			iniFile->write("\n[File Gazzetta Path]\n");
-			iniFile->write(this->gazzettaPath.toAscii().trimmed());
+			iniFile->write(THE_REPO->gazzettaPath.toAscii().trimmed());
 
 			iniFile->write("\n[File Output Path]\n");
-			iniFile->write(this->risultatiPath.toAscii().trimmed());
+			iniFile->write(THE_REPO->risultatiPath.toAscii().trimmed());
 
 			iniFile->write("\n[Download Path]\n");
-			iniFile->write(this->downloadPath.toAscii().trimmed());
+			iniFile->write(THE_REPO->downloadPath.toAscii().trimmed());
 
 			iniFile->write("\n[Liste Path]\n");
-			iniFile->write(this->listePath.toAscii().trimmed());
+			iniFile->write(THE_REPO->listePath.toAscii().trimmed());
 
 			iniFile->write("\n[File Formazioni Url]\n");
-			iniFile->write(this->formazioniUrl.toAscii().trimmed());
+			iniFile->write(THE_REPO->formazioniUrl.toAscii().trimmed());
 
 			iniFile->write("\n[File Gazzetta Url]\n");
-			iniFile->write(this->gazzettaUrl.toAscii().trimmed());
+			iniFile->write(THE_REPO->gazzettaUrl.toAscii().trimmed());
 
 			iniFile->write("\n[Debug]\n");
-			if (this->debugStatus)
+			if (THE_REPO->debugStatus)
 				iniFile->write("TRUE");
 			else
 				iniFile->write("FALSE");
@@ -138,38 +139,38 @@ void IniFileManager::readIniFile() {
 
 		iniFile->readLine(buf, sizeof(buf)); // [File Formazioni Path]
 		iniFile->readLine(buf, sizeof(buf));
-		this->formazioniPath = QString::fromAscii(buf).trimmed();
+		THE_REPO->formazioniPath = QString::fromAscii(buf).trimmed();
 
 		iniFile->readLine(buf, sizeof(buf)); // [File Gazzetta Path]
 		iniFile->readLine(buf, sizeof(buf));
-		this->gazzettaPath = QString::fromAscii(buf).trimmed();
+		THE_REPO->gazzettaPath = QString::fromAscii(buf).trimmed();
 
 		iniFile->readLine(buf, sizeof(buf)); // [File Output Path]
 		iniFile->readLine(buf, sizeof(buf));
-		this->risultatiPath = QString::fromAscii(buf).trimmed();
+		THE_REPO->risultatiPath = QString::fromAscii(buf).trimmed();
 
 		iniFile->readLine(buf, sizeof(buf)); // [Download Path]
 		iniFile->readLine(buf, sizeof(buf));
-		this->downloadPath = QString::fromAscii(buf).trimmed();
+		THE_REPO->downloadPath = QString::fromAscii(buf).trimmed();
 
 		iniFile->readLine(buf, sizeof(buf)); // [Liste Path]
 		iniFile->readLine(buf, sizeof(buf));
-		this->listePath = QString::fromAscii(buf).trimmed();
+		THE_REPO->listePath = QString::fromAscii(buf).trimmed();
 
 		iniFile->readLine(buf, sizeof(buf)); // [File Formazioni Url]
 		iniFile->readLine(buf, sizeof(buf));
-		this->formazioniUrl = QString::fromAscii(buf).trimmed();
+		THE_REPO->formazioniUrl = QString::fromAscii(buf).trimmed();
 
 		iniFile->readLine(buf, sizeof(buf)); // [File Gazzetta Url]
 		iniFile->readLine(buf, sizeof(buf));
-		this->gazzettaUrl = QString::fromAscii(buf).trimmed();
+		THE_REPO->gazzettaUrl = QString::fromAscii(buf).trimmed();
 
 		iniFile->readLine(buf, sizeof(buf)); // [Debug]
 		iniFile->readLine(buf, sizeof(buf));
 		if (QString::fromAscii(buf).trimmed() == "TRUE")
-			this->debugStatus = TRUE;
+			THE_REPO->debugStatus = TRUE;
 		else
-			this->debugStatus = FALSE;
+			THE_REPO->debugStatus = FALSE;
 
 		iniFile->close();
 	} else {
@@ -183,21 +184,22 @@ void IniFileManager::readIniFile() {
 		IniFilePopulator::Inst()->setStartDir(this->workDir);
 		IniFilePopulator::Inst()->exec();
 
-		this->formazioniPath = IniFilePopulator::Inst()->getFormazioniPath();
-		this->gazzettaPath = IniFilePopulator::Inst()->getGazzettaPath();
-		this->risultatiPath = IniFilePopulator::Inst()->getRisultatiPath();
-		this->downloadPath = IniFilePopulator::Inst()->getDownloadPath();
-		this->listePath = IniFilePopulator::Inst()->getListePath();
-		this->formazioniUrl = IniFilePopulator::Inst()->getFormazioniUrl();
-		this->gazzettaUrl = IniFilePopulator::Inst()->getGazzettaUrl();
+		THE_REPO->formazioniPath = IniFilePopulator::Inst()->getFormazioniPath();
+		THE_REPO->gazzettaPath = IniFilePopulator::Inst()->getGazzettaPath();
+		THE_REPO->risultatiPath = IniFilePopulator::Inst()->getRisultatiPath();
+		THE_REPO->downloadPath = IniFilePopulator::Inst()->getDownloadPath();
+		THE_REPO->listePath = IniFilePopulator::Inst()->getListePath();
+		THE_REPO->formazioniUrl = IniFilePopulator::Inst()->getFormazioniUrl();
+		THE_REPO->gazzettaUrl = IniFilePopulator::Inst()->getGazzettaUrl();
 		if (IniFilePopulator::Inst()->getDebugStatus())
-			this->debugStatus = TRUE;
+			THE_REPO->debugStatus = TRUE;
 		else
-			this->debugStatus = FALSE;
+			THE_REPO->debugStatus = FALSE;
 
 		this->writeIniFile();
 	}
 }
+/*
 QString IniFileManager::getFormazioniPath() {
 	return this->formazioniPath;
 }
@@ -257,3 +259,4 @@ QString IniFileManager::showIniFile() {
 	}
 	return content;
 }
+*/

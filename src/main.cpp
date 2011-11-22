@@ -1,38 +1,41 @@
-#include "cstdlib"
-#include "string"
-#include <fstream>
+//#include "cstdlib"
+//#include "string"
+//#include <fstream>
 
-#include <QtGui/QtGui>
+//#include <QtGui/QtGui>
 #include <QtGui/QApplication>
-#include <QtCore/QFileInfo>
+//#include <QtCore/QFileInfo>
 
 #include "singletonQtLogger.h"
-#include "defines.h"
-#include "stringModifiers.h"
-#include "toString.h"
+#include "Repository.h"
+//#include "stringModifiers.h"
+//#include "toString.h"
 
-#include "CVersion.h"
-#include "UseTheNetDialog.h"
+//#include "CVersion.h"
+//#include "UseTheNetDialog.h"
+#include "IniFilePopulator.h"
 #include "IniFileManager.h"
-#include "ChooseFileFromAListDialog.h"
-#include "GazzettaFileReader.h"
-#include "FormazioniFileReader.h"
-#include "StringModifier.h"
-#include "Fanta.h"
+//#include "ChooseFileFromAListDialog.h"
+//#include "GazzettaFileReader.h"
+//#include "FormazioniFileReader.h"
+//#include "StringModifier.h"
+//#include "Fanta.h"
+#include "defines.h"
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
 	QApplication a(argc, argv);
 
-//	CVersion version;
-//	QString loggerTitle = "FantaCalcGui v" + version.getVersion();
-
 //	singletonQtLogger::Inst()->setTitle(loggerTitle);
 //	singletonQtLogger::Inst()->setDebugStatus(
 //			IniFileManager::Inst()->getDebugStatus());
 
-	singletonQtLogger::Inst();
+	THE_REPO;
+	THE_CONFIGURATOR;
+	THE_MANAGER;
+	THE_LOGGER;
+	return a.exec();
 
 //	LOG(DEBUG, "In main() -> Logger started.");
 //

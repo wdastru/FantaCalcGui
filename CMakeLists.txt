@@ -15,6 +15,7 @@ SET( SRCS src/main.cpp
         src/WhichOfLevenshteinDialog.cpp
         src/Less25MinDialog.cpp
         src/IniFilePopulator.cpp
+        src/Repository.cpp 
         src/StringModifier.cpp 
         src/singletonQtLogger.cpp )
 SET( HDRS src/CVersion.h
@@ -30,12 +31,13 @@ SET( HDRS src/CVersion.h
         src/Less25MinDialog.h
         src/WhichOfLevenshteinDialog.h
         src/IniFilePopulator.h
+        src/Repository.h
         src/StringModifier.h 
         src/singletonQtLogger.h )
 SET( UIS  src/authenticationdialog.ui
 		src/UseTheNetDialog.ui
         src/IniFilePopulator.ui
-		src/NoNetFileDialog.ui 
+        src/NoNetFileDialog.ui 
 		src/singletonQtLogger.ui )
 SET( RCS src/resources.qrc )
 

@@ -6,24 +6,16 @@ IniFilePopulator* IniFilePopulator::Inst() {
 	}
 	return pInstance;
 }
-
 IniFilePopulator* IniFilePopulator::pInstance = NULL;
-
 IniFilePopulator::IniFilePopulator(QWidget *parent) :
 	QDialog(parent) {
 	LOG(DEBUG, "In IniFilePopulator() constructor.");
 	ui.setupUi(this);
-	ui.formazioniUrlLineEdit->setText(
-			"http://nmr.ch.unito.it/lab/Fantasito/777/formazioni/");
-	ui.gazzettaUrlLineEdit->setText(
-			"http://nmr.ch.unito.it/lab/Fantasito/777/filesGazzetta/");
 	ui.falseCheckBox->setChecked(TRUE);
 }
-
 IniFilePopulator::~IniFilePopulator() {
 
 }
-
 void IniFilePopulator::chooseFormazioniPath() {
 	QString directory = this->getDir("Formazioni Path", this->startDir);
 	if (!directory.isEmpty())

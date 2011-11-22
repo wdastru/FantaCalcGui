@@ -1,27 +1,32 @@
 #include "singletonQtLogger.h"
 #include "IniFileManager.h"
 #include "IniFilePopulator.h"
+#include "Repository.h"
 #include "httpwindow.h"
 #include "NoNetFileDialog.h"
 
 #include <vector>
 
+singletonQtLogger* singletonQtLogger::pInstance = NULL;
 singletonQtLogger* singletonQtLogger::Inst() {
 	if (pInstance == NULL) {
 		pInstance = new singletonQtLogger();
 	}
 	return pInstance;
 }
-singletonQtLogger::singletonQtLogger(QDialog *parent) :
-	QDialog(parent) {
+singletonQtLogger::singletonQtLogger(QWidget *parent) :
+	QWidget(parent) {
 	this->ui.setupUi(this);
-	this->version = "v0.2 build 14";
+	this->init();
+	this->show();
+}
+void singletonQtLogger::init() {
+	this->setVersion("v2.6.0");
 	this->setTitle("FantaCalcGui");
-	this->exec();
+	this->debugStatus = TRUE;
 }
 singletonQtLogger::~singletonQtLogger() {
 }
-singletonQtLogger* singletonQtLogger::pInstance = NULL;
 bool singletonQtLogger::debugStatus = FALSE;
 void singletonQtLogger::Logging(QString type, QString message) {
 	this->fileContent += (message + "\n");
@@ -57,14 +62,22 @@ void singletonQtLogger::Logging(QString type, QString message) {
 	return;
 }
 void singletonQtLogger::setTitle(QString _title) {
-	ui.label->setText(
+	this->ui.titleLabel->setText(
 			"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 				"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 				"p, li { white-space: pre-wrap; }\n"
 				"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
 				"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt; color:#ff0000;\">"
-					+ _title + "</span></p><p>" + this->version
-					+ "</p></body></html>");
+					+ _title + "</span></p></body></html>");
+}
+void singletonQtLogger::setVersion(QString _version) {
+	this->ui.versionLabel->setText(
+			"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\"\n"
+				"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+				"p, li {white-space: pre-wrap;}\n"
+				"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+				"<p align=\"right\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">"
+					+ _version + "</span></p></body></html>");
 }
 void singletonQtLogger::setDebugStatus(bool _status) {
 	this->debugStatus = _status;
@@ -140,17 +153,17 @@ void singletonQtLogger::configClicked() {
 
 	IniFileManager::Inst()->updateAndWriteIniFile();
 }
-
 void singletonQtLogger::onlineClicked() {
 	LOG(DEBUG,
 			"In void singletonQtLogger::onlineClicked() : network will be accessed.");
-/*
-//	this->yesHasBeenClicked = TRUE;
-//	this->noHasBeenClicked = FALSE;
+	//	this->yesHasBeenClicked = TRUE;
+	//	this->noHasBeenClicked = FALSE;
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
-	urls->push_back(QUrl::fromLocalFile(IniFileManager::Inst()->getFileFormazioniUrl()));
-	urls->push_back(QUrl::fromLocalFile(IniFileManager::Inst()->getFileGazzettaUrl()));
+	urls->push_back(
+			QUrl::fromLocalFile(IniFileManager::Inst()->getFileFormazioniUrl()));
+	urls->push_back(
+			QUrl::fromLocalFile(IniFileManager::Inst()->getFileGazzettaUrl()));
 
 	std::vector<QString> * savePaths = new std::vector<QString>;
 	savePaths->push_back(IniFileManager::Inst()->getListePath());
@@ -163,39 +176,40 @@ void singletonQtLogger::onlineClicked() {
 		LOG(
 				DEBUG,
 				"In singletonQtLogger::onlineClicked() --> the download of files succeded: closing useTheNetDialog.");
-//		this->hasFinished = TRUE;
-//		this->downloadSuccess = TRUE;
-//		this->close();
+		//		this->hasFinished = TRUE;
+		//		this->downloadSuccess = TRUE;
+		//		this->close();
 	} else {
 		LOG(DEBUG,
 				"In singletonQtLogger::onlineClicked() --> the download of files failed.");
-//		this->downloadSuccess = FALSE;
+		//		this->downloadSuccess = FALSE;
 	}
-	*/
 }
 void singletonQtLogger::offlineClicked() {
-	LOG(DEBUG, "In singletonQtLogger::offlineClicked() --> Network will not be accessed.");
-	/*
-
-//	this->yesHasBeenClicked = FALSE;
-//	this->noHasBeenClicked = TRUE;
+	LOG(DEBUG,
+			"In singletonQtLogger::offlineClicked() --> Network will not be accessed.");
+	//	this->yesHasBeenClicked = FALSE;
+	//	this->noHasBeenClicked = TRUE;
 
 	NoNetFileDialog * noNetFileDialog = new NoNetFileDialog(this);
 	noNetFileDialog->exec();
 
 	if (!noNetFileDialog->hasBeenAborted) {
-		this->noNetSquadreFile = noNetFileDialog->getFileNameSquadre();
+		THE_REPO->noNetSquadreFile = noNetFileDialog->getFileNameSquadre();
 		LOG(
 				DEBUG,
 				"In void singletonQtLogger::offlineClicked() -> fileNameSquadre : "
-						+ this->noNetSquadreFile);
-		this->noNetGazzettaFile = noNetFileDialog->getFileNameGazzetta();
-//		this->hasFinished = TRUE;
-//		this->close();
+						+ THE_REPO->noNetSquadreFile);
+		THE_REPO->noNetGazzettaFile = noNetFileDialog->getFileNameGazzetta();
+		LOG(
+				DEBUG,
+				"In void singletonQtLogger::offlineClicked() -> fileNameSquadre : "
+						+ THE_REPO->noNetGazzettaFile);
+		//		this->hasFinished = TRUE;
+		//		this->close();
 	} else {
-//		this->hasFinished = FALSE;
-//		return;
+		//		this->hasFinished = FALSE;
+		return;
 	}
-*/
 }
 
