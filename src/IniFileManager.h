@@ -21,7 +21,7 @@ public:
 	IniFileManager();
 	virtual ~IniFileManager();
 	static IniFileManager* Inst();
-	void updateAndWriteIniFile();
+//	void updateAndWriteIniFile();
 	void writeIniFile();
 	void readIniFile();
 	QString getIniFilePath();

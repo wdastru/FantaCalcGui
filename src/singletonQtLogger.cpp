@@ -129,7 +129,7 @@ void singletonQtLogger::saveLogFile() {
 	file.close();
 }
 void singletonQtLogger::saveLogAndClose() {
-	THE_MANAGER->updateAndWriteIniFile();
+	THE_MANAGER->writeIniFile();
 	this->saveLogFile();
 	this->close();
 }

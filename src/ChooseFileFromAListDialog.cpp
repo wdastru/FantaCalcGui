@@ -353,9 +353,8 @@ QString ChooseFileFromAListDialog::getHomeFile() {
 			if (this->neutro1.at(i)->isChecked())
 				return this->labelFormazioni.at(i)->text();
 		}
-	} else
-		return "";
-
+	}
+	return QString::null;
 }
 QString ChooseFileFromAListDialog::getAwayFile() {
 	if (this->HomeAwayBox->isChecked()) {
@@ -368,8 +367,8 @@ QString ChooseFileFromAListDialog::getAwayFile() {
 			if (this->neutro2.at(i)->isChecked())
 				return this->labelFormazioni.at(i)->text();
 		}
-	} else
-		return QString::null;
+	}
+	return QString::null;
 }
 int ChooseFileFromAListDialog::groupBoxChecked() {
 	if (this->HomeAwayBox->isChecked())
@@ -412,12 +411,9 @@ void ChooseFileFromAListDialog::doDownload() {
 			"In ChooseFileFromAListDialog::doDownload() --> Network will be accessed.");
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
-	urls->push_back(
-			THE_REPO->getFormazioniUrl() + this->getHomeFile());
-	urls->push_back(
-			THE_REPO->getFormazioniUrl() + this->getAwayFile());
-	urls->push_back(
-			THE_REPO->getGazzettaUrl() + this->getGazFile());
+	urls->push_back(THE_REPO->getFormazioniUrl() + this->getHomeFile());
+	urls->push_back(THE_REPO->getFormazioniUrl() + this->getAwayFile());
+	urls->push_back(THE_REPO->getGazzettaUrl() + this->getGazFile());
 
 	std::vector<QString> * savePaths = new std::vector<QString>;
 	savePaths->push_back(THE_REPO->getDownloadPath());
@@ -445,12 +441,8 @@ unsigned int ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 	LOG(DEBUG,
 			"In unsigned int ChooseFileFromAListDialog::createFileSquadreFromWebFiles().");
 	if (this->downloadSuccess) {
-		QFile fHome(
-				THE_REPO->getDownloadPath() + "/"
-						+ this->getHomeFile());
-		QFile fAway(
-				THE_REPO->getDownloadPath() + "/"
-						+ this->getAwayFile());
+		QFile fHome(THE_REPO->getDownloadPath() + "/" + this->getHomeFile());
+		QFile fAway(THE_REPO->getDownloadPath() + "/" + this->getAwayFile());
 
 		fHome.open(QIODevice::ReadOnly);
 		fAway.open(QIODevice::ReadOnly);
@@ -695,8 +687,7 @@ void ChooseFileFromAListDialog::execute() {
 	LOG(DEBUG, "In void ChooseFileFromAListDialog::execute().");
 	this->doDownload();
 	this->createFileSquadreFromWebFiles();
-	this->fileGazzetta = THE_REPO->getGazzettaPath()
-			+ this->getGazFile();
+	this->fileGazzetta = THE_REPO->getGazzettaPath() + this->getGazFile();
 	this->accept();
 }
 bool ChooseFileFromAListDialog::wasCancelClicked() {
