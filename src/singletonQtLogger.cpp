@@ -143,14 +143,10 @@ void singletonQtLogger::configClicked() {
 	THE_CONFIGURATOR->setGazzettaUrl(THE_REPO->getGazzettaUrl());
 	THE_CONFIGURATOR->setDebugStatus(THE_REPO->getDebugStatus());
 	THE_CONFIGURATOR->exec();
-
-	THE_MANAGER->updateAndWriteIniFile();
 }
 void singletonQtLogger::onlineClicked() {
 	LOG(DEBUG,
 			"In void singletonQtLogger::onlineClicked() : network will be accessed.");
-	//	this->yesHasBeenClicked = TRUE;
-	//	this->noHasBeenClicked = FALSE;
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	urls->push_back(QUrl::fromLocalFile(THE_REPO->getFileFormazioniUrl()));
@@ -160,27 +156,21 @@ void singletonQtLogger::onlineClicked() {
 	savePaths->push_back(THE_REPO->getListePath());
 	savePaths->push_back(THE_REPO->getListePath());
 
-	HttpWindow httpWin(THE_LOGGER, urls, savePaths);
+	HttpWindow httpWin(this, urls, savePaths);
 	httpWin.exec();
 
 	if (httpWin.requestSucceded()) {
 		LOG(
 				DEBUG,
 				"In singletonQtLogger::onlineClicked() --> the download of files succeded: closing useTheNetDialog.");
-		//		this->hasFinished = TRUE;
-		//		this->downloadSuccess = TRUE;
-		//		this->close();
 	} else {
 		LOG(DEBUG,
 				"In singletonQtLogger::onlineClicked() --> the download of files failed.");
-		//		this->downloadSuccess = FALSE;
 	}
 }
 void singletonQtLogger::offlineClicked() {
 	LOG(DEBUG,
 			"In singletonQtLogger::offlineClicked() --> Network will not be accessed.");
-	//	this->yesHasBeenClicked = FALSE;
-	//	this->noHasBeenClicked = TRUE;
 
 	NoNetFileDialog * noNetFileDialog = new NoNetFileDialog(this);
 	noNetFileDialog->exec();
@@ -196,10 +186,7 @@ void singletonQtLogger::offlineClicked() {
 				DEBUG,
 				"In void singletonQtLogger::offlineClicked() -> fileNameSquadre : "
 						+ THE_REPO->noNetGazzettaFile);
-		//		this->hasFinished = TRUE;
-		//		this->close();
 	} else {
-		//		this->hasFinished = FALSE;
 		return;
 	}
 }

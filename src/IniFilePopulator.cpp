@@ -54,7 +54,12 @@ QString IniFilePopulator::getDir(QString caption, QString startDir) {
 			| QFileDialog::ShowDirsOnly;
 	options |= QFileDialog::DontUseNativeDialog;
 
-	return QFileDialog::getExistingDirectory(this, caption, startDir, options);
+	QString dir = QFileDialog::getExistingDirectory(this, caption, startDir,
+			options) + "/";
+
+	LOG(DEBUG, "In IniFilePopulator::getDir() --> returning " + dir);
+
+	return dir;
 }
 void IniFilePopulator::setStartDir(QString _startDir) {
 	this->startDir = _startDir;

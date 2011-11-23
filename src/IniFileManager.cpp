@@ -33,14 +33,14 @@ IniFileManager::~IniFileManager() {
 }
 void IniFileManager::updateAndWriteIniFile() {
 
-	THE_REPO->formazioniPath = IniFilePopulator::Inst()->getFormazioniPath();
-	THE_REPO->gazzettaPath = IniFilePopulator::Inst()->getGazzettaPath();
-	THE_REPO->risultatiPath = IniFilePopulator::Inst()->getRisultatiPath();
-	THE_REPO->downloadPath = IniFilePopulator::Inst()->getDownloadPath();
-	THE_REPO->listePath = IniFilePopulator::Inst()->getListePath();
-	THE_REPO->formazioniUrl = IniFilePopulator::Inst()->getFormazioniUrl();
-	THE_REPO->gazzettaUrl = IniFilePopulator::Inst()->getGazzettaUrl();
-	THE_REPO->debugStatus = IniFilePopulator::Inst()->getDebugStatus();
+	THE_MANAGER->formazioniPath = THE_REPO->getFormazioniPath();
+	THE_MANAGER->gazzettaPath = THE_REPO->getGazzettaPath();
+	THE_MANAGER->risultatiPath = THE_REPO->getRisultatiPath();
+	THE_MANAGER->downloadPath = THE_REPO->getDownloadPath();
+	THE_MANAGER->listePath = THE_REPO->getListePath();
+	THE_MANAGER->formazioniUrl = THE_REPO->getFormazioniUrl();
+	THE_MANAGER->gazzettaUrl = THE_REPO->getGazzettaUrl();
+	THE_MANAGER->debugStatus = THE_REPO->getDebugStatus();
 
 	this->writeIniFile();
 }
