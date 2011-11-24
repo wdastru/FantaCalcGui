@@ -23,11 +23,11 @@ singletonQtLogger::singletonQtLogger(QWidget *parent) :
 void singletonQtLogger::init() {
 	this->setVersion("v2.6.0");
 	this->setTitle("FantaCalcGui");
-	this->debugStatus = TRUE;
+//	this->debugStatus = TRUE;
 }
 singletonQtLogger::~singletonQtLogger() {
 }
-bool singletonQtLogger::debugStatus = FALSE;
+//bool singletonQtLogger::debugStatus = FALSE;
 void singletonQtLogger::Logging(QString type, QString message) {
 	this->fileContent += (message + "\n");
 
@@ -40,7 +40,7 @@ void singletonQtLogger::Logging(QString type, QString message) {
 				"[" + QTime::currentTime().toString("hh:mm:ss.zzz")
 						+ "] ERROR   : " + message);
 	else if (type == "DEBUG") {
-		if (this->debugStatus) {
+		if (THE_REPO->debugStatus) {
 			this->ui.plainTextEdit->appendHtml(
 					"[" + QTime::currentTime().toString("hh:mm:ss.zzz")
 							+ "] DEBUG   : " + message);
@@ -79,9 +79,9 @@ void singletonQtLogger::setVersion(QString _version) {
 				"<p align=\"right\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">"
 					+ _version + "</span></p></body></html>");
 }
-void singletonQtLogger::setDebugStatus(bool _status) {
-	this->debugStatus = _status;
-}
+//void singletonQtLogger::setDebugStatus(bool _status) {
+//	this->debugStatus = _status;
+//}
 void singletonQtLogger::setLogFileName(QString _filename) {
 	this->logFileName = _filename;
 }

@@ -19,7 +19,7 @@ public:
 	virtual ~singletonQtLogger();
 	void setTitle(QString);
 	void setVersion(QString);
-	void setDebugStatus(bool);
+//	void setDebugStatus(bool);
 	void setLogFileName(QString);
 
 private slots:
@@ -32,7 +32,7 @@ private:
 	void init();
 	void saveLogFile();
 	QString title;
-	static bool debugStatus;
+//	static bool debugStatus;
 	Ui::singletonQtLoggerClass ui;
 	static singletonQtLogger* pInstance;
 	QString fileContent;

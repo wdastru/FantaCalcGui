@@ -31,19 +31,6 @@ IniFileManager::IniFileManager() {
 }
 IniFileManager::~IniFileManager() {
 }
-//void IniFileManager::updateAndWriteIniFile() {
-//
-//	THE_MANAGER->formazioniPath = THE_REPO->getFormazioniPath();
-//	THE_MANAGER->gazzettaPath = THE_REPO->getGazzettaPath();
-//	THE_MANAGER->risultatiPath = THE_REPO->getRisultatiPath();
-//	THE_MANAGER->downloadPath = THE_REPO->getDownloadPath();
-//	THE_MANAGER->listePath = THE_REPO->getListePath();
-//	THE_MANAGER->formazioniUrl = THE_REPO->getFormazioniUrl();
-//	THE_MANAGER->gazzettaUrl = THE_REPO->getGazzettaUrl();
-//	THE_MANAGER->debugStatus = THE_REPO->getDebugStatus();
-//
-//	this->writeIniFile();
-//}
 void IniFileManager::writeIniFile() {
 	QFile * iniFile = new QFile(this->iniFileName);
 	if (iniFile->exists()) {

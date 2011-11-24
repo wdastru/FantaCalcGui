@@ -62,7 +62,7 @@ void NoNetFileDialog::setOpenFileNameSquadre() {
 	ui.fileSquadreLineEdit->setText(this->fileNameSquadre);
 	this->enableOkButton();
 
-	THE_MANAGER->writeIniFile();
+//	THE_MANAGER->writeIniFile();
 }
 void NoNetFileDialog::setOpenFileNameGazzetta() {
 	QString path = THE_REPO->getGazzettaPath().trimmed().replace(
@@ -105,7 +105,7 @@ void NoNetFileDialog::setOpenFileNameGazzetta() {
 	ui.fileGazzettaLineEdit->setText(this->fileNameGazzetta);
 	this->enableOkButton();
 
-	THE_MANAGER->writeIniFile();
+//	THE_MANAGER->writeIniFile();
 }
 void NoNetFileDialog::createEmptyFile() {
 	ui.newFileLineEdit->setText("file nuovo");

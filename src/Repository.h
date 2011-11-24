@@ -32,8 +32,8 @@ public:
 	QString getFileGazzettaUrl();
 	QString getFormazioniUrl();
 	QString getGazzettaUrl();
-	void setFormazioniPath(QString dir);
 	bool getDebugStatus();
+//	void setFormazioniPath(QString dir);
 
 private:
 	static Repository* pInstance;

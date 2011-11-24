@@ -61,6 +61,6 @@ QString Repository::getGazzettaUrl() {
 bool Repository::getDebugStatus() {
 	return this->debugStatus;
 }
-void Repository::setFormazioniPath(QString dir) {
-	this->formazioniPath = dir;
-}
+//void Repository::setFormazioniPath(QString dir) {
+//	this->formazioniPath = dir;
+//}

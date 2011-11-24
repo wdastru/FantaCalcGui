@@ -12,7 +12,7 @@ IniFilePopulator::IniFilePopulator(QWidget *parent) :
 	QDialog(parent) {
 	LOG(DEBUG, "In IniFilePopulator() constructor.");
 	ui.setupUi(this);
-	ui.falseCheckBox->setChecked(TRUE);
+//	ui.falseCheckBox->setChecked(TRUE);
 }
 IniFilePopulator::~IniFilePopulator() {
 
