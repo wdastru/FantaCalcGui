@@ -168,10 +168,14 @@ void IniFilePopulator::setDebugStatus(bool status) {
 		this->ui.falseCheckBox->setChecked(true);
 	}
 }
-void IniFilePopulator::toggleDebugStatus(){
-	if (THE_REPO->debugStatus){
+void IniFilePopulator::toggleDebugStatus() {
+	if (THE_REPO->debugStatus) {
 		THE_REPO->debugStatus = FALSE;
+		LOG(DEBUG,
+				"void IniFilePopulator::toggleDebugStatus() --> status is now FALSE");
 	} else {
 		THE_REPO->debugStatus = TRUE;
+		LOG(DEBUG,
+				"void IniFilePopulator::toggleDebugStatus() --> status is now TRUE");
 	}
 }

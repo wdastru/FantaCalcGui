@@ -311,7 +311,7 @@ p, li { white-space: pre-wrap; }
   </connection>
   <connection>
    <sender>falseCheckBox</sender>
-   <signal>clicked()</signal>
+   <signal>stateChanged(int)</signal>
    <receiver>IniFilePopulatorClass</receiver>
    <slot>toggleDebugStatus()</slot>
    <hints>
@@ -322,22 +322,6 @@ p, li { white-space: pre-wrap; }
     <hint type="destinationlabel">
      <x>199</x>
      <y>166</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>trueCheckBox</sender>
-   <signal>clicked()</signal>
-   <receiver>IniFilePopulatorClass</receiver>
-   <slot>toggleDebugStatus()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>112</x>
-     <y>295</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>199</x>
-     <y>164</y>
     </hint>
    </hints>
   </connection>
