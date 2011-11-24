@@ -20,31 +20,41 @@ IniFilePopulator::~IniFilePopulator() {
 void IniFilePopulator::chooseFormazioniPath() {
 	QString directory = this->getDir("Formazioni Path",
 			THE_REPO->getFormazioniPath());
-	if (!directory.isEmpty())
+	if (!directory.isEmpty()) {
 		this->ui.formazioniLineEdit->setText(directory);
+		THE_REPO->formazioniPath = directory;
+	}
 }
 void IniFilePopulator::chooseGazzettaPath() {
 	QString directory = this->getDir("Gazzetta Path",
 			THE_REPO->getGazzettaUrl());
-	if (!directory.isEmpty())
+	if (!directory.isEmpty()) {
 		this->ui.gazzettaLineEdit->setText(directory);
+		THE_REPO->gazzettaPath = directory;
+	}
 }
 void IniFilePopulator::chooseDownloadPath() {
 	QString directory = this->getDir("Download Path",
 			THE_REPO->getDownloadPath());
-	if (!directory.isEmpty())
+	if (!directory.isEmpty()) {
 		this->ui.downloadLineEdit->setText(directory);
+		THE_REPO->downloadPath = directory;
+	}
 }
 void IniFilePopulator::chooseRisultatiPath() {
 	QString directory = this->getDir("Risultati Path",
 			THE_REPO->getRisultatiPath());
-	if (!directory.isEmpty())
+	if (!directory.isEmpty()) {
 		this->ui.risultatiLineEdit->setText(directory);
+		THE_REPO->risultatiPath = directory;
+	}
 }
 void IniFilePopulator::chooseListePath() {
 	QString directory = this->getDir("Liste Path", THE_REPO->getListePath());
-	if (!directory.isEmpty())
+	if (!directory.isEmpty()) {
 		this->ui.listeLineEdit->setText(directory);
+		THE_REPO->listePath;
+	}
 }
 QString IniFilePopulator::getDir(QString caption, QString startDir) {
 
@@ -156,5 +166,12 @@ void IniFilePopulator::setDebugStatus(bool status) {
 		LOG(DEBUG,
 				"void IniFilePopulator::setDebugStatus(bool status) --> status is FALSE");
 		this->ui.falseCheckBox->setChecked(true);
+	}
+}
+void IniFilePopulator::toggleDebugStatus(){
+	if (THE_REPO->debugStatus){
+		THE_REPO->debugStatus = FALSE;
+	} else {
+		THE_REPO->debugStatus = TRUE;
 	}
 }

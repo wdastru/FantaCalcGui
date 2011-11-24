@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>333</height>
+    <height>330</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>0</y>
+     <x>60</x>
+     <y>5</y>
      <width>281</width>
      <height>31</height>
     </rect>
@@ -309,6 +309,38 @@ p, li { white-space: pre-wrap; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>falseCheckBox</sender>
+   <signal>clicked()</signal>
+   <receiver>IniFilePopulatorClass</receiver>
+   <slot>toggleDebugStatus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>182</x>
+     <y>295</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>166</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>trueCheckBox</sender>
+   <signal>clicked()</signal>
+   <receiver>IniFilePopulatorClass</receiver>
+   <slot>toggleDebugStatus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>112</x>
+     <y>295</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>164</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>chooseFormazioniPath()</slot>
@@ -316,6 +348,7 @@ p, li { white-space: pre-wrap; }
   <slot>chooseRisultatiPath()</slot>
   <slot>chooseDownloadPath()</slot>
   <slot>chooseListePath()</slot>
+  <slot>toggleDebugStatus()</slot>
  </slots>
  <buttongroups>
   <buttongroup name="buttonGroup"/>

@@ -40,6 +40,7 @@ private slots:
 	void chooseRisultatiPath();
 	void chooseDownloadPath();
 	void chooseListePath();
+	void toggleDebugStatus();
 
 private:
 	static IniFilePopulator* pInstance;
