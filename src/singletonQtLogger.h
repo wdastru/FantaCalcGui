@@ -8,6 +8,8 @@
 #include <QFile>
 #include "ui_singletonQtLogger.h"
 
+#include "defines.h"
+
 class singletonQtLogger: public QWidget {
 Q_OBJECT
 

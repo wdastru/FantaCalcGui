@@ -1,10 +1,6 @@
 #ifndef INIFILEPOPULATOR_H
 #define INIFILEPOPULATOR_H
 
-#include "singletonQtLogger.h"
-#include "IniFileManager.h"
-#include "defines.h"
-
 #include <QtGui/QDialog>
 #include <QtGui/QFileDialog>
 #include "ui_IniFilePopulator.h"

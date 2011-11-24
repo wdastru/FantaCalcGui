@@ -23,7 +23,6 @@ singletonQtLogger::singletonQtLogger(QWidget *parent) :
 void singletonQtLogger::init() {
 	this->setVersion("v2.6.0");
 	this->setTitle("FantaCalcGui");
-//	this->debugStatus = TRUE;
 }
 singletonQtLogger::~singletonQtLogger() {
 }

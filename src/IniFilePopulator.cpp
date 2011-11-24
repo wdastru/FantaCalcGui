@@ -1,5 +1,7 @@
 #include "Repository.h"
+#include "IniFileManager.h"
 #include "IniFilePopulator.h"
+#include "defines.h"
 
 IniFilePopulator* IniFilePopulator::Inst() {
 	if (pInstance == NULL) {
@@ -12,14 +14,19 @@ IniFilePopulator::IniFilePopulator(QWidget *parent) :
 	QDialog(parent) {
 	LOG(DEBUG, "In IniFilePopulator() constructor.");
 	ui.setupUi(this);
-//	ui.falseCheckBox->setChecked(TRUE);
+	//	ui.falseCheckBox->setChecked(TRUE);
 }
 IniFilePopulator::~IniFilePopulator() {
 
 }
 void IniFilePopulator::chooseFormazioniPath() {
-	QString directory = this->getDir("Formazioni Path",
-			THE_REPO->getFormazioniPath());
+	QString directory = THE_REPO->getFormazioniPath();
+	if (directory.isEmpty()) {
+		directory = this->getDir("Formazioni Path", THE_MANAGER->getWorkDir());
+	} else {
+		directory = this->getDir("Formazioni Path",
+				THE_REPO->getFormazioniPath());
+	}
 	if (!directory.isEmpty()) {
 		this->ui.formazioniLineEdit->setText(directory);
 		THE_REPO->formazioniPath = directory;

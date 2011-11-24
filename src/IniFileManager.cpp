@@ -25,11 +25,14 @@ IniFileManager::IniFileManager() {
 	char *UserProfile = getenv("USERPROFILE");
 	QDir dir(UserProfile);
 	dir.mkdir("FantaCalcGui");
-	workDir = QString::fromAscii(UserProfile) + "\\FantaCalcGui\\";
-	iniFileName = workDir + "FantaCalcGui.ini";
-	readIniFile();
+	this->workDir = QString::fromAscii(UserProfile) + "\\FantaCalcGui\\";
+	this->iniFileName = workDir + "FantaCalcGui.ini";
+	this->readIniFile();
 }
 IniFileManager::~IniFileManager() {
+}
+QString IniFileManager::getWorkDir() {
+	return this->workDir;
 }
 void IniFileManager::writeIniFile() {
 	QFile * iniFile = new QFile(this->iniFileName);
@@ -171,7 +174,8 @@ void IniFileManager::readIniFile() {
 		IniFilePopulator::Inst()->setStartDir(this->workDir);
 		IniFilePopulator::Inst()->exec();
 
-		THE_REPO->formazioniPath = IniFilePopulator::Inst()->getFormazioniPath();
+		THE_REPO->formazioniPath
+				= IniFilePopulator::Inst()->getFormazioniPath();
 		THE_REPO->gazzettaPath = IniFilePopulator::Inst()->getGazzettaPath();
 		THE_REPO->risultatiPath = IniFilePopulator::Inst()->getRisultatiPath();
 		THE_REPO->downloadPath = IniFilePopulator::Inst()->getDownloadPath();
@@ -202,9 +206,9 @@ QString IniFileManager::showIniFile() {
 }
 /*
  QString Repository::getIniFilePath() {
-	return this->iniFileName;
-}
-QString Repository::getWorkDir() {
-	return this->workDir;
-}
-*/
+ return this->iniFileName;
+ }
+ QString Repository::getWorkDir() {
+ return this->workDir;
+ }
+ */

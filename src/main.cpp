@@ -31,10 +31,10 @@ int main(int argc, char *argv[]) {
 //	singletonQtLogger::Inst()->setDebugStatus(
 //			IniFileManager::Inst()->getDebugStatus());
 
-	THE_REPO;         // prima si crea il repository dei dati
-	THE_MANAGER;      // poi si legge l'ini file (se presente)
-	THE_CONFIGURATOR; // quindi il configuratore viene popolato con i dati
-	THE_LOGGER;       // infine parte l'applicazione
+	THE_LOGGER;       // prima parte l'applicazione
+	THE_REPO;         // poi si crea il repository dei dati
+	THE_MANAGER;      // quindi si legge l'ini file (o lo si crea se non esistente)
+	THE_CONFIGURATOR; // infine il configuratore viene popolato con i dati
 
 	return a.exec();
 
