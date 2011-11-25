@@ -21,46 +21,62 @@ IniFilePopulator::~IniFilePopulator() {
 }
 void IniFilePopulator::chooseFormazioniPath() {
 	QString directory = THE_REPO->getFormazioniPath();
-	if (directory.isEmpty()) {
-		directory = this->getDir("Formazioni Path", THE_MANAGER->getWorkDir());
-	} else {
-		directory = this->getDir("Formazioni Path",
-				THE_REPO->getFormazioniPath());
+	QString startDir = THE_MANAGER->getWorkDir();
+	if (!directory.isEmpty()) {
+		startDir = directory;
 	}
+	directory = this->getDir("Formazioni Path", startDir);
 	if (!directory.isEmpty()) {
 		this->ui.formazioniLineEdit->setText(directory);
 		THE_REPO->formazioniPath = directory;
 	}
 }
 void IniFilePopulator::chooseGazzettaPath() {
-	QString directory = this->getDir("Gazzetta Path",
-			THE_REPO->getGazzettaUrl());
+	QString directory = THE_REPO->getGazzettaPath();
+	QString startDir = THE_MANAGER->getWorkDir();
+	if (!directory.isEmpty()) {
+		startDir = directory;
+	}
+	directory = this->getDir("Gazzetta Path", startDir);
 	if (!directory.isEmpty()) {
 		this->ui.gazzettaLineEdit->setText(directory);
 		THE_REPO->gazzettaPath = directory;
 	}
 }
 void IniFilePopulator::chooseDownloadPath() {
-	QString directory = this->getDir("Download Path",
-			THE_REPO->getDownloadPath());
+	QString directory = THE_REPO->getDownloadPath();
+	QString startDir = THE_MANAGER->getWorkDir();
+	if (!directory.isEmpty()) {
+		startDir = directory;
+	}
+	directory = this->getDir("Download Path", startDir);
 	if (!directory.isEmpty()) {
 		this->ui.downloadLineEdit->setText(directory);
 		THE_REPO->downloadPath = directory;
 	}
 }
 void IniFilePopulator::chooseRisultatiPath() {
-	QString directory = this->getDir("Risultati Path",
-			THE_REPO->getRisultatiPath());
+	QString directory = THE_REPO->getRisultatiPath();
+	QString startDir = THE_MANAGER->getWorkDir();
+	if (!directory.isEmpty()) {
+		startDir = directory;
+	}
+	directory = this->getDir("Risultati Path", startDir);
 	if (!directory.isEmpty()) {
 		this->ui.risultatiLineEdit->setText(directory);
 		THE_REPO->risultatiPath = directory;
 	}
 }
 void IniFilePopulator::chooseListePath() {
-	QString directory = this->getDir("Liste Path", THE_REPO->getListePath());
+	QString directory = THE_REPO->getListePath();
+	QString startDir = THE_MANAGER->getWorkDir();
+	if (!directory.isEmpty()) {
+		startDir = directory;
+	}
+	directory = this->getDir("Liste Path", startDir);
 	if (!directory.isEmpty()) {
 		this->ui.listeLineEdit->setText(directory);
-		THE_REPO->listePath;
+		THE_REPO->listePath = directory;
 	}
 }
 QString IniFilePopulator::getDir(QString caption, QString startDir) {
@@ -72,7 +88,7 @@ QString IniFilePopulator::getDir(QString caption, QString startDir) {
 	options |= QFileDialog::DontUseNativeDialog;
 
 	QString dir = QFileDialog::getExistingDirectory(this, caption, startDir,
-			options) + "/";
+			options);
 
 	LOG(DEBUG, "In IniFilePopulator::getDir() --> returning " + dir);
 
