@@ -3,6 +3,7 @@
 
 #include <QtGui/QDialog>
 #include <QtGui/QFileDialog>
+#include "IniFileManager.h"
 #include "ui_IniFilePopulator.h"
 
 class IniFilePopulator: public QDialog {

@@ -177,24 +177,43 @@ void IniFileManager::readIniFile() {
 		iniFile->close();
 	} else {
 		LOG(
+				ERROR,
+				this->iniFileName
+						+ " non esiste. Inserire le informazioni richieste.");
+
+		LOG(
 				DEBUG,
 				"In IniFileManager::readIniFile() --> " + this->iniFileName
 						+ " does not exists.");
 
 		LOG(DEBUG, "In IniFileManager::readIniFile() --> " + this->workDir);
 
-		IniFilePopulator::Inst()->setStartDir(this->workDir);
-		IniFilePopulator::Inst()->exec();
+		THE_CONFIGURATOR->setStartDir(this->workDir);
 
-		THE_REPO->formazioniPath
-				= IniFilePopulator::Inst()->getFormazioniPath();
-		THE_REPO->gazzettaPath = IniFilePopulator::Inst()->getGazzettaPath();
-		THE_REPO->risultatiPath = IniFilePopulator::Inst()->getRisultatiPath();
-		THE_REPO->downloadPath = IniFilePopulator::Inst()->getDownloadPath();
-		THE_REPO->listePath = IniFilePopulator::Inst()->getListePath();
-		THE_REPO->formazioniUrl = IniFilePopulator::Inst()->getFormazioniUrl();
-		THE_REPO->gazzettaUrl = IniFilePopulator::Inst()->getGazzettaUrl();
-		if (IniFilePopulator::Inst()->getDebugStatus())
+		/*
+		 * utilizza i valori comunque presenti in Repository::Repository()
+		 */
+		THE_CONFIGURATOR->setFormazioniUrl(THE_REPO->formazioniUrl);
+		THE_CONFIGURATOR->setGazzettaUrl(THE_REPO->gazzettaUrl);
+		if (THE_REPO->debugStatus == TRUE) {
+			THE_CONFIGURATOR->setDebugStatus(TRUE);
+		} else {
+			THE_CONFIGURATOR->setDebugStatus(FALSE);
+		}
+
+		THE_CONFIGURATOR->exec();
+
+		/*
+		 * aggiorna i dati in THE_REPO
+		 */
+		THE_REPO->formazioniPath = THE_CONFIGURATOR->getFormazioniPath();
+		THE_REPO->gazzettaPath = THE_CONFIGURATOR->getGazzettaPath();
+		THE_REPO->risultatiPath = THE_CONFIGURATOR->getRisultatiPath();
+		THE_REPO->downloadPath = THE_CONFIGURATOR->getDownloadPath();
+		THE_REPO->listePath = THE_CONFIGURATOR->getListePath();
+		THE_REPO->formazioniUrl = THE_CONFIGURATOR->getFormazioniUrl();
+		THE_REPO->gazzettaUrl = THE_CONFIGURATOR->getGazzettaUrl();
+		if (THE_CONFIGURATOR->getDebugStatus())
 			THE_REPO->debugStatus = TRUE;
 		else
 			THE_REPO->debugStatus = FALSE;
