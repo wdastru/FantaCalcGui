@@ -143,13 +143,26 @@ void singletonQtLogger::onlineClicked() {
 	LOG(DEBUG,
 			"In void singletonQtLogger::onlineClicked() : network will be accessed.");
 
+	LOG(
+			DEBUG,
+			"In void singletonQtLogger::onlineClicked() --> THE_REPO->getFileFormazioniUrl() : "
+					+ THE_REPO->getFileFormazioniUrl());
+	LOG(
+			DEBUG,
+			"In void singletonQtLogger::onlineClicked() --> THE_REPO->getFileGazzettaUrl() : "
+					+ THE_REPO->getFileGazzettaUrl());
+	LOG(
+			DEBUG,
+			"In void singletonQtLogger::onlineClicked() --> THE_REPO->getListePath : "
+					+ THE_REPO->getListePath());
+
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	urls->push_back(QUrl::fromLocalFile(THE_REPO->getFileFormazioniUrl()));
 	urls->push_back(QUrl::fromLocalFile(THE_REPO->getFileGazzettaUrl()));
 
 	std::vector<QString> * savePaths = new std::vector<QString>;
-	savePaths->push_back(THE_REPO->getListePath());
-	savePaths->push_back(THE_REPO->getListePath());
+	savePaths->push_back(THE_REPO->getListePath()+'/');
+	savePaths->push_back(THE_REPO->getListePath()+'/');
 
 	HttpWindow httpWin(this, urls, savePaths);
 	httpWin.exec();
