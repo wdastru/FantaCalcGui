@@ -21,7 +21,7 @@ singletonQtLogger::singletonQtLogger(QWidget *parent) :
 	this->show();
 }
 void singletonQtLogger::init() {
-	this->setVersion("v2.6.0");
+	this->setVersion("v3.0");
 	this->setTitle("FantaCalcGui");
 }
 singletonQtLogger::~singletonQtLogger() {
@@ -39,11 +39,11 @@ void singletonQtLogger::Logging(QString type, QString message) {
 				"[" + QTime::currentTime().toString("hh:mm:ss.zzz")
 						+ "] ERROR   : " + message);
 	else if (type == "DEBUG") {
-//		if (THE_REPO->debugStatus) {
+		if (THE_REPO->debugStatus) {
 			this->ui.plainTextEdit->appendHtml(
 					"[" + QTime::currentTime().toString("hh:mm:ss.zzz")
 							+ "] DEBUG   : " + message);
-//		}
+		}
 	} else if (type == "FATAL")
 		this->ui.plainTextEdit->appendHtml(
 				"[" + QTime::currentTime().toString("hh:mm:ss.zzz")
@@ -61,6 +61,7 @@ void singletonQtLogger::Logging(QString type, QString message) {
 	return;
 }
 void singletonQtLogger::setTitle(QString _title) {
+	this->title = _title;
 	this->ui.titleLabel->setText(
 			"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 				"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
@@ -70,6 +71,7 @@ void singletonQtLogger::setTitle(QString _title) {
 					+ _title + "</span></p></body></html>");
 }
 void singletonQtLogger::setVersion(QString _version) {
+	this->version = _version;
 	this->ui.versionLabel->setText(
 			"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\"\n"
 				"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
@@ -77,12 +79,6 @@ void singletonQtLogger::setVersion(QString _version) {
 				"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
 				"<p align=\"right\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">"
 					+ _version + "</span></p></body></html>");
-}
-//void singletonQtLogger::setDebugStatus(bool _status) {
-//	this->debugStatus = _status;
-//}
-void singletonQtLogger::setLogFileName(QString _filename) {
-	this->logFileName = _filename;
 }
 void singletonQtLogger::saveLogFile() {
 	if (this->logFileName.isEmpty()) {
@@ -188,5 +184,11 @@ void singletonQtLogger::offlineClicked() {
 	} else {
 		return;
 	}
+}
+QString singletonQtLogger::getTitle(void) {
+	return this->title;
+}
+QString singletonQtLogger::getVersion(void) {
+	return this->version;
 }
 
