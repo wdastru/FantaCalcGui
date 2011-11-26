@@ -198,11 +198,11 @@ void IniFilePopulator::setDebugStatus(bool status) {
 	if (status) {
 		LOG(DEBUG,
 				"In void IniFilePopulator::setDebugStatus(bool status) --> status is TRUE.");
-		this->ui.trueCheckBox->setChecked(true);
+		this->ui.trueCheckBox->setChecked(TRUE);
 	} else {
 		LOG(DEBUG,
 				"void IniFilePopulator::setDebugStatus(bool status) --> status is FALSE.");
-		this->ui.falseCheckBox->setChecked(true);
+		this->ui.falseCheckBox->setChecked(TRUE);
 	}
 }
 void IniFilePopulator::toggleDebugStatus() {
