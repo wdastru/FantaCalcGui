@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>330</height>
+    <height>295</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,7 +36,7 @@ p, li { white-space: pre-wrap; }
      <x>10</x>
      <y>40</y>
      <width>367</width>
-     <height>231</height>
+     <height>201</height>
     </rect>
    </property>
    <layout class="QFormLayout" name="formLayout">
@@ -138,7 +138,7 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>280</y>
+     <y>250</y>
      <width>206</width>
      <height>31</height>
     </rect>
@@ -184,7 +184,7 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>223</x>
-     <y>284</y>
+     <y>254</y>
      <width>156</width>
      <height>23</height>
     </rect>
@@ -325,6 +325,118 @@ p, li { white-space: pre-wrap; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>downloadLineEdit</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>IniFilePopulatorClass</receiver>
+   <slot>updateInternalData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>236</x>
+     <y>137</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>164</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>formazioniLineEdit</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>IniFilePopulatorClass</receiver>
+   <slot>updateInternalData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>236</x>
+     <y>50</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>164</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>formazioniUrlLineEdit</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>IniFilePopulatorClass</receiver>
+   <slot>updateInternalData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>236</x>
+     <y>195</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>164</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>gazzettaLineEdit</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>IniFilePopulatorClass</receiver>
+   <slot>updateInternalData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>236</x>
+     <y>79</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>164</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>gazzettaUrlLineEdit</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>IniFilePopulatorClass</receiver>
+   <slot>updateInternalData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>236</x>
+     <y>221</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>164</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>listeLineEdit</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>IniFilePopulatorClass</receiver>
+   <slot>updateInternalData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>236</x>
+     <y>166</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>164</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>risultatiLineEdit</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>IniFilePopulatorClass</receiver>
+   <slot>updateInternalData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>236</x>
+     <y>108</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>164</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>chooseFormazioniPath()</slot>
@@ -333,6 +445,7 @@ p, li { white-space: pre-wrap; }
   <slot>chooseDownloadPath()</slot>
   <slot>chooseListePath()</slot>
   <slot>toggleDebugStatus()</slot>
+  <slot>updateInternalData()</slot>
  </slots>
  <buttongroups>
   <buttongroup name="buttonGroup"/>
