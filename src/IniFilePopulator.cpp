@@ -18,6 +18,21 @@ IniFilePopulator::IniFilePopulator(QWidget *parent) :
 IniFilePopulator::~IniFilePopulator() {
 
 }
+void IniFilePopulator::updateInternalData() {
+	THE_REPO->formazioniPath = ui.formazioniLineEdit->text();
+	THE_REPO->gazzettaPath = ui.gazzettaLineEdit->text();
+	THE_REPO->risultatiPath = ui.risultatiLineEdit->text();
+	THE_REPO->downloadPath = ui.downloadLineEdit->text();
+	THE_REPO->listePath = ui.listeLineEdit->text();
+	THE_REPO->formazioniUrl = ui.formazioniUrlLineEdit->text();
+	THE_REPO->gazzettaUrl = ui.gazzettaUrlLineEdit->text();
+
+	if (this->ui.trueCheckBox->isChecked()) {
+		THE_REPO->debugStatus = "TRUE";
+	} else {
+		THE_REPO->debugStatus = "FALSE";
+	}
+}
 void IniFilePopulator::chooseFormazioniPath() {
 	QString directory = THE_REPO->getFormazioniPath();
 	QString startDir = THE_MANAGER->getWorkDir();
