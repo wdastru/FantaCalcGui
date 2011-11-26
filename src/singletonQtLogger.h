@@ -21,7 +21,8 @@ public:
 	virtual ~singletonQtLogger();
 	void setTitle(QString);
 	void setVersion(QString);
-//	void setDebugStatus(bool);
+	QString getTitle(void);
+	QString getVersion(void);
 	void setLogFileName(QString);
 
 private slots:

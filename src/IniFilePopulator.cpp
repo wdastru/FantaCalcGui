@@ -197,22 +197,26 @@ void IniFilePopulator::setGazzettaUrl(QString str) {
 void IniFilePopulator::setDebugStatus(bool status) {
 	if (status) {
 		LOG(DEBUG,
-				"In void IniFilePopulator::setDebugStatus(bool status) --> status is TRUE");
+				"In void IniFilePopulator::setDebugStatus(bool status) --> status is TRUE.");
 		this->ui.trueCheckBox->setChecked(true);
 	} else {
 		LOG(DEBUG,
-				"void IniFilePopulator::setDebugStatus(bool status) --> status is FALSE");
+				"void IniFilePopulator::setDebugStatus(bool status) --> status is FALSE.");
 		this->ui.falseCheckBox->setChecked(true);
 	}
 }
 void IniFilePopulator::toggleDebugStatus() {
-	if (THE_REPO->debugStatus) {
-		THE_REPO->debugStatus = FALSE;
-		LOG(DEBUG,
-				"void IniFilePopulator::toggleDebugStatus() --> status is now FALSE");
-	} else {
+	if (this->ui.trueCheckBox->isChecked()) {
 		THE_REPO->debugStatus = TRUE;
 		LOG(DEBUG,
-				"void IniFilePopulator::toggleDebugStatus() --> status is now TRUE");
+				"void IniFilePopulator::toggleDebugStatus() --> status is now TRUE.");
+	} else if (this->ui.falseCheckBox->isChecked()) {
+		THE_REPO->debugStatus = FALSE;
+		LOG(DEBUG,
+				"void IniFilePopulator::toggleDebugStatus() --> status is now FALSE.");
+	} else {
+		THE_REPO->debugStatus = FALSE;
+				LOG(ERROR,
+						"void IniFilePopulator::toggleDebugStatus() --> was not defined: set to FALSE.");
 	}
 }
