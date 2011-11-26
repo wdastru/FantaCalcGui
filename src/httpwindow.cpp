@@ -1,4 +1,3 @@
-/****************************************************************************
  /****************************************************************************
  **
  ** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
@@ -91,7 +90,7 @@ HttpWindow::HttpWindow(QWidget *parent, std::vector<QUrl>* _urls,
 #endif
 	connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
 	connect(downloadButton, SIGNAL(clicked()), this, SLOT(downloadAllFiles()));
-	connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
+	connect(quitButton, SIGNAL(clicked()), this, SLOT(closeDialog()));
 
 	QVBoxLayout *vLayout = new QVBoxLayout;
 	for (size_t i = 0; i < this->urls->size(); i++) {
@@ -113,6 +112,10 @@ HttpWindow::HttpWindow(QWidget *parent, std::vector<QUrl>* _urls,
 	//urlLineEditVector.at(0)->setFocus();
 }
 
+void HttpWindow::closeDialog() {
+	this->close();
+}
+
 void HttpWindow::startRequest(QUrl url) {
 	LOG(DEBUG, "In void HttpWindow::startRequest(QUrl url)");
 	reply = qnam.get(QNetworkRequest(url));
@@ -123,16 +126,25 @@ void HttpWindow::startRequest(QUrl url) {
 }
 
 void HttpWindow::downloadAllFiles() {
-	for (int i = 0; i < this->urls->size(); i++) {
+	for (size_t i = 0; i < this->urls->size(); i++) {
 		LOG(
 				DEBUG,
-				"In void HttpWindow::downloadAllFiles(std::vector<QUrl>* _urls, std::vector<QString>* _savePaths).");
-		LOG(
-				DEBUG,
-				" downloading : " + this->urls->at(i).authority()
+				" In void HttpWindow::downloadAllFiles(std::vector<QUrl>* _urls, std::vector<QString>* _savePaths) --> downloading : "
+						+ this->urls->at(i).authority()
 						+ this->urls->at(i).path());
 		LOG(DEBUG, " saving at : " + this->savePaths->at(i));
 		this->downloadFile(this->urls->at(i), this->savePaths->at(i));
+	}
+
+	if (httpRequestSucceded) {
+		LOG(
+				DEBUG,
+				" In void HttpWindow::downloadAllFiles(std::vector<QUrl>* _urls, std::vector<QString>* _savePaths) --> download of files succeded.");
+		return;
+	} else {
+		LOG(
+				DEBUG,
+				" In void HttpWindow::downloadAllFiles(std::vector<QUrl>* _urls, std::vector<QString>* _savePaths) --> download of files failed.");
 	}
 }
 
@@ -159,13 +171,15 @@ void HttpWindow::downloadFile(QUrl _url, QString _savePath) {
 				tr("HTTP - File exists !!!"),
 				tr("There already exists a file called %1. Overwrite?").arg(
 						fileName), QMessageBox::Yes | QMessageBox::No,
-				QMessageBox::No) == QMessageBox::No)
+				QMessageBox::No) == QMessageBox::No) {
 			return;
-		QFile::remove(fileName);
-		LOG(
-				DEBUG,
-				"In HttpWindow::downloadFile() --> " + fileName
-						+ " exists : it will be overwritten.");
+		} else {
+			QFile::remove(fileName);
+			LOG(
+					DEBUG,
+					"In HttpWindow::downloadFile() --> " + fileName
+							+ " exists : it will be overwritten.");
+		}
 	}
 
 	file = new QFile(fileName);
@@ -228,10 +242,15 @@ void HttpWindow::httpFinished() {
 					QUrl(urlLineEditVector.at(i)->text()).path()).fileName();
 			statusLabel->setText(
 					tr("Downloaded %1 to current directory.").arg(fileName));
+
+			LOG(
+					DEBUG,
+					"In void HttpWindow::httpFinished() --> " + QUrl(
+							urlLineEditVector.at(i)->text()).path()
+							+ " downloaded.");
 		}
 
 		httpRequestSucceded = true;
-		//downloadButton->setEnabled(true);
 	}
 
 	reply->deleteLater();

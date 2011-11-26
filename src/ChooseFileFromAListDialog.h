@@ -6,12 +6,6 @@
 #include <QtCore/QFileInfo>
 #include <QUrl>
 
-#include "singletonQtLogger.h"
-#include "defines.h"
-
-#include "IniFileManager.h"
-#include "httpwindow.h"
-
 class QLabel;
 class QPushButton;
 class QGroupBox;
@@ -33,6 +27,7 @@ public:
 	QString getGazFile();
 	QString getAwayFile();
 	bool wasCancelClicked();
+	bool isFinished();
 	bool getDownloadSuccess();
 	QTabWidget *Tabs;
 	QWidget *formazioniTab;

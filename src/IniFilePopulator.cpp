@@ -1,4 +1,7 @@
+#include "Repository.h"
+#include "IniFileManager.h"
 #include "IniFilePopulator.h"
+#include "defines.h"
 
 IniFilePopulator* IniFilePopulator::Inst() {
 	if (pInstance == NULL) {
@@ -6,48 +9,74 @@ IniFilePopulator* IniFilePopulator::Inst() {
 	}
 	return pInstance;
 }
-
 IniFilePopulator* IniFilePopulator::pInstance = NULL;
-
 IniFilePopulator::IniFilePopulator(QWidget *parent) :
 	QDialog(parent) {
 	LOG(DEBUG, "In IniFilePopulator() constructor.");
 	ui.setupUi(this);
-	ui.formazioniUrlLineEdit->setText(
-			"http://nmr.ch.unito.it/lab/Fantasito/777/formazioni/");
-	ui.gazzettaUrlLineEdit->setText(
-			"http://nmr.ch.unito.it/lab/Fantasito/777/filesGazzetta/");
-	ui.falseCheckBox->setChecked(TRUE);
 }
-
 IniFilePopulator::~IniFilePopulator() {
 
 }
-
 void IniFilePopulator::chooseFormazioniPath() {
-	QString directory = this->getDir("Formazioni Path", this->startDir);
-	if (!directory.isEmpty())
+	QString directory = THE_REPO->getFormazioniPath();
+	QString startDir = THE_MANAGER->getWorkDir();
+	if (!directory.isEmpty()) {
+		startDir = directory;
+	}
+	directory = this->getDir("Formazioni Path", startDir);
+	if (!directory.isEmpty()) {
 		this->ui.formazioniLineEdit->setText(directory);
+		THE_REPO->formazioniPath = directory;
+	}
 }
 void IniFilePopulator::chooseGazzettaPath() {
-	QString directory = this->getDir("Gazzetta Path", this->startDir);
-	if (!directory.isEmpty())
+	QString directory = THE_REPO->getGazzettaPath();
+	QString startDir = THE_MANAGER->getWorkDir();
+	if (!directory.isEmpty()) {
+		startDir = directory;
+	}
+	directory = this->getDir("Gazzetta Path", startDir);
+	if (!directory.isEmpty()) {
 		this->ui.gazzettaLineEdit->setText(directory);
+		THE_REPO->gazzettaPath = directory;
+	}
 }
 void IniFilePopulator::chooseDownloadPath() {
-	QString directory = this->getDir("Download Path", this->startDir);
-	if (!directory.isEmpty())
+	QString directory = THE_REPO->getDownloadPath();
+	QString startDir = THE_MANAGER->getWorkDir();
+	if (!directory.isEmpty()) {
+		startDir = directory;
+	}
+	directory = this->getDir("Download Path", startDir);
+	if (!directory.isEmpty()) {
 		this->ui.downloadLineEdit->setText(directory);
+		THE_REPO->downloadPath = directory;
+	}
 }
 void IniFilePopulator::chooseRisultatiPath() {
-	QString directory = this->getDir("Risultati Path", this->startDir);
-	if (!directory.isEmpty())
+	QString directory = THE_REPO->getRisultatiPath();
+	QString startDir = THE_MANAGER->getWorkDir();
+	if (!directory.isEmpty()) {
+		startDir = directory;
+	}
+	directory = this->getDir("Risultati Path", startDir);
+	if (!directory.isEmpty()) {
 		this->ui.risultatiLineEdit->setText(directory);
+		THE_REPO->risultatiPath = directory;
+	}
 }
 void IniFilePopulator::chooseListePath() {
-	QString directory = this->getDir("Liste Path", this->startDir);
-	if (!directory.isEmpty())
+	QString directory = THE_REPO->getListePath();
+	QString startDir = THE_MANAGER->getWorkDir();
+	if (!directory.isEmpty()) {
+		startDir = directory;
+	}
+	directory = this->getDir("Liste Path", startDir);
+	if (!directory.isEmpty()) {
 		this->ui.listeLineEdit->setText(directory);
+		THE_REPO->listePath = directory;
+	}
 }
 QString IniFilePopulator::getDir(QString caption, QString startDir) {
 
@@ -57,9 +86,12 @@ QString IniFilePopulator::getDir(QString caption, QString startDir) {
 			| QFileDialog::ShowDirsOnly;
 	options |= QFileDialog::DontUseNativeDialog;
 
-	QString directory = QFileDialog::getExistingDirectory(this, caption,
-			startDir, options);
-	return directory + "/";
+	QString dir = QFileDialog::getExistingDirectory(this, caption, startDir,
+			options);
+
+	LOG(DEBUG, "In IniFilePopulator::getDir() --> returning " + dir);
+
+	return dir;
 }
 void IniFilePopulator::setStartDir(QString _startDir) {
 	this->startDir = _startDir;
@@ -156,5 +188,16 @@ void IniFilePopulator::setDebugStatus(bool status) {
 		LOG(DEBUG,
 				"void IniFilePopulator::setDebugStatus(bool status) --> status is FALSE");
 		this->ui.falseCheckBox->setChecked(true);
+	}
+}
+void IniFilePopulator::toggleDebugStatus() {
+	if (THE_REPO->debugStatus) {
+		THE_REPO->debugStatus = FALSE;
+		LOG(DEBUG,
+				"void IniFilePopulator::toggleDebugStatus() --> status is now FALSE");
+	} else {
+		THE_REPO->debugStatus = TRUE;
+		LOG(DEBUG,
+				"void IniFilePopulator::toggleDebugStatus() --> status is now TRUE");
 	}
 }

@@ -413,7 +413,7 @@ void Fanta::orderByRuolo() {
 				"In Fanta::orderByRuolo() --> Squadra : "
 						+ QString::fromStdString(this->getTeamName(k)));
 
-		for (size_t i = 0; i < 4; i++) // loop sui ruoli
+		for (signed int i = 0; i < 4; i++) // loop sui ruoli
 		{
 			for (size_t j = 0; j < this->Team[k].size(); j++) // loop sui giocatori
 			{

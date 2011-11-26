@@ -72,7 +72,6 @@ public:
 	void startRequest(QUrl url);
 
 private slots:
-	void downloadFile(QUrl, QString);
 	void downloadAllFiles();
 	void cancelDownload();
 	void httpFinished();
@@ -80,15 +79,17 @@ private slots:
 	void updateDataReadProgress(qint64 bytesRead, qint64 totalBytes);
 	void enableDownloadButton();
 	void slotAuthenticationRequired(QNetworkReply*, QAuthenticator *);
+	void closeDialog();
 #ifndef QT_NO_OPENSSL
 	void sslErrors(QNetworkReply*, const QList<QSslError> &errors);
 #endif
 
 private:
+	void downloadFile(QUrl, QString);
 	QLabel * statusLabel;
-	std::vector<QLabel * > urlLabelVector;
+	std::vector<QLabel *> urlLabelVector;
 	//QLabel * urlLabel;
-	std::vector<QLineEdit * > urlLineEditVector;
+	std::vector<QLineEdit *> urlLineEditVector;
 	//QLineEdit * urlLineEdit;
 	QProgressDialog * progressDialog;
 	QPushButton * downloadButton;

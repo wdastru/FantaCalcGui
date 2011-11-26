@@ -350,7 +350,7 @@ std::vector<std::string> FormazioniFileReader::findLevenstheins(
 
 	std::vector<std::string> Levenshteins;
 
-	for (signed int distance = 1;; distance++) { // loop infinito: fino a trovare qualcosa
+	for (unsigned int distance = 1; ; distance++) { // loop infinito: fino a trovare qualcosa
 		Levenshteins.clear();
 		for (size_t ii = 0; ii < 26; ii++) { // giocatori della squadra
 			for (size_t jj = 0; jj < this->allThePlayers[ii].size(); jj++) { // giocatori della Gazzetta

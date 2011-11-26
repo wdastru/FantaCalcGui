@@ -9,6 +9,7 @@
  */
 
 #include "NoNetFileDialog.h"
+#include "Repository.h"
 
 NoNetFileDialog::NoNetFileDialog(QWidget *parent) :
 	QDialog(parent) {
@@ -22,7 +23,7 @@ NoNetFileDialog::~NoNetFileDialog() {
 }
 void NoNetFileDialog::setOpenFileNameSquadre() {
 	QString path =
-			IniFileManager::Inst()->getFormazioniPath().trimmed().replace("\\",
+			THE_REPO->getFormazioniPath().trimmed().replace("\\",
 					"\\\\");
 
 	this->fileNameSquadre = QFileDialog::getOpenFileName(this,
@@ -49,7 +50,7 @@ void NoNetFileDialog::setOpenFileNameSquadre() {
 
 		 this->fileNameSquadrePath = ba.trimmed();
 		 //		this->writeIniFile();
-		 IniFileManager::Inst()->writeIniFile();
+		 THE_REPO->writeIniFile();
 		 */
 	} else {
 		LOG(DEBUG,
@@ -61,10 +62,10 @@ void NoNetFileDialog::setOpenFileNameSquadre() {
 	ui.fileSquadreLineEdit->setText(this->fileNameSquadre);
 	this->enableOkButton();
 
-	IniFileManager::Inst()->writeIniFile();
+//	THE_MANAGER->writeIniFile();
 }
 void NoNetFileDialog::setOpenFileNameGazzetta() {
-	QString path = IniFileManager::Inst()->getGazzettaPath().trimmed().replace(
+	QString path = THE_REPO->getGazzettaPath().trimmed().replace(
 			"\\", "\\\\");
 
 	this->fileNameGazzetta = QFileDialog::getOpenFileName(this,
@@ -93,7 +94,7 @@ void NoNetFileDialog::setOpenFileNameGazzetta() {
 
 		 this->fileNameGazzettaPath = ba.trimmed();
 		 //		this->writeIniFile();
-		 IniFileManager::Inst()->writeIniFile();
+		 THE_REPO->writeIniFile();
 		 */
 	} else {
 		LOG(DEBUG,
@@ -104,7 +105,7 @@ void NoNetFileDialog::setOpenFileNameGazzetta() {
 	ui.fileGazzettaLineEdit->setText(this->fileNameGazzetta);
 	this->enableOkButton();
 
-	IniFileManager::Inst()->writeIniFile();
+//	THE_MANAGER->writeIniFile();
 }
 void NoNetFileDialog::createEmptyFile() {
 	ui.newFileLineEdit->setText("file nuovo");

@@ -14,7 +14,8 @@ UseTheNetDialog::UseTheNetDialog(QWidget *parent) :
 	yesHasBeenClicked = FALSE;
 	downloadSuccess = FALSE;
 
-	LOG(DEBUG, "UseTheNetDialog object created.");
+	LOG(DEBUG,
+			"In UseTheNetDialog::UseTheNetDialog(QWidget *parent) -> object created.");
 }
 UseTheNetDialog::~UseTheNetDialog() {
 }
@@ -32,19 +33,20 @@ void UseTheNetDialog::setQuestion(const std::string question) {
 					0, QApplication::UnicodeUTF8));
 }
 void UseTheNetDialog::yesClicked() {
-	LOG(DEBUG, "In void UseTheNetDialog::yesClicked() : network will be accessed.");
+	LOG(DEBUG,
+			"In void UseTheNetDialog::yesClicked() : network will be accessed.");
 	this->yesHasBeenClicked = TRUE;
 	this->noHasBeenClicked = FALSE;
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
-	urls->push_back(IniFileManager::Inst()->getFileFormazioniUrl());
-	urls->push_back(IniFileManager::Inst()->getFileGazzettaUrl());
+	urls->push_back(THE_MANAGER->getFileFormazioniUrl());
+	urls->push_back(THE_MANAGER->getFileGazzettaUrl());
 
 	std::vector<QString> * savePaths = new std::vector<QString>;
-	savePaths->push_back(IniFileManager::Inst()->getListePath());
-	savePaths->push_back(IniFileManager::Inst()->getListePath());
+	savePaths->push_back(THE_MANAGER->getListePath());
+	savePaths->push_back(THE_MANAGER->getListePath());
 
-	HttpWindow httpWin(singletonQtLogger::Inst(), urls, savePaths);
+	HttpWindow httpWin(THE_LOGGER, urls, savePaths);
 	httpWin.exec();
 
 	if (httpWin.requestSucceded()) {
@@ -58,23 +60,32 @@ void UseTheNetDialog::yesClicked() {
 		LOG(DEBUG,
 				"In UseTheNetDialog::yesClicked() --> the download of files failed.");
 		this->downloadSuccess = FALSE;
+		return;
 	}
 }
 void UseTheNetDialog::noClicked() {
-	this->hasFinished = true;
-	LOG(DEBUG, "Network will not be accessed.");
+	LOG(DEBUG,
+			"In UseTheNetDialog::noClicked() --> Network will not be accessed.");
+
+	this->yesHasBeenClicked = FALSE;
+	this->noHasBeenClicked = TRUE;
 
 	noNetFileDialog = new NoNetFileDialog(this);
 	noNetFileDialog->exec();
+
 	if (!noNetFileDialog->hasBeenAborted) {
 		this->noNetSquadreFile = noNetFileDialog->getFileNameSquadre();
+		LOG(
+				DEBUG,
+				"In void UseTheNetDialog::noClicked() -> fileNameSquadre : "
+						+ this->noNetSquadreFile);
 		this->noNetGazzettaFile = noNetFileDialog->getFileNameGazzetta();
+		this->hasFinished = TRUE;
+		this->close();
 	} else {
-		;
+		this->hasFinished = FALSE;
+		return;
 	}
-	this->yesHasBeenClicked = FALSE;
-	this->noHasBeenClicked = TRUE;
-	this->close();
 }
 void UseTheNetDialog::abortClicked() {
 	this->hasBeenAborted = true;
@@ -83,25 +94,15 @@ void UseTheNetDialog::abortClicked() {
 	this->close();
 }
 void UseTheNetDialog::configClicked() {
-	IniFilePopulator::Inst()->setFormazioniPath(
-			IniFileManager::Inst()->getFormazioniPath());
-	IniFilePopulator::Inst()->setGazzettaPath(
-			IniFileManager::Inst()->getGazzettaPath());
-	IniFilePopulator::Inst()->setRisultatiPath(
-			IniFileManager::Inst()->getRisultatiPath());
-	IniFilePopulator::Inst()->setListePath(
-			IniFileManager::Inst()->getListePath());
-	IniFilePopulator::Inst()->setDownloadPath(
-			IniFileManager::Inst()->getDownloadPath());
-	IniFilePopulator::Inst()->setFormazioniUrl(
-			IniFileManager::Inst()->getFormazioniUrl());
-	IniFilePopulator::Inst()->setGazzettaUrl(
-			IniFileManager::Inst()->getGazzettaUrl());
-	IniFilePopulator::Inst()->setDebugStatus(
-			IniFileManager::Inst()->getDebugStatus());
-	IniFilePopulator::Inst()->exec();
-
-	IniFileManager::Inst()->updateAndWriteIniFile();
+	THE_CONFIGURATOR->setFormazioniPath(THE_REPO->getFormazioniPath());
+	THE_CONFIGURATOR->setGazzettaPath(THE_REPO->getGazzettaPath());
+	THE_CONFIGURATOR->setRisultatiPath(THE_REPO->getRisultatiPath());
+	THE_CONFIGURATOR->setListePath(THE_REPO->getListePath());
+	THE_CONFIGURATOR->setDownloadPath(THE_REPO->getDownloadPath());
+	THE_CONFIGURATOR->setFormazioniUrl(THE_REPO->getFormazioniUrl());
+	THE_CONFIGURATOR->setGazzettaUrl(THE_REPO->getGazzettaUrl());
+	THE_CONFIGURATOR->setDebugStatus(THE_REPO->getDebugStatus());
+	THE_CONFIGURATOR->exec();
 }
 QString UseTheNetDialog::getNoNetSquadreFile() {
 	return this->noNetSquadreFile;

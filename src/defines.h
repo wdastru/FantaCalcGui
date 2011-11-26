@@ -49,6 +49,18 @@
 #define THE_LOGGER singletonQtLogger::Inst()
 #endif /* THE_LOGGER */
 
+#ifndef THE_MANAGER
+#define THE_MANAGER IniFileManager::Inst()
+#endif /* THE_MANAGER */
+
+#ifndef THE_CONFIGURATOR
+#define THE_CONFIGURATOR IniFilePopulator::Inst()
+#endif /* THE_POPULATOR */
+
+#ifndef THE_REPO
+#define THE_REPO Repository::Inst()
+#endif /* THE_REPO */
+
 #ifndef STR_MOD
 #define STR_MOD StringModifier::Inst()
 #endif /* STR_MOD */
