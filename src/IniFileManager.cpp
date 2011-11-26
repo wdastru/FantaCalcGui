@@ -149,11 +149,23 @@ void IniFileManager::readIniFile() {
 
 		iniFile->readLine(buf, sizeof(buf)); // [File Formazioni Url]
 		iniFile->readLine(buf, sizeof(buf));
-		THE_REPO->formazioniUrl = QString::fromAscii(buf).trimmed();
+		/*
+		 *  se buf è vuoto lascia il valore di default
+		 *  impostato nel costruttore di THE_REPO
+		 */
+		if (!QString::fromAscii(buf).trimmed().isEmpty()) {
+			THE_REPO->formazioniUrl = QString::fromAscii(buf).trimmed();
+		}
 
 		iniFile->readLine(buf, sizeof(buf)); // [File Gazzetta Url]
 		iniFile->readLine(buf, sizeof(buf));
-		THE_REPO->gazzettaUrl = QString::fromAscii(buf).trimmed();
+		/*
+		 *  se buf è vuoto lascia il valore di default
+		 *  impostato nel costruttore di THE_REPO
+		 */
+		if (!QString::fromAscii(buf).trimmed().isEmpty()) {
+			THE_REPO->gazzettaUrl = QString::fromAscii(buf).trimmed();
+		}
 
 		iniFile->readLine(buf, sizeof(buf)); // [Debug]
 		iniFile->readLine(buf, sizeof(buf));
