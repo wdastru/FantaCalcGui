@@ -10,7 +10,10 @@
 
 Repository::Repository() {
 	// TODO Auto-generated constructor stub
-
+	this->formazioniUrl
+			= "http://www.cim.unito.it/private/fantacalcio/777/formazioni/";
+	this->gazzettaUrl
+			= "http://www.cim.unito.it/private/fantacalcio/777/filesGazzetta/";
 }
 
 Repository::~Repository() {
