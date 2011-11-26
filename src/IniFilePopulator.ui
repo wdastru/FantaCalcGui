@@ -310,22 +310,6 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>falseCheckBox</sender>
-   <signal>stateChanged(int)</signal>
-   <receiver>IniFilePopulatorClass</receiver>
-   <slot>toggleDebugStatus()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>182</x>
-     <y>295</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>199</x>
-     <y>166</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>downloadLineEdit</sender>
    <signal>textEdited(QString)</signal>
    <receiver>IniFilePopulatorClass</receiver>
@@ -434,6 +418,22 @@ p, li { white-space: pre-wrap; }
     <hint type="destinationlabel">
      <x>199</x>
      <y>164</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonGroup</sender>
+   <signal>buttonClicked(int)</signal>
+   <receiver>IniFilePopulatorClass</receiver>
+   <slot>toggleDebugStatus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>147</y>
     </hint>
    </hints>
   </connection>

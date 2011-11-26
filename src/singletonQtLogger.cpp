@@ -39,11 +39,11 @@ void singletonQtLogger::Logging(QString type, QString message) {
 				"[" + QTime::currentTime().toString("hh:mm:ss.zzz")
 						+ "] ERROR   : " + message);
 	else if (type == "DEBUG") {
-		if (THE_REPO->debugStatus) {
+//		if (THE_REPO->debugStatus) {
 			this->ui.plainTextEdit->appendHtml(
 					"[" + QTime::currentTime().toString("hh:mm:ss.zzz")
 							+ "] DEBUG   : " + message);
-		}
+//		}
 	} else if (type == "FATAL")
 		this->ui.plainTextEdit->appendHtml(
 				"[" + QTime::currentTime().toString("hh:mm:ss.zzz")
