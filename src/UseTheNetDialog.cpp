@@ -112,7 +112,6 @@ void UseTheNetDialog::configClicked() {
 
 	IniFileManager::Inst()->updateAndWriteIniFile();
 }
-
 QString UseTheNetDialog::getNoNetSquadreFile() {
 	return this->noNetSquadreFile;
 }
