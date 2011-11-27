@@ -1,0 +1,10 @@
+-IC:/Qt/4.7.3/include
+-IC:/Qt/4.7.3/include/QtGui
+-IC:/Qt/4.7.3/include/QtCore
+-DQT_DLL
+-DQT_GUI_LIB
+-DQT_CORE_LIB
+-DWIN32
+-o
+D:/Sorgenti/FantaCalcGuiNew/build/src/moc_Fanta.cxx
+D:/Sorgenti/FantaCalcGuiNew/src/Fanta.h
