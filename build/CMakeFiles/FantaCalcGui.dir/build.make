@@ -163,28 +163,28 @@ CMakeFiles/FantaCalcGui.dir/src/ChooseFileFromAListDialog.cpp.obj.provides: CMak
 
 CMakeFiles/FantaCalcGui.dir/src/ChooseFileFromAListDialog.cpp.obj.provides.build: CMakeFiles/FantaCalcGui.dir/src/ChooseFileFromAListDialog.cpp.obj
 
-CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.obj: CMakeFiles/FantaCalcGui.dir/flags.make
-CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.obj: ../src/UseTheNetDialog.cpp
+CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.obj: CMakeFiles/FantaCalcGui.dir/flags.make
+CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.obj: ../src/Downloader.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_6)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.obj"
-	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\UseTheNetDialog.cpp.obj -c D:\Sorgenti\FantaCalcGuiNew\src\UseTheNetDialog.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.obj"
+	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\Downloader.cpp.obj -c D:\Sorgenti\FantaCalcGuiNew\src\Downloader.cpp
 
-CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.i"
-	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E D:\Sorgenti\FantaCalcGuiNew\src\UseTheNetDialog.cpp > CMakeFiles\FantaCalcGui.dir\src\UseTheNetDialog.cpp.i
+CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.i"
+	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E D:\Sorgenti\FantaCalcGuiNew\src\Downloader.cpp > CMakeFiles\FantaCalcGui.dir\src\Downloader.cpp.i
 
-CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.s"
-	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S D:\Sorgenti\FantaCalcGuiNew\src\UseTheNetDialog.cpp -o CMakeFiles\FantaCalcGui.dir\src\UseTheNetDialog.cpp.s
+CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.s"
+	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S D:\Sorgenti\FantaCalcGuiNew\src\Downloader.cpp -o CMakeFiles\FantaCalcGui.dir\src\Downloader.cpp.s
 
-CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.obj.requires:
-.PHONY : CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.obj.requires
+CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.obj.requires:
+.PHONY : CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.obj.requires
 
-CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.obj.provides: CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.obj.requires
-	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.obj.provides.build
-.PHONY : CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.obj.provides
+CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.obj.provides: CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.obj.provides.build
+.PHONY : CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.obj.provides
 
-CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.obj.provides.build: CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.obj
+CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.obj.provides.build: CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.obj
 
 CMakeFiles/FantaCalcGui.dir/src/NoNetFileDialog.cpp.obj: CMakeFiles/FantaCalcGui.dir/flags.make
 CMakeFiles/FantaCalcGui.dir/src/NoNetFileDialog.cpp.obj: ../src/NoNetFileDialog.cpp
@@ -370,9 +370,32 @@ CMakeFiles/FantaCalcGui.dir/src/IniFilePopulator.cpp.obj.provides: CMakeFiles/Fa
 
 CMakeFiles/FantaCalcGui.dir/src/IniFilePopulator.cpp.obj.provides.build: CMakeFiles/FantaCalcGui.dir/src/IniFilePopulator.cpp.obj
 
+CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.obj: CMakeFiles/FantaCalcGui.dir/flags.make
+CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.obj: ../src/Repository.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_15)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.obj"
+	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\Repository.cpp.obj -c D:\Sorgenti\FantaCalcGuiNew\src\Repository.cpp
+
+CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.i"
+	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E D:\Sorgenti\FantaCalcGuiNew\src\Repository.cpp > CMakeFiles\FantaCalcGui.dir\src\Repository.cpp.i
+
+CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.s"
+	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S D:\Sorgenti\FantaCalcGuiNew\src\Repository.cpp -o CMakeFiles\FantaCalcGui.dir\src\Repository.cpp.s
+
+CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.obj.requires:
+.PHONY : CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.obj.requires
+
+CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.obj.provides: CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.obj.provides.build
+.PHONY : CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.obj.provides
+
+CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.obj.provides.build: CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.obj
+
 CMakeFiles/FantaCalcGui.dir/src/StringModifier.cpp.obj: CMakeFiles/FantaCalcGui.dir/flags.make
 CMakeFiles/FantaCalcGui.dir/src/StringModifier.cpp.obj: ../src/StringModifier.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_15)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_16)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/StringModifier.cpp.obj"
 	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\StringModifier.cpp.obj -c D:\Sorgenti\FantaCalcGuiNew\src\StringModifier.cpp
 
@@ -393,9 +416,32 @@ CMakeFiles/FantaCalcGui.dir/src/StringModifier.cpp.obj.provides: CMakeFiles/Fant
 
 CMakeFiles/FantaCalcGui.dir/src/StringModifier.cpp.obj.provides.build: CMakeFiles/FantaCalcGui.dir/src/StringModifier.cpp.obj
 
+CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.obj: CMakeFiles/FantaCalcGui.dir/flags.make
+CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.obj: ../src/singletonQtLogger.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_17)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.obj"
+	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\singletonQtLogger.cpp.obj -c D:\Sorgenti\FantaCalcGuiNew\src\singletonQtLogger.cpp
+
+CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.i"
+	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E D:\Sorgenti\FantaCalcGuiNew\src\singletonQtLogger.cpp > CMakeFiles\FantaCalcGui.dir\src\singletonQtLogger.cpp.i
+
+CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.s"
+	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S D:\Sorgenti\FantaCalcGuiNew\src\singletonQtLogger.cpp -o CMakeFiles\FantaCalcGui.dir\src\singletonQtLogger.cpp.s
+
+CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.obj.requires:
+.PHONY : CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.obj.requires
+
+CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.obj.provides: CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.obj.provides.build
+.PHONY : CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.obj.provides
+
+CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.obj.provides.build: CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.obj
+
 CMakeFiles/FantaCalcGui.dir/src/moc_CVersion.cxx.obj: CMakeFiles/FantaCalcGui.dir/flags.make
 CMakeFiles/FantaCalcGui.dir/src/moc_CVersion.cxx.obj: src/moc_CVersion.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_16)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_18)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/moc_CVersion.cxx.obj"
 	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\moc_CVersion.cxx.obj -c D:\Sorgenti\FantaCalcGuiNew\build\src\moc_CVersion.cxx
 
@@ -418,7 +464,7 @@ CMakeFiles/FantaCalcGui.dir/src/moc_CVersion.cxx.obj.provides.build: CMakeFiles/
 
 CMakeFiles/FantaCalcGui.dir/src/moc_IniFileManager.cxx.obj: CMakeFiles/FantaCalcGui.dir/flags.make
 CMakeFiles/FantaCalcGui.dir/src/moc_IniFileManager.cxx.obj: src/moc_IniFileManager.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_17)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_19)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/moc_IniFileManager.cxx.obj"
 	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\moc_IniFileManager.cxx.obj -c D:\Sorgenti\FantaCalcGuiNew\build\src\moc_IniFileManager.cxx
 
@@ -441,7 +487,7 @@ CMakeFiles/FantaCalcGui.dir/src/moc_IniFileManager.cxx.obj.provides.build: CMake
 
 CMakeFiles/FantaCalcGui.dir/src/moc_httpwindow.cxx.obj: CMakeFiles/FantaCalcGui.dir/flags.make
 CMakeFiles/FantaCalcGui.dir/src/moc_httpwindow.cxx.obj: src/moc_httpwindow.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_18)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_20)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/moc_httpwindow.cxx.obj"
 	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\moc_httpwindow.cxx.obj -c D:\Sorgenti\FantaCalcGuiNew\build\src\moc_httpwindow.cxx
 
@@ -464,7 +510,7 @@ CMakeFiles/FantaCalcGui.dir/src/moc_httpwindow.cxx.obj.provides.build: CMakeFile
 
 CMakeFiles/FantaCalcGui.dir/src/moc_ChooseFileFromAListDialog.cxx.obj: CMakeFiles/FantaCalcGui.dir/flags.make
 CMakeFiles/FantaCalcGui.dir/src/moc_ChooseFileFromAListDialog.cxx.obj: src/moc_ChooseFileFromAListDialog.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_19)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_21)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/moc_ChooseFileFromAListDialog.cxx.obj"
 	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\moc_ChooseFileFromAListDialog.cxx.obj -c D:\Sorgenti\FantaCalcGuiNew\build\src\moc_ChooseFileFromAListDialog.cxx
 
@@ -485,32 +531,32 @@ CMakeFiles/FantaCalcGui.dir/src/moc_ChooseFileFromAListDialog.cxx.obj.provides: 
 
 CMakeFiles/FantaCalcGui.dir/src/moc_ChooseFileFromAListDialog.cxx.obj.provides.build: CMakeFiles/FantaCalcGui.dir/src/moc_ChooseFileFromAListDialog.cxx.obj
 
-CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.obj: CMakeFiles/FantaCalcGui.dir/flags.make
-CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.obj: src/moc_UseTheNetDialog.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_20)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.obj"
-	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\moc_UseTheNetDialog.cxx.obj -c D:\Sorgenti\FantaCalcGuiNew\build\src\moc_UseTheNetDialog.cxx
+CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj: CMakeFiles/FantaCalcGui.dir/flags.make
+CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj: src/moc_Downloader.cxx
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_22)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj"
+	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\moc_Downloader.cxx.obj -c D:\Sorgenti\FantaCalcGuiNew\build\src\moc_Downloader.cxx
 
-CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.i"
-	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E D:\Sorgenti\FantaCalcGuiNew\build\src\moc_UseTheNetDialog.cxx > CMakeFiles\FantaCalcGui.dir\src\moc_UseTheNetDialog.cxx.i
+CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.i"
+	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E D:\Sorgenti\FantaCalcGuiNew\build\src\moc_Downloader.cxx > CMakeFiles\FantaCalcGui.dir\src\moc_Downloader.cxx.i
 
-CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.s"
-	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S D:\Sorgenti\FantaCalcGuiNew\build\src\moc_UseTheNetDialog.cxx -o CMakeFiles\FantaCalcGui.dir\src\moc_UseTheNetDialog.cxx.s
+CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.s"
+	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S D:\Sorgenti\FantaCalcGuiNew\build\src\moc_Downloader.cxx -o CMakeFiles\FantaCalcGui.dir\src\moc_Downloader.cxx.s
 
-CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.obj.requires:
-.PHONY : CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.obj.requires
+CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj.requires:
+.PHONY : CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj.requires
 
-CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.obj.provides: CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.obj.requires
-	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.obj.provides.build
-.PHONY : CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.obj.provides
+CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj.provides: CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj.requires
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj.provides.build
+.PHONY : CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj.provides
 
-CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.obj.provides.build: CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.obj
+CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj.provides.build: CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj
 
 CMakeFiles/FantaCalcGui.dir/src/moc_NoNetFileDialog.cxx.obj: CMakeFiles/FantaCalcGui.dir/flags.make
 CMakeFiles/FantaCalcGui.dir/src/moc_NoNetFileDialog.cxx.obj: src/moc_NoNetFileDialog.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_21)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_23)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/moc_NoNetFileDialog.cxx.obj"
 	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\moc_NoNetFileDialog.cxx.obj -c D:\Sorgenti\FantaCalcGuiNew\build\src\moc_NoNetFileDialog.cxx
 
@@ -533,7 +579,7 @@ CMakeFiles/FantaCalcGui.dir/src/moc_NoNetFileDialog.cxx.obj.provides.build: CMak
 
 CMakeFiles/FantaCalcGui.dir/src/moc_GazzettaFileReader.cxx.obj: CMakeFiles/FantaCalcGui.dir/flags.make
 CMakeFiles/FantaCalcGui.dir/src/moc_GazzettaFileReader.cxx.obj: src/moc_GazzettaFileReader.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_22)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_24)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/moc_GazzettaFileReader.cxx.obj"
 	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\moc_GazzettaFileReader.cxx.obj -c D:\Sorgenti\FantaCalcGuiNew\build\src\moc_GazzettaFileReader.cxx
 
@@ -556,7 +602,7 @@ CMakeFiles/FantaCalcGui.dir/src/moc_GazzettaFileReader.cxx.obj.provides.build: C
 
 CMakeFiles/FantaCalcGui.dir/src/moc_FormazioniFileReader.cxx.obj: CMakeFiles/FantaCalcGui.dir/flags.make
 CMakeFiles/FantaCalcGui.dir/src/moc_FormazioniFileReader.cxx.obj: src/moc_FormazioniFileReader.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_23)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_25)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/moc_FormazioniFileReader.cxx.obj"
 	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\moc_FormazioniFileReader.cxx.obj -c D:\Sorgenti\FantaCalcGuiNew\build\src\moc_FormazioniFileReader.cxx
 
@@ -579,7 +625,7 @@ CMakeFiles/FantaCalcGui.dir/src/moc_FormazioniFileReader.cxx.obj.provides.build:
 
 CMakeFiles/FantaCalcGui.dir/src/moc_Fanta.cxx.obj: CMakeFiles/FantaCalcGui.dir/flags.make
 CMakeFiles/FantaCalcGui.dir/src/moc_Fanta.cxx.obj: src/moc_Fanta.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_24)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_26)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/moc_Fanta.cxx.obj"
 	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\moc_Fanta.cxx.obj -c D:\Sorgenti\FantaCalcGuiNew\build\src\moc_Fanta.cxx
 
@@ -602,7 +648,7 @@ CMakeFiles/FantaCalcGui.dir/src/moc_Fanta.cxx.obj.provides.build: CMakeFiles/Fan
 
 CMakeFiles/FantaCalcGui.dir/src/moc_WhichOfTheseDialog.cxx.obj: CMakeFiles/FantaCalcGui.dir/flags.make
 CMakeFiles/FantaCalcGui.dir/src/moc_WhichOfTheseDialog.cxx.obj: src/moc_WhichOfTheseDialog.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_25)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_27)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/moc_WhichOfTheseDialog.cxx.obj"
 	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\moc_WhichOfTheseDialog.cxx.obj -c D:\Sorgenti\FantaCalcGuiNew\build\src\moc_WhichOfTheseDialog.cxx
 
@@ -625,7 +671,7 @@ CMakeFiles/FantaCalcGui.dir/src/moc_WhichOfTheseDialog.cxx.obj.provides.build: C
 
 CMakeFiles/FantaCalcGui.dir/src/moc_Less25MinDialog.cxx.obj: CMakeFiles/FantaCalcGui.dir/flags.make
 CMakeFiles/FantaCalcGui.dir/src/moc_Less25MinDialog.cxx.obj: src/moc_Less25MinDialog.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_26)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_28)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/moc_Less25MinDialog.cxx.obj"
 	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\moc_Less25MinDialog.cxx.obj -c D:\Sorgenti\FantaCalcGuiNew\build\src\moc_Less25MinDialog.cxx
 
@@ -648,7 +694,7 @@ CMakeFiles/FantaCalcGui.dir/src/moc_Less25MinDialog.cxx.obj.provides.build: CMak
 
 CMakeFiles/FantaCalcGui.dir/src/moc_WhichOfLevenshteinDialog.cxx.obj: CMakeFiles/FantaCalcGui.dir/flags.make
 CMakeFiles/FantaCalcGui.dir/src/moc_WhichOfLevenshteinDialog.cxx.obj: src/moc_WhichOfLevenshteinDialog.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_27)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_29)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/moc_WhichOfLevenshteinDialog.cxx.obj"
 	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\moc_WhichOfLevenshteinDialog.cxx.obj -c D:\Sorgenti\FantaCalcGuiNew\build\src\moc_WhichOfLevenshteinDialog.cxx
 
@@ -671,7 +717,7 @@ CMakeFiles/FantaCalcGui.dir/src/moc_WhichOfLevenshteinDialog.cxx.obj.provides.bu
 
 CMakeFiles/FantaCalcGui.dir/src/moc_IniFilePopulator.cxx.obj: CMakeFiles/FantaCalcGui.dir/flags.make
 CMakeFiles/FantaCalcGui.dir/src/moc_IniFilePopulator.cxx.obj: src/moc_IniFilePopulator.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_28)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_30)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/moc_IniFilePopulator.cxx.obj"
 	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\moc_IniFilePopulator.cxx.obj -c D:\Sorgenti\FantaCalcGuiNew\build\src\moc_IniFilePopulator.cxx
 
@@ -692,9 +738,32 @@ CMakeFiles/FantaCalcGui.dir/src/moc_IniFilePopulator.cxx.obj.provides: CMakeFile
 
 CMakeFiles/FantaCalcGui.dir/src/moc_IniFilePopulator.cxx.obj.provides.build: CMakeFiles/FantaCalcGui.dir/src/moc_IniFilePopulator.cxx.obj
 
+CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.obj: CMakeFiles/FantaCalcGui.dir/flags.make
+CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.obj: src/moc_Repository.cxx
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_31)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.obj"
+	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\moc_Repository.cxx.obj -c D:\Sorgenti\FantaCalcGuiNew\build\src\moc_Repository.cxx
+
+CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.i"
+	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E D:\Sorgenti\FantaCalcGuiNew\build\src\moc_Repository.cxx > CMakeFiles\FantaCalcGui.dir\src\moc_Repository.cxx.i
+
+CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.s"
+	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S D:\Sorgenti\FantaCalcGuiNew\build\src\moc_Repository.cxx -o CMakeFiles\FantaCalcGui.dir\src\moc_Repository.cxx.s
+
+CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.obj.requires:
+.PHONY : CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.obj.requires
+
+CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.obj.provides: CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.obj.requires
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.obj.provides.build
+.PHONY : CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.obj.provides
+
+CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.obj.provides.build: CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.obj
+
 CMakeFiles/FantaCalcGui.dir/src/moc_StringModifier.cxx.obj: CMakeFiles/FantaCalcGui.dir/flags.make
 CMakeFiles/FantaCalcGui.dir/src/moc_StringModifier.cxx.obj: src/moc_StringModifier.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_29)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_32)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/moc_StringModifier.cxx.obj"
 	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\moc_StringModifier.cxx.obj -c D:\Sorgenti\FantaCalcGuiNew\build\src\moc_StringModifier.cxx
 
@@ -715,95 +784,128 @@ CMakeFiles/FantaCalcGui.dir/src/moc_StringModifier.cxx.obj.provides: CMakeFiles/
 
 CMakeFiles/FantaCalcGui.dir/src/moc_StringModifier.cxx.obj.provides.build: CMakeFiles/FantaCalcGui.dir/src/moc_StringModifier.cxx.obj
 
+CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.obj: CMakeFiles/FantaCalcGui.dir/flags.make
+CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.obj: src/moc_singletonQtLogger.cxx
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_33)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.obj"
+	C:\MinGW\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\FantaCalcGui.dir\src\moc_singletonQtLogger.cxx.obj -c D:\Sorgenti\FantaCalcGuiNew\build\src\moc_singletonQtLogger.cxx
+
+CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.i"
+	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E D:\Sorgenti\FantaCalcGuiNew\build\src\moc_singletonQtLogger.cxx > CMakeFiles\FantaCalcGui.dir\src\moc_singletonQtLogger.cxx.i
+
+CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.s"
+	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S D:\Sorgenti\FantaCalcGuiNew\build\src\moc_singletonQtLogger.cxx -o CMakeFiles\FantaCalcGui.dir\src\moc_singletonQtLogger.cxx.s
+
+CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.obj.requires:
+.PHONY : CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.obj.requires
+
+CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.obj.provides: CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.obj.requires
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.obj.provides.build
+.PHONY : CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.obj.provides
+
+CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.obj.provides.build: CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.obj
+
 src/moc_CVersion.cxx: ../src/CVersion.h
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_30)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_34)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/moc_CVersion.cxx"
 	cd D:\Sorgenti\FantaCalcGuiNew\build\src && C:\Qt\4.7.3\bin\moc.exe @moc_CVersion.cxx_parameters
 
 src/moc_IniFileManager.cxx: ../src/IniFileManager.h
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_31)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_35)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/moc_IniFileManager.cxx"
 	cd D:\Sorgenti\FantaCalcGuiNew\build\src && C:\Qt\4.7.3\bin\moc.exe @moc_IniFileManager.cxx_parameters
 
 src/moc_httpwindow.cxx: ../src/httpwindow.h
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_32)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_36)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/moc_httpwindow.cxx"
 	cd D:\Sorgenti\FantaCalcGuiNew\build\src && C:\Qt\4.7.3\bin\moc.exe @moc_httpwindow.cxx_parameters
 
 src/moc_ChooseFileFromAListDialog.cxx: ../src/ChooseFileFromAListDialog.h
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_33)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_37)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/moc_ChooseFileFromAListDialog.cxx"
 	cd D:\Sorgenti\FantaCalcGuiNew\build\src && C:\Qt\4.7.3\bin\moc.exe @moc_ChooseFileFromAListDialog.cxx_parameters
 
-src/moc_UseTheNetDialog.cxx: ../src/UseTheNetDialog.h
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_34)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/moc_UseTheNetDialog.cxx"
-	cd D:\Sorgenti\FantaCalcGuiNew\build\src && C:\Qt\4.7.3\bin\moc.exe @moc_UseTheNetDialog.cxx_parameters
+src/moc_Downloader.cxx: ../src/Downloader.h
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_38)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/moc_Downloader.cxx"
+	cd D:\Sorgenti\FantaCalcGuiNew\build\src && C:\Qt\4.7.3\bin\moc.exe @moc_Downloader.cxx_parameters
 
 src/moc_NoNetFileDialog.cxx: ../src/NoNetFileDialog.h
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_35)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_39)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/moc_NoNetFileDialog.cxx"
 	cd D:\Sorgenti\FantaCalcGuiNew\build\src && C:\Qt\4.7.3\bin\moc.exe @moc_NoNetFileDialog.cxx_parameters
 
 src/moc_GazzettaFileReader.cxx: ../src/GazzettaFileReader.h
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_36)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_40)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/moc_GazzettaFileReader.cxx"
 	cd D:\Sorgenti\FantaCalcGuiNew\build\src && C:\Qt\4.7.3\bin\moc.exe @moc_GazzettaFileReader.cxx_parameters
 
 src/moc_FormazioniFileReader.cxx: ../src/FormazioniFileReader.h
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_37)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_41)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/moc_FormazioniFileReader.cxx"
 	cd D:\Sorgenti\FantaCalcGuiNew\build\src && C:\Qt\4.7.3\bin\moc.exe @moc_FormazioniFileReader.cxx_parameters
 
 src/moc_Fanta.cxx: ../src/Fanta.h
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_38)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_42)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/moc_Fanta.cxx"
 	cd D:\Sorgenti\FantaCalcGuiNew\build\src && C:\Qt\4.7.3\bin\moc.exe @moc_Fanta.cxx_parameters
 
 src/moc_WhichOfTheseDialog.cxx: ../src/WhichOfTheseDialog.h
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_39)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_43)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/moc_WhichOfTheseDialog.cxx"
 	cd D:\Sorgenti\FantaCalcGuiNew\build\src && C:\Qt\4.7.3\bin\moc.exe @moc_WhichOfTheseDialog.cxx_parameters
 
 src/moc_Less25MinDialog.cxx: ../src/Less25MinDialog.h
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_40)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_44)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/moc_Less25MinDialog.cxx"
 	cd D:\Sorgenti\FantaCalcGuiNew\build\src && C:\Qt\4.7.3\bin\moc.exe @moc_Less25MinDialog.cxx_parameters
 
 src/moc_WhichOfLevenshteinDialog.cxx: ../src/WhichOfLevenshteinDialog.h
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_41)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_45)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/moc_WhichOfLevenshteinDialog.cxx"
 	cd D:\Sorgenti\FantaCalcGuiNew\build\src && C:\Qt\4.7.3\bin\moc.exe @moc_WhichOfLevenshteinDialog.cxx_parameters
 
 src/moc_IniFilePopulator.cxx: ../src/IniFilePopulator.h
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_42)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_46)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/moc_IniFilePopulator.cxx"
 	cd D:\Sorgenti\FantaCalcGuiNew\build\src && C:\Qt\4.7.3\bin\moc.exe @moc_IniFilePopulator.cxx_parameters
 
+src/moc_Repository.cxx: ../src/Repository.h
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_47)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/moc_Repository.cxx"
+	cd D:\Sorgenti\FantaCalcGuiNew\build\src && C:\Qt\4.7.3\bin\moc.exe @moc_Repository.cxx_parameters
+
 src/moc_StringModifier.cxx: ../src/StringModifier.h
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_43)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_48)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/moc_StringModifier.cxx"
 	cd D:\Sorgenti\FantaCalcGuiNew\build\src && C:\Qt\4.7.3\bin\moc.exe @moc_StringModifier.cxx_parameters
 
+src/moc_singletonQtLogger.cxx: ../src/singletonQtLogger.h
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_49)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/moc_singletonQtLogger.cxx"
+	cd D:\Sorgenti\FantaCalcGuiNew\build\src && C:\Qt\4.7.3\bin\moc.exe @moc_singletonQtLogger.cxx_parameters
+
 ui_authenticationdialog.h: ../src/authenticationdialog.ui
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_44)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_50)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ui_authenticationdialog.h"
 	C:\Qt\4.7.3\bin\uic.exe -o D:/Sorgenti/FantaCalcGuiNew/build/ui_authenticationdialog.h D:/Sorgenti/FantaCalcGuiNew/src/authenticationdialog.ui
 
-ui_UseTheNetDialog.h: ../src/UseTheNetDialog.ui
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_45)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ui_UseTheNetDialog.h"
-	C:\Qt\4.7.3\bin\uic.exe -o D:/Sorgenti/FantaCalcGuiNew/build/ui_UseTheNetDialog.h D:/Sorgenti/FantaCalcGuiNew/src/UseTheNetDialog.ui
-
 ui_IniFilePopulator.h: ../src/IniFilePopulator.ui
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_46)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_51)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ui_IniFilePopulator.h"
 	C:\Qt\4.7.3\bin\uic.exe -o D:/Sorgenti/FantaCalcGuiNew/build/ui_IniFilePopulator.h D:/Sorgenti/FantaCalcGuiNew/src/IniFilePopulator.ui
 
 ui_NoNetFileDialog.h: ../src/NoNetFileDialog.ui
-	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_47)
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_52)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ui_NoNetFileDialog.h"
 	C:\Qt\4.7.3\bin\uic.exe -o D:/Sorgenti/FantaCalcGuiNew/build/ui_NoNetFileDialog.h D:/Sorgenti/FantaCalcGuiNew/src/NoNetFileDialog.ui
+
+ui_singletonQtLogger.h: ../src/singletonQtLogger.ui
+	$(CMAKE_COMMAND) -E cmake_progress_report D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles $(CMAKE_PROGRESS_53)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ui_singletonQtLogger.h"
+	C:\Qt\4.7.3\bin\uic.exe -o D:/Sorgenti/FantaCalcGuiNew/build/ui_singletonQtLogger.h D:/Sorgenti/FantaCalcGuiNew/src/singletonQtLogger.ui
 
 # Object files for target FantaCalcGui
 FantaCalcGui_OBJECTS = \
@@ -812,7 +914,7 @@ FantaCalcGui_OBJECTS = \
 "CMakeFiles/FantaCalcGui.dir/src/httpwindow.cpp.obj" \
 "CMakeFiles/FantaCalcGui.dir/src/CVersion.cpp.obj" \
 "CMakeFiles/FantaCalcGui.dir/src/ChooseFileFromAListDialog.cpp.obj" \
-"CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.obj" \
+"CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.obj" \
 "CMakeFiles/FantaCalcGui.dir/src/NoNetFileDialog.cpp.obj" \
 "CMakeFiles/FantaCalcGui.dir/src/GazzettaFileReader.cpp.obj" \
 "CMakeFiles/FantaCalcGui.dir/src/FormazioniFileReader.cpp.obj" \
@@ -821,12 +923,14 @@ FantaCalcGui_OBJECTS = \
 "CMakeFiles/FantaCalcGui.dir/src/WhichOfLevenshteinDialog.cpp.obj" \
 "CMakeFiles/FantaCalcGui.dir/src/Less25MinDialog.cpp.obj" \
 "CMakeFiles/FantaCalcGui.dir/src/IniFilePopulator.cpp.obj" \
+"CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.obj" \
 "CMakeFiles/FantaCalcGui.dir/src/StringModifier.cpp.obj" \
+"CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.obj" \
 "CMakeFiles/FantaCalcGui.dir/src/moc_CVersion.cxx.obj" \
 "CMakeFiles/FantaCalcGui.dir/src/moc_IniFileManager.cxx.obj" \
 "CMakeFiles/FantaCalcGui.dir/src/moc_httpwindow.cxx.obj" \
 "CMakeFiles/FantaCalcGui.dir/src/moc_ChooseFileFromAListDialog.cxx.obj" \
-"CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.obj" \
+"CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj" \
 "CMakeFiles/FantaCalcGui.dir/src/moc_NoNetFileDialog.cxx.obj" \
 "CMakeFiles/FantaCalcGui.dir/src/moc_GazzettaFileReader.cxx.obj" \
 "CMakeFiles/FantaCalcGui.dir/src/moc_FormazioniFileReader.cxx.obj" \
@@ -835,7 +939,9 @@ FantaCalcGui_OBJECTS = \
 "CMakeFiles/FantaCalcGui.dir/src/moc_Less25MinDialog.cxx.obj" \
 "CMakeFiles/FantaCalcGui.dir/src/moc_WhichOfLevenshteinDialog.cxx.obj" \
 "CMakeFiles/FantaCalcGui.dir/src/moc_IniFilePopulator.cxx.obj" \
-"CMakeFiles/FantaCalcGui.dir/src/moc_StringModifier.cxx.obj"
+"CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.obj" \
+"CMakeFiles/FantaCalcGui.dir/src/moc_StringModifier.cxx.obj" \
+"CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.obj"
 
 # External object files for target FantaCalcGui
 FantaCalcGui_EXTERNAL_OBJECTS =
@@ -845,7 +951,7 @@ FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/IniFileManager.cpp.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/httpwindow.cpp.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/CVersion.cpp.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/ChooseFileFromAListDialog.cpp.obj
-FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.obj
+FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/NoNetFileDialog.cpp.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/GazzettaFileReader.cpp.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/FormazioniFileReader.cpp.obj
@@ -854,12 +960,14 @@ FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/WhichOfTheseDialog.cpp.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/WhichOfLevenshteinDialog.cpp.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/Less25MinDialog.cpp.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/IniFilePopulator.cpp.obj
+FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/StringModifier.cpp.obj
+FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/moc_CVersion.cxx.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/moc_IniFileManager.cxx.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/moc_httpwindow.cxx.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/moc_ChooseFileFromAListDialog.cxx.obj
-FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.obj
+FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/moc_NoNetFileDialog.cxx.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/moc_GazzettaFileReader.cxx.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/moc_FormazioniFileReader.cxx.obj
@@ -868,7 +976,9 @@ FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/moc_WhichOfTheseDialog.cxx.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/moc_Less25MinDialog.cxx.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/moc_WhichOfLevenshteinDialog.cxx.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/moc_IniFilePopulator.cxx.obj
+FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.obj
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/moc_StringModifier.cxx.obj
+FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.obj
 FantaCalcGui.exe: C:/Qt/4.7.3/lib/libQtGui4.a
 FantaCalcGui.exe: C:/Qt/4.7.3/lib/libQtCore4.a
 FantaCalcGui.exe: CMakeFiles/FantaCalcGui.dir/build.make
@@ -886,7 +996,7 @@ CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/IniFileMan
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/httpwindow.cpp.obj.requires
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/CVersion.cpp.obj.requires
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/ChooseFileFromAListDialog.cpp.obj.requires
-CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.obj.requires
+CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.obj.requires
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/NoNetFileDialog.cpp.obj.requires
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/GazzettaFileReader.cpp.obj.requires
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/FormazioniFileReader.cpp.obj.requires
@@ -895,12 +1005,14 @@ CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/WhichOfThe
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/WhichOfLevenshteinDialog.cpp.obj.requires
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/Less25MinDialog.cpp.obj.requires
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/IniFilePopulator.cpp.obj.requires
+CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.obj.requires
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/StringModifier.cpp.obj.requires
+CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.obj.requires
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/moc_CVersion.cxx.obj.requires
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/moc_IniFileManager.cxx.obj.requires
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/moc_httpwindow.cxx.obj.requires
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/moc_ChooseFileFromAListDialog.cxx.obj.requires
-CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.obj.requires
+CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj.requires
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/moc_NoNetFileDialog.cxx.obj.requires
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/moc_GazzettaFileReader.cxx.obj.requires
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/moc_FormazioniFileReader.cxx.obj.requires
@@ -909,7 +1021,9 @@ CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/moc_WhichO
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/moc_Less25MinDialog.cxx.obj.requires
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/moc_WhichOfLevenshteinDialog.cxx.obj.requires
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/moc_IniFilePopulator.cxx.obj.requires
+CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.obj.requires
 CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/moc_StringModifier.cxx.obj.requires
+CMakeFiles/FantaCalcGui.dir/requires: CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.obj.requires
 .PHONY : CMakeFiles/FantaCalcGui.dir/requires
 
 CMakeFiles/FantaCalcGui.dir/clean:
@@ -920,7 +1034,7 @@ CMakeFiles/FantaCalcGui.dir/depend: src/moc_CVersion.cxx
 CMakeFiles/FantaCalcGui.dir/depend: src/moc_IniFileManager.cxx
 CMakeFiles/FantaCalcGui.dir/depend: src/moc_httpwindow.cxx
 CMakeFiles/FantaCalcGui.dir/depend: src/moc_ChooseFileFromAListDialog.cxx
-CMakeFiles/FantaCalcGui.dir/depend: src/moc_UseTheNetDialog.cxx
+CMakeFiles/FantaCalcGui.dir/depend: src/moc_Downloader.cxx
 CMakeFiles/FantaCalcGui.dir/depend: src/moc_NoNetFileDialog.cxx
 CMakeFiles/FantaCalcGui.dir/depend: src/moc_GazzettaFileReader.cxx
 CMakeFiles/FantaCalcGui.dir/depend: src/moc_FormazioniFileReader.cxx
@@ -929,11 +1043,13 @@ CMakeFiles/FantaCalcGui.dir/depend: src/moc_WhichOfTheseDialog.cxx
 CMakeFiles/FantaCalcGui.dir/depend: src/moc_Less25MinDialog.cxx
 CMakeFiles/FantaCalcGui.dir/depend: src/moc_WhichOfLevenshteinDialog.cxx
 CMakeFiles/FantaCalcGui.dir/depend: src/moc_IniFilePopulator.cxx
+CMakeFiles/FantaCalcGui.dir/depend: src/moc_Repository.cxx
 CMakeFiles/FantaCalcGui.dir/depend: src/moc_StringModifier.cxx
+CMakeFiles/FantaCalcGui.dir/depend: src/moc_singletonQtLogger.cxx
 CMakeFiles/FantaCalcGui.dir/depend: ui_authenticationdialog.h
-CMakeFiles/FantaCalcGui.dir/depend: ui_UseTheNetDialog.h
 CMakeFiles/FantaCalcGui.dir/depend: ui_IniFilePopulator.h
 CMakeFiles/FantaCalcGui.dir/depend: ui_NoNetFileDialog.h
+CMakeFiles/FantaCalcGui.dir/depend: ui_singletonQtLogger.h
 	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" D:\Sorgenti\FantaCalcGuiNew D:\Sorgenti\FantaCalcGuiNew D:\Sorgenti\FantaCalcGuiNew\build D:\Sorgenti\FantaCalcGuiNew\build D:\Sorgenti\FantaCalcGuiNew\build\CMakeFiles\FantaCalcGui.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/FantaCalcGui.dir/depend
 

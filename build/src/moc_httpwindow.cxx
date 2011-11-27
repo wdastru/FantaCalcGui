@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'httpwindow.h'
 **
-** Created: Sun 27. Nov 00:59:37 2011
+** Created: Sun 27. Nov 14:28:58 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -31,28 +31,28 @@ static const uint qt_meta_data_HttpWindow[] = {
        0,       // signalCount
 
  // slots: signature, parameters, type, tag, flags
-      14,   12,   11,   11, 0x08,
-      41,   11,   11,   11, 0x08,
-      60,   11,   11,   11, 0x08,
-      77,   11,   11,   11, 0x08,
-      92,   11,   11,   11, 0x08,
-     129,  108,   11,   11, 0x08,
-     167,   11,   11,   11, 0x08,
-     190,   12,   11,   11, 0x08,
-     257,  249,   11,   11, 0x08,
+      12,   11,   11,   11, 0x08,
+      31,   11,   11,   11, 0x08,
+      48,   11,   11,   11, 0x08,
+      63,   11,   11,   11, 0x08,
+     100,   79,   11,   11, 0x08,
+     138,   11,   11,   11, 0x08,
+     163,  161,   11,   11, 0x08,
+     222,   11,   11,   11, 0x08,
+     244,  236,   11,   11, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_HttpWindow[] = {
-    "HttpWindow\0\0,\0downloadFile(QUrl,QString)\0"
-    "downloadAllFiles()\0cancelDownload()\0"
-    "httpFinished()\0httpReadyRead()\0"
-    "bytesRead,totalBytes\0"
+    "HttpWindow\0\0downloadAllFiles()\0"
+    "cancelDownload()\0httpFinished()\0"
+    "httpReadyRead()\0bytesRead,totalBytes\0"
     "updateDataReadProgress(qint64,qint64)\0"
-    "enableDownloadButton()\0"
+    "enableDownloadButton()\0,\0"
     "slotAuthenticationRequired(QNetworkReply*,QAuthenticator*)\0"
-    ",errors\0sslErrors(QNetworkReply*,QList<QSslError>)\0"
+    "closeDialog()\0,errors\0"
+    "sslErrors(QNetworkReply*,QList<QSslError>)\0"
 };
 
 const QMetaObject HttpWindow::staticMetaObject = {
@@ -84,14 +84,14 @@ int HttpWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: downloadFile((*reinterpret_cast< QUrl(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
-        case 1: downloadAllFiles(); break;
-        case 2: cancelDownload(); break;
-        case 3: httpFinished(); break;
-        case 4: httpReadyRead(); break;
-        case 5: updateDataReadProgress((*reinterpret_cast< qint64(*)>(_a[1])),(*reinterpret_cast< qint64(*)>(_a[2]))); break;
-        case 6: enableDownloadButton(); break;
-        case 7: slotAuthenticationRequired((*reinterpret_cast< QNetworkReply*(*)>(_a[1])),(*reinterpret_cast< QAuthenticator*(*)>(_a[2]))); break;
+        case 0: downloadAllFiles(); break;
+        case 1: cancelDownload(); break;
+        case 2: httpFinished(); break;
+        case 3: httpReadyRead(); break;
+        case 4: updateDataReadProgress((*reinterpret_cast< qint64(*)>(_a[1])),(*reinterpret_cast< qint64(*)>(_a[2]))); break;
+        case 5: enableDownloadButton(); break;
+        case 6: slotAuthenticationRequired((*reinterpret_cast< QNetworkReply*(*)>(_a[1])),(*reinterpret_cast< QAuthenticator*(*)>(_a[2]))); break;
+        case 7: closeDialog(); break;
         case 8: sslErrors((*reinterpret_cast< QNetworkReply*(*)>(_a[1])),(*reinterpret_cast< const QList<QSslError>(*)>(_a[2]))); break;
         default: ;
         }

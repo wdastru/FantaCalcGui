@@ -158,6 +158,30 @@ src/ChooseFileFromAListDialog.cpp.s:
 	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/ChooseFileFromAListDialog.cpp.s
 .PHONY : src/ChooseFileFromAListDialog.cpp.s
 
+src/Downloader.obj: src/Downloader.cpp.obj
+.PHONY : src/Downloader.obj
+
+# target to build an object file
+src/Downloader.cpp.obj:
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.obj
+.PHONY : src/Downloader.cpp.obj
+
+src/Downloader.i: src/Downloader.cpp.i
+.PHONY : src/Downloader.i
+
+# target to preprocess a source file
+src/Downloader.cpp.i:
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.i
+.PHONY : src/Downloader.cpp.i
+
+src/Downloader.s: src/Downloader.cpp.s
+.PHONY : src/Downloader.s
+
+# target to generate assembly for a file
+src/Downloader.cpp.s:
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.s
+.PHONY : src/Downloader.cpp.s
+
 src/Fanta.obj: src/Fanta.cpp.obj
 .PHONY : src/Fanta.obj
 
@@ -326,6 +350,30 @@ src/NoNetFileDialog.cpp.s:
 	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/NoNetFileDialog.cpp.s
 .PHONY : src/NoNetFileDialog.cpp.s
 
+src/Repository.obj: src/Repository.cpp.obj
+.PHONY : src/Repository.obj
+
+# target to build an object file
+src/Repository.cpp.obj:
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.obj
+.PHONY : src/Repository.cpp.obj
+
+src/Repository.i: src/Repository.cpp.i
+.PHONY : src/Repository.i
+
+# target to preprocess a source file
+src/Repository.cpp.i:
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.i
+.PHONY : src/Repository.cpp.i
+
+src/Repository.s: src/Repository.cpp.s
+.PHONY : src/Repository.s
+
+# target to generate assembly for a file
+src/Repository.cpp.s:
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/Repository.cpp.s
+.PHONY : src/Repository.cpp.s
+
 src/StringModifier.obj: src/StringModifier.cpp.obj
 .PHONY : src/StringModifier.obj
 
@@ -349,30 +397,6 @@ src/StringModifier.s: src/StringModifier.cpp.s
 src/StringModifier.cpp.s:
 	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/StringModifier.cpp.s
 .PHONY : src/StringModifier.cpp.s
-
-src/UseTheNetDialog.obj: src/UseTheNetDialog.cpp.obj
-.PHONY : src/UseTheNetDialog.obj
-
-# target to build an object file
-src/UseTheNetDialog.cpp.obj:
-	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.obj
-.PHONY : src/UseTheNetDialog.cpp.obj
-
-src/UseTheNetDialog.i: src/UseTheNetDialog.cpp.i
-.PHONY : src/UseTheNetDialog.i
-
-# target to preprocess a source file
-src/UseTheNetDialog.cpp.i:
-	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.i
-.PHONY : src/UseTheNetDialog.cpp.i
-
-src/UseTheNetDialog.s: src/UseTheNetDialog.cpp.s
-.PHONY : src/UseTheNetDialog.s
-
-# target to generate assembly for a file
-src/UseTheNetDialog.cpp.s:
-	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/UseTheNetDialog.cpp.s
-.PHONY : src/UseTheNetDialog.cpp.s
 
 src/WhichOfLevenshteinDialog.obj: src/WhichOfLevenshteinDialog.cpp.obj
 .PHONY : src/WhichOfLevenshteinDialog.obj
@@ -517,6 +541,30 @@ src/moc_ChooseFileFromAListDialog.s: src/moc_ChooseFileFromAListDialog.cxx.s
 src/moc_ChooseFileFromAListDialog.cxx.s:
 	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/moc_ChooseFileFromAListDialog.cxx.s
 .PHONY : src/moc_ChooseFileFromAListDialog.cxx.s
+
+src/moc_Downloader.obj: src/moc_Downloader.cxx.obj
+.PHONY : src/moc_Downloader.obj
+
+# target to build an object file
+src/moc_Downloader.cxx.obj:
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj
+.PHONY : src/moc_Downloader.cxx.obj
+
+src/moc_Downloader.i: src/moc_Downloader.cxx.i
+.PHONY : src/moc_Downloader.i
+
+# target to preprocess a source file
+src/moc_Downloader.cxx.i:
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.i
+.PHONY : src/moc_Downloader.cxx.i
+
+src/moc_Downloader.s: src/moc_Downloader.cxx.s
+.PHONY : src/moc_Downloader.s
+
+# target to generate assembly for a file
+src/moc_Downloader.cxx.s:
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.s
+.PHONY : src/moc_Downloader.cxx.s
 
 src/moc_Fanta.obj: src/moc_Fanta.cxx.obj
 .PHONY : src/moc_Fanta.obj
@@ -686,6 +734,30 @@ src/moc_NoNetFileDialog.cxx.s:
 	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/moc_NoNetFileDialog.cxx.s
 .PHONY : src/moc_NoNetFileDialog.cxx.s
 
+src/moc_Repository.obj: src/moc_Repository.cxx.obj
+.PHONY : src/moc_Repository.obj
+
+# target to build an object file
+src/moc_Repository.cxx.obj:
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.obj
+.PHONY : src/moc_Repository.cxx.obj
+
+src/moc_Repository.i: src/moc_Repository.cxx.i
+.PHONY : src/moc_Repository.i
+
+# target to preprocess a source file
+src/moc_Repository.cxx.i:
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.i
+.PHONY : src/moc_Repository.cxx.i
+
+src/moc_Repository.s: src/moc_Repository.cxx.s
+.PHONY : src/moc_Repository.s
+
+# target to generate assembly for a file
+src/moc_Repository.cxx.s:
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/moc_Repository.cxx.s
+.PHONY : src/moc_Repository.cxx.s
+
 src/moc_StringModifier.obj: src/moc_StringModifier.cxx.obj
 .PHONY : src/moc_StringModifier.obj
 
@@ -709,30 +781,6 @@ src/moc_StringModifier.s: src/moc_StringModifier.cxx.s
 src/moc_StringModifier.cxx.s:
 	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/moc_StringModifier.cxx.s
 .PHONY : src/moc_StringModifier.cxx.s
-
-src/moc_UseTheNetDialog.obj: src/moc_UseTheNetDialog.cxx.obj
-.PHONY : src/moc_UseTheNetDialog.obj
-
-# target to build an object file
-src/moc_UseTheNetDialog.cxx.obj:
-	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.obj
-.PHONY : src/moc_UseTheNetDialog.cxx.obj
-
-src/moc_UseTheNetDialog.i: src/moc_UseTheNetDialog.cxx.i
-.PHONY : src/moc_UseTheNetDialog.i
-
-# target to preprocess a source file
-src/moc_UseTheNetDialog.cxx.i:
-	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.i
-.PHONY : src/moc_UseTheNetDialog.cxx.i
-
-src/moc_UseTheNetDialog.s: src/moc_UseTheNetDialog.cxx.s
-.PHONY : src/moc_UseTheNetDialog.s
-
-# target to generate assembly for a file
-src/moc_UseTheNetDialog.cxx.s:
-	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/moc_UseTheNetDialog.cxx.s
-.PHONY : src/moc_UseTheNetDialog.cxx.s
 
 src/moc_WhichOfLevenshteinDialog.obj: src/moc_WhichOfLevenshteinDialog.cxx.obj
 .PHONY : src/moc_WhichOfLevenshteinDialog.obj
@@ -806,6 +854,54 @@ src/moc_httpwindow.cxx.s:
 	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/moc_httpwindow.cxx.s
 .PHONY : src/moc_httpwindow.cxx.s
 
+src/moc_singletonQtLogger.obj: src/moc_singletonQtLogger.cxx.obj
+.PHONY : src/moc_singletonQtLogger.obj
+
+# target to build an object file
+src/moc_singletonQtLogger.cxx.obj:
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.obj
+.PHONY : src/moc_singletonQtLogger.cxx.obj
+
+src/moc_singletonQtLogger.i: src/moc_singletonQtLogger.cxx.i
+.PHONY : src/moc_singletonQtLogger.i
+
+# target to preprocess a source file
+src/moc_singletonQtLogger.cxx.i:
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.i
+.PHONY : src/moc_singletonQtLogger.cxx.i
+
+src/moc_singletonQtLogger.s: src/moc_singletonQtLogger.cxx.s
+.PHONY : src/moc_singletonQtLogger.s
+
+# target to generate assembly for a file
+src/moc_singletonQtLogger.cxx.s:
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/moc_singletonQtLogger.cxx.s
+.PHONY : src/moc_singletonQtLogger.cxx.s
+
+src/singletonQtLogger.obj: src/singletonQtLogger.cpp.obj
+.PHONY : src/singletonQtLogger.obj
+
+# target to build an object file
+src/singletonQtLogger.cpp.obj:
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.obj
+.PHONY : src/singletonQtLogger.cpp.obj
+
+src/singletonQtLogger.i: src/singletonQtLogger.cpp.i
+.PHONY : src/singletonQtLogger.i
+
+# target to preprocess a source file
+src/singletonQtLogger.cpp.i:
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.i
+.PHONY : src/singletonQtLogger.cpp.i
+
+src/singletonQtLogger.s: src/singletonQtLogger.cpp.s
+.PHONY : src/singletonQtLogger.s
+
+# target to generate assembly for a file
+src/singletonQtLogger.cpp.s:
+	$(MAKE) -f CMakeFiles\FantaCalcGui.dir\build.make CMakeFiles/FantaCalcGui.dir/src/singletonQtLogger.cpp.s
+.PHONY : src/singletonQtLogger.cpp.s
+
 # Help Target
 help:
 	@$(CMAKE_COMMAND) -E echo "The following are some of the valid targets for this Makefile:"
@@ -821,6 +917,9 @@ help:
 	@$(CMAKE_COMMAND) -E echo "... src/ChooseFileFromAListDialog.obj"
 	@$(CMAKE_COMMAND) -E echo "... src/ChooseFileFromAListDialog.i"
 	@$(CMAKE_COMMAND) -E echo "... src/ChooseFileFromAListDialog.s"
+	@$(CMAKE_COMMAND) -E echo "... src/Downloader.obj"
+	@$(CMAKE_COMMAND) -E echo "... src/Downloader.i"
+	@$(CMAKE_COMMAND) -E echo "... src/Downloader.s"
 	@$(CMAKE_COMMAND) -E echo "... src/Fanta.obj"
 	@$(CMAKE_COMMAND) -E echo "... src/Fanta.i"
 	@$(CMAKE_COMMAND) -E echo "... src/Fanta.s"
@@ -842,12 +941,12 @@ help:
 	@$(CMAKE_COMMAND) -E echo "... src/NoNetFileDialog.obj"
 	@$(CMAKE_COMMAND) -E echo "... src/NoNetFileDialog.i"
 	@$(CMAKE_COMMAND) -E echo "... src/NoNetFileDialog.s"
+	@$(CMAKE_COMMAND) -E echo "... src/Repository.obj"
+	@$(CMAKE_COMMAND) -E echo "... src/Repository.i"
+	@$(CMAKE_COMMAND) -E echo "... src/Repository.s"
 	@$(CMAKE_COMMAND) -E echo "... src/StringModifier.obj"
 	@$(CMAKE_COMMAND) -E echo "... src/StringModifier.i"
 	@$(CMAKE_COMMAND) -E echo "... src/StringModifier.s"
-	@$(CMAKE_COMMAND) -E echo "... src/UseTheNetDialog.obj"
-	@$(CMAKE_COMMAND) -E echo "... src/UseTheNetDialog.i"
-	@$(CMAKE_COMMAND) -E echo "... src/UseTheNetDialog.s"
 	@$(CMAKE_COMMAND) -E echo "... src/WhichOfLevenshteinDialog.obj"
 	@$(CMAKE_COMMAND) -E echo "... src/WhichOfLevenshteinDialog.i"
 	@$(CMAKE_COMMAND) -E echo "... src/WhichOfLevenshteinDialog.s"
@@ -866,6 +965,9 @@ help:
 	@$(CMAKE_COMMAND) -E echo "... src/moc_ChooseFileFromAListDialog.obj"
 	@$(CMAKE_COMMAND) -E echo "... src/moc_ChooseFileFromAListDialog.i"
 	@$(CMAKE_COMMAND) -E echo "... src/moc_ChooseFileFromAListDialog.s"
+	@$(CMAKE_COMMAND) -E echo "... src/moc_Downloader.obj"
+	@$(CMAKE_COMMAND) -E echo "... src/moc_Downloader.i"
+	@$(CMAKE_COMMAND) -E echo "... src/moc_Downloader.s"
 	@$(CMAKE_COMMAND) -E echo "... src/moc_Fanta.obj"
 	@$(CMAKE_COMMAND) -E echo "... src/moc_Fanta.i"
 	@$(CMAKE_COMMAND) -E echo "... src/moc_Fanta.s"
@@ -887,12 +989,12 @@ help:
 	@$(CMAKE_COMMAND) -E echo "... src/moc_NoNetFileDialog.obj"
 	@$(CMAKE_COMMAND) -E echo "... src/moc_NoNetFileDialog.i"
 	@$(CMAKE_COMMAND) -E echo "... src/moc_NoNetFileDialog.s"
+	@$(CMAKE_COMMAND) -E echo "... src/moc_Repository.obj"
+	@$(CMAKE_COMMAND) -E echo "... src/moc_Repository.i"
+	@$(CMAKE_COMMAND) -E echo "... src/moc_Repository.s"
 	@$(CMAKE_COMMAND) -E echo "... src/moc_StringModifier.obj"
 	@$(CMAKE_COMMAND) -E echo "... src/moc_StringModifier.i"
 	@$(CMAKE_COMMAND) -E echo "... src/moc_StringModifier.s"
-	@$(CMAKE_COMMAND) -E echo "... src/moc_UseTheNetDialog.obj"
-	@$(CMAKE_COMMAND) -E echo "... src/moc_UseTheNetDialog.i"
-	@$(CMAKE_COMMAND) -E echo "... src/moc_UseTheNetDialog.s"
 	@$(CMAKE_COMMAND) -E echo "... src/moc_WhichOfLevenshteinDialog.obj"
 	@$(CMAKE_COMMAND) -E echo "... src/moc_WhichOfLevenshteinDialog.i"
 	@$(CMAKE_COMMAND) -E echo "... src/moc_WhichOfLevenshteinDialog.s"
@@ -902,6 +1004,12 @@ help:
 	@$(CMAKE_COMMAND) -E echo "... src/moc_httpwindow.obj"
 	@$(CMAKE_COMMAND) -E echo "... src/moc_httpwindow.i"
 	@$(CMAKE_COMMAND) -E echo "... src/moc_httpwindow.s"
+	@$(CMAKE_COMMAND) -E echo "... src/moc_singletonQtLogger.obj"
+	@$(CMAKE_COMMAND) -E echo "... src/moc_singletonQtLogger.i"
+	@$(CMAKE_COMMAND) -E echo "... src/moc_singletonQtLogger.s"
+	@$(CMAKE_COMMAND) -E echo "... src/singletonQtLogger.obj"
+	@$(CMAKE_COMMAND) -E echo "... src/singletonQtLogger.i"
+	@$(CMAKE_COMMAND) -E echo "... src/singletonQtLogger.s"
 .PHONY : help
 
 

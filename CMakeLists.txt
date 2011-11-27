@@ -6,6 +6,7 @@ SET( SRCS src/main.cpp
         src/httpwindow.cpp
 		src/CVersion.cpp
 		src/ChooseFileFromAListDialog.cpp
+		src/Downloader.cpp
 		src/NoNetFileDialog.cpp 
         src/GazzettaFileReader.cpp 
         src/FormazioniFileReader.cpp 
@@ -21,6 +22,7 @@ SET( HDRS src/CVersion.h
         src/IniFileManager.h
 		src/httpwindow.h
         src/ChooseFileFromAListDialog.h
+		src/Downloader.h
 		src/NoNetFileDialog.h 
         src/GazzettaFileReader.h
         src/FormazioniFileReader.h 

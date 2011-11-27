@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'singletonQtLogger.h'
 **
-** Created: Sat 26. Nov 20:29:01 2011
+** Created: Sun 27. Nov 14:29:15 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!

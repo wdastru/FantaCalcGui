@@ -16,8 +16,6 @@ SET(CMAKE_C_INCLUDE_PATH
   "."
   "C:/Qt/4.7.3/include/QtNetwork"
   "../src"
-  "D:/Sorgenti/singletonQtLogger_CMake/src"
-  "D:/Sorgenti/singletonQtLogger_CMake/build"
   )
 SET(CMAKE_CXX_INCLUDE_PATH ${CMAKE_C_INCLUDE_PATH})
 SET(CMAKE_Fortran_INCLUDE_PATH ${CMAKE_C_INCLUDE_PATH})

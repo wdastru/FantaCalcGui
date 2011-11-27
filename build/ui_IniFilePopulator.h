@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'IniFilePopulator.ui'
 **
-** Created: Sun 27. Nov 00:59:49 2011
+** Created: Sun 27. Nov 14:29:17 2011
 **      by: Qt User Interface Compiler version 4.7.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -59,13 +59,13 @@ public:
     {
         if (IniFilePopulatorClass->objectName().isEmpty())
             IniFilePopulatorClass->setObjectName(QString::fromUtf8("IniFilePopulatorClass"));
-        IniFilePopulatorClass->resize(400, 420);
+        IniFilePopulatorClass->resize(400, 295);
         label = new QLabel(IniFilePopulatorClass);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(60, 10, 281, 51));
+        label->setGeometry(QRect(60, 5, 281, 31));
         layoutWidget = new QWidget(IniFilePopulatorClass);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(20, 60, 357, 231));
+        layoutWidget->setGeometry(QRect(10, 40, 367, 201));
         formLayout = new QFormLayout(layoutWidget);
         formLayout->setSpacing(6);
         formLayout->setContentsMargins(11, 11, 11, 11);
@@ -146,7 +146,7 @@ public:
 
         horizontalLayoutWidget = new QWidget(IniFilePopulatorClass);
         horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(20, 300, 171, 31));
+        horizontalLayoutWidget->setGeometry(QRect(10, 250, 206, 31));
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
@@ -174,7 +174,7 @@ public:
 
         okCancelButtonBox = new QDialogButtonBox(IniFilePopulatorClass);
         okCancelButtonBox->setObjectName(QString::fromUtf8("okCancelButtonBox"));
-        okCancelButtonBox->setGeometry(QRect(120, 380, 156, 23));
+        okCancelButtonBox->setGeometry(QRect(223, 254, 156, 23));
         okCancelButtonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
 
         retranslateUi(IniFilePopulatorClass);
@@ -185,6 +185,14 @@ public:
         QObject::connect(gazzettaButton, SIGNAL(clicked()), IniFilePopulatorClass, SLOT(chooseGazzettaPath()));
         QObject::connect(listeButton, SIGNAL(clicked()), IniFilePopulatorClass, SLOT(chooseListePath()));
         QObject::connect(risultatiButton, SIGNAL(clicked()), IniFilePopulatorClass, SLOT(chooseRisultatiPath()));
+        QObject::connect(downloadLineEdit, SIGNAL(textEdited(QString)), IniFilePopulatorClass, SLOT(updateInternalData()));
+        QObject::connect(formazioniLineEdit, SIGNAL(textEdited(QString)), IniFilePopulatorClass, SLOT(updateInternalData()));
+        QObject::connect(formazioniUrlLineEdit, SIGNAL(textEdited(QString)), IniFilePopulatorClass, SLOT(updateInternalData()));
+        QObject::connect(gazzettaLineEdit, SIGNAL(textEdited(QString)), IniFilePopulatorClass, SLOT(updateInternalData()));
+        QObject::connect(gazzettaUrlLineEdit, SIGNAL(textEdited(QString)), IniFilePopulatorClass, SLOT(updateInternalData()));
+        QObject::connect(listeLineEdit, SIGNAL(textEdited(QString)), IniFilePopulatorClass, SLOT(updateInternalData()));
+        QObject::connect(risultatiLineEdit, SIGNAL(textEdited(QString)), IniFilePopulatorClass, SLOT(updateInternalData()));
+        QObject::connect(buttonGroup, SIGNAL(buttonClicked(int)), IniFilePopulatorClass, SLOT(toggleDebugStatus()));
 
         QMetaObject::connectSlotsByName(IniFilePopulatorClass);
     } // setupUi
@@ -196,7 +204,7 @@ public:
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; font-weight:600;\">The Populator</span></p></body></html>", 0, QApplication::UnicodeUTF8));
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt; font-weight:600;\">Configure</span></p></body></html>", 0, QApplication::UnicodeUTF8));
         formazioniButton->setText(QApplication::translate("IniFilePopulatorClass", "Formazioni", 0, QApplication::UnicodeUTF8));
         gazzettaButton->setText(QApplication::translate("IniFilePopulatorClass", "Gazzetta", 0, QApplication::UnicodeUTF8));
         risultatiButton->setText(QApplication::translate("IniFilePopulatorClass", "Risultati", 0, QApplication::UnicodeUTF8));

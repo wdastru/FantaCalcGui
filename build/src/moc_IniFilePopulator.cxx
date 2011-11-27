@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'IniFilePopulator.h'
 **
-** Created: Sun 27. Nov 00:59:46 2011
+** Created: Sun 27. Nov 14:29:09 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_IniFilePopulator[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -36,6 +36,8 @@ static const uint qt_meta_data_IniFilePopulator[] = {
       62,   17,   17,   17, 0x08,
       84,   17,   17,   17, 0x08,
      105,   17,   17,   17, 0x08,
+     123,   17,   17,   17, 0x08,
+     143,   17,   17,   17, 0x08,
 
        0        // eod
 };
@@ -44,6 +46,7 @@ static const char qt_meta_stringdata_IniFilePopulator[] = {
     "IniFilePopulator\0\0chooseFormazioniPath()\0"
     "chooseGazzettaPath()\0chooseRisultatiPath()\0"
     "chooseDownloadPath()\0chooseListePath()\0"
+    "toggleDebugStatus()\0updateInternalData()\0"
 };
 
 const QMetaObject IniFilePopulator::staticMetaObject = {
@@ -80,9 +83,11 @@ int IniFilePopulator::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 2: chooseRisultatiPath(); break;
         case 3: chooseDownloadPath(); break;
         case 4: chooseListePath(); break;
+        case 5: toggleDebugStatus(); break;
+        case 6: updateInternalData(); break;
         default: ;
         }
-        _id -= 5;
+        _id -= 7;
     }
     return _id;
 }

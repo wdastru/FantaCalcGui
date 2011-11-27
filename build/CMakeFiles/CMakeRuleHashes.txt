@@ -1,6 +1,7 @@
 # Hashes of file build rules.
 1c79c03578192d9baf77926c0f64440b src/moc_CVersion.cxx
 feeecf9399bd58108d856a1802e24a1c src/moc_ChooseFileFromAListDialog.cxx
+02584d4669af1c5b020118683e7ad45b src/moc_Downloader.cxx
 8d560c26b593fa20f367f2cb3f74beae src/moc_Fanta.cxx
 c9ba0ca446477e5595681b2e1c5a9051 src/moc_FormazioniFileReader.cxx
 d0471fdbca20fff440d29042c21676e2 src/moc_GazzettaFileReader.cxx

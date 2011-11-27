@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'singletonQtLogger.ui'
 **
-** Created: Sat 26. Nov 20:28:53 2011
+** Created: Sun 27. Nov 14:28:47 2011
 **      by: Qt User Interface Compiler version 4.7.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

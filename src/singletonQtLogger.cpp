@@ -3,6 +3,7 @@
 #include "IniFilePopulator.h"
 #include "Repository.h"
 #include "httpwindow.h"
+#include "Downloader.h"
 #include "NoNetFileDialog.h"
 
 #include <vector>
@@ -164,17 +165,21 @@ void singletonQtLogger::onlineClicked() {
 	savePaths->push_back(THE_REPO->getListePath()+'/');
 	savePaths->push_back(THE_REPO->getListePath()+'/');
 
-	HttpWindow httpWin(this, urls, savePaths);
-	httpWin.exec();
+	Downloader downloader;
+	downloader.show();
+	downloader.exec();
 
-	if (httpWin.requestSucceded()) {
-		LOG(
-				DEBUG,
-				"In singletonQtLogger::onlineClicked() --> the download of files succeded: closing useTheNetDialog.");
-	} else {
-		LOG(DEBUG,
-				"In singletonQtLogger::onlineClicked() --> the download of files failed.");
-	}
+//	HttpWindow httpWin(this, urls, savePaths);
+//	httpWin.exec();
+//
+//	if (httpWin.requestSucceded()) {
+//		LOG(
+//				DEBUG,
+//				"In singletonQtLogger::onlineClicked() --> the download of files succeded: closing useTheNetDialog.");
+//	} else {
+//		LOG(DEBUG,
+//				"In singletonQtLogger::onlineClicked() --> the download of files failed.");
+//	}
 }
 void singletonQtLogger::offlineClicked() {
 	LOG(DEBUG,

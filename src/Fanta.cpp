@@ -841,7 +841,7 @@ void Fanta::calculateGoals() {
 							+ " : "
 							+ my::toQString<signed int>(Fanta::goals[0]) + " ("
 							+ my::toQString<double>(Fanta::Total[0]) + ")<br/>"
-							+ QString::fromStdString(this->getTeamName(1))
+							+ QString::fromStdString(this->getTeamName(1u))
 							+ " : "
 							+ my::toQString<signed int>(Fanta::goals[1]) + " ("
 							+ my::toQString<double>(Fanta::Total[1]) + ")");
