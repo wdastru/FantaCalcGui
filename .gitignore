@@ -2,7 +2,4 @@
 /build
 /deploy
 /Release
-/.settings
-.cproject
-.project
 notepad++_diff.sh
