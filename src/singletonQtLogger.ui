@@ -49,7 +49,7 @@ p, li { white-space: pre-wrap; }
     <set>Qt::AlignHCenter|Qt::AlignTop</set>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>190</x>
@@ -67,14 +67,14 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="yesButton">
+     <widget class="QPushButton" name="onlineButton">
       <property name="text">
        <string>Online</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="noButton">
+     <widget class="QPushButton" name="offlineButton">
       <property name="text">
        <string>Offline</string>
       </property>
@@ -125,9 +125,43 @@ p, li { white-space: pre-wrap; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>onlineButton</sender>
+   <signal>clicked()</signal>
+   <receiver>singletonQtLoggerClass</receiver>
+   <slot>onlineClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>309</x>
+     <y>382</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>340</x>
+     <y>206</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>offlineButton</sender>
+   <signal>clicked()</signal>
+   <receiver>singletonQtLoggerClass</receiver>
+   <slot>offlineClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>390</x>
+     <y>382</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>340</x>
+     <y>206</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>saveLogAndClose()</slot>
   <slot>configClicked()</slot>
+  <slot>onlineClicked()</slot>
+  <slot>offlineClicked()</slot>
  </slots>
 </ui>

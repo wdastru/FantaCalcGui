@@ -1,21 +1,21 @@
 #ifndef SINGLETONQTLOGGER_H
 #define SINGLETONQTLOGGER_H
 
-#include <QWidget>
+#include <QDialog>
 #include <QMessageBox>
 #include <QString>
 #include <QTime>
 #include <QFile>
 #include "ui_singletonQtLogger.h"
 
-class singletonQtLogger: public QWidget {
+class singletonQtLogger: public QDialog {
 Q_OBJECT
 
 public:
 	static singletonQtLogger* Inst();
 	void Logging(QString type, QString message);
 	void Initialize();
-	singletonQtLogger(QWidget *parent = 0);
+	singletonQtLogger(QDialog *parent = 0);
 	virtual ~singletonQtLogger();
 	void setTitle(QString title);
 	void setDebugStatus(bool status);
@@ -24,6 +24,8 @@ public:
 private slots:
 	void saveLogAndClose();
 	void configClicked();
+	void onlineClicked();
+	void offlineClicked();
 
 private:
 	void saveLogFile();

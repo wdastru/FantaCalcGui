@@ -1,6 +1,10 @@
 #include "singletonQtLogger.h"
 #include "IniFileManager.h"
 #include "IniFilePopulator.h"
+#include "httpwindow.h"
+#include "NoNetFileDialog.h"
+
+#include <vector>
 
 singletonQtLogger* singletonQtLogger::Inst() {
 	if (pInstance == NULL) {
@@ -8,11 +12,12 @@ singletonQtLogger* singletonQtLogger::Inst() {
 	}
 	return pInstance;
 }
-singletonQtLogger::singletonQtLogger(QWidget *parent) :
-	QWidget(parent) {
+singletonQtLogger::singletonQtLogger(QDialog *parent) :
+	QDialog(parent) {
 	this->ui.setupUi(this);
 	this->version = "v0.2 build 14";
-	this->show();
+	this->setTitle("FantaCalcGui");
+	this->exec();
 }
 singletonQtLogger::~singletonQtLogger() {
 }
@@ -135,3 +140,62 @@ void singletonQtLogger::configClicked() {
 
 	IniFileManager::Inst()->updateAndWriteIniFile();
 }
+
+void singletonQtLogger::onlineClicked() {
+	LOG(DEBUG,
+			"In void singletonQtLogger::onlineClicked() : network will be accessed.");
+/*
+//	this->yesHasBeenClicked = TRUE;
+//	this->noHasBeenClicked = FALSE;
+
+	std::vector<QUrl> * urls = new std::vector<QUrl>;
+	urls->push_back(QUrl::fromLocalFile(IniFileManager::Inst()->getFileFormazioniUrl()));
+	urls->push_back(QUrl::fromLocalFile(IniFileManager::Inst()->getFileGazzettaUrl()));
+
+	std::vector<QString> * savePaths = new std::vector<QString>;
+	savePaths->push_back(IniFileManager::Inst()->getListePath());
+	savePaths->push_back(IniFileManager::Inst()->getListePath());
+
+	HttpWindow httpWin(singletonQtLogger::Inst(), urls, savePaths);
+	httpWin.exec();
+
+	if (httpWin.requestSucceded()) {
+		LOG(
+				DEBUG,
+				"In singletonQtLogger::onlineClicked() --> the download of files succeded: closing useTheNetDialog.");
+//		this->hasFinished = TRUE;
+//		this->downloadSuccess = TRUE;
+//		this->close();
+	} else {
+		LOG(DEBUG,
+				"In singletonQtLogger::onlineClicked() --> the download of files failed.");
+//		this->downloadSuccess = FALSE;
+	}
+	*/
+}
+void singletonQtLogger::offlineClicked() {
+	LOG(DEBUG, "In singletonQtLogger::offlineClicked() --> Network will not be accessed.");
+	/*
+
+//	this->yesHasBeenClicked = FALSE;
+//	this->noHasBeenClicked = TRUE;
+
+	NoNetFileDialog * noNetFileDialog = new NoNetFileDialog(this);
+	noNetFileDialog->exec();
+
+	if (!noNetFileDialog->hasBeenAborted) {
+		this->noNetSquadreFile = noNetFileDialog->getFileNameSquadre();
+		LOG(
+				DEBUG,
+				"In void singletonQtLogger::offlineClicked() -> fileNameSquadre : "
+						+ this->noNetSquadreFile);
+		this->noNetGazzettaFile = noNetFileDialog->getFileNameGazzetta();
+//		this->hasFinished = TRUE;
+//		this->close();
+	} else {
+//		this->hasFinished = FALSE;
+//		return;
+	}
+*/
+}
+
