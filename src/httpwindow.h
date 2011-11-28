@@ -58,7 +58,6 @@ class QPushButton;
 class QSslError;
 class QAuthenticator;
 class QNetworkReply;
-
 QT_END_NAMESPACE
 
 class HttpWindow: public QDialog {
@@ -66,10 +65,10 @@ Q_OBJECT
 
 public:
 	HttpWindow(QWidget *parent = 0,
-			std::vector<QUrl>* urls = new std::vector<QUrl>,
-			std::vector<QString>* savePaths = new std::vector<QString>);
+		std::vector<QUrl>* urls = new std::vector<QUrl>,
+		std::vector<QString>* savePaths = new std::vector<QString>);
+	void startRequest(QUrl url);	
 	bool requestSucceded();
-	void startRequest(QUrl url);
 
 private slots:
 	void downloadAllFiles();
