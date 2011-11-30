@@ -27,7 +27,6 @@ void singletonQtLogger::init() {
 }
 singletonQtLogger::~singletonQtLogger() {
 }
-//bool singletonQtLogger::debugStatus = FALSE;
 void singletonQtLogger::Logging(QString type, QString message) {
 	this->fileContent += (message + "\n");
 
@@ -162,24 +161,25 @@ void singletonQtLogger::onlineClicked() {
 	urls->push_back(QUrl::fromLocalFile(THE_REPO->getFileGazzettaUrl()));
 
 	std::vector<QString> * savePaths = new std::vector<QString>;
-	savePaths->push_back(THE_REPO->getListePath()+'/');
-	savePaths->push_back(THE_REPO->getListePath()+'/');
+	savePaths->push_back(THE_REPO->getListePath() + '/');
+	savePaths->push_back(THE_REPO->getListePath() + '/');
 
-	Downloader downloader;
+	Downloader downloader(THE_LOGGER, urls, savePaths);
 	downloader.show();
 	downloader.exec();
 
-//	HttpWindow httpWin(this, urls, savePaths);
-//	httpWin.exec();
-//
-//	if (httpWin.requestSucceded()) {
-//		LOG(
-//				DEBUG,
-//				"In singletonQtLogger::onlineClicked() --> the download of files succeded: closing useTheNetDialog.");
-//	} else {
-//		LOG(DEBUG,
-//				"In singletonQtLogger::onlineClicked() --> the download of files failed.");
-//	}
+	//	HttpWindow httpWin(this, urls, savePaths);
+	//	httpWin.show();
+	//	httpWin.exec();
+
+	if (downloader.requestSucceded()) {
+		LOG(
+				DEBUG,
+				"In singletonQtLogger::onlineClicked() --> the download of files succeded.");
+	} else {
+		LOG(ERROR,
+				"In singletonQtLogger::onlineClicked() --> the download of files failed.");
+	}
 }
 void singletonQtLogger::offlineClicked() {
 	LOG(DEBUG,

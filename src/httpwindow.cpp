@@ -41,8 +41,8 @@
 #include <QtGui>
 #include <QtNetwork>
 
-#include "httpwindow.h"
 #include "ui_authenticationdialog.h"
+#include "httpwindow.h"
 
 HttpWindow::HttpWindow(QWidget *parent, std::vector<QUrl>* _urls,
 		std::vector<QString>* _savePaths) :
@@ -85,8 +85,8 @@ HttpWindow::HttpWindow(QWidget *parent, std::vector<QUrl>* _urls,
 			this,
 			SLOT(slotAuthenticationRequired(QNetworkReply*,QAuthenticator*)));
 #ifndef QT_NO_OPENSSL
-	connect(&qnam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this,
-			SLOT(sslErrors(QNetworkReply*,QList<QSslError>)));
+	connect(&qnam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), 
+	this, SLOT(sslErrors(QNetworkReply*,QList<QSslError>)));
 #endif
 	connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
 	connect(downloadButton, SIGNAL(clicked()), this, SLOT(downloadAllFiles()));
@@ -112,17 +112,12 @@ HttpWindow::HttpWindow(QWidget *parent, std::vector<QUrl>* _urls,
 	//urlLineEditVector.at(0)->setFocus();
 }
 
-void HttpWindow::closeDialog() {
-	this->close();
-}
-
 void HttpWindow::startRequest(QUrl url) {
 	LOG(DEBUG, "In void HttpWindow::startRequest(QUrl url)");
 	reply = qnam.get(QNetworkRequest(url));
 	connect(reply, SIGNAL(finished()), this, SLOT(httpFinished()));
 	connect(reply, SIGNAL(readyRead()), this, SLOT(httpReadyRead()));
-	connect(reply, SIGNAL(downloadProgress(qint64,qint64)), this,
-			SLOT(updateDataReadProgress(qint64,qint64)));
+	connect(reply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDataReadProgress(qint64,qint64)));
 }
 
 void HttpWindow::downloadAllFiles() {
@@ -327,3 +322,8 @@ void HttpWindow::sslErrors(QNetworkReply*, const QList<QSslError> &errors) {
 	}
 }
 #endif
+
+void HttpWindow::closeDialog() {
+	this->close();
+}
+

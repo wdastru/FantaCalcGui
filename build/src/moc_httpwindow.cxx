@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'httpwindow.h'
 **
-** Created: Sun 27. Nov 14:28:58 2011
+** Created: Wed 30. Nov 06:38:05 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -32,27 +32,27 @@ static const uint qt_meta_data_HttpWindow[] = {
 
  // slots: signature, parameters, type, tag, flags
       12,   11,   11,   11, 0x08,
-      31,   11,   11,   11, 0x08,
-      48,   11,   11,   11, 0x08,
-      63,   11,   11,   11, 0x08,
-     100,   79,   11,   11, 0x08,
-     138,   11,   11,   11, 0x08,
-     163,  161,   11,   11, 0x08,
-     222,   11,   11,   11, 0x08,
-     244,  236,   11,   11, 0x08,
+      29,   11,   11,   11, 0x08,
+      44,   11,   11,   11, 0x08,
+      81,   60,   11,   11, 0x08,
+     119,   11,   11,   11, 0x08,
+     144,  142,   11,   11, 0x08,
+     211,  203,   11,   11, 0x08,
+     254,   11,   11,   11, 0x08,
+     273,   11,   11,   11, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_HttpWindow[] = {
-    "HttpWindow\0\0downloadAllFiles()\0"
-    "cancelDownload()\0httpFinished()\0"
-    "httpReadyRead()\0bytesRead,totalBytes\0"
+    "HttpWindow\0\0cancelDownload()\0"
+    "httpFinished()\0httpReadyRead()\0"
+    "bytesRead,totalBytes\0"
     "updateDataReadProgress(qint64,qint64)\0"
     "enableDownloadButton()\0,\0"
     "slotAuthenticationRequired(QNetworkReply*,QAuthenticator*)\0"
-    "closeDialog()\0,errors\0"
-    "sslErrors(QNetworkReply*,QList<QSslError>)\0"
+    ",errors\0sslErrors(QNetworkReply*,QList<QSslError>)\0"
+    "downloadAllFiles()\0closeDialog()\0"
 };
 
 const QMetaObject HttpWindow::staticMetaObject = {
@@ -84,15 +84,15 @@ int HttpWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: downloadAllFiles(); break;
-        case 1: cancelDownload(); break;
-        case 2: httpFinished(); break;
-        case 3: httpReadyRead(); break;
-        case 4: updateDataReadProgress((*reinterpret_cast< qint64(*)>(_a[1])),(*reinterpret_cast< qint64(*)>(_a[2]))); break;
-        case 5: enableDownloadButton(); break;
-        case 6: slotAuthenticationRequired((*reinterpret_cast< QNetworkReply*(*)>(_a[1])),(*reinterpret_cast< QAuthenticator*(*)>(_a[2]))); break;
-        case 7: closeDialog(); break;
-        case 8: sslErrors((*reinterpret_cast< QNetworkReply*(*)>(_a[1])),(*reinterpret_cast< const QList<QSslError>(*)>(_a[2]))); break;
+        case 0: cancelDownload(); break;
+        case 1: httpFinished(); break;
+        case 2: httpReadyRead(); break;
+        case 3: updateDataReadProgress((*reinterpret_cast< qint64(*)>(_a[1])),(*reinterpret_cast< qint64(*)>(_a[2]))); break;
+        case 4: enableDownloadButton(); break;
+        case 5: slotAuthenticationRequired((*reinterpret_cast< QNetworkReply*(*)>(_a[1])),(*reinterpret_cast< QAuthenticator*(*)>(_a[2]))); break;
+        case 6: sslErrors((*reinterpret_cast< QNetworkReply*(*)>(_a[1])),(*reinterpret_cast< const QList<QSslError>(*)>(_a[2]))); break;
+        case 7: downloadAllFiles(); break;
+        case 8: closeDialog(); break;
         default: ;
         }
         _id -= 9;

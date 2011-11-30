@@ -599,6 +599,7 @@ CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.obj
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/tools/qvector.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/xml/qxmlstream.h
  C:/Qt/4.7.3/include/QtCore/QDate
+ C:/Qt/4.7.3/include/QtCore/QFile
  C:/Qt/4.7.3/include/QtCore/QIODevice
  C:/Qt/4.7.3/include/QtCore/QList
  C:/Qt/4.7.3/include/QtCore/QMetaType
@@ -607,6 +608,7 @@ CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.obj
  C:/Qt/4.7.3/include/QtCore/QPointF
  C:/Qt/4.7.3/include/QtCore/QSharedDataPointer
  C:/Qt/4.7.3/include/QtCore/QString
+ C:/Qt/4.7.3/include/QtCore/QTime
  C:/Qt/4.7.3/include/QtCore/QUrl
  C:/Qt/4.7.3/include/QtCore/QVariant
  C:/Qt/4.7.3/include/QtCore/QtCore
@@ -1008,16 +1010,21 @@ CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.obj
  C:/Qt/4.7.3/include/QtGui/QFileDialog
  C:/Qt/4.7.3/include/QtGui/QFont
  C:/Qt/4.7.3/include/QtGui/QGridLayout
+ C:/Qt/4.7.3/include/QtGui/QHBoxLayout
  C:/Qt/4.7.3/include/QtGui/QHeaderView
  C:/Qt/4.7.3/include/QtGui/QLabel
  C:/Qt/4.7.3/include/QtGui/QLayout
  C:/Qt/4.7.3/include/QtGui/QLineEdit
  C:/Qt/4.7.3/include/QtGui/QMatrix4x4
+ C:/Qt/4.7.3/include/QtGui/QMessageBox
  C:/Qt/4.7.3/include/QtGui/QPalette
+ C:/Qt/4.7.3/include/QtGui/QPlainTextEdit
  C:/Qt/4.7.3/include/QtGui/QPrinter
+ C:/Qt/4.7.3/include/QtGui/QPushButton
  C:/Qt/4.7.3/include/QtGui/QSpacerItem
  C:/Qt/4.7.3/include/QtGui/QTransform
  C:/Qt/4.7.3/include/QtGui/QVector3D
+ C:/Qt/4.7.3/include/QtGui/QWidget
  C:/Qt/4.7.3/include/QtGui/QtGui
  C:/Qt/4.7.3/include/QtGui/qabstractbutton.h
  C:/Qt/4.7.3/include/QtGui/qabstractitemdelegate.h
@@ -1316,7 +1323,11 @@ CMakeFiles/FantaCalcGui.dir/src/Downloader.cpp.obj
  C:/Qt/4.7.3/include/QtNetwork/qurlinfo.h
  D:/Sorgenti/FantaCalcGuiNew/src/Downloader.cpp
  D:/Sorgenti/FantaCalcGuiNew/src/Downloader.h
+ D:/Sorgenti/FantaCalcGuiNew/src/defines.h
+ D:/Sorgenti/FantaCalcGuiNew/src/singletonQtLogger.h
+ D:/Sorgenti/FantaCalcGuiNew/src/toString.h
  ui_authenticationdialog.h
+ ui_singletonQtLogger.h
 CMakeFiles/FantaCalcGui.dir/src/Fanta.cpp.obj
  C:/Qt/4.7.3/include/Qt3Support/../../src/qt3support/tools/q3cstring.h
  C:/Qt/4.7.3/include/Qt3Support/../../src/qt3support/tools/q3valuelist.h
@@ -6610,25 +6621,33 @@ CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/global/qfeatures.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/global/qglobal.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/global/qnamespace.h
+ C:/Qt/4.7.3/include/QtCore/../../src/corelib/io/qbuffer.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/io/qdatastream.h
+ C:/Qt/4.7.3/include/QtCore/../../src/corelib/io/qfile.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/io/qiodevice.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/io/qurl.h
+ C:/Qt/4.7.3/include/QtCore/../../src/corelib/kernel/qabstractitemmodel.h
+ C:/Qt/4.7.3/include/QtCore/../../src/corelib/kernel/qcoreapplication.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/kernel/qcoreevent.h
+ C:/Qt/4.7.3/include/QtCore/../../src/corelib/kernel/qeventloop.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/kernel/qmetatype.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/kernel/qmimedata.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/kernel/qobject.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/kernel/qobjectdefs.h
+ C:/Qt/4.7.3/include/QtCore/../../src/corelib/kernel/qpointer.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/kernel/qvariant.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/thread/qatomic.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/thread/qbasicatomic.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/tools/qalgorithms.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/tools/qbytearray.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/tools/qchar.h
+ C:/Qt/4.7.3/include/QtCore/../../src/corelib/tools/qdatetime.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/tools/qhash.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/tools/qiterator.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/tools/qline.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/tools/qlinkedlist.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/tools/qlist.h
+ C:/Qt/4.7.3/include/QtCore/../../src/corelib/tools/qlocale.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/tools/qmap.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/tools/qmargins.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/tools/qpair.h
@@ -6646,10 +6665,15 @@ CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/tools/qstringlist.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/tools/qstringmatcher.h
  C:/Qt/4.7.3/include/QtCore/../../src/corelib/tools/qvector.h
+ C:/Qt/4.7.3/include/QtCore/QFile
  C:/Qt/4.7.3/include/QtCore/QObject
  C:/Qt/4.7.3/include/QtCore/QPoint
  C:/Qt/4.7.3/include/QtCore/QPointF
+ C:/Qt/4.7.3/include/QtCore/QString
+ C:/Qt/4.7.3/include/QtCore/QTime
  C:/Qt/4.7.3/include/QtCore/QUrl
+ C:/Qt/4.7.3/include/QtCore/QVariant
+ C:/Qt/4.7.3/include/QtCore/qabstractitemmodel.h
  C:/Qt/4.7.3/include/QtCore/qalgorithms.h
  C:/Qt/4.7.3/include/QtCore/qatomic.h
  C:/Qt/4.7.3/include/QtCore/qatomic_alpha.h
@@ -6676,12 +6700,17 @@ CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj
  C:/Qt/4.7.3/include/QtCore/qatomic_windowsce.h
  C:/Qt/4.7.3/include/QtCore/qatomic_x86_64.h
  C:/Qt/4.7.3/include/QtCore/qbasicatomic.h
+ C:/Qt/4.7.3/include/QtCore/qbuffer.h
  C:/Qt/4.7.3/include/QtCore/qbytearray.h
  C:/Qt/4.7.3/include/QtCore/qchar.h
  C:/Qt/4.7.3/include/QtCore/qconfig.h
+ C:/Qt/4.7.3/include/QtCore/qcoreapplication.h
  C:/Qt/4.7.3/include/QtCore/qcoreevent.h
  C:/Qt/4.7.3/include/QtCore/qdatastream.h
+ C:/Qt/4.7.3/include/QtCore/qdatetime.h
+ C:/Qt/4.7.3/include/QtCore/qeventloop.h
  C:/Qt/4.7.3/include/QtCore/qfeatures.h
+ C:/Qt/4.7.3/include/QtCore/qfile.h
  C:/Qt/4.7.3/include/QtCore/qglobal.h
  C:/Qt/4.7.3/include/QtCore/qhash.h
  C:/Qt/4.7.3/include/QtCore/qiodevice.h
@@ -6689,6 +6718,7 @@ CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj
  C:/Qt/4.7.3/include/QtCore/qline.h
  C:/Qt/4.7.3/include/QtCore/qlinkedlist.h
  C:/Qt/4.7.3/include/QtCore/qlist.h
+ C:/Qt/4.7.3/include/QtCore/qlocale.h
  C:/Qt/4.7.3/include/QtCore/qmap.h
  C:/Qt/4.7.3/include/QtCore/qmargins.h
  C:/Qt/4.7.3/include/QtCore/qmetatype.h
@@ -6698,6 +6728,7 @@ CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj
  C:/Qt/4.7.3/include/QtCore/qobjectdefs.h
  C:/Qt/4.7.3/include/QtCore/qpair.h
  C:/Qt/4.7.3/include/QtCore/qpoint.h
+ C:/Qt/4.7.3/include/QtCore/qpointer.h
  C:/Qt/4.7.3/include/QtCore/qrect.h
  C:/Qt/4.7.3/include/QtCore/qregexp.h
  C:/Qt/4.7.3/include/QtCore/qscopedpointer.h
@@ -6714,12 +6745,27 @@ CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj
  C:/Qt/4.7.3/include/QtCore/qvariant.h
  C:/Qt/4.7.3/include/QtCore/qvector.h
  C:/Qt/4.7.3/include/QtGui/../../src/gui/dialogs/qdialog.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/dialogs/qmessagebox.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/embedded/qtransportauth_qws.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/image/qicon.h
  C:/Qt/4.7.3/include/QtGui/../../src/gui/image/qimage.h
  C:/Qt/4.7.3/include/QtGui/../../src/gui/image/qpixmap.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/itemviews/qabstractitemdelegate.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/itemviews/qabstractitemview.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/itemviews/qheaderview.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/itemviews/qitemselectionmodel.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/kernel/qaction.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/kernel/qactiongroup.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/kernel/qapplication.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/kernel/qboxlayout.h
  C:/Qt/4.7.3/include/QtGui/../../src/gui/kernel/qcursor.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/kernel/qdesktopwidget.h
  C:/Qt/4.7.3/include/QtGui/../../src/gui/kernel/qdrag.h
  C:/Qt/4.7.3/include/QtGui/../../src/gui/kernel/qevent.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/kernel/qgridlayout.h
  C:/Qt/4.7.3/include/QtGui/../../src/gui/kernel/qkeysequence.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/kernel/qlayout.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/kernel/qlayoutitem.h
  C:/Qt/4.7.3/include/QtGui/../../src/gui/kernel/qmacdefines_mac.h
  C:/Qt/4.7.3/include/QtGui/../../src/gui/kernel/qmime.h
  C:/Qt/4.7.3/include/QtGui/../../src/gui/kernel/qpalette.h
@@ -6732,38 +6778,113 @@ CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj
  C:/Qt/4.7.3/include/QtGui/../../src/gui/painting/qmatrix.h
  C:/Qt/4.7.3/include/QtGui/../../src/gui/painting/qpaintdevice.h
  C:/Qt/4.7.3/include/QtGui/../../src/gui/painting/qpainterpath.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/painting/qpen.h
  C:/Qt/4.7.3/include/QtGui/../../src/gui/painting/qpolygon.h
  C:/Qt/4.7.3/include/QtGui/../../src/gui/painting/qregion.h
  C:/Qt/4.7.3/include/QtGui/../../src/gui/painting/qrgb.h
  C:/Qt/4.7.3/include/QtGui/../../src/gui/painting/qtransform.h
  C:/Qt/4.7.3/include/QtGui/../../src/gui/painting/qwmatrix.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/styles/qstyle.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/styles/qstyleoption.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/text/qabstracttextdocumentlayout.h
  C:/Qt/4.7.3/include/QtGui/../../src/gui/text/qfont.h
  C:/Qt/4.7.3/include/QtGui/../../src/gui/text/qfontinfo.h
  C:/Qt/4.7.3/include/QtGui/../../src/gui/text/qfontmetrics.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/text/qtextcursor.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/text/qtextdocument.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/text/qtextformat.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/text/qtextlayout.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/text/qtextobject.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/text/qtextoption.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/widgets/qabstractbutton.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/widgets/qabstractscrollarea.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/widgets/qabstractslider.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/widgets/qabstractspinbox.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/widgets/qbuttongroup.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/widgets/qframe.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/widgets/qlabel.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/widgets/qplaintextedit.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/widgets/qpushbutton.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/widgets/qrubberband.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/widgets/qslider.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/widgets/qtabbar.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/widgets/qtabwidget.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/widgets/qtextedit.h
+ C:/Qt/4.7.3/include/QtGui/../../src/gui/widgets/qvalidator.h
+ C:/Qt/4.7.3/include/QtGui/QAction
+ C:/Qt/4.7.3/include/QtGui/QApplication
+ C:/Qt/4.7.3/include/QtGui/QButtonGroup
  C:/Qt/4.7.3/include/QtGui/QDialog
+ C:/Qt/4.7.3/include/QtGui/QHBoxLayout
+ C:/Qt/4.7.3/include/QtGui/QHeaderView
+ C:/Qt/4.7.3/include/QtGui/QLabel
+ C:/Qt/4.7.3/include/QtGui/QMessageBox
+ C:/Qt/4.7.3/include/QtGui/QPlainTextEdit
+ C:/Qt/4.7.3/include/QtGui/QPushButton
+ C:/Qt/4.7.3/include/QtGui/QWidget
+ C:/Qt/4.7.3/include/QtGui/qabstractbutton.h
+ C:/Qt/4.7.3/include/QtGui/qabstractitemdelegate.h
+ C:/Qt/4.7.3/include/QtGui/qabstractitemview.h
+ C:/Qt/4.7.3/include/QtGui/qabstractscrollarea.h
+ C:/Qt/4.7.3/include/QtGui/qabstractslider.h
+ C:/Qt/4.7.3/include/QtGui/qabstractspinbox.h
+ C:/Qt/4.7.3/include/QtGui/qabstracttextdocumentlayout.h
+ C:/Qt/4.7.3/include/QtGui/qaction.h
+ C:/Qt/4.7.3/include/QtGui/qactiongroup.h
+ C:/Qt/4.7.3/include/QtGui/qapplication.h
+ C:/Qt/4.7.3/include/QtGui/qboxlayout.h
  C:/Qt/4.7.3/include/QtGui/qbrush.h
+ C:/Qt/4.7.3/include/QtGui/qbuttongroup.h
  C:/Qt/4.7.3/include/QtGui/qcolor.h
  C:/Qt/4.7.3/include/QtGui/qcursor.h
+ C:/Qt/4.7.3/include/QtGui/qdesktopwidget.h
  C:/Qt/4.7.3/include/QtGui/qdialog.h
  C:/Qt/4.7.3/include/QtGui/qdrag.h
  C:/Qt/4.7.3/include/QtGui/qevent.h
  C:/Qt/4.7.3/include/QtGui/qfont.h
  C:/Qt/4.7.3/include/QtGui/qfontinfo.h
  C:/Qt/4.7.3/include/QtGui/qfontmetrics.h
+ C:/Qt/4.7.3/include/QtGui/qframe.h
+ C:/Qt/4.7.3/include/QtGui/qgridlayout.h
+ C:/Qt/4.7.3/include/QtGui/qheaderview.h
+ C:/Qt/4.7.3/include/QtGui/qicon.h
  C:/Qt/4.7.3/include/QtGui/qimage.h
+ C:/Qt/4.7.3/include/QtGui/qitemselectionmodel.h
  C:/Qt/4.7.3/include/QtGui/qkeysequence.h
+ C:/Qt/4.7.3/include/QtGui/qlabel.h
+ C:/Qt/4.7.3/include/QtGui/qlayout.h
+ C:/Qt/4.7.3/include/QtGui/qlayoutitem.h
  C:/Qt/4.7.3/include/QtGui/qmacdefines_mac.h
  C:/Qt/4.7.3/include/QtGui/qmatrix.h
+ C:/Qt/4.7.3/include/QtGui/qmessagebox.h
  C:/Qt/4.7.3/include/QtGui/qmime.h
  C:/Qt/4.7.3/include/QtGui/qpaintdevice.h
  C:/Qt/4.7.3/include/QtGui/qpainterpath.h
  C:/Qt/4.7.3/include/QtGui/qpalette.h
+ C:/Qt/4.7.3/include/QtGui/qpen.h
  C:/Qt/4.7.3/include/QtGui/qpixmap.h
+ C:/Qt/4.7.3/include/QtGui/qplaintextedit.h
  C:/Qt/4.7.3/include/QtGui/qpolygon.h
+ C:/Qt/4.7.3/include/QtGui/qpushbutton.h
  C:/Qt/4.7.3/include/QtGui/qregion.h
  C:/Qt/4.7.3/include/QtGui/qrgb.h
+ C:/Qt/4.7.3/include/QtGui/qrubberband.h
  C:/Qt/4.7.3/include/QtGui/qsizepolicy.h
+ C:/Qt/4.7.3/include/QtGui/qslider.h
+ C:/Qt/4.7.3/include/QtGui/qstyle.h
+ C:/Qt/4.7.3/include/QtGui/qstyleoption.h
+ C:/Qt/4.7.3/include/QtGui/qtabbar.h
+ C:/Qt/4.7.3/include/QtGui/qtabwidget.h
+ C:/Qt/4.7.3/include/QtGui/qtextcursor.h
+ C:/Qt/4.7.3/include/QtGui/qtextdocument.h
+ C:/Qt/4.7.3/include/QtGui/qtextedit.h
+ C:/Qt/4.7.3/include/QtGui/qtextformat.h
+ C:/Qt/4.7.3/include/QtGui/qtextlayout.h
+ C:/Qt/4.7.3/include/QtGui/qtextobject.h
+ C:/Qt/4.7.3/include/QtGui/qtextoption.h
  C:/Qt/4.7.3/include/QtGui/qtransform.h
+ C:/Qt/4.7.3/include/QtGui/qtransportauth_qws.h
+ C:/Qt/4.7.3/include/QtGui/qvalidator.h
  C:/Qt/4.7.3/include/QtGui/qwidget.h
  C:/Qt/4.7.3/include/QtGui/qwindowdefs.h
  C:/Qt/4.7.3/include/QtGui/qwindowdefs_win.h
@@ -6772,7 +6893,11 @@ CMakeFiles/FantaCalcGui.dir/src/moc_Downloader.cxx.obj
  C:/Qt/4.7.3/include/QtNetwork/QNetworkAccessManager
  C:/Qt/4.7.3/include/QtNetwork/qnetworkaccessmanager.h
  D:/Sorgenti/FantaCalcGuiNew/build/src/../../src/Downloader.h
+ D:/Sorgenti/FantaCalcGuiNew/build/src/../../src/defines.h
+ D:/Sorgenti/FantaCalcGuiNew/build/src/../../src/singletonQtLogger.h
+ D:/Sorgenti/FantaCalcGuiNew/build/src/../../src/toString.h
  D:/Sorgenti/FantaCalcGuiNew/build/src/moc_Downloader.cxx
+ ui_singletonQtLogger.h
 CMakeFiles/FantaCalcGui.dir/src/moc_Fanta.cxx.obj
  D:/Sorgenti/FantaCalcGuiNew/build/src/moc_Fanta.cxx
 CMakeFiles/FantaCalcGui.dir/src/moc_FormazioniFileReader.cxx.obj

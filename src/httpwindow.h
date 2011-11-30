@@ -58,6 +58,7 @@ class QPushButton;
 class QSslError;
 class QAuthenticator;
 class QNetworkReply;
+
 QT_END_NAMESPACE
 
 class HttpWindow: public QDialog {
@@ -65,43 +66,44 @@ Q_OBJECT
 
 public:
 	HttpWindow(QWidget *parent = 0,
-		std::vector<QUrl>* urls = new std::vector<QUrl>,
-		std::vector<QString>* savePaths = new std::vector<QString>);
-	void startRequest(QUrl url);	
+			std::vector<QUrl>* urls = new std::vector<QUrl>,
+			std::vector<QString>* savePaths = new std::vector<QString>);
+	void startRequest(QUrl url);
 	bool requestSucceded();
 
 private slots:
-	void downloadAllFiles();
 	void cancelDownload();
 	void httpFinished();
 	void httpReadyRead();
 	void updateDataReadProgress(qint64 bytesRead, qint64 totalBytes);
 	void enableDownloadButton();
 	void slotAuthenticationRequired(QNetworkReply*, QAuthenticator *);
-	void closeDialog();
+
 #ifndef QT_NO_OPENSSL
 	void sslErrors(QNetworkReply*, const QList<QSslError> &errors);
 #endif
 
+	void downloadAllFiles();
+	void closeDialog();
+
 private:
-	void downloadFile(QUrl, QString);
 	QLabel * statusLabel;
-	std::vector<QLabel *> urlLabelVector;
-	//QLabel * urlLabel;
-	std::vector<QLineEdit *> urlLineEditVector;
-	//QLineEdit * urlLineEdit;
 	QProgressDialog * progressDialog;
 	QPushButton * downloadButton;
 	QPushButton * quitButton;
 	QDialogButtonBox * buttonBox;
-
 	QNetworkAccessManager qnam;
 	QNetworkReply * reply;
 	QFile * file;
-	std::vector<QUrl>* urls;
-	std::vector<QString>* savePaths;
 	int httpGetId;
 	bool httpRequestAborted;
+
+	std::vector<QLineEdit *> urlLineEditVector;
+	std::vector<QUrl>* urls;
+
+	std::vector<QLabel *> urlLabelVector;
+	void downloadFile(QUrl, QString);
+	std::vector<QString>* savePaths;
 	bool httpRequestSucceded;
 };
 
