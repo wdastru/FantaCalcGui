@@ -38,8 +38,8 @@
  **
  ****************************************************************************/
 
-#ifndef HTTPWINDOW_H
-#define HTTPWINDOW_H
+#ifndef DOWNLOADER_H
+#define DOWNLOADER_H
 
 #include <QDialog>
 #include <QNetworkAccessManager>
@@ -61,13 +61,14 @@ class QNetworkReply;
 
 QT_END_NAMESPACE
 
-class HttpWindow: public QDialog {
+class Downloader: public QDialog {
 Q_OBJECT
 
 public:
-	HttpWindow(QWidget *parent = 0,
-			std::vector<QUrl>* urls = new std::vector<QUrl>,
-			std::vector<QString>* savePaths = new std::vector<QString>);
+	Downloader(QWidget *parent = 0,
+			std::vector<QUrl>* _urls = new std::vector<QUrl>,
+			std::vector<QString>* _savePaths = new std::vector<QString>);
+
 	void startRequest(QUrl url);
 	bool requestSucceded();
 
@@ -78,33 +79,36 @@ private slots:
 	void updateDataReadProgress(qint64 bytesRead, qint64 totalBytes);
 	void enableDownloadButton();
 	void slotAuthenticationRequired(QNetworkReply*, QAuthenticator *);
+	void downloadFiles();
 
 #ifndef QT_NO_OPENSSL
 	void sslErrors(QNetworkReply*, const QList<QSslError> &errors);
 #endif
 
-	void downloadAllFiles();
-	void closeDialog();
-
 private:
-	QLabel * statusLabel;
-	QProgressDialog * progressDialog;
-	QPushButton * downloadButton;
-	QPushButton * quitButton;
-	QDialogButtonBox * buttonBox;
+	QLabel *statusLabel;
+	QProgressDialog *progressDialog;
+	QPushButton *downloadButton;
+	QPushButton *quitButton;
+	QDialogButtonBox *buttonBox;
 	QNetworkAccessManager qnam;
-	QNetworkReply * reply;
-	QFile * file;
+	QNetworkReply *reply;
+	QFile *file;
 	int httpGetId;
 	bool httpRequestAborted;
-
-	std::vector<QLineEdit *> urlLineEditVector;
-	std::vector<QUrl>* urls;
-
-	std::vector<QLabel *> urlLabelVector;
-	void downloadFile(QUrl, QString);
-	std::vector<QString>* savePaths;
 	bool httpRequestSucceded;
+//	unsigned int numberOfDownloads;
+//	unsigned int downloadsSucceded;
+
+	QLineEdit *urlLineEdit;
+	QUrl url;
+	QLabel *urlLabel;
+	std::vector<QLabel *> urlLabelVector;
+	std::vector<QLineEdit *> urlLineEditVector;
+	std::vector<QString>* savePaths;
+	std::vector<QUrl>* urls;
+	QString statusLabelText;
+
 };
 
 #endif

@@ -37,7 +37,7 @@ std::vector<std::vector<std::string> > GazzettaFileReader::getOutput() {
 		std::string tmpString;
 		tmpString = line;
 
-		for (size_t i = 0; i < 26; i++) {
+		for (signed int i = 0; i < 26; i++) {
 			if (line.size() > 0) {
 				STR_MOD->onlyLettersBegin(tmpString);
 
