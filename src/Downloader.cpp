@@ -56,6 +56,9 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 
 	this->savePaths = _savePaths;
 	this->urls = _urls;
+	this->statusLabelText = "";
+	//	this->numberOfDownloads = urls->size();
+	//	this->downloadsSucceded = 0;
 
 	for (size_t i = 0; i < this->urls->size(); i++) {
 		this->urlLineEditVector.push_back(
@@ -121,6 +124,7 @@ void Downloader::startRequest(QUrl url) {
 }
 
 void Downloader::downloadFiles() {
+	this->statusLabelText = "";
 	for (unsigned int i = 0; i < urlLineEditVector.size(); ++i) {
 		url = urlLineEditVector.at(i)->text();
 
@@ -164,6 +168,7 @@ void Downloader::downloadFiles() {
 
 		// schedule the request
 		httpRequestAborted = false;
+		this->statusLabelText += "<br>" + fileName;
 		startRequest(url);
 	}
 }
@@ -200,35 +205,37 @@ void Downloader::httpFinished() {
 	if (reply->error()) {
 		file->remove();
 		QMessageBox::information(this, tr("HTTP"),
-				tr("Download failed: %1.") .arg(reply->errorString()));
+				tr("Download failed: %1.").arg(reply->errorString()));
+
+		LOG(
+				ERROR,
+				"In void Downloader::httpFinished() --> download failed: "
+						+ reply->errorString());
 
 		downloadButton->setEnabled(true);
-	} else if (!redirectionTarget.isNull()) {
-		QUrl newUrl = url.resolved(redirectionTarget.toUrl());
-		if (QMessageBox::question(this, tr("HTTP"),
-				tr("Redirect to %1 ?").arg(newUrl.toString()),
-				QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes) {
-			url = newUrl;
-			reply->deleteLater();
-			file->open(QIODevice::WriteOnly);
-			file->resize(0);
-			startRequest(url);
-			return;
-		}
 	} else {
 
 		QString fileName =
 				QFileInfo(QUrl(urlLineEdit->text()).path()).fileName();
-//		statusLabel->setText(
-//				tr("Downloaded %1 to current directory.").arg(fileName));
-		LOG(INFO, "Downloaded " + url.path() + " to current directory.");
-		downloadButton->setEnabled(true);
+		this->statusLabelText
+				+= " : <span style='font-weight:bold; color:#00CC00;'>download OK.</span><br>";
+		statusLabel->setText(this->statusLabelText);
+		LOG(
+				DEBUG,
+				"In void Downloader::httpFinished() --> download succeded : "
+						+ reply->url().path());
+		LOG(INFO, "Download succeded.");
+		downloadButton->setEnabled(false);
+
 	}
 
 	reply->deleteLater();
 	reply = 0;
 	delete file;
 	file = 0;
+
+	//	if (this->downloadsSucceded == this->numberOfDownloads)
+	//		this->close();
 }
 
 void Downloader::httpReadyRead() {
@@ -251,7 +258,6 @@ void Downloader::updateDataReadProgress(qint64 bytesRead, qint64 totalBytes) {
 
 void Downloader::enableDownloadButton() {
 	downloadButton->setEnabled(!urlLineEdit->text().isEmpty());
-
 }
 
 void Downloader::slotAuthenticationRequired(QNetworkReply*,

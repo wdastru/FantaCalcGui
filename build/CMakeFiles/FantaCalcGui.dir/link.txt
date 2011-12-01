@@ -1,3 +1,0 @@
-"c:\Programmi\CMake 2.8\bin\cmake.exe" -E remove -f CMakeFiles\FantaCalcGui.dir/objects.a
-C:\MinGW\bin\ar.exe cr CMakeFiles\FantaCalcGui.dir/objects.a @CMakeFiles\FantaCalcGui.dir\objects1.rsp
-C:\MinGW\bin\g++.exe  -O3 -DNDEBUG   -Wl,--whole-archive CMakeFiles\FantaCalcGui.dir/objects.a -Wl,--no-whole-archive  -o FantaCalcGui.exe -Wl,--out-implib,libFantaCalcGui.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -LC:\Qt\4.7.3\bin C:\Qt\4.7.3\lib\libQtGui4.a C:\Qt\4.7.3\lib\libQtCore4.a -lQtNetwork4 -lQtTest4 -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 

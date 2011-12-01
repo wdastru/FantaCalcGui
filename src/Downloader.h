@@ -97,6 +97,8 @@ private:
 	int httpGetId;
 	bool httpRequestAborted;
 	bool httpRequestSucceded;
+//	unsigned int numberOfDownloads;
+//	unsigned int downloadsSucceded;
 
 	QLineEdit *urlLineEdit;
 	QUrl url;
@@ -105,6 +107,7 @@ private:
 	std::vector<QLineEdit *> urlLineEditVector;
 	std::vector<QString>* savePaths;
 	std::vector<QUrl>* urls;
+	QString statusLabelText;
 
 };
 
