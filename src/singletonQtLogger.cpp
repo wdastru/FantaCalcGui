@@ -168,10 +168,6 @@ void singletonQtLogger::onlineClicked() {
 	downloader.show();
 	downloader.exec();
 
-	//	HttpWindow httpWin(this, urls, savePaths);
-	//	httpWin.show();
-	//	httpWin.exec();
-
 	if (downloader.requestSucceded()) {
 		LOG(
 				DEBUG,

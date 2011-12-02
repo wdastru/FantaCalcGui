@@ -3,8 +3,7 @@ PROJECT (FantaCalcGuiNew)
 
 SET( SRCS src/main.cpp 
         src/IniFileManager.cpp
-        src/httpwindow.cpp
-		src/CVersion.cpp
+        src/CVersion.cpp
 		src/ChooseFileFromAListDialog.cpp
 		src/Downloader.cpp
 		src/NoNetFileDialog.cpp 
@@ -20,8 +19,7 @@ SET( SRCS src/main.cpp
         src/singletonQtLogger.cpp )
 SET( HDRS src/CVersion.h
         src/IniFileManager.h
-		src/httpwindow.h
-        src/ChooseFileFromAListDialog.h
+		src/ChooseFileFromAListDialog.h
 		src/Downloader.h
 		src/NoNetFileDialog.h 
         src/GazzettaFileReader.h
