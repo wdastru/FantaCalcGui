@@ -207,6 +207,10 @@ void Downloader::httpFinished() {
 		QMessageBox::information(this, tr("HTTP"),
 				tr("Download failed: %1.").arg(reply->errorString()));
 
+		this->statusLabelText
+				+= " : <span style='font-weight:bold; color:#FF0000;'>download failed.</span><br>";
+		statusLabel->setText(this->statusLabelText);
+
 		LOG(
 				ERROR,
 				"In void Downloader::httpFinished() --> download failed: "
