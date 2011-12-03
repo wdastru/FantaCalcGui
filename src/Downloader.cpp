@@ -43,6 +43,7 @@
 
 #include "ui_authenticationdialog.h"
 #include "Downloader.h"
+#include "toString.h"
 
 Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 		std::vector<QString>* _savePaths) :
@@ -57,18 +58,15 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 	this->savePaths = _savePaths;
 	this->urls = _urls;
 	this->statusLabelText = "";
-	//	this->numberOfDownloads = urls->size();
-	//	this->downloadsSucceded = 0;
+	this->hasBeenQuitted = false;
+	this->httpRequestSucceded = false;
+	this->downloadCounter = 0;
 
 	for (size_t i = 0; i < this->urls->size(); i++) {
 		this->urlLineEditVector.push_back(
 				new QLineEdit(this->urls->at(i).path()));
 		this->urlLabelVector.push_back(new QLabel(tr("&URL:")));
-		//		this->urlLabelVector.at(i)->setBuddy(this->urlLineEditVector.at(i));
 	}
-
-	//	urlLabel = new QLabel(tr("&URL:"));
-	//	urlLabel->setBuddy(urlLineEdit);
 
 	statusLabel = new QLabel(tr("Please enter the URL of a file you want to "
 		"download."));
@@ -94,7 +92,7 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 #endif
 	connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
 	connect(downloadButton, SIGNAL(clicked()), this, SLOT(downloadFiles()));
-	connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
+	connect(quitButton, SIGNAL(clicked()), this, SLOT(quit()));
 
 	QVBoxLayout *vLayout = new QVBoxLayout;
 	for (size_t i = 0; i < this->urls->size(); i++) {
@@ -109,12 +107,15 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 	mainLayout->addWidget(statusLabel);
 	mainLayout->addWidget(buttonBox);
 	setLayout(mainLayout);
-
-	httpRequestSucceded = TRUE;
-
 	setWindowTitle(tr("HTTP"));
 }
-
+bool Downloader::quitted() {
+	return this->hasBeenQuitted;
+}
+void Downloader::quit() {
+	this->hasBeenQuitted = true;
+	this->close();
+}
 void Downloader::startRequest(QUrl url) {
 	reply = qnam.get(QNetworkRequest(url));
 	connect(reply, SIGNAL(finished()), this, SLOT(httpFinished()));
@@ -122,7 +123,6 @@ void Downloader::startRequest(QUrl url) {
 	connect(reply, SIGNAL(downloadProgress(qint64,qint64)), this,
 			SLOT(updateDataReadProgress(qint64,qint64)));
 }
-
 void Downloader::downloadFiles() {
 	this->statusLabelText = "";
 	for (unsigned int i = 0; i < urlLineEditVector.size(); ++i) {
@@ -172,7 +172,6 @@ void Downloader::downloadFiles() {
 		startRequest(url);
 	}
 }
-
 void Downloader::cancelDownload() {
 	statusLabel->setText(tr("Download canceled."));
 	httpRequestAborted = true;
@@ -182,7 +181,6 @@ void Downloader::cancelDownload() {
 bool Downloader::requestSucceded() {
 	return httpRequestSucceded;
 }
-
 void Downloader::httpFinished() {
 	if (httpRequestAborted) {
 		if (file) {
@@ -228,8 +226,20 @@ void Downloader::httpFinished() {
 				DEBUG,
 				"In void Downloader::httpFinished() --> download succeded : "
 						+ reply->url().path());
+		this->downloadCounter++;
+
 		LOG(INFO, "Download succeded.");
-		downloadButton->setEnabled(false);
+		LOG(
+				DEBUG,
+				"Download counter : " + my::toQString<unsigned int>(
+						this->downloadCounter));
+
+		if (this->downloadCounter < this->urls->size()) {
+			downloadButton->setEnabled(true);
+		} else {
+			this->httpRequestSucceded = true;
+			downloadButton->setEnabled(false);
+		}
 
 	}
 
@@ -241,7 +251,6 @@ void Downloader::httpFinished() {
 	//	if (this->downloadsSucceded == this->numberOfDownloads)
 	//		this->close();
 }
-
 void Downloader::httpReadyRead() {
 
 	// this slot gets called every time the QNetworkReply has new data.
@@ -251,7 +260,6 @@ void Downloader::httpReadyRead() {
 	if (file)
 		file->write(reply->readAll());
 }
-
 void Downloader::updateDataReadProgress(qint64 bytesRead, qint64 totalBytes) {
 	if (httpRequestAborted)
 		return;
@@ -259,11 +267,9 @@ void Downloader::updateDataReadProgress(qint64 bytesRead, qint64 totalBytes) {
 	progressDialog->setMaximum(totalBytes);
 	progressDialog->setValue(bytesRead);
 }
-
 void Downloader::enableDownloadButton() {
 	downloadButton->setEnabled(!urlLineEdit->text().isEmpty());
 }
-
 void Downloader::slotAuthenticationRequired(QNetworkReply*,
 		QAuthenticator *authenticator) {
 
