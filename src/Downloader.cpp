@@ -267,9 +267,9 @@ void Downloader::updateDataReadProgress(qint64 bytesRead, qint64 totalBytes) {
 	progressDialog->setMaximum(totalBytes);
 	progressDialog->setValue(bytesRead);
 }
-void Downloader::enableDownloadButton() {
-	downloadButton->setEnabled(!urlLineEdit->text().isEmpty());
-}
+//void Downloader::enableDownloadButton() {
+//	downloadButton->setEnabled(!urlLineEdit->text().isEmpty());
+//}
 void Downloader::slotAuthenticationRequired(QNetworkReply*,
 		QAuthenticator *authenticator) {
 
