@@ -16,6 +16,7 @@ SET( SRCS src/main.cpp
         src/IniFilePopulator.cpp
         src/Repository.cpp 
         src/StringModifier.cpp 
+        src/httpwindow.cpp
         src/singletonQtLogger.cpp )
 SET( HDRS src/CVersion.h
         src/IniFileManager.h
@@ -31,6 +32,7 @@ SET( HDRS src/CVersion.h
         src/IniFilePopulator.h
         src/Repository.h
         src/StringModifier.h 
+        src/httpwindow.h
         src/singletonQtLogger.h )
 SET( UIS  src/authenticationdialog.ui
 		src/IniFilePopulator.ui
