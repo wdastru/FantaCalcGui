@@ -111,6 +111,7 @@ private:
 	bool hasBeenQuitted;
 	unsigned int downloadSuccess;
 	unsigned int downloadFailure;
+	std::vector<QFile *> files;
 
 };
 
