@@ -132,7 +132,9 @@ void Downloader::downloadFiles() {
 		LOG(DEBUG, "In Downloader::downloadFile() --> " + url.path());
 
 		QFileInfo fileInfo(url.path());
-		QString fileName = fileInfo.fileName();
+		QString fileName = savePaths->at(i) + fileInfo.fileName();
+
+		LOG(DEBUG, "In Downloader::downloadFile() --> saving to " + fileName);
 
 		if (fileName.isEmpty())
 			fileName = "index.html";
