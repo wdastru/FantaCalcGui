@@ -60,12 +60,13 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 	this->statusLabelText = "";
 	this->hasBeenQuitted = false;
 	this->httpRequestSucceded = false;
-	this->downloadCounter = 0;
+	this->downloadSuccess = 0;
+	this->downloadFailure = 0;
 
 	for (size_t i = 0; i < this->urls->size(); i++) {
 		this->urlLineEditVector.push_back(
 				new QLineEdit(this->urls->at(i).path()));
-		this->urlLabelVector.push_back(new QLabel(tr("&URL:")));
+		this->urlLabelVector.push_back(new QLabel(tr("URL:")));
 	}
 
 	statusLabel = new QLabel(tr("Please enter the URL of a file you want to "
@@ -131,7 +132,9 @@ void Downloader::downloadFiles() {
 		LOG(DEBUG, "In Downloader::downloadFile() --> " + url.path());
 
 		QFileInfo fileInfo(url.path());
-		QString fileName = fileInfo.fileName();
+		QString fileName = savePaths->at(i) + fileInfo.fileName();
+
+		LOG(DEBUG, "In Downloader::downloadFile() --> saving to " + fileName);
 
 		if (fileName.isEmpty())
 			fileName = "index.html";
@@ -201,46 +204,62 @@ void Downloader::httpFinished() {
 	QVariant redirectionTarget = reply->attribute(
 			QNetworkRequest::RedirectionTargetAttribute);
 	if (reply->error()) {
-		file->remove();
-		QMessageBox::information(this, tr("HTTP"),
-				tr("Download failed: %1.").arg(reply->errorString()));
+
+		this->downloadFailure++;
 
 		this->statusLabelText
 				+= " : <span style='font-weight:bold; color:#FF0000;'>download failed.</span><br>";
-		statusLabel->setText(this->statusLabelText);
+
+		file->remove();
+		QMessageBox::information(this, tr("HTTP"),
+				tr("Download failed: %1.").arg(reply->errorString()));
 
 		LOG(
 				ERROR,
 				"In void Downloader::httpFinished() --> download failed: "
 						+ reply->errorString());
 
-		downloadButton->setEnabled(true);
+		LOG(
+				DEBUG,
+				"Download failures : " + my::toQString<unsigned int>(
+						this->downloadFailure));
+
+		if ((this->downloadSuccess + this->downloadFailure)
+				< this->urls->size()) {
+			downloadButton->setEnabled(true);
+		} else {
+			statusLabel->setText(this->statusLabelText);
+			this->httpRequestSucceded = false;
+			downloadButton->setEnabled(true);
+		}
+
 	} else {
+
+		this->downloadSuccess++;
 
 		QString fileName =
 				QFileInfo(QUrl(urlLineEdit->text()).path()).fileName();
 		this->statusLabelText
 				+= " : <span style='font-weight:bold; color:#00CC00;'>download OK.</span><br>";
-		statusLabel->setText(this->statusLabelText);
 		LOG(
 				DEBUG,
 				"In void Downloader::httpFinished() --> download succeded : "
 						+ reply->url().path());
-		this->downloadCounter++;
 
 		LOG(INFO, "Download succeded.");
 		LOG(
 				DEBUG,
-				"Download counter : " + my::toQString<unsigned int>(
-						this->downloadCounter));
+				"Download successes : " + my::toQString<unsigned int>(
+						this->downloadSuccess));
 
-		if (this->downloadCounter < this->urls->size()) {
+		if ((this->downloadSuccess + this->downloadFailure)
+				< this->urls->size()) {
 			downloadButton->setEnabled(true);
 		} else {
+			statusLabel->setText(this->statusLabelText);
 			this->httpRequestSucceded = true;
 			downloadButton->setEnabled(false);
 		}
-
 	}
 
 	reply->deleteLater();

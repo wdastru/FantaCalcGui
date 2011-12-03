@@ -109,7 +109,8 @@ private:
 	std::vector<QUrl>* urls;
 	QString statusLabelText;
 	bool hasBeenQuitted;
-	unsigned int downloadCounter;
+	unsigned int downloadSuccess;
+	unsigned int downloadFailure;
 
 };
 
