@@ -152,7 +152,6 @@ void Downloader::downloadFiles() {
 				return;
 
 			QFile::remove(fileName);
-
 		}
 
 		file = new QFile(fileName);

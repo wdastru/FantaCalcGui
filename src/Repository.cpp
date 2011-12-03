@@ -45,10 +45,10 @@ QString Repository::getListePath() {
 	return this->listePath;
 }
 QString Repository::getListaFormazioni() {
-	return this->listePath + "listaFormazioni.txt";
+	return this->listePath + "/listaFormazioni.txt";
 }
 QString Repository::getListaGazFiles() {
-	return this->listePath + "listaGazFiles.txt";
+	return this->listePath + "/listaGazFiles.txt";
 }
 QString Repository::getFileFormazioniUrl() {
 	return this->getFormazioniUrl() + "listaFormazioni.txt";

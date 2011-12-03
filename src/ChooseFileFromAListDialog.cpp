@@ -65,6 +65,11 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 	groupBoxNeutro2 = new QGroupBox("Neutro");
 	groupBoxGazzetta = new QGroupBox("Files Gazzetta");
 
+	LOG(
+			DEBUG,
+			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> fileFormazioni : "
+					+ _fileFormazioni);
+
 	QFile *file1 = new QFile(_fileFormazioni);
 
 	QString time = QTime::currentTime().toString("hh:mm:ss.zzz");
@@ -181,6 +186,11 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 
 
 	time = QTime::currentTime().toString("hh:mm:ss.zzz");
+
+	LOG(
+			DEBUG,
+			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> fileGazzetta : "
+					+ _fileGazzetta);
 
 	QFile *file2 = new QFile(_fileGazzetta);
 	if (file2->exists()) {
