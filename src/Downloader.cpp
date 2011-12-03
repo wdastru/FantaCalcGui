@@ -49,11 +49,11 @@
 Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 		std::vector<QString>* _savePaths) :
 	QDialog(parent) {
-//
-//	urlLineEdit
-//			= new QLineEdit(
-//					"http://localhost/www.cim.unito.it/private/fantacalcio/777/formazioni/listaFormazioni.txt");
-//
+	//
+	//	urlLineEdit
+	//			= new QLineEdit(
+	//					"http://localhost/www.cim.unito.it/private/fantacalcio/777/formazioni/listaFormazioni.txt");
+	//
 	LOG(DEBUG, "In Downloader::Downloader(...) constructor.");
 
 	this->savePaths = _savePaths;
@@ -63,6 +63,8 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 	this->httpRequestSucceded = false;
 	this->downloadSuccess = 0;
 	this->downloadFailure = 0;
+	//	this->httpClients = new std::vector<HttpWindow *>;
+	this->httpClients.resize(urls->size());
 
 	for (size_t i = 0; i < this->urls->size(); i++) {
 		this->urlLineEditVector.push_back(
@@ -82,17 +84,17 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 	buttonBox->addButton(downloadButton, QDialogButtonBox::ActionRole);
 	buttonBox->addButton(quitButton, QDialogButtonBox::RejectRole);
 
-//	progressDialog = new QProgressDialog(this);
-//
-//	connect(&qnam,
-//			SIGNAL(authenticationRequired(QNetworkReply*,QAuthenticator*)),
-//			this,
-//			SLOT(slotAuthenticationRequired(QNetworkReply*,QAuthenticator*)));
-//#ifndef QT_NO_OPENSSL
-//	connect(&qnam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this,
-//			SLOT(sslErrors(QNetworkReply*,QList<QSslError>)));
-//#endif
-//	connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
+	//	progressDialog = new QProgressDialog(this);
+	//
+	//	connect(&qnam,
+	//			SIGNAL(authenticationRequired(QNetworkReply*,QAuthenticator*)),
+	//			this,
+	//			SLOT(slotAuthenticationRequired(QNetworkReply*,QAuthenticator*)));
+	//#ifndef QT_NO_OPENSSL
+	//	connect(&qnam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this,
+	//			SLOT(sslErrors(QNetworkReply*,QList<QSslError>)));
+	//#endif
+	//	connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
 	connect(downloadButton, SIGNAL(clicked()), this, SLOT(downloadFiles()));
 	connect(quitButton, SIGNAL(clicked()), this, SLOT(quit()));
 
@@ -109,7 +111,7 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 	mainLayout->addWidget(statusLabel);
 	mainLayout->addWidget(buttonBox);
 	setLayout(mainLayout);
-	setWindowTitle(tr("HTTP"));
+	setWindowTitle(tr("Downloader"));
 }
 //bool Downloader::quitted() {
 //	return this->hasBeenQuitted;
@@ -129,59 +131,72 @@ void Downloader::quit() {
 //			SLOT(updateDataReadProgress(qint64,qint64)));
 //}
 void Downloader::downloadFiles() {
-//	this->statusLabelText = "";
-//	for (unsigned int i = 0; i < urlLineEditVector.size(); ++i) {
-//		url = urlLineEditVector.at(i)->text();
-//
-//		LOG(DEBUG, "In Downloader::downloadFile() --> " + url.path());
-//
-//		QFileInfo fileInfo(url.path());
-//		QString fileName = savePaths->at(i) + fileInfo.fileName();
-//
-//		LOG(DEBUG, "In Downloader::downloadFile() --> saving to " + fileName);
-//
-//		if (fileName.isEmpty())
-//			fileName = "index.html";
-//
-//		if (QFile::exists(fileName)) {
-//			LOG(
-//					DEBUG,
-//					"In Downloader::downloadFile() --> file " + fileName
-//							+ " exists.");
-//
-//			if (QMessageBox::question(this, tr("HTTP"),
-//					tr("There already exists a file called %1 in "
-//						"the current directory. Overwrite?").arg(fileName),
-//					QMessageBox::Yes | QMessageBox::No, QMessageBox::No)
-//
-//			== QMessageBox::No)
-//				return;
-//
-//			QFile::remove(fileName);
-//		}
-//
-//		file = new QFile(fileName);
-//		if (!file->open(QIODevice::WriteOnly)) {
-//			QMessageBox::information(
-//					this,
-//					tr("HTTP"),
-//					tr("Unable to save the file %1: %2.") .arg(fileName).arg(
-//							file->errorString()));
-//
-//			delete file;
-//			file = 0;
-//			return;
-//		}
-//
-//		progressDialog->setWindowTitle(tr("HTTP"));
-//		progressDialog->setLabelText(tr("Downloading %1.").arg(url.path()));
-//		downloadButton->setEnabled(false);
-//
-//		// schedule the request
-//		httpRequestAborted = false;
-//		this->statusLabelText += "<br>" + fileName;
-//		startRequest(url);
-//	}
+	this->statusLabelText = "";
+	for (unsigned int i = 0; i < urlLineEditVector.size(); ++i) {
+		QUrl url = QUrl(urlLineEditVector.at(i)->text());
+
+		LOG(
+				DEBUG,
+				"In Downloader::downloadFile() --> url.toLocalFile() : "
+						+ url.toString());
+		LOG(
+				DEBUG,
+				"In Downloader::downloadFile() --> savePaths->at(i) : "
+						+ savePaths->at(i));
+
+		QFileInfo fileInfo(url.path());
+		QString fileName = savePaths->at(i) + fileInfo.fileName();
+
+		LOG(DEBUG, "In Downloader::downloadFile() --> " + url.path());
+		LOG(DEBUG, "In Downloader::downloadFile() --> saving to " + fileName);
+
+		this->httpClients.at(i) = new HttpWindow(this, url.toLocalFile(),
+				savePaths->at(i));
+		this->httpClients.at(i)->show();
+		this->httpClients.at(i)->exec();
+
+		//		if (fileName.isEmpty())
+		//			fileName = "index.html";
+		//
+		//		if (QFile::exists(fileName)) {
+		//			LOG(
+		//					DEBUG,
+		//					"In Downloader::downloadFile() --> file " + fileName
+		//							+ " exists.");
+		//
+		//			if (QMessageBox::question(this, tr("HTTP"),
+		//					tr("There already exists a file called %1 in "
+		//						"the current directory. Overwrite?").arg(fileName),
+		//					QMessageBox::Yes | QMessageBox::No, QMessageBox::No)
+		//
+		//			== QMessageBox::No)
+		//				return;
+		//
+		//			QFile::remove(fileName);
+		//		}
+		//
+		//		file = new QFile(fileName);
+		//		if (!file->open(QIODevice::WriteOnly)) {
+		//			QMessageBox::information(
+		//					this,
+		//					tr("HTTP"),
+		//					tr("Unable to save the file %1: %2.") .arg(fileName).arg(
+		//							file->errorString()));
+		//
+		//			delete file;
+		//			file = 0;
+		//			return;
+		//		}
+		//
+		//		progressDialog->setWindowTitle(tr("HTTP"));
+		//		progressDialog->setLabelText(tr("Downloading %1.").arg(url.path()));
+		//		downloadButton->setEnabled(false);
+		//
+		//		// schedule the request
+		//		httpRequestAborted = false;
+		//		this->statusLabelText += "<br>" + fileName;
+		//		startRequest(url);
+	}
 }
 //void Downloader::cancelDownload() {
 //	statusLabel->setText(tr("Download canceled."));

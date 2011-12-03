@@ -55,6 +55,7 @@ class QLabel;
 class QLineEdit;
 //class QProgressDialog;
 class QPushButton;
+class HttpWindow;
 //class QSslError;
 //class QAuthenticator;
 //class QNetworkReply;
@@ -101,12 +102,13 @@ private:
 	bool httpRequestSucceded;
 //
 	QLineEdit *urlLineEdit;
-	QUrl url;
+//	QUrl url;
 	QLabel *urlLabel;
 	std::vector<QLabel *> urlLabelVector;
 	std::vector<QLineEdit *> urlLineEditVector;
 	std::vector<QString>* savePaths;
 	std::vector<QUrl>* urls;
+	std::vector<HttpWindow *> httpClients;
 	QString statusLabelText;
 	bool hasBeenQuitted;
 	unsigned int downloadSuccess;

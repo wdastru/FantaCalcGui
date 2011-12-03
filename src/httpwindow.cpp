@@ -1,7 +1,7 @@
 /****************************************************************************
-/****************************************************************************
+****************************************************************************
 **
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
+** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies) .
 ** All rights reserved.
 ** Contact: Nokia Corporation (qt-info@nokia.com)
 **
@@ -41,18 +41,21 @@
 
 #include <QtGui>
 #include <QtNetwork>
+#include <QUrl>
 
 #include "httpwindow.h"
 #include "ui_authenticationdialog.h"
 
-HttpWindow::HttpWindow(QWidget *parent)
+HttpWindow::HttpWindow(QWidget *parent, QString _url, QString _savePath)
     : QDialog(parent)
 {
 #ifndef QT_NO_OPENSSL
-    urlLineEdit = new QLineEdit("https://qt.nokia.com/");
+    urlLineEdit = new QLineEdit(_url);
 #else
     urlLineEdit = new QLineEdit("http://qt.nokia.com/");
 #endif
+
+    savePath = _savePath;
 
     urlLabel = new QLabel(tr("&URL:"));
     urlLabel->setBuddy(urlLineEdit);
@@ -113,7 +116,7 @@ void HttpWindow::downloadFile()
     url = urlLineEdit->text();
 
     QFileInfo fileInfo(url.path());
-    QString fileName = fileInfo.fileName();
+    QString fileName = savePath;
     if (fileName.isEmpty())
         fileName = "index.html";
 
