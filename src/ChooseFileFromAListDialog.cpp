@@ -21,8 +21,8 @@
 #include "defines.h"
 #include "singletonQtLogger.h"
 #include "IniFileManager.h"
-#include "httpwindow.h"
 #include "Repository.h"
+#include "Downloader.h"
 #include "toString.h"
 #include "tokenize.h"
 
@@ -411,31 +411,32 @@ void ChooseFileFromAListDialog::doDownload() {
 			"In ChooseFileFromAListDialog::doDownload() --> Network will be accessed.");
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
-	urls->push_back(THE_REPO->getFormazioniUrl() + this->getHomeFile());
-	urls->push_back(THE_REPO->getFormazioniUrl() + this->getAwayFile());
-	urls->push_back(THE_REPO->getGazzettaUrl() + this->getGazFile());
+	urls->push_back(
+			QUrl::fromLocalFile(
+					THE_REPO->getFormazioniUrl() + this->getHomeFile()));
+	urls->push_back(
+			QUrl::fromLocalFile(
+					THE_REPO->getFormazioniUrl() + this->getAwayFile()));
+	urls->push_back(
+			QUrl::fromLocalFile(THE_REPO->getGazzettaUrl() + this->getGazFile()));
 
 	std::vector<QString> * savePaths = new std::vector<QString>;
-	savePaths->push_back(THE_REPO->getDownloadPath());
-	savePaths->push_back(THE_REPO->getDownloadPath());
-	savePaths->push_back(THE_REPO->getGazzettaPath());
+	savePaths->push_back(THE_REPO->getDownloadPath() + '/');
+	savePaths->push_back(THE_REPO->getDownloadPath() + '/');
+	savePaths->push_back(THE_REPO->getGazzettaPath() + '/');
 
-	HttpWindow httpWin(singletonQtLogger::Inst(), urls, savePaths);
-	httpWin.exec();
+	Downloader filesDownloader(THE_LOGGER, urls, savePaths);
+	filesDownloader.show();
+	filesDownloader.exec();
 
-	if (httpWin.requestSucceded()) {
+	if (filesDownloader.requestSucceded()) {
 		LOG(
 				DEBUG,
-				"In ChooseFileFromAListDialog::doDownload() --> the download of files succeded: closing chooseFileFromAListDialog.");
-		this->hasFinished = true;
-		this->downloadSuccess = true;
+				"In ChooseFileFromAListDialog::doDownload() --> the download of files succeded.");
 	} else {
 		LOG(DEBUG,
 				"In ChooseFileFromAListDialog::doDownload() --> the download of files failed.");
-		this->downloadSuccess = false;
 	}
-
-	LOG(DEBUG, "In ChooseFileFromAListDialog::doDownload() --> exiting ....");
 }
 unsigned int ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 	LOG(DEBUG,

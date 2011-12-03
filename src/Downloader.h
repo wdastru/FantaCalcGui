@@ -71,6 +71,7 @@ public:
 
 	void startRequest(QUrl url);
 	bool requestSucceded();
+	bool quitted();
 
 private slots:
 	void cancelDownload();
@@ -80,6 +81,7 @@ private slots:
 	void enableDownloadButton();
 	void slotAuthenticationRequired(QNetworkReply*, QAuthenticator *);
 	void downloadFiles();
+	void quit();
 
 #ifndef QT_NO_OPENSSL
 	void sslErrors(QNetworkReply*, const QList<QSslError> &errors);
@@ -97,8 +99,6 @@ private:
 	int httpGetId;
 	bool httpRequestAborted;
 	bool httpRequestSucceded;
-//	unsigned int numberOfDownloads;
-//	unsigned int downloadsSucceded;
 
 	QLineEdit *urlLineEdit;
 	QUrl url;
@@ -108,6 +108,8 @@ private:
 	std::vector<QString>* savePaths;
 	std::vector<QUrl>* urls;
 	QString statusLabelText;
+	bool hasBeenQuitted;
+	unsigned int downloadCounter;
 
 };
 
