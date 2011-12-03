@@ -117,6 +117,9 @@ void Downloader::quit() {
 	this->hasBeenQuitted = true;
 	this->close();
 }
+void Downloader::enableDownloadButton() {
+       downloadButton->setEnabled(!urlLineEdit->text().isEmpty());
+}
 void Downloader::startRequest(QUrl url) {
 	reply = qnam.get(QNetworkRequest(url));
 	connect(reply, SIGNAL(finished()), this, SLOT(httpFinished()));
