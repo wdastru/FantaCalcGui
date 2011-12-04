@@ -134,24 +134,20 @@ void Downloader::downloadFiles() {
 	this->statusLabelText = "";
 	for (unsigned int i = 0; i < urlLineEditVector.size(); ++i) {
 		QUrl url = QUrl(urlLineEditVector.at(i)->text());
+		QString fullUrlString = url.scheme() + "://" + url.authority()
+				+ url.path();
 
-		LOG(
-				DEBUG,
-				"In Downloader::downloadFile() --> url.toLocalFile() : "
-						+ url.toString());
+		LOG(DEBUG, "In Downloader::downloadFile() --> url : " + fullUrlString);
+
 		LOG(
 				DEBUG,
 				"In Downloader::downloadFile() --> savePaths->at(i) : "
 						+ savePaths->at(i));
 
-		QFileInfo fileInfo(url.path());
-		QString fileName = savePaths->at(i) + fileInfo.fileName();
+		LOG(INFO, "Downloading " + fullUrlString);
+		LOG(INFO, "Saving to " + savePaths->at(i));
 
-		LOG(DEBUG, "In Downloader::downloadFile() --> " + url.path());
-		LOG(DEBUG, "In Downloader::downloadFile() --> saving to " + fileName);
-
-		this->httpClients.at(i) = new HttpWindow(this, url.toLocalFile(),
-				savePaths->at(i));
+		this->httpClients.at(i) = new HttpWindow(this, url, savePaths->at(i));
 		this->httpClients.at(i)->show();
 		this->httpClients.at(i)->exec();
 

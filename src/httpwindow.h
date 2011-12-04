@@ -63,7 +63,7 @@ class HttpWindow: public QDialog {
 Q_OBJECT
 
 public:
-	HttpWindow(QWidget *parent = 0, QString _url = "", QString _savePath= "");
+	HttpWindow(QWidget *parent = 0, QUrl _url = QUrl(), QString _savePath= "");
 
 			void startRequest(QUrl url);
 
