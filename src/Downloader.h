@@ -111,8 +111,8 @@ private:
 	std::vector<HttpWindow *> httpClients;
 	QString statusLabelText;
 	bool hasBeenQuitted;
-	unsigned int downloadSuccess;
-	unsigned int downloadFailure;
+	unsigned int downloadSuccesses;
+	unsigned int downloadFailures;
 //	std::vector<QFile *> files;
 
 };

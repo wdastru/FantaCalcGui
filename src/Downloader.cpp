@@ -49,11 +49,7 @@
 Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 		std::vector<QString>* _savePaths) :
 	QDialog(parent) {
-	//
-	//	urlLineEdit
-	//			= new QLineEdit(
-	//					"http://localhost/www.cim.unito.it/private/fantacalcio/777/formazioni/listaFormazioni.txt");
-	//
+
 	LOG(DEBUG, "In Downloader::Downloader(...) constructor.");
 
 	this->savePaths = _savePaths;
@@ -61,9 +57,6 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 	this->statusLabelText = "";
 	this->hasBeenQuitted = false;
 	this->httpRequestSucceded = false;
-	this->downloadSuccess = 0;
-	this->downloadFailure = 0;
-	//	this->httpClients = new std::vector<HttpWindow *>;
 	this->httpClients.resize(urls->size());
 
 	for (size_t i = 0; i < this->urls->size(); i++) {
@@ -132,6 +125,9 @@ void Downloader::quit() {
 //}
 void Downloader::downloadFiles() {
 	this->statusLabelText = "";
+	this->downloadFailures = 0;
+	this->downloadSuccesses = 0;
+
 	for (unsigned int i = 0; i < urlLineEditVector.size(); ++i) {
 		QUrl url = QUrl(urlLineEditVector.at(i)->text());
 		QString fullUrlString = url.scheme() + "://" + url.authority()
@@ -148,8 +144,28 @@ void Downloader::downloadFiles() {
 		LOG(INFO, "Saving to " + savePaths->at(i));
 
 		this->httpClients.at(i) = new HttpWindow(this, url, savePaths->at(i));
-		this->httpClients.at(i)->show();
+		//		this->httpClients.at(i)->show();
 		this->httpClients.at(i)->exec();
+
+		if (this->httpClients.at(i)->downloadSuccessful()) {
+			this->downloadSuccesses++;
+		} else {
+			this->downloadFailures++;
+		}
+
+		LOG(
+				DEBUG,
+				"Download successes : " + my::toQString<unsigned int>(
+						this->downloadSuccesses));
+
+		LOG(
+				DEBUG,
+				"Download failures : " + my::toQString<unsigned int>(
+						this->downloadFailures));
+
+		if (this->downloadSuccesses == savePaths->size()) {
+			this->close();
+		}
 
 		//		if (fileName.isEmpty())
 		//			fileName = "index.html";
@@ -201,7 +217,9 @@ void Downloader::downloadFiles() {
 //	downloadButton->setEnabled(true);
 //}
 bool Downloader::requestSucceded() {
-	return httpRequestSucceded;
+	if (this->downloadSuccesses == this->savePaths->size()) {
+		return true;
+	}
 }
 //void Downloader::httpFinished() {
 //	if (httpRequestAborted) {

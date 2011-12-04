@@ -63,38 +63,42 @@ class HttpWindow: public QDialog {
 Q_OBJECT
 
 public:
-	HttpWindow(QWidget *parent = 0, QUrl _url = QUrl(), QString _savePath= "");
+	HttpWindow(QWidget *parent = 0, QUrl _url = QUrl(), QString _savePath = "");
 
-			void startRequest(QUrl url);
+	void startRequest(QUrl url);
+	bool downloadSuccessful();
+	void downloadFile();
 
-		private slots:
-			void downloadFile();
-			void cancelDownload();
-			void httpFinished();
-			void httpReadyRead();
-			void updateDataReadProgress(qint64 bytesRead, qint64 totalBytes);
-			void enableDownloadButton();
-			void slotAuthenticationRequired(QNetworkReply*, QAuthenticator *);
+private slots:
+	void cancelDownload();
+	void httpFinished();
+	void httpReadyRead();
+	void updateDataReadProgress(qint64 bytesRead, qint64 totalBytes);
+//	void enableDownloadButton();
+	void slotAuthenticationRequired(QNetworkReply*, QAuthenticator *);
 #ifndef QT_NO_OPENSSL
-			void sslErrors(QNetworkReply*, const QList<QSslError> &errors);
+	void sslErrors(QNetworkReply*, const QList<QSslError> &errors);
 #endif
 
-		private:
-			QLabel *statusLabel;
-			QLabel *urlLabel;
-			QLineEdit *urlLineEdit;
-			QProgressDialog *progressDialog;
-			QPushButton *downloadButton;
-			QPushButton *quitButton;
-			QDialogButtonBox *buttonBox;
+private:
+	QLabel *statusLabel;
+	QLabel *urlLabel;
+	QLineEdit *urlLineEdit;
+	QProgressDialog *progressDialog;
+	QPushButton *downloadButton;
+	QPushButton *quitButton;
+	QDialogButtonBox *buttonBox;
 
-			QUrl url;
-			QString savePath;
-			QNetworkAccessManager qnam;
-			QNetworkReply *reply;
-			QFile *file;
-			int httpGetId;
-			bool httpRequestAborted;
-		};
+	QUrl url;
+	QString savePath;
+	QNetworkAccessManager qnam;
+	QNetworkReply *reply;
+	QFile *file;
+	int httpGetId;
+	bool httpRequestAborted;
+	bool downloadSuccess;
+	QString fullUrlString;
+
+};
 
 #endif
