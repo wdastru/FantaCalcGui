@@ -55,32 +55,32 @@ HttpWindow::HttpWindow(QWidget *parent, QUrl _url, QString _savePath) :
 
 	this->downloadSuccess = false;
 
-//#ifndef QT_NO_OPENSSL
-//	urlLineEdit = new QLineEdit(fullUrlString);
-//#else
-//	urlLineEdit = new QLineEdit(fullUrlString);
-//#endif
+	//#ifndef QT_NO_OPENSSL
+	//	urlLineEdit = new QLineEdit(fullUrlString);
+	//#else
+	//	urlLineEdit = new QLineEdit(fullUrlString);
+	//#endif
 
 	savePath = _savePath;
 
-//	urlLabel = new QLabel(tr("&URL:"));
-//	urlLabel->setBuddy(urlLineEdit);
-//	statusLabel = new QLabel(tr("Please enter the URL of a file you want to "
-//		"download."));
+	//	urlLabel = new QLabel(tr("&URL:"));
+	//	urlLabel->setBuddy(urlLineEdit);
+	//	statusLabel = new QLabel(tr("Please enter the URL of a file you want to "
+	//		"download."));
 
-//	downloadButton = new QPushButton(tr("Download"));
-//	downloadButton->setDefault(true);
-//	quitButton = new QPushButton(tr("Quit"));
-//	quitButton->setAutoDefault(false);
+	//	downloadButton = new QPushButton(tr("Download"));
+	//	downloadButton->setDefault(true);
+	//	quitButton = new QPushButton(tr("Quit"));
+	//	quitButton->setAutoDefault(false);
 
-//	buttonBox = new QDialogButtonBox;
-//	buttonBox->addButton(downloadButton, QDialogButtonBox::ActionRole);
-//	buttonBox->addButton(quitButton, QDialogButtonBox::RejectRole);
+	//	buttonBox = new QDialogButtonBox;
+	//	buttonBox->addButton(downloadButton, QDialogButtonBox::ActionRole);
+	//	buttonBox->addButton(quitButton, QDialogButtonBox::RejectRole);
 
 	progressDialog = new QProgressDialog(this);
 
-//	connect(urlLineEdit, SIGNAL(textChanged(QString)), this,
-//			SLOT(enableDownloadButton()));
+	//	connect(urlLineEdit, SIGNAL(textChanged(QString)), this,
+	//			SLOT(enableDownloadButton()));
 
 	connect(&qnam,
 			SIGNAL(authenticationRequired(QNetworkReply*,QAuthenticator*)),
@@ -90,22 +90,22 @@ HttpWindow::HttpWindow(QWidget *parent, QUrl _url, QString _savePath) :
 	connect(&qnam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this,
 			SLOT(sslErrors(QNetworkReply*,QList<QSslError>)));
 #endif
-//	connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
+	//	connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
 	//	connect(downloadButton, SIGNAL(clicked()), this, SLOT(downloadFile()));
 	//	connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
 
-//	QHBoxLayout *topLayout = new QHBoxLayout;
-//	topLayout->addWidget(urlLabel);
-//	topLayout->addWidget(urlLineEdit);
+	//	QHBoxLayout *topLayout = new QHBoxLayout;
+	//	topLayout->addWidget(urlLabel);
+	//	topLayout->addWidget(urlLineEdit);
 
-//	QVBoxLayout *mainLayout = new QVBoxLayout;
-//	mainLayout->addLayout(topLayout);
-//	mainLayout->addWidget(statusLabel);
-//	mainLayout->addWidget(buttonBox);
-//	setLayout(mainLayout);
+	//	QVBoxLayout *mainLayout = new QVBoxLayout;
+	//	mainLayout->addLayout(topLayout);
+	//	mainLayout->addWidget(statusLabel);
+	//	mainLayout->addWidget(buttonBox);
+	//	setLayout(mainLayout);
 
-//	setWindowTitle(tr("HTTP Client"));
-//	urlLineEdit->setFocus();
+	//	setWindowTitle(tr("HTTP Client"));
+	//	urlLineEdit->setFocus();
 
 	this->downloadFile();
 }
@@ -124,20 +124,21 @@ void HttpWindow::downloadFile() {
 	QFileInfo fileInfo(url.path());
 	QString fileName = savePath;
 
-	if (fileName.isEmpty())
-		fileName = "index.html";
-
-	if (QFile::exists(fileName)) {
-		if (QMessageBox::question(this, tr("HTTP"),
-				tr("There already exists a file called %1 in "
-					"the current directory. Overwrite?").arg(fileName),
-				QMessageBox::Yes | QMessageBox::No, QMessageBox::No)
-				== QMessageBox::No) {
-			this->downloadSuccess = false;
-			return;
-		}
-		QFile::remove(fileName);
+	if (fileName.isEmpty()) {
+		LOG(FATAL, tr("In HttpWindow::downloadFile() --> fileName is empty."));
 	}
+
+	//	if (QFile::exists(fileName)) {
+	//		if (QMessageBox::question(this, tr("HTTP"),
+	//				tr("There already exists a file called %1 in "
+	//					"the current directory. Overwrite?").arg(fileName),
+	//				QMessageBox::Yes | QMessageBox::No, QMessageBox::No)
+	//				== QMessageBox::No) {
+	//			this->downloadSuccess = false;
+	//			return;
+	//		}
+	//		QFile::remove(fileName);
+	//	}
 
 	file = new QFile(fileName);
 	if (!file->open(QIODevice::WriteOnly)) {
@@ -154,7 +155,7 @@ void HttpWindow::downloadFile() {
 
 	progressDialog->setWindowTitle(tr("HTTP"));
 	progressDialog->setLabelText(tr("Downloading %1.").arg(fileName));
-//	downloadButton->setEnabled(false);
+	//	downloadButton->setEnabled(false);
 
 	// schedule the request
 	httpRequestAborted = false;
@@ -165,7 +166,7 @@ void HttpWindow::cancelDownload() {
 	statusLabel->setText(tr("Download canceled."));
 	httpRequestAborted = true;
 	reply->abort();
-//	downloadButton->setEnabled(true);
+	//	downloadButton->setEnabled(true);
 }
 
 void HttpWindow::httpFinished() {
@@ -193,7 +194,7 @@ void HttpWindow::httpFinished() {
 		file->remove();
 		QMessageBox::information(this, tr("HTTP"),
 				tr("Download failed: %1.") .arg(reply->errorString()));
-//		downloadButton->setEnabled(true);
+		//		downloadButton->setEnabled(true);
 		this->downloadSuccess = false;
 	} else if (!redirectionTarget.isNull()) {
 		QUrl newUrl = url.resolved(redirectionTarget.toUrl());
@@ -218,7 +219,7 @@ void HttpWindow::httpFinished() {
 						"In HttpWindow::httpFinished()--> downloaded %1 to current directory.").arg(
 						fileName));
 
-//		downloadButton->setEnabled(false);
+		//		downloadButton->setEnabled(false);
 		this->downloadSuccess = true;
 	}
 
