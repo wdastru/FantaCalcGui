@@ -161,34 +161,30 @@ void singletonQtLogger::onlineClicked() {
 	urls->push_back(QUrl::fromLocalFile(THE_REPO->getFileGazzettaUrl()));
 
 	std::vector<QString> * savePaths = new std::vector<QString>;
-	savePaths->push_back(THE_REPO->getListePath() + '/');
-	savePaths->push_back(THE_REPO->getListePath() + '/');
+	savePaths->push_back(THE_REPO->getListePath() + "/listaFormazioni.txt");
+	savePaths->push_back(THE_REPO->getListePath() + "/listaGazFiles.txt");
 
 	Downloader listsDownloader(THE_LOGGER, urls, savePaths);
 	listsDownloader.show();
 	listsDownloader.exec();
 
-//	if (listsDownloader.quitted()) {
-//		LOG(DEBUG,
-//				"In singletonQtLogger::onlineClicked() --> listsDownloader.quitted() is TRUE.");
-		if (listsDownloader.requestSucceded()) {
-			LOG(DEBUG,
-					"In singletonQtLogger::onlineClicked() --> the download of files succeded.");
+	if (listsDownloader.requestSucceded()) {
+		LOG(DEBUG,
+				"In singletonQtLogger::onlineClicked() --> the download of files succeded.");
 
-			ChooseFileFromAListDialog * chooseFileFromAListDialog =
-					new ChooseFileFromAListDialog(
-							THE_REPO->getListaFormazioni(),
-							THE_REPO->getListaGazFiles(), THE_LOGGER);
-			chooseFileFromAListDialog->show();
-			chooseFileFromAListDialog->exec();
+		ChooseFileFromAListDialog * chooseFileFromAListDialog =
+				new ChooseFileFromAListDialog(THE_REPO->getListaFormazioni(),
+						THE_REPO->getListaGazFiles(), THE_LOGGER);
+		chooseFileFromAListDialog->show();
+		chooseFileFromAListDialog->exec();
 
-		} else {
-			LOG(ERROR,
-					"In singletonQtLogger::onlineClicked() --> the download of files failed.");
-		}
-//	} else {
-//
-//	}
+	} else {
+		LOG(ERROR,
+				"In singletonQtLogger::onlineClicked() --> the download of files failed.");
+	}
+	//	} else {
+	//
+	//	}
 }
 void singletonQtLogger::offlineClicked() {
 	LOG(DEBUG,
