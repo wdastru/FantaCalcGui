@@ -431,9 +431,11 @@ void ChooseFileFromAListDialog::doDownload() {
 			QUrl::fromLocalFile(THE_REPO->getGazzettaUrl() + this->getGazFile()));
 
 	std::vector<QString> * savePaths = new std::vector<QString>;
-	savePaths->push_back(THE_REPO->getDownloadPath() + '/');
-	savePaths->push_back(THE_REPO->getDownloadPath() + '/');
-	savePaths->push_back(THE_REPO->getGazzettaPath() + '/');
+	savePaths->push_back(
+			THE_REPO->getDownloadPath() + '/' + this->getHomeFile());
+	savePaths->push_back(
+			THE_REPO->getDownloadPath() + '/' + this->getAwayFile());
+	savePaths->push_back(THE_REPO->getGazzettaPath() + '/' + this->getGazFile());
 
 	Downloader filesDownloader(THE_LOGGER, urls, savePaths);
 	filesDownloader.show();

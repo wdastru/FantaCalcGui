@@ -111,7 +111,8 @@ void Downloader::downloadFiles() {
 
 		LOG(
 				DEBUG,
-				"In Downloader::downloadFile() --> savePaths->at(i) : "
+				"In Downloader::downloadFile() --> savePaths->at("
+						+ my::toQString<unsigned int>(i) + ") : "
 						+ savePaths->at(i));
 
 		LOG(INFO, "Downloading " + fullUrlString);
