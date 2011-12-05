@@ -442,18 +442,25 @@ void ChooseFileFromAListDialog::doDownload() {
 	filesDownloader.exec();
 
 	if (filesDownloader.requestSucceded()) {
+		this->downloadSuccess = true;
 		LOG(
 				DEBUG,
 				"In ChooseFileFromAListDialog::doDownload() --> the download of files succeded.");
 	} else {
+		this->downloadSuccess = false;
 		LOG(DEBUG,
 				"In ChooseFileFromAListDialog::doDownload() --> the download of files failed.");
 	}
 }
-unsigned int ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
-	LOG(DEBUG,
-			"In unsigned int ChooseFileFromAListDialog::createFileSquadreFromWebFiles().");
+bool ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
+	LOG(DEBUG, "In ChooseFileFromAListDialog::createFileSquadreFromWebFiles().");
+
 	if (this->downloadSuccess) {
+
+		LOG(
+				DEBUG,
+				"In ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> download was successful.");
+
 		QFile fHome(THE_REPO->getDownloadPath() + "/" + this->getHomeFile());
 		QFile fAway(THE_REPO->getDownloadPath() + "/" + this->getAwayFile());
 
@@ -463,12 +470,13 @@ unsigned int ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 		if (!fHome.isReadable())
 			LOG(
 					FATAL,
-					"In : void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file : "
+					"In void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file : "
 							+ fHome.fileName() + " non è apribile.");
+
 		else if (!fAway.isReadable())
 			LOG(
 					FATAL,
-					"In : void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file : "
+					"In void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file : "
 							+ fHome.fileName() + " non è apribile.");
 
 		QFileInfo FIfHome(fHome);
@@ -477,7 +485,7 @@ unsigned int ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 		QFile fGaz(this->getGazFile());
 		QFileInfo FIfGaz(fGaz);
 
-		QString fileOut = THE_REPO->getFormazioniPath()
+		QString fileOut = THE_REPO->getFormazioniPath() + '/'
 				+ FIfHome.baseName().split("_").at(0) + "_"
 				+ FIfAway.baseName().split("_").at(0) + "_" + FIfGaz.baseName()
 				+ ".txt";
@@ -690,11 +698,21 @@ unsigned int ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 
 		fOut.write(str.toAscii());
 
+		LOG(
+				DEBUG,
+				"In ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> <br>"
+						+ str);
+
 		fHome.close();
 		fAway.close();
 		fOut.close();
+		return EXIT_SUCCESS;
+	} else {
+		LOG(
+				DEBUG,
+				"In ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> download was not successful.");
+		return EXIT_FAILURE;
 	}
-	return EXIT_SUCCESS;
 }
 void ChooseFileFromAListDialog::execute() {
 	LOG(DEBUG, "In void ChooseFileFromAListDialog::execute().");

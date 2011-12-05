@@ -43,7 +43,7 @@ private slots:
 private:
 	void doDownload();
 	int groupBoxChecked();
-	unsigned int createFileSquadreFromWebFiles();
+	bool createFileSquadreFromWebFiles();
 	QString fileFormazioni;
 	QString fileGazzetta;
 	std::vector<QRadioButton *> home;
