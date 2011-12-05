@@ -219,6 +219,8 @@ void Downloader::downloadFiles() {
 bool Downloader::requestSucceded() {
 	if (this->downloadSuccesses == this->savePaths->size()) {
 		return true;
+	} else {
+		return false;
 	}
 }
 //void Downloader::httpFinished() {
