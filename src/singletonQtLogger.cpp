@@ -182,7 +182,8 @@ void singletonQtLogger::onlineClicked() {
 		chooseFileFromAListDialog->exec();
 
 		THE_REPO->fileGazzetta = chooseFileFromAListDialog->getFileGazzetta();
-		THE_REPO->fileFormazioni = chooseFileFromAListDialog->getFileFormazioni();
+		THE_REPO->fileFormazioni
+				= chooseFileFromAListDialog->getFileFormazioni();
 
 		LOG(
 				DEBUG,
@@ -193,8 +194,8 @@ void singletonQtLogger::onlineClicked() {
 				"In void singletonQtLogger::onlineClicked() --> fileFormazioni : "
 						+ THE_REPO->fileFormazioni);
 
-		this->reader();
-		FANTA->execute();
+		emit(this->onOffClickedFinished());
+
 	} else {
 		/* TODO
 		 * inserire exception
@@ -222,8 +223,7 @@ void singletonQtLogger::offlineClicked() {
 				"In void singletonQtLogger::offlineClicked() --> fileFormazioni : "
 						+ THE_REPO->fileFormazioni);
 
-		this->reader();
-		FANTA->execute();
+		emit(this->onOffClickedFinished());
 
 	} else {
 		/* TODO
@@ -238,7 +238,7 @@ QString singletonQtLogger::getTitle(void) {
 QString singletonQtLogger::getVersion(void) {
 	return this->version;
 }
-void singletonQtLogger::reader() {
+void singletonQtLogger::goOn() {
 	// --> lettura file Gazzetta e Formazioni
 	GazzettaFileReader * gazzettaFileReader = new GazzettaFileReader(
 			THE_REPO->fileGazzetta);
@@ -248,4 +248,18 @@ void singletonQtLogger::reader() {
 	formazioniFileReader->setPlayers(gazzettaFileReader->getOutput());
 	formazioniFileReader->execute();
 	// <-- lettura file Gazzetta e Formazioni
+	FANTA->execute();
+
+	this->setLogFileName(
+			THE_REPO->getRisultatiPath() + "/risultato_"
+					+ QString::fromStdString(FANTA->getTeamName(0)) + "-"
+					+ QString::fromStdString(FANTA->getTeamName(1)) + "_"
+					+ QFileInfo(FANTA->getFileGazzetta()).fileName());
+
+	FANTA->printTitolo(FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
+	FANTA->printRiepilogo();
+	FANTA->printFormations();
+}
+void singletonQtLogger::setLogFileName(QString filename) {
+	this->logFileName = filename;
 }

@@ -30,6 +30,10 @@ private slots:
 	void configClicked();
 	void onlineClicked();
 	void offlineClicked();
+	void goOn();
+
+signals:
+	void onOffClickedFinished();
 
 private:
 	void init();
@@ -43,7 +47,6 @@ private:
 	QString version;
 	QString fileGazzetta;
 	QString fileFormazioni;
-	void reader();
 };
 
 #endif //
