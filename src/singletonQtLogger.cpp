@@ -123,6 +123,9 @@ void singletonQtLogger::saveLogFile() {
 	fileContent.replace("<pre>", "");
 	fileContent.replace("</pre>", "\n");
 
+	fileContent += "\n File prodotto da FantaCalcGui.exe " + this->getVersion()
+			+ "\n";
+
 	file.write(this->fileContent.toStdString().c_str());
 	file.close();
 }
