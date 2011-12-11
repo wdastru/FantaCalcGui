@@ -748,21 +748,31 @@ void Fanta::calculateSfide() {
 void Fanta::calculateTotal() {
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
+		QString message;
 		Fanta::Total[k] += Fanta::atHome[k];
-		QString message = "In Fanta::calculateTotal() --> Calcolo squadra "
-				+ QString::fromStdString(this->getTeamName(k)) + " :<br />"
-				+ my::toQString<double>(Fanta::Total[k]) + " : in casa ("
-				+ my::toQString<unsigned int>(Fanta::atHome[k]) + ").<br />";
+		message = "In Fanta::calculateTotal() --> squadra "
+				+ QString::fromStdString(this->getTeamName(k)) + " : "
+				+ my::toQString<double>(Fanta::Total[k]) + " in casa ("
+				+ my::toQString<unsigned int>(Fanta::atHome[k]) + ").";
+
+		LOG(DEBUG, message);
 
 		Fanta::Total[k] += Fanta::modifier[k];
-		message += (my::toQString<double>(Fanta::Total[k])
-				+ " : modificatore difesa (" + my::toQString<signed int>(
-				Fanta::modifier[k]) + ").<br />");
+		message = "In Fanta::calculateTotal() --> squadra "
+				+ QString::fromStdString(this->getTeamName(k)) + " : "
+				+ (my::toQString<double>(Fanta::Total[k])
+						+ " modificatore difesa ("
+						+ my::toQString<signed int>(Fanta::modifier[k])
+						+ ").");
+		LOG(DEBUG, message);
 
 		Fanta::Total[k] += Fanta::sfide[k];
-		message += (my::toQString<double>(Fanta::Total[k]) + " : sfide vinte."
-				+ " (" + my::toQString<unsigned int>(Fanta::sfide[k])
-				+ ").");
+		message = "In Fanta::calculateTotal() --> squadra "
+				+ QString::fromStdString(this->getTeamName(k)) + " : "
+				+ (my::toQString<double>(Fanta::Total[k]) + " sfide vinte."
+						+ " (" + my::toQString<unsigned int>(Fanta::sfide[k])
+						+ ").");
+		LOG(DEBUG, message);
 
 		for (size_t i = 0; i < 4; i++) // ruolo
 		{
@@ -772,19 +782,25 @@ void Fanta::calculateTotal() {
 						+= Fanta::teamOrderedByRuolo[k][i].at(j).FantaVoto;
 
 				message
-						+= ("<br />" + my::toQString<double>(Fanta::Total[k])
-								+ " : " + QString::fromStdString(
-								Fanta::teamOrderedByRuolo[k][i].at(j).Nome)
+						= "In Fanta::calculateTotal() --> squadra "
+								+ QString::fromStdString(this->getTeamName(k))
+								+ " : " + my::toQString<double>(
+								Fanta::Total[k]) + " "
+								+ QString::fromStdString(
+										Fanta::teamOrderedByRuolo[k][i].at(j).Nome)
 								+ " ("
 								+ my::toQString<float>(
 										Fanta::teamOrderedByRuolo[k][i].at(j).FantaVoto)
-								+ ").");
+								+ ").";
+				LOG(DEBUG, message);
 
 				j++;
 			}
 		}
 
-		message += ("<br />Totale : " + my::toQString<double>(Fanta::Total[k]));
+		message = "In Fanta::calculateTotal() --> squadra "
+				+ QString::fromStdString(this->getTeamName(k))
+				+ " : Totale " + my::toQString<double>(Fanta::Total[k]);
 		LOG(DEBUG, message);
 	}
 }
@@ -996,18 +1012,6 @@ void Fanta::printRiepilogo() {
 							FANTA->longerNameLength)) + " : " + my::toQString<
 			unsigned int>(FANTA->getAssistTot(1));
 
-	output += "<br/><br/> --- Numero sfide ---<br/>"
-			+ QString::fromStdString(
-					STR_MOD->leftString(FANTA->getTeamName(0),
-							FANTA->longerNameLength)) + " : " + my::toQString<
-			unsigned int>(FANTA->sfide[0]);
-
-	output += "<br/>"
-			+ QString::fromStdString(
-					STR_MOD->leftString(FANTA->getTeamName(1),
-							FANTA->longerNameLength)) + " : " + my::toQString<
-			unsigned int>(FANTA->sfide[1]);
-
 	output += "<br/><br/> --- Sostituzioni ---<br/>"
 			+ QString::fromStdString(
 					STR_MOD->leftString(FANTA->getTeamName(0),
@@ -1020,7 +1024,19 @@ void Fanta::printRiepilogo() {
 							FANTA->longerNameLength)) + " : " + my::toQString<
 			unsigned int>(FANTA->sostituzioni[1]);
 
-	output += "<br/><br/> --- Dettaglio Sfide ---<br/>";
+	output += "<br/><br/> --- Sfide ---<br/>"
+			+ QString::fromStdString(
+					STR_MOD->leftString(FANTA->getTeamName(0),
+							FANTA->longerNameLength)) + " : " + my::toQString<
+			unsigned int>(FANTA->sfide[0]);
+
+	output += "<br/>"
+			+ QString::fromStdString(
+					STR_MOD->leftString(FANTA->getTeamName(1),
+							FANTA->longerNameLength)) + " : " + my::toQString<
+			unsigned int>(FANTA->sfide[1]);
+
+	output += "<br/><br/> Dettaglio :<br/>";
 
 	output += "<br/>\t|";
 
@@ -1147,7 +1163,7 @@ void Fanta::printTitolo(std::string str) {
 		tmp += "-";
 	tmp += "+<br/>";
 
-	LOG(DEBUG, tmp);
+	LOG(INFO, tmp);
 }
 unsigned int Fanta::getAmmonizioniTot(unsigned int k) const {
 	unsigned int amm = 0;
@@ -1376,6 +1392,5 @@ void Fanta::printFormations() {
 	}
 
 	output += QString::fromStdString("</pre>" + fondo);
-	//LOG(TOFILE, output);
 	LOG(INFO, output);
 }
