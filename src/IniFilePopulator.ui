@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>295</height>
+    <height>435</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -164,7 +164,7 @@ p, li { white-space: pre-wrap; }
        <string>TRUE</string>
       </property>
       <attribute name="buttonGroup">
-       <string>buttonGroup</string>
+       <string>trueFalseButtonGroup</string>
       </attribute>
      </widget>
     </item>
@@ -174,7 +174,7 @@ p, li { white-space: pre-wrap; }
        <string>FALSE</string>
       </property>
       <attribute name="buttonGroup">
-       <string>buttonGroup</string>
+       <string>trueFalseButtonGroup</string>
       </attribute>
      </widget>
     </item>
@@ -201,15 +201,15 @@ p, li { white-space: pre-wrap; }
    <sender>okCancelButtonBox</sender>
    <signal>accepted()</signal>
    <receiver>IniFilePopulatorClass</receiver>
-   <slot>close()</slot>
+   <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>197</x>
-     <y>391</y>
+     <x>271</x>
+     <y>269</y>
     </hint>
     <hint type="destinationlabel">
-     <x>199</x>
-     <y>209</y>
+     <x>271</x>
+     <y>333</y>
     </hint>
    </hints>
   </connection>
@@ -217,31 +217,15 @@ p, li { white-space: pre-wrap; }
    <sender>okCancelButtonBox</sender>
    <signal>rejected()</signal>
    <receiver>IniFilePopulatorClass</receiver>
-   <slot>close()</slot>
+   <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>197</x>
-     <y>391</y>
+     <x>334</x>
+     <y>261</y>
     </hint>
     <hint type="destinationlabel">
-     <x>199</x>
-     <y>209</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>downloadButton</sender>
-   <signal>clicked()</signal>
-   <receiver>IniFilePopulatorClass</receiver>
-   <slot>chooseDownloadPath()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>58</x>
-     <y>179</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>199</x>
-     <y>209</y>
+     <x>337</x>
+     <y>325</y>
     </hint>
    </hints>
   </connection>
@@ -252,12 +236,12 @@ p, li { white-space: pre-wrap; }
    <slot>chooseFormazioniPath()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>58</x>
-     <y>92</y>
+     <x>66</x>
+     <y>50</y>
     </hint>
     <hint type="destinationlabel">
-     <x>199</x>
-     <y>209</y>
+     <x>79</x>
+     <y>416</y>
     </hint>
    </hints>
   </connection>
@@ -268,28 +252,12 @@ p, li { white-space: pre-wrap; }
    <slot>chooseGazzettaPath()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>58</x>
-     <y>121</y>
+     <x>46</x>
+     <y>88</y>
     </hint>
     <hint type="destinationlabel">
-     <x>199</x>
-     <y>209</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>listeButton</sender>
-   <signal>clicked()</signal>
-   <receiver>IniFilePopulatorClass</receiver>
-   <slot>chooseListePath()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>58</x>
-     <y>208</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>199</x>
-     <y>209</y>
+     <x>65</x>
+     <y>352</y>
     </hint>
    </hints>
   </connection>
@@ -300,140 +268,76 @@ p, li { white-space: pre-wrap; }
    <slot>chooseRisultatiPath()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>58</x>
-     <y>150</y>
+     <x>25</x>
+     <y>110</y>
     </hint>
     <hint type="destinationlabel">
-     <x>199</x>
-     <y>209</y>
+     <x>46</x>
+     <y>325</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>downloadLineEdit</sender>
-   <signal>textEdited(QString)</signal>
+   <sender>downloadButton</sender>
+   <signal>clicked()</signal>
    <receiver>IniFilePopulatorClass</receiver>
-   <slot>updateInternalData()</slot>
+   <slot>chooseDownloadPath()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>236</x>
-     <y>137</y>
+     <x>34</x>
+     <y>142</y>
     </hint>
     <hint type="destinationlabel">
-     <x>199</x>
-     <y>164</y>
+     <x>40</x>
+     <y>303</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>formazioniLineEdit</sender>
-   <signal>textEdited(QString)</signal>
+   <sender>listeButton</sender>
+   <signal>clicked()</signal>
    <receiver>IniFilePopulatorClass</receiver>
-   <slot>updateInternalData()</slot>
+   <slot>chooseListePath()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>236</x>
-     <y>50</y>
+     <x>75</x>
+     <y>174</y>
     </hint>
     <hint type="destinationlabel">
-     <x>199</x>
-     <y>164</y>
+     <x>87</x>
+     <y>381</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>formazioniUrlLineEdit</sender>
-   <signal>textEdited(QString)</signal>
-   <receiver>IniFilePopulatorClass</receiver>
-   <slot>updateInternalData()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>236</x>
-     <y>195</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>199</x>
-     <y>164</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>gazzettaLineEdit</sender>
-   <signal>textEdited(QString)</signal>
-   <receiver>IniFilePopulatorClass</receiver>
-   <slot>updateInternalData()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>236</x>
-     <y>79</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>199</x>
-     <y>164</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>gazzettaUrlLineEdit</sender>
-   <signal>textEdited(QString)</signal>
-   <receiver>IniFilePopulatorClass</receiver>
-   <slot>updateInternalData()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>236</x>
-     <y>221</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>199</x>
-     <y>164</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>listeLineEdit</sender>
-   <signal>textEdited(QString)</signal>
-   <receiver>IniFilePopulatorClass</receiver>
-   <slot>updateInternalData()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>236</x>
-     <y>166</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>199</x>
-     <y>164</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>risultatiLineEdit</sender>
-   <signal>textEdited(QString)</signal>
-   <receiver>IniFilePopulatorClass</receiver>
-   <slot>updateInternalData()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>236</x>
-     <y>108</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>199</x>
-     <y>164</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonGroup</sender>
-   <signal>buttonClicked(int)</signal>
+   <sender>trueCheckBox</sender>
+   <signal>clicked()</signal>
    <receiver>IniFilePopulatorClass</receiver>
    <slot>toggleDebugStatus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
+     <x>106</x>
+     <y>266</y>
     </hint>
     <hint type="destinationlabel">
-     <x>199</x>
-     <y>147</y>
+     <x>268</x>
+     <y>411</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>falseCheckBox</sender>
+   <signal>clicked()</signal>
+   <receiver>IniFilePopulatorClass</receiver>
+   <slot>toggleDebugStatus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>171</x>
+     <y>266</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>238</x>
+     <y>389</y>
     </hint>
    </hints>
   </connection>
@@ -446,8 +350,9 @@ p, li { white-space: pre-wrap; }
   <slot>chooseListePath()</slot>
   <slot>toggleDebugStatus()</slot>
   <slot>updateInternalData()</slot>
+  <slot>setDebugStatus(bool)</slot>
  </slots>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
+  <buttongroup name="trueFalseButtonGroup"/>
  </buttongroups>
 </ui>

@@ -206,17 +206,21 @@ void IniFilePopulator::setDebugStatus(bool status) {
 	}
 }
 void IniFilePopulator::toggleDebugStatus() {
+	LOG(DEBUG, "void IniFilePopulator::toggleDebugStatus().");
+
 	if (this->ui.trueCheckBox->isChecked()) {
+		LOG(DEBUG,
+				"void IniFilePopulator::toggleDebugStatus() --> TRUE is checked.");
 		THE_REPO->debugStatus = TRUE;
-		LOG(DEBUG,
-				"void IniFilePopulator::toggleDebugStatus() --> status is now TRUE.");
+
 	} else if (this->ui.falseCheckBox->isChecked()) {
-		THE_REPO->debugStatus = FALSE;
 		LOG(DEBUG,
-				"void IniFilePopulator::toggleDebugStatus() --> status is now FALSE.");
-	} else {
+				"void IniFilePopulator::toggleDebugStatus() --> FALSE is checked.");
 		THE_REPO->debugStatus = FALSE;
-				LOG(ERROR,
-						"void IniFilePopulator::toggleDebugStatus() --> was not defined: set to FALSE.");
+	} else {
+		LOG(
+				ERROR,
+				"void IniFilePopulator::toggleDebugStatus() --> status is not defined: set to FALSE.");
+		THE_REPO->debugStatus = FALSE;
 	}
 }
