@@ -718,7 +718,7 @@ void ChooseFileFromAListDialog::execute() {
 	LOG(DEBUG, "In void ChooseFileFromAListDialog::execute().");
 	this->doDownload();
 	this->createFileSquadreFromWebFiles();
-	this->fileGazzetta = THE_REPO->getGazzettaPath() + this->getGazFile();
+	this->fileGazzetta = THE_REPO->getGazzettaPath() + "/" + this->getGazFile();
 	this->accept();
 }
 bool ChooseFileFromAListDialog::wasCancelClicked() {

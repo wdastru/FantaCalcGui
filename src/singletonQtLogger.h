@@ -41,6 +41,9 @@ private:
 	QString fileContent;
 	QString logFileName;
 	QString version;
+	QString fileGazzetta;
+	QString fileFormazioni;
+	void reader();
 };
 
 #endif //

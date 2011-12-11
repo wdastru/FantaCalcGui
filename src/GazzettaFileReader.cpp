@@ -5,10 +5,12 @@
  *      Author: WAleViolaeIvan
  */
 
+#include "Fanta.h"
 #include "GazzettaFileReader.h"
 #include "StringModifier.h"
 
 GazzettaFileReader::GazzettaFileReader(QString _fileGazzetta) {
+	LOG(DEBUG, "In GazzettaFileReader::GazzettaFileReader(...).");
 	this->fileGazzetta = _fileGazzetta;
 	FANTA->setFileGazzetta(_fileGazzetta);
 }
@@ -18,6 +20,8 @@ GazzettaFileReader::~GazzettaFileReader() {
 }
 
 std::vector<std::vector<std::string> > GazzettaFileReader::getOutput() {
+	LOG(DEBUG, "In GazzettaFileReader::getOutput().");
+
 	std::ifstream fGaz(this->fileGazzetta.toStdString().c_str());
 	if (!fGaz) {
 		LOG(
