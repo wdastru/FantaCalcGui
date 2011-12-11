@@ -5,6 +5,9 @@
 #include "Downloader.h"
 #include "NoNetFileDialog.h"
 #include "ChooseFileFromAListDialog.h"
+#include "GazzettaFileReader.h"
+#include "FormazioniFileReader.h"
+#include "Fanta.h"
 
 #include <vector>
 
@@ -178,13 +181,26 @@ void singletonQtLogger::onlineClicked() {
 		chooseFileFromAListDialog->show();
 		chooseFileFromAListDialog->exec();
 
+		THE_REPO->fileGazzetta = chooseFileFromAListDialog->getFileGazzetta();
+		THE_REPO->fileFormazioni = chooseFileFromAListDialog->getFileFormazioni();
+
+		LOG(
+				DEBUG,
+				"In void singletonQtLogger::onlineClicked() --> fileGazzetta : "
+						+ THE_REPO->fileGazzetta);
+		LOG(
+				DEBUG,
+				"In void singletonQtLogger::onlineClicked() --> fileFormazioni : "
+						+ THE_REPO->fileFormazioni);
+
+		this->reader();
+		FANTA->execute();
 	} else {
-		LOG(ERROR,
-				"In singletonQtLogger::onlineClicked() --> the download of files failed.");
+		/* TODO
+		 * inserire exception
+		 */
+		;
 	}
-	//	} else {
-	//
-	//	}
 }
 void singletonQtLogger::offlineClicked() {
 	LOG(DEBUG,
@@ -194,17 +210,25 @@ void singletonQtLogger::offlineClicked() {
 	noNetFileDialog->exec();
 
 	if (!noNetFileDialog->hasBeenAborted) {
-		THE_REPO->noNetSquadreFile = noNetFileDialog->getFileNameSquadre();
+		THE_REPO->fileFormazioni = noNetFileDialog->getFileNameSquadre();
+		THE_REPO->fileGazzetta = noNetFileDialog->getFileNameGazzetta();
+
 		LOG(
 				DEBUG,
-				"In void singletonQtLogger::offlineClicked() -> fileNameSquadre : "
-						+ THE_REPO->noNetSquadreFile);
-		THE_REPO->noNetGazzettaFile = noNetFileDialog->getFileNameGazzetta();
+				"In void singletonQtLogger::offlineClicked() --> fileGazzetta : "
+						+ THE_REPO->fileGazzetta);
 		LOG(
 				DEBUG,
-				"In void singletonQtLogger::offlineClicked() -> fileNameSquadre : "
-						+ THE_REPO->noNetGazzettaFile);
+				"In void singletonQtLogger::offlineClicked() --> fileFormazioni : "
+						+ THE_REPO->fileFormazioni);
+
+		this->reader();
+		FANTA->execute();
+
 	} else {
+		/* TODO
+		 * inserire exception
+		 */
 		return;
 	}
 }
@@ -214,4 +238,14 @@ QString singletonQtLogger::getTitle(void) {
 QString singletonQtLogger::getVersion(void) {
 	return this->version;
 }
+void singletonQtLogger::reader() {
+	// --> lettura file Gazzetta e Formazioni
+	GazzettaFileReader * gazzettaFileReader = new GazzettaFileReader(
+			THE_REPO->fileGazzetta);
+	FormazioniFileReader * formazioniFileReader = new FormazioniFileReader(
+			THE_REPO->fileFormazioni);
 
+	formazioniFileReader->setPlayers(gazzettaFileReader->getOutput());
+	formazioniFileReader->execute();
+	// <-- lettura file Gazzetta e Formazioni
+}

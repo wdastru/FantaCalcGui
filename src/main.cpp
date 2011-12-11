@@ -19,7 +19,7 @@
 //#include "GazzettaFileReader.h"
 //#include "FormazioniFileReader.h"
 //#include "StringModifier.h"
-//#include "Fanta.h"
+#include "Fanta.h"
 #include "defines.h"
 
 using namespace std;
@@ -37,6 +37,8 @@ int main(int argc, char *argv[]) {
 	THE_REPO; // poi si crea il repository dei dati
 	THE_MANAGER; // quindi si legge l'ini file (o lo si crea se non esistente)
 	THE_CONFIGURATOR; // infine il configuratore viene popolato con i dati
+
+	FANTA; // la classe del calcolatore
 
 	return a.exec();
 

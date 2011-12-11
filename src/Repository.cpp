@@ -9,7 +9,6 @@
 #include <QFile>
 
 Repository::Repository() {
-	// TODO Auto-generated constructor stub
 	this->formazioniUrl
 			= "http://www.cim.unito.it/private/fantacalcio/777/formazioni/";
 	this->gazzettaUrl
@@ -18,7 +17,6 @@ Repository::Repository() {
 }
 
 Repository::~Repository() {
-	// TODO Auto-generated destructor stub
 }
 
 Repository* Repository::pInstance = NULL;

@@ -44,6 +44,8 @@ private:
 	QString downloadPath;
 	QString formazioniUrl;
 	QString gazzettaUrl;
+	QString fileGazzetta;
+	QString fileFormazioni;
 	QString noNetSquadreFile;
 	QString noNetGazzettaFile;
 	bool debugStatus;
