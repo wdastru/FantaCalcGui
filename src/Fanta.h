@@ -32,7 +32,7 @@ private:
 	double defenseMean[2];
 	unsigned int defenders[2];
 	unsigned int sfide[2];
-	signed int goals[2];
+	unsigned int goals[2];
 	unsigned int sostituzioni[2];
 	size_t longerNameLength;
 	signed int modifierValues[9][5];
