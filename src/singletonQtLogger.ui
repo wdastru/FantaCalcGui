@@ -174,11 +174,29 @@ p, li { white-space: pre-wrap; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>singletonQtLoggerClass</sender>
+   <signal>onOffClickedFinished()</signal>
+   <receiver>singletonQtLoggerClass</receiver>
+   <slot>goOn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>340</x>
+     <y>206</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>340</x>
+     <y>206</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
+  <signal>onOffClickedFinished()</signal>
   <slot>saveLogAndClose()</slot>
   <slot>configClicked()</slot>
   <slot>onlineClicked()</slot>
   <slot>offlineClicked()</slot>
+  <slot>goOn()</slot>
  </slots>
 </ui>

@@ -1130,22 +1130,22 @@ void Fanta::printRiepilogo() {
 	LOG(DEBUG, output + "<br/>");
 }
 void Fanta::printTitolo(std::string str) {
-	QString tmp = "\n +";
+	QString tmp = "<br/> +";
 	for (unsigned int i = 0; i < str.size() + 6; i++) {
 		tmp += "-";
 	}
-	tmp += "+\n | +";
+	tmp += "+<br/> | +";
 
 	for (unsigned int i = 0; i < str.size() + 2; i++) {
 		tmp += "-";
 	}
-	tmp += "+ |\n | | " + QString::fromStdString(str) + " | |\n | +";
+	tmp += "+ |<br/> | | " + QString::fromStdString(str) + " | |<br/> | +";
 	for (unsigned int i = 0; i < str.size() + 2; i++)
 		tmp += "-";
-	tmp += "+ |\n +";
+	tmp += "+ |<br/> +";
 	for (unsigned int i = 0; i < str.size() + 6; i++)
 		tmp += "-";
-	tmp += "+\n";
+	tmp += "+<br/>";
 
 	LOG(DEBUG, tmp);
 }
