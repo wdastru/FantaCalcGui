@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>155</height>
+    <height>130</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -64,6 +64,10 @@
     </item>
     <item row="0" column="1">
      <widget class="QLineEdit" name="fileSquadreLineEdit">
+      <property name="styleSheet">
+       <string notr="true">border-color: rgb(255, 0, 0);
+background-color: rgb(255, 200, 200);</string>
+      </property>
       <property name="readOnly">
        <bool>true</bool>
       </property>
@@ -71,6 +75,10 @@
     </item>
     <item row="1" column="1">
      <widget class="QLineEdit" name="fileGazzettaLineEdit">
+      <property name="styleSheet">
+       <string notr="true">border-color: rgb(255, 0, 0);
+background-color: rgb(255, 200, 200);</string>
+      </property>
       <property name="readOnly">
        <bool>true</bool>
       </property>
@@ -78,6 +86,10 @@
     </item>
     <item row="2" column="1">
      <widget class="QLineEdit" name="newFileLineEdit">
+      <property name="styleSheet">
+       <string notr="true">border-color: rgb(255, 0, 0);
+background-color: rgb(255, 200, 200);</string>
+      </property>
       <property name="readOnly">
        <bool>true</bool>
       </property>
@@ -89,7 +101,7 @@
    <property name="geometry">
     <rect>
      <x>230</x>
-     <y>120</y>
+     <y>100</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -102,7 +114,7 @@
    <property name="geometry">
     <rect>
      <x>310</x>
-     <y>120</y>
+     <y>100</y>
      <width>75</width>
      <height>23</height>
     </rect>

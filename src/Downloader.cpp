@@ -61,6 +61,8 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 		this->urlLineEditVector.push_back(
 				new QLineEdit(this->urls->at(i).path()));
 		this->urlLineEditVector.at(i)->setReadOnly(true);
+		this->urlLineEditVector.at(i)->setStyleSheet(
+				"border-color: rgb(255, 0, 0); background-color: rgb(255, 200, 200);");
 		this->urlLabelVector.push_back(new QLabel(tr("URL:")));
 	}
 
@@ -89,7 +91,7 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 
 	QVBoxLayout *mainLayout = new QVBoxLayout;
 	mainLayout->addLayout(vLayout);
-	mainLayout->addWidget(statusLabel);
+//	mainLayout->addWidget(statusLabel);
 	mainLayout->addWidget(buttonBox);
 	setLayout(mainLayout);
 	setWindowTitle(tr("Downloader"));
