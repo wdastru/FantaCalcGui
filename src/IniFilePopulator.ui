@@ -55,6 +55,9 @@ p, li { white-space: pre-wrap; }
       <property name="enabled">
        <bool>true</bool>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
     </item>
     <item row="1" column="0">
@@ -65,7 +68,11 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QLineEdit" name="gazzettaLineEdit"/>
+     <widget class="QLineEdit" name="gazzettaLineEdit">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
     <item row="2" column="0">
      <widget class="QPushButton" name="risultatiButton">
@@ -75,7 +82,11 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="2" column="1">
-     <widget class="QLineEdit" name="risultatiLineEdit"/>
+     <widget class="QLineEdit" name="risultatiLineEdit">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
     <item row="3" column="0">
      <widget class="QPushButton" name="downloadButton">
@@ -85,7 +96,11 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="3" column="1">
-     <widget class="QLineEdit" name="downloadLineEdit"/>
+     <widget class="QLineEdit" name="downloadLineEdit">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
     <item row="4" column="0">
      <widget class="QPushButton" name="listeButton">
@@ -101,6 +116,9 @@ p, li { white-space: pre-wrap; }
         <width>268</width>
         <height>20</height>
        </size>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
     </item>

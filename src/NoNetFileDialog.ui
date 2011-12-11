@@ -63,13 +63,25 @@
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QLineEdit" name="fileSquadreLineEdit"/>
+     <widget class="QLineEdit" name="fileSquadreLineEdit">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QLineEdit" name="fileGazzettaLineEdit"/>
+     <widget class="QLineEdit" name="fileGazzettaLineEdit">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
     <item row="2" column="1">
-     <widget class="QLineEdit" name="newFileLineEdit"/>
+     <widget class="QLineEdit" name="newFileLineEdit">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

@@ -60,6 +60,7 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 	for (size_t i = 0; i < this->urls->size(); i++) {
 		this->urlLineEditVector.push_back(
 				new QLineEdit(this->urls->at(i).path()));
+		this->urlLineEditVector.at(i)->setReadOnly(true);
 		this->urlLabelVector.push_back(new QLabel(tr("URL:")));
 	}
 
