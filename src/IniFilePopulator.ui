@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>294</height>
+    <width>600</width>
+    <height>291</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>600</width>
+    <height>0</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>IniFilePopulator</string>
@@ -16,9 +22,9 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>10</x>
      <y>5</y>
-     <width>281</width>
+     <width>581</width>
      <height>31</height>
     </rect>
    </property>
@@ -35,7 +41,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>10</x>
      <y>40</y>
-     <width>367</width>
+     <width>581</width>
      <height>201</height>
     </rect>
    </property>
@@ -231,8 +237,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QDialogButtonBox" name="okCancelButtonBox">
    <property name="geometry">
     <rect>
-     <x>223</x>
-     <y>254</y>
+     <x>430</x>
+     <y>250</y>
      <width>156</width>
      <height>23</height>
     </rect>
