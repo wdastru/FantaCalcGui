@@ -310,6 +310,8 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 	setWindowTitle(tr("Choose Files"));
 }
 void ChooseFileFromAListDialog::quit() {
+	LOG(DEBUG, "In void ChooseFileFromAListDialog::quit().");
+
 	for (int i = 0; i < this->nFiles; i++) {
 		home.at(i)->setChecked(false);
 		away.at(i)->setChecked(false);
