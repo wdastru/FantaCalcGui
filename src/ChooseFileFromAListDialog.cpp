@@ -32,8 +32,8 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 
 	LOG(DEBUG, "In ChooseFileFromAListDialog constructor.");
 
-	this->resize(600, 0);
-	this->setMinimumSize(600,0);
+	this->resize(620, 0);
+	this->setMinimumSize(620,0);
 
 	Tabs = new QTabWidget(this);
 	Tabs->setObjectName(QString::fromUtf8("Tabs"));
