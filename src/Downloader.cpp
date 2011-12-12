@@ -50,6 +50,9 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 
 	LOG(DEBUG, "In Downloader::Downloader(...) constructor.");
 
+	this->resize(600, 0);
+	this->setMinimumSize(600,0);
+
 	this->savePaths = _savePaths;
 	this->urls = _urls;
 	this->statusLabelText = "";
@@ -91,7 +94,6 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 
 	QVBoxLayout *mainLayout = new QVBoxLayout;
 	mainLayout->addLayout(vLayout);
-//	mainLayout->addWidget(statusLabel);
 	mainLayout->addWidget(buttonBox);
 	setLayout(mainLayout);
 	setWindowTitle(tr("Downloader"));
