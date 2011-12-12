@@ -33,7 +33,7 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 	LOG(DEBUG, "In ChooseFileFromAListDialog constructor.");
 
 	this->resize(620, 0);
-	this->setMinimumSize(620,0);
+	this->setMinimumSize(620, 0);
 
 	Tabs = new QTabWidget(this);
 	Tabs->setObjectName(QString::fromUtf8("Tabs"));
@@ -456,6 +456,7 @@ void ChooseFileFromAListDialog::doDownload() {
 		LOG(DEBUG,
 				"In ChooseFileFromAListDialog::doDownload() --> the download of files failed.");
 	}
+	return;
 }
 bool ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 	LOG(DEBUG, "In ChooseFileFromAListDialog::createFileSquadreFromWebFiles().");
@@ -722,9 +723,19 @@ bool ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 void ChooseFileFromAListDialog::execute() {
 	LOG(DEBUG, "In void ChooseFileFromAListDialog::execute().");
 	this->doDownload();
-	this->createFileSquadreFromWebFiles();
-	this->fileGazzetta = THE_REPO->getGazzettaPath() + "/" + this->getGazFile();
-	this->accept();
+	if (this->downloadSuccess) {
+		this->createFileSquadreFromWebFiles();
+		this->fileGazzetta = THE_REPO->getGazzettaPath() + "/"
+				+ this->getGazFile();
+		this->accept();
+	} else {
+		LOG(
+				DEBUG,
+				"In void ChooseFileFromAListDialog::execute() --> download of file was not successful.");
+		/* TODO
+		 * completare
+		 */
+	}
 }
 bool ChooseFileFromAListDialog::wasCancelClicked() {
 	return this->cancelClicked;

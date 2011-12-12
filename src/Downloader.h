@@ -67,6 +67,7 @@ public:
 			std::vector<QString>* _savePaths = new std::vector<QString>);
 
 	bool requestSucceded();
+	bool wasCancelClicked();
 
 private slots:
 	void downloadFiles();

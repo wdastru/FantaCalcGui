@@ -99,6 +99,7 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 	setWindowTitle(tr("Downloader"));
 }
 void Downloader::quit() {
+	LOG(DEBUG, "In void Downloader::quit().");
 	this->hasBeenQuitted = true;
 	this->close();
 }
@@ -145,7 +146,6 @@ void Downloader::downloadFiles() {
 		if (this->downloadSuccesses == savePaths->size()) {
 			this->close();
 		}
-
 	}
 }
 bool Downloader::requestSucceded() {
@@ -154,4 +154,7 @@ bool Downloader::requestSucceded() {
 	} else {
 		return false;
 	}
+}
+bool Downloader::wasCancelClicked() {
+	return this->hasBeenQuitted;
 }
