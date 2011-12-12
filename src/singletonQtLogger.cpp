@@ -184,21 +184,27 @@ void singletonQtLogger::onlineClicked() {
 		chooseFileFromAListDialog->show();
 		chooseFileFromAListDialog->exec();
 
-		THE_REPO->fileGazzetta = chooseFileFromAListDialog->getFileGazzetta();
-		THE_REPO->fileFormazioni
-				= chooseFileFromAListDialog->getFileFormazioni();
+		if (!chooseFileFromAListDialog->wasCancelClicked()) {
+			THE_REPO->fileGazzetta
+					= chooseFileFromAListDialog->getFileGazzetta();
+			THE_REPO->fileFormazioni
+					= chooseFileFromAListDialog->getFileFormazioni();
 
-		LOG(
-				DEBUG,
-				"In void singletonQtLogger::onlineClicked() --> fileGazzetta : "
-						+ THE_REPO->fileGazzetta);
-		LOG(
-				DEBUG,
-				"In void singletonQtLogger::onlineClicked() --> fileFormazioni : "
-						+ THE_REPO->fileFormazioni);
+			LOG(
+					DEBUG,
+					"In void singletonQtLogger::onlineClicked() --> fileGazzetta : "
+							+ THE_REPO->fileGazzetta);
+			LOG(
+					DEBUG,
+					"In void singletonQtLogger::onlineClicked() --> fileFormazioni : "
+							+ THE_REPO->fileFormazioni);
 
-		emit(this->onOffClickedFinished());
-
+			emit(this->onOffClickedFinished());
+		} else {
+			LOG(DEBUG,
+					"In void singletonQtLogger::onlineClicked() --> Cancel clicked in ChooseFileFromAListDialog.");
+			return;
+		}
 	} else {
 		/* TODO
 		 * inserire exception
