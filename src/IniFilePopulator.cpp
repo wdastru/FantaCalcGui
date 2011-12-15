@@ -32,6 +32,8 @@ void IniFilePopulator::updateInternalData() {
 	} else {
 		THE_REPO->debugStatus = "FALSE";
 	}
+
+	this->close();
 }
 void IniFilePopulator::chooseFormazioniPath() {
 	QString directory = THE_REPO->getFormazioniPath();
@@ -224,3 +226,4 @@ void IniFilePopulator::toggleDebugStatus() {
 		THE_REPO->debugStatus = FALSE;
 	}
 }
+
