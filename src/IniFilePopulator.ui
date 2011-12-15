@@ -237,8 +237,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QDialogButtonBox" name="okCancelButtonBox">
    <property name="geometry">
     <rect>
-     <x>430</x>
-     <y>250</y>
+     <x>436</x>
+     <y>260</y>
      <width>156</width>
      <height>23</height>
     </rect>
@@ -255,7 +255,7 @@ p, li { white-space: pre-wrap; }
    <sender>okCancelButtonBox</sender>
    <signal>accepted()</signal>
    <receiver>IniFilePopulatorClass</receiver>
-   <slot>accept()</slot>
+   <slot>updateInternalData()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>271</x>
@@ -263,7 +263,7 @@ p, li { white-space: pre-wrap; }
     </hint>
     <hint type="destinationlabel">
      <x>271</x>
-     <y>333</y>
+     <y>277</y>
     </hint>
    </hints>
   </connection>
@@ -279,7 +279,7 @@ p, li { white-space: pre-wrap; }
     </hint>
     <hint type="destinationlabel">
      <x>337</x>
-     <y>325</y>
+     <y>277</y>
     </hint>
    </hints>
   </connection>
@@ -295,7 +295,7 @@ p, li { white-space: pre-wrap; }
     </hint>
     <hint type="destinationlabel">
      <x>79</x>
-     <y>416</y>
+     <y>277</y>
     </hint>
    </hints>
   </connection>
@@ -311,7 +311,7 @@ p, li { white-space: pre-wrap; }
     </hint>
     <hint type="destinationlabel">
      <x>65</x>
-     <y>352</y>
+     <y>277</y>
     </hint>
    </hints>
   </connection>
@@ -327,7 +327,7 @@ p, li { white-space: pre-wrap; }
     </hint>
     <hint type="destinationlabel">
      <x>46</x>
-     <y>325</y>
+     <y>277</y>
     </hint>
    </hints>
   </connection>
@@ -343,7 +343,7 @@ p, li { white-space: pre-wrap; }
     </hint>
     <hint type="destinationlabel">
      <x>40</x>
-     <y>303</y>
+     <y>277</y>
     </hint>
    </hints>
   </connection>
@@ -359,7 +359,7 @@ p, li { white-space: pre-wrap; }
     </hint>
     <hint type="destinationlabel">
      <x>87</x>
-     <y>381</y>
+     <y>277</y>
     </hint>
    </hints>
   </connection>
@@ -375,7 +375,7 @@ p, li { white-space: pre-wrap; }
     </hint>
     <hint type="destinationlabel">
      <x>268</x>
-     <y>411</y>
+     <y>277</y>
     </hint>
    </hints>
   </connection>
@@ -391,7 +391,7 @@ p, li { white-space: pre-wrap; }
     </hint>
     <hint type="destinationlabel">
      <x>238</x>
-     <y>389</y>
+     <y>277</y>
     </hint>
    </hints>
   </connection>
