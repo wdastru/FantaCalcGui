@@ -258,22 +258,24 @@ bool HttpWindow::downloadSuccessful() {
 
 void HttpWindow::slotAuthenticationRequired(QNetworkReply*,
 		QAuthenticator *authenticator) {
-	QDialog dlg;
-	Ui::Dialog ui;
-	ui.setupUi(&dlg);
-	dlg.adjustSize();
-	ui.siteDescription->setText(
-			tr("%1 at %2").arg(authenticator->realm()).arg(url.host()));
-
-	// Did the URL have information? Fill the UI
-	// This is only relevant if the URL-supplied credentials were wrong
-	ui.userEdit->setText(url.userName());
-	ui.passwordEdit->setText(url.password());
-
-	if (dlg.exec() == QDialog::Accepted) {
-		authenticator->setUser(ui.userEdit->text());
-		authenticator->setPassword(ui.passwordEdit->text());
-	}
+//	QDialog dlg;
+//	Ui::Dialog ui;
+//	ui.setupUi(&dlg);
+//	dlg.adjustSize();
+//	ui.siteDescription->setText(
+//			tr("%1 at %2").arg(authenticator->realm()).arg(url.host()));
+//
+//	// Did the URL have information? Fill the UI
+//	// This is only relevant if the URL-supplied credentials were wrong
+//	ui.userEdit->setText(url.userName());
+//	ui.passwordEdit->setText(url.password());
+//
+//	if (dlg.exec() == QDialog::Accepted) {
+//	authenticator->setUser(ui.userEdit->text());
+//	authenticator->setPassword(ui.passwordEdit->text());
+	authenticator->setUser("laboratorio");
+	authenticator->setPassword("NMR12345");
+//	}
 }
 
 #ifndef QT_NO_OPENSSL
