@@ -7,6 +7,7 @@
 #include "ChooseFileFromAListDialog.h"
 #include "GazzettaFileReader.h"
 #include "FormazioniFileReader.h"
+#include "FileFormazioniViewer.h"
 #include "Fanta.h"
 
 #include <vector>
@@ -189,6 +190,10 @@ void singletonQtLogger::onlineClicked() {
 					= chooseFileFromAListDialog->getFileGazzetta();
 			THE_REPO->fileFormazioni
 					= chooseFileFromAListDialog->getFileFormazioni();
+
+			FileFormazioniViewer * viewer = new FileFormazioniViewer(this);
+			viewer->show();
+			viewer->exec();
 
 			LOG(
 					DEBUG,
