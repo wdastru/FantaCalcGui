@@ -188,39 +188,14 @@ void singletonQtLogger::onlineClicked() {
 		chooseFileFromAListDialog->show();
 		chooseFileFromAListDialog->exec();
 
-		FileFormazioniViewer * viewer = new FileFormazioniViewer(this);
-
 		if (!chooseFileFromAListDialog->wasCancelClicked()) {
 			THE_REPO->fileGazzetta
 					= chooseFileFromAListDialog->getFileGazzetta();
 			THE_REPO->fileFormazioni
 					= chooseFileFromAListDialog->getFileFormazioni();
 
-			QFile *file = new QFile(THE_REPO->fileFormazioni);
-			if (file->exists()) {
-				file->open(QIODevice::ReadWrite);
-				if (file->isOpen()) {
-					if (file->isReadable()) {
-						QByteArray data = file->readAll();
-						QString str = QString::fromLocal8Bit(data);
-						viewer->setDocument(str);
-					} else {
-						/* TODO
-						 * completare
-						 */
-					}
-				} else {
-					/* TODO
-					 * completare
-					 */
-				}
-
-			} else {
-				/* TODO
-				 * completare
-				 */
-			}
-
+			FileFormazioniViewer * viewer = new FileFormazioniViewer(this);
+			viewer->setFile(THE_REPO->fileFormazioni);
 			viewer->show();
 			viewer->exec();
 
