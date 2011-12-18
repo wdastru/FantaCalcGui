@@ -19,6 +19,7 @@ private slots:
 
 private:
 	Ui::FileFormazioniViewerClass ui;
+	QString filename;
 };
 
 #endif // FILEFORMAZIONIVIEWER_H

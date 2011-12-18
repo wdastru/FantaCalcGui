@@ -56,5 +56,25 @@ p, li { white-space: pre-wrap; }
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>FileFormazioniViewerClass</receiver>
+   <slot>saveFileAndClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>530</x>
+     <y>411</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>369</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>saveFileAndClose()</slot>
+ </slots>
 </ui>

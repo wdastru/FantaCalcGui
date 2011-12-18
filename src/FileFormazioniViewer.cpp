@@ -1,4 +1,8 @@
 #include "FileFormazioniViewer.h"
+#include "defines.h"
+#include "singletonQtLogger.h"
+
+#include <QTextDocumentWriter>
 
 FileFormazioniViewer::FileFormazioniViewer(QWidget *parent) :
 	QDialog(parent) {
@@ -10,15 +14,14 @@ FileFormazioniViewer::~FileFormazioniViewer() {
 }
 
 void FileFormazioniViewer::setFile(QString filename) {
-
+	this->filename = filename;
 	QFile *file = new QFile(filename);
 	if (file->exists()) {
 		file->open(QIODevice::ReadWrite);
 		if (file->isOpen()) {
 			if (file->isReadable()) {
-//				QByteArray data = file->readAll();
-//				QString str = QString::fromLocal8Bit(data);
-				this->ui.plainTextEdit->setPlainText(QString::fromLocal8Bit(file->readAll()));
+				this->ui.plainTextEdit->setPlainText(
+						QString::fromLocal8Bit(file->readAll()));
 			} else {
 				/* TODO
 				 * completare
@@ -41,5 +44,19 @@ void FileFormazioniViewer::setFile(QString filename) {
 }
 
 void FileFormazioniViewer::saveFileAndClose() {
-
+	LOG(DEBUG, "In FileFormazioniViewer::saveFileAndClose().");
+	QTextDocumentWriter writer(this->filename);
+	if (writer.write(this->ui.plainTextEdit->document())) {
+		LOG(
+				DEBUG,
+				"In FileFormazioniViewer::saveFileAndClose() --> write of "
+						+ this->filename + " was successful.");
+		this->close();
+	} else {
+		LOG(
+				ERROR,
+				"In FileFormazioniViewer::saveFileAndClose() --> write of "
+						+ this->filename + " was not successful.");
+		this->close();
+	}
 }
