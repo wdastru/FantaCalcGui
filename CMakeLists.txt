@@ -9,6 +9,7 @@ SET( SRCS src/main.cpp
 		src/NoNetFileDialog.cpp 
         src/GazzettaFileReader.cpp 
         src/FormazioniFileReader.cpp 
+        src/FileFormazioniViewer.cpp 
         src/Fanta.cpp        
         src/WhichOfTheseDialog.cpp
         src/WhichOfLevenshteinDialog.cpp
@@ -25,6 +26,7 @@ SET( HDRS src/CVersion.h
 		src/NoNetFileDialog.h 
         src/GazzettaFileReader.h
         src/FormazioniFileReader.h 
+        src/FileFormazioniViewer.h
         src/Fanta.h        
         src/WhichOfTheseDialog.h
         src/Less25MinDialog.h
@@ -36,6 +38,7 @@ SET( HDRS src/CVersion.h
         src/singletonQtLogger.h )
 SET( UIS  src/authenticationdialog.ui
 		src/IniFilePopulator.ui
+		src/FileFormazioniViewer.ui
         src/NoNetFileDialog.ui 
 		src/singletonQtLogger.ui )
 SET( RCS src/resources.qrc )

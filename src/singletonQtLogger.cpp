@@ -1,3 +1,6 @@
+#include <QtCore/QString>
+#include <QtCore/QTextStream>
+
 #include "singletonQtLogger.h"
 #include "IniFileManager.h"
 #include "IniFilePopulator.h"
@@ -7,6 +10,7 @@
 #include "ChooseFileFromAListDialog.h"
 #include "GazzettaFileReader.h"
 #include "FormazioniFileReader.h"
+#include "FileFormazioniViewer.h"
 #include "Fanta.h"
 
 #include <vector>
@@ -190,6 +194,11 @@ void singletonQtLogger::onlineClicked() {
 			THE_REPO->fileFormazioni
 					= chooseFileFromAListDialog->getFileFormazioni();
 
+			FileFormazioniViewer * viewer = new FileFormazioniViewer(this);
+			viewer->setFile(THE_REPO->fileFormazioni);
+			viewer->show();
+			viewer->exec();
+
 			LOG(
 					DEBUG,
 					"In void singletonQtLogger::onlineClicked() --> fileGazzetta : "
@@ -201,7 +210,8 @@ void singletonQtLogger::onlineClicked() {
 
 			emit(this->onOffClickedFinished());
 		} else {
-			LOG(DEBUG,
+			LOG(
+					DEBUG,
 					"In void singletonQtLogger::onlineClicked() --> Cancel clicked in ChooseFileFromAListDialog.");
 			return;
 		}
