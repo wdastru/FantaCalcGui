@@ -4,15 +4,19 @@
 #include <QtGui/QDialog>
 #include "ui_FileFormazioniViewer.h"
 
-class FileFormazioniViewer : public QDialog {
-    Q_OBJECT
+class FileFormazioniViewer: public QDialog {
+Q_OBJECT
 
 public:
-    FileFormazioniViewer(QWidget *parent = 0);
-    virtual ~FileFormazioniViewer();
+	FileFormazioniViewer(QWidget *parent = 0);
+	virtual ~FileFormazioniViewer();
+	void setDocument(QString);
+
+private slots:
+	void saveFileAndClose();
 
 private:
-    Ui::FileFormazioniViewerClass ui;
+	Ui::FileFormazioniViewerClass ui;
 };
 
 #endif // FILEFORMAZIONIVIEWER_H

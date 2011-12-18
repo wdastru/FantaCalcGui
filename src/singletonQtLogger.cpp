@@ -1,3 +1,6 @@
+#include <QtCore/QString>
+#include <QtCore/QTextStream>
+
 #include "singletonQtLogger.h"
 #include "IniFileManager.h"
 #include "IniFilePopulator.h"
@@ -185,13 +188,39 @@ void singletonQtLogger::onlineClicked() {
 		chooseFileFromAListDialog->show();
 		chooseFileFromAListDialog->exec();
 
+		FileFormazioniViewer * viewer = new FileFormazioniViewer(this);
+
 		if (!chooseFileFromAListDialog->wasCancelClicked()) {
 			THE_REPO->fileGazzetta
 					= chooseFileFromAListDialog->getFileGazzetta();
 			THE_REPO->fileFormazioni
 					= chooseFileFromAListDialog->getFileFormazioni();
 
-			FileFormazioniViewer * viewer = new FileFormazioniViewer(this);
+			QFile *file = new QFile(THE_REPO->fileFormazioni);
+			if (file->exists()) {
+				file->open(QIODevice::ReadWrite);
+				if (file->isOpen()) {
+					if (file->isReadable()) {
+						QByteArray data = file->readAll();
+						QString str = QString::fromLocal8Bit(data);
+						viewer->setDocument(str);
+					} else {
+						/* TODO
+						 * completare
+						 */
+					}
+				} else {
+					/* TODO
+					 * completare
+					 */
+				}
+
+			} else {
+				/* TODO
+				 * completare
+				 */
+			}
+
 			viewer->show();
 			viewer->exec();
 
@@ -206,7 +235,8 @@ void singletonQtLogger::onlineClicked() {
 
 			emit(this->onOffClickedFinished());
 		} else {
-			LOG(DEBUG,
+			LOG(
+					DEBUG,
 					"In void singletonQtLogger::onlineClicked() --> Cancel clicked in ChooseFileFromAListDialog.");
 			return;
 		}
