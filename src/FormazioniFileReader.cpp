@@ -18,6 +18,7 @@ void FormazioniFileReader::setPlayers(
 	this->allThePlayers = _allThePlayers;
 }
 unsigned int FormazioniFileReader::execute() {
+	LOG(DEBUG, "In FormazioniFileReader::execute().");
 	std::ifstream fSqua(this->fileFormazioni.toStdString().c_str());
 	if (!fSqua) {
 		LOG(
@@ -276,9 +277,11 @@ unsigned int FormazioniFileReader::execute() {
 
 					switch (FANTA->addPlayer(v_Found.at(answer), k)) {
 					case 0:
+						LOG(DEBUG, "In FormazioniFileReader::execute() --> switch : FANTA->addPlayer( ... ) returned PLAYER_OK.");
 						break;
 
 					case 1:
+						LOG(DEBUG, "In FormazioniFileReader::execute() --> switch : FANTA->addPlayer( ... ) returned PLAYER_REPEATED.");
 						LOG(
 								ERROR,
 								"In FormazioniFileReader::execute() --> "
@@ -294,6 +297,7 @@ unsigned int FormazioniFileReader::execute() {
 						break;
 
 					case 2:
+						LOG(DEBUG, "In FormazioniFileReader::execute() --> switch : FANTA->addPlayer( ... ) returned PLAYER_GDV_NO_GOAL.");
 						LOG(
 								ERROR,
 								QString::fromStdString(
@@ -308,6 +312,7 @@ unsigned int FormazioniFileReader::execute() {
 						break;
 
 					case 3:
+						LOG(DEBUG, "In FormazioniFileReader::execute() --> switch : FANTA->addPlayer( ... ) returned PLAYER_GDP_NO_GOAL.");
 						LOG(
 								ERROR,
 								QString::fromStdString(
@@ -322,6 +327,7 @@ unsigned int FormazioniFileReader::execute() {
 						break;
 
 					default:
+						LOG(DEBUG, "In FormazioniFileReader::execute() --> switch : default.");
 						break;
 					}
 

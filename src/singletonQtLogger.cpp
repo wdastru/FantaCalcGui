@@ -258,6 +258,7 @@ QString singletonQtLogger::getVersion(void) {
 	return this->version;
 }
 void singletonQtLogger::goOn() {
+	LOG(DEBUG, "In singletonQtLogger::goOn().");
 	// --> lettura file Gazzetta e Formazioni
 	GazzettaFileReader * gazzettaFileReader = new GazzettaFileReader(
 			THE_REPO->fileGazzetta);
