@@ -189,16 +189,21 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 		tmpPlayer.VotoGazzetta = atof(
 				STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str());
 
-	// goal decisivi ed altro
+	// --> goal decisivi
 	tmpPlayer.GoalDecVitt = atoi(
 			STR_MOD->msk(str, DELIM, ColGoalDecVitt).c_str());
-	if (tmpPlayer.GoalDecVitt != 0 && tmpPlayer.GoalFatti == 0)
+	if (tmpPlayer.GoalDecVitt != 0 && tmpPlayer.GoalFatti == 0) {
+		LOG(DEBUG, "In Fanta::addPlayer( ... ) --> PLAYER_GDV_NO_GOAL");
 		return PLAYER_GDV_NO_GOAL;
+	}
 
 	tmpPlayer.GoalDecPar
 			= atoi(STR_MOD->msk(str, DELIM, ColGoalDecPar).c_str());
-	if (tmpPlayer.GoalDecPar != 0 && tmpPlayer.GoalFatti == 0)
+	if (tmpPlayer.GoalDecPar != 0 && tmpPlayer.GoalFatti == 0) {
+		LOG(DEBUG, "In Fanta::addPlayer( ... ) --> PLAYER_GDP_NO_GOAL");
 		return PLAYER_GDP_NO_GOAL;
+	}
+	// <-- goal decisivi
 
 	tmpPlayer.Assist = atoi(STR_MOD->msk(str, DELIM, ColAssist).c_str());
 	tmpPlayer.Autoreti = abs(
@@ -262,20 +267,95 @@ void Fanta::execute() {
 
 	LOG(DEBUG, "In void Fanta::execute().");
 
-	this->checkGiocatoSenzaVoto();
-	this->checkNonHaGiocato();
-	this->orderByRuolo();
-	this->fillWithNonHaGiocato();
-	this->substitutions();
-	this->calculateFantaVoto();
-	this->calculateDefenseMean();
-	this->calculateDefenseModifier();
-	this->calculateSfide();
-	this->calculateTotal();
-	this->calculateGoals();
-	this->calculateScorers();
+	try {
+		this->checkGiocatoSenzaVoto();
+	} catch (...) {
+		LOG(DEBUG,
+				"In void Fanta::execute() --> exception caught in checkGiocatoSenzaVoto().");
+	}
+
+	try {
+		this->checkNonHaGiocato();
+	} catch (...) {
+		LOG(DEBUG,
+				"In void Fanta::execute() --> exception caught in checkNonHaGiocato().");
+	}
+
+	try {
+		this->orderByRuolo();
+	} catch (...) {
+		LOG(DEBUG,
+				"In void Fanta::execute() --> exception caught in orderByRuolo().");
+	}
+
+	try {
+		this->fillWithNonHaGiocato();
+	} catch (...) {
+		LOG(DEBUG,
+				"In void Fanta::execute() --> exception caught in fillWithNonHaGiocato().");
+	}
+
+	/**/
+
+	try {
+		this->substitutions();
+	} catch (...) {
+		LOG(DEBUG,
+				"In void Fanta::execute() --> exception caught in substitutions().");
+	}
+
+	try {
+		this->calculateFantaVoto();
+	} catch (...) {
+		LOG(DEBUG,
+				"In void Fanta::execute() --> exception caught in calculateFantaVoto().");
+	}
+
+	try {
+		this->calculateDefenseMean();
+	} catch (...) {
+		LOG(DEBUG,
+				"In void Fanta::execute() --> exception caught in calculateDefenseMean().");
+	}
+
+	try {
+		this->calculateDefenseModifier();
+	} catch (...) {
+		LOG(DEBUG,
+				"In void Fanta::execute() --> exception caught in calculateDefenseModifier().");
+	}
+
+	try {
+		this->calculateSfide();
+	} catch (...) {
+		LOG(DEBUG,
+				"In void Fanta::execute() --> exception caught in calculateSfide().");
+	}
+
+	try {
+		this->calculateTotal();
+	} catch (...) {
+		LOG(DEBUG,
+				"In void Fanta::execute() --> exception caught in calculateTotal().");
+	}
+
+	try {
+		this->calculateGoals();
+	} catch (...) {
+		LOG(DEBUG,
+				"In void Fanta::execute() --> exception caught in calculateGoals().");
+	}
+
+	try {
+		this->calculateScorers();
+	} catch (...) {
+		LOG(DEBUG,
+				"In void Fanta::execute() --> exception caught in calculateScorers().");
+	}
+
 	return;
 }
+
 void Fanta::checkGiocatoSenzaVoto() {
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
@@ -409,31 +489,54 @@ void Fanta::checkNonHaGiocato() {
 	}
 }
 void Fanta::orderByRuolo() {
-	LOG(DEBUG, "In Fanta::orderByRuolo().");
-	for (unsigned int k = 0; k < 2; k++)// loop sulle squadre
-	{
-		LOG(
-				DEBUG,
-				"In Fanta::orderByRuolo() --> Squadra : "
-						+ QString::fromStdString(this->getTeamName(k)));
 
-		for (signed int i = 0; i < 4; i++) // loop sui ruoli
+	LOG(DEBUG, "In Fanta::orderByRuolo().");
+
+	try {
+		for (unsigned int k = 0; k < 2; k++)// loop sulle squadre
 		{
-			for (size_t j = 0; j < this->Team[k].size(); j++) // loop sui giocatori
-			{
-				if (this->Team[k].at(j).Ruolo == i) {
-					Fanta::teamOrderedByRuolo[k][i].push_back(
-							this->Team[k].at(j));
-					LOG(
-							DEBUG,
-							"In Fanta::orderByRuolo() --> "
-									+ QString::fromStdString(
-											my::toString<unsigned int>(i))
-									+ " " + QString::fromStdString(
-									this->Team[k].at(j).Nome));
+			try {
+				LOG(
+						DEBUG,
+						"In Fanta::orderByRuolo() --> Squadra : "
+								+ QString::fromStdString(this->getTeamName(k)));
+				throw(this->getTeamName(k));
+			} catch (std::string str) {
+				LOG(
+						DEBUG,
+						"In Fanta::orderByRuolo() --> exception caught : this->getTeamName("
+								+ my::toQString<unsigned int>(k) + ") = "
+								+ QString::fromStdString(str));
+			}
+
+			try {
+				for (signed int i = 0; i < 4; i++) // loop sui ruoli
+				{
+
+					for (size_t j = 0; j < this->Team[k].size(); j++) // loop sui giocatori
+					{
+						if (this->Team[k].at(j).Ruolo == i) {
+							Fanta::teamOrderedByRuolo[k][i].push_back(
+									this->Team[k].at(j));
+							LOG(
+									DEBUG,
+									"In Fanta::orderByRuolo() --> "
+											+ QString::fromStdString(
+													my::toString<unsigned int>(
+															i)) + " "
+											+ QString::fromStdString(
+													this->Team[k].at(j).Nome));
+						}
+					}
 				}
+			} catch (...) {
+				LOG(FATAL,
+						"In Fanta::orderByRuolo() --> exception caught in for (i) loop.");
 			}
 		}
+	} catch (...) {
+		LOG(FATAL,
+				"In Fanta::orderByRuolo() --> exception caught in for (k) loop.");
 	}
 }
 void Fanta::fillWithNonHaGiocato() {

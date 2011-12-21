@@ -266,19 +266,36 @@ void singletonQtLogger::goOn() {
 			THE_REPO->fileFormazioni);
 
 	formazioniFileReader->setPlayers(gazzettaFileReader->getOutput());
-	formazioniFileReader->execute();
+	unsigned int retVal = formazioniFileReader->execute();
+
+	LOG(
+			DEBUG,
+			"In singletonQtLogger::goOn() --> formazioniFileReader::execute() returned "
+					+ my::toQString<unsigned int>(retVal) + ".");
+
 	// <-- lettura file Gazzetta e Formazioni
-	FANTA->execute();
+	try {
+		FANTA->execute();
+	} catch (...) {
+		LOG(DEBUG,
+				"In singletonQtLogger::goOn() --> exception caught in FANTA->execute().");
+	}
 
-	this->setLogFileName(
-			THE_REPO->getRisultatiPath() + "/risultato_"
-					+ QString::fromStdString(FANTA->getTeamName(0)) + "-"
-					+ QString::fromStdString(FANTA->getTeamName(1)) + "_"
-					+ QFileInfo(FANTA->getFileGazzetta()).fileName());
+	try {
+		this->setLogFileName(
+				THE_REPO->getRisultatiPath() + "/risultato_"
+						+ QString::fromStdString(FANTA->getTeamName(0)) + "-"
+						+ QString::fromStdString(FANTA->getTeamName(1)) + "_"
+						+ QFileInfo(FANTA->getFileGazzetta()).fileName());
 
-	FANTA->printTitolo(FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
-	FANTA->printRiepilogo();
-	FANTA->printFormations();
+		FANTA->printTitolo(
+				FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
+		FANTA->printRiepilogo();
+		FANTA->printFormations();
+	} catch (...) {
+		LOG(DEBUG,
+				"In singletonQtLogger::goOn() --> exception caught after FANTA->execute().");
+	}
 }
 void singletonQtLogger::setLogFileName(QString filename) {
 	this->logFileName = filename;
