@@ -20,8 +20,6 @@ void FormazioniFileReader::setPlayers(
 unsigned int FormazioniFileReader::execute() {
 	LOG(DEBUG, "In FormazioniFileReader::execute().");
 
-	FANTA->initialize();
-
 	std::ifstream fSqua(this->fileFormazioni.toStdString().c_str());
 	if (!fSqua) {
 		LOG(

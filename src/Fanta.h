@@ -89,6 +89,7 @@ public:
 	Fanta();
 	virtual ~Fanta();
 	static Fanta * Inst();
+	static Fanta * Refresh();
 	void initialize();
 	unsigned int atHome[2];
 	void setTeamName(const std::string, unsigned int);

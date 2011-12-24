@@ -14,6 +14,13 @@ Fanta * Fanta::Inst() {
 	return pInstance;
 }
 
+Fanta * Fanta::Refresh() {
+	if (pInstance != NULL)
+		delete pInstance;
+
+	return pInstance = new Fanta();
+}
+
 Fanta * Fanta::pInstance = NULL;
 
 Fanta::Fanta() {

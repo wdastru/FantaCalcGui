@@ -273,6 +273,8 @@ void singletonQtLogger::goOn() {
 		THE_VIEWER->show();
 		THE_VIEWER->exec();
 
+		Fanta::Refresh();
+
 		retVal = formazioniFileReader->execute();
 
 		LOG(
@@ -282,12 +284,12 @@ void singletonQtLogger::goOn() {
 	} while (retVal != FORMFILEREAD_OK);
 	// <-- lettura file Gazzetta e Formazioni
 
-	//	try {
-	//		FANTA->execute();
-	//	} catch (...) {
-	//		LOG(DEBUG,
-	//				"In singletonQtLogger::goOn() --> exception caught in FANTA->execute().");
-	//	}
+	try {
+		FANTA->execute();
+	} catch (...) {
+		LOG(DEBUG,
+				"In singletonQtLogger::goOn() --> exception caught in FANTA->execute().");
+	}
 
 	try {
 		this->setLogFileName(
