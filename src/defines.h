@@ -61,6 +61,10 @@
 #define THE_REPO Repository::Inst()
 #endif /* THE_REPO */
 
+#ifndef THE_VIEWER
+#define THE_VIEWER FileFormazioniViewer::Inst()
+#endif /* THE_VIEWER */
+
 #ifndef STR_MOD
 #define STR_MOD StringModifier::Inst()
 #endif /* STR_MOD */
@@ -101,6 +105,7 @@
 #define PLAYER_REPEATED 	1
 #define PLAYER_GDV_NO_GOAL 	2
 #define PLAYER_GDP_NO_GOAL 	3
+#define PLAYER_ERROR 		99
 #endif /* ADDPLAYER_RETURN_CODES */
 
 #ifndef FORMFILEREAD_RETURN_CODE

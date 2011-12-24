@@ -10,6 +10,8 @@ class FileFormazioniViewer: public QDialog {
 Q_OBJECT
 
 public:
+
+	static FileFormazioniViewer* Inst();
 	FileFormazioniViewer(QWidget *parent = 0);
 	virtual ~FileFormazioniViewer();
 	void setFile(QString);
@@ -18,6 +20,7 @@ private slots:
 	void saveFileAndClose();
 
 private:
+	static FileFormazioniViewer* pInstance;
 	Ui::FileFormazioniViewerClass ui;
 	QString filename;
 };

@@ -19,6 +19,9 @@ void FormazioniFileReader::setPlayers(
 }
 unsigned int FormazioniFileReader::execute() {
 	LOG(DEBUG, "In FormazioniFileReader::execute().");
+
+	this->init();
+
 	std::ifstream fSqua(this->fileFormazioni.toStdString().c_str());
 	if (!fSqua) {
 		LOG(
@@ -275,61 +278,87 @@ unsigned int FormazioniFileReader::execute() {
 						v_Found.at(answer) += "\t0\t0";
 					}
 
-					switch (FANTA->addPlayer(v_Found.at(answer), k)) {
-					case 0:
-						LOG(DEBUG, "In FormazioniFileReader::execute() --> switch : FANTA->addPlayer( ... ) returned PLAYER_OK.");
-						break;
+					LOG(
+							DEBUG,
+							"In FormazioniFileReader::execute() --> before switch : v_Found.at("
+									+ my::toQString<unsigned int>(answer)
+									+ ") = " + QString::fromStdString(
+									v_Found.at(answer)) + " (squadra "
+									+ my::toQString<unsigned int>(k) + ")");
 
-					case 1:
-						LOG(DEBUG, "In FormazioniFileReader::execute() --> switch : FANTA->addPlayer( ... ) returned PLAYER_REPEATED.");
-						LOG(
-								ERROR,
-								"In FormazioniFileReader::execute() --> "
-										+ QString::fromStdString(
-												STR_MOD->msk(
-														v_Found.at(answer),
-														DELIM, ColNomeCognome))
-										+ " ( " + QString::fromStdString(
-										STR_MOD->msk(v_Found.at(answer), DELIM,
-												ColSquadra))
-										+ ") ripetuto !!! Controllare il file di input.");
-						return FORMFILEREAD_REPEATED;
-						break;
+					/**/
+					do {
+						switch (FANTA->addPlayer(v_Found.at(answer), k)) {
+						case 0:
+							LOG(
+									DEBUG,
+									"In FormazioniFileReader::execute() --> switch : FANTA->addPlayer( ... ) returned PLAYER_OK.");
+							break;
 
-					case 2:
-						LOG(DEBUG, "In FormazioniFileReader::execute() --> switch : FANTA->addPlayer( ... ) returned PLAYER_GDV_NO_GOAL.");
-						LOG(
-								ERROR,
-								QString::fromStdString(
-										STR_MOD->msk(v_Found.at(answer), DELIM,
-												ColNomeCognome)) + " ( "
-										+ QString::fromStdString(
-												STR_MOD->msk(
-														v_Found.at(answer),
-														DELIM, ColSquadra))
-										+ "<br>Giocatore indicato con goal decisivo vittoria senza che abbia segnato !!!<br/>Controllare il file di input.");
-						return FORMFILEREAD_GDV_NO_GOAL;
-						break;
+						case 1:
+							LOG(
+									DEBUG,
+									"In FormazioniFileReader::execute() --> switch : FANTA->addPlayer( ... ) returned PLAYER_REPEATED.");
+							LOG(
+									ERROR,
+									"In FormazioniFileReader::execute() --> "
+											+ QString::fromStdString(
+													STR_MOD->msk(
+															v_Found.at(answer),
+															DELIM,
+															ColNomeCognome))
+											+ " ( " + QString::fromStdString(
+											STR_MOD->msk(v_Found.at(answer),
+													DELIM, ColSquadra))
+											+ ") ripetuto !!! Controllare il file di input.");
+							return FORMFILEREAD_REPEATED;
+							break;
 
-					case 3:
-						LOG(DEBUG, "In FormazioniFileReader::execute() --> switch : FANTA->addPlayer( ... ) returned PLAYER_GDP_NO_GOAL.");
-						LOG(
-								ERROR,
-								QString::fromStdString(
-										STR_MOD->msk(v_Found.at(answer), DELIM,
-												ColNomeCognome)) + " ( "
-										+ QString::fromStdString(
-												STR_MOD->msk(
-														v_Found.at(answer),
-														DELIM, ColSquadra))
-										+ "<br>Giocatore indicato con goal decisivo pareggio senza che abbia segnato !!!<br/>Controllare il file di input.<br>");
-						return FORMFILEREAD_GDP_NO_GOAL;
-						break;
+						case 2:
+							LOG(
+									DEBUG,
+									"In FormazioniFileReader::execute() --> switch : FANTA->addPlayer( ... ) returned PLAYER_GDV_NO_GOAL.");
+							LOG(
+									ERROR,
+									QString::fromStdString(
+											STR_MOD->msk(v_Found.at(answer),
+													DELIM, ColNomeCognome))
+											+ " ( " + QString::fromStdString(
+											STR_MOD->msk(v_Found.at(answer),
+													DELIM, ColSquadra))
+											+ " )<br>Giocatore indicato con goal decisivo vittoria senza che abbia segnato !!! Controllare il file di input.");
+							return FORMFILEREAD_GDV_NO_GOAL;
+							break;
 
-					default:
-						LOG(DEBUG, "In FormazioniFileReader::execute() --> switch : default.");
-						break;
-					}
+						case 3:
+							LOG(
+									DEBUG,
+									"In FormazioniFileReader::execute() --> switch : FANTA->addPlayer( ... ) returned PLAYER_GDP_NO_GOAL.");
+							LOG(
+									ERROR,
+									QString::fromStdString(
+											STR_MOD->msk(v_Found.at(answer),
+													DELIM, ColNomeCognome))
+											+ " ( " + QString::fromStdString(
+											STR_MOD->msk(v_Found.at(answer),
+													DELIM, ColSquadra))
+											+ " )<br>Giocatore indicato con goal decisivo pareggio senza che abbia segnato !!! Controllare il file di input.");
+							return FORMFILEREAD_GDP_NO_GOAL;
+							break;
+
+						case 99:
+							LOG(
+									ERROR,
+									"In FormazioniFileReader::execute() --> switch : FANTA->addPlayer( ... ) returned PLAYER_ERROR.");
+							break;
+
+						default:
+							LOG(ERROR,
+									"In FormazioniFileReader::execute() --> switch : default.");
+							break;
+						}
+					} while (FANTA->addPlayer(v_Found.at(answer), k)
+							!= FORMFILEREAD_OK);
 
 					LOG(
 							DEBUG,
@@ -421,4 +450,6 @@ std::string FormazioniFileReader::prepareStringToPresent(std::string str,
 
 	return tmpStr;
 }
-
+void FormazioniFileReader::init() {
+	;
+}

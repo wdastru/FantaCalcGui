@@ -59,6 +59,7 @@ private:
 		unsigned int daSostituire;
 	};
 	player NonHaGiocato;
+	player fakePlayer;
 	std::vector<std::string> teamName;
 	unsigned int getModulo(size_t, size_t) const;
 	std::vector<Fanta::player> Team[2];

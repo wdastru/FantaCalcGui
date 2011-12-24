@@ -59,6 +59,24 @@ void Fanta::initialize() {
 	Fanta::NonHaGiocato.Esp = -0;
 	Fanta::NonHaGiocato.daSostituire = 0;
 
+	Fanta::fakePlayer.Nome = "fake";
+	Fanta::fakePlayer.Nome_Sost = "---";
+	Fanta::fakePlayer.Squadra = "---";
+	Fanta::fakePlayer.Squadra_Sost = "---";
+	Fanta::fakePlayer.Ruolo = -1;
+	Fanta::fakePlayer.VotoGazzetta = 0.0;
+	Fanta::fakePlayer.FantaVotoGazzetta = 3.0;
+	Fanta::fakePlayer.FantaVoto = 3.0;
+	Fanta::fakePlayer.GoalFatti = 0.0;
+	Fanta::fakePlayer.Autoreti = -0.0;
+	Fanta::fakePlayer.GoalSubiti = 0.0;
+	Fanta::fakePlayer.GoalDecVitt = 0;
+	Fanta::fakePlayer.GoalDecPar = 0;
+	Fanta::fakePlayer.Assist = 0;
+	Fanta::fakePlayer.Amm = -0;
+	Fanta::fakePlayer.Esp = -0;
+	Fanta::fakePlayer.daSostituire = 0;
+
 	for (int j = 0; j < 4; j++) {
 		Fanta::modifierValues[0][j] = j + 1;
 	}
@@ -127,103 +145,114 @@ void Fanta::setAtHome(unsigned int k) {
 	this->atHome[k] = 2;
 }
 unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
-	LOG(DEBUG,
-			"In Fanta::addPlayer(...) --> str : " + QString::fromStdString(str));
+	try {
+		LOG(
+				DEBUG,
+				"In Fanta::addPlayer(...) --> str : " + QString::fromStdString(
+						str));
 
-	Fanta::player tmpPlayer;
+		Fanta::player tmpPlayer;
 
-	// nome
-	tmpPlayer.Nome = STR_MOD->msk(str, DELIM, ColNomeCognome);
+		// nome
+		tmpPlayer.Nome = STR_MOD->msk(str, DELIM, ColNomeCognome);
 
-	// squadra
-	tmpPlayer.Squadra = STR_MOD->msk(str, DELIM, ColSquadra);
+		// squadra
+		tmpPlayer.Squadra = STR_MOD->msk(str, DELIM, ColSquadra);
 
-	// goal e rigori
-	if (STR_MOD->msk(str, DELIM, ColRuolo) == "P") {
-		tmpPlayer.Ruolo = 0;
-		tmpPlayer.GoalSubiti = fabs(
-				atof(STR_MOD->msk(str, DELIM, ColGoalSubiti).c_str()));
-		tmpPlayer.GoalFatti = 0;
-		tmpPlayer.RigoreParato = fabs(
-				atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3);
-		tmpPlayer.RigoreSbagliato = 0;
-	} else if (STR_MOD->msk(str, DELIM, ColRuolo) == "D") {
-		tmpPlayer.Ruolo = 1;
-		tmpPlayer.GoalFatti = atof(
-				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3;
-		tmpPlayer.GoalSubiti = 0;
-		tmpPlayer.RigoreSbagliato = fabs(
-				atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3);
-		tmpPlayer.RigoreParato = 0;
-	} else if (STR_MOD->msk(str, DELIM, ColRuolo) == "C") {
-		tmpPlayer.Ruolo = 2;
-		tmpPlayer.GoalFatti = atof(
-				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3;
-		tmpPlayer.GoalSubiti = 0;
-		tmpPlayer.RigoreSbagliato = fabs(
-				atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3);
-		tmpPlayer.RigoreParato = 0;
-	} else if (STR_MOD->msk(str, DELIM, ColRuolo) == "A") {
-		tmpPlayer.Ruolo = 3;
-		tmpPlayer.GoalFatti = atof(
-				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3;
-		tmpPlayer.GoalSubiti = 0;
-		tmpPlayer.RigoreSbagliato = fabs(
-				atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3);
-		tmpPlayer.RigoreParato = 0;
-	}
-
-	// fantavoto
-	if (STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta) == "-")
-		tmpPlayer.FantaVotoGazzetta = 0;
-	else
-		tmpPlayer.FantaVotoGazzetta = atof(
-				STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta).c_str());
-
-	// voto gazzetta
-	if (STR_MOD->msk(str, DELIM, ColVotoGazzetta) == "-")
-		tmpPlayer.VotoGazzetta = 0;
-	else if (STR_MOD->msk(str, DELIM, ColVotoGazzetta) == "S.V.")
-		tmpPlayer.VotoGazzetta = -1;
-	else
-		tmpPlayer.VotoGazzetta = atof(
-				STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str());
-
-	// --> goal decisivi
-	tmpPlayer.GoalDecVitt = atoi(
-			STR_MOD->msk(str, DELIM, ColGoalDecVitt).c_str());
-	if (tmpPlayer.GoalDecVitt != 0 && tmpPlayer.GoalFatti == 0) {
-		LOG(DEBUG, "In Fanta::addPlayer( ... ) --> PLAYER_GDV_NO_GOAL");
-		return PLAYER_GDV_NO_GOAL;
-	}
-
-	tmpPlayer.GoalDecPar
-			= atoi(STR_MOD->msk(str, DELIM, ColGoalDecPar).c_str());
-	if (tmpPlayer.GoalDecPar != 0 && tmpPlayer.GoalFatti == 0) {
-		LOG(DEBUG, "In Fanta::addPlayer( ... ) --> PLAYER_GDP_NO_GOAL");
-		return PLAYER_GDP_NO_GOAL;
-	}
-	// <-- goal decisivi
-
-	tmpPlayer.Assist = atoi(STR_MOD->msk(str, DELIM, ColAssist).c_str());
-	tmpPlayer.Autoreti = abs(
-			atoi(STR_MOD->msk(str, DELIM, ColAutoreti).c_str()) / 2);
-	tmpPlayer.Amm = abs(
-			int(atof(STR_MOD->msk(str, DELIM, ColAmm).c_str()) / 0.5));
-	tmpPlayer.Esp = abs(atoi(STR_MOD->msk(str, DELIM, ColEsp).c_str()));
-
-	tmpPlayer.daSostituire = 0;
-
-	for (size_t kk = 0; kk < 2; kk++) {
-		for (size_t i = 0; i < Team[kk].size(); i++) {
-			if (tmpPlayer.Nome == Fanta::Team[kk].at(i).Nome && tmpPlayer.Ruolo
-					== Fanta::Team[kk].at(i).Ruolo)
-				return PLAYER_REPEATED;
+		// goal e rigori
+		if (STR_MOD->msk(str, DELIM, ColRuolo) == "P") {
+			tmpPlayer.Ruolo = 0;
+			tmpPlayer.GoalSubiti = fabs(
+					atof(STR_MOD->msk(str, DELIM, ColGoalSubiti).c_str()));
+			tmpPlayer.GoalFatti = 0;
+			tmpPlayer.RigoreParato = fabs(
+					atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3);
+			tmpPlayer.RigoreSbagliato = 0;
+		} else if (STR_MOD->msk(str, DELIM, ColRuolo) == "D") {
+			tmpPlayer.Ruolo = 1;
+			tmpPlayer.GoalFatti = atof(
+					STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3;
+			tmpPlayer.GoalSubiti = 0;
+			tmpPlayer.RigoreSbagliato = fabs(
+					atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3);
+			tmpPlayer.RigoreParato = 0;
+		} else if (STR_MOD->msk(str, DELIM, ColRuolo) == "C") {
+			tmpPlayer.Ruolo = 2;
+			tmpPlayer.GoalFatti = atof(
+					STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3;
+			tmpPlayer.GoalSubiti = 0;
+			tmpPlayer.RigoreSbagliato = fabs(
+					atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3);
+			tmpPlayer.RigoreParato = 0;
+		} else if (STR_MOD->msk(str, DELIM, ColRuolo) == "A") {
+			tmpPlayer.Ruolo = 3;
+			tmpPlayer.GoalFatti = atof(
+					STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3;
+			tmpPlayer.GoalSubiti = 0;
+			tmpPlayer.RigoreSbagliato = fabs(
+					atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3);
+			tmpPlayer.RigoreParato = 0;
 		}
-	}
 
-	Fanta::Team[k].push_back(tmpPlayer);
-	return PLAYER_OK;
+		// fantavoto
+		if (STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta) == "-")
+			tmpPlayer.FantaVotoGazzetta = 0;
+		else
+			tmpPlayer.FantaVotoGazzetta = atof(
+					STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta).c_str());
+
+		// voto gazzetta
+		if (STR_MOD->msk(str, DELIM, ColVotoGazzetta) == "-")
+			tmpPlayer.VotoGazzetta = 0;
+		else if (STR_MOD->msk(str, DELIM, ColVotoGazzetta) == "S.V.")
+			tmpPlayer.VotoGazzetta = -1;
+		else
+			tmpPlayer.VotoGazzetta = atof(
+					STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str());
+
+		// --> goal decisivi
+		tmpPlayer.GoalDecVitt = atoi(
+				STR_MOD->msk(str, DELIM, ColGoalDecVitt).c_str());
+		if (tmpPlayer.GoalDecVitt != 0 && tmpPlayer.GoalFatti == 0) {
+			LOG(DEBUG, "In Fanta::addPlayer( ... ) --> PLAYER_GDV_NO_GOAL");
+			Fanta::Team[k].push_back(this->fakePlayer);
+			return PLAYER_GDV_NO_GOAL;
+		}
+
+		tmpPlayer.GoalDecPar = atoi(
+				STR_MOD->msk(str, DELIM, ColGoalDecPar).c_str());
+		if (tmpPlayer.GoalDecPar != 0 && tmpPlayer.GoalFatti == 0) {
+			LOG(DEBUG, "In Fanta::addPlayer( ... ) --> PLAYER_GDP_NO_GOAL");
+			Fanta::Team[k].push_back(this->fakePlayer);
+			return PLAYER_GDP_NO_GOAL;
+		}
+		// <-- goal decisivi
+
+		tmpPlayer.Assist = atoi(STR_MOD->msk(str, DELIM, ColAssist).c_str());
+		tmpPlayer.Autoreti = abs(
+				atoi(STR_MOD->msk(str, DELIM, ColAutoreti).c_str()) / 2);
+		tmpPlayer.Amm = abs(
+				int(atof(STR_MOD->msk(str, DELIM, ColAmm).c_str()) / 0.5));
+		tmpPlayer.Esp = abs(atoi(STR_MOD->msk(str, DELIM, ColEsp).c_str()));
+
+		tmpPlayer.daSostituire = 0;
+
+		for (size_t kk = 0; kk < 2; kk++) {
+			for (size_t i = 0; i < Team[kk].size(); i++) {
+				if (tmpPlayer.Nome == Fanta::Team[kk].at(i).Nome
+						&& tmpPlayer.Ruolo == Fanta::Team[kk].at(i).Ruolo) {
+					Fanta::Team[k].push_back(this->fakePlayer);
+					return PLAYER_REPEATED;
+				}
+			}
+		}
+
+		Fanta::Team[k].push_back(tmpPlayer);
+		return PLAYER_OK;
+	} catch (...) {
+		Fanta::Team[k].push_back(this->fakePlayer);
+		return PLAYER_ERROR;
+	}
 }
 
 const unsigned int cost_del = 1;
@@ -295,8 +324,6 @@ void Fanta::execute() {
 				"In void Fanta::execute() --> exception caught in fillWithNonHaGiocato().");
 	}
 
-	/**/
-
 	try {
 		this->substitutions();
 	} catch (...) {
@@ -355,7 +382,6 @@ void Fanta::execute() {
 
 	return;
 }
-
 void Fanta::checkGiocatoSenzaVoto() {
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
@@ -499,12 +525,12 @@ void Fanta::orderByRuolo() {
 				LOG(
 						DEBUG,
 						"In Fanta::orderByRuolo() --> Squadra : "
-								+ QString::fromStdString(this->getTeamName(k)));
-				throw(this->getTeamName(k));
+								+ QString::fromStdString(this->teamName.at(k)));
+				throw(this->teamName.at(k));
 			} catch (std::string str) {
 				LOG(
 						DEBUG,
-						"In Fanta::orderByRuolo() --> exception caught : this->getTeamName("
+						"In Fanta::orderByRuolo() --> exception caught : this->teamName.at("
 								+ my::toQString<unsigned int>(k) + ") = "
 								+ QString::fromStdString(str));
 			}
