@@ -23,6 +23,8 @@ using namespace std;
 
 class Fanta {
 
+	friend class FormazioniFileReader;
+
 private:
 	static Fanta * pInstance;
 	unsigned int modulo[2][4];// moduli delle squadre
@@ -100,7 +102,7 @@ public:
 	void execute();
 	void bSort(std::vector<Fanta::player> &);
 	QString getFileGazzetta();
-	void setFileGazzetta(QString);
+//	void setFileGazzetta(QString);
 	void printRiepilogo();
 	void printTitolo(std::string);
 	unsigned int getAmmonizioniTot(unsigned int) const ;

@@ -22,6 +22,9 @@ Fanta::Fanta() {
 Fanta::~Fanta() {
 }
 void Fanta::initialize() {
+
+	LOG(DEBUG, "In Fanta::initialize().");
+
 	for (size_t k = 0; k < 2; k++) {
 		for (size_t j = 0; j < 4; j++) {
 			Fanta::modulo[k][j] = 0;
@@ -37,6 +40,7 @@ void Fanta::initialize() {
 		Fanta::sfide[k] = 0;
 		Fanta::goals[k] = 0;
 		Fanta::sostituzioni[k] = 0;
+		Fanta::Team[k].clear();
 	}
 
 	Fanta::longerNameLength = 0;
@@ -1052,9 +1056,9 @@ void Fanta::bSort(std::vector<Fanta::player> & vect) {
 QString Fanta::getFileGazzetta() {
 	return this->fileGazzetta;
 }
-void Fanta::setFileGazzetta(QString _fileGazzetta) {
-	this->fileGazzetta = _fileGazzetta;
-}
+//void Fanta::setFileGazzetta(QString _fileGazzetta) {
+//	this->fileGazzetta = _fileGazzetta;
+//}
 void Fanta::printRiepilogo() {
 
 	QString output = "<br/> --- Modulo  ---<br/>"

@@ -280,8 +280,8 @@ void singletonQtLogger::goOn() {
 				"In singletonQtLogger::goOn() --> formazioniFileReader::execute() returned "
 						+ my::toQString<unsigned int>(retVal) + ".");
 	} while (retVal != FORMFILEREAD_OK);
-
 	// <-- lettura file Gazzetta e Formazioni
+
 	//	try {
 	//		FANTA->execute();
 	//	} catch (...) {
