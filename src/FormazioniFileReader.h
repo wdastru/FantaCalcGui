@@ -34,6 +34,7 @@ public:
 //	void printTitolo3(std::string);
 
 private:
+	void init();
 	QString fileFormazioni;
 	std::vector<std::vector<std::string> > allThePlayers;
 	std::vector < std::string > findLevenstheins(std::string);

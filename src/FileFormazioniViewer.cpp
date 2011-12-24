@@ -4,6 +4,14 @@
 
 #include <QTextDocumentWriter>
 
+FileFormazioniViewer* FileFormazioniViewer::pInstance = NULL;
+
+FileFormazioniViewer* FileFormazioniViewer::Inst() {
+	if (pInstance == NULL) {
+		pInstance = new FileFormazioniViewer(THE_LOGGER);
+	}
+	return pInstance;
+}
 FileFormazioniViewer::FileFormazioniViewer(QWidget *parent) :
 	QDialog(parent) {
 	ui.setupUi(this);
