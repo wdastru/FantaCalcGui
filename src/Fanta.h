@@ -23,6 +23,8 @@ using namespace std;
 
 class Fanta {
 
+	friend class FormazioniFileReader;
+
 private:
 	static Fanta * pInstance;
 	unsigned int modulo[2][4];// moduli delle squadre
@@ -59,6 +61,7 @@ private:
 		unsigned int daSostituire;
 	};
 	player NonHaGiocato;
+	player fakePlayer;
 	std::vector<std::string> teamName;
 	unsigned int getModulo(size_t, size_t) const;
 	std::vector<Fanta::player> Team[2];
@@ -86,6 +89,7 @@ public:
 	Fanta();
 	virtual ~Fanta();
 	static Fanta * Inst();
+	static Fanta * Refresh();
 	void initialize();
 	unsigned int atHome[2];
 	void setTeamName(const std::string, unsigned int);
@@ -99,7 +103,7 @@ public:
 	void execute();
 	void bSort(std::vector<Fanta::player> &);
 	QString getFileGazzetta();
-	void setFileGazzetta(QString);
+//	void setFileGazzetta(QString);
 	void printRiepilogo();
 	void printTitolo(std::string);
 	unsigned int getAmmonizioniTot(unsigned int) const ;
