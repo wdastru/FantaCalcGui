@@ -234,55 +234,23 @@ p, li { white-space: pre-wrap; }
     </item>
    </layout>
   </widget>
-  <widget class="QDialogButtonBox" name="okCancelButtonBox">
+  <widget class="QPushButton" name="okButton">
    <property name="geometry">
     <rect>
-     <x>436</x>
-     <y>260</y>
-     <width>156</width>
+     <x>517</x>
+     <y>252</y>
+     <width>75</width>
      <height>23</height>
     </rect>
    </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   <property name="text">
+    <string>Ok</string>
    </property>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections>
-  <connection>
-   <sender>okCancelButtonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>IniFilePopulatorClass</receiver>
-   <slot>updateInternalData()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>271</x>
-     <y>269</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>271</x>
-     <y>277</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>okCancelButtonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>IniFilePopulatorClass</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>334</x>
-     <y>261</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>337</x>
-     <y>277</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>formazioniButton</sender>
    <signal>clicked()</signal>
@@ -392,6 +360,22 @@ p, li { white-space: pre-wrap; }
     <hint type="destinationlabel">
      <x>238</x>
      <y>277</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>okButton</sender>
+   <signal>clicked()</signal>
+   <receiver>IniFilePopulatorClass</receiver>
+   <slot>updateInternalData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>543</x>
+     <y>261</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>442</x>
+     <y>245</y>
     </hint>
    </hints>
   </connection>
