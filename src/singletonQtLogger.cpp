@@ -296,7 +296,12 @@ void singletonQtLogger::goOn() {
 				THE_REPO->getRisultatiPath() + "/risultato_"
 						+ QString::fromStdString(FANTA->getTeamName(0)) + "-"
 						+ QString::fromStdString(FANTA->getTeamName(1)) + "_"
-						+ QFileInfo(FANTA->getFileGazzetta()).fileName());
+						+ QFileInfo(THE_REPO->fileGazzetta).fileName());
+
+		LOG(
+				DEBUG,
+				"In singletonQtLogger::goOn() --> risultato file name : "
+						+ this->logFileName + ".");
 
 		FANTA->printTitolo(
 				FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
