@@ -28,9 +28,11 @@ void IniFilePopulator::updateInternalData() {
 	THE_REPO->gazzettaUrl = ui.gazzettaUrlLineEdit->text();
 
 	if (this->ui.trueCheckBox->isChecked()) {
-		THE_REPO->debugStatus = "TRUE";
+		THE_REPO->debugStatus = true;
+	} else if (this->ui.falseCheckBox->isChecked()) {
+		THE_REPO->debugStatus = false;
 	} else {
-		THE_REPO->debugStatus = "FALSE";
+		THE_REPO->debugStatus = true;
 	}
 
 	this->close();
@@ -208,12 +210,10 @@ void IniFilePopulator::setDebugStatus(bool status) {
 	}
 }
 void IniFilePopulator::toggleDebugStatus() {
-	LOG(DEBUG, "void IniFilePopulator::toggleDebugStatus().");
-
 	if (this->ui.trueCheckBox->isChecked()) {
+		THE_REPO->debugStatus = TRUE;
 		LOG(DEBUG,
 				"void IniFilePopulator::toggleDebugStatus() --> TRUE is checked.");
-		THE_REPO->debugStatus = TRUE;
 
 	} else if (this->ui.falseCheckBox->isChecked()) {
 		LOG(DEBUG,
