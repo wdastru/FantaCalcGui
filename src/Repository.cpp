@@ -5,15 +5,32 @@
  *      Author: WAleViolaeIvan
  */
 
+#include <stdlib.h>
 #include "Repository.h"
 #include <QFile>
 
 Repository::Repository() {
+	/*
+	 * DEFAULTS
+	 */
 	this->formazioniUrl
 			= "http://www.cim.unito.it/private/fantacalcio/777/formazioni/";
 	this->gazzettaUrl
 			= "http://www.cim.unito.it/private/fantacalcio/777/filesGazzetta/";
 	this->debugStatus = FALSE; // temporaneo prima che venga letto l'ini file.
+
+	char * UserProfile = getenv("USERPROFILE");
+
+	this->formazioniPath = QString::fromLocal8Bit(UserProfile)
+			+ "\\FantaCalcGui\\formazioni";
+	this->gazzettaPath = QString::fromLocal8Bit(UserProfile)
+			+ "\\FantaCalcGui\\gazzetta";
+	this->risultatiPath = QString::fromLocal8Bit(UserProfile)
+			+ "\\FantaCalcGui\\risultati";
+	this->downloadPath = QString::fromLocal8Bit(UserProfile)
+			+ "\\FantaCalcGui\\download";
+	this->listePath = QString::fromLocal8Bit(UserProfile)
+			+ "\\FantaCalcGui\\liste";
 }
 
 Repository::~Repository() {

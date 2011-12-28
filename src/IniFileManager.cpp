@@ -22,7 +22,7 @@ IniFileManager* IniFileManager::pInstance = NULL;
 
 IniFileManager::IniFileManager() {
 	LOG(DEBUG, "In IniFileManager() constructor.");
-	char *UserProfile = getenv("USERPROFILE");
+	char * UserProfile = getenv("USERPROFILE");
 	QDir dir(UserProfile);
 	dir.mkdir("FantaCalcGui");
 	this->workDir = QString::fromAscii(UserProfile) + "\\FantaCalcGui\\";
@@ -195,28 +195,17 @@ void IniFileManager::readIniFile() {
 		 */
 		THE_CONFIGURATOR->setFormazioniUrl(THE_REPO->formazioniUrl);
 		THE_CONFIGURATOR->setGazzettaUrl(THE_REPO->gazzettaUrl);
+		THE_CONFIGURATOR->setFormazioniPath(THE_REPO->formazioniPath);
+		THE_CONFIGURATOR->setGazzettaPath(THE_REPO->gazzettaPath);
+		THE_CONFIGURATOR->setRisultatiPath(THE_REPO->risultatiPath);
+		THE_CONFIGURATOR->setDownloadPath(THE_REPO->downloadPath);
+		THE_CONFIGURATOR->setListePath(THE_REPO->listePath);
 		if (THE_REPO->debugStatus == TRUE) {
 			THE_CONFIGURATOR->setDebugStatus(TRUE);
 		} else {
 			THE_CONFIGURATOR->setDebugStatus(FALSE);
 		}
-
 		THE_CONFIGURATOR->exec();
-
-		/*
-		 * aggiorna i dati in THE_REPO
-		 */
-		THE_REPO->formazioniPath = THE_CONFIGURATOR->getFormazioniPath();
-		THE_REPO->gazzettaPath = THE_CONFIGURATOR->getGazzettaPath();
-		THE_REPO->risultatiPath = THE_CONFIGURATOR->getRisultatiPath();
-		THE_REPO->downloadPath = THE_CONFIGURATOR->getDownloadPath();
-		THE_REPO->listePath = THE_CONFIGURATOR->getListePath();
-		THE_REPO->formazioniUrl = THE_CONFIGURATOR->getFormazioniUrl();
-		THE_REPO->gazzettaUrl = THE_CONFIGURATOR->getGazzettaUrl();
-		if (THE_CONFIGURATOR->getDebugStatus())
-			THE_REPO->debugStatus = TRUE;
-		else
-			THE_REPO->debugStatus = FALSE;
 
 		this->writeIniFile();
 	}
