@@ -11,7 +11,7 @@
 #include <QtCore/QString>
 
 #include "singletonQtLogger.h"
-#include "IniFilePopulator.h"
+//#include "IniFilePopulator.h"
 
 #include "defines.h"
 
@@ -26,6 +26,7 @@ public:
 	void readIniFile();
 	QString getIniFilePath();
 	QString getWorkDir();
+	void setWorkDir(QString);
 	QString showIniFile();
 
 private:

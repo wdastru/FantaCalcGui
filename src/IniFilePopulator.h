@@ -45,6 +45,7 @@ private:
 	Ui::IniFilePopulatorClass ui;
 	QString getDir(QString, QString);
 	QString startDir;
+	bool createDirs();
 
 };
 
