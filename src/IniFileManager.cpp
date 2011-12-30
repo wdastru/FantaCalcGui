@@ -6,6 +6,7 @@
  */
 
 #include "IniFileManager.h"
+#include "IniFilePopulator.h"
 #include "Repository.h"
 
 #include <QtCore/QDir>
@@ -30,6 +31,10 @@ IniFileManager::IniFileManager() {
 	this->readIniFile();
 }
 IniFileManager::~IniFileManager() {
+}
+void IniFileManager::setWorkDir(QString dir) {
+	this->workDir = dir;
+	LOG(DEBUG, "In IniFileManager::setWorkDir(QString dir) --> workDir set to " + this->workDir);
 }
 QString IniFileManager::getWorkDir() {
 	return this->workDir;
@@ -177,7 +182,7 @@ void IniFileManager::readIniFile() {
 		iniFile->close();
 	} else {
 		LOG(
-				ERROR,
+				INFO,
 				this->iniFileName
 						+ " non esiste. Inserire le informazioni richieste.");
 
@@ -224,11 +229,3 @@ QString IniFileManager::showIniFile() {
 	}
 	return content;
 }
-/*
- QString Repository::getIniFilePath() {
- return this->iniFileName;
- }
- QString Repository::getWorkDir() {
- return this->workDir;
- }
- */

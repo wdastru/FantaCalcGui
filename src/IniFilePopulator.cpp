@@ -13,6 +13,7 @@ IniFilePopulator* IniFilePopulator::pInstance = NULL;
 IniFilePopulator::IniFilePopulator(QWidget *parent) :
 	QDialog(parent) {
 	LOG(DEBUG, "In IniFilePopulator() constructor.");
+	this->startDir = "";
 	ui.setupUi(this);
 }
 IniFilePopulator::~IniFilePopulator() {
@@ -35,66 +36,137 @@ void IniFilePopulator::updateInternalData() {
 		THE_REPO->debugStatus = true;
 	}
 
+	this->createDirs();
+
 	this->close();
 }
-void IniFilePopulator::chooseFormazioniPath() {
-	QString directory = THE_REPO->getFormazioniPath();
-	QString startDir = THE_MANAGER->getWorkDir();
-	if (!directory.isEmpty()) {
-		startDir = directory;
+bool IniFilePopulator::createDirs() {
+	LOG(DEBUG, "In IniFilePopulator::createDirs().");
+
+	bool retVal = true;
+
+	QDir * dir = new QDir;
+
+	if (dir->mkdir(THE_REPO->formazioniPath)) {
+		LOG(
+				DEBUG,
+				"In IniFilePopulator::createDirs() --> "
+						+ THE_REPO->formazioniPath + " has been created.");
+		retVal = retVal && true;
+	} else {
+		LOG(
+				DEBUG,
+				"In IniFilePopulator::createDirs() --> "
+						+ THE_REPO->formazioniPath + " has not been created.");
+		retVal = retVal && false;
 	}
-	directory = this->getDir("Formazioni Path", startDir);
+
+	if (dir->mkdir(THE_REPO->gazzettaPath)) {
+		LOG(
+				DEBUG,
+				"In IniFilePopulator::createDirs() --> "
+						+ THE_REPO->gazzettaPath + " has been created.");
+		retVal = retVal && true;
+	} else {
+		LOG(
+				DEBUG,
+				"In IniFilePopulator::createDirs() --> "
+						+ THE_REPO->gazzettaPath + " has not been created.");
+		retVal = retVal && false;
+	}
+
+	if (dir->mkdir(THE_REPO->risultatiPath)) {
+		LOG(
+				DEBUG,
+				"In IniFilePopulator::createDirs() --> "
+						+ THE_REPO->risultatiPath + " has been created.");
+		retVal = retVal && true;
+	} else {
+		LOG(
+				DEBUG,
+				"In IniFilePopulator::createDirs() --> "
+						+ THE_REPO->risultatiPath + " has not been created.");
+		retVal = retVal && false;
+	}
+
+	if (dir->mkdir(THE_REPO->downloadPath)) {
+		LOG(
+				DEBUG,
+				"In IniFilePopulator::createDirs() --> "
+						+ THE_REPO->downloadPath + " has been created.");
+		retVal = retVal && true;
+	} else {
+		LOG(
+				DEBUG,
+				"In IniFilePopulator::createDirs() --> "
+						+ THE_REPO->downloadPath + " has not been created.");
+		retVal = retVal && false;
+	}
+
+	if (dir->mkdir(THE_REPO->listePath)) {
+		LOG(
+				DEBUG,
+				"In IniFilePopulator::createDirs() --> " + THE_REPO->listePath
+						+ " has been created.");
+		retVal = retVal && true;
+	} else {
+		LOG(
+				DEBUG,
+				"In IniFilePopulator::createDirs() --> " + THE_REPO->listePath
+						+ " has not been created.");
+		retVal = retVal && false;
+	}
+
+	return retVal;
+}
+void IniFilePopulator::chooseFormazioniPath() {
+	QString directory = this->getDir("Formazioni Path", this->startDir);
 	if (!directory.isEmpty()) {
 		this->ui.formazioniLineEdit->setText(directory);
 		THE_REPO->formazioniPath = directory;
+		QDir * dir = new QDir(directory);
+		dir->cdUp();
+		this->startDir = dir->absolutePath();
 	}
 }
 void IniFilePopulator::chooseGazzettaPath() {
-	QString directory = THE_REPO->getGazzettaPath();
-	QString startDir = THE_MANAGER->getWorkDir();
-	if (!directory.isEmpty()) {
-		startDir = directory;
-	}
-	directory = this->getDir("Gazzetta Path", startDir);
+	QString directory = this->getDir("Gazzetta Path", this->startDir);
 	if (!directory.isEmpty()) {
 		this->ui.gazzettaLineEdit->setText(directory);
 		THE_REPO->gazzettaPath = directory;
+		QDir * dir = new QDir(directory);
+		dir->cdUp();
+		this->startDir = dir->absolutePath();
 	}
 }
 void IniFilePopulator::chooseDownloadPath() {
-	QString directory = THE_REPO->getDownloadPath();
-	QString startDir = THE_MANAGER->getWorkDir();
-	if (!directory.isEmpty()) {
-		startDir = directory;
-	}
-	directory = this->getDir("Download Path", startDir);
+	QString directory = this->getDir("Download Path", this->startDir);
 	if (!directory.isEmpty()) {
 		this->ui.downloadLineEdit->setText(directory);
 		THE_REPO->downloadPath = directory;
+		QDir * dir = new QDir(directory);
+		dir->cdUp();
+		this->startDir = dir->absolutePath();
 	}
 }
 void IniFilePopulator::chooseRisultatiPath() {
-	QString directory = THE_REPO->getRisultatiPath();
-	QString startDir = THE_MANAGER->getWorkDir();
-	if (!directory.isEmpty()) {
-		startDir = directory;
-	}
-	directory = this->getDir("Risultati Path", startDir);
+	QString directory = this->getDir("Risultati Path", this->startDir);
 	if (!directory.isEmpty()) {
 		this->ui.risultatiLineEdit->setText(directory);
 		THE_REPO->risultatiPath = directory;
+		QDir * dir = new QDir(directory);
+		dir->cdUp();
+		this->startDir = dir->absolutePath();
 	}
 }
 void IniFilePopulator::chooseListePath() {
-	QString directory = THE_REPO->getListePath();
-	QString startDir = THE_MANAGER->getWorkDir();
-	if (!directory.isEmpty()) {
-		startDir = directory;
-	}
-	directory = this->getDir("Liste Path", startDir);
+	QString directory = this->getDir("Liste Path", this->startDir);
 	if (!directory.isEmpty()) {
 		this->ui.listeLineEdit->setText(directory);
 		THE_REPO->listePath = directory;
+		QDir * dir = new QDir(directory);
+		dir->cdUp();
+		this->startDir = dir->absolutePath();
 	}
 }
 QString IniFilePopulator::getDir(QString caption, QString startDir) {
