@@ -94,7 +94,7 @@ void singletonQtLogger::saveLogFile() {
 		this->Inst()->Logging(
 				"DEBUG",
 				"In singletonQtLogger::saveLogFile() --> logFileName is empty. Continue with log.txt.");
-		this->logFileName = "log.txt";
+		this ->setLogFileName(THE_MANAGER->getWorkDir() + "\log.txt");
 	} else {
 		this->Inst()->Logging(
 				"DEBUG",
@@ -113,7 +113,9 @@ void singletonQtLogger::saveLogFile() {
 		QFile::remove(this->logFileName);
 	}
 
-	QFile file(this->logFileName);
+	QFile file(
+			THE_REPO->risultatiPath + "\\"
+					+ this->ui.outputFileNameLineEdit->text());
 
 	if (!file.open(QIODevice::WriteOnly)) {
 		QMessageBox::information(
@@ -292,21 +294,24 @@ void singletonQtLogger::goOn() {
 	}
 
 	try {
-		this->setLogFileName(
-				THE_REPO->getRisultatiPath() + "/risultato_"
-						+ QString::fromStdString(FANTA->getTeamName(0)) + "-"
-						+ QString::fromStdString(FANTA->getTeamName(1)) + "_"
-						+ QFileInfo(THE_REPO->fileGazzetta).fileName());
+		QString fileName(
+				"risultato_" + QString::fromStdString(FANTA->getTeamName(0))
+						+ "-" + QString::fromStdString(FANTA->getTeamName(1))
+						+ "_" + QFileInfo(THE_REPO->fileGazzetta).fileName());
+		this->setLogFileName(THE_REPO->getRisultatiPath() + "/" + fileName);
 
 		LOG(
 				DEBUG,
-				"In singletonQtLogger::goOn() --> risultato file name : "
-						+ this->logFileName + ".");
+				"In singletonQtLogger::goOn() --> file name temporaneo : "
+						+ fileName + ".");
 
 		FANTA->printTitolo(
 				FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
 		FANTA->printRiepilogo();
 		FANTA->printFormations();
+
+		this->ui.outputFileNameLineEdit->setEnabled(true);
+		this->ui.outputFileNameLineEdit->setText(fileName);
 	} catch (...) {
 		LOG(DEBUG,
 				"In singletonQtLogger::goOn() --> exception caught after FANTA->execute().");
