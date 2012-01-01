@@ -39,7 +39,6 @@ private:
 	void init();
 	void saveLogFile();
 	QString title;
-//	static bool debugStatus;
 	Ui::singletonQtLoggerClass ui;
 	static singletonQtLogger* pInstance;
 	QString fileContent;
