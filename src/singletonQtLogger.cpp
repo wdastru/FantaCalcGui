@@ -90,12 +90,19 @@ void singletonQtLogger::setVersion(QString _version) {
 					+ _version + "</span></p></body></html>");
 }
 void singletonQtLogger::saveLogFile() {
-	if (this->logFileName.isEmpty()) {
+	QFile * file = new QFile;
+
+	if (this->ui.outputFileNameLineEdit->text().isEmpty()) {
+		this->setLogFileName(THE_MANAGER->getWorkDir() + "log.txt");
+		file->setFileName(this->logFileName);
 		this->Inst()->Logging(
 				"DEBUG",
-				"In singletonQtLogger::saveLogFile() --> logFileName is empty. Continue with log.txt.");
-		this->logFileName = "log.txt";
+				"In singletonQtLogger::saveLogFile() --> logFileName is empty. Continue with "
+						+ this->logFileName);
 	} else {
+		file->setFileName(
+				THE_REPO->risultatiPath + "\\"
+						+ this->ui.outputFileNameLineEdit->text());
 		this->Inst()->Logging(
 				"DEBUG",
 				"In singletonQtLogger::saveLogFile() --> logFileName is "
@@ -113,14 +120,12 @@ void singletonQtLogger::saveLogFile() {
 		QFile::remove(this->logFileName);
 	}
 
-	QFile file(this->logFileName);
-
-	if (!file.open(QIODevice::WriteOnly)) {
+	if (!file->open(QIODevice::WriteOnly)) {
 		QMessageBox::information(
 				this,
 				tr("HTTP"),
 				tr("Unable to save the file %1: %2.") .arg(this->logFileName).arg(
-						file.errorString()));
+						file->errorString()));
 		return;
 	}
 
@@ -132,8 +137,8 @@ void singletonQtLogger::saveLogFile() {
 	fileContent += "\n File prodotto da FantaCalcGui.exe " + this->getVersion()
 			+ "\n";
 
-	file.write(this->fileContent.toStdString().c_str());
-	file.close();
+	file->write(this->fileContent.toStdString().c_str());
+	file->close();
 }
 void singletonQtLogger::saveLogAndClose() {
 	THE_MANAGER->writeIniFile();
@@ -292,21 +297,24 @@ void singletonQtLogger::goOn() {
 	}
 
 	try {
-		this->setLogFileName(
-				THE_REPO->getRisultatiPath() + "/risultato_"
-						+ QString::fromStdString(FANTA->getTeamName(0)) + "-"
-						+ QString::fromStdString(FANTA->getTeamName(1)) + "_"
-						+ QFileInfo(THE_REPO->fileGazzetta).fileName());
+		QString fileName(
+				"risultato_" + QString::fromStdString(FANTA->getTeamName(0))
+						+ "-" + QString::fromStdString(FANTA->getTeamName(1))
+						+ "_" + QFileInfo(THE_REPO->fileGazzetta).fileName());
+		this->setLogFileName(THE_REPO->getRisultatiPath() + "/" + fileName);
 
 		LOG(
 				DEBUG,
-				"In singletonQtLogger::goOn() --> risultato file name : "
-						+ this->logFileName + ".");
+				"In singletonQtLogger::goOn() --> file name temporaneo : "
+						+ fileName + ".");
 
 		FANTA->printTitolo(
 				FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
 		FANTA->printRiepilogo();
 		FANTA->printFormations();
+
+		this->ui.outputFileNameLineEdit->setEnabled(true);
+		this->ui.outputFileNameLineEdit->setText(fileName);
 	} catch (...) {
 		LOG(DEBUG,
 				"In singletonQtLogger::goOn() --> exception caught after FANTA->execute().");
