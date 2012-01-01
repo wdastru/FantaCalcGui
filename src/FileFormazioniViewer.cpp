@@ -16,11 +16,9 @@ FileFormazioniViewer::FileFormazioniViewer(QWidget *parent) :
 	QDialog(parent) {
 	ui.setupUi(this);
 }
-
 FileFormazioniViewer::~FileFormazioniViewer() {
 
 }
-
 void FileFormazioniViewer::setFile(QString filename) {
 	this->filename = filename;
 	QFile *file = new QFile(filename);
@@ -50,7 +48,6 @@ void FileFormazioniViewer::setFile(QString filename) {
 	QFont f("Courier");
 	this->ui.plainTextEdit->setFont(f);
 }
-
 void FileFormazioniViewer::saveFileAndClose() {
 	LOG(DEBUG, "In FileFormazioniViewer::saveFileAndClose().");
 	QTextDocumentWriter writer(this->filename);
