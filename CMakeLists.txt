@@ -18,6 +18,7 @@ SET( SRCS src/main.cpp
         src/Repository.cpp 
         src/StringModifier.cpp 
         src/httpwindow.cpp
+        src/prova.cpp
         src/singletonQtLogger.cpp )
 SET( HDRS src/CVersion.h
         src/IniFileManager.h
@@ -35,11 +36,13 @@ SET( HDRS src/CVersion.h
         src/Repository.h
         src/StringModifier.h 
         src/httpwindow.h
+        src/prova.h
         src/singletonQtLogger.h )
 SET( UIS  src/authenticationdialog.ui
 		src/IniFilePopulator.ui
 		src/FileFormazioniViewer.ui
         src/NoNetFileDialog.ui
+        src/prova.ui 
 		src/singletonQtLogger.ui )
 SET( RCS src/resources.qrc )
 
