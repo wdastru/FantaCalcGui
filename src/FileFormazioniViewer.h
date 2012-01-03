@@ -15,14 +15,17 @@ public:
 	FileFormazioniViewer(QWidget *parent = 0);
 	virtual ~FileFormazioniViewer();
 	void setFile(QString);
+	unsigned int getResult();
 
 private slots:
 	void saveFileAndClose();
+	void quit();
 
 private:
 	static FileFormazioniViewer* pInstance;
 	Ui::FileFormazioniViewerClass ui;
 	QString filename;
+	unsigned int result;
 };
 
 #endif // FILEFORMAZIONIVIEWER_H

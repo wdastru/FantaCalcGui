@@ -32,11 +32,12 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 
 	LOG(DEBUG, "In ChooseFileFromAListDialog constructor.");
 
-	this->resize(620, 0);
-	this->setMinimumSize(620, 0);
+	this->resize(700, 0);
+	this->setMinimumSize(700, 0);
 
 	Tabs = new QTabWidget(this);
 	Tabs->setObjectName(QString::fromUtf8("Tabs"));
+	Tabs->setMaximumWidth(650);
 	formazioniTab = new QWidget();
 	formazioniTab->setObjectName(QString::fromUtf8("formazioniTab"));
 	QScrollArea *scrollAreaFormazioni = new QScrollArea(formazioniTab);
@@ -61,13 +62,24 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 	FilesBox = new QGroupBox(tr("Files"));
 	HomeAwayBox = new QGroupBox(tr("Andata-Ritorno"));
 	CampoNeutroBox = new QGroupBox(tr("Campo Neutro"));
+
+	QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
+	sizePolicy.setHorizontalStretch(0);
+	sizePolicy.setVerticalStretch(0);
+
+	sizePolicy.setHeightForWidth(HomeAwayBox->sizePolicy().hasHeightForWidth());
+	HomeAwayBox->setSizePolicy(sizePolicy);
+
+	sizePolicy.setHeightForWidth(
+			CampoNeutroBox->sizePolicy().hasHeightForWidth());
+	CampoNeutroBox->setSizePolicy(sizePolicy);
+
 	groupBoxLabelsFormazioni = new QGroupBox("File");
 	groupBoxHome = new QGroupBox("Casa");
 	groupBoxAway = new QGroupBox("Fuori");
 	groupBoxNeutro1 = new QGroupBox("Neutro");
 	groupBoxNeutro2 = new QGroupBox("Neutro");
 	groupBoxGazzetta = new QGroupBox("Files Gazzetta");
-
 	LOG(
 			DEBUG,
 			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> fileFormazioni : "
@@ -108,11 +120,16 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 				continue; // skip empty lines
 
 			QLabel * tmpLabel = new QLabel(QString::fromAscii(buf).trimmed());
+			tmpLabel->setMaximumHeight(20);
 			labelFormazioni.push_back(tmpLabel);
 			QRadioButton * tmpButton1 = new QRadioButton();
 			QRadioButton * tmpButton2 = new QRadioButton();
 			QRadioButton * tmpButton3 = new QRadioButton();
 			QRadioButton * tmpButton4 = new QRadioButton();
+			tmpButton1->setMaximumHeight(20);
+			tmpButton2->setMaximumHeight(20);
+			tmpButton3->setMaximumHeight(20);
+			tmpButton4->setMaximumHeight(20);
 			home.push_back(tmpButton1);
 			away.push_back(tmpButton2);
 			neutro1.push_back(tmpButton3);
@@ -283,20 +300,38 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 	scrollAreaFormazioni->setFixedHeight(400);
 	scrollAreaGazzetta->setFixedHeight(400);
 
+	LOG(
+			DEBUG,
+			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> FilesBox->size().width() : "
+					+ my::toQString<int>(FilesBox->size().width()));
+	LOG(
+			DEBUG,
+			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> HomeAwayBox->size().width() : "
+					+ my::toQString<int>(HomeAwayBox->size().width()));
+	LOG(
+			DEBUG,
+			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> CampoNeutroBox->size().width() : "
+					+ my::toQString<int>(CampoNeutroBox->size().width()));
+
 	int width_formazioni = FilesBox->size().width()
-			+\
- HomeAwayBox->size().width() + CampoNeutroBox->size().width()
-			+ 52;
-	int width_gazzetta = groupBoxGazzetta->size().width() + 34;
+			+ HomeAwayBox->size().width() + CampoNeutroBox->size().width()
+			+ 68; //148
+	int width_gazzetta = groupBoxGazzetta->size().width() + 50; //130
+
 	scrollAreaFormazioni->setMinimumWidth(
 			std::max(width_formazioni, width_gazzetta));
 	scrollAreaGazzetta->setMinimumWidth(
 			std::max(width_formazioni, width_gazzetta));
 
-	formazioniTab->setMinimumWidth(scrollAreaFormazioni->minimumWidth());
+	scrollAreaFormazioni->setStyleSheet("background-color: rgb(255, 128, 255);");
+	scrollAreaGazzetta->setStyleSheet("background-color: rgb(255, 255, 128);");
+
+	//	formazioniTab->setMinimumWidth(scrollAreaFormazioni->minimumWidth());
+	formazioniTab->setStyleSheet("background-color: rgb(255, 128, 64);");
 	formazioniTab->setFixedHeight(scrollAreaFormazioni->size().height());
-	gazzettaTab->setMinimumWidth(scrollAreaGazzetta->minimumWidth());
+	//	gazzettaTab->setMinimumWidth(scrollAreaGazzetta->minimumWidth());
 	gazzettaTab->setFixedHeight(scrollAreaGazzetta->size().height());
+	gazzettaTab->setStyleSheet("background-color: rgb(64, 128, 255);");
 
 	Tabs->setMinimumHeight(
 			std::max(formazioniTab->size().height(),
@@ -307,6 +342,12 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 	vbox2->addLayout(hboxButtons);
 
 	setLayout(vbox2);
+
+	QFont font;
+	font.setFamily(QString::fromUtf8("Candara"));
+	font.setPointSize(10);
+	setFont(font);
+
 	setWindowTitle(tr("Choose Files"));
 }
 void ChooseFileFromAListDialog::quit() {

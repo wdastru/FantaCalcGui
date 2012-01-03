@@ -1282,7 +1282,7 @@ void Fanta::printRiepilogo() {
 		output += string + ")<br/>";
 	}
 
-	LOG(DEBUG, output + "<br/>");
+	LOG(INFO, output + "<br/>");
 }
 void Fanta::printTitolo(std::string str) {
 	QString tmp = "<br/> +";

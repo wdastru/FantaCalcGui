@@ -26,6 +26,12 @@ void FileFormazioniViewer::setFile(QString filename) {
 		file->open(QIODevice::ReadWrite);
 		if (file->isOpen()) {
 			if (file->isReadable()) {
+
+				QFont font;
+				font.setFamily(QString::fromUtf8("Lucida Console"));
+				font.setPointSize(9);
+				this->setFont(font);
+
 				this->ui.plainTextEdit->setPlainText(
 						QString::fromLocal8Bit(file->readAll()));
 			} else {
@@ -50,18 +56,29 @@ void FileFormazioniViewer::setFile(QString filename) {
 }
 void FileFormazioniViewer::saveFileAndClose() {
 	LOG(DEBUG, "In FileFormazioniViewer::saveFileAndClose().");
+
+	this->result = FORMFILEVIEWER_OK;
+
 	QTextDocumentWriter writer(this->filename);
 	if (writer.write(this->ui.plainTextEdit->document())) {
 		LOG(
 				DEBUG,
 				"In FileFormazioniViewer::saveFileAndClose() --> write of "
 						+ this->filename + " was successful.");
-		this->close();
 	} else {
 		LOG(
 				ERROR,
 				"In FileFormazioniViewer::saveFileAndClose() --> write of "
 						+ this->filename + " was not successful.");
-		this->close();
 	}
+
+	this->close();
+}
+void FileFormazioniViewer::quit() {
+	LOG(DEBUG, "In FileFormazioniViewer::quit().");
+	this->result = FORMFILEVIEWER_CANCEL;
+	this->close();
+}
+unsigned int FileFormazioniViewer::getResult() {
+	return this->result;
 }

@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>130</height>
+    <height>136</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -25,6 +25,12 @@
     <height>0</height>
    </size>
   </property>
+  <property name="font">
+   <font>
+    <family>Candara</family>
+    <pointsize>10</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Choose Files</string>
   </property>
@@ -34,7 +40,7 @@
      <x>10</x>
      <y>11</y>
      <width>581</width>
-     <height>83</height>
+     <height>91</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -118,8 +124,8 @@ background-color: rgb(255, 200, 200);</string>
   <widget class="QPushButton" name="okButton">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>100</y>
+     <x>437</x>
+     <y>106</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -131,8 +137,8 @@ background-color: rgb(255, 200, 200);</string>
   <widget class="QPushButton" name="cancelButton">
    <property name="geometry">
     <rect>
-     <x>520</x>
-     <y>100</y>
+     <x>517</x>
+     <y>106</y>
      <width>75</width>
      <height>23</height>
     </rect>
