@@ -39,7 +39,7 @@ SET( HDRS src/CVersion.h
 SET( UIS  src/authenticationdialog.ui
 		src/IniFilePopulator.ui
 		src/FileFormazioniViewer.ui
-        src/NoNetFileDialog.ui 
+        src/NoNetFileDialog.ui
 		src/singletonQtLogger.ui )
 SET( RCS src/resources.qrc )
 

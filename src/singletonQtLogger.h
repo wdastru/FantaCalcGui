@@ -34,6 +34,7 @@ private slots:
 
 signals:
 	void onOffClickedFinished();
+	void restart();
 
 private:
 	void init();

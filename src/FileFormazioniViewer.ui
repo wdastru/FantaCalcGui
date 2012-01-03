@@ -10,24 +10,42 @@
     <height>437</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>Candara</family>
+    <pointsize>10</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>File Formazioni Viewer</string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>4</x>
-     <y>4</y>
-     <width>590</width>
-     <height>31</height>
+     <x>0</x>
+     <y>0</y>
+     <width>600</width>
+     <height>41</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Candara</family>
+     <pointsize>16</pointsize>
+     <weight>75</weight>
+     <italic>false</italic>
+     <bold>true</bold>
+     <underline>false</underline>
+     <strikeout>false</strikeout>
+     <stylestrategy>PreferDefault</stylestrategy>
+     <kerning>true</kerning>
+    </font>
+   </property>
    <property name="text">
-    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Formazioni&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>Formazioni</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QPlainTextEdit" name="plainTextEdit">
@@ -39,18 +57,36 @@ p, li { white-space: pre-wrap; }
      <height>351</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Lucida Console</family>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="tabChangesFocus">
+    <bool>false</bool>
+   </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>516</x>
+     <x>435</x>
      <y>400</y>
-     <width>75</width>
+     <width>156</width>
      <height>23</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Accept</string>
+   <property name="font">
+    <font>
+     <family>Candara</family>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+     <kerning>false</kerning>
+    </font>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
  </widget>
@@ -58,23 +94,40 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections>
   <connection>
-   <sender>pushButton</sender>
-   <signal>clicked()</signal>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
    <receiver>FileFormazioniViewerClass</receiver>
    <slot>saveFileAndClose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>530</x>
+     <x>465</x>
+     <y>412</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>163</x>
+     <y>403</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>FileFormazioniViewerClass</receiver>
+   <slot>quit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>512</x>
      <y>411</y>
     </hint>
     <hint type="destinationlabel">
-     <x>369</x>
-     <y>408</y>
+     <x>299</x>
+     <y>218</y>
     </hint>
    </hints>
   </connection>
  </connections>
  <slots>
   <slot>saveFileAndClose()</slot>
+  <slot>quit()</slot>
  </slots>
 </ui>

@@ -51,7 +51,7 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 	LOG(DEBUG, "In Downloader::Downloader(...) constructor.");
 
 	this->resize(600, 0);
-	this->setMinimumSize(600,0);
+	this->setMinimumSize(600, 0);
 
 	this->savePaths = _savePaths;
 	this->urls = _urls;
@@ -96,6 +96,12 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 	mainLayout->addLayout(vLayout);
 	mainLayout->addWidget(buttonBox);
 	setLayout(mainLayout);
+
+	QFont font;
+	font.setFamily(QString::fromUtf8("Candara"));
+	font.setPointSize(10);
+	setFont(font);
+
 	setWindowTitle(tr("Downloader"));
 }
 void Downloader::quit() {

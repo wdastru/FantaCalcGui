@@ -71,23 +71,11 @@ void singletonQtLogger::Logging(QString type, QString message) {
 }
 void singletonQtLogger::setTitle(QString _title) {
 	this->title = _title;
-	this->ui.titleLabel->setText(
-			"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-				"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-				"p, li { white-space: pre-wrap; }\n"
-				"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-				"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt; color:#ff0000;\">"
-					+ _title + "</span></p></body></html>");
+	this->ui.titleLabel->setText(_title);
 }
 void singletonQtLogger::setVersion(QString _version) {
 	this->version = _version;
-	this->ui.versionLabel->setText(
-			"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\"\n"
-				"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-				"p, li {white-space: pre-wrap;}\n"
-				"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-				"<p align=\"right\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">"
-					+ _version + "</span></p></body></html>");
+	this->ui.versionLabel->setText(_version);
 }
 void singletonQtLogger::saveLogFile() {
 	QFile * file = new QFile;
@@ -272,22 +260,35 @@ void singletonQtLogger::goOn() {
 	formazioniFileReader->setPlayers(gazzettaFileReader->getOutput());
 
 	THE_VIEWER->setFile(THE_REPO->fileFormazioni);
-	unsigned int retVal;
+	unsigned int retVal1;
 
 	do {
 		THE_VIEWER->show();
 		THE_VIEWER->exec();
 
+		if (THE_VIEWER->getResult() == 1) {
+			LOG(DEBUG,
+					"In singletonQtLogger::goOn() --> THE_VIEWER returned 1.");
+		} else {
+			LOG(DEBUG,
+					"In singletonQtLogger::goOn() --> THE_VIEWER returned 0.");
+			break;
+		}
+
 		Fanta::Refresh();
 
-		retVal = formazioniFileReader->execute();
+		retVal1 = formazioniFileReader->execute();
 
 		LOG(
 				DEBUG,
 				"In singletonQtLogger::goOn() --> formazioniFileReader::execute() returned "
-						+ my::toQString<unsigned int>(retVal) + ".");
-	} while (retVal != FORMFILEREAD_OK);
+						+ my::toQString<unsigned int>(retVal1) + ".");
+	} while (retVal1 != FORMFILEREAD_OK);
 	// <-- lettura file Gazzetta e Formazioni
+
+	if (THE_VIEWER->getResult() == 0) { // in caso di break
+		return;
+	}
 
 	try {
 		FANTA->execute();
