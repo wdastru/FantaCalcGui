@@ -6,6 +6,7 @@
  */
 
 #include <QString>
+#include <QFont>
 
 #ifndef REPOSITORY_H_
 #define REPOSITORY_H_
@@ -15,6 +16,10 @@ class Repository {
 	friend class IniFilePopulator;
 	friend class IniFileManager;
 	friend class singletonQtLogger;
+	friend class ChooseFileFromAListDialog;
+	friend class Downloader;
+	friend class FileFormazioniViewer;
+	friend class Less25MinDialog;
 
 public:
 	Repository();
@@ -48,6 +53,10 @@ private:
 	QString fileFormazioni;
 	QString noNetSquadreFile;
 	QString noNetGazzettaFile;
+	QFont fontVariableWidthSmall;
+	QFont fontVariableWidthBig;
+	QFont fontFixedWidth;
+
 	bool debugStatus;
 };
 

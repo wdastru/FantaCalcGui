@@ -42,6 +42,7 @@
 
 #include "httpwindow.h"
 #include "Downloader.h"
+#include "Repository.h"
 #include "toString.h"
 
 Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
@@ -66,6 +67,7 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 		this->urlLineEditVector.at(i)->setReadOnly(true);
 		this->urlLineEditVector.at(i)->setStyleSheet(
 				"border-color: rgb(255, 0, 0); background-color: rgb(255, 200, 200);");
+		this->urlLineEditVector.at(i)->setFont(THE_REPO->fontVariableWidthSmall);
 		this->urlLabelVector.push_back(new QLabel(tr("URL:")));
 	}
 
@@ -95,13 +97,9 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 	QVBoxLayout *mainLayout = new QVBoxLayout;
 	mainLayout->addLayout(vLayout);
 	mainLayout->addWidget(buttonBox);
+
 	setLayout(mainLayout);
-
-	QFont font;
-	font.setFamily(QString::fromUtf8("Candara"));
-	font.setPointSize(10);
-	setFont(font);
-
+	setFont(THE_REPO->fontVariableWidthSmall);
 	setWindowTitle(tr("Downloader"));
 }
 void Downloader::quit() {

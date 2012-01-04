@@ -35,10 +35,6 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 	this->resize(630, 0);
 	this->setMinimumSize(630, 0);
 
-	QFont font;
-	font.setFamily(QString::fromUtf8("Candara"));
-	font.setPointSize(10);
-
 	Tabs = new QTabWidget(this);
 	Tabs->setObjectName(QString::fromUtf8("Tabs"));
 
@@ -125,7 +121,7 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 
 			QLabel * tmpLabel = new QLabel(QString::fromAscii(buf).trimmed());
 			tmpLabel->setMaximumHeight(20);
-			tmpLabel->setFont(font);
+			tmpLabel->setFont(THE_REPO->fontVariableWidthSmall);
 			labelFormazioni.push_back(tmpLabel);
 
 			QRadioButton * tmpButton1 = new QRadioButton();
@@ -237,7 +233,7 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 		int rowCounter = 0;
 		for (unsigned int i = 0; i < lines.size(); i++) {
 			QLabel * tmpLabel = new QLabel(lines.at(i));
-			tmpLabel->setFont(font);
+			tmpLabel->setFont(THE_REPO->fontVariableWidthSmall);
 			QRadioButton * tmpButton = new QRadioButton("");
 			labelGazzetta.push_back(tmpLabel);
 			gaz.push_back(tmpButton);
@@ -334,16 +330,10 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 	 * alla colonna dei nomi dei file di allargarsi senza tagliare
 	 * i nomi stessi
 	 */
-	scrollAreaFormazioni->setStyleSheet("border-color: rgb(230, 230, 230);");
-	scrollAreaGazzetta->setStyleSheet("border-color: rgb(255, 255, 255);");
-	//	scrollAreaFormazioni->setStyleSheet("font: 10pt 'Candara';");
-	//	scrollAreaGazzetta->setStyleSheet("font: 10pt 'Candara';");
+	scrollAreaFormazioni->setStyleSheet("border-color: rgb(245, 245, 245);");
+	scrollAreaGazzetta->setStyleSheet("border-color: rgb(245, 245, 245);");
 
-	//	formazioniTab->setMinimumWidth(scrollAreaFormazioni->minimumWidth());
-	//	formazioniTab->setStyleSheet("background-color: rgb(64, 255, 128);");
 	formazioniTab->setFixedHeight(scrollAreaFormazioni->size().height());
-	//	gazzettaTab->setMinimumWidth(scrollAreaGazzetta->minimumWidth());
-	//	gazzettaTab->setStyleSheet("background-color: rgb(64, 128, 255);");
 	gazzettaTab->setFixedHeight(scrollAreaGazzetta->size().height());
 
 	Tabs->setMinimumHeight(
@@ -355,7 +345,7 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 	vbox2->addLayout(hboxButtons);
 
 	setLayout(vbox2);
-	setFont(font);
+	setFont(THE_REPO->fontVariableWidthSmall);
 	setWindowTitle(tr("Choose Files"));
 }
 void ChooseFileFromAListDialog::quit() {
