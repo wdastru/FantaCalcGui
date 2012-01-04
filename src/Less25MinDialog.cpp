@@ -56,45 +56,26 @@ void Less25MinDialog::questionMessage() {
 	msgBox.setFont(THE_REPO->fontVariableWidthSmall);
 	int reply = msgBox.exec();
 
-	//	QMessageBox::StandardButton reply;
-//	reply = QMessageBox::question(this, tr("Ha giocato almeno 25' ?"),
-//			tr(Less25MinDialog::Message.c_str()),
-//			QMessageBox::Yes | QMessageBox::No);
-
 	std::string tmp;
 
 	switch (reply) {
 	   case QMessageBox::Yes:
 		   tmp = Less25MinDialog::player + " ha giocato più di 25'";
 		   		questionLabel->setText(tr(tmp.c_str()));
-		   		questionLabel->setStyleSheet("font: 10pt 'Candara';");
+		   		questionLabel->setFont(THE_REPO->fontVariableWidthSmall);
 		   		Less25MinDialog::answer = "Yes";
 	       break;
 	   case QMessageBox::No:
 		   tmp = Less25MinDialog::player
 		   				+ " non ha giocato più di 25'";
 		   		questionLabel->setText(tr(tmp.c_str()));
-		   		questionLabel->setStyleSheet("font: 10pt 'Candara';");
+		   		questionLabel->setFont(THE_REPO->fontVariableWidthSmall);
 		   		Less25MinDialog::answer = "No";
 	       break;
 	   default:
 	       // should never be reached
 	       break;
 	 }
-
-
-	//	if (reply == QMessageBox::Yes) {
-	//		std::string tmp = Less25MinDialog::player + " ha giocato più di 25'";
-	//		questionLabel->setText(tr(tmp.c_str()));
-	//		questionLabel->setStyleSheet("font: 10pt 'Candara';");
-	//		Less25MinDialog::answer = "Yes";
-	//	} else if (reply == QMessageBox::No) {
-	//		std::string tmp = Less25MinDialog::player
-	//				+ " non ha giocato più di 25'";
-	//		questionLabel->setText(tr(tmp.c_str()));
-	//		questionLabel->setStyleSheet("font: 10pt 'Candara';");
-	//		Less25MinDialog::answer = "No";
-	//	}
 
 	this->enableOkButton();
 }

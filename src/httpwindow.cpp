@@ -43,6 +43,7 @@
 #include <QtNetwork>
 #include <QUrl>
 
+#include "Repository.h"
 #include "httpwindow.h"
 #include "singletonQtLogger.h"
 #include "ui_authenticationdialog.h"
@@ -142,11 +143,23 @@ void HttpWindow::downloadFile() {
 
 	file = new QFile(fileName);
 	if (!file->open(QIODevice::WriteOnly)) {
-		QMessageBox::information(
-				this,
-				tr("HTTP"),
-				tr("Unable to save the file %1: %2.") .arg(fileName).arg(
+
+		QMessageBox msgBox;
+		msgBox.setWindowTitle("HTTP");
+		msgBox.setInformativeText(
+				tr("Unable to save the file %1: %2.").arg(fileName).arg(
 						file->errorString()));
+		msgBox.setStandardButtons(QMessageBox::Ok);
+		msgBox.setDefaultButton(QMessageBox::Ok);
+		msgBox.setIcon(QMessageBox::Information);
+		msgBox.setFont(THE_REPO->fontVariableWidthSmall);
+		msgBox.exec();
+
+		//		QMessageBox::information(
+		//				this,
+		//				tr("HTTP"),
+		//				tr("Unable to save the file %1: %2.") .arg(fileName).arg(
+		//						file->errorString()));
 		delete file;
 		file = 0;
 		this->downloadSuccess = false;
@@ -192,8 +205,19 @@ void HttpWindow::httpFinished() {
 			QNetworkRequest::RedirectionTargetAttribute);
 	if (reply->error()) {
 		file->remove();
-		QMessageBox::information(this, tr("HTTP"),
+
+		QMessageBox msgBox;
+		msgBox.setWindowTitle("HTTP");
+		msgBox.setInformativeText(
 				tr("Download failed: %1.") .arg(reply->errorString()));
+		msgBox.setStandardButtons(QMessageBox::Ok);
+		msgBox.setDefaultButton(QMessageBox::Ok);
+		msgBox.setIcon(QMessageBox::Critical);
+		msgBox.setFont(THE_REPO->fontVariableWidthSmall);
+		msgBox.exec();
+
+		//		QMessageBox::information(this, tr("HTTP"),
+		//				tr("Download failed: %1.") .arg(reply->errorString()));
 		//		downloadButton->setEnabled(true);
 		this->downloadSuccess = false;
 	} else if (!redirectionTarget.isNull()) {
@@ -258,24 +282,24 @@ bool HttpWindow::downloadSuccessful() {
 
 void HttpWindow::slotAuthenticationRequired(QNetworkReply*,
 		QAuthenticator *authenticator) {
-//	QDialog dlg;
-//	Ui::Dialog ui;
-//	ui.setupUi(&dlg);
-//	dlg.adjustSize();
-//	ui.siteDescription->setText(
-//			tr("%1 at %2").arg(authenticator->realm()).arg(url.host()));
-//
-//	// Did the URL have information? Fill the UI
-//	// This is only relevant if the URL-supplied credentials were wrong
-//	ui.userEdit->setText(url.userName());
-//	ui.passwordEdit->setText(url.password());
-//
-//	if (dlg.exec() == QDialog::Accepted) {
-//	authenticator->setUser(ui.userEdit->text());
-//	authenticator->setPassword(ui.passwordEdit->text());
+	//	QDialog dlg;
+	//	Ui::Dialog ui;
+	//	ui.setupUi(&dlg);
+	//	dlg.adjustSize();
+	//	ui.siteDescription->setText(
+	//			tr("%1 at %2").arg(authenticator->realm()).arg(url.host()));
+	//
+	//	// Did the URL have information? Fill the UI
+	//	// This is only relevant if the URL-supplied credentials were wrong
+	//	ui.userEdit->setText(url.userName());
+	//	ui.passwordEdit->setText(url.password());
+	//
+	//	if (dlg.exec() == QDialog::Accepted) {
+	//	authenticator->setUser(ui.userEdit->text());
+	//	authenticator->setPassword(ui.passwordEdit->text());
 	authenticator->setUser("laboratorio");
 	authenticator->setPassword("NMR12345");
-//	}
+	//	}
 }
 
 #ifndef QT_NO_OPENSSL

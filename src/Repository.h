@@ -20,6 +20,7 @@ class Repository {
 	friend class Downloader;
 	friend class FileFormazioniViewer;
 	friend class Less25MinDialog;
+	friend class HttpWindow;
 
 public:
 	Repository();
