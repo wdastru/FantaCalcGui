@@ -5,8 +5,9 @@
  *      Author: WAleViolaeIvan
  */
 
-#include <stdlib.h>
 #include "Repository.h"
+
+#include <stdlib.h>
 #include <QFile>
 
 Repository::Repository() {
@@ -31,6 +32,15 @@ Repository::Repository() {
 			+ "\\FantaCalcGui\\download";
 	this->listePath = QString::fromLocal8Bit(UserProfile)
 			+ "\\FantaCalcGui\\liste";
+
+	this->fontVariableWidthSmall.setFamily(QString::fromUtf8("Candara"));
+	this->fontVariableWidthSmall.setPointSize(10);
+
+	this->fontVariableWidthBig.setFamily(QString::fromUtf8("Candara"));
+	this->fontVariableWidthBig.setPointSize(16);
+
+	this->fontFixedWidth.setFamily(QString::fromUtf8("Lucida Console"));
+	this->fontFixedWidth.setPointSize(9);
 }
 
 Repository::~Repository() {

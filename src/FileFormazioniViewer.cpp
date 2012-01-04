@@ -1,4 +1,5 @@
 #include "FileFormazioniViewer.h"
+#include "Repository.h"
 #include "defines.h"
 #include "singletonQtLogger.h"
 
@@ -27,10 +28,7 @@ void FileFormazioniViewer::setFile(QString filename) {
 		if (file->isOpen()) {
 			if (file->isReadable()) {
 
-				QFont font;
-				font.setFamily(QString::fromUtf8("Lucida Console"));
-				font.setPointSize(9);
-				this->setFont(font);
+				this->setFont(THE_REPO->fontFixedWidth);
 
 				this->ui.plainTextEdit->setPlainText(
 						QString::fromLocal8Bit(file->readAll()));
