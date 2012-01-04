@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>136</height>
+    <height>108</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -40,7 +40,7 @@
      <x>10</x>
      <y>11</y>
      <width>581</width>
-     <height>91</height>
+     <height>61</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -73,19 +73,6 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
-     <widget class="QPushButton" name="noFileButton">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>Nuovo File</string>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="1">
      <widget class="QLineEdit" name="fileSquadreLineEdit">
       <property name="styleSheet">
@@ -108,24 +95,13 @@ background-color: rgb(255, 200, 200);</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="1">
-     <widget class="QLineEdit" name="newFileLineEdit">
-      <property name="styleSheet">
-       <string notr="true">border-color: rgb(255, 0, 0);
-background-color: rgb(255, 200, 200);</string>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QPushButton" name="okButton">
    <property name="geometry">
     <rect>
      <x>437</x>
-     <y>106</y>
+     <y>77</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -138,7 +114,7 @@ background-color: rgb(255, 200, 200);</string>
    <property name="geometry">
     <rect>
      <x>517</x>
-     <y>106</y>
+     <y>77</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -176,22 +152,6 @@ background-color: rgb(255, 200, 200);</string>
     <hint type="sourcelabel">
      <x>347</x>
      <y>131</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>199</x>
-     <y>77</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>noFileButton</sender>
-   <signal>clicked()</signal>
-   <receiver>NoNetFileDialogClass</receiver>
-   <slot>createEmptyFile()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>59</x>
-     <y>96</y>
     </hint>
     <hint type="destinationlabel">
      <x>199</x>

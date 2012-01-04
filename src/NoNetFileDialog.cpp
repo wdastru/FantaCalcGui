@@ -107,10 +107,10 @@ void NoNetFileDialog::setOpenFileNameGazzetta() {
 
 //	THE_MANAGER->writeIniFile();
 }
-void NoNetFileDialog::createEmptyFile() {
-	ui.newFileLineEdit->setText("file nuovo");
-	this->enableOkButton();
-}
+//void NoNetFileDialog::createEmptyFile() {
+//	ui.newFileLineEdit->setText("file nuovo");
+//	this->enableOkButton();
+//}
 void NoNetFileDialog::enableOkButton() {
 	if (ui.fileSquadreLineEdit->text().isEmpty()
 			|| ui.fileGazzettaLineEdit->text().isEmpty())

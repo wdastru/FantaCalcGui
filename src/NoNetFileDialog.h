@@ -31,7 +31,7 @@ public:
 private slots:
 	void setOpenFileNameSquadre();
 	void setOpenFileNameGazzetta();
-	void createEmptyFile();
+//	void createEmptyFile();
 	void okClicked();
 	void cancelClicked();
 
