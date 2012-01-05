@@ -782,3 +782,6 @@ bool ChooseFileFromAListDialog::wasCancelClicked() {
 bool ChooseFileFromAListDialog::isFinished() {
 	return this->hasFinished;
 }
+void ChooseFileFromAListDialog::closeEvent(QCloseEvent *event) {
+	this->quit();
+}
