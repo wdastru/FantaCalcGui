@@ -40,6 +40,9 @@ private:
 	QString fileNameSquadre;
 	QString fileNameGazzetta;
 	void enableOkButton();
+
+protected:
+	void closeEvent(QCloseEvent *event);
 };
 
 #endif  //_NONETFILEDIALOG_H
