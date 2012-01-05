@@ -73,6 +73,10 @@ private:
 	bool cancelClicked;
 	bool hasFinished;
 	bool downloadSuccess;
+
+protected:
+	void closeEvent(QCloseEvent *event);
+
 };
 
 #endif // CHOOSEFROMALISTDIALOG_H
