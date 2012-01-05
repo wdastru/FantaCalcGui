@@ -4,7 +4,6 @@
 #include <QTime>
 #include <QFile>
 
-
 #include "singletonQtLogger.h"
 #include "IniFileManager.h"
 #include "IniFilePopulator.h"
@@ -125,7 +124,7 @@ void singletonQtLogger::saveLogFile() {
 		msgBox.setWindowTitle("File cannot be saved !");
 		msgBox.setInformativeText(
 				tr("Unable to save the file %1: %2.") .arg(this->logFileName).arg(
-										file->errorString()));
+						file->errorString()));
 		msgBox.setStandardButtons(QMessageBox::Ok);
 		msgBox.setDefaultButton(QMessageBox::Ok);
 		msgBox.setIcon(QMessageBox::Information);
@@ -240,7 +239,7 @@ void singletonQtLogger::offlineClicked() {
 	LOG(DEBUG,
 			"In singletonQtLogger::offlineClicked() --> Network will not be accessed.");
 
-	NoNetFileDialog * noNetFileDialog = new NoNetFileDialog(this);
+	NoNetFileDialog * noNetFileDialog = new NoNetFileDialog(THE_LOGGER);
 	noNetFileDialog->exec();
 
 	if (!noNetFileDialog->hasBeenAborted) {
@@ -259,9 +258,9 @@ void singletonQtLogger::offlineClicked() {
 		emit(this->onOffClickedFinished());
 
 	} else {
-		/* TODO
-		 * inserire exception
-		 */
+		LOG(
+				DEBUG,
+				"In void singletonQtLogger::offlineClicked() --> noNetFileDialog has been aborted.");
 		return;
 	}
 }

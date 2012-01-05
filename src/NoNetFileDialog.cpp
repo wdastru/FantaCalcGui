@@ -134,3 +134,7 @@ void NoNetFileDialog::cancelClicked() {
 	this->hasFinished = FALSE;
 	this->close();
 }
+void NoNetFileDialog::closeEvent(QCloseEvent *event) {
+	this->cancelClicked();
+}
+
