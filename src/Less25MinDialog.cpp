@@ -1,3 +1,7 @@
+#include <QtGui/QMessageBox>
+#include <QtGui/QGridLayout>
+#include <QtGui/QCloseEvent>
+
 #include "Less25MinDialog.h"
 #include "Repository.h"
 #include "defines.h"

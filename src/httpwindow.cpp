@@ -222,9 +222,17 @@ void HttpWindow::httpFinished() {
 		this->downloadSuccess = false;
 	} else if (!redirectionTarget.isNull()) {
 		QUrl newUrl = url.resolved(redirectionTarget.toUrl());
-		if (QMessageBox::question(this, tr("HTTP"),
-				tr("Redirect to %1 ?").arg(newUrl.toString()),
-				QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes) {
+
+		QMessageBox msgBox;
+		msgBox.setWindowTitle("HTTP");
+		msgBox.setInformativeText(tr("Redirect to %1 ?").arg(newUrl.toString()));
+		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+		msgBox.setDefaultButton(QMessageBox::No);
+		msgBox.setIcon(QMessageBox::Question);
+		msgBox.setFont(THE_REPO->fontVariableWidthSmall);
+		int answer = msgBox.exec();
+
+		if (answer == QMessageBox::Yes) {
 			url = newUrl;
 			reply->deleteLater();
 			file->open(QIODevice::WriteOnly);
@@ -312,9 +320,17 @@ void HttpWindow::sslErrors(QNetworkReply*, const QList<QSslError> &errors) {
 			errorString += error.errorString();
 		}
 
-	if (QMessageBox::warning(this, tr("HTTP"),
-			tr("One or more SSL errors has occurred: %1").arg(errorString),
-			QMessageBox::Ignore | QMessageBox::Abort) == QMessageBox::Ignore) {
+	QMessageBox msgBox;
+	msgBox.setWindowTitle("HTTP");
+	msgBox.setInformativeText(
+			tr("One or more SSL errors has occurred: %1").arg(errorString));
+	msgBox.setStandardButtons(QMessageBox::Ignore | QMessageBox::Abort);
+	msgBox.setDefaultButton(QMessageBox::Ignore);
+	msgBox.setIcon(QMessageBox::Warning);
+	msgBox.setFont(THE_REPO->fontVariableWidthSmall);
+	int answer = msgBox.exec();
+
+	if (answer == QMessageBox::Ignore) {
 		reply->ignoreSslErrors();
 	}
 }

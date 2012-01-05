@@ -1,5 +1,9 @@
 #include <QtCore/QString>
 #include <QtCore/QTextStream>
+#include <QtGui/QMessageBox>
+#include <QTime>
+#include <QFile>
+
 
 #include "singletonQtLogger.h"
 #include "IniFileManager.h"
@@ -98,22 +102,41 @@ void singletonQtLogger::saveLogFile() {
 	}
 
 	if (QFile::exists(this->logFileName)) {
-		if (QMessageBox::question(
-				this,
-				tr("HTTP"),
+
+		QMessageBox msgBox;
+		msgBox.setWindowTitle("File exists !");
+		msgBox.setInformativeText(
 				tr("There already exists a file called %1. Overwrite?").arg(
-						this->logFileName), QMessageBox::Yes | QMessageBox::No,
-				QMessageBox::No) == QMessageBox::No)
+						this->logFileName));
+		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+		msgBox.setDefaultButton(QMessageBox::No);
+		msgBox.setIcon(QMessageBox::Question);
+		msgBox.setFont(THE_REPO->fontVariableWidthSmall);
+		int reply = msgBox.exec();
+
+		if (reply == QMessageBox::No)
 			return;
 		QFile::remove(this->logFileName);
 	}
 
 	if (!file->open(QIODevice::WriteOnly)) {
-		QMessageBox::information(
-				this,
-				tr("HTTP"),
+
+		QMessageBox msgBox;
+		msgBox.setWindowTitle("File cannot be saved !");
+		msgBox.setInformativeText(
 				tr("Unable to save the file %1: %2.") .arg(this->logFileName).arg(
-						file->errorString()));
+										file->errorString()));
+		msgBox.setStandardButtons(QMessageBox::Ok);
+		msgBox.setDefaultButton(QMessageBox::Ok);
+		msgBox.setIcon(QMessageBox::Information);
+		msgBox.setFont(THE_REPO->fontVariableWidthSmall);
+		msgBox.exec();
+
+		//		QMessageBox::information(
+		//				this,
+		//				tr("HTTP"),
+		//				tr("Unable to save the file %1: %2.") .arg(this->logFileName).arg(
+		//						file->errorString()));
 		return;
 	}
 

@@ -2,10 +2,7 @@
 #define SINGLETONQTLOGGER_H
 
 #include <QWidget>
-#include <QMessageBox>
 #include <QString>
-#include <QTime>
-#include <QFile>
 #include "ui_singletonQtLogger.h"
 
 #include "defines.h"

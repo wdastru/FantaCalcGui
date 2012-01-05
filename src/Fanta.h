@@ -12,7 +12,7 @@
 #include <fstream>
 #include <string>
 
-#include <QtGui/QMessageBox>
+//#include <QtGui/QMessageBox>
 
 #include "defines.h"
 #include "singletonQtLogger.h"
