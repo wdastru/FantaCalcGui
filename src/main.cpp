@@ -26,6 +26,10 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 	QApplication a(argc, argv);
+	a.setOrganizationName("Eptadone Software");
+	a.setApplicationName("FantaCalcGui");
+	a.setApplicationVersion("v3.0.0");
+//	a.setWindowIcon(QIcon)
 
 	THE_LOGGER; // prima parte l'applicazione
 
