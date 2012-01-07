@@ -4,12 +4,7 @@
 #include <QtGui/QDialog>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
-
-#include "singletonQtLogger.h"
-#include "defines.h"
-
-#include "IniFileManager.h"
-#include "httpwindow.h"
+#include <QUrl>
 
 class QLabel;
 class QPushButton;
@@ -32,6 +27,7 @@ public:
 	QString getGazFile();
 	QString getAwayFile();
 	bool wasCancelClicked();
+	bool isFinished();
 	bool getDownloadSuccess();
 	QTabWidget *Tabs;
 	QWidget *formazioniTab;
@@ -47,7 +43,7 @@ private slots:
 private:
 	void doDownload();
 	int groupBoxChecked();
-	unsigned int createFileSquadreFromWebFiles();
+	bool createFileSquadreFromWebFiles();
 	QString fileFormazioni;
 	QString fileGazzetta;
 	std::vector<QRadioButton *> home;
@@ -77,6 +73,10 @@ private:
 	bool cancelClicked;
 	bool hasFinished;
 	bool downloadSuccess;
+
+protected:
+	void closeEvent(QCloseEvent *event);
+
 };
 
 #endif // CHOOSEFROMALISTDIALOG_H

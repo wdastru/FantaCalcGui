@@ -2,27 +2,51 @@
 <ui version="4.0">
  <class>NoNetFileDialogClass</class>
  <widget class="QDialog" name="NoNetFileDialogClass">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>155</height>
+    <width>600</width>
+    <height>108</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>600</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>Candara</family>
+    <pointsize>10</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
-   <string>NoNetFileDialog</string>
+   <string>Choose Files</string>
   </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>21</x>
+     <x>10</x>
      <y>11</y>
-     <width>361</width>
-     <height>83</height>
+     <width>581</width>
+     <height>61</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
+    <property name="sizeConstraint">
+     <enum>QLayout::SetDefaultConstraint</enum>
+    </property>
     <item row="1" column="0">
      <widget class="QPushButton" name="openFileNameGazzettaButton">
       <property name="sizePolicy">
@@ -49,35 +73,35 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
-     <widget class="QPushButton" name="noFileButton">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="fileSquadreLineEdit">
+      <property name="styleSheet">
+       <string notr="true">border-color: rgb(255, 0, 0);
+background-color: rgb(255, 200, 200);</string>
       </property>
-      <property name="text">
-       <string>Nuovo File</string>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="fileSquadreLineEdit"/>
-    </item>
     <item row="1" column="1">
-     <widget class="QLineEdit" name="fileGazzettaLineEdit"/>
-    </item>
-    <item row="2" column="1">
-     <widget class="QLineEdit" name="newFileLineEdit"/>
+     <widget class="QLineEdit" name="fileGazzettaLineEdit">
+      <property name="styleSheet">
+       <string notr="true">border-color: rgb(255, 0, 0);
+background-color: rgb(255, 200, 200);</string>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
   <widget class="QPushButton" name="okButton">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>120</y>
+     <x>437</x>
+     <y>77</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -89,8 +113,8 @@
   <widget class="QPushButton" name="cancelButton">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>120</y>
+     <x>517</x>
+     <y>77</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -104,14 +128,30 @@
  <resources/>
  <connections>
   <connection>
-   <sender>noFileButton</sender>
+   <sender>okButton</sender>
    <signal>clicked()</signal>
    <receiver>NoNetFileDialogClass</receiver>
-   <slot>createEmptyFile()</slot>
+   <slot>okClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>59</x>
-     <y>96</y>
+     <x>267</x>
+     <y>131</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>77</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cancelButton</sender>
+   <signal>clicked()</signal>
+   <receiver>NoNetFileDialogClass</receiver>
+   <slot>cancelClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>347</x>
+     <y>131</y>
     </hint>
     <hint type="destinationlabel">
      <x>199</x>
@@ -144,38 +184,6 @@
     <hint type="sourcelabel">
      <x>59</x>
      <y>28</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>199</x>
-     <y>77</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>okButton</sender>
-   <signal>clicked()</signal>
-   <receiver>NoNetFileDialogClass</receiver>
-   <slot>okClicked()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>267</x>
-     <y>131</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>199</x>
-     <y>77</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cancelButton</sender>
-   <signal>clicked()</signal>
-   <receiver>NoNetFileDialogClass</receiver>
-   <slot>cancelClicked()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>347</x>
-     <y>131</y>
     </hint>
     <hint type="destinationlabel">
      <x>199</x>

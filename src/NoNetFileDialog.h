@@ -31,7 +31,7 @@ public:
 private slots:
 	void setOpenFileNameSquadre();
 	void setOpenFileNameGazzetta();
-	void createEmptyFile();
+//	void createEmptyFile();
 	void okClicked();
 	void cancelClicked();
 
@@ -40,6 +40,9 @@ private:
 	QString fileNameSquadre;
 	QString fileNameGazzetta;
 	void enableOkButton();
+
+protected:
+	void closeEvent(QCloseEvent *event);
 };
 
 #endif  //_NONETFILEDIALOG_H

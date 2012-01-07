@@ -13,18 +13,31 @@
 #include <QtCore/QRect>
 #include <QPalette>
 #include <QtCore/QString>
+
 #include <cstdio>
 #include <cstdlib>
-
 #include <vector>
+
+#include "defines.h"
+#include "singletonQtLogger.h"
+#include "IniFileManager.h"
+#include "Repository.h"
+#include "Downloader.h"
 #include "toString.h"
 #include "tokenize.h"
 
 ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 		QString _fileGazzetta, QWidget *parent) :
 	QDialog(parent) {
+
+	LOG(DEBUG, "In ChooseFileFromAListDialog constructor.");
+
+	this->resize(630, 0);
+	this->setMinimumSize(630, 0);
+
 	Tabs = new QTabWidget(this);
 	Tabs->setObjectName(QString::fromUtf8("Tabs"));
+
 	formazioniTab = new QWidget();
 	formazioniTab->setObjectName(QString::fromUtf8("formazioniTab"));
 	QScrollArea *scrollAreaFormazioni = new QScrollArea(formazioniTab);
@@ -49,12 +62,28 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 	FilesBox = new QGroupBox(tr("Files"));
 	HomeAwayBox = new QGroupBox(tr("Andata-Ritorno"));
 	CampoNeutroBox = new QGroupBox(tr("Campo Neutro"));
+
+	QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
+	sizePolicy.setHorizontalStretch(0);
+	sizePolicy.setVerticalStretch(0);
+
+	sizePolicy.setHeightForWidth(HomeAwayBox->sizePolicy().hasHeightForWidth());
+	HomeAwayBox->setSizePolicy(sizePolicy);
+
+	sizePolicy.setHeightForWidth(
+			CampoNeutroBox->sizePolicy().hasHeightForWidth());
+	CampoNeutroBox->setSizePolicy(sizePolicy);
+
 	groupBoxLabelsFormazioni = new QGroupBox("File");
 	groupBoxHome = new QGroupBox("Casa");
 	groupBoxAway = new QGroupBox("Fuori");
 	groupBoxNeutro1 = new QGroupBox("Neutro");
 	groupBoxNeutro2 = new QGroupBox("Neutro");
 	groupBoxGazzetta = new QGroupBox("Files Gazzetta");
+	LOG(
+			DEBUG,
+			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> fileFormazioni : "
+					+ _fileFormazioni);
 
 	QFile *file1 = new QFile(_fileFormazioni);
 
@@ -91,11 +120,18 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 				continue; // skip empty lines
 
 			QLabel * tmpLabel = new QLabel(QString::fromAscii(buf).trimmed());
+			tmpLabel->setMaximumHeight(20);
+			tmpLabel->setFont(THE_REPO->fontVariableWidthSmall);
 			labelFormazioni.push_back(tmpLabel);
+
 			QRadioButton * tmpButton1 = new QRadioButton();
 			QRadioButton * tmpButton2 = new QRadioButton();
 			QRadioButton * tmpButton3 = new QRadioButton();
 			QRadioButton * tmpButton4 = new QRadioButton();
+			tmpButton1->setMaximumHeight(20);
+			tmpButton2->setMaximumHeight(20);
+			tmpButton3->setMaximumHeight(20);
+			tmpButton4->setMaximumHeight(20);
 			home.push_back(tmpButton1);
 			away.push_back(tmpButton2);
 			neutro1.push_back(tmpButton3);
@@ -173,6 +209,11 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 
 	time = QTime::currentTime().toString("hh:mm:ss.zzz");
 
+	LOG(
+			DEBUG,
+			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> fileGazzetta : "
+					+ _fileGazzetta);
+
 	QFile *file2 = new QFile(_fileGazzetta);
 	if (file2->exists()) {
 		file2->open(QIODevice::ReadOnly);
@@ -192,6 +233,7 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 		int rowCounter = 0;
 		for (unsigned int i = 0; i < lines.size(); i++) {
 			QLabel * tmpLabel = new QLabel(lines.at(i));
+			tmpLabel->setFont(THE_REPO->fontVariableWidthSmall);
 			QRadioButton * tmpButton = new QRadioButton("");
 			labelGazzetta.push_back(tmpLabel);
 			gaz.push_back(tmpButton);
@@ -261,19 +303,37 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 	scrollAreaFormazioni->setFixedHeight(400);
 	scrollAreaGazzetta->setFixedHeight(400);
 
+	LOG(
+			DEBUG,
+			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> FilesBox->size().width() : "
+					+ my::toQString<int>(FilesBox->size().width()));
+	LOG(
+			DEBUG,
+			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> HomeAwayBox->size().width() : "
+					+ my::toQString<int>(HomeAwayBox->size().width()));
+	LOG(
+			DEBUG,
+			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> CampoNeutroBox->size().width() : "
+					+ my::toQString<int>(CampoNeutroBox->size().width()));
+
 	int width_formazioni = FilesBox->size().width()
-			+\
- HomeAwayBox->size().width() + CampoNeutroBox->size().width()
-			+ 52;
-	int width_gazzetta = groupBoxGazzetta->size().width() + 34;
+			+ HomeAwayBox->size().width() + CampoNeutroBox->size().width() + 51;
+	int width_gazzetta = groupBoxGazzetta->size().width() + 33;
+
 	scrollAreaFormazioni->setMinimumWidth(
 			std::max(width_formazioni, width_gazzetta));
 	scrollAreaGazzetta->setMinimumWidth(
 			std::max(width_formazioni, width_gazzetta));
 
-	formazioniTab->setMinimumWidth(scrollAreaFormazioni->minimumWidth());
+	/*
+	 * lo stile delle scrollArea serve inspiegabilmente per permettere
+	 * alla colonna dei nomi dei file di allargarsi senza tagliare
+	 * i nomi stessi
+	 */
+	scrollAreaFormazioni->setStyleSheet("border-color: rgb(245, 245, 245);");
+	scrollAreaGazzetta->setStyleSheet("border-color: rgb(245, 245, 245);");
+
 	formazioniTab->setFixedHeight(scrollAreaFormazioni->size().height());
-	gazzettaTab->setMinimumWidth(scrollAreaGazzetta->minimumWidth());
 	gazzettaTab->setFixedHeight(scrollAreaGazzetta->size().height());
 
 	Tabs->setMinimumHeight(
@@ -285,9 +345,12 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 	vbox2->addLayout(hboxButtons);
 
 	setLayout(vbox2);
+	setFont(THE_REPO->fontVariableWidthSmall);
 	setWindowTitle(tr("Choose Files"));
 }
 void ChooseFileFromAListDialog::quit() {
+	LOG(DEBUG, "In void ChooseFileFromAListDialog::quit().");
+
 	for (int i = 0; i < this->nFiles; i++) {
 		home.at(i)->setChecked(false);
 		away.at(i)->setChecked(false);
@@ -297,7 +360,7 @@ void ChooseFileFromAListDialog::quit() {
 	for (int i = 0; i < this->nGazFiles; i++)
 		gaz.at(i)->setChecked(false);
 
-	this->cancelClicked = true;
+	this->cancelClicked = TRUE;
 	this->close();
 }
 void ChooseFileFromAListDialog::enableOkButton() {
@@ -344,9 +407,8 @@ QString ChooseFileFromAListDialog::getHomeFile() {
 			if (this->neutro1.at(i)->isChecked())
 				return this->labelFormazioni.at(i)->text();
 		}
-	} else
-		return "";
-
+	}
+	return QString::null;
 }
 QString ChooseFileFromAListDialog::getAwayFile() {
 	if (this->HomeAwayBox->isChecked()) {
@@ -359,8 +421,8 @@ QString ChooseFileFromAListDialog::getAwayFile() {
 			if (this->neutro2.at(i)->isChecked())
 				return this->labelFormazioni.at(i)->text();
 		}
-	} else
-		return QString::null;
+	}
+	return QString::null;
 }
 int ChooseFileFromAListDialog::groupBoxChecked() {
 	if (this->HomeAwayBox->isChecked())
@@ -402,41 +464,50 @@ void ChooseFileFromAListDialog::doDownload() {
 	LOG(DEBUG,
 			"In ChooseFileFromAListDialog::doDownload() --> Network will be accessed.");
 
-	HttpWindow httpWin_1(singletonQtLogger::Inst(),
-			IniFileManager::Inst()->getFormazioniUrl() + this->getHomeFile(),
-			IniFileManager::Inst()->getDownloadPath());
-	httpWin_1.exec();
-	HttpWindow httpWin_2(singletonQtLogger::Inst(),
-			IniFileManager::Inst()->getFormazioniUrl() + this->getAwayFile(),
-			IniFileManager::Inst()->getDownloadPath());
-	httpWin_2.exec();
-	HttpWindow httpWin_3(singletonQtLogger::Inst(),
-			IniFileManager::Inst()->getGazzettaUrl() + this->getGazFile(),
-			IniFileManager::Inst()->getGazzettaPath());
-	httpWin_3.exec();
+	std::vector<QUrl> * urls = new std::vector<QUrl>;
+	urls->push_back(
+			QUrl::fromLocalFile(
+					THE_REPO->getFormazioniUrl() + this->getHomeFile()));
+	urls->push_back(
+			QUrl::fromLocalFile(
+					THE_REPO->getFormazioniUrl() + this->getAwayFile()));
+	urls->push_back(
+			QUrl::fromLocalFile(THE_REPO->getGazzettaUrl() + this->getGazFile()));
 
-	if (httpWin_1.requestSucceded() && httpWin_2.requestSucceded()
-			&& httpWin_3.requestSucceded()) {
+	std::vector<QString> * savePaths = new std::vector<QString>;
+	savePaths->push_back(
+			THE_REPO->getDownloadPath() + '/' + this->getHomeFile());
+	savePaths->push_back(
+			THE_REPO->getDownloadPath() + '/' + this->getAwayFile());
+	savePaths->push_back(THE_REPO->getGazzettaPath() + '/' + this->getGazFile());
+
+	Downloader filesDownloader(THE_LOGGER, urls, savePaths);
+	filesDownloader.show();
+	filesDownloader.exec();
+
+	if (filesDownloader.requestSucceded()) {
+		this->downloadSuccess = true;
 		LOG(
 				DEBUG,
-				"In ChooseFileFromAListDialog::doDownload() --> the download of files succeded: closing chooseFileFromAListaDialog.");
-		this->hasFinished = true;
-		this->downloadSuccess = true;
-		this->close();
+				"In ChooseFileFromAListDialog::doDownload() --> the download of files succeded.");
 	} else {
+		this->downloadSuccess = false;
 		LOG(DEBUG,
 				"In ChooseFileFromAListDialog::doDownload() --> the download of files failed.");
-		this->downloadSuccess = false;
 	}
+	return;
 }
-unsigned int ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
+bool ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
+	LOG(DEBUG, "In ChooseFileFromAListDialog::createFileSquadreFromWebFiles().");
+
 	if (this->downloadSuccess) {
-		QFile fHome(
-				IniFileManager::Inst()->getDownloadPath() + "/"
-						+ this->getHomeFile());
-		QFile fAway(
-				IniFileManager::Inst()->getDownloadPath() + "/"
-						+ this->getAwayFile());
+
+		LOG(
+				DEBUG,
+				"In ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> download was successful.");
+
+		QFile fHome(THE_REPO->getDownloadPath() + "/" + this->getHomeFile());
+		QFile fAway(THE_REPO->getDownloadPath() + "/" + this->getAwayFile());
 
 		fHome.open(QIODevice::ReadOnly);
 		fAway.open(QIODevice::ReadOnly);
@@ -444,12 +515,13 @@ unsigned int ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 		if (!fHome.isReadable())
 			LOG(
 					FATAL,
-					"In : void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file : "
+					"In void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file : "
 							+ fHome.fileName() + " non è apribile.");
+
 		else if (!fAway.isReadable())
 			LOG(
 					FATAL,
-					"In : void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file : "
+					"In void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file : "
 							+ fHome.fileName() + " non è apribile.");
 
 		QFileInfo FIfHome(fHome);
@@ -458,7 +530,7 @@ unsigned int ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 		QFile fGaz(this->getGazFile());
 		QFileInfo FIfGaz(fGaz);
 
-		QString fileOut = IniFileManager::Inst()->getFormazioniPath()
+		QString fileOut = THE_REPO->getFormazioniPath() + '/'
 				+ FIfHome.baseName().split("_").at(0) + "_"
 				+ FIfAway.baseName().split("_").at(0) + "_" + FIfGaz.baseName()
 				+ ".txt";
@@ -671,16 +743,45 @@ unsigned int ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 
 		fOut.write(str.toAscii());
 
+		LOG(
+				DEBUG,
+				"In ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> <br>"
+						+ str);
+
 		fHome.close();
 		fAway.close();
 		fOut.close();
+		return EXIT_SUCCESS;
+	} else {
+		LOG(
+				DEBUG,
+				"In ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> download was not successful.");
+		return EXIT_FAILURE;
 	}
-	return EXIT_SUCCESS;
 }
 void ChooseFileFromAListDialog::execute() {
+	LOG(DEBUG, "In void ChooseFileFromAListDialog::execute().");
 	this->doDownload();
-	this->createFileSquadreFromWebFiles();
-	this->fileGazzetta = IniFileManager::Inst()->getGazzettaPath()
-			+ this->getGazFile();
-	this->accept();
+	if (this->downloadSuccess) {
+		this->createFileSquadreFromWebFiles();
+		this->fileGazzetta = THE_REPO->getGazzettaPath() + "/"
+				+ this->getGazFile();
+		this->accept();
+	} else {
+		LOG(
+				DEBUG,
+				"In void ChooseFileFromAListDialog::execute() --> download of file was not successful.");
+		/* TODO
+		 * completare
+		 */
+	}
+}
+bool ChooseFileFromAListDialog::wasCancelClicked() {
+	return this->cancelClicked;
+}
+bool ChooseFileFromAListDialog::isFinished() {
+	return this->hasFinished;
+}
+void ChooseFileFromAListDialog::closeEvent(QCloseEvent *event) {
+	this->quit();
 }

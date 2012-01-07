@@ -1,12 +1,9 @@
 #ifndef INIFILEPOPULATOR_H
 #define INIFILEPOPULATOR_H
 
-#include "singletonQtLogger.h"
-#include "IniFileManager.h"
-#include "defines.h"
-
 #include <QtGui/QDialog>
 #include <QtGui/QFileDialog>
+#include "IniFileManager.h"
 #include "ui_IniFilePopulator.h"
 
 class IniFilePopulator: public QDialog {
@@ -40,12 +37,15 @@ private slots:
 	void chooseRisultatiPath();
 	void chooseDownloadPath();
 	void chooseListePath();
+	void toggleDebugStatus();
+	void updateInternalData();
 
 private:
 	static IniFilePopulator* pInstance;
 	Ui::IniFilePopulatorClass ui;
 	QString getDir(QString, QString);
 	QString startDir;
+	bool createDirs();
 
 };
 

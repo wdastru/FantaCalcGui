@@ -12,7 +12,7 @@
 #include <fstream>
 #include <string>
 
-#include <QtGui/QMessageBox>
+//#include <QtGui/QMessageBox>
 
 #include "defines.h"
 #include "singletonQtLogger.h"
@@ -23,6 +23,8 @@ using namespace std;
 
 class Fanta {
 
+	friend class FormazioniFileReader;
+
 private:
 	static Fanta * pInstance;
 	unsigned int modulo[2][4];// moduli delle squadre
@@ -32,7 +34,7 @@ private:
 	double defenseMean[2];
 	unsigned int defenders[2];
 	unsigned int sfide[2];
-	signed int goals[2];
+	unsigned int goals[2];
 	unsigned int sostituzioni[2];
 	size_t longerNameLength;
 	signed int modifierValues[9][5];
@@ -59,6 +61,7 @@ private:
 		unsigned int daSostituire;
 	};
 	player NonHaGiocato;
+	player fakePlayer;
 	std::vector<std::string> teamName;
 	unsigned int getModulo(size_t, size_t) const;
 	std::vector<Fanta::player> Team[2];
@@ -86,6 +89,7 @@ public:
 	Fanta();
 	virtual ~Fanta();
 	static Fanta * Inst();
+	static Fanta * Refresh();
 	void initialize();
 	unsigned int atHome[2];
 	void setTeamName(const std::string, unsigned int);
@@ -99,22 +103,21 @@ public:
 	void execute();
 	void bSort(std::vector<Fanta::player> &);
 	QString getFileGazzetta();
-	void setFileGazzetta(QString);
+//	void setFileGazzetta(QString);
 	void printRiepilogo();
-	void printTitolo2(std::string);
-	 unsigned int getAmmonizioniTot(unsigned int) const ;
-	 unsigned int getEspulsioniTot(unsigned int) const ;
-	 unsigned int getGoalDecVittTot(unsigned int) const ;
-	 unsigned int getGoalDecParTot(unsigned int) const ;
-	 unsigned int getAssistTot(unsigned int) const ;
-	 unsigned int getSubstitutions(unsigned int) const ;
-	 void printFormations();
+	void printTitolo(std::string);
+	unsigned int getAmmonizioniTot(unsigned int) const ;
+	unsigned int getEspulsioniTot(unsigned int) const ;
+	unsigned int getGoalDecVittTot(unsigned int) const ;
+	unsigned int getGoalDecParTot(unsigned int) const ;
+	unsigned int getAssistTot(unsigned int) const ;
+	unsigned int getSubstitutions(unsigned int) const ;
+	void printFormations();
 
-//	void printTitolo3(std::string);
+	//	void printTitolo3(std::string);
 
 	/*
 	 std::string getVariablesValues();
-	 void printRiepilogo();
 	 void printRiepilogo_toFile(ofstream &);
 	 void printRiepilogo_toHtml(ofstream &);
 	 void printPlayersInfo(unsigned int);

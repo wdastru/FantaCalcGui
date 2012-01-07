@@ -13,7 +13,6 @@
 #include <vector>
 #include "QtCore/QString"
 
-#include "Fanta.h"
 #include "singletonQtLogger.h"
 #include "StringModifier.h"
 #include "WhichOfTheseDialog.h"
@@ -35,6 +34,7 @@ public:
 //	void printTitolo3(std::string);
 
 private:
+	void init();
 	QString fileFormazioni;
 	std::vector<std::vector<std::string> > allThePlayers;
 	std::vector < std::string > findLevenstheins(std::string);

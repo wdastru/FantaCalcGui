@@ -1,110 +1,46 @@
-#include "cstdlib"
-#include "string"
-#include <fstream>
+//#include "cstdlib"
+//#include "string"
+//#include <fstream>
 
-#include <QtGui/QtGui>
+//#include <QtGui/QtGui>
 #include <QtGui/QApplication>
-#include <QtCore/QFileInfo>
+//#include <QtCore/QFileInfo>
 
 #include "singletonQtLogger.h"
-#include "defines.h"
-#include "stringModifiers.h"
-#include "toString.h"
+#include "Repository.h"
+//#include "stringModifiers.h"
+//#include "toString.h"
 
-#include "CVersion.h"
-#include "UseTheNetDialog.h"
+//#include "CVersion.h"
+//#include "UseTheNetDialog.h"
+#include "IniFilePopulator.h"
 #include "IniFileManager.h"
-#include "ChooseFileFromAListDialog.h"
-#include "GazzettaFileReader.h"
-#include "FormazioniFileReader.h"
-#include "StringModifier.h"
+//#include "ChooseFileFromAListDialog.h"
+//#include "GazzettaFileReader.h"
+//#include "FormazioniFileReader.h"
+//#include "StringModifier.h"
 #include "Fanta.h"
+#include "defines.h"
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
 	QApplication a(argc, argv);
+	a.setOrganizationName("Eptadone Software");
+	a.setApplicationName("FantaCalcGui");
+	a.setApplicationVersion("v3.0.0");
+//	a.setWindowIcon(QIcon)
 
-	CVersion version;
-	QString loggerTitle = "FantaCalcGui v" + version.getVersion();
-
-	singletonQtLogger::Inst()->setTitle(loggerTitle);
-	singletonQtLogger::Inst()->setDebugStatus(
-			IniFileManager::Inst()->getDebugStatus());
-
-	LOG(DEBUG, "In main(): Logger started.");
+	THE_LOGGER; // prima parte l'applicazione
 
 	LOG(
-			DEBUG,
-			"Contenuto iniFile (" + IniFileManager::Inst()->getIniFilePath()
-					+ "):<br />" + IniFileManager::Inst()->showIniFile());
+			INFO,
+			"Benvenuti in " + THE_LOGGER->getTitle() + " "
+					+ THE_LOGGER->getVersion() + ".");
 
-	UseTheNetDialog * useTheNetDialog = new UseTheNetDialog(THE_LOGGER);
-	useTheNetDialog->setQuestion(
-			"<span style='font-size:8pt; font-weight:600; color:#ff0000;'>Si vuole usare la rete per scaricare i files?</span><br /><br /><span style='font-size:8pt; font-weight:200; color:#000000;'>se s&iacute;, assicurarsi di essere connessi.</span>");
-	do
-		useTheNetDialog->exec();
-	while (!useTheNetDialog->hasFinished);
+	THE_REPO; // poi si crea il repository dei dati
+	THE_MANAGER; // quindi si legge l'ini file (o lo si crea se non esistente)
+	THE_CONFIGURATOR; // infine il configuratore viene popolato con i dati
 
-	useTheNetDialog->close();
-
-	if (!useTheNetDialog->hasBeenAborted) {
-		QString fileGazzetta;
-		QString fileFormazioni;
-
-		ChooseFileFromAListDialog * chooseFileFromAListDialog = NULL;
-		/*
-		 *  --> Controllo dell'input dell'utente a UseTheNetDialog
-		 */
-		if (useTheNetDialog->getYesClicked()
-				&& useTheNetDialog->getDownloadSuccess()) {
-			/*
-			 * --> Scegli, scarica i file dalla rete e crea file squadre
-			 */
-			chooseFileFromAListDialog = new ChooseFileFromAListDialog(
-					IniFileManager::Inst()->getListaFormazioni(),
-					IniFileManager::Inst()->getListaGazFiles(), THE_LOGGER);
-			chooseFileFromAListDialog->exec();
-			fileGazzetta = chooseFileFromAListDialog->getFileGazzetta();
-			fileFormazioni = chooseFileFromAListDialog->getFileFormazioni();
-			// <-- Scegli e scarica i file dalla rete e crea file squadre
-		} else if (useTheNetDialog->getNoClicked()) {
-			fileGazzetta = useTheNetDialog->getNoNetGazzettaFile();
-			fileFormazioni = useTheNetDialog->getNoNetSquadreFile();
-		} else if (useTheNetDialog->hasBeenAborted) {
-			LOG(DEBUG, "In main --> useTheNetDialog aborted.");
-		} else {
-			LOG(FATAL, "In main --> Caso strano, che si fa?");
-		}
-		// <-- fine controllo dell'input dell'utente a UseTheNetDialog
-
-		/*
-		 * --> lettura file Gazzetta e Formazioni
-		 */
-		GazzettaFileReader * gazzettaFileReader = new GazzettaFileReader(
-				fileGazzetta);
-		//	std::vector<std::vector<std::string> > allThePlayers =
-		//			gazzettaFileReader->getOutput();
-
-		FormazioniFileReader * formazioniFileReader = new FormazioniFileReader(
-				fileFormazioni);
-		formazioniFileReader->setPlayers(gazzettaFileReader->getOutput());
-		formazioniFileReader->execute();
-		// <-- lettura file Gazzetta e Formazioni
-		FANTA->execute();
-
-		QString match = IniFileManager::Inst()->getRisultatiPath()
-				+ "risultato_" + QString::fromStdString(FANTA->getTeamName(0))
-				+ "-" + QString::fromStdString(FANTA->getTeamName(1)) + "_"
-				+ QFileInfo(FANTA->getFileGazzetta()).fileName();
-
-		FANTA->printTitolo2(
-				FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
-		FANTA->printRiepilogo();
-		FANTA->printFormations();
-
-		singletonQtLogger::Inst()->setLogFileName(match);
-		singletonQtLogger::Inst()->saveLogFile();
-	} else
-		return a.exec();
+	return a.exec();
 }

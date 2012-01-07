@@ -3,10 +3,7 @@
 
 #include <QtGui/QDialog>
 #include <QtGui/QLabel>
-#include <QtGui/QMessageBox>
 #include <QtGui/QPushButton>
-#include <QtGui/QGridLayout>
-#include <QtGui/QCloseEvent>
 
 class Less25MinDialog : public QDialog
 {
