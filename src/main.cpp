@@ -1,24 +1,12 @@
-//#include "cstdlib"
-//#include "string"
-//#include <fstream>
 
-//#include <QtGui/QtGui>
 #include <QtGui/QApplication>
-//#include <QtCore/QFileInfo>
 
 #include "singletonQtLogger.h"
 #include "Repository.h"
-//#include "stringModifiers.h"
-//#include "toString.h"
 
-//#include "CVersion.h"
-//#include "UseTheNetDialog.h"
 #include "IniFilePopulator.h"
 #include "IniFileManager.h"
-//#include "ChooseFileFromAListDialog.h"
-//#include "GazzettaFileReader.h"
-//#include "FormazioniFileReader.h"
-//#include "StringModifier.h"
+
 #include "Fanta.h"
 #include "defines.h"
 
@@ -30,7 +18,6 @@ int main(int argc, char *argv[]) {
 	a.setOrganizationName("Eptadone Software");
 	a.setApplicationName("FantaCalcGui");
 	a.setApplicationVersion(version);
-//	a.setWindowIcon(QIcon)
 
 	THE_LOGGER->setVersion(version); // prima parte l'applicazione
 
