@@ -5,7 +5,6 @@ SET( QT_VER 4.8.0)
 
 SET( SRCS src/main.cpp 
         src/IniFileManager.cpp
-        src/CVersion.cpp
         src/ChooseFileFromAListDialog.cpp
         src/Downloader.cpp
         src/NoNetFileDialog.cpp 
@@ -23,8 +22,7 @@ SET( SRCS src/main.cpp
         src/prova.cpp
         src/singletonQtLogger.cpp
         src/resources.rc )
-SET( HDRS src/CVersion.h
-        src/IniFileManager.h
+SET( HDRS src/IniFileManager.h
         src/ChooseFileFromAListDialog.h
         src/Downloader.h
         src/NoNetFileDialog.h 
