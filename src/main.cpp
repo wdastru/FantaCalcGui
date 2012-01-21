@@ -14,7 +14,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 	QApplication a(argc, argv);
-	QString version = "v3.0.1";
+	QString version = "v3.1.0";
 	a.setOrganizationName("Eptadone Software");
 	a.setApplicationName("FantaCalcGui");
 	a.setApplicationVersion(version);
