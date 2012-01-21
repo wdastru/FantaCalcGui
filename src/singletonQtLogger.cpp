@@ -192,8 +192,8 @@ void singletonQtLogger::onlineClicked() {
 	savePaths->push_back(THE_REPO->getListePath() + "/listaGazFiles.txt");
 
 	Downloader listsDownloader(THE_LOGGER, urls, savePaths);
-	listsDownloader.show();
-	listsDownloader.exec();
+	//listsDownloader.show();
+	//listsDownloader.exec();
 
 	if (listsDownloader.requestSucceded()) {
 		LOG(DEBUG,
