@@ -482,8 +482,8 @@ void ChooseFileFromAListDialog::doDownload() {
 	savePaths->push_back(THE_REPO->getGazzettaPath() + '/' + this->getGazFile());
 
 	Downloader filesDownloader(THE_LOGGER, urls, savePaths);
-	filesDownloader.show();
-	filesDownloader.exec();
+//	filesDownloader.show();
+//	filesDownloader.exec();
 
 	if (filesDownloader.requestSucceded()) {
 		this->downloadSuccess = true;
