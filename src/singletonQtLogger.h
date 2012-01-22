@@ -21,6 +21,7 @@ public:
 	QString getTitle(void);
 	QString getVersion(void);
 	void setLogFileName(QString);
+	bool checkForUpdates();
 
 private slots:
 	void saveLogAndClose();

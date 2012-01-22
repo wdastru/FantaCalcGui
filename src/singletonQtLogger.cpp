@@ -32,7 +32,6 @@ singletonQtLogger::singletonQtLogger(QWidget *parent) :
 	this->show();
 }
 void singletonQtLogger::init() {
-	//this->setVersion("v3.0.1");
 	this->setTitle("FantaCalcGui");
 }
 singletonQtLogger::~singletonQtLogger() {
@@ -345,4 +344,22 @@ void singletonQtLogger::goOn() {
 }
 void singletonQtLogger::setLogFileName(QString filename) {
 	this->logFileName = filename;
+}
+bool singletonQtLogger::checkForUpdates() {
+	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates.");
+
+//	std::vector<QUrl> * urls = new std::vector<QUrl>;
+//	QString url = THE_REPO->getFileFormazioniUrl();
+//	urls->push_back(QUrl::fromLocalFile(url));
+//
+//	std::vector<QString> * savePaths = new std::vector<QString>;
+//	savePaths->push_back(THE_REPO->getDownloadPath() + "\downloads.txt");
+
+	//Downloader downloadsDownloader(THE_LOGGER, urls, savePaths);
+
+	if (1) {
+		return true;
+	} else {
+		return false;
+	}
 }

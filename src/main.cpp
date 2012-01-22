@@ -26,6 +26,12 @@ int main(int argc, char *argv[]) {
 			"Benvenuti in " + THE_LOGGER->getTitle() + " "
 					+ THE_LOGGER->getVersion() + ".");
 
+	if (1) {
+		LOG(DEBUG, "New updates are available.");
+	} else {
+		LOG(DEBUG, "No updates available.");
+	}
+
 	THE_REPO; // poi si crea il repository dei dati
 	THE_MANAGER; // quindi si legge l'ini file (o lo si crea se non esistente)
 	THE_CONFIGURATOR; // infine il configuratore viene popolato con i dati
