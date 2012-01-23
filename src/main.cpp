@@ -1,4 +1,3 @@
-
 #include <QtGui/QApplication>
 
 #include "singletonQtLogger.h"
@@ -14,27 +13,23 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 	QApplication a(argc, argv);
-	QString version = "v3.1.0";
+	QString version = "3.1.0";
 	a.setOrganizationName("Eptadone Software");
 	a.setApplicationName("FantaCalcGui");
 	a.setApplicationVersion(version);
 
+	THE_MANAGER; // lettura dell'ini file (o lo si crea se non esistente)
 	THE_LOGGER->setVersion(version); // prima parte l'applicazione
 
 	LOG(
 			INFO,
-			"Benvenuti in " + THE_LOGGER->getTitle() + " "
+			"Benvenuti in " + THE_LOGGER->getTitle() + " v"
 					+ THE_LOGGER->getVersion() + ".");
 
-	if (1) {
-		LOG(DEBUG, "New updates are available.");
-	} else {
-		LOG(DEBUG, "No updates available.");
-	}
+	THE_LOGGER->checkForUpdates();
 
-	THE_REPO; // poi si crea il repository dei dati
-	THE_MANAGER; // quindi si legge l'ini file (o lo si crea se non esistente)
-	THE_CONFIGURATOR; // infine il configuratore viene popolato con i dati
+	THE_REPO; // repository dei dati
+	THE_CONFIGURATOR; // il configuratore viene popolato con i dati
 
 	return a.exec();
 }

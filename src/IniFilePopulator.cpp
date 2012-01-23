@@ -12,7 +12,7 @@ IniFilePopulator* IniFilePopulator::Inst() {
 IniFilePopulator* IniFilePopulator::pInstance = NULL;
 IniFilePopulator::IniFilePopulator(QWidget *parent) :
 	QDialog(parent) {
-	LOG(DEBUG, "In IniFilePopulator() constructor.");
+	LOG(DEBUG, "In IniFilePopulator::IniFilePopulator(...).");
 	this->startDir = "";
 	ui.setupUi(this);
 }
