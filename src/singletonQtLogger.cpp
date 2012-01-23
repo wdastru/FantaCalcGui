@@ -444,6 +444,60 @@ bool singletonQtLogger::checkForUpdates() {
 							"E' possibile scaricare la versione "
 									+ availableVersions.at(i) + " : "
 									+ content.at(i));
+
+					QMessageBox msgBox;
+					msgBox.setWindowTitle("HTTP");
+					msgBox.setInformativeText(
+							tr("New version available. Download %1 ?").arg(
+									content.at(i)));
+					msgBox.setStandardButtons(
+							QMessageBox::Yes | QMessageBox::No);
+					msgBox.setDefaultButton(QMessageBox::No);
+					msgBox.setIcon(QMessageBox::Question);
+					msgBox.setFont(THE_REPO->fontVariableWidthSmall);
+					int answer = msgBox.exec();
+
+					if (answer == QMessageBox::Yes) {
+						std::vector<QUrl> * urls = new std::vector<QUrl>;
+
+						QString url = THE_REPO->getFileFormazioniUrl();
+						unsigned int pos = url.lastIndexOf("/");
+						url = url.left(pos);
+						pos = url.lastIndexOf("/");
+						url = url.left(pos);
+						pos = url.lastIndexOf("/");
+						url = url.left(pos) + "/download/" + content.at(i);
+
+						urls->push_back(QUrl::fromLocalFile(url));
+
+						LOG(
+								DEBUG,
+								"In void singletonQtLogger::checkForUpdates() --> url : "
+										+ url);
+
+						std::vector<QString> * savePaths = new std::vector<
+								QString>;
+						QString savePath = THE_REPO->getDownloadPath() + "/"
+								+ content.at(i);
+						savePaths->push_back(savePath);
+
+						LOG(
+								DEBUG,
+								"In void singletonQtLogger::checkForUpdates() --> savePath : "
+										+ savePath);
+
+						Downloader updatesDownloader(THE_LOGGER, urls,
+								savePaths);
+						if (downloadsDownloader.requestSucceded()) { // download succeded
+							LOG(
+									DEBUG,
+									"In void singletonQtLogger::checkForUpdates() --> download of "
+											+ content.at(i) + " succeded.");
+						} else {
+							LOG(ERROR, content.at(i) + " download failed.");
+
+						}
+					}
 				}
 			}
 
