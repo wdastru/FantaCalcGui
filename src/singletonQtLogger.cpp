@@ -32,7 +32,6 @@ singletonQtLogger::singletonQtLogger(QWidget *parent) :
 	this->show();
 }
 void singletonQtLogger::init() {
-	//this->setVersion("v3.0.1");
 	this->setTitle("FantaCalcGui");
 }
 singletonQtLogger::~singletonQtLogger() {
@@ -62,10 +61,16 @@ void singletonQtLogger::Logging(QString type, QString message) {
 						+ "] FATAL   : " + message + "</span>");
 	else if (type == "WARN")
 		this->ui.plainTextEdit->appendHtml(
-				"[" + QTime::currentTime().toString("hh:mm:ss.zzz")
-						+ "] WARNING : " + message);
+				"<span style='color:#FF8800;'>["
+						+ QTime::currentTime().toString("hh:mm:ss.zzz")
+						+ "] WARNING : " + message + "</span>");
 	else if (type == "FILE") {
 		;
+	} else if (type == "UPDATE") {
+		this->ui.plainTextEdit->appendHtml(
+				"<span style='color:#00CC00; font-weight:bold'>["
+						+ QTime::currentTime().toString("hh:mm:ss.zzz")
+						+ "] UPDATE : " + message + "</span>");
 	} else
 		this->ui.plainTextEdit->appendHtml(
 				"[" + QTime::currentTime().toString("hh:mm:ss.zzz")
@@ -144,8 +149,8 @@ void singletonQtLogger::saveLogFile() {
 	fileContent.replace("<pre>", "");
 	fileContent.replace("</pre>", "\n");
 
-	fileContent += "\n File prodotto da FantaCalcGui.exe " + this->getVersion()
-			+ "\n";
+	fileContent += "\n File prodotto da FantaCalcGui.exe v"
+			+ this->getVersion() + "\n";
 
 	file->write(this->fileContent.toStdString().c_str());
 	file->close();
@@ -345,4 +350,113 @@ void singletonQtLogger::goOn() {
 }
 void singletonQtLogger::setLogFileName(QString filename) {
 	this->logFileName = filename;
+}
+bool singletonQtLogger::checkForUpdates() {
+	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates.");
+
+	std::vector<QUrl> * urls = new std::vector<QUrl>;
+	QString url = THE_REPO->getFileFormazioniUrl();
+	unsigned int pos = url.lastIndexOf("/");
+	url = url.left(pos);
+	pos = url.lastIndexOf("/");
+	url = url.left(pos) + "/downloads.txt";
+
+	urls->push_back(QUrl::fromLocalFile(url));
+
+	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates() --> url : " + url);
+
+	std::vector<QString> * savePaths = new std::vector<QString>;
+	QString savePath = THE_REPO->getDownloadPath() + "/downloads.txt";
+	savePaths->push_back(savePath);
+
+	LOG(
+			DEBUG,
+			"In void singletonQtLogger::checkForUpdates() --> savePath : "
+					+ savePath);
+
+	Downloader downloadsDownloader(THE_LOGGER, urls, savePaths);
+
+	if (downloadsDownloader.requestSucceded()) { // download succeded
+		QFile *file = new QFile(savePath);
+		std::vector<QString> content;
+		std::vector<QString> status;
+		std::vector<QString> availableVersions;
+
+		if (file->exists()) {
+			file->open(QIODevice::ReadOnly);
+			QTextStream in(file);
+
+			int i = 0;
+			while (!in.atEnd()) {
+				content.push_back(in.readLine(0));//reads a line of text file
+
+				int start = content.at(i).indexOf(QRegExp("[0-9]"));
+				int end = content.at(i).lastIndexOf(QRegExp("[0-9]")) + 1;
+
+				QString versionAvailable =
+						content.at(i).mid(start, end - start);
+
+				QStringList current = this->getVersion().split(QRegExp("\\\."));
+				int verCurrent = current.at(0).toInt();
+				int majCurrent = current.at(1).toInt();
+				int minCurrent = current.at(2).toInt();
+
+				QStringList available = versionAvailable.split(QRegExp("\\\."));
+				int verAvailable = available.at(0).toInt();
+				int majAvailable = available.at(1).toInt();
+				int minAvailable = available.at(2).toInt();
+
+				availableVersions.push_back(versionAvailable);
+
+				if (verAvailable > verCurrent) {
+					status.push_back("new");
+				} else if (verAvailable == verCurrent) {
+					if (majAvailable > majCurrent) {
+						status.push_back("new");
+					} else if (majAvailable == majCurrent) {
+						if (minAvailable > minCurrent) {
+							status.push_back("new");
+						} else {
+							status.push_back("old");
+						}
+					} else {
+						status.push_back("old");
+					}
+				} else {
+					status.push_back("old");
+				}
+
+				LOG(
+						DEBUG,
+						"In void singletonQtLogger::checkForUpdates() --> content.at("
+								+ my::toQString<int>(i) + ") : "
+								+ content.at(i) + ", version : "
+								+ availableVersions.at(i) + " (" + status.at(i)
+								+ ")");
+				++i;
+			}
+
+			for (int i = 0; i < content.size(); ++i) {
+
+				if (status.at(i) == "new") {
+					LOG(
+							UPDATE,
+							"E' possibile scaricare la versione "
+									+ availableVersions.at(i) + " : "
+									+ content.at(i));
+				}
+			}
+
+			file->close();
+		} else {
+			LOG(WARN, "Il file " + savePath + "è mancante.");
+			return false;
+		}
+
+	} else { // download failed
+		LOG(
+				WARN,
+				"Non è stato possibile scaricare le informazioni relative agli aggiornamenti disponibili.");
+		return false;
+	}
 }

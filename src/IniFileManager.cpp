@@ -22,7 +22,7 @@ IniFileManager* IniFileManager::Inst() {
 IniFileManager* IniFileManager::pInstance = NULL;
 
 IniFileManager::IniFileManager() {
-	LOG(DEBUG, "In IniFileManager() constructor.");
+	LOG(DEBUG, "In IniFileManager::IniFileManager().");
 	char * UserProfile = getenv("USERPROFILE");
 	QDir dir(UserProfile);
 	dir.mkdir("FantaCalcGui");
