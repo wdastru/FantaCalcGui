@@ -28,8 +28,8 @@ private:
     std::string answer;
     void enableOkButton();
 
-protected:
-    void closeEvent(QCloseEvent *event);
+//protected:
+//    void closeEvent(QCloseEvent *event);
 };
 
 #endif
