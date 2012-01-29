@@ -6,6 +6,11 @@
  */
 
 #include "Fanta.h"
+#include "defines.h"
+#include "singletonQtLogger.h"
+#include "Repository.h"
+//#include "StringModifier.h"
+#include "QMessageBox"
 
 Fanta * Fanta::Inst() {
 	if (pInstance == NULL) {
@@ -399,15 +404,16 @@ void Fanta::checkGiocatoSenzaVoto() {
 
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
-		for (size_t j = 0; j < this->Team[k].size(); j++) // loop sui giocatori
-		{
+		for (size_t j = 0; j < this->Team[k].size(); j++) { // loop sui giocatori
 			LOG(
 					DEBUG,
 					"In Fanta::checkGiocatoSenzaVoto() --> "
 							+ QString::fromStdString(this->Team[k].at(j).Nome));
 
 			if (this->Team[k].at(j).VotoGazzetta == -1) { // se S.V.
+
 				if (this->Team[k].at(j).Ruolo == 0) { // se è un portiere
+
 					LOG(DEBUG,
 							"In Fanta::checkGiocatoSenzaVoto() --> portiere.");
 
@@ -437,19 +443,22 @@ void Fanta::checkGiocatoSenzaVoto() {
 					LOG(DEBUG,
 							"In Fanta::checkGiocatoSenzaVoto() --> non portiere.");
 
-					string answer;
+					QString answer;
 
 					try {
 
-						Less25MinDialog less25MinDialog;
-						less25MinDialog.setPlayer(this->Team[k].at(j).Nome);
-						less25MinDialog.show();
-						less25MinDialog.exec();
+						answer
+								= this->questionMessage(
+										QString::fromStdString(
+												this->Team[k].at(j).Nome));
 
-						LOG(DEBUG,
-								"In Fanta::checkGiocatoSenzaVoto() --> dopo Less25MinDialog::exec().");
+						LOG(
+								DEBUG,
+								"In Fanta::checkGiocatoSenzaVoto() --> più di 25 minuti ? "
+										+ QString::fromStdString(
+												this->Team[k].at(j).Nome) + " "
+										+ answer);
 
-						answer = less25MinDialog.getAnswer();
 					} catch (...) {
 						LOG(FATAL,
 								"In Fanta::checkGiocatoSenzaVoto() --> exception caught!");
@@ -458,10 +467,11 @@ void Fanta::checkGiocatoSenzaVoto() {
 					LOG(
 							DEBUG,
 							"In Fanta::checkGiocatoSenzaVoto() --> answer : "
-									+ QString::fromStdString(answer));
+									+ answer);
 
-					if (answer == "Yes") {
-						this->Team[k].at(j).VotoGazzetta = 6.0;
+					if (answer == "Yes") { // giocato più di 25'
+
+						this->Team[k].at(j).VotoGazzetta = 5.5;
 						this->Team[k].at(j).FantaVotoGazzetta
 								= this->Team[k].at(j).VotoGazzetta
 										- this->Team[k].at(j).Esp - 0.5
@@ -483,6 +493,25 @@ void Fanta::checkGiocatoSenzaVoto() {
 											this->Team[k].at(j).Squadra)
 											+ ") ha giocato 25'.");
 						}
+
+					} else if (answer == "No") { // giocato meno di 25' --> sostituire
+
+						LOG(DEBUG,
+								"In Fanta::checkGiocatoSenzaVoto() --> da sostituire.");
+
+						this->Team[k].at(j).daSostituire = 1; // viene marcato per l'eliminazione
+
+						LOG(
+								DEBUG,
+								"In Fanta::checkGiocatoSenzaVoto() --> "
+										+ QString::fromStdString(
+												this->Team[k].at(j).Nome)
+										+ " (" + QString::fromStdString(
+										this->Team[k].at(j).Squadra)
+										+ ") non ha giocato 25' : verrà effettuata una sostituzione.");
+
+					} else {
+						// answer is neither Yes or No !!!!!!
 					}
 				} else { // da sostituire
 
@@ -505,6 +534,43 @@ void Fanta::checkGiocatoSenzaVoto() {
 			} // se S.V.
 		} // loop giocatori
 	} // loop squadre
+}
+QString Fanta::questionMessage(QString playerName) {
+
+	LOG(DEBUG, "In Fanta::questionMessage().");
+
+	QString
+			message =
+					"Il giocatore \n" + playerName
+							+ " \nha giocato, ma non e\' stato giudicato. \nHa giocato piu\' di 25\' ?";
+
+	QMessageBox msgBox;
+	msgBox.setWindowTitle("Ha giocato almeno 25' ?");
+	msgBox.setInformativeText(message);
+	msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+	msgBox.setDefaultButton(QMessageBox::No);
+	msgBox.setIcon(QMessageBox::Question);
+	msgBox.setFont(THE_REPO->fontVariableWidthSmall);
+
+	QString answer;
+
+	switch (msgBox.exec()) {
+	case QMessageBox::Yes:
+		LOG(DEBUG, "In Fanta::questionMessage() --> case Yes.");
+		answer = "Yes";
+		break;
+	case QMessageBox::No:
+		LOG(DEBUG, "In Fanta::questionMessage() --> case No.");
+		answer = "No";
+		break;
+	default:
+		// should never be reached
+		LOG(ERROR, "In Fanta::questionMessage() --> case Default.");
+		answer = "Error";
+		break;
+	}
+
+	return answer;
 }
 void Fanta::checkNonHaGiocato() {
 

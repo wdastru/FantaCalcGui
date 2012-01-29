@@ -80,6 +80,7 @@ private:
 	void calculateScorers();
 	std::vector<std::string> scorers[2];
 	QString fileGazzetta;
+	QString questionMessage(QString);
 
 	/*
 	 void reorderPlayers();
