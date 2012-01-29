@@ -16,7 +16,7 @@ public:
 
 private slots:
     void questionMessage();
-    void exit();
+    void quit();
 
 private:
     std::string Message;

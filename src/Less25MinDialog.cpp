@@ -27,7 +27,7 @@ Less25MinDialog::Less25MinDialog(QWidget *parent) :
 	okButton->setEnabled(false);
 
 	connect(questionButton, SIGNAL(clicked()), this, SLOT(questionMessage()));
-	connect(okButton, SIGNAL(clicked()), this, SLOT(exit()));
+	connect(okButton, SIGNAL(clicked()), this, SLOT(quit()));
 
 	QGridLayout *layout = new QGridLayout;
 	layout->setColumnStretch(1, 1);
@@ -63,17 +63,17 @@ void Less25MinDialog::questionMessage() {
 	switch (msgBox.exec()) {
 	case QMessageBox::Yes:
 		LOG(DEBUG, "In Less25MinDialog::questionMessage() --> case Yes.");
-		tmp = Less25MinDialog::player + " ha giocato più di 25'";
-		questionLabel->setText(tr(tmp.c_str()));
-		questionLabel->setFont(THE_REPO->fontVariableWidthSmall);
-		Less25MinDialog::answer = "Yes";
+		tmp = this->player + " ha giocato più di 25'";
+		this->questionLabel->setText(tr(tmp.c_str()));
+		this->questionLabel->setFont(THE_REPO->fontVariableWidthSmall);
+		this->answer = "Yes";
 		break;
 	case QMessageBox::No:
 		LOG(DEBUG, "In Less25MinDialog::questionMessage() --> case No.");
-		tmp = Less25MinDialog::player + " non ha giocato più di 25'";
-		questionLabel->setText(tr(tmp.c_str()));
-		questionLabel->setFont(THE_REPO->fontVariableWidthSmall);
-		Less25MinDialog::answer = "No";
+		tmp = this->player + " non ha giocato più di 25'";
+		this->questionLabel->setText(tr(tmp.c_str()));
+		this->questionLabel->setFont(THE_REPO->fontVariableWidthSmall);
+		this->answer = "No";
 		break;
 	default:
 		// should never be reached
@@ -83,16 +83,16 @@ void Less25MinDialog::questionMessage() {
 
 	this->enableOkButton();
 }
-void Less25MinDialog::setPlayer(std::string player) {
+void Less25MinDialog::setPlayer(std::string _player) {
 
 	LOG(
 			DEBUG,
 			"In Less25MinDialog::setPlayer(...) --> player : "
-					+ QString::fromStdString(player));
+					+ QString::fromStdString(_player));
 
-	Less25MinDialog::player = player;
-	Less25MinDialog::Message
-			= "Il giocatore \n\n" + player
+	this->player = _player;
+	this->Message
+			= "Il giocatore \n\n" + this->player
 					+ " \n\nha giocato, ma non e\' stato giudicato. \nHa giocato piu\' di 25\' ?";
 }
 std::string Less25MinDialog::getAnswer() {
@@ -102,9 +102,15 @@ std::string Less25MinDialog::getAnswer() {
 			"In Less25MinDialog::getAnswer() --> player : "
 					+ QString::fromStdString(this->player));
 
-	return Less25MinDialog::answer;
+	return this->answer;
 }
-void Less25MinDialog::exit() {
-	LOG(DEBUG, "In Less25MinDialog::exit().");
-	this->close();
+void Less25MinDialog::quit() {
+	LOG(DEBUG, "In Less25MinDialog::quit().");
+
+	try {
+		this->close();
+	} catch (...) {
+		LOG(FATAL, "In Less25MinDialog::quit() --> exception caught in close()!");
+	}
+
 }

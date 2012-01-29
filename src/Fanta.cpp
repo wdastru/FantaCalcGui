@@ -406,10 +406,10 @@ void Fanta::checkGiocatoSenzaVoto() {
 					"In Fanta::checkGiocatoSenzaVoto() --> "
 							+ QString::fromStdString(this->Team[k].at(j).Nome));
 
-			if (this->Team[k].at(j).VotoGazzetta == -1) {
+			if (this->Team[k].at(j).VotoGazzetta == -1) { // se S.V.
 				if (this->Team[k].at(j).Ruolo == 0) { // se è un portiere
 					LOG(DEBUG,
-							"In Fanta::checkGiocatoSenzaVoto() --> PORTIERE.");
+							"In Fanta::checkGiocatoSenzaVoto() --> portiere.");
 
 					this->Team[k].at(j).VotoGazzetta = 6.0; // il portiere non si sostituisce se ha giocato (ma non ha preso voto),
 					this->Team[k].at(j).FantaVotoGazzetta
@@ -435,18 +435,25 @@ void Fanta::checkGiocatoSenzaVoto() {
 				} else if (this->Team[k].at(j).Ruolo > 0) { //se non è un portiere
 
 					LOG(DEBUG,
-							"In Fanta::checkGiocatoSenzaVoto() --> NON PORTIERE.");
+							"In Fanta::checkGiocatoSenzaVoto() --> non portiere.");
 
 					string answer;
 
-					Less25MinDialog less25MinDialog;
-					less25MinDialog.setPlayer(this->Team[k].at(j).Nome);
-					less25MinDialog.exec();
+					try {
 
-					LOG(DEBUG,
-							"In Fanta::checkGiocatoSenzaVoto() --> dopo Less25MinDialog::exec().");
+						Less25MinDialog less25MinDialog;
+						less25MinDialog.setPlayer(this->Team[k].at(j).Nome);
+						less25MinDialog.show();
+						less25MinDialog.exec();
 
-					answer = less25MinDialog.getAnswer();
+						LOG(DEBUG,
+								"In Fanta::checkGiocatoSenzaVoto() --> dopo Less25MinDialog::exec().");
+
+						answer = less25MinDialog.getAnswer();
+					} catch (...) {
+						LOG(FATAL,
+								"In Fanta::checkGiocatoSenzaVoto() --> exception caught!");
+					}
 
 					LOG(
 							DEBUG,
@@ -476,28 +483,28 @@ void Fanta::checkGiocatoSenzaVoto() {
 											this->Team[k].at(j).Squadra)
 											+ ") ha giocato 25'.");
 						}
-					} else {
-
-						LOG(DEBUG,
-								"In Fanta::checkGiocatoSenzaVoto() --> DA SOSTITUIRE.");
-
-						this->Team[k].at(j).daSostituire = 1; // viene marcato per l'eliminazione
-
-						LOG(
-								DEBUG,
-								"In Fanta::checkGiocatoSenzaVoto() --> "
-										+ QString::fromStdString(
-												this->Team[k].at(j).Nome)
-										+ " (" + QString::fromStdString(
-										this->Team[k].at(j).Squadra)
-										+ ") non ha giocato 25' : verrà effettuata una sostituzione.");
 					}
+				} else { // da sostituire
 
-					continue;
+					LOG(DEBUG,
+							"In Fanta::checkGiocatoSenzaVoto() --> da sostituire.");
+
+					this->Team[k].at(j).daSostituire = 1; // viene marcato per l'eliminazione
+
+					LOG(
+							DEBUG,
+							"In Fanta::checkGiocatoSenzaVoto() --> "
+									+ QString::fromStdString(
+											this->Team[k].at(j).Nome) + " ("
+									+ QString::fromStdString(
+											this->Team[k].at(j).Squadra)
+									+ ") non ha giocato 25' : verrà effettuata una sostituzione.");
 				}
-			}
-		}
-	}
+
+				continue;
+			} // se S.V.
+		} // loop giocatori
+	} // loop squadre
 }
 void Fanta::checkNonHaGiocato() {
 
