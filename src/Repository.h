@@ -21,6 +21,7 @@ class Repository {
 	friend class FileFormazioniViewer;
 	friend class Less25MinDialog;
 	friend class HttpWindow;
+	friend class Fanta;
 
 public:
 	Repository();

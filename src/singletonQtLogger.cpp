@@ -32,7 +32,7 @@ singletonQtLogger::singletonQtLogger(QWidget *parent) :
 	this->show();
 }
 void singletonQtLogger::init() {
-	this->setVersion("v3.0");
+//	this->setVersion("v3.0");
 	this->setTitle("FantaCalcGui");
 }
 singletonQtLogger::~singletonQtLogger() {
@@ -282,30 +282,37 @@ void singletonQtLogger::goOn() {
 	formazioniFileReader->setPlayers(gazzettaFileReader->getOutput());
 
 	THE_VIEWER->setFile(THE_REPO->fileFormazioni);
-	unsigned int retVal1;
+	unsigned int retVal;
 
 	do {
-		THE_VIEWER->show();
-		THE_VIEWER->exec();
+		try {
+			THE_VIEWER->show();
+			THE_VIEWER->exec();
 
-		if (THE_VIEWER->getResult() == 1) {
-			LOG(DEBUG,
-					"In singletonQtLogger::goOn() --> THE_VIEWER returned 1.");
-		} else {
-			LOG(DEBUG,
-					"In singletonQtLogger::goOn() --> THE_VIEWER returned 0.");
-			break;
+			if (THE_VIEWER->getResult() == 1) {
+				LOG(DEBUG,
+						"In singletonQtLogger::goOn() --> THE_VIEWER returned 1.");
+			} else {
+				LOG(DEBUG,
+						"In singletonQtLogger::goOn() --> THE_VIEWER returned 0.");
+				break;
+			}
+
+			Fanta::Refresh();
+
+			retVal = formazioniFileReader->execute();
+
+			LOG(
+					DEBUG,
+					"In singletonQtLogger::goOn() --> formazioniFileReader::execute() returned "
+							+ my::toQString<unsigned int>(retVal) + ".");
+		} catch (QString& str) {
+			LOG(
+					DEBUG,
+					"In singletonQtLogger::goOn() --> exception caught! retVal : "
+							+ my::toQString<unsigned int>(retVal) + ", " + str);
 		}
-
-		Fanta::Refresh();
-
-		retVal1 = formazioniFileReader->execute();
-
-		LOG(
-				DEBUG,
-				"In singletonQtLogger::goOn() --> formazioniFileReader::execute() returned "
-						+ my::toQString<unsigned int>(retVal1) + ".");
-	} while (retVal1 != FORMFILEREAD_OK);
+	} while (retVal != FORMFILEREAD_OK);
 	// <-- lettura file Gazzetta e Formazioni
 
 	if (THE_VIEWER->getResult() == 0) { // in caso di break
@@ -315,9 +322,10 @@ void singletonQtLogger::goOn() {
 	try {
 		FANTA->execute();
 	} catch (...) {
-		LOG(DEBUG,
-				"In singletonQtLogger::goOn() --> exception caught in FANTA->execute().");
+		LOG(DEBUG, "In singletonQtLogger::goOn() --> exception caught.");
 	}
+
+	LOG(DEBUG, "In singletonQtLogger::goOn() --> after FANTA->execute() call.");
 
 	try {
 		QString fileName(
