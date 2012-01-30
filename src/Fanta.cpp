@@ -464,14 +464,14 @@ void Fanta::checkGiocatoSenzaVoto() {
 								"In Fanta::checkGiocatoSenzaVoto() --> exception caught!");
 					}
 
-					LOG(
-							DEBUG,
-							"In Fanta::checkGiocatoSenzaVoto() --> answer : "
-									+ answer);
-
 					if (answer == "Yes") { // giocato più di 25'
 
-						this->Team[k].at(j).VotoGazzetta = 5.5;
+						/* TODO
+						 * controllare il regolamento
+						 * riguardante i giocatori
+						 * senza voto
+						 */
+						this->Team[k].at(j).VotoGazzetta = 6.0;
 						this->Team[k].at(j).FantaVotoGazzetta
 								= this->Team[k].at(j).VotoGazzetta
 										- this->Team[k].at(j).Esp - 0.5
@@ -480,7 +480,7 @@ void Fanta::checkGiocatoSenzaVoto() {
 										+ this->Team[k].at(j).Assist + 3
 										* this->Team[k].at(j).GoalFatti;
 
-						if (this->Team[k].at(j).FantaVotoGazzetta == 6.0) {
+						if (this->Team[k].at(j).FantaVotoGazzetta == 6.0) { // no Bonus/Malus
 							this->Team[k].at(j).VotoGazzetta = 5.5;
 							this->Team[k].at(j).FantaVotoGazzetta = 5.5;
 
@@ -539,35 +539,27 @@ QString Fanta::questionMessage(QString playerName) {
 
 	LOG(DEBUG, "In Fanta::questionMessage().");
 
+	QString title = "Ha giocato almeno 25' ?";
+
 	QString
 			message =
 					"Il giocatore \n" + playerName
 							+ " \nha giocato, ma non e\' stato giudicato. \nHa giocato piu\' di 25\' ?";
 
-	QMessageBox msgBox;
-	msgBox.setWindowTitle("Ha giocato almeno 25' ?");
-	msgBox.setInformativeText(message);
-	msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-	msgBox.setDefaultButton(QMessageBox::No);
-	msgBox.setIcon(QMessageBox::Question);
-	msgBox.setFont(THE_REPO->fontVariableWidthSmall);
-
 	QString answer;
 
-	switch (msgBox.exec()) {
-	case QMessageBox::Yes:
-		LOG(DEBUG, "In Fanta::questionMessage() --> case Yes.");
+	QMessageBox::StandardButton reply;
+	reply = QMessageBox::question(THE_LOGGER, title, message,
+			QMessageBox::Yes | QMessageBox::No);
+	if (reply == QMessageBox::Yes) {
 		answer = "Yes";
-		break;
-	case QMessageBox::No:
-		LOG(DEBUG, "In Fanta::questionMessage() --> case No.");
+		LOG(DEBUG, "In Fanta::questionMessage() --> returning " + answer + ".");
+	} else if (reply == QMessageBox::No) {
 		answer = "No";
-		break;
-	default:
-		// should never be reached
-		LOG(ERROR, "In Fanta::questionMessage() --> case Default.");
+		LOG(DEBUG, "In Fanta::questionMessage() --> returning " + answer + ".");
+	} else {
 		answer = "Error";
-		break;
+		LOG(ERROR, "In Fanta::questionMessage() --> returning " + answer + ".");
 	}
 
 	return answer;

@@ -15,7 +15,6 @@ SET( SRCS src/main.cpp
         src/Fanta.cpp        
         src/WhichOfTheseDialog.cpp
         src/WhichOfLevenshteinDialog.cpp
-        src/Less25MinDialog.cpp
         src/IniFilePopulator.cpp
         src/Repository.cpp 
         src/StringModifier.cpp 
@@ -33,7 +32,6 @@ SET( HDRS src/CVersion.h
         src/FileFormazioniViewer.h
         src/Fanta.h        
         src/WhichOfTheseDialog.h
-        src/Less25MinDialog.h
         src/WhichOfLevenshteinDialog.h
         src/IniFilePopulator.h
         src/Repository.h
@@ -47,9 +45,6 @@ SET( UIS  src/authenticationdialog.ui
         src/NoNetFileDialog.ui
         src/prova.ui 
 		    src/singletonQtLogger.ui )
-
-# enable warnings
-#ADD_DEFINITIONS( -Wall )
 
 FIND_PACKAGE(Qt REQUIRED)
 INCLUDE( ${QT_USE_FILE} )
