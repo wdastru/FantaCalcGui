@@ -6,14 +6,11 @@
  */
 
 #include "Repository.h"
-#include "singletonQtLogger.h"
-#include "defines.h"
 
 #include <stdlib.h>
 #include <QFile>
 
 Repository::Repository() {
-//	LOG(DEBUG, "In Repository::Repository().");
 	/*
 	 * DEFAULTS
 	 */

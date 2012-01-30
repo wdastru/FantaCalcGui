@@ -15,7 +15,7 @@ NoNetFileDialog::NoNetFileDialog(QWidget *parent) :
 	QDialog(parent) {
 	ui.setupUi(this);
 	ui.okButton->setEnabled(false);
-	//	hasFinished = FALSE;
+	hasFinished = FALSE;
 	hasBeenAborted = FALSE;
 }
 NoNetFileDialog::~NoNetFileDialog() {
@@ -23,7 +23,8 @@ NoNetFileDialog::~NoNetFileDialog() {
 }
 void NoNetFileDialog::setOpenFileNameSquadre() {
 	QString path =
-			THE_REPO->getFormazioniPath().trimmed().replace("\\", "\\\\");
+			THE_REPO->getFormazioniPath().trimmed().replace("\\",
+					"\\\\");
 
 	this->fileNameSquadre = QFileDialog::getOpenFileName(this,
 			tr("Scegli il file con le squadre."), path,
@@ -61,10 +62,11 @@ void NoNetFileDialog::setOpenFileNameSquadre() {
 	ui.fileSquadreLineEdit->setText(this->fileNameSquadre);
 	this->enableOkButton();
 
-	//	THE_MANAGER->writeIniFile();
+//	THE_MANAGER->writeIniFile();
 }
 void NoNetFileDialog::setOpenFileNameGazzetta() {
-	QString path = THE_REPO->getGazzettaPath().trimmed().replace("\\", "\\\\");
+	QString path = THE_REPO->getGazzettaPath().trimmed().replace(
+			"\\", "\\\\");
 
 	this->fileNameGazzetta = QFileDialog::getOpenFileName(this,
 			tr("Scegli il file della gazzetta."), path,
@@ -103,7 +105,7 @@ void NoNetFileDialog::setOpenFileNameGazzetta() {
 	ui.fileGazzettaLineEdit->setText(this->fileNameGazzetta);
 	this->enableOkButton();
 
-	//	THE_MANAGER->writeIniFile();
+//	THE_MANAGER->writeIniFile();
 }
 //void NoNetFileDialog::createEmptyFile() {
 //	ui.newFileLineEdit->setText("file nuovo");
@@ -124,18 +126,15 @@ QString NoNetFileDialog::getFileNameGazzetta() {
 }
 void NoNetFileDialog::okClicked() {
 	this->hasBeenAborted = FALSE;
-	LOG(DEBUG, "In NoNetFileDialog::okClicked().");
-	//	this->hasFinished = TRUE;
-	this->hide();
+	this->hasFinished = TRUE;
+	this->close();
 }
 void NoNetFileDialog::cancelClicked() {
 	this->hasBeenAborted = TRUE;
-	LOG(DEBUG, "In NoNetFileDialog::cancelClicked().");
-	//	this->hasFinished = FALSE;
+	this->hasFinished = FALSE;
 	this->close();
 }
 void NoNetFileDialog::closeEvent(QCloseEvent *event) {
-	LOG(DEBUG, "In NoNetFileDialog::closeEvent(...).");
 	this->cancelClicked();
 }
 

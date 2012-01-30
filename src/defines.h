@@ -42,7 +42,6 @@
 #define FATAL "FATAL"
 #define WARN  "WARN"
 #define DEBUG "DEBUG"
-#define UPDATE "UPDATE"
 #define TOFILE  "FILE"
 #endif /* TYPE_OF_LOG_MSG */
 

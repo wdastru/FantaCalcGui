@@ -25,7 +25,7 @@ public:
 	virtual ~NoNetFileDialog();
 	QString getFileNameSquadre();
 	QString getFileNameGazzetta();
-//	bool hasFinished;
+	bool hasFinished;
 	bool hasBeenAborted;
 
 private slots:

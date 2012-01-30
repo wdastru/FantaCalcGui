@@ -321,6 +321,11 @@ unsigned int FormazioniFileReader::execute() {
 										STR_MOD->msk(v_Found.at(answer), DELIM,
 												ColSquadra))
 										+ ") ripetuto !!! Controllare il file di input.");
+
+//						throw(QString::fromStdString(
+//								STR_MOD->msk(v_Found.at(answer), DELIM,
+//										ColNomeCognome)));
+
 						return FORMFILEREAD_REPEATED;
 						break;
 

@@ -78,7 +78,7 @@ HttpWindow::HttpWindow(QWidget *parent, QUrl _url, QString _savePath) :
 	//	buttonBox->addButton(downloadButton, QDialogButtonBox::ActionRole);
 	//	buttonBox->addButton(quitButton, QDialogButtonBox::RejectRole);
 
-	//progressDialog = new QProgressDialog(this);
+	progressDialog = new QProgressDialog(this);
 
 	//	connect(urlLineEdit, SIGNAL(textChanged(QString)), this,
 	//			SLOT(enableDownloadButton()));
@@ -166,8 +166,8 @@ void HttpWindow::downloadFile() {
 		return;
 	}
 
-	//	progressDialog->setWindowTitle(tr("HTTP"));
-	//	progressDialog->setLabelText(tr("Downloading %1.").arg(fileName));
+	progressDialog->setWindowTitle(tr("HTTP"));
+	progressDialog->setLabelText(tr("Downloading %1.").arg(fileName));
 	//	downloadButton->setEnabled(false);
 
 	// schedule the request
@@ -191,13 +191,13 @@ void HttpWindow::httpFinished() {
 			file = 0;
 		}
 		reply->deleteLater();
-		//		progressDialog->hide();
+		progressDialog->hide();
 		this->downloadSuccess = false;
 		this->close();
 		return;
 	}
 
-	//	progressDialog->hide();
+	progressDialog->hide();
 	file->flush();
 	file->close();
 
@@ -276,8 +276,8 @@ void HttpWindow::updateDataReadProgress(qint64 bytesRead, qint64 totalBytes) {
 	if (httpRequestAborted)
 		return;
 
-	//	progressDialog->setMaximum(totalBytes);
-	//	progressDialog->setValue(bytesRead);
+	progressDialog->setMaximum(totalBytes);
+	progressDialog->setValue(bytesRead);
 }
 
 bool HttpWindow::downloadSuccessful() {

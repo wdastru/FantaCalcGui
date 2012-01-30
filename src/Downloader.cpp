@@ -101,8 +101,6 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 	setLayout(mainLayout);
 	setFont(THE_REPO->fontVariableWidthSmall);
 	setWindowTitle(tr("Downloader"));
-
-	this->downloadFiles();
 }
 void Downloader::quit() {
 	LOG(DEBUG, "In void Downloader::quit().");
