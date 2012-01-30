@@ -1,8 +1,3 @@
-<<<<<<< HEAD
 .project
 build/
-=======
-.project
-build/
->>>>>>> Bug#79-giocatore_senza_voto_provoca_crash
 installer/*.exe
