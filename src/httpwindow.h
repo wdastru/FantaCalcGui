@@ -42,7 +42,7 @@
 #define HTTPWINDOW_H
 
 #include <QDialog>
-#include <QNetworkAccessManager>
+#include <QtNetwork/QNetworkAccessManager>
 #include <QUrl>
 
 QT_BEGIN_NAMESPACE

@@ -40,7 +40,7 @@
  ****************************************************************************/
 
 #include <QtGui>
-#include <QtNetwork>
+#include <QtNetwork/QtNetwork>
 #include <QUrl>
 
 #include "Repository.h"
