@@ -9,7 +9,6 @@
 #include "defines.h"
 #include "singletonQtLogger.h"
 #include "Repository.h"
-//#include "StringModifier.h"
 #include "QMessageBox"
 
 Fanta * Fanta::Inst() {
