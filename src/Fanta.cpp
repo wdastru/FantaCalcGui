@@ -9,7 +9,6 @@
 #include "defines.h"
 #include "singletonQtLogger.h"
 #include "Repository.h"
-//#include "StringModifier.h"
 #include "QMessageBox"
 
 Fanta * Fanta::Inst() {
@@ -1066,7 +1065,11 @@ void Fanta::calculateGoals() {
 			if (Fanta::Total[k] >= (6 * i))
 				continue;
 
-			Fanta::goals[k] = i - 11;
+			if (i > 11) {
+				Fanta::goals[k] = i - 11;
+			} else {
+				Fanta::goals[k] = 0;
+			}
 
 			LOG(
 					DEBUG,

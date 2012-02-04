@@ -42,7 +42,7 @@
 #define HTTPWINDOW_H
 
 #include <QDialog>
-#include <QNetworkAccessManager>
+#include <QtNetwork/QNetworkAccessManager>
 #include <QUrl>
 
 QT_BEGIN_NAMESPACE
@@ -53,7 +53,7 @@ class QLabel;
 class QLineEdit;
 class QProgressDialog;
 class QPushButton;
-class QSslError;
+//class QSslError;
 class QAuthenticator;
 class QNetworkReply;
 
@@ -76,9 +76,9 @@ private slots:
 	void updateDataReadProgress(qint64 bytesRead, qint64 totalBytes);
 //	void enableDownloadButton();
 	void slotAuthenticationRequired(QNetworkReply*, QAuthenticator *);
-#ifndef QT_NO_OPENSSL
-	void sslErrors(QNetworkReply*, const QList<QSslError> &errors);
-#endif
+//#ifndef QT_NO_OPENSSL
+//	void sslErrors(QNetworkReply*, const QList<QSslError> &errors);
+//#endif
 
 private:
 	QLabel *statusLabel;

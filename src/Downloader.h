@@ -42,7 +42,7 @@
 #define DOWNLOADER_H
 
 #include <QDialog>
-#include <QNetworkAccessManager>
+#include <QtNetwork/QNetworkAccessManager>
 #include <QUrl>
 
 #include "singletonQtLogger.h"

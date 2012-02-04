@@ -1,7 +1,12 @@
 CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
 PROJECT (FantaCalcGuiNew)
 
-SET( QT_VER 4.8.0)
+FIND_PACKAGE(Qt4 4.4.3 REQUIRED)
+INCLUDE(${QT_USE_FILE})
+ADD_DEFINITIONS(${QT_DEFINITIONS})
+
+SET (QT_USE_QTNETWORK TRUE)
+SET (QT_USE_QTTEST TRUE)
 
 SET( SRCS src/main.cpp 
         src/IniFileManager.cpp
@@ -19,44 +24,29 @@ SET( SRCS src/main.cpp
         src/Repository.cpp 
         src/StringModifier.cpp 
         src/httpwindow.cpp
-        src/prova.cpp
         src/singletonQtLogger.cpp
         src/resources.rc )
-SET( HDRS src/CVersion.h
-        src/IniFileManager.h
+SET( HDRS 
         src/ChooseFileFromAListDialog.h
         src/Downloader.h
-        src/NoNetFileDialog.h 
-        src/GazzettaFileReader.h
-        src/FormazioniFileReader.h 
+        src/NoNetFileDialog.h  
         src/FileFormazioniViewer.h
-        src/Fanta.h        
         src/WhichOfTheseDialog.h
         src/WhichOfLevenshteinDialog.h
         src/IniFilePopulator.h
-        src/Repository.h
-        src/StringModifier.h 
         src/httpwindow.h
-        src/prova.h
         src/singletonQtLogger.h )
 SET( UIS  src/authenticationdialog.ui
     		src/IniFilePopulator.ui
     		src/FileFormazioniViewer.ui
         src/NoNetFileDialog.ui
-        src/prova.ui 
-		    src/singletonQtLogger.ui )
-
-FIND_PACKAGE(Qt REQUIRED)
-INCLUDE( ${QT_USE_FILE} )
+        src/singletonQtLogger.ui )
 
 QT4_WRAP_UI( UI_HDRS ${UIS} )
 QT4_WRAP_CPP( MOC_SRCS ${HDRS} )
 
-INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} 
-    C:/Qt/${QT_VER}/include/
-    C:/Qt/${QT_VER}/include/QtNetwork 
-    D:/Sorgenti/FantaCalcGuiNew/src  )
-LINK_DIRECTORIES( C:/Qt/${QT_VER}/bin/ )
+INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} )
 
 ADD_EXECUTABLE( FantaCalcGui ${SRCS} ${MOC_SRCS} ${UI_HDRS} )
-TARGET_LINK_LIBRARIES( FantaCalcGui ${QT_LIBRARIES} QtNetwork4 QtTest4 )
+
+TARGET_LINK_LIBRARIES( FantaCalcGui ${QT_LIBRARIES} ${QT_QTNETWORK_LIBRARIES} ${QT_QTTEST_LIBRARIES} )
