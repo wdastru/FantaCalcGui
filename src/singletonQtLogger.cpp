@@ -32,7 +32,6 @@ singletonQtLogger::singletonQtLogger(QWidget *parent) :
 	this->show();
 }
 void singletonQtLogger::init() {
-//	this->setVersion("v3.0");
 	this->setTitle("FantaCalcGui");
 }
 singletonQtLogger::~singletonQtLogger() {

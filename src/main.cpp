@@ -13,15 +13,13 @@ using namespace std;
 int main(int argc, char *argv[]) {
 
 	QApplication a(argc, argv);
-
-	QString version = "3.1.0";
-
 	a.setOrganizationName("Eptadone Software");
 	a.setApplicationName("FantaCalcGui");
-	a.setApplicationVersion(version);
+	a.setApplicationVersion("3.1.0");
 
 	THE_LOGGER; // prima parte l'applicazione
-	THE_LOGGER->setVersion(version);
+	THE_LOGGER->setVersion(a.applicationVersion());
+	THE_LOGGER->setTitle(a.applicationName());
 
 	LOG(
 			INFO,
