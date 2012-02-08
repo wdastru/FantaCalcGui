@@ -42,7 +42,7 @@
 #define DOWNLOADER_H
 
 #include <QDialog>
-#include <QNetworkAccessManager>
+#include <QtNetwork/QNetworkAccessManager>
 #include <QUrl>
 
 #include "singletonQtLogger.h"
@@ -64,7 +64,7 @@ Q_OBJECT
 public:
 	Downloader(QWidget *parent = 0,
 			std::vector<QUrl>* _urls = new std::vector<QUrl>,
-			std::vector<QString>* _savePaths = new std::vector<QString>);
+			std::vector<QString>* _savePaths = new std::vector<QString>, bool silent = FALSE);
 
 	bool requestSucceded();
 	bool wasCancelClicked();

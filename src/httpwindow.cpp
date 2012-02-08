@@ -40,9 +40,10 @@
  ****************************************************************************/
 
 #include <QtGui>
-#include <QtNetwork>
+#include <QtNetwork/QtNetwork>
 #include <QUrl>
 
+#include "defines.h"
 #include "Repository.h"
 #include "httpwindow.h"
 #include "singletonQtLogger.h"
@@ -87,10 +88,10 @@ HttpWindow::HttpWindow(QWidget *parent, QUrl _url, QString _savePath) :
 			SIGNAL(authenticationRequired(QNetworkReply*,QAuthenticator*)),
 			this,
 			SLOT(slotAuthenticationRequired(QNetworkReply*,QAuthenticator*)));
-#ifndef QT_NO_OPENSSL
-	connect(&qnam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this,
-			SLOT(sslErrors(QNetworkReply*,QList<QSslError>)));
-#endif
+//#ifndef QT_NO_OPENSSL
+//	connect(&qnam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this,
+//			SLOT(sslErrors(QNetworkReply*,QList<QSslError>)));
+//#endif
 	//	connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
 	//	connect(downloadButton, SIGNAL(clicked()), this, SLOT(downloadFile()));
 	//	connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
@@ -310,28 +311,28 @@ void HttpWindow::slotAuthenticationRequired(QNetworkReply*,
 	//	}
 }
 
-#ifndef QT_NO_OPENSSL
-void HttpWindow::sslErrors(QNetworkReply*, const QList<QSslError> &errors) {
-	QString errorString;
-	foreach (const QSslError &error, errors)
-		{
-			if (!errorString.isEmpty())
-				errorString += ", ";
-			errorString += error.errorString();
-		}
-
-	QMessageBox msgBox;
-	msgBox.setWindowTitle("HTTP");
-	msgBox.setInformativeText(
-			tr("One or more SSL errors has occurred: %1").arg(errorString));
-	msgBox.setStandardButtons(QMessageBox::Ignore | QMessageBox::Abort);
-	msgBox.setDefaultButton(QMessageBox::Ignore);
-	msgBox.setIcon(QMessageBox::Warning);
-	msgBox.setFont(THE_REPO->fontVariableWidthSmall);
-	int answer = msgBox.exec();
-
-	if (answer == QMessageBox::Ignore) {
-		reply->ignoreSslErrors();
-	}
-}
-#endif
+//#ifndef QT_NO_OPENSSL
+//void HttpWindow::sslErrors(QNetworkReply*, const QList<QSslError> &errors) {
+//	QString errorString;
+//	foreach (const QSslError &error, errors)
+//		{
+//			if (!errorString.isEmpty())
+//				errorString += ", ";
+//			errorString += error.errorString();
+//		}
+//
+//	QMessageBox msgBox;
+//	msgBox.setWindowTitle("HTTP");
+//	msgBox.setInformativeText(
+//			tr("One or more SSL errors has occurred: %1").arg(errorString));
+//	msgBox.setStandardButtons(QMessageBox::Ignore | QMessageBox::Abort);
+//	msgBox.setDefaultButton(QMessageBox::Ignore);
+//	msgBox.setIcon(QMessageBox::Warning);
+//	msgBox.setFont(THE_REPO->fontVariableWidthSmall);
+//	int answer = msgBox.exec();
+//
+//	if (answer == QMessageBox::Ignore) {
+//		reply->ignoreSslErrors();
+//	}
+//}
+//#endif

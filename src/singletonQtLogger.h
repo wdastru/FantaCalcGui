@@ -5,8 +5,6 @@
 #include <QString>
 #include "ui_singletonQtLogger.h"
 
-#include "defines.h"
-
 class singletonQtLogger: public QWidget {
 Q_OBJECT
 
@@ -21,6 +19,7 @@ public:
 	QString getTitle(void);
 	QString getVersion(void);
 	void setLogFileName(QString);
+	bool checkForUpdates();
 
 private slots:
 	void saveLogAndClose();
