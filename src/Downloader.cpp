@@ -46,7 +46,7 @@
 #include "toString.h"
 
 Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
-		std::vector<QString>* _savePaths, bool silent = FALSE) :
+		std::vector<QString>* _savePaths, bool silent) :
 	QDialog(parent) {
 
 	LOG(DEBUG, "In Downloader::Downloader(...) constructor.");

@@ -197,9 +197,9 @@ void singletonQtLogger::onlineClicked() {
 	savePaths->push_back(THE_REPO->getListePath() + "/listaFormazioni.txt");
 	savePaths->push_back(THE_REPO->getListePath() + "/listaGazFiles.txt");
 
-	Downloader listsDownloader(THE_LOGGER, urls, savePaths);
-	listsDownloader.show();
-	listsDownloader.exec();
+	Downloader listsDownloader(THE_LOGGER, urls, savePaths, TRUE);
+//	listsDownloader.show();
+//	listsDownloader.exec();
 
 	if (listsDownloader.requestSucceded()) {
 		LOG(DEBUG,
@@ -383,9 +383,9 @@ bool singletonQtLogger::checkForUpdates() {
 			"In void singletonQtLogger::checkForUpdates() --> savePath : "
 					+ savePath);
 
-	Downloader downloadsDownloader(THE_LOGGER, urls, savePaths);
-	downloadsDownloader.show();
-	downloadsDownloader.exec();
+	Downloader downloadsDownloader(THE_LOGGER, urls, savePaths, TRUE);
+//	downloadsDownloader.show();
+//	downloadsDownloader.exec();
 
 	if (downloadsDownloader.requestSucceded()) { // download succeded
 		QFile *file = new QFile(savePath);
