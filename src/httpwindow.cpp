@@ -43,6 +43,7 @@
 #include <QtNetwork/QtNetwork>
 #include <QUrl>
 
+#include "defines.h"
 #include "Repository.h"
 #include "httpwindow.h"
 #include "singletonQtLogger.h"
