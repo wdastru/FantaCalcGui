@@ -384,6 +384,8 @@ bool singletonQtLogger::checkForUpdates() {
 					+ savePath);
 
 	Downloader downloadsDownloader(THE_LOGGER, urls, savePaths);
+	downloadsDownloader.show();
+	downloadsDownloader.exec();
 
 	if (downloadsDownloader.requestSucceded()) { // download succeded
 		QFile *file = new QFile(savePath);

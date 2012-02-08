@@ -1,16 +1,16 @@
 CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
 PROJECT (FantaCalcGuiNew)
 
-FIND_PACKAGE(Qt4 4.4.3 REQUIRED)
+FIND_PACKAGE(Qt4 REQUIRED)
 INCLUDE(${QT_USE_FILE})
 ADD_DEFINITIONS(${QT_DEFINITIONS})
 
 SET (QT_USE_QTNETWORK TRUE)
 SET (QT_USE_QTTEST TRUE)
 
-SET( SRCS src/main.cpp 
+SET( SRCS 
+        src/main.cpp 
         src/IniFileManager.cpp
-        src/CVersion.cpp
         src/ChooseFileFromAListDialog.cpp
         src/Downloader.cpp
         src/NoNetFileDialog.cpp 
@@ -36,7 +36,8 @@ SET( HDRS
         src/IniFilePopulator.h
         src/httpwindow.h
         src/singletonQtLogger.h )
-SET( UIS  src/authenticationdialog.ui
+SET( UIS  
+        src/authenticationdialog.ui
     		src/IniFilePopulator.ui
     		src/FileFormazioniViewer.ui
         src/NoNetFileDialog.ui
