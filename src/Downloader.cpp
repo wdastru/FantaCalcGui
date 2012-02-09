@@ -46,11 +46,12 @@
 #include "toString.h"
 
 Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
-		std::vector<QString>* _savePaths, bool silent) :
+		std::vector<QString>* _savePaths, bool _silent) :
 	QDialog(parent) {
 
 	LOG(DEBUG, "In Downloader::Downloader(...) constructor.");
 
+	this->silent = _silent;
 	this->resize(600, 0);
 	this->setMinimumSize(600, 0);
 
@@ -102,8 +103,7 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 	setFont(THE_REPO->fontVariableWidthSmall);
 	setWindowTitle(tr("Downloader"));
 
-	if (silent)
-	{
+	if (silent) {
 		this->downloadFiles();
 	}
 }
@@ -130,8 +130,10 @@ void Downloader::downloadFiles() {
 						+ my::toQString<unsigned int>(i) + ") : "
 						+ savePaths->at(i));
 
-		LOG(INFO, "Downloading " + fullUrlString);
-		LOG(INFO, "Saving to " + savePaths->at(i));
+		if (!this->silent) {
+			LOG(INFO, "Downloading " + fullUrlString);
+			LOG(INFO, "Saving to " + savePaths->at(i));
+		}
 
 		this->httpClients.at(i) = new HttpWindow(this, url, savePaths->at(i));
 		this->httpClients.at(i)->exec();
