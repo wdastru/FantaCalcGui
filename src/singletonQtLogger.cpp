@@ -1,6 +1,7 @@
 #include <QtCore/QString>
 #include <QtCore/QTextStream>
 #include <QtGui/QMessageBox>
+#include <QtXml/QDomDocument>
 #include <QTime>
 #include <QFile>
 
@@ -359,6 +360,9 @@ void singletonQtLogger::setLogFileName(QString filename) {
 	this->logFileName = filename;
 }
 bool singletonQtLogger::checkForUpdates() {
+
+	this->checkForUpdates_new();
+
 	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates.");
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
@@ -382,8 +386,6 @@ bool singletonQtLogger::checkForUpdates() {
 					+ savePath);
 
 	Downloader downloadsDownloader(THE_LOGGER, urls, savePaths, TRUE);
-//	downloadsDownloader.show();
-//	downloadsDownloader.exec();
 
 	if (downloadsDownloader.requestSucceded()) { // download succeded
 		QFile *file = new QFile(savePath);
@@ -522,4 +524,72 @@ bool singletonQtLogger::checkForUpdates() {
 				"Non è stato possibile scaricare le informazioni relative agli aggiornamenti disponibili.");
 		return false;
 	}
+}
+bool singletonQtLogger::checkForUpdates_new() {
+
+	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates_new().");
+
+	std::vector<QUrl> * urls = new std::vector<QUrl>;
+	QString url = THE_REPO->getFileFormazioniUrl();
+	unsigned int pos = url.lastIndexOf("/");
+	url = url.left(pos);
+	pos = url.lastIndexOf("/");
+	url = url.left(pos);
+	pos = url.lastIndexOf("/");
+	url = url.left(pos) + "/download/updates.xml";
+
+	urls->push_back(QUrl::fromLocalFile(url));
+
+	LOG(DEBUG,
+			"In void singletonQtLogger::checkForUpdates_new() --> url : " + url);
+
+	std::vector<QString> * savePaths = new std::vector<QString>;
+	QString savePath = THE_REPO->getDownloadPath() + "/updates.xml";
+	savePaths->push_back(savePath);
+
+	LOG(
+			DEBUG,
+			"In void singletonQtLogger::checkForUpdates_new() --> savePath : "
+					+ savePath);
+
+	Downloader updatesDownloader(THE_LOGGER, urls, savePaths, TRUE);
+
+	QDomDocument doc("updates");
+	QFile file(savePath);
+	if (!file.open(QIODevice::ReadOnly))
+		return false;
+	if (!doc.setContent(&file)) {
+		file.close();
+		return false;
+	}
+	file.close();
+
+	// print out the element names of all elements that are direct children
+	// of the outermost element.
+	QDomElement docElem = doc.documentElement();
+
+	QDomNode n = docElem.firstChild();
+	while (!n.isNull()) {
+		QDomElement e = n.toElement(); // try to convert the node to an element.
+		if (!e.isNull()) {
+			LOG(
+					DEBUG,
+					"In void singletonQtLogger::checkForUpdates_new() --> "
+							+ e.tagName()); // the node really is an element.
+			QDomNode m = n.firstChild();
+			while (!m.isNull()) {
+				QDomElement f = m.toElement(); // try to convert the node to an element.
+				if (!f.isNull()) {
+					LOG(
+							DEBUG,
+							"In void singletonQtLogger::checkForUpdates_new() --> "
+									+ f.tagName() + " : " + f.text()); // the node really is an element.}
+				}
+				m = m.nextSibling();
+			}
+		}
+		n = n.nextSibling();
+	}
+
+	return true;
 }

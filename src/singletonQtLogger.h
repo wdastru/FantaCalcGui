@@ -20,6 +20,7 @@ public:
 	QString getVersion(void);
 	void setLogFileName(QString);
 	bool checkForUpdates();
+	bool checkForUpdates_new();
 
 private slots:
 	void saveLogAndClose();
