@@ -1,5 +1,6 @@
 #include <QtCore/QString>
 #include <QtCore/QTextStream>
+#include <QtCore/QList>
 #include <QtGui/QMessageBox>
 #include <QtXml/QDomDocument>
 #include <QTime>
@@ -359,9 +360,7 @@ void singletonQtLogger::goOn() {
 void singletonQtLogger::setLogFileName(QString filename) {
 	this->logFileName = filename;
 }
-bool singletonQtLogger::checkForUpdates() {
-
-	this->checkForUpdates_new();
+bool singletonQtLogger::checkForUpdates_old() {
 
 	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates.");
 
@@ -525,9 +524,14 @@ bool singletonQtLogger::checkForUpdates() {
 		return false;
 	}
 }
-bool singletonQtLogger::checkForUpdates_new() {
+bool singletonQtLogger::checkForUpdates() {
 
-	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates_new().");
+	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates().");
+
+	QStringList current = this->getVersion().split(QRegExp("\\\."));
+	int verCurrent = current.at(0).toInt();
+	int majCurrent = current.at(1).toInt();
+	int minCurrent = current.at(2).toInt();
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	QString url = THE_REPO->getFileFormazioniUrl();
@@ -541,7 +545,7 @@ bool singletonQtLogger::checkForUpdates_new() {
 	urls->push_back(QUrl::fromLocalFile(url));
 
 	LOG(DEBUG,
-			"In void singletonQtLogger::checkForUpdates_new() --> url : " + url);
+			"In void singletonQtLogger::checkForUpdates() --> url : " + url);
 
 	std::vector<QString> * savePaths = new std::vector<QString>;
 	QString savePath = THE_REPO->getDownloadPath() + "/updates.xml";
@@ -549,46 +553,171 @@ bool singletonQtLogger::checkForUpdates_new() {
 
 	LOG(
 			DEBUG,
-			"In void singletonQtLogger::checkForUpdates_new() --> savePath : "
+			"In void singletonQtLogger::checkForUpdates() --> savePath : "
 					+ savePath);
 
-	Downloader updatesDownloader(THE_LOGGER, urls, savePaths, TRUE);
+	Downloader updatesXmlDownloader(THE_LOGGER, urls, savePaths, TRUE);
 
-	QDomDocument doc("updates");
-	QFile file(savePath);
-	if (!file.open(QIODevice::ReadOnly))
-		return false;
-	if (!doc.setContent(&file)) {
+	if (updatesXmlDownloader.requestSucceded()) { // download succeded
+
+		std::vector<QString> content;
+		std::vector<QString> status;
+		std::vector<QString> availableVersions;
+
+		QDomDocument doc("updates");
+		QFile file(savePath);
+		if (!file.open(QIODevice::ReadOnly))
+			return false;
+		if (!doc.setContent(&file)) {
+			file.close();
+			return false;
+		}
 		file.close();
-		return false;
-	}
-	file.close();
 
-	// print out the element names of all elements that are direct children
-	// of the outermost element.
-	QDomElement docElem = doc.documentElement();
+		// print out the element names of all elements that are direct children
+		// of the outermost element.
+		QDomElement docElem = doc.documentElement();
 
-	QDomNode n = docElem.firstChild();
-	while (!n.isNull()) {
-		QDomElement e = n.toElement(); // try to convert the node to an element.
-		if (!e.isNull()) {
-			LOG(
-					DEBUG,
-					"In void singletonQtLogger::checkForUpdates_new() --> "
-							+ e.tagName()); // the node really is an element.
-			QDomNode m = n.firstChild();
-			while (!m.isNull()) {
-				QDomElement f = m.toElement(); // try to convert the node to an element.
-				if (!f.isNull()) {
+		int i = 0;
+
+		QDomNode n = docElem.firstChild();
+		while (!n.isNull()) {
+			QDomElement e = n.toElement(); // try to convert the node to an element.
+			if (!e.isNull()) {
+				LOG(
+						DEBUG,
+						"In void singletonQtLogger::checkForUpdates() --> "
+								+ e.tagName()); // the node really is an element.
+				QDomNode m = n.firstChild();
+				while (!m.isNull()) {
+					QDomElement f = m.toElement(); // try to convert the node to an element.
+					if (!f.isNull()) {
+						LOG(
+								DEBUG,
+								"In void singletonQtLogger::checkForUpdates() --> "
+										+ f.tagName() + " : " + f.text()); // the node really is an element.}
+
+						if (f.tagName() == "file") {
+							content.push_back(f.text());
+							LOG(
+									DEBUG,
+									"In void singletonQtLogger::checkForUpdates() --> content.at("
+											+ my::toQString<int>(i) + ") : "
+											+ content.at(i));
+						}
+
+						if (f.tagName() == "version") {
+							QStringList available = f.text().split(
+									QRegExp("\\\."));
+							int verAvailable = available.at(0).toInt();
+							int majAvailable = available.at(1).toInt();
+							int minAvailable = available.at(2).toInt();
+
+							availableVersions.push_back(f.text());
+
+							if (verAvailable > verCurrent) {
+								status.push_back("new");
+							} else if (verAvailable == verCurrent) {
+								if (majAvailable > majCurrent) {
+									status.push_back("new");
+								} else if (majAvailable == majCurrent) {
+									if (minAvailable > minCurrent) {
+										status.push_back("new");
+									} else {
+										status.push_back("old");
+									}
+								} else {
+									status.push_back("old");
+								}
+							} else {
+								status.push_back("old");
+							}
+
+							LOG(
+									DEBUG,
+									"In void singletonQtLogger::checkForUpdates() --> content.at("
+											+ my::toQString<int>(i) + ") : "
+											+ content.at(i) + ", version : "
+											+ availableVersions.at(i) + " ("
+											+ status.at(i) + ")");
+
+							++i;
+
+						}
+					}
+					m = m.nextSibling();
+				}
+			}
+			n = n.nextSibling();
+		}
+
+		for (int i = 0; i < content.size(); ++i) {
+
+			if (status.at(i) == "new") {
+				LOG(
+						UPDATE,
+						"E' possibile scaricare la versione "
+								+ availableVersions.at(i) + " : " + content.at(
+								i));
+
+				QMessageBox msgBox;
+				msgBox.setWindowTitle("HTTP");
+				msgBox.setInformativeText(
+						tr("New version available. Download %1 ?").arg(
+								content.at(i)));
+				msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+				msgBox.setDefaultButton(QMessageBox::No);
+				msgBox.setIcon(QMessageBox::Question);
+				msgBox.setFont(THE_REPO->fontVariableWidthSmall);
+				int answer = msgBox.exec();
+
+				if (answer == QMessageBox::Yes) {
+					std::vector<QUrl> * urls = new std::vector<QUrl>;
+
+					QString url = THE_REPO->getFileFormazioniUrl();
+					unsigned int pos = url.lastIndexOf("/");
+					url = url.left(pos);
+					pos = url.lastIndexOf("/");
+					url = url.left(pos);
+					pos = url.lastIndexOf("/");
+					url = url.left(pos) + "/download/" + content.at(i);
+
+					urls->push_back(QUrl::fromLocalFile(url));
+
 					LOG(
 							DEBUG,
-							"In void singletonQtLogger::checkForUpdates_new() --> "
-									+ f.tagName() + " : " + f.text()); // the node really is an element.}
+							"In void singletonQtLogger::checkForUpdates() --> url : "
+									+ url);
+
+					std::vector<QString> * savePaths = new std::vector<QString>;
+					QString savePath = THE_REPO->getDownloadPath() + "/"
+							+ content.at(i);
+					savePaths->push_back(savePath);
+
+					LOG(
+							DEBUG,
+							"In void singletonQtLogger::checkForUpdates() --> savePath : "
+									+ savePath);
+
+					Downloader updateDownloader(THE_LOGGER, urls, savePaths);
+					if (updateDownloader.requestSucceded()) { // download succeded
+						LOG(
+								DEBUG,
+								"In void singletonQtLogger::checkForUpdates() --> download of "
+										+ content.at(i) + " succeded.");
+					} else {
+						LOG(ERROR, content.at(i) + " download failed.");
+
+					}
 				}
-				m = m.nextSibling();
 			}
 		}
-		n = n.nextSibling();
+
+	} else { // download failed
+		LOG(
+				WARN,
+				"Non è stato possibile scaricare le informazioni relative agli aggiornamenti disponibili.");
+		return false;
 	}
 
 	return true;
