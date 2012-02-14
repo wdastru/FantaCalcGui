@@ -475,7 +475,10 @@ bool singletonQtLogger::checkForUpdates() {
 
 						} else if (f.tagName() == "description") {
 							hash.insert("description", f.text());
+						} else if (f.tagName() == "new") {
+							hash.insert("new", f.text());
 						}
+
 					}
 					m = m.nextSibling();
 				}
@@ -492,7 +495,8 @@ bool singletonQtLogger::checkForUpdates() {
 								+ hash["version"]
 								+ ", <br>hash[\"description\"] : "
 								+ hash["description"]
-								+ ", <br>hash[\"status\"] : " + hash["status"]);
+								+ ", <br>hash[\"status\"] : " + hash["status"]
+								+ ", <br>hash[\"new\"] : " + hash["new"]);
 			}
 
 			n = n.nextSibling();
@@ -510,7 +514,8 @@ bool singletonQtLogger::checkForUpdates() {
 									+ listOfResources.at(i).at(j)["file"]
 									+ " ("
 									+ listOfResources.at(i).at(j)["description"]
-									+ ")");
+									+ ")<br>changes : <br>"
+									+ listOfResources.at(i).at(j)["new"]);
 				}
 			}
 		}
@@ -565,7 +570,8 @@ bool singletonQtLogger::checkForUpdates() {
 										+ savePath);
 
 						Downloader
-								updateDownloader(THE_LOGGER, urls, savePaths);
+								updateDownloader(THE_LOGGER, urls, savePaths, true);
+
 						if (updateDownloader.requestSucceded()) { // download succeded
 							LOG(
 									DEBUG,
