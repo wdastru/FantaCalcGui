@@ -5,7 +5,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "FantaCalcGui"
-!define PRODUCT_VERSION "v3.1.0"
+!define PRODUCT_VERSION "v3.1.1"
 !define PRODUCT_PUBLISHER "EPTADONE Software Inc."
 !define PRODUCT_WEB_SITE "http://www.cim.unito.it/private/fantacalcio/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\FantaCalcGui.exe"
@@ -55,7 +55,7 @@ var ICONS_GROUP
 ; MUI end ------
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "${PRODUCT_NAME}_${PRODUCT_VERSION}_setup.exe"
+OutFile "${PRODUCT_NAME}_${PRODUCT_VERSION}_Setup.exe"
 InstallDir "$PROGRAMFILES\FantaCalcGui"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
