@@ -46,8 +46,7 @@ void singletonQtLogger::Logging(QString type, QString message) {
 
 	if (type == "INFO")
 		this->ui.plainTextEdit->appendHtml(
-				"[" + QTime::currentTime().toString("hh:mm:ss.zzz")
-						+ "] INFO    : " + message);
+				" " + message);
 	else if (type == "ERROR")
 		this->ui.plainTextEdit->appendHtml(
 				"<span style='color:#FF0000;'>["
