@@ -75,6 +75,7 @@ Section "MainSection" SEC01
   File "${QT}\QtCore4.dll"
   File "${QT}\QtGui4.dll"
   File "${QT}\QtNetwork4.dll"
+  File "${QT}\QtXml4.dll"
 
 ; Shortcuts
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
