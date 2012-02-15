@@ -13,7 +13,6 @@
 #include <vector>
 #include "QtCore/QString"
 
-#include "singletonQtLogger.h"
 #include "StringModifier.h"
 #include "WhichOfTheseDialog.h"
 #include "WhichOfLevenshteinDialog.h"
