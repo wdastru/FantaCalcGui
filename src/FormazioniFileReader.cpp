@@ -5,6 +5,8 @@
  *      Author: WAleViolaeIvan
  */
 
+#include "singletonQtLogger.h"
+#include <QDebug>
 #include "FormazioniFileReader.h"
 #include "Fanta.h"
 
@@ -181,7 +183,11 @@ unsigned int FormazioniFileReader::execute() {
 				bool found = FALSE;
 
 				if (v_Found.size() > 1) {
+
 					for (unsigned int j = 0; j < v_Found.size(); j++) {
+
+						std::string temp = v_Found.at(j);
+
 						LOG(
 								DEBUG,
 								"In FormazioniFileReader::execute() --> "
@@ -199,7 +205,10 @@ unsigned int FormazioniFileReader::execute() {
 									"In FormazioniFileReader::execute() --> trovata corrispondenza esatta : "
 											+ QString::fromStdString(line));
 							found = TRUE;
-							answer = j;
+							//answer = j;
+
+							v_Found.clear();
+							v_Found.push_back(temp); // adesso v_Found.size() vale 1
 						}
 					}
 
@@ -216,8 +225,14 @@ unsigned int FormazioniFileReader::execute() {
 
 						answer = whichOfTheseDialog.chosenThese;
 						answer--;
+					} else {
+						LOG(DEBUG,
+								"In FormazioniFileReader::execute() --> found : TRUE. ");
 					}
-				} else if (v_Found.size() == 0) {
+
+				}
+
+				if (v_Found.size() == 0) {
 					/*
 					 *  Non sono stati trovati giocatori che contengono
 					 *  la string di ricerca.
@@ -268,7 +283,9 @@ unsigned int FormazioniFileReader::execute() {
 										whichOfLevenshteinDialog.chosenLevenshtein
 												- 1));
 					}
-				} else {
+				}
+
+				if (v_Found.size() == 1) {
 					/*
 					 *  aggiungo le due colonne mancanti
 					 *  nel file della Gazzetta : GDV e GDP
@@ -322,9 +339,9 @@ unsigned int FormazioniFileReader::execute() {
 												ColSquadra))
 										+ ") ripetuto !!! Controllare il file di input.");
 
-//						throw(QString::fromStdString(
-//								STR_MOD->msk(v_Found.at(answer), DELIM,
-//										ColNomeCognome)));
+						//						throw(QString::fromStdString(
+						//								STR_MOD->msk(v_Found.at(answer), DELIM,
+						//										ColNomeCognome)));
 
 						return FORMFILEREAD_REPEATED;
 						break;
