@@ -179,56 +179,76 @@ unsigned int FormazioniFileReader::execute() {
 									size_t>(v_Found.size()));
 				}
 
-				unsigned int answer = 0;
-				bool found = FALSE;
-
 				if (v_Found.size() > 1) {
 
-					for (unsigned int j = 0; j < v_Found.size(); j++) {
+					std::vector<std::string> temp;
+					temp.clear();
 
-						std::string temp = v_Found.at(j);
+					do { // while (v_Found.size() > 1)
 
-						LOG(
-								DEBUG,
-								"In FormazioniFileReader::execute() --> "
-										+ QString::fromStdString(
-												this->prepareStringToPresent(
-														v_Found.at(j), j)));
+						for (unsigned int j = 0; j < v_Found.size(); j++) {
 
-						if (FANTA->LevenshteinDistance(
-								line,
-								STR_MOD->onlySurname(
-										STR_MOD->msk(v_Found.at(j), DELIM,
-												ColNomeCognome))) == 0) { // corrispondenza esatta
 							LOG(
 									DEBUG,
-									"In FormazioniFileReader::execute() --> trovata corrispondenza esatta : "
-											+ QString::fromStdString(line));
-							found = TRUE;
-							//answer = j;
+									"In FormazioniFileReader::execute() --> "
+											+ QString::fromStdString(
+													this->prepareStringToPresent(
+															v_Found.at(j), j)));
+
+							if (FANTA->LevenshteinDistance(
+									line,
+									STR_MOD->onlySurname(
+											STR_MOD->msk(v_Found.at(j), DELIM,
+													ColNomeCognome))) == 0) { // corrispondenza esatta
+								LOG(
+										DEBUG,
+										"In FormazioniFileReader::execute() --> trovata corrispondenza esatta : "
+												+ QString::fromStdString(line));
+
+								temp.push_back(v_Found.at(j)); // aggiungi corrispondenza esatta						}
+							}
+						}
+
+						if (temp.size() > 1) { // più di una corrispondenza esatta (!!!)
+							for (unsigned int j = 0; j < temp.size(); j++) {
+								std::string tmpStr =
+										this->prepareStringToPresent(
+												temp.at(j), j);
+								v_WhichOfThese.push_back(tmpStr);
+							}
+
+							WhichOfTheseDialog whichOfTheseDialog;
+							whichOfTheseDialog.setListOfThese(v_WhichOfThese);
+							whichOfTheseDialog.exec();
 
 							v_Found.clear();
-							v_Found.push_back(temp); // adesso v_Found.size() vale 1
+							v_Found.push_back(
+									temp.at(whichOfTheseDialog.chosenThese - 1));
+
+						} else if (temp.size() == 1) {
+							LOG(DEBUG,
+									"In FormazioniFileReader::execute() --> found : TRUE. ");
+							v_Found = temp;
+						} else { // nessuna corrispondenza esatta
+
+							for (unsigned int j = 0; j < v_Found.size(); j++) {
+								std::string tmpStr =
+										this->prepareStringToPresent(
+												v_Found.at(j), j);
+								v_WhichOfThese.push_back(tmpStr);
+							}
+
+							WhichOfTheseDialog whichOfTheseDialog;
+							whichOfTheseDialog.setListOfThese(v_WhichOfThese);
+							whichOfTheseDialog.exec();
+
+							std::string temp = v_Found.at(
+									whichOfTheseDialog.chosenThese - 1);
+							v_Found.clear();
+							v_Found.push_back(temp);
 						}
-					}
 
-					if (!found) {
-						for (unsigned int j = 0; j < v_Found.size(); j++) {
-							std::string tmpStr = this->prepareStringToPresent(
-									v_Found.at(j), j);
-							v_WhichOfThese.push_back(tmpStr);
-						}
-
-						WhichOfTheseDialog whichOfTheseDialog;
-						whichOfTheseDialog.setListOfThese(v_WhichOfThese);
-						whichOfTheseDialog.exec();
-
-						answer = whichOfTheseDialog.chosenThese;
-						answer--;
-					} else {
-						LOG(DEBUG,
-								"In FormazioniFileReader::execute() --> found : TRUE. ");
-					}
+					} while (v_Found.size() > 1);
 
 				}
 
@@ -291,22 +311,19 @@ unsigned int FormazioniFileReader::execute() {
 					 *  nel file della Gazzetta : GDV e GDP
 					 */
 					if (gdv) {
-						v_Found.at(answer) += "\t1\t0";
+						v_Found.at(0) += "\t1\t0";
 					} else if (gdp) {
-						v_Found.at(answer) += "\t0\t1";
+						v_Found.at(0) += "\t0\t1";
 					} else {
-						v_Found.at(answer) += "\t0\t0";
+						v_Found.at(0) += "\t0\t0";
 					}
 
 					LOG(
 							DEBUG,
-							"In FormazioniFileReader::execute() --> before switch : v_Found.at("
-									+ my::toQString<unsigned int>(answer)
-									+ ") = " + QString::fromStdString(
-									v_Found.at(answer)) + " (squadra "
+							"In FormazioniFileReader::execute() --> before switch : v_Found.at(0) = " + QString::fromStdString(
+									v_Found.at(0)) + " (squadra "
 									+ my::toQString<unsigned int>(k) + ")");
 
-					/**/
 
 					LOG(
 							DEBUG,
@@ -316,7 +333,7 @@ unsigned int FormazioniFileReader::execute() {
 									+ my::toQString<unsigned int>(
 											FANTA->Team[k].size()));
 
-					switch (FANTA->addPlayer(v_Found.at(answer), k)) {
+					switch (FANTA->addPlayer(v_Found.at(0), k)) {
 					case 0:
 						LOG(
 								DEBUG,
@@ -332,16 +349,12 @@ unsigned int FormazioniFileReader::execute() {
 								"In FormazioniFileReader::execute() --> "
 										+ QString::fromStdString(
 												STR_MOD->msk(
-														v_Found.at(answer),
+														v_Found.at(0),
 														DELIM, ColNomeCognome))
 										+ " ( " + QString::fromStdString(
-										STR_MOD->msk(v_Found.at(answer), DELIM,
+										STR_MOD->msk(v_Found.at(0), DELIM,
 												ColSquadra))
 										+ ") ripetuto !!! Controllare il file di input.");
-
-						//						throw(QString::fromStdString(
-						//								STR_MOD->msk(v_Found.at(answer), DELIM,
-						//										ColNomeCognome)));
 
 						return FORMFILEREAD_REPEATED;
 						break;
@@ -353,11 +366,11 @@ unsigned int FormazioniFileReader::execute() {
 						LOG(
 								ERROR,
 								QString::fromStdString(
-										STR_MOD->msk(v_Found.at(answer), DELIM,
+										STR_MOD->msk(v_Found.at(0), DELIM,
 												ColNomeCognome)) + " ( "
 										+ QString::fromStdString(
 												STR_MOD->msk(
-														v_Found.at(answer),
+														v_Found.at(0),
 														DELIM, ColSquadra))
 										+ " )<br>Giocatore indicato con goal decisivo vittoria senza che abbia segnato !!! Controllare il file di input.");
 						return FORMFILEREAD_GDV_NO_GOAL;
@@ -370,11 +383,11 @@ unsigned int FormazioniFileReader::execute() {
 						LOG(
 								ERROR,
 								QString::fromStdString(
-										STR_MOD->msk(v_Found.at(answer), DELIM,
+										STR_MOD->msk(v_Found.at(0), DELIM,
 												ColNomeCognome)) + " ( "
 										+ QString::fromStdString(
 												STR_MOD->msk(
-														v_Found.at(answer),
+														v_Found.at(0),
 														DELIM, ColSquadra))
 										+ " )<br>Giocatore indicato con goal decisivo pareggio senza che abbia segnato !!! Controllare il file di input.");
 						return FORMFILEREAD_GDP_NO_GOAL;
@@ -396,10 +409,10 @@ unsigned int FormazioniFileReader::execute() {
 							DEBUG,
 							"In FormazioniFileReader::execute() --> "
 									+ QString::fromStdString(
-											STR_MOD->msk(v_Found.at(answer),
+											STR_MOD->msk(v_Found.at(0),
 													DELIM, ColNomeCognome))
 									+ " ( " + QString::fromStdString(
-									STR_MOD->msk(v_Found.at(answer), DELIM,
+									STR_MOD->msk(v_Found.at(0), DELIM,
 											ColSquadra)) + " ) trovato.");
 
 				}
