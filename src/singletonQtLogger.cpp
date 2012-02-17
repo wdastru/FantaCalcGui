@@ -45,41 +45,32 @@ void singletonQtLogger::Logging(QString type, QString message) {
 	this->fileContent += (message + "\n");
 
 	if (type == "INFO")
-		this->ui.plainTextEdit->appendHtml(
-				"[" + QTime::currentTime().toString("hh:mm:ss.zzz")
-						+ "] INFO    : " + message);
+		this->ui.plainTextEdit->appendHtml(" " + message);
 	else if (type == "ERROR")
 		this->ui.plainTextEdit->appendHtml(
-				"<span style='color:#FF0000;'>["
-						+ QTime::currentTime().toString("hh:mm:ss.zzz")
-						+ "] ERROR   : " + message + "</span>");
+				"<span style='color:#FF0000;'> ERROR : " + message
+						+ "</span>");
 	else if (type == "DEBUG") {
 		if (THE_REPO->debugStatus) {
-			this->ui.plainTextEdit->appendHtml(
-					"[" + QTime::currentTime().toString("hh:mm:ss.zzz")
-							+ "] DEBUG   : " + message);
+			this->ui.plainTextEdit->appendHtml(" " + message);
 		}
 	} else if (type == "FATAL")
 		this->ui.plainTextEdit->appendHtml(
-				"<span style='color:#FF0000; font-weight:bold'>["
-						+ QTime::currentTime().toString("hh:mm:ss.zzz")
-						+ "] FATAL   : " + message + "</span>");
+				"<span style='color:#FF0000; font-weight:bold'> FATAL ERROR : "
+						+ message + "</span>");
 	else if (type == "WARN")
 		this->ui.plainTextEdit->appendHtml(
-				"<span style='color:#FF8800;'>["
-						+ QTime::currentTime().toString("hh:mm:ss.zzz")
-						+ "] WARNING : " + message + "</span>");
+				"<span style='color:#FF8800;'> WARNING : " + message
+						+ "</span>");
 	else if (type == "FILE") {
 		;
 	} else if (type == "UPDATE") {
 		this->ui.plainTextEdit->appendHtml(
-				"<span style='color:#00CC00; font-weight:bold'>["
-						+ QTime::currentTime().toString("hh:mm:ss.zzz")
-						+ "] UPDATE : " + message + "</span>");
+				"<span style='color:#00CC00; font-weight:bold'> UPDATE : "
+						+ message + "</span>");
 	} else
 		this->ui.plainTextEdit->appendHtml(
-				"[" + QTime::currentTime().toString("hh:mm:ss.zzz")
-						+ "] !!!! : Type " + type + " not recognized.");
+				" !!!! : Type " + type + " not recognized.");
 	return;
 }
 void singletonQtLogger::setTitle(QString _title) {
@@ -569,8 +560,8 @@ bool singletonQtLogger::checkForUpdates() {
 								"In void singletonQtLogger::checkForUpdates() --> savePath : "
 										+ savePath);
 
-						Downloader
-								updateDownloader(THE_LOGGER, urls, savePaths, true);
+						Downloader updateDownloader(THE_LOGGER, urls,
+								savePaths, true);
 
 						if (updateDownloader.requestSucceded()) { // download succeded
 							LOG(

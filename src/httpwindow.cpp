@@ -41,6 +41,7 @@
 
 #include <QtGui>
 #include <QtNetwork/QtNetwork>
+#include <QDebug>
 #include <QUrl>
 
 #include "defines.h"
@@ -88,10 +89,10 @@ HttpWindow::HttpWindow(QWidget *parent, QUrl _url, QString _savePath) :
 			SIGNAL(authenticationRequired(QNetworkReply*,QAuthenticator*)),
 			this,
 			SLOT(slotAuthenticationRequired(QNetworkReply*,QAuthenticator*)));
-//#ifndef QT_NO_OPENSSL
-//	connect(&qnam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this,
-//			SLOT(sslErrors(QNetworkReply*,QList<QSslError>)));
-//#endif
+	//#ifndef QT_NO_OPENSSL
+	//	connect(&qnam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this,
+	//			SLOT(sslErrors(QNetworkReply*,QList<QSslError>)));
+	//#endif
 	//	connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
 	//	connect(downloadButton, SIGNAL(clicked()), this, SLOT(downloadFile()));
 	//	connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
@@ -204,6 +205,7 @@ void HttpWindow::httpFinished() {
 
 	QVariant redirectionTarget = reply->attribute(
 			QNetworkRequest::RedirectionTargetAttribute);
+
 	if (reply->error()) {
 		file->remove();
 
@@ -217,31 +219,36 @@ void HttpWindow::httpFinished() {
 		msgBox.setFont(THE_REPO->fontVariableWidthSmall);
 		msgBox.exec();
 
-		//		QMessageBox::information(this, tr("HTTP"),
-		//				tr("Download failed: %1.") .arg(reply->errorString()));
-		//		downloadButton->setEnabled(true);
+		//		qDebug() << tr("Download of %1 failed.").arg(
+		//				file->fileName().toStdString().c_str());
+
 		this->downloadSuccess = false;
+
 	} else if (!redirectionTarget.isNull()) {
-		QUrl newUrl = url.resolved(redirectionTarget.toUrl());
 
-		QMessageBox msgBox;
-		msgBox.setWindowTitle("HTTP");
-		msgBox.setInformativeText(tr("Redirect to %1 ?").arg(newUrl.toString()));
-		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-		msgBox.setDefaultButton(QMessageBox::No);
-		msgBox.setIcon(QMessageBox::Question);
-		msgBox.setFont(THE_REPO->fontVariableWidthSmall);
-		int answer = msgBox.exec();
+		this->downloadSuccess = false;
 
-		if (answer == QMessageBox::Yes) {
-			url = newUrl;
-			reply->deleteLater();
-			file->open(QIODevice::WriteOnly);
-			file->resize(0);
-			this->downloadSuccess = false;
-			startRequest(url);
-			return;
-		}
+//		QUrl newUrl = url.resolved(redirectionTarget.toUrl());
+//
+//		QMessageBox msgBox;
+//		msgBox.setWindowTitle("HTTP");
+//		msgBox.setInformativeText(tr("Redirect to %1 ?").arg(newUrl.toString()));
+//		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+//		msgBox.setDefaultButton(QMessageBox::No);
+//		msgBox.setIcon(QMessageBox::Question);
+//		msgBox.setFont(THE_REPO->fontVariableWidthSmall);
+//		int answer = msgBox.exec();
+//
+//		if (answer == QMessageBox::Yes) {
+//			url = newUrl;
+//			reply->deleteLater();
+//			file->open(QIODevice::WriteOnly);
+//			file->resize(0);
+//			this->downloadSuccess = false;
+//			startRequest(url);
+//			return;
+//		}
+
 	} else {
 		QString fileName =
 				QFileInfo(QUrl(this->fullUrlString).path()).fileName();
