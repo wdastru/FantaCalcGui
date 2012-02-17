@@ -41,6 +41,7 @@
 
 #include <QtGui>
 #include <QtNetwork/QtNetwork>
+#include <QDebug>
 #include <QUrl>
 
 #include "defines.h"
@@ -88,10 +89,10 @@ HttpWindow::HttpWindow(QWidget *parent, QUrl _url, QString _savePath) :
 			SIGNAL(authenticationRequired(QNetworkReply*,QAuthenticator*)),
 			this,
 			SLOT(slotAuthenticationRequired(QNetworkReply*,QAuthenticator*)));
-//#ifndef QT_NO_OPENSSL
-//	connect(&qnam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this,
-//			SLOT(sslErrors(QNetworkReply*,QList<QSslError>)));
-//#endif
+	//#ifndef QT_NO_OPENSSL
+	//	connect(&qnam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this,
+	//			SLOT(sslErrors(QNetworkReply*,QList<QSslError>)));
+	//#endif
 	//	connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
 	//	connect(downloadButton, SIGNAL(clicked()), this, SLOT(downloadFile()));
 	//	connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
@@ -204,6 +205,7 @@ void HttpWindow::httpFinished() {
 
 	QVariant redirectionTarget = reply->attribute(
 			QNetworkRequest::RedirectionTargetAttribute);
+
 	if (reply->error()) {
 		file->remove();
 
@@ -217,31 +219,12 @@ void HttpWindow::httpFinished() {
 		msgBox.setFont(THE_REPO->fontVariableWidthSmall);
 		msgBox.exec();
 
-		//		QMessageBox::information(this, tr("HTTP"),
-		//				tr("Download failed: %1.") .arg(reply->errorString()));
-		//		downloadButton->setEnabled(true);
 		this->downloadSuccess = false;
+
 	} else if (!redirectionTarget.isNull()) {
-		QUrl newUrl = url.resolved(redirectionTarget.toUrl());
 
-		QMessageBox msgBox;
-		msgBox.setWindowTitle("HTTP");
-		msgBox.setInformativeText(tr("Redirect to %1 ?").arg(newUrl.toString()));
-		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-		msgBox.setDefaultButton(QMessageBox::No);
-		msgBox.setIcon(QMessageBox::Question);
-		msgBox.setFont(THE_REPO->fontVariableWidthSmall);
-		int answer = msgBox.exec();
+		this->downloadSuccess = false;
 
-		if (answer == QMessageBox::Yes) {
-			url = newUrl;
-			reply->deleteLater();
-			file->open(QIODevice::WriteOnly);
-			file->resize(0);
-			this->downloadSuccess = false;
-			startRequest(url);
-			return;
-		}
 	} else {
 		QString fileName =
 				QFileInfo(QUrl(this->fullUrlString).path()).fileName();
@@ -252,7 +235,6 @@ void HttpWindow::httpFinished() {
 						"In HttpWindow::httpFinished()--> downloaded %1 to current directory.").arg(
 						fileName));
 
-		//		downloadButton->setEnabled(false);
 		this->downloadSuccess = true;
 	}
 
@@ -285,54 +267,8 @@ bool HttpWindow::downloadSuccessful() {
 	return this->downloadSuccess;
 }
 
-//void HttpWindow::enableDownloadButton() {
-//	downloadButton->setEnabled(!urlLineEdit->text().isEmpty());
-//}
-
 void HttpWindow::slotAuthenticationRequired(QNetworkReply*,
 		QAuthenticator *authenticator) {
-	//	QDialog dlg;
-	//	Ui::Dialog ui;
-	//	ui.setupUi(&dlg);
-	//	dlg.adjustSize();
-	//	ui.siteDescription->setText(
-	//			tr("%1 at %2").arg(authenticator->realm()).arg(url.host()));
-	//
-	//	// Did the URL have information? Fill the UI
-	//	// This is only relevant if the URL-supplied credentials were wrong
-	//	ui.userEdit->setText(url.userName());
-	//	ui.passwordEdit->setText(url.password());
-	//
-	//	if (dlg.exec() == QDialog::Accepted) {
-	//	authenticator->setUser(ui.userEdit->text());
-	//	authenticator->setPassword(ui.passwordEdit->text());
 	authenticator->setUser("laboratorio");
 	authenticator->setPassword("NMR12345");
-	//	}
 }
-
-//#ifndef QT_NO_OPENSSL
-//void HttpWindow::sslErrors(QNetworkReply*, const QList<QSslError> &errors) {
-//	QString errorString;
-//	foreach (const QSslError &error, errors)
-//		{
-//			if (!errorString.isEmpty())
-//				errorString += ", ";
-//			errorString += error.errorString();
-//		}
-//
-//	QMessageBox msgBox;
-//	msgBox.setWindowTitle("HTTP");
-//	msgBox.setInformativeText(
-//			tr("One or more SSL errors has occurred: %1").arg(errorString));
-//	msgBox.setStandardButtons(QMessageBox::Ignore | QMessageBox::Abort);
-//	msgBox.setDefaultButton(QMessageBox::Ignore);
-//	msgBox.setIcon(QMessageBox::Warning);
-//	msgBox.setFont(THE_REPO->fontVariableWidthSmall);
-//	int answer = msgBox.exec();
-//
-//	if (answer == QMessageBox::Ignore) {
-//		reply->ignoreSslErrors();
-//	}
-//}
-//#endif
