@@ -142,17 +142,21 @@ void Downloader::downloadFiles() {
 			this->downloadSuccesses++;
 		} else {
 			this->downloadFailures++;
+			LOG(
+					ERROR,
+					tr("Download of %1 failed.").arg(
+							QFileInfo(savePaths->at(i)).fileName()));
 		}
 
 		LOG(
 				DEBUG,
-				"Download successes : " + my::toQString<unsigned int>(
-						this->downloadSuccesses));
+				tr("Download successes : %1").arg(
+						my::toQString<unsigned int>(this->downloadSuccesses)));
 
 		LOG(
 				DEBUG,
-				"Download failures : " + my::toQString<unsigned int>(
-						this->downloadFailures));
+				tr("Download failures : %1").arg(
+						my::toQString<unsigned int>(this->downloadFailures)));
 
 		if (this->downloadSuccesses == savePaths->size()) {
 			this->close();
