@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
 	QApplication a(argc, argv);
 	a.setOrganizationName("Eptadone Software");
 	a.setApplicationName("FantaCalcGui");
-	a.setApplicationVersion("3.2.0");
+	a.setApplicationVersion("3.2.1");
 
 	THE_MANAGER; // quindi si legge l'ini file (o lo si crea se non esistente)
 
