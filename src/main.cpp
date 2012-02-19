@@ -1,12 +1,11 @@
-
 #include <QApplication>
+#include <QObject>
 #include "singletonQtLogger.h"
 #include "Repository.h"
 #include "IniFilePopulator.h"
 #include "IniFileManager.h"
 #include "Fanta.h"
 #include "defines.h"
-
 
 using namespace std;
 
@@ -25,8 +24,8 @@ int main(int argc, char *argv[]) {
 
 	LOG(
 			INFO,
-			"Benvenuti in " + THE_LOGGER->getTitle() + " v"
-					+ THE_LOGGER->getVersion() + ".");
+			QObject::tr("<br>Benvenuti in %1 v%2<br>").arg(THE_LOGGER->getTitle()).arg(
+					THE_LOGGER->getVersion()));
 
 	THE_LOGGER->checkForUpdates();
 
