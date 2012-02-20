@@ -197,17 +197,8 @@ void HttpWindow::httpFinished() {
 		LOG(
 				DEBUG,
 				tr(
-						"In HttpWindow::httpFinished()--> error downloading %1 : %2."));
-
-		QMessageBox msgBox;
-		msgBox.setWindowTitle("HTTP");
-		msgBox.setInformativeText(
-				tr("Download failed: %1.") .arg(reply->errorString()));
-		msgBox.setStandardButtons(QMessageBox::Ok);
-		msgBox.setDefaultButton(QMessageBox::Ok);
-		msgBox.setIcon(QMessageBox::Critical);
-		msgBox.setFont(THE_REPO->fontVariableWidthSmall);
-		msgBox.exec();
+						"In HttpWindow::httpFinished()--> error downloading %1 : %2.").arg(
+						file->fileName()).arg(reply->errorString()));
 
 		this->downloadSuccess = false;
 
