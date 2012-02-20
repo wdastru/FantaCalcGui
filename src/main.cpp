@@ -1,12 +1,11 @@
-
 #include <QApplication>
+#include <QObject>
 #include "singletonQtLogger.h"
 #include "Repository.h"
 #include "IniFilePopulator.h"
 #include "IniFileManager.h"
 #include "Fanta.h"
 #include "defines.h"
-
 
 using namespace std;
 
@@ -15,7 +14,7 @@ int main(int argc, char *argv[]) {
 	QApplication a(argc, argv);
 	a.setOrganizationName("Eptadone Software");
 	a.setApplicationName("FantaCalcGui");
-	a.setApplicationVersion("3.2.0");
+	a.setApplicationVersion("3.2.1");
 
 	THE_MANAGER; // quindi si legge l'ini file (o lo si crea se non esistente)
 
@@ -25,8 +24,8 @@ int main(int argc, char *argv[]) {
 
 	LOG(
 			INFO,
-			"Benvenuti in " + THE_LOGGER->getTitle() + " v"
-					+ THE_LOGGER->getVersion() + ".");
+			QObject::tr("<br>Benvenuti in %1 v%2<br>").arg(THE_LOGGER->getTitle()).arg(
+					THE_LOGGER->getVersion()));
 
 	THE_LOGGER->checkForUpdates();
 

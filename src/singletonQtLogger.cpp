@@ -7,6 +7,7 @@
 #include <QtXml/QDomDocument>
 #include <QTime>
 #include <QFile>
+#include <QObject>
 
 #include "defines.h"
 #include "singletonQtLogger.h"
@@ -48,8 +49,7 @@ void singletonQtLogger::Logging(QString type, QString message) {
 		this->ui.plainTextEdit->appendHtml(" " + message);
 	else if (type == "ERROR")
 		this->ui.plainTextEdit->appendHtml(
-				"<span style='color:#FF0000;'> ERROR : " + message
-						+ "</span>");
+				"<span style='color:#FF0000;'> ERROR : " + message + "</span>");
 	else if (type == "DEBUG") {
 		if (THE_REPO->debugStatus) {
 			this->ui.plainTextEdit->appendHtml(" " + message);
@@ -132,11 +132,6 @@ void singletonQtLogger::saveLogFile() {
 		msgBox.setFont(THE_REPO->fontVariableWidthSmall);
 		msgBox.exec();
 
-		//		QMessageBox::information(
-		//				this,
-		//				tr("HTTP"),
-		//				tr("Unable to save the file %1: %2.") .arg(this->logFileName).arg(
-		//						file->errorString()));
 		return;
 	}
 
@@ -144,6 +139,7 @@ void singletonQtLogger::saveLogFile() {
 	fileContent.replace("<br />", "\n");
 	fileContent.replace("<pre>", "");
 	fileContent.replace("</pre>", "\n");
+	fileContent.replace("&nbsp;", " ");
 
 	fileContent += "\n File prodotto da FantaCalcGui.exe " + this->getVersion()
 			+ "\n";
@@ -305,11 +301,14 @@ void singletonQtLogger::goOn() {
 					DEBUG,
 					"In singletonQtLogger::goOn() --> formazioniFileReader::execute() returned "
 							+ my::toQString<unsigned int>(retVal) + ".");
+
 		} catch (QString& str) {
+
 			LOG(
 					DEBUG,
 					"In singletonQtLogger::goOn() --> exception caught! retVal : "
 							+ my::toQString<unsigned int>(retVal) + ", " + str);
+
 		}
 	} while (retVal != FORMFILEREAD_OK);
 	// <-- lettura file Gazzetta e Formazioni
@@ -335,13 +334,19 @@ void singletonQtLogger::goOn() {
 
 		LOG(
 				DEBUG,
-				"In singletonQtLogger::goOn() --> file name temporaneo : "
-						+ fileName + ".");
+				QObject::tr(
+						"In singletonQtLogger::goOn() --> file name temporaneo : %1").arg(
+						fileName));
 
 		FANTA->printTitolo(
 				FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
+
 		FANTA->printRiepilogo();
 		FANTA->printFormations();
+
+		LOG(INFO, "<br/><br/>&nbsp;&nbsp;&nbsp;DETTAGLIO SQUADRE : <br/>");
+
+		FANTA->printPlayersInfo();
 
 		this->ui.outputFileNameLineEdit->setEnabled(true);
 		this->ui.outputFileNameLineEdit->setText(fileName);

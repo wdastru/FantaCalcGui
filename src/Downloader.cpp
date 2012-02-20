@@ -131,8 +131,8 @@ void Downloader::downloadFiles() {
 						+ savePaths->at(i));
 
 		if (!this->silent) {
-			LOG(INFO, "Downloading " + fullUrlString);
-			LOG(INFO, "Saving to " + savePaths->at(i));
+			LOG(DEBUG, "Downloading " + fullUrlString);
+			LOG(DEBUG, "Saving to " + savePaths->at(i));
 		}
 
 		this->httpClients.at(i) = new HttpWindow(this, url, savePaths->at(i));
@@ -140,19 +140,31 @@ void Downloader::downloadFiles() {
 
 		if (this->httpClients.at(i)->downloadSuccessful()) {
 			this->downloadSuccesses++;
+
+			if (!this->silent) {
+				LOG(
+						INFO,
+						tr("Scaricato %1").arg(
+								QFileInfo(savePaths->at(i)).fileName()));
+			}
+
 		} else {
 			this->downloadFailures++;
+			LOG(
+					ERROR,
+					tr("Download of %1 failed.").arg(
+							QFileInfo(savePaths->at(i)).fileName()));
 		}
 
 		LOG(
 				DEBUG,
-				"Download successes : " + my::toQString<unsigned int>(
-						this->downloadSuccesses));
+				tr("Download successes : %1").arg(
+						my::toQString<unsigned int>(this->downloadSuccesses)));
 
 		LOG(
 				DEBUG,
-				"Download failures : " + my::toQString<unsigned int>(
-						this->downloadFailures));
+				tr("Download failures : %1").arg(
+						my::toQString<unsigned int>(this->downloadFailures)));
 
 		if (this->downloadSuccesses == savePaths->size()) {
 			this->close();

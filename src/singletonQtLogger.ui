@@ -43,11 +43,17 @@
      <bold>false</bold>
     </font>
    </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
    <property name="styleSheet">
     <string notr="true"/>
    </property>
    <property name="readOnly">
     <bool>true</bool>
+   </property>
+   <property name="backgroundVisible">
+    <bool>false</bool>
    </property>
   </widget>
   <widget class="QLabel" name="titleLabel">
