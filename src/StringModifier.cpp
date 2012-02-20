@@ -94,8 +94,38 @@ std::string StringModifier::leftString(std::string str, size_t i) {
 		}
 	}
 }
+QString StringModifier::leftQString(QString str, size_t i) {
+	QString leftString = "";
+
+	if (str.size() >= i) {
+		leftString = str;
+		return leftString;
+	} else {
+		leftString = str;
+		while (1) {
+			leftString = leftString + " ";
+			if (leftString.size() == i)
+				return leftString;
+		}
+	}
+}
 std::string StringModifier::rightString(std::string str, size_t i) {
 	std::string rightString = "";
+
+	if (str.size() >= i) {
+		rightString = str;
+		return rightString;
+	} else {
+		rightString = str;
+		while (1) {
+			rightString = " " + rightString;
+			if (rightString.size() == i)
+				return rightString;
+		}
+	}
+}
+QString StringModifier::rightQString(QString str, size_t i) {
+	QString rightString = "";
 
 	if (str.size() >= i) {
 		rightString = str;

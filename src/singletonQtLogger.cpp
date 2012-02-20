@@ -341,6 +341,7 @@ void singletonQtLogger::goOn() {
 				FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
 		FANTA->printRiepilogo();
 		FANTA->printFormations();
+		FANTA->printPlayersInfo();
 
 		this->ui.outputFileNameLineEdit->setEnabled(true);
 		this->ui.outputFileNameLineEdit->setText(fileName);

@@ -12,6 +12,7 @@
 #include "Repository.h"
 #include <QMessageBox>
 #include <QDebug>
+#include <QObject>
 
 Fanta * Fanta::Inst() {
 	if (pInstance == NULL) {
@@ -1232,14 +1233,14 @@ void Fanta::printRiepilogo() {
 	output += "<br/>   " + team_B + " : " + my::toQString<unsigned int>(
 			FANTA->getEspulsioniTot(1));
 
-	output += "<br/><br/> --- Goal decisivi vittoria ---<br/><br/>   " + team_A + " : "
-			+ my::toQString<unsigned int>(FANTA->getGoalDecVittTot(0));
+	output += "<br/><br/> --- Goal decisivi vittoria ---<br/><br/>   " + team_A
+			+ " : " + my::toQString<unsigned int>(FANTA->getGoalDecVittTot(0));
 
 	output += "<br/>   " + team_B + " : " + my::toQString<unsigned int>(
 			FANTA->getGoalDecVittTot(1));
 
-	output += "<br/><br/> --- Goal decisivi pareggio ---<br/><br/>   " + team_A + " : "
-			+ my::toQString<unsigned int>(FANTA->getGoalDecParTot(0));
+	output += "<br/><br/> --- Goal decisivi pareggio ---<br/><br/>   " + team_A
+			+ " : " + my::toQString<unsigned int>(FANTA->getGoalDecParTot(0));
 
 	output += "<br/>   " + team_B + " : " + my::toQString<unsigned int>(
 			FANTA->getGoalDecParTot(1));
@@ -1256,8 +1257,8 @@ void Fanta::printRiepilogo() {
 	output += "<br/>   " + team_B + " : " + my::toQString<unsigned int>(
 			FANTA->sostituzioni[1]);
 
-	output += "<br/><br/> --- Sfide ---<br/><br/>   " + team_A + " : " + my::toQString<
-			unsigned int>(FANTA->sfide[0]);
+	output += "<br/><br/> --- Sfide ---<br/><br/>   " + team_A + " : "
+			+ my::toQString<unsigned int>(FANTA->sfide[0]);
 
 	output += "<br/>   " + team_B + " : " + my::toQString<unsigned int>(
 			FANTA->sfide[1]);
@@ -1336,7 +1337,7 @@ void Fanta::printRiepilogo() {
 	output += "<br/> --- Media Difesa ---<br/><br/>";
 
 	for (size_t i = 0; i < 2; i++) {
-		QString string = "   "+QString::fromStdString(
+		QString string = "   " + QString::fromStdString(
 				STR_MOD->leftString(FANTA->getTeamName(i),
 						FANTA->longerNameLength)).replace(QString(" "),
 				QString("&nbsp;")) + " : " + my::toQString<double>(
@@ -1349,7 +1350,7 @@ void Fanta::printRiepilogo() {
 	output += "<br/> --- Modificatore ---<br/><br/>";
 
 	for (size_t i = 0; i < 2; i++) {
-		QString string = "   "+QString::fromStdString(
+		QString string = "   " + QString::fromStdString(
 				STR_MOD->leftString(FANTA->getTeamName(i),
 						FANTA->longerNameLength)).replace(QString(" "),
 				QString("&nbsp;")) + " : " + my::toQString<signed int>(
@@ -1358,7 +1359,7 @@ void Fanta::printRiepilogo() {
 		output += string + "<br/>";
 	}
 
-	output += "<br/> --- Marcatori ---<br/><br/>";
+	output += "<br/> --- Risultato e marcatori ---<br/><br/>";
 
 	unsigned int longestTotalLenght =
 			(my::toString<double>(FANTA->Total[0]).size() >= my::toString<
@@ -1367,13 +1368,13 @@ void Fanta::printRiepilogo() {
 					FANTA->Total[1]).size();
 
 	for (size_t i = 0; i < 2; i++) {
-		QString string = "   "+QString::fromStdString(
+		QString string = "   " + QString::fromStdString(
 				STR_MOD->leftString(FANTA->getTeamName(i),
 						FANTA->longerNameLength)).replace(QString(" "),
 				QString("&nbsp;")) + " : " + my::toQString<signed int>(
 				FANTA->goals[i]) + " ( " + QString::fromStdString(
-				STR_MOD->leftString(my::toString<double>(FANTA->Total[i]), longestTotalLenght))
-				+ " ";
+				STR_MOD->leftString(my::toString<double>(FANTA->Total[i]),
+						longestTotalLenght)) + " ";
 
 		if (FANTA->goals[i] > 0)
 			string += ": ";
@@ -1431,6 +1432,114 @@ void Fanta::printTitolo(std::string str) {
 	tmp += "+<br/>";
 
 	LOG(INFO, tmp.replace(QString(" "), QString("&nbsp;")));
+}
+void Fanta::printPlayersInfo() {
+	for (size_t k = 0; k < 2; k++) // squadre
+	{
+		FANTA->printTitolo(FANTA->teamName.at(k));
+
+		QString tmp = "<br/>";
+
+		for (size_t i = 0; i < 4; i++) // ruolo
+		{
+			size_t j = 0;
+			while (j < FANTA->modulo[k][i]) {
+				tmp += QObject::tr("<br/><br/>   ==== %1 ====").arg(
+						QString::fromStdString(
+								FANTA->teamOrderedByRuolo[k][i].at(j).Nome));
+
+				tmp += "<br/><br/>";
+
+				tmp += STR_MOD->rightQString("Voto :", 20);
+				tmp
+						+= STR_MOD->rightQString(
+								my::toQString<float>(
+										FANTA->teamOrderedByRuolo[k][i].at(j).VotoGazzetta),
+								5);
+				tmp += STR_MOD->rightQString("Fantavoto :", 20);
+				tmp
+						+= STR_MOD->rightQString(
+								my::toQString<float>(
+										FANTA->teamOrderedByRuolo[k][i].at(j).FantaVoto),
+								5);
+				tmp += "<br/>";
+
+				tmp += STR_MOD->rightQString("Goal fatti :", 20);
+				tmp
+						+= STR_MOD->rightQString(
+								my::toQString<float>(
+										FANTA->teamOrderedByRuolo[k][i].at(j).GoalFatti),
+								5);
+				tmp += STR_MOD->rightQString("Goal subiti :", 20);
+				tmp
+						+= STR_MOD->rightQString(
+								my::toQString<float>(
+										FANTA->teamOrderedByRuolo[k][i].at(j).GoalSubiti),
+								5);
+				tmp += "<br/>";
+
+				tmp += STR_MOD->rightQString("Goal dec vitt :", 20);
+				tmp
+						+= STR_MOD->rightQString(
+								my::toQString<float>(
+										FANTA->teamOrderedByRuolo[k][i].at(j).GoalDecVitt),
+								5);
+				tmp += STR_MOD->rightQString("Goal dec par :", 20);
+				tmp
+						+= STR_MOD->rightQString(
+								my::toQString<float>(
+										FANTA->teamOrderedByRuolo[k][i].at(j).GoalDecPar),
+								5);
+				tmp += "<br/>";
+
+				tmp += STR_MOD->rightQString("Ammonizioni :", 20);
+				tmp
+						+= STR_MOD->rightQString(
+								my::toQString<float>(
+										FANTA->teamOrderedByRuolo[k][i].at(j).Amm),
+								5);
+				tmp += STR_MOD->rightQString("Espulsioni :", 20);
+				tmp
+						+= STR_MOD->rightQString(
+								my::toQString<float>(
+										FANTA->teamOrderedByRuolo[k][i].at(j).Esp),
+								5);
+				tmp += "<br/>";
+
+				tmp += STR_MOD->rightQString("Assist :", 20);
+				tmp
+						+= STR_MOD->rightQString(
+								my::toQString<unsigned int>(
+										FANTA->teamOrderedByRuolo[k][i].at(j).Assist),
+								5);
+				tmp += STR_MOD->rightQString("Autoreti :", 20);
+				tmp
+						+= STR_MOD->rightQString(
+								my::toQString<float>(
+										FANTA->teamOrderedByRuolo[k][i].at(j).Autoreti),
+								5);
+				tmp += "<br/>";
+
+				tmp += STR_MOD->rightQString("Rigore parato :", 20);
+				tmp
+						+= STR_MOD->rightQString(
+								my::toQString<unsigned int>(
+										FANTA->teamOrderedByRuolo[k][i].at(j).RigoreParato),
+								5);
+				tmp += STR_MOD->rightQString("Rigore sbagliato :", 20);
+				tmp
+						+= STR_MOD->rightQString(
+								my::toQString<unsigned int>(
+										FANTA->teamOrderedByRuolo[k][i].at(j).RigoreSbagliato),
+								5);
+				tmp += "<br/>";
+
+				j++;
+			}
+		}
+
+		LOG(INFO, tmp.replace(QString(" "), QString("&nbsp;")));
+	}
 }
 unsigned int Fanta::getAmmonizioniTot(unsigned int k) const {
 	unsigned int amm = 0;
