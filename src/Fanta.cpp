@@ -76,6 +76,8 @@ void Fanta::initialize() {
 	Fanta::NonHaGiocato.Amm = -0;
 	Fanta::NonHaGiocato.Esp = -0;
 	Fanta::NonHaGiocato.daSostituire = 0;
+	Fanta::NonHaGiocato.RigoreParato = 0;
+	Fanta::NonHaGiocato.RigoreSbagliato = 0;
 
 	Fanta::fakePlayer.Nome = "fake";
 	Fanta::fakePlayer.Nome_Sost = "---";
@@ -91,9 +93,11 @@ void Fanta::initialize() {
 	Fanta::fakePlayer.GoalDecVitt = 0;
 	Fanta::fakePlayer.GoalDecPar = 0;
 	Fanta::fakePlayer.Assist = 0;
-	Fanta::fakePlayer.Amm = -0;
-	Fanta::fakePlayer.Esp = -0;
+	Fanta::fakePlayer.Amm = 0;
+	Fanta::fakePlayer.Esp = 0;
 	Fanta::fakePlayer.daSostituire = 0;
+	Fanta::fakePlayer.RigoreParato = 0;
+	Fanta::fakePlayer.RigoreSbagliato = 0;
 
 	for (int j = 0; j < 4; j++) {
 		Fanta::modifierValues[0][j] = j + 1;
@@ -1436,9 +1440,12 @@ void Fanta::printTitolo(std::string str) {
 void Fanta::printPlayersInfo() {
 	for (size_t k = 0; k < 2; k++) // squadre
 	{
+
+		LOG(INFO, "<br/><br/>");
+
 		FANTA->printTitolo(FANTA->teamName.at(k));
 
-		QString tmp = "<br/>";
+		QString tmp = "";
 
 		for (size_t i = 0; i < 4; i++) // ruolo
 		{

@@ -7,6 +7,7 @@
 #include <QtXml/QDomDocument>
 #include <QTime>
 #include <QFile>
+#include <QObject>
 
 #include "defines.h"
 #include "singletonQtLogger.h"
@@ -48,8 +49,7 @@ void singletonQtLogger::Logging(QString type, QString message) {
 		this->ui.plainTextEdit->appendHtml(" " + message);
 	else if (type == "ERROR")
 		this->ui.plainTextEdit->appendHtml(
-				"<span style='color:#FF0000;'> ERROR : " + message
-						+ "</span>");
+				"<span style='color:#FF0000;'> ERROR : " + message + "</span>");
 	else if (type == "DEBUG") {
 		if (THE_REPO->debugStatus) {
 			this->ui.plainTextEdit->appendHtml(" " + message);
@@ -334,13 +334,18 @@ void singletonQtLogger::goOn() {
 
 		LOG(
 				DEBUG,
-				"In singletonQtLogger::goOn() --> file name temporaneo : "
-						+ fileName + ".");
+				QObject::tr(
+						"In singletonQtLogger::goOn() --> file name temporaneo : %1").arg(
+						fileName));
 
 		FANTA->printTitolo(
 				FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
+
 		FANTA->printRiepilogo();
 		FANTA->printFormations();
+
+		LOG(INFO, "<br/><br/>&nbsp;&nbsp;&nbsp;DETTAGLIO SQUADRE : <br/>");
+
 		FANTA->printPlayersInfo();
 
 		this->ui.outputFileNameLineEdit->setEnabled(true);
