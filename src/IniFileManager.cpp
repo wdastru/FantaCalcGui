@@ -11,6 +11,7 @@
 
 #include <QtCore/QDir>
 #include <QtCore/QTextStream>
+#include <QObject>
 
 IniFileManager* IniFileManager::Inst() {
 	if (pInstance == NULL) {
@@ -22,7 +23,7 @@ IniFileManager* IniFileManager::Inst() {
 IniFileManager* IniFileManager::pInstance = NULL;
 
 IniFileManager::IniFileManager() {
-	LOG(DEBUG, "In IniFileManager() constructor.");
+	//LOG(DEBUG, "In IniFileManager() constructor.");
 	char * UserProfile = getenv("USERPROFILE");
 	QDir dir(UserProfile);
 	dir.mkdir("FantaCalcGui");
@@ -34,7 +35,10 @@ IniFileManager::~IniFileManager() {
 }
 void IniFileManager::setWorkDir(QString dir) {
 	this->workDir = dir;
-	LOG(DEBUG, "In IniFileManager::setWorkDir(QString dir) --> workDir set to " + this->workDir);
+	LOG(
+			DEBUG,
+			"In IniFileManager::setWorkDir(QString dir) --> workDir set to "
+					+ this->workDir);
 }
 QString IniFileManager::getWorkDir() {
 	return this->workDir;
@@ -125,10 +129,7 @@ void IniFileManager::writeIniFile() {
 void IniFileManager::readIniFile() {
 	QFile *iniFile = new QFile(this->iniFileName);
 	if (iniFile->exists()) {
-		LOG(
-				DEBUG,
-				"In IniFileManager::readIniFile() --> " + this->iniFileName
-						+ " exists.");
+		LOG(DEBUG, QObject::tr("%1 esiste").arg(this->iniFileName));
 		iniFile->open(QIODevice::ReadOnly);
 		char buf[1024];
 
@@ -183,21 +184,16 @@ void IniFileManager::readIniFile() {
 	} else {
 		LOG(
 				INFO,
-				this->iniFileName
-						+ " non esiste. Inserire le informazioni richieste.");
-
-		LOG(
-				DEBUG,
-				"In IniFileManager::readIniFile() --> " + this->iniFileName
-						+ " does not exists.");
-
-		LOG(DEBUG, "In IniFileManager::readIniFile() --> " + this->workDir);
+				QObject::tr(
+						"%1 non esiste<br>Inserire le informazioni di configurazione").arg(
+						this->iniFileName));
 
 		THE_CONFIGURATOR->setStartDir(this->workDir);
 
 		/*
 		 * utilizza i valori comunque presenti in Repository::Repository()
 		 */
+
 		THE_CONFIGURATOR->setFormazioniUrl(THE_REPO->formazioniUrl);
 		THE_CONFIGURATOR->setGazzettaUrl(THE_REPO->gazzettaUrl);
 		THE_CONFIGURATOR->setFormazioniPath(THE_REPO->formazioniPath);

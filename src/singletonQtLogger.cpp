@@ -135,6 +135,7 @@ void singletonQtLogger::saveLogFile() {
 		return;
 	}
 
+	fileContent.replace("<br>", "\n");
 	fileContent.replace("<br/>", "\n");
 	fileContent.replace("<br />", "\n");
 	fileContent.replace("<pre>", "");
@@ -360,7 +361,7 @@ void singletonQtLogger::setLogFileName(QString filename) {
 }
 bool singletonQtLogger::checkForUpdates() {
 
-	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates().");
+	//	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates().");
 
 	QStringList current = this->getVersion().split(QRegExp("\\\."));
 	int verCurrent = current.at(0).toInt();
@@ -378,20 +379,23 @@ bool singletonQtLogger::checkForUpdates() {
 
 	urls->push_back(QUrl::fromLocalFile(url));
 
-	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates() --> url : " + url);
+	//	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates() --> url : " + url);
 
 	std::vector<QString> * savePaths = new std::vector<QString>;
 	QString savePath = THE_REPO->getDownloadPath() + "/updates.xml";
 	savePaths->push_back(savePath);
 
-	LOG(
-			DEBUG,
-			"In void singletonQtLogger::checkForUpdates() --> savePath : "
-					+ savePath);
+	//	LOG(
+	//			DEBUG,
+	//			"In void singletonQtLogger::checkForUpdates() --> savePath : "
+	//					+ savePath);
 
 	Downloader updatesXmlDownloader(THE_LOGGER, urls, savePaths, TRUE);
 
 	if (updatesXmlDownloader.requestSucceded()) { // download succeded
+
+		LOG(DEBUG,
+				"Scaricato le informazioni relative agli aggiornamenti disponibili");
 
 		std::vector<QString> content;
 		std::vector<QString> status;
@@ -411,7 +415,6 @@ bool singletonQtLogger::checkForUpdates() {
 		// of the outermost element.
 		QDomElement docElem = doc.documentElement();
 
-		// QList<QList<QHash<QString, QString> > > * listOfResources = new QList<QList<QHash<QString, QString> > > ();
 		QList<QList<QHash<QString, QString> > > listOfResources;
 
 		QDomNode n = docElem.firstChild();
@@ -424,22 +427,16 @@ bool singletonQtLogger::checkForUpdates() {
 
 			QDomElement e = n.toElement(); // try to convert the node to an element.
 			if (!e.isNull()) {
-				//				QList<QHash<QString, QString> > * list = new QList<QHash<QString, QString> > ();
 
 				QDomNode m = n.firstChild();
 				while (!m.isNull()) {
 					QDomElement f = m.toElement(); // try to convert the node to an element.
 					if (!f.isNull()) {
-						//qDebug() << f.tagName();
-						//	QHash<QString, QString> * hash = new QHash<QString,
-						//		QString> ();
 
 						if (f.tagName() == "file") {
 							hash.insert("file", f.text());
-							//							list.push_back(hash);
 						} else if (f.tagName() == "version") {
 							hash.insert("version", f.text());
-							//							list.push_back(hash);
 
 							QStringList available = f.text().split(
 									QRegExp("\\\."));
@@ -483,17 +480,17 @@ bool singletonQtLogger::checkForUpdates() {
 
 			listOfResources.push_back(list);
 
-			for (int i = 0; i < list.size(); ++i) {
-				LOG(
-						DEBUG,
-						"In void singletonQtLogger::checkForUpdates() --> <br>hash[\"file\"] : "
-								+ hash["file"] + ", <br>hash[\"version\"] : "
-								+ hash["version"]
-								+ ", <br>hash[\"description\"] : "
-								+ hash["description"]
-								+ ", <br>hash[\"status\"] : " + hash["status"]
-								+ ", <br>hash[\"new\"] : " + hash["new"]);
-			}
+			//			for (int i = 0; i < list.size(); ++i) {
+			//				LOG(
+			//						DEBUG,
+			//						"In void singletonQtLogger::checkForUpdates() --> <br>hash[\"file\"] : "
+			//								+ hash["file"] + ", <br>hash[\"version\"] : "
+			//								+ hash["version"]
+			//								+ ", <br>hash[\"description\"] : "
+			//								+ hash["description"]
+			//								+ ", <br>hash[\"status\"] : " + hash["status"]
+			//								+ ", <br>hash[\"new\"] : " + hash["new"]);
+			//			}
 
 			n = n.nextSibling();
 		}

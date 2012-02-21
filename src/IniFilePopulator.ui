@@ -75,10 +75,10 @@
       </property>
       <property name="styleSheet">
        <string notr="true">border-color: rgb(255, 0, 0);
-background-color: rgb(255, 200, 200);</string>
+/*background-color: rgb(255, 200, 200);*/</string>
       </property>
       <property name="readOnly">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
      </widget>
     </item>
@@ -93,10 +93,10 @@ background-color: rgb(255, 200, 200);</string>
      <widget class="QLineEdit" name="gazzettaLineEdit">
       <property name="styleSheet">
        <string notr="true">border-color: rgb(255, 0, 0);
-background-color: rgb(255, 200, 200);</string>
+/*background-color: rgb(255, 200, 200);*/</string>
       </property>
       <property name="readOnly">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
      </widget>
     </item>
@@ -111,10 +111,10 @@ background-color: rgb(255, 200, 200);</string>
      <widget class="QLineEdit" name="risultatiLineEdit">
       <property name="styleSheet">
        <string notr="true">border-color: rgb(255, 0, 0);
-background-color: rgb(255, 200, 200);</string>
+/*background-color: rgb(255, 200, 200);*/</string>
       </property>
       <property name="readOnly">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
      </widget>
     </item>
@@ -129,10 +129,10 @@ background-color: rgb(255, 200, 200);</string>
      <widget class="QLineEdit" name="downloadLineEdit">
       <property name="styleSheet">
        <string notr="true">border-color: rgb(255, 0, 0);
-background-color: rgb(255, 200, 200);</string>
+/*background-color: rgb(255, 200, 200);*/</string>
       </property>
       <property name="readOnly">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
      </widget>
     </item>
@@ -153,10 +153,10 @@ background-color: rgb(255, 200, 200);</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border-color: rgb(255, 0, 0);
-background-color: rgb(255, 200, 200);</string>
+/*background-color: rgb(255, 200, 200);*/</string>
       </property>
       <property name="readOnly">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
      </widget>
     </item>
@@ -164,7 +164,7 @@ background-color: rgb(255, 200, 200);</string>
      <widget class="QLineEdit" name="formazioniUrlLineEdit">
       <property name="styleSheet">
        <string notr="true">border-color: rgb(255, 0, 0);
-background-color: rgb(200, 255, 200);</string>
+/*background-color: rgb(200, 255, 200);*/</string>
       </property>
      </widget>
     </item>
@@ -172,7 +172,7 @@ background-color: rgb(200, 255, 200);</string>
      <widget class="QLineEdit" name="gazzettaUrlLineEdit">
       <property name="styleSheet">
        <string notr="true">border-color: rgb(255, 0, 0);
-background-color: rgb(200, 255, 200);</string>
+/*background-color: rgb(200, 255, 200);*/</string>
       </property>
      </widget>
     </item>

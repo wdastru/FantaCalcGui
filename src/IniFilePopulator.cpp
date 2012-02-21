@@ -1,3 +1,5 @@
+#include <QObject>
+
 #include "Repository.h"
 #include "IniFileManager.h"
 #include "IniFilePopulator.h"
@@ -12,7 +14,7 @@ IniFilePopulator* IniFilePopulator::Inst() {
 IniFilePopulator* IniFilePopulator::pInstance = NULL;
 IniFilePopulator::IniFilePopulator(QWidget *parent) :
 	QDialog(parent) {
-	LOG(DEBUG, "In IniFilePopulator() constructor.");
+	//LOG(DEBUG, "In IniFilePopulator() constructor.");
 	this->startDir = "";
 	ui.setupUi(this);
 }
@@ -41,80 +43,32 @@ void IniFilePopulator::updateInternalData() {
 	this->close();
 }
 bool IniFilePopulator::createDirs() {
-	LOG(DEBUG, "In IniFilePopulator::createDirs().");
+	//	LOG(DEBUG, "In IniFilePopulator::createDirs().");
 
 	bool retVal = true;
 
 	QDir * dir = new QDir;
 
-	if (dir->mkdir(THE_REPO->formazioniPath)) {
-		LOG(
-				DEBUG,
-				"In IniFilePopulator::createDirs() --> "
-						+ THE_REPO->formazioniPath + " has been created.");
-		retVal = retVal && true;
-	} else {
-		LOG(
-				DEBUG,
-				"In IniFilePopulator::createDirs() --> "
-						+ THE_REPO->formazioniPath + " has not been created.");
-		retVal = retVal && false;
-	}
+	QVector<QString> * paths = new QVector<QString> ();
+	paths->push_back(THE_REPO->formazioniPath);
+	paths->push_back(THE_REPO->risultatiPath);
+	paths->push_back(THE_REPO->gazzettaPath);
+	paths->push_back(THE_REPO->listePath);
+	paths->push_back(THE_REPO->downloadPath);
 
-	if (dir->mkdir(THE_REPO->gazzettaPath)) {
-		LOG(
-				DEBUG,
-				"In IniFilePopulator::createDirs() --> "
-						+ THE_REPO->gazzettaPath + " has been created.");
-		retVal = retVal && true;
-	} else {
-		LOG(
-				DEBUG,
-				"In IniFilePopulator::createDirs() --> "
-						+ THE_REPO->gazzettaPath + " has not been created.");
-		retVal = retVal && false;
-	}
-
-	if (dir->mkdir(THE_REPO->risultatiPath)) {
-		LOG(
-				DEBUG,
-				"In IniFilePopulator::createDirs() --> "
-						+ THE_REPO->risultatiPath + " has been created.");
-		retVal = retVal && true;
-	} else {
-		LOG(
-				DEBUG,
-				"In IniFilePopulator::createDirs() --> "
-						+ THE_REPO->risultatiPath + " has not been created.");
-		retVal = retVal && false;
-	}
-
-	if (dir->mkdir(THE_REPO->downloadPath)) {
-		LOG(
-				DEBUG,
-				"In IniFilePopulator::createDirs() --> "
-						+ THE_REPO->downloadPath + " has been created.");
-		retVal = retVal && true;
-	} else {
-		LOG(
-				DEBUG,
-				"In IniFilePopulator::createDirs() --> "
-						+ THE_REPO->downloadPath + " has not been created.");
-		retVal = retVal && false;
-	}
-
-	if (dir->mkdir(THE_REPO->listePath)) {
-		LOG(
-				DEBUG,
-				"In IniFilePopulator::createDirs() --> " + THE_REPO->listePath
-						+ " has been created.");
-		retVal = retVal && true;
-	} else {
-		LOG(
-				DEBUG,
-				"In IniFilePopulator::createDirs() --> " + THE_REPO->listePath
-						+ " has not been created.");
-		retVal = retVal && false;
+	for (int i = 0; i < paths->size(); ++i) {
+		if (!dir->exists(paths->at(i))) {
+			if (dir->mkdir(paths->at(i))) {
+				LOG(DEBUG, QObject::tr("Creata cartella %1").arg(paths->at(i)));
+				retVal = retVal && true;
+			} else {
+				LOG(
+						ERROR,
+						QObject::tr(
+								"Non è stato possibile creare la cartella %1").arg(
+								paths->at(i)));
+			}
+		}
 	}
 
 	return retVal;
@@ -122,6 +76,12 @@ bool IniFilePopulator::createDirs() {
 void IniFilePopulator::chooseFormazioniPath() {
 	QString directory = this->getDir("Formazioni Path", this->startDir);
 	if (!directory.isEmpty()) {
+
+		LOG(
+				DEBUG,
+				QObject::tr("Percorso di salvataggio file formazioni : %1").arg(
+						directory));
+
 		this->ui.formazioniLineEdit->setText(directory);
 		THE_REPO->formazioniPath = directory;
 		QDir * dir = new QDir(directory);
@@ -132,6 +92,12 @@ void IniFilePopulator::chooseFormazioniPath() {
 void IniFilePopulator::chooseGazzettaPath() {
 	QString directory = this->getDir("Gazzetta Path", this->startDir);
 	if (!directory.isEmpty()) {
+
+		LOG(
+				DEBUG,
+				QObject::tr("Percorso di salvataggio file gazzetta : %1").arg(
+						directory));
+
 		this->ui.gazzettaLineEdit->setText(directory);
 		THE_REPO->gazzettaPath = directory;
 		QDir * dir = new QDir(directory);
@@ -142,6 +108,12 @@ void IniFilePopulator::chooseGazzettaPath() {
 void IniFilePopulator::chooseDownloadPath() {
 	QString directory = this->getDir("Download Path", this->startDir);
 	if (!directory.isEmpty()) {
+
+		LOG(
+				DEBUG,
+				QObject::tr("Percorso di salvataggio downloads : %1").arg(
+						directory));
+
 		this->ui.downloadLineEdit->setText(directory);
 		THE_REPO->downloadPath = directory;
 		QDir * dir = new QDir(directory);
@@ -152,6 +124,12 @@ void IniFilePopulator::chooseDownloadPath() {
 void IniFilePopulator::chooseRisultatiPath() {
 	QString directory = this->getDir("Risultati Path", this->startDir);
 	if (!directory.isEmpty()) {
+
+		LOG(
+				DEBUG,
+				QObject::tr("Percorso di salvataggio risultati : %1").arg(
+						directory));
+
 		this->ui.risultatiLineEdit->setText(directory);
 		THE_REPO->risultatiPath = directory;
 		QDir * dir = new QDir(directory);
@@ -162,6 +140,12 @@ void IniFilePopulator::chooseRisultatiPath() {
 void IniFilePopulator::chooseListePath() {
 	QString directory = this->getDir("Liste Path", this->startDir);
 	if (!directory.isEmpty()) {
+
+		LOG(
+				DEBUG,
+				QObject::tr("Percorso di salvataggio file liste : %1").arg(
+						directory));
+
 		this->ui.listeLineEdit->setText(directory);
 		THE_REPO->listePath = directory;
 		QDir * dir = new QDir(directory);
@@ -171,7 +155,7 @@ void IniFilePopulator::chooseListePath() {
 }
 QString IniFilePopulator::getDir(QString caption, QString startDir) {
 
-	LOG(DEBUG, "In IniFilePopulator::getDir()");
+	//	LOG(DEBUG, "In IniFilePopulator::getDir()");
 
 	QFileDialog::Options options = QFileDialog::DontResolveSymlinks
 			| QFileDialog::ShowDirsOnly;
@@ -180,14 +164,14 @@ QString IniFilePopulator::getDir(QString caption, QString startDir) {
 	QString dir = QFileDialog::getExistingDirectory(this, caption, startDir,
 			options);
 
-	LOG(DEBUG, "In IniFilePopulator::getDir() --> returning " + dir);
+	//	LOG(DEBUG, "In IniFilePopulator::getDir() --> returning " + dir);
 
 	return dir;
 }
 void IniFilePopulator::setStartDir(QString _startDir) {
 	this->startDir = _startDir;
-	LOG(DEBUG,
-			"In IniFilePopulator::setStartDir(QString) --> " + this->startDir);
+	//	LOG(DEBUG,
+	//			"In IniFilePopulator::setStartDir(QString) --> " + this->startDir);
 }
 QString IniFilePopulator::getFormazioniPath() {
 	return this->ui.formazioniLineEdit->text();
@@ -222,62 +206,62 @@ bool IniFilePopulator::getDebugStatus() {
 	}
 }
 void IniFilePopulator::setFormazioniPath(QString str) {
-	LOG(
-			DEBUG,
-			"In void IniFilePopulator::setFormazioniPath(QString str ) --> str : "
-					+ str);
+	//	LOG(
+	//			DEBUG,
+	//			"In void IniFilePopulator::setFormazioniPath(QString str ) --> str : "
+	//					+ str);
 	this->ui.formazioniLineEdit->setText(str);
 }
 void IniFilePopulator::setGazzettaPath(QString str) {
-	LOG(
-			DEBUG,
-			"In void IniFilePopulator::setGazzettaPath(QString str ) --> str : "
-					+ str);
+	//	LOG(
+	//			DEBUG,
+	//			"In void IniFilePopulator::setGazzettaPath(QString str ) --> str : "
+	//					+ str);
 	this->ui.gazzettaLineEdit->setText(str);
 }
 void IniFilePopulator::setRisultatiPath(QString str) {
-	LOG(
-			DEBUG,
-			"In void IniFilePopulator::setRisultatiPath(QString str ) --> str : "
-					+ str);
+	//	LOG(
+	//			DEBUG,
+	//			"In void IniFilePopulator::setRisultatiPath(QString str ) --> str : "
+	//					+ str);
 	this->ui.risultatiLineEdit->setText(str);
 }
 void IniFilePopulator::setListePath(QString str) {
-	LOG(
-			DEBUG,
-			"In void IniFilePopulator::setListePath(QString str ) --> str : "
-					+ str);
+	//	LOG(
+	//			DEBUG,
+	//			"In void IniFilePopulator::setListePath(QString str ) --> str : "
+	//					+ str);
 	this->ui.listeLineEdit->setText(str);
 }
 void IniFilePopulator::setDownloadPath(QString str) {
-	LOG(
-			DEBUG,
-			"In void IniFilePopulator::setDownloadPath(QString str ) --> str : "
-					+ str);
+	//	LOG(
+	//			DEBUG,
+	//			"In void IniFilePopulator::setDownloadPath(QString str ) --> str : "
+	//					+ str);
 	this->ui.downloadLineEdit->setText(str);
 }
 void IniFilePopulator::setFormazioniUrl(QString str) {
-	LOG(
-			DEBUG,
-			"In void IniFilePopulator::setFormazioniUrl(QString str ) --> str : "
-					+ str);
+	//	LOG(
+	//			DEBUG,
+	//			"In void IniFilePopulator::setFormazioniUrl(QString str ) --> str : "
+	//					+ str);
 	this->ui.formazioniUrlLineEdit->setText(str);
 }
 void IniFilePopulator::setGazzettaUrl(QString str) {
-	LOG(
-			DEBUG,
-			"In void IniFilePopulator::setGazzettaUrl(QString str ) --> str : "
-					+ str);
+	//	LOG(
+	//			DEBUG,
+	//			"In void IniFilePopulator::setGazzettaUrl(QString str ) --> str : "
+	//					+ str);
 	this->ui.gazzettaUrlLineEdit->setText(str);
 }
 void IniFilePopulator::setDebugStatus(bool status) {
 	if (status) {
-		LOG(DEBUG,
-				"In void IniFilePopulator::setDebugStatus(bool status) --> status is TRUE.");
+		//		LOG(DEBUG,
+		//				"In void IniFilePopulator::setDebugStatus(bool status) --> status is TRUE.");
 		this->ui.trueCheckBox->setChecked(TRUE);
 	} else {
-		LOG(DEBUG,
-				"void IniFilePopulator::setDebugStatus(bool status) --> status is FALSE.");
+		//		LOG(DEBUG,
+		//				"void IniFilePopulator::setDebugStatus(bool status) --> status is FALSE.");
 		this->ui.falseCheckBox->setChecked(TRUE);
 	}
 }

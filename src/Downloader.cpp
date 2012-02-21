@@ -39,6 +39,7 @@
  ****************************************************************************/
 
 #include <QtGui>
+#include <QDebug>
 
 #include "httpwindow.h"
 #include "Downloader.h"
@@ -49,7 +50,7 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 		std::vector<QString>* _savePaths, bool _silent) :
 	QDialog(parent) {
 
-	LOG(DEBUG, "In Downloader::Downloader(...) constructor.");
+	//	LOG(DEBUG, "In Downloader::Downloader(...) constructor.");
 
 	this->silent = _silent;
 	this->resize(600, 0);
@@ -108,7 +109,7 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 	}
 }
 void Downloader::quit() {
-	LOG(DEBUG, "In void Downloader::quit().");
+	//	LOG(DEBUG, "In void Downloader::quit().");
 	this->hasBeenQuitted = true;
 	this->close();
 }
@@ -122,20 +123,20 @@ void Downloader::downloadFiles() {
 		QString fullUrlString = url.scheme() + "://" + url.authority()
 				+ url.path();
 
-		LOG(DEBUG, "In Downloader::downloadFile() --> url : " + fullUrlString);
-
-		LOG(
-				DEBUG,
-				"In Downloader::downloadFile() --> savePaths->at("
-						+ my::toQString<unsigned int>(i) + ") : "
-						+ savePaths->at(i));
+		//		LOG(DEBUG, "In Downloader::downloadFile() --> url : " + fullUrlString);
+		//
+		//		LOG(
+		//				DEBUG,
+		//				"In Downloader::downloadFile() --> savePaths->at("
+		//						+ my::toQString<unsigned int>(i) + ") : "
+		//						+ savePaths->at(i));
 
 		if (!this->silent) {
-			LOG(DEBUG, "Downloading " + fullUrlString);
-			LOG(DEBUG, "Saving to " + savePaths->at(i));
+			LOG(DEBUG, QObject::tr("Downloading %1").arg(fullUrlString));
+			LOG(DEBUG, QObject::tr("Saving to %1").arg(this->savePaths->at(i)));
 		}
 
-		this->httpClients.at(i) = new HttpWindow(this, url, savePaths->at(i));
+		this->httpClients.at(i) = new HttpWindow(this, url, this->savePaths->at(i));
 		this->httpClients.at(i)->exec();
 
 		if (this->httpClients.at(i)->downloadSuccessful()) {
@@ -145,7 +146,7 @@ void Downloader::downloadFiles() {
 				LOG(
 						INFO,
 						tr("Scaricato %1").arg(
-								QFileInfo(savePaths->at(i)).fileName()));
+								QFileInfo(this->savePaths->at(i)).fileName()));
 			}
 
 		} else {
@@ -153,20 +154,20 @@ void Downloader::downloadFiles() {
 			LOG(
 					ERROR,
 					tr("Download of %1 failed.").arg(
-							QFileInfo(savePaths->at(i)).fileName()));
+							QFileInfo(this->savePaths->at(i)).fileName()));
 		}
 
-		LOG(
-				DEBUG,
-				tr("Download successes : %1").arg(
-						my::toQString<unsigned int>(this->downloadSuccesses)));
+//		LOG(
+//				DEBUG,
+//				tr("Download successes : %1").arg(
+//						my::toQString<unsigned int>(this->downloadSuccesses)));
+//
+//		LOG(
+//				DEBUG,
+//				tr("Download failures : %1").arg(
+//						my::toQString<unsigned int>(this->downloadFailures)));
 
-		LOG(
-				DEBUG,
-				tr("Download failures : %1").arg(
-						my::toQString<unsigned int>(this->downloadFailures)));
-
-		if (this->downloadSuccesses == savePaths->size()) {
+		if (this->downloadSuccesses == this->savePaths->size()) {
 			this->close();
 		}
 	}
