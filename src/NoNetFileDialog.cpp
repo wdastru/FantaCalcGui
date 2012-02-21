@@ -30,10 +30,10 @@ void NoNetFileDialog::setOpenFileNameSquadre() {
 			tr("Text Files (*.txt);;All Files (*)"));
 
 	if (!this->fileNameSquadre.isEmpty()) {
-		LOG(
-				DEBUG,
-				"In NoNetFileDialog::setOpenFileNameSquadre() --> fileNameSquadre is not empty: "
-						+ this->fileNameSquadre);
+//		LOG(
+//				DEBUG,
+//				"In NoNetFileDialog::setOpenFileNameSquadre() --> fileNameSquadre is not empty: "
+//						+ this->fileNameSquadre);
 		/*
 		 QByteArray ba = this->fileNameSquadre.toLatin1();
 
@@ -52,7 +52,7 @@ void NoNetFileDialog::setOpenFileNameSquadre() {
 		 THE_REPO->writeIniFile();
 		 */
 	} else {
-		LOG(DEBUG,
+		LOG(ERROR,
 				"In NoNetFileDialog::setOpenFileNameSquadre() --> fileNameSquadre is empty.");
 		this->fileNameSquadre = "";
 		//		openFileNameSquadreLabel->setText("");
@@ -71,10 +71,10 @@ void NoNetFileDialog::setOpenFileNameGazzetta() {
 			tr("Text Files (*.txt);;All Files (*)"));
 
 	if (!this->fileNameGazzetta.isEmpty()) {
-		LOG(
-				DEBUG,
-				"In NoNetFileDialog::setOpenFileNameGazzetta() --> fileNameGazzetta is not empty: "
-						+ this->fileNameGazzetta);
+//		LOG(
+//				DEBUG,
+//				"In NoNetFileDialog::setOpenFileNameGazzetta() --> fileNameGazzetta is not empty: "
+//						+ this->fileNameGazzetta);
 		/*
 		 openFileNameGazzettaLabel->setText(fileNameGazzetta);
 
@@ -95,7 +95,7 @@ void NoNetFileDialog::setOpenFileNameGazzetta() {
 		 THE_REPO->writeIniFile();
 		 */
 	} else {
-		LOG(DEBUG,
+		LOG(ERROR,
 				"In NoNetFileDialog::setOpenFileNameGazzetta() --> fileNameGazzetta is empty.");
 		this->fileNameGazzetta = "";
 	}
@@ -103,7 +103,6 @@ void NoNetFileDialog::setOpenFileNameGazzetta() {
 	ui.fileGazzettaLineEdit->setText(this->fileNameGazzetta);
 	this->enableOkButton();
 
-	//	THE_MANAGER->writeIniFile();
 }
 //void NoNetFileDialog::createEmptyFile() {
 //	ui.newFileLineEdit->setText("file nuovo");
@@ -124,12 +123,12 @@ QString NoNetFileDialog::getFileNameGazzetta() {
 }
 void NoNetFileDialog::okClicked() {
 	this->hasBeenAborted = FALSE;
-	LOG(DEBUG, "In NoNetFileDialog::okClicked().");
+//	LOG(DEBUG, "In NoNetFileDialog::okClicked().");
 	this->hide();
 }
 void NoNetFileDialog::cancelClicked() {
 	this->hasBeenAborted = TRUE;
-	LOG(DEBUG, "In NoNetFileDialog::cancelClicked().");
+//	LOG(DEBUG, "In NoNetFileDialog::cancelClicked().");
 	this->close();
 }
 void NoNetFileDialog::closeEvent(QCloseEvent *event) {

@@ -30,7 +30,7 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 		QString _fileGazzetta, QWidget *parent) :
 	QDialog(parent) {
 
-	LOG(DEBUG, "In ChooseFileFromAListDialog constructor.");
+	//	LOG(DEBUG, "In ChooseFileFromAListDialog constructor.");
 
 	this->resize(630, 0);
 	this->setMinimumSize(630, 0);
@@ -80,10 +80,10 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 	groupBoxNeutro1 = new QGroupBox("Neutro");
 	groupBoxNeutro2 = new QGroupBox("Neutro");
 	groupBoxGazzetta = new QGroupBox("Files Gazzetta");
-	LOG(
-			DEBUG,
-			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> fileFormazioni : "
-					+ _fileFormazioni);
+	//	LOG(
+	//			DEBUG,
+	//			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> fileFormazioni : "
+	//					+ _fileFormazioni);
 
 	QFile *file1 = new QFile(_fileFormazioni);
 
@@ -209,10 +209,10 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 
 	time = QTime::currentTime().toString("hh:mm:ss.zzz");
 
-	LOG(
-			DEBUG,
-			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> fileGazzetta : "
-					+ _fileGazzetta);
+	//	LOG(
+	//			DEBUG,
+	//			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> fileGazzetta : "
+	//					+ _fileGazzetta);
 
 	QFile *file2 = new QFile(_fileGazzetta);
 	if (file2->exists()) {
@@ -303,18 +303,18 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 	scrollAreaFormazioni->setFixedHeight(400);
 	scrollAreaGazzetta->setFixedHeight(400);
 
-	LOG(
-			DEBUG,
-			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> FilesBox->size().width() : "
-					+ my::toQString<int>(FilesBox->size().width()));
-	LOG(
-			DEBUG,
-			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> HomeAwayBox->size().width() : "
-					+ my::toQString<int>(HomeAwayBox->size().width()));
-	LOG(
-			DEBUG,
-			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> CampoNeutroBox->size().width() : "
-					+ my::toQString<int>(CampoNeutroBox->size().width()));
+	//	LOG(
+	//			DEBUG,
+	//			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> FilesBox->size().width() : "
+	//					+ my::toQString<int>(FilesBox->size().width()));
+	//	LOG(
+	//			DEBUG,
+	//			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> HomeAwayBox->size().width() : "
+	//					+ my::toQString<int>(HomeAwayBox->size().width()));
+	//	LOG(
+	//			DEBUG,
+	//			"In ChooseFileFromAListDialog::ChooseFileFromAListDialog(...) --> CampoNeutroBox->size().width() : "
+	//					+ my::toQString<int>(CampoNeutroBox->size().width()));
 
 	int width_formazioni = FilesBox->size().width()
 			+ HomeAwayBox->size().width() + CampoNeutroBox->size().width() + 51;
@@ -461,8 +461,8 @@ void ChooseFileFromAListDialog::setFileGazzetta(QString _fileGazzetta) {
 	this->fileGazzetta = _fileGazzetta;
 }
 void ChooseFileFromAListDialog::doDownload() {
-	LOG(DEBUG,
-			"In ChooseFileFromAListDialog::doDownload() --> Network will be accessed.");
+	//	LOG(DEBUG,
+	//			"In ChooseFileFromAListDialog::doDownload() --> Network will be accessed.");
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	urls->push_back(
@@ -487,24 +487,24 @@ void ChooseFileFromAListDialog::doDownload() {
 
 	if (filesDownloader.requestSucceded()) {
 		this->downloadSuccess = true;
-		LOG(
-				DEBUG,
-				"In ChooseFileFromAListDialog::doDownload() --> the download of files succeded.");
+		//		LOG(
+		//				DEBUG,
+		//				"In ChooseFileFromAListDialog::doDownload() --> the download of files succeded.");
 	} else {
 		this->downloadSuccess = false;
-		LOG(DEBUG,
-				"In ChooseFileFromAListDialog::doDownload() --> the download of files failed.");
+		//		LOG(DEBUG,
+		//				"In ChooseFileFromAListDialog::doDownload() --> the download of files failed.");
 	}
 	return;
 }
 bool ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
-	LOG(DEBUG, "In ChooseFileFromAListDialog::createFileSquadreFromWebFiles().");
+	//	LOG(DEBUG, "In ChooseFileFromAListDialog::createFileSquadreFromWebFiles().");
 
 	if (this->downloadSuccess) {
 
-		LOG(
-				DEBUG,
-				"In ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> download was successful.");
+		//		LOG(
+		//				DEBUG,
+		//				"In ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> download was successful.");
 
 		QFile fHome(THE_REPO->getDownloadPath() + "/" + this->getHomeFile());
 		QFile fAway(THE_REPO->getDownloadPath() + "/" + this->getAwayFile());
@@ -743,10 +743,7 @@ bool ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 
 		fOut.write(str.toAscii());
 
-		LOG(
-				DEBUG,
-				"In ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> <br>"
-						+ str);
+		LOG(DEBUG, QObject::tr("Creato file squadre : <br>%1").arg(str));
 
 		fHome.close();
 		fAway.close();
@@ -754,13 +751,13 @@ bool ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 		return EXIT_SUCCESS;
 	} else {
 		LOG(
-				DEBUG,
+				ERROR,
 				"In ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> download was not successful.");
 		return EXIT_FAILURE;
 	}
 }
 void ChooseFileFromAListDialog::execute() {
-	LOG(DEBUG, "In void ChooseFileFromAListDialog::execute().");
+	//	LOG(DEBUG, "In void ChooseFileFromAListDialog::execute().");
 	this->doDownload();
 	if (this->downloadSuccess) {
 		this->createFileSquadreFromWebFiles();

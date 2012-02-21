@@ -165,21 +165,20 @@ void singletonQtLogger::configClicked() {
 	THE_CONFIGURATOR->exec();
 }
 void singletonQtLogger::onlineClicked() {
-	LOG(DEBUG,
-			"In void singletonQtLogger::onlineClicked() : network will be accessed.");
+	LOG(DEBUG, "Modalita' online<br>");
 
-	LOG(
-			DEBUG,
-			"In void singletonQtLogger::onlineClicked() --> THE_REPO->getFileFormazioniUrl() : "
-					+ THE_REPO->getFileFormazioniUrl());
-	LOG(
-			DEBUG,
-			"In void singletonQtLogger::onlineClicked() --> THE_REPO->getFileGazzettaUrl() : "
-					+ THE_REPO->getFileGazzettaUrl());
-	LOG(
-			DEBUG,
-			"In void singletonQtLogger::onlineClicked() --> THE_REPO->getListePath : "
-					+ THE_REPO->getListePath());
+	//	LOG(
+	//			DEBUG,
+	//			"In void singletonQtLogger::onlineClicked() --> THE_REPO->getFileFormazioniUrl() : "
+	//					+ THE_REPO->getFileFormazioniUrl());
+	//	LOG(
+	//			DEBUG,
+	//			"In void singletonQtLogger::onlineClicked() --> THE_REPO->getFileGazzettaUrl() : "
+	//					+ THE_REPO->getFileGazzettaUrl());
+	//	LOG(
+	//			DEBUG,
+	//			"In void singletonQtLogger::onlineClicked() --> THE_REPO->getListePath : "
+	//					+ THE_REPO->getListePath());
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	urls->push_back(QUrl::fromLocalFile(THE_REPO->getFileFormazioniUrl()));
@@ -192,8 +191,8 @@ void singletonQtLogger::onlineClicked() {
 	Downloader listsDownloader(THE_LOGGER, urls, savePaths, TRUE);
 
 	if (listsDownloader.requestSucceded()) {
-		LOG(DEBUG,
-				"In singletonQtLogger::onlineClicked() --> the download of files succeded.");
+//		LOG(DEBUG,
+//				"In singletonQtLogger::onlineClicked() --> the download of files succeded.");
 
 		ChooseFileFromAListDialog * chooseFileFromAListDialog =
 				new ChooseFileFromAListDialog(THE_REPO->getListaFormazioni(),
@@ -207,14 +206,14 @@ void singletonQtLogger::onlineClicked() {
 			THE_REPO->fileFormazioni
 					= chooseFileFromAListDialog->getFileFormazioni();
 
-			LOG(
-					DEBUG,
-					"In void singletonQtLogger::onlineClicked() --> fileGazzetta : "
-							+ THE_REPO->fileGazzetta);
-			LOG(
-					DEBUG,
-					"In void singletonQtLogger::onlineClicked() --> fileFormazioni : "
-							+ THE_REPO->fileFormazioni);
+//			LOG(
+//					DEBUG,
+//					"In void singletonQtLogger::onlineClicked() --> fileGazzetta : "
+//							+ THE_REPO->fileGazzetta);
+//			LOG(
+//					DEBUG,
+//					"In void singletonQtLogger::onlineClicked() --> fileFormazioni : "
+//							+ THE_REPO->fileFormazioni);
 
 			emit(this->onOffClickedFinished());
 
@@ -232,8 +231,7 @@ void singletonQtLogger::onlineClicked() {
 	}
 }
 void singletonQtLogger::offlineClicked() {
-	LOG(DEBUG,
-			"In singletonQtLogger::offlineClicked() --> Network will not be accessed.");
+	LOG(DEBUG, "Modalita' offline<br>");
 
 	NoNetFileDialog * noNetFileDialog = new NoNetFileDialog(THE_LOGGER);
 	noNetFileDialog->exec();
@@ -242,21 +240,19 @@ void singletonQtLogger::offlineClicked() {
 		THE_REPO->fileFormazioni = noNetFileDialog->getFileNameSquadre();
 		THE_REPO->fileGazzetta = noNetFileDialog->getFileNameGazzetta();
 
+		LOG(DEBUG,
+				QObject::tr("File gazzetta : %1").arg(THE_REPO->fileGazzetta));
 		LOG(
 				DEBUG,
-				"In void singletonQtLogger::offlineClicked() --> fileGazzetta : "
-						+ THE_REPO->fileGazzetta);
-		LOG(
-				DEBUG,
-				"In void singletonQtLogger::offlineClicked() --> fileFormazioni : "
-						+ THE_REPO->fileFormazioni);
+				QObject::tr("File formazioni : %1").arg(
+						THE_REPO->fileFormazioni));
 
 		emit(this->onOffClickedFinished());
 
 	} else {
-		LOG(
-				DEBUG,
-				"In void singletonQtLogger::offlineClicked() --> noNetFileDialog has been aborted.");
+//		LOG(
+//				DEBUG,
+//				"In void singletonQtLogger::offlineClicked() --> noNetFileDialog has been aborted.");
 		return;
 	}
 }
@@ -267,7 +263,7 @@ QString singletonQtLogger::getVersion(void) {
 	return this->version;
 }
 void singletonQtLogger::goOn() {
-	LOG(DEBUG, "In singletonQtLogger::goOn().");
+//	LOG(DEBUG, "In singletonQtLogger::goOn().");
 
 	// --> lettura file Gazzetta e Formazioni
 	GazzettaFileReader * gazzettaFileReader = new GazzettaFileReader(
@@ -286,11 +282,11 @@ void singletonQtLogger::goOn() {
 			THE_VIEWER->exec();
 
 			if (THE_VIEWER->getResult() == 1) {
-				LOG(DEBUG,
-						"In singletonQtLogger::goOn() --> THE_VIEWER returned 1.");
+//				LOG(DEBUG,
+//						"In singletonQtLogger::goOn() --> THE_VIEWER returned 1.");
 			} else {
-				LOG(DEBUG,
-						"In singletonQtLogger::goOn() --> THE_VIEWER returned 0.");
+//				LOG(DEBUG,
+//						"In singletonQtLogger::goOn() --> THE_VIEWER returned 0.");
 				break;
 			}
 

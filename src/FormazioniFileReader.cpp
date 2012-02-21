@@ -21,7 +21,7 @@ void FormazioniFileReader::setPlayers(
 	this->allThePlayers = _allThePlayers;
 }
 unsigned int FormazioniFileReader::execute() {
-	LOG(DEBUG, "In FormazioniFileReader::execute().");
+//	LOG(DEBUG, "In FormazioniFileReader::execute().");
 
 	std::ifstream fSqua(this->fileFormazioni.toStdString().c_str());
 	if (!fSqua) {
@@ -32,10 +32,10 @@ unsigned int FormazioniFileReader::execute() {
 						+ " non esiste o non è leggibile!");
 		return FORMFILEREAD_NO_FORM_FILE;
 	} else {
-		LOG(
-				DEBUG,
-				"In FormazioniFileReader::execute() --> file formazioni  : "
-						+ this->fileFormazioni);
+//		LOG(
+//				DEBUG,
+//				"In FormazioniFileReader::execute() --> file formazioni  : "
+//						+ this->fileFormazioni);
 	}
 
 	std::string line;
