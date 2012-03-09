@@ -24,7 +24,7 @@ public:
 	void removeNotAllowedChars(std::string & str);
 	std::string onlySurname(std::string str);
 	std::string onlyCapitalLetters(std::string str);
-	std::string centerString(std::string str, size_t i);
+	std::string centerString(std::string str, unsigned int i);
 	std::string leftString(std::string str, size_t i);
 	QString leftQString(QString str, size_t i);
 	std::string rightString(std::string str, size_t i);

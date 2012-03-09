@@ -12,6 +12,7 @@
 #include <QtCore/QDir>
 #include <QtCore/QTextStream>
 #include <QObject>
+#include <QtCore/QDebug>
 
 IniFileManager* IniFileManager::Inst() {
 	if (pInstance == NULL) {
@@ -23,20 +24,37 @@ IniFileManager* IniFileManager::Inst() {
 IniFileManager* IniFileManager::pInstance = NULL;
 
 IniFileManager::IniFileManager() {
-	//LOG(DEBUG, "In IniFileManager() constructor.");
-	char * UserProfile = getenv("USERPROFILE");
+
+	qDebug() << "In IniFileManager::IniFileManager()";
+
+#ifdef WIN32
+	QString UserProfile = QString::fromAscii(getenv("USERPROFILE"));
+	//qDebug() << UserProfile;
+#else if LINUX
+	QString UserProfile = "/home/" + QString::fromAscii(getenv("USERNAME"));
+	//qDebug() << UserProfile;
+#endif
+
 	QDir dir(UserProfile);
 	dir.mkdir("FantaCalcGui");
-	this->workDir = QString::fromAscii(UserProfile) + "\\FantaCalcGui\\";
+
+	this->workDir = UserProfile + "/FantaCalcGui/";
+
+#ifdef WIN32
+	WIN32_SLASHES(this->workDir);
+#endif
+
 	this->iniFileName = workDir + "FantaCalcGui.ini";
+
+	qDebug() << this->workDir;
+
 	this->readIniFile();
 }
 IniFileManager::~IniFileManager() {
 }
 void IniFileManager::setWorkDir(QString dir) {
 	this->workDir = dir;
-	LOG(
-			DEBUG,
+	LOG(DEBUG,
 			"In IniFileManager::setWorkDir(QString dir) --> workDir set to "
 					+ this->workDir);
 }
@@ -46,8 +64,7 @@ QString IniFileManager::getWorkDir() {
 void IniFileManager::writeIniFile() {
 	QFile * iniFile = new QFile(this->iniFileName);
 	if (iniFile->exists()) {
-		LOG(
-				DEBUG,
+		LOG(DEBUG,
 				"In IniFileManager::writeIniFile() --> " + this->iniFileName
 						+ " exists.");
 		iniFile->open(QIODevice::WriteOnly);
@@ -81,8 +98,7 @@ void IniFileManager::writeIniFile() {
 
 		iniFile->close();
 	} else {
-		LOG(
-				DEBUG,
+		LOG(DEBUG,
 				"In IniFileManager::writeIniFile() --> " + this->iniFileName
 						+ " does not exists.");
 		QString path = this->workDir;
@@ -156,7 +172,7 @@ void IniFileManager::readIniFile() {
 		iniFile->readLine(buf, sizeof(buf)); // [File Formazioni Url]
 		iniFile->readLine(buf, sizeof(buf));
 		/*
-		 *  se buf è vuoto lascia il valore di default
+		 *  se buf Ã¨ vuoto lascia il valore di default
 		 *  impostato nel costruttore di THE_REPO
 		 */
 		if (!QString::fromAscii(buf).trimmed().isEmpty()) {
@@ -166,7 +182,7 @@ void IniFileManager::readIniFile() {
 		iniFile->readLine(buf, sizeof(buf)); // [File Gazzetta Url]
 		iniFile->readLine(buf, sizeof(buf));
 		/*
-		 *  se buf è vuoto lascia il valore di default
+		 *  se buf Ã¨ vuoto lascia il valore di default
 		 *  impostato nel costruttore di THE_REPO
 		 */
 		if (!QString::fromAscii(buf).trimmed().isEmpty()) {
@@ -182,8 +198,7 @@ void IniFileManager::readIniFile() {
 
 		iniFile->close();
 	} else {
-		LOG(
-				INFO,
+		LOG(INFO,
 				QObject::tr(
 						"%1 non esiste<br>Inserire le informazioni di configurazione").arg(
 						this->iniFileName));
@@ -219,7 +234,7 @@ QString IniFileManager::showIniFile() {
 		iniFile->open(QIODevice::ReadOnly);
 		QTextStream in(iniFile);
 		while (!in.atEnd()) {
-			content += in.readLine(0) + "<br />";//reads a line of text file
+			content += in.readLine(0) + "<br />"; //reads a line of text file
 		}
 		iniFile->close();
 	}

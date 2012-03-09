@@ -11,13 +11,21 @@
 #include <QtCore/QTime>
 #include "toString.h"
 
-#ifndef UPDATE_LOG_INFO
-#define UPDATE_LOG_INFO(msg) pLogger->ui.plainTextEdit->appendHtml(" [&nbsp&nbspINFO] "+QTime::currentTime().toString("hh:mm:ss.zzz")+" : "+msg)
-#endif /* UPDATE_LOG_INFO */
+#ifndef ERROR_STYLE
+#define ERROR_STYLE(msg) "<span style='color:#FF0000;'> ERROR : msg</span>"
+#endif /* ERROR_STYLE */
 
-#ifndef UPDATE_LOG_FATAL
-#define UPDATE_LOG_FATAL(msg) pLogger->ui.plainTextEdit->appendHtml("<span style='color:#FF0000'>[&nbspFATAL]</span> "+QTime::currentTime().toString("hh:mm:ss.zzz")+" : "+msg)
-#endif /* UPDATE_LOG_FATAL */
+#ifndef UPDATE_STYLE
+#define UPDATE_STYLE(msg) "<span style='color:#00CC00; font-weight:bold'> UPDATE : msg</span>"
+#endif /* UPDATE_STYLE */
+
+#ifndef WARNING_STYLE
+#define WARNING_STYLE(msg) "<span style='color:#FF8800;'> WARNING : msg</span>"
+#endif /* WARNING_STYLE */
+
+#ifndef FATAL_STYLE
+#define FATAL_STYLE(msg) "<span style='color:#FF0000; font-weight:bold'> FATAL ERROR : msg</span>"
+#endif /* FATAL_STYLE */
 
 #ifndef HOMEAWAY_BOX_IS_CHECKED
 #define HOMEAWAY_BOX_IS_CHECKED		0
@@ -126,5 +134,9 @@
 #define FORMFILEVIEWER_CANCEL			0
 #define FORMFILEVIEWER_OK				1
 #endif /* FORMFILEVIEWER_RETURN_CODE */
+
+#ifndef WIN32_SLASHES(QString)
+#define	WIN32_SLASHES(QString)	QString.replace("/", "\\");
+#endif
 
 #endif /* DEFINES_H_ */

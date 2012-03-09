@@ -1,18 +1,18 @@
 #include "ChooseFileFromAListDialog.h"
 
-#include <QRadioButton>
-#include <QPushButton>
-#include <QGroupBox>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QLabel>
-#include <QScrollArea>
-#include <QMainWindow>
-#include <QtCore/QTime>
-#include <QTabWidget>
+#include <QtGui/QRadioButton>
+#include <QtGui/QPushButton>
+#include <QtGui/QGroupBox>
+#include <QtGui/QVBoxLayout>
+#include <QtGui/QHBoxLayout>
+#include <QtGui/QLabel>
+#include <QtGui/QScrollArea>
+#include <QtGui/QMainWindow>
+#include <QtGui/QTabWidget>
+#include <QtGui/QPalette>
 #include <QtCore/QRect>
-#include <QPalette>
 #include <QtCore/QString>
+#include <QtCore/QTime>
 
 #include <cstdio>
 #include <cstdlib>
@@ -516,13 +516,13 @@ bool ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 			LOG(
 					FATAL,
 					"In void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file : "
-							+ fHome.fileName() + " non è apribile.");
+							+ fHome.fileName() + " non ï¿½ apribile.");
 
 		else if (!fAway.isReadable())
 			LOG(
 					FATAL,
 					"In void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file : "
-							+ fHome.fileName() + " non è apribile.");
+							+ fHome.fileName() + " non ï¿½ apribile.");
 
 		QFileInfo FIfHome(fHome);
 		QFileInfo FIfAway(fAway);
@@ -544,7 +544,7 @@ bool ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 			LOG(
 					FATAL,
 					"In : void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file "
-							+ fileOut + " non è apribile in scrittura.");
+							+ fileOut + " non ï¿½ apribile in scrittura.");
 			this->close();
 			return EXIT_FAILURE;
 		}

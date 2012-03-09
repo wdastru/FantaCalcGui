@@ -22,10 +22,9 @@ int main(int argc, char *argv[]) {
 	THE_LOGGER->setVersion(a.applicationVersion());
 	THE_LOGGER->setTitle(a.applicationName());
 
-	LOG(
-			INFO,
-			QObject::tr("<br>Benvenuti in %1 v%2<br>").arg(THE_LOGGER->getTitle()).arg(
-					THE_LOGGER->getVersion()));
+	LOG(INFO,
+			QObject::tr("<br>Benvenuti in %1 v%2<br>").arg(
+					THE_LOGGER->getTitle()).arg(THE_LOGGER->getVersion()));
 
 	THE_LOGGER->checkForUpdates();
 
