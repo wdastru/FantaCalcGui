@@ -58,6 +58,7 @@ private:
 	QFont fontVariableWidthSmall;
 	QFont fontVariableWidthBig;
 	QFont fontFixedWidth;
+	QString UserProfile;
 
 	bool debugStatus;
 };

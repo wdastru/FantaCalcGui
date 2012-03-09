@@ -27,24 +27,19 @@ IniFileManager::IniFileManager() {
 
 	qDebug() << "In IniFileManager::IniFileManager()";
 
-#ifdef WIN32
-	QString UserProfile = QString::fromAscii(getenv("USERPROFILE"));
-	//qDebug() << UserProfile;
-#else if LINUX
-	QString UserProfile = "/home/" + QString::fromAscii(getenv("USERNAME"));
-	//qDebug() << UserProfile;
-#endif
-
-	QDir dir(UserProfile);
+	QDir dir(THE_REPO->UserProfile);
 	dir.mkdir("FantaCalcGui");
 
-	this->workDir = UserProfile + "/FantaCalcGui/";
+	//this->workDir = THE_REPO->UserProfile + "/FantaCalcGui/";
+	this->workDir = dir.path();
+
+	qDebug() << this->workDir;
 
 #ifdef WIN32
 	WIN32_SLASHES(this->workDir);
 #endif
 
-	this->iniFileName = workDir + "FantaCalcGui.ini";
+	this->iniFileName = this->workDir + "FantaCalcGui.ini";
 
 	qDebug() << this->workDir;
 

@@ -6,6 +6,7 @@
  */
 
 #include "Repository.h"
+#include "defines.h"
 
 #include <stdlib.h>
 #include <QFile>
@@ -14,24 +15,33 @@ Repository::Repository() {
 	/*
 	 * DEFAULTS
 	 */
-	this->formazioniUrl
-			= "http://www.cim.unito.it/private/fantacalcio/777/formazioni/";
-	this->gazzettaUrl
-			= "http://www.cim.unito.it/private/fantacalcio/777/filesGazzetta/";
+	this->formazioniUrl =
+			"http://www.cim.unito.it/private/fantacalcio/777/formazioni/";
+	this->gazzettaUrl =
+			"http://www.cim.unito.it/private/fantacalcio/777/filesGazzetta/";
 	this->debugStatus = FALSE; // temporaneo prima che venga letto l'ini file.
 
-	char * UserProfile = getenv("USERPROFILE");
+#ifdef WIN32
+	this->UserProfile = QString::fromAscii(getenv("USERPROFILE"));
+	//qDebug() << UserProfile;
+#else if LINUX
+	this->UserProfile = "/home/" + QString::fromAscii(getenv("USERNAME"));
+	//qDebug() << UserProfile;
+#endif
 
-	this->formazioniPath = QString::fromLocal8Bit(UserProfile)
-			+ "\\FantaCalcGui\\formazioni";
-	this->gazzettaPath = QString::fromLocal8Bit(UserProfile)
-			+ "\\FantaCalcGui\\gazzetta";
-	this->risultatiPath = QString::fromLocal8Bit(UserProfile)
-			+ "\\FantaCalcGui\\risultati";
-	this->downloadPath = QString::fromLocal8Bit(UserProfile)
-			+ "\\FantaCalcGui\\download";
-	this->listePath = QString::fromLocal8Bit(UserProfile)
-			+ "\\FantaCalcGui\\liste";
+	this->formazioniPath = this->UserProfile + "/FantaCalcGui/formazioni";
+	this->gazzettaPath = this->UserProfile + "/FantaCalcGui/gazzetta";
+	this->risultatiPath = this->UserProfile + "/FantaCalcGui/risultati";
+	this->downloadPath = this->UserProfile + "/FantaCalcGui/download";
+	this->listePath = this->UserProfile + "/FantaCalcGui/liste";
+
+#ifdef WIN32
+	WIN32_SLASHES(this->formazioniPath);
+	WIN32_SLASHES(this->gazzettaPath);
+	WIN32_SLASHES(this->risultatiPath);
+	WIN32_SLASHES(this->downloadPath);
+	WIN32_SLASHES(this->listePath);
+#endif
 
 	this->fontVariableWidthSmall.setFamily(QString::fromUtf8("Candara"));
 	this->fontVariableWidthSmall.setPointSize(10);
