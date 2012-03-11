@@ -12,19 +12,19 @@
 #include "toString.h"
 
 #ifndef ERROR_STYLE
-#define ERROR_STYLE(msg) "<span style='color:#FF0000;'> ERROR : msg</span>"
+#define ERROR_STYLE(msg) <span style='color:#FF0000;'> ERROR : msg</span>
 #endif /* ERROR_STYLE */
 
 #ifndef UPDATE_STYLE
-#define UPDATE_STYLE(msg) "<span style='color:#00CC00; font-weight:bold'> UPDATE : msg</span>"
+#define UPDATE_STYLE(msg) <span style='color:#00CC00; font-weight:bold'> UPDATE : msg</span>
 #endif /* UPDATE_STYLE */
 
 #ifndef WARNING_STYLE
-#define WARNING_STYLE(msg) "<span style='color:#FF8800;'> WARNING : msg</span>"
+#define WARNING_STYLE(msg) <span style='color:#FF8800;'> WARNING : msg</span>
 #endif /* WARNING_STYLE */
 
 #ifndef FATAL_STYLE
-#define FATAL_STYLE(msg) "<span style='color:#FF0000; font-weight:bold'> FATAL ERROR : msg</span>"
+#define FATAL_STYLE(msg) <span style='color:#FF0000; font-weight:bold'> FATAL ERROR : msg</span>
 #endif /* FATAL_STYLE */
 
 #ifndef HOMEAWAY_BOX_IS_CHECKED
