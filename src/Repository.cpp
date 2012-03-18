@@ -29,11 +29,11 @@ Repository::Repository() {
 	//qDebug() << UserProfile;
 #endif
 
-	this->formazioniPath = this->UserProfile + "/FantaCalcGui/formazioni";
-	this->gazzettaPath = this->UserProfile + "/FantaCalcGui/gazzetta";
-	this->risultatiPath = this->UserProfile + "/FantaCalcGui/risultati";
-	this->downloadPath = this->UserProfile + "/FantaCalcGui/download";
-	this->listePath = this->UserProfile + "/FantaCalcGui/liste";
+	this->formazioniPath = this->UserProfile + "/FantaCalcGui/formazioni/";
+	this->gazzettaPath = this->UserProfile + "/FantaCalcGui/gazzetta/";
+	this->risultatiPath = this->UserProfile + "/FantaCalcGui/risultati/";
+	this->downloadPath = this->UserProfile + "/FantaCalcGui/download/";
+	this->listePath = this->UserProfile + "/FantaCalcGui/liste/";
 
 #ifdef WIN32
 	WIN32_SLASHES(this->formazioniPath);

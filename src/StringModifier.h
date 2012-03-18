@@ -34,6 +34,7 @@ public:
 	void toUpperCase(std::string &);
 	void toLowerCase(std::string &);
 	std::string msk(std::string riga, std::string delim, size_t idx);
+	void fixSlashes(QString & qString);
 
 private:
 	static StringModifier * pInstance;

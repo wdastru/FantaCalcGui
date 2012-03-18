@@ -47,33 +47,33 @@ void singletonQtLogger::Logging(QString type, QString message) {
 	if (type == "INFO") {
 		this->ui.plainTextEdit->appendHtml(" " + message);
 	} else if (type == "ERROR") {
+		//this->ui.plainTextEdit->appendHtml(ERROR_STYLE(message));
+		this->ui.plainTextEdit->appendHtml("<span style='color:#FF0000;'> ERROR : " + message + "</span>");
+	} else if (type == "DEBUG") {
+		if (THE_REPO->debugStatus) {
+			this->ui.plainTextEdit->appendHtml(" " + message);
+		}
+	} else if (type == "FATAL") {
 		this->ui.plainTextEdit->appendHtml(
-			ERROR_STYLE(message));
-} else if (type == "DEBUG") {
-	if (THE_REPO->debugStatus) {
-		this->ui.plainTextEdit->appendHtml(" " + message);
-	}
-} else if (type == "FATAL") {
-	this->ui.plainTextEdit->appendHtml(
-			"<span style='color:#FF0000; font-weight:bold'> FATAL ERROR : "
-			+ message + "</span>");
-} else if (type == "WARN") {
-	this->ui.plainTextEdit->appendHtml(
-			"<span style='color:#FF8800;'> WARNING : " + message
-			+ "</span>");
-} else if (type == "FILE") {
-	;
-} else if (type == "UPDATE") {
-	this->ui.plainTextEdit->appendHtml(
-			"<span style='color:#00CC00; font-weight:bold'> UPDATE : "
-			+ message + "</span>");
-} else
-this->ui.plainTextEdit->appendHtml(
-		" !!!! : Type " + type + " not recognized.");
+				"<span style='color:#FF0000; font-weight:bold'> FATAL ERROR : "
+						+ message + "</span>");
+	} else if (type == "WARN") {
+		this->ui.plainTextEdit->appendHtml(
+				"<span style='color:#FF8800;'> WARNING : " + message
+						+ "</span>");
+	} else if (type == "FILE") {
+		;
+	} else if (type == "UPDATE") {
+		this->ui.plainTextEdit->appendHtml(
+				"<span style='color:#00CC00; font-weight:bold'> UPDATE : "
+						+ message + "</span>");
+	} else
+		this->ui.plainTextEdit->appendHtml(
+				" !!!! : Type " + type + " not recognized.");
 
-this->fileContent += (message + "<br/>");
+	this->fileContent += (message + "<br/>");
 
-return;
+	return;
 }
 void singletonQtLogger::setTitle(QString _title) {
 	this->title = _title;
@@ -87,10 +87,12 @@ void singletonQtLogger::saveLogFile() {
 	QFile * file = new QFile;
 
 	if (this->ui.outputFileNameLineEdit->text().isEmpty()) {
-		this->setLogFileName(THE_MANAGER->getWorkDir() + "log.txt");
+		QString logFileName = THE_MANAGER->getWorkDir() + "\\log.txt";
+		STR_MOD->fixSlashes(logFileName);
+		this->setLogFileName(logFileName);
 		file->setFileName(this->logFileName);
 		this->Inst()->Logging("DEBUG",
-				"In singletonQtLogger::saveLogFile() --> logFileName is empty. Continue with "
+				"In singletonQtLogger::saveLogFile() --> logFileName is empty.<br>Saving to "
 						+ this->logFileName);
 	} else {
 		file->setFileName(
@@ -578,7 +580,7 @@ bool singletonQtLogger::checkForUpdates() {
 
 	} else { // download failed
 		LOG(WARN,
-				"Non � stato possibile scaricare le informazioni relative agli aggiornamenti disponibili.");
+				"Non e' stato possibile scaricare le informazioni relative agli aggiornamenti disponibili.");
 		return false;
 	}
 

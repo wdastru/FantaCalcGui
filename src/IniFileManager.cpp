@@ -8,6 +8,7 @@
 #include "IniFileManager.h"
 #include "IniFilePopulator.h"
 #include "Repository.h"
+#include "StringModifier.h"
 
 #include <QtCore/QDir>
 #include <QtCore/QTextStream>
@@ -28,20 +29,17 @@ IniFileManager::IniFileManager() {
 	qDebug() << "In IniFileManager::IniFileManager()";
 
 	QDir dir(THE_REPO->UserProfile);
-	dir.mkdir("FantaCalcGui");
 
-	//this->workDir = THE_REPO->UserProfile + "/FantaCalcGui/";
+	if (!dir.cd("FantaCalcGui")) {
+		dir.mkdir("FantaCalcGui");
+		dir.cd("FantaCalcGui");
+	}
+
 	this->workDir = dir.path();
+	this->iniFileName = dir.absoluteFilePath("FantaCalcGui.ini");
 
-	qDebug() << this->workDir;
-
-#ifdef WIN32
-	WIN32_SLASHES(this->workDir);
-#endif
-
-	this->iniFileName = this->workDir + "FantaCalcGui.ini";
-
-	qDebug() << this->workDir;
+	STR_MOD->fixSlashes(this->workDir);
+	STR_MOD->fixSlashes(this->iniFileName);
 
 	this->readIniFile();
 }
@@ -138,6 +136,7 @@ void IniFileManager::writeIniFile() {
 	}
 }
 void IniFileManager::readIniFile() {
+
 	QFile *iniFile = new QFile(this->iniFileName);
 	if (iniFile->exists()) {
 		LOG(DEBUG, QObject::tr("%1 esiste").arg(this->iniFileName));
@@ -191,6 +190,8 @@ void IniFileManager::readIniFile() {
 		else
 			THE_REPO->debugStatus = FALSE;
 
+		qDebug() << "THE_REPO->formazioniPath = " << THE_REPO->formazioniPath;
+
 		iniFile->close();
 	} else {
 		LOG(INFO,
@@ -198,6 +199,7 @@ void IniFileManager::readIniFile() {
 						"%1 non esiste<br>Inserire le informazioni di configurazione").arg(
 						this->iniFileName));
 
+		LOG(DEBUG, "In void IniFileManager::readIniFile() : workDir = " + this->workDir);
 		THE_CONFIGURATOR->setStartDir(this->workDir);
 
 		/*

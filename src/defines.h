@@ -135,8 +135,4 @@
 #define FORMFILEVIEWER_OK				1
 #endif /* FORMFILEVIEWER_RETURN_CODE */
 
-#ifndef WIN32_SLASHES(QString)
-#define	WIN32_SLASHES(QString)	QString.replace("/", "\\");
-#endif
-
 #endif /* DEFINES_H_ */

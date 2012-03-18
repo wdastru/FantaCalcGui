@@ -1,8 +1,10 @@
 #include <QObject>
+#include <QtCore/QDebug>
 
 #include "Repository.h"
 #include "IniFileManager.h"
 #include "IniFilePopulator.h"
+#include "StringModifier.h"
 #include "defines.h"
 
 IniFilePopulator* IniFilePopulator::Inst() {
@@ -13,7 +15,7 @@ IniFilePopulator* IniFilePopulator::Inst() {
 }
 IniFilePopulator* IniFilePopulator::pInstance = NULL;
 IniFilePopulator::IniFilePopulator(QWidget *parent) :
-	QDialog(parent) {
+		QDialog(parent) {
 	//LOG(DEBUG, "In IniFilePopulator() constructor.");
 	this->startDir = "";
 	ui.setupUi(this);
@@ -49,7 +51,7 @@ bool IniFilePopulator::createDirs() {
 
 	QDir * dir = new QDir;
 
-	QVector<QString> * paths = new QVector<QString> ();
+	QVector<QString> * paths = new QVector<QString>();
 	paths->push_back(THE_REPO->formazioniPath);
 	paths->push_back(THE_REPO->risultatiPath);
 	paths->push_back(THE_REPO->gazzettaPath);
@@ -62,10 +64,9 @@ bool IniFilePopulator::createDirs() {
 				LOG(DEBUG, QObject::tr("Creata cartella %1").arg(paths->at(i)));
 				retVal = retVal && true;
 			} else {
-				LOG(
-						ERROR,
+				LOG(ERROR,
 						QObject::tr(
-								"Non è stato possibile creare la cartella %1").arg(
+								"Non e' stato possibile creare la cartella %1").arg(
 								paths->at(i)));
 			}
 		}
@@ -74,11 +75,11 @@ bool IniFilePopulator::createDirs() {
 	return retVal;
 }
 void IniFilePopulator::chooseFormazioniPath() {
-	QString directory = this->getDir("Formazioni Path", this->startDir);
+
+	QString directory = this->getDir("Formazioni Path", THE_REPO->formazioniPath);
 	if (!directory.isEmpty()) {
 
-		LOG(
-				DEBUG,
+		LOG(DEBUG,
 				QObject::tr("Percorso di salvataggio file formazioni : %1").arg(
 						directory));
 
@@ -90,11 +91,10 @@ void IniFilePopulator::chooseFormazioniPath() {
 	}
 }
 void IniFilePopulator::chooseGazzettaPath() {
-	QString directory = this->getDir("Gazzetta Path", this->startDir);
+	QString directory = this->getDir("Gazzetta Path", THE_REPO->gazzettaPath);
 	if (!directory.isEmpty()) {
 
-		LOG(
-				DEBUG,
+		LOG(DEBUG,
 				QObject::tr("Percorso di salvataggio file gazzetta : %1").arg(
 						directory));
 
@@ -106,11 +106,10 @@ void IniFilePopulator::chooseGazzettaPath() {
 	}
 }
 void IniFilePopulator::chooseDownloadPath() {
-	QString directory = this->getDir("Download Path", this->startDir);
+	QString directory = this->getDir("Download Path", THE_REPO->downloadPath);
 	if (!directory.isEmpty()) {
 
-		LOG(
-				DEBUG,
+		LOG(DEBUG,
 				QObject::tr("Percorso di salvataggio downloads : %1").arg(
 						directory));
 
@@ -122,11 +121,10 @@ void IniFilePopulator::chooseDownloadPath() {
 	}
 }
 void IniFilePopulator::chooseRisultatiPath() {
-	QString directory = this->getDir("Risultati Path", this->startDir);
+	QString directory = this->getDir("Risultati Path", THE_REPO->risultatiPath);
 	if (!directory.isEmpty()) {
 
-		LOG(
-				DEBUG,
+		LOG(DEBUG,
 				QObject::tr("Percorso di salvataggio risultati : %1").arg(
 						directory));
 
@@ -138,11 +136,10 @@ void IniFilePopulator::chooseRisultatiPath() {
 	}
 }
 void IniFilePopulator::chooseListePath() {
-	QString directory = this->getDir("Liste Path", this->startDir);
+	QString directory = this->getDir("Liste Path", THE_REPO->listePath);
 	if (!directory.isEmpty()) {
 
-		LOG(
-				DEBUG,
+		LOG(DEBUG,
 				QObject::tr("Percorso di salvataggio file liste : %1").arg(
 						directory));
 
@@ -164,7 +161,7 @@ QString IniFilePopulator::getDir(QString caption, QString startDir) {
 	QString dir = QFileDialog::getExistingDirectory(this, caption, startDir,
 			options);
 
-	//	LOG(DEBUG, "In IniFilePopulator::getDir() --> returning " + dir);
+	LOG(DEBUG, "In IniFilePopulator::getDir() --> returning " + dir);
 
 	return dir;
 }
@@ -268,17 +265,18 @@ void IniFilePopulator::setDebugStatus(bool status) {
 void IniFilePopulator::toggleDebugStatus() {
 	if (this->ui.trueCheckBox->isChecked()) {
 		THE_REPO->debugStatus = TRUE;
-		THE_LOGGER->ui.plainTextEdit->setPlainText(THE_LOGGER->fileContent.replace("&nbsp;", " "));
+		THE_LOGGER->ui.plainTextEdit->setPlainText(
+				THE_LOGGER->fileContent.replace("&nbsp;", " "));
 		LOG(DEBUG,
 				"void IniFilePopulator::toggleDebugStatus() --> TRUE is checked.");
 	} else if (this->ui.falseCheckBox->isChecked()) {
-		THE_LOGGER->ui.plainTextEdit->setPlainText(THE_LOGGER->fileContent.replace("&nbsp;", " "));
+		THE_LOGGER->ui.plainTextEdit->setPlainText(
+				THE_LOGGER->fileContent.replace("&nbsp;", " "));
 		LOG(DEBUG,
 				"void IniFilePopulator::toggleDebugStatus() --> FALSE is checked.");
 		THE_REPO->debugStatus = FALSE;
 	} else {
-		LOG(
-				ERROR,
+		LOG(ERROR,
 				"void IniFilePopulator::toggleDebugStatus() --> status is not defined: set to FALSE.");
 		THE_REPO->debugStatus = FALSE;
 	}
