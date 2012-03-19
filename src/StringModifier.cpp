@@ -221,7 +221,8 @@ std::string StringModifier::msk(std::string riga, std::string delim,
 void StringModifier::fixSlashes(QString & qString) {
 #ifdef WIN32
 	qString.replace("/", "\\");
-#else if LINUX
+#endif
+#ifdef LINUX
 	qString.replace("\\", "/");
 #endif
 }

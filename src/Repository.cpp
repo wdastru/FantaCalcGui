@@ -7,6 +7,7 @@
 
 #include "Repository.h"
 #include "defines.h"
+#include "StringModifier.h"
 
 #include <stdlib.h>
 #include <QFile>
@@ -24,7 +25,8 @@ Repository::Repository() {
 #ifdef WIN32
 	this->UserProfile = QString::fromAscii(getenv("USERPROFILE"));
 	//qDebug() << UserProfile;
-#else if LINUX
+#endif
+#ifdef LINUX
 	this->UserProfile = "/home/" + QString::fromAscii(getenv("USERNAME"));
 	//qDebug() << UserProfile;
 #endif
@@ -35,13 +37,11 @@ Repository::Repository() {
 	this->downloadPath = this->UserProfile + "/FantaCalcGui/download/";
 	this->listePath = this->UserProfile + "/FantaCalcGui/liste/";
 
-#ifdef WIN32
-	WIN32_SLASHES(this->formazioniPath);
-	WIN32_SLASHES(this->gazzettaPath);
-	WIN32_SLASHES(this->risultatiPath);
-	WIN32_SLASHES(this->downloadPath);
-	WIN32_SLASHES(this->listePath);
-#endif
+	STR_MOD->fixSlashes(this->formazioniPath);
+	STR_MOD->fixSlashes(this->gazzettaPath);
+	STR_MOD->fixSlashes(this->risultatiPath);
+	STR_MOD->fixSlashes(this->downloadPath);
+	STR_MOD->fixSlashes(this->listePath);
 
 	this->fontVariableWidthSmall.setFamily(QString::fromUtf8("Candara"));
 	this->fontVariableWidthSmall.setPointSize(10);
