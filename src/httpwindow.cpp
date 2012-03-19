@@ -195,10 +195,9 @@ void HttpWindow::httpFinished() {
 		this->file->remove();
 
 		LOG(
-				DEBUG,
-				tr(
-						"In HttpWindow::httpFinished()--> error downloading %1 : %2.").arg(
-						file->fileName()).arg(reply->errorString()));
+				ERROR,
+				tr("Error downloading %1 : %2.").arg(file->fileName()).arg(
+						reply->errorString()));
 
 		this->downloadSuccess = false;
 
@@ -232,9 +231,9 @@ void HttpWindow::httpFinished() {
 	} else {
 		LOG(
 				DEBUG,
-				tr(
-						"In HttpWindow::httpFinished()--> downloaded %1 to current directory.").arg(
-						QFileInfo(this->file->fileName()).fileName()));
+				tr("Downloaded %1 to %2").arg(
+						QFileInfo(this->file->fileName()).fileName()).arg(
+						QFileInfo(this->file->fileName()).path()));
 
 		this->downloadSuccess = true;
 	}

@@ -4,7 +4,7 @@
 #include <QtGui/QDialog>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
-#include <QUrl>
+#include <QtCore/QUrl>
 
 class QLabel;
 class QPushButton;

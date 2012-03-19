@@ -418,7 +418,7 @@ void Fanta::checkGiocatoSenzaVoto() {
 
 			if (this->Team[k].at(j).VotoGazzetta == -1) { // se S.V.
 
-				if (this->Team[k].at(j).Ruolo == 0) { // se è un portiere
+				if (this->Team[k].at(j).Ruolo == 0) { // se ï¿½ un portiere
 
 					LOG(DEBUG,
 							"In Fanta::checkGiocatoSenzaVoto() --> portiere.");
@@ -444,7 +444,7 @@ void Fanta::checkGiocatoSenzaVoto() {
 											my::toString<float>(
 													this->Team[k].at(j).FantaVotoGazzetta)));
 
-				} else if (this->Team[k].at(j).Ruolo > 0) { //se non è un portiere
+				} else if (this->Team[k].at(j).Ruolo > 0) { //se non ï¿½ un portiere
 
 					LOG(DEBUG,
 							"In Fanta::checkGiocatoSenzaVoto() --> non portiere.");
@@ -460,7 +460,7 @@ void Fanta::checkGiocatoSenzaVoto() {
 
 						LOG(
 								DEBUG,
-								"In Fanta::checkGiocatoSenzaVoto() --> più di 25 minuti ? "
+								"In Fanta::checkGiocatoSenzaVoto() --> piï¿½ di 25 minuti ? "
 										+ QString::fromStdString(
 												this->Team[k].at(j).Nome) + " "
 										+ answer);
@@ -470,7 +470,7 @@ void Fanta::checkGiocatoSenzaVoto() {
 								"In Fanta::checkGiocatoSenzaVoto() --> exception caught!");
 					}
 
-					if (answer == "Yes") { // giocato più di 25'
+					if (answer == "Yes") { // giocato piï¿½ di 25'
 
 						/* TODO
 						 * controllare il regolamento
@@ -514,7 +514,7 @@ void Fanta::checkGiocatoSenzaVoto() {
 												this->Team[k].at(j).Nome)
 										+ " (" + QString::fromStdString(
 										this->Team[k].at(j).Squadra)
-										+ ") non ha giocato 25' : verrà effettuata una sostituzione.");
+										+ ") non ha giocato 25' : verrï¿½ effettuata una sostituzione.");
 
 					} else {
 						// answer is neither Yes or No !!!!!!
@@ -533,7 +533,7 @@ void Fanta::checkGiocatoSenzaVoto() {
 											this->Team[k].at(j).Nome) + " ("
 									+ QString::fromStdString(
 											this->Team[k].at(j).Squadra)
-									+ ") non ha giocato 25' : verrà effettuata una sostituzione.");
+									+ ") non ha giocato 25' : verrï¿½ effettuata una sostituzione.");
 				}
 
 				continue;
@@ -1604,7 +1604,7 @@ unsigned int Fanta::getGoalDecParTot(unsigned int k) const {
 
 	return GDPT;
 }
-unsigned int Fanta::getSubstitutions(size_t k) const {
+unsigned int Fanta::getSubstitutions(unsigned int k) const {
 	return Fanta::sostituzioni[k];
 }
 unsigned int Fanta::getAssistTot(unsigned int k) const {

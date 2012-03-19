@@ -8,9 +8,12 @@
 #include "IniFileManager.h"
 #include "IniFilePopulator.h"
 #include "Repository.h"
+#include "StringModifier.h"
 
 #include <QtCore/QDir>
 #include <QtCore/QTextStream>
+#include <QObject>
+#include <QtCore/QDebug>
 
 IniFileManager* IniFileManager::Inst() {
 	if (pInstance == NULL) {
@@ -22,19 +25,31 @@ IniFileManager* IniFileManager::Inst() {
 IniFileManager* IniFileManager::pInstance = NULL;
 
 IniFileManager::IniFileManager() {
-	LOG(DEBUG, "In IniFileManager() constructor.");
-	char * UserProfile = getenv("USERPROFILE");
-	QDir dir(UserProfile);
-	dir.mkdir("FantaCalcGui");
-	this->workDir = QString::fromAscii(UserProfile) + "\\FantaCalcGui\\";
-	this->iniFileName = workDir + "FantaCalcGui.ini";
+
+	qDebug() << "In IniFileManager::IniFileManager()";
+
+	QDir dir(THE_REPO->UserProfile);
+
+	if (!dir.cd("FantaCalcGui")) {
+		dir.mkdir("FantaCalcGui");
+		dir.cd("FantaCalcGui");
+	}
+
+	this->workDir = dir.path();
+	this->iniFileName = dir.absoluteFilePath("FantaCalcGui.ini");
+
+	STR_MOD->fixSlashes(this->workDir);
+	STR_MOD->fixSlashes(this->iniFileName);
+
 	this->readIniFile();
 }
 IniFileManager::~IniFileManager() {
 }
 void IniFileManager::setWorkDir(QString dir) {
 	this->workDir = dir;
-	LOG(DEBUG, "In IniFileManager::setWorkDir(QString dir) --> workDir set to " + this->workDir);
+	LOG(DEBUG,
+			"In IniFileManager::setWorkDir(QString dir) --> workDir set to "
+					+ this->workDir);
 }
 QString IniFileManager::getWorkDir() {
 	return this->workDir;
@@ -42,8 +57,7 @@ QString IniFileManager::getWorkDir() {
 void IniFileManager::writeIniFile() {
 	QFile * iniFile = new QFile(this->iniFileName);
 	if (iniFile->exists()) {
-		LOG(
-				DEBUG,
+		LOG(DEBUG,
 				"In IniFileManager::writeIniFile() --> " + this->iniFileName
 						+ " exists.");
 		iniFile->open(QIODevice::WriteOnly);
@@ -77,8 +91,7 @@ void IniFileManager::writeIniFile() {
 
 		iniFile->close();
 	} else {
-		LOG(
-				DEBUG,
+		LOG(DEBUG,
 				"In IniFileManager::writeIniFile() --> " + this->iniFileName
 						+ " does not exists.");
 		QString path = this->workDir;
@@ -123,12 +136,10 @@ void IniFileManager::writeIniFile() {
 	}
 }
 void IniFileManager::readIniFile() {
+
 	QFile *iniFile = new QFile(this->iniFileName);
 	if (iniFile->exists()) {
-		LOG(
-				DEBUG,
-				"In IniFileManager::readIniFile() --> " + this->iniFileName
-						+ " exists.");
+		LOG(DEBUG, QObject::tr("%1 esiste").arg(this->iniFileName));
 		iniFile->open(QIODevice::ReadOnly);
 		char buf[1024];
 
@@ -155,7 +166,7 @@ void IniFileManager::readIniFile() {
 		iniFile->readLine(buf, sizeof(buf)); // [File Formazioni Url]
 		iniFile->readLine(buf, sizeof(buf));
 		/*
-		 *  se buf è vuoto lascia il valore di default
+		 *  se buf Ã¨ vuoto lascia il valore di default
 		 *  impostato nel costruttore di THE_REPO
 		 */
 		if (!QString::fromAscii(buf).trimmed().isEmpty()) {
@@ -165,7 +176,7 @@ void IniFileManager::readIniFile() {
 		iniFile->readLine(buf, sizeof(buf)); // [File Gazzetta Url]
 		iniFile->readLine(buf, sizeof(buf));
 		/*
-		 *  se buf è vuoto lascia il valore di default
+		 *  se buf Ã¨ vuoto lascia il valore di default
 		 *  impostato nel costruttore di THE_REPO
 		 */
 		if (!QString::fromAscii(buf).trimmed().isEmpty()) {
@@ -179,25 +190,22 @@ void IniFileManager::readIniFile() {
 		else
 			THE_REPO->debugStatus = FALSE;
 
+		qDebug() << "THE_REPO->formazioniPath = " << THE_REPO->formazioniPath;
+
 		iniFile->close();
 	} else {
-		LOG(
-				INFO,
-				this->iniFileName
-						+ " non esiste. Inserire le informazioni richieste.");
+		LOG(INFO,
+				QObject::tr(
+						"%1 non esiste<br>Inserire le informazioni di configurazione").arg(
+						this->iniFileName));
 
-		LOG(
-				DEBUG,
-				"In IniFileManager::readIniFile() --> " + this->iniFileName
-						+ " does not exists.");
-
-		LOG(DEBUG, "In IniFileManager::readIniFile() --> " + this->workDir);
-
+		LOG(DEBUG, "In void IniFileManager::readIniFile() : workDir = " + this->workDir);
 		THE_CONFIGURATOR->setStartDir(this->workDir);
 
 		/*
 		 * utilizza i valori comunque presenti in Repository::Repository()
 		 */
+
 		THE_CONFIGURATOR->setFormazioniUrl(THE_REPO->formazioniUrl);
 		THE_CONFIGURATOR->setGazzettaUrl(THE_REPO->gazzettaUrl);
 		THE_CONFIGURATOR->setFormazioniPath(THE_REPO->formazioniPath);
@@ -223,7 +231,7 @@ QString IniFileManager::showIniFile() {
 		iniFile->open(QIODevice::ReadOnly);
 		QTextStream in(iniFile);
 		while (!in.atEnd()) {
-			content += in.readLine(0) + "<br />";//reads a line of text file
+			content += in.readLine(0) + "<br />"; //reads a line of text file
 		}
 		iniFile->close();
 	}
