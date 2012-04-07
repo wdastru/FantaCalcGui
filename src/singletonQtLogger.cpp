@@ -1,13 +1,13 @@
-#include <QString>
-#include <QTextStream>
-#include <QList>
-#include <QHash>
-#include <QDebug>
-#include <QMessageBox>
+#include <QtCore/QString>
+#include <QtCore/QTextStream>
+#include <QtCore/QList>
+#include <QtCore/QHash>
+#include <QtCore/QDebug>
+#include <QtGui/QMessageBox>
 #include <QtXml/QDomDocument>
-#include <QTime>
-#include <QFile>
-#include <QObject>
+#include <QtCore/QTime>
+#include <QtCore/QFile>
+#include <QtCore/QObject>
 
 #include "defines.h"
 #include "singletonQtLogger.h"
@@ -23,6 +23,7 @@
 #include "Fanta.h"
 
 #include <vector>
+#include <string>
 
 singletonQtLogger* singletonQtLogger::pInstance = NULL;
 singletonQtLogger* singletonQtLogger::Inst() {
@@ -47,33 +48,33 @@ void singletonQtLogger::Logging(QString type, QString message) {
 	if (type == "INFO") {
 		this->ui.plainTextEdit->appendHtml(" " + message);
 	} else if (type == "ERROR") {
-	this	->ui.plainTextEdit->appendHtml(
-			ERROR_STYLE(message));
-} else if (type == "DEBUG") {
-	if (THE_REPO->debugStatus) {
-		this->ui.plainTextEdit->appendHtml(" " + message);
-	}
-} else if (type == "FATAL") {
-	this->ui.plainTextEdit->appendHtml(
-			"<span style='color:#FF0000; font-weight:bold'> FATAL ERROR : "
-			+ message + "</span>");
-} else if (type == "WARN") {
-	this->ui.plainTextEdit->appendHtml(
-			"<span style='color:#FF8800;'> WARNING : " + message
-			+ "</span>");
-} else if (type == "FILE") {
-	;
-} else if (type == "UPDATE") {
-	this->ui.plainTextEdit->appendHtml(
-			"<span style='color:#00CC00; font-weight:bold'> UPDATE : "
-			+ message + "</span>");
-} else
-this->ui.plainTextEdit->appendHtml(
-		" !!!! : Type " + type + " not recognized.");
+		this->ui.plainTextEdit->appendHtml(
+				"<span style='color:#FF0000;'> ERROR : " + message + "</span>");
+	} else if (type == "DEBUG") {
+		if (THE_REPO->debugStatus) {
+			this->ui.plainTextEdit->appendHtml(" " + message);
+		}
+	} else if (type == "FATAL") {
+		this->ui.plainTextEdit->appendHtml(
+				"<span style='color:#FF0000; font-weight:bold'> FATAL ERROR : "
+						+ message + "</span>");
+	} else if (type == "WARN") {
+		this->ui.plainTextEdit->appendHtml(
+				"<span style='color:#FF8800;'> WARNING : " + message
+						+ "</span>");
+	} else if (type == "FILE") {
+		;
+	} else if (type == "UPDATE") {
+		this->ui.plainTextEdit->appendHtml(
+				"<span style='color:#00CC00; font-weight:bold'> UPDATE : "
+						+ message + "</span>");
+	} else
+		this->ui.plainTextEdit->appendHtml(
+				" !!!! : Type " + type + " not recognized.");
 
-this->fileContent += (message + "<br/>");
+	this->fileContent += (message + "<br/>");
 
-return;
+	return;
 }
 void singletonQtLogger::setTitle(QString _title) {
 	this->title = _title;
@@ -145,12 +146,8 @@ void singletonQtLogger::saveLogFile() {
 	fileContent.replace("&nbsp;", " ");
 	fileContent.replace("<span style='color:#FF0000;'> ERROR : ", "");
 	fileContent.replace(
-<<<<<<< HEAD
 			"<span style='color:#FF0000; font-weight:bold'> FATAL ERROR : ",
 			"");
-=======
-			"<span style='color:#FF0000; font-weight:bold'> FATAL ERROR : ", "");
->>>>>>> modifiche 3
 	fileContent.replace("<span style='color:#FF8800;'> WARNING : ", "");
 	fileContent.replace(
 			"<span style='color:#00CC00; font-weight:bold'> UPDATE : ", "");
@@ -198,7 +195,7 @@ void singletonQtLogger::onlineClicked() {
 	urls->push_back(QUrl::fromLocalFile(THE_REPO->getFileFormazioniUrl()));
 	urls->push_back(QUrl::fromLocalFile(THE_REPO->getFileGazzettaUrl()));
 
-	std::vector<QString> * savePaths = new std::vector<QString>;
+	std::vector < QString > *savePaths = new std::vector<QString>;
 	savePaths->push_back(THE_REPO->getListePath() + "/listaFormazioni.txt");
 	savePaths->push_back(THE_REPO->getListePath() + "/listaGazFiles.txt");
 
@@ -215,17 +212,10 @@ void singletonQtLogger::onlineClicked() {
 		chooseFileFromAListDialog->exec();
 
 		if (!chooseFileFromAListDialog->wasCancelClicked()) {
-<<<<<<< HEAD
 			THE_REPO->fileGazzetta =
 					chooseFileFromAListDialog->getFileGazzetta();
 			THE_REPO->fileFormazioni =
 					chooseFileFromAListDialog->getFileFormazioni();
-=======
-			THE_REPO->fileGazzetta
-					= chooseFileFromAListDialog->getFileGazzetta();
-			THE_REPO->fileFormazioni
-					= chooseFileFromAListDialog->getFileFormazioni();
->>>>>>> modifiche 3
 
 			//			LOG(
 			//					DEBUG,
@@ -393,7 +383,7 @@ bool singletonQtLogger::checkForUpdates() {
 
 	//	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates() --> url : " + url);
 
-	std::vector<QString> * savePaths = new std::vector<QString>;
+	std::vector < QString > *savePaths = new std::vector<QString>;
 	QString savePath = THE_REPO->getDownloadPath() + "/updates.xml";
 	savePaths->push_back(savePath);
 
@@ -409,9 +399,9 @@ bool singletonQtLogger::checkForUpdates() {
 		LOG(DEBUG,
 				"Scaricato le informazioni relative agli aggiornamenti disponibili");
 
-		std::vector<QString> content;
-		std::vector<QString> status;
-		std::vector<QString> availableVersions;
+		std::vector < QString > content;
+		std::vector < QString > status;
+		std::vector < QString > availableVersions;
 
 		QDomDocument doc("updates");
 		QFile file(savePath);
@@ -427,15 +417,15 @@ bool singletonQtLogger::checkForUpdates() {
 		// of the outermost element.
 		QDomElement docElem = doc.documentElement();
 
-		QList<QList<QHash<QString, QString> > > listOfResources;
+		QList < QList<QHash<QString, QString> > > listOfResources;
 
 		QDomNode n = docElem.firstChild();
-		QHash<QString, QString> hash;
+		QHash < QString, QString > hash;
 
 		while (!n.isNull()) {
 
 			hash.clear();
-			QList<QHash<QString, QString> > list;
+			QList < QHash<QString, QString> > list;
 
 			QDomElement e = n.toElement(); // try to convert the node to an element.
 			if (!e.isNull()) {
@@ -543,7 +533,7 @@ bool singletonQtLogger::checkForUpdates() {
 					int answer = msgBox.exec();
 
 					if (answer == QMessageBox::Yes) {
-						std::vector<QUrl> * urls = new std::vector<QUrl>;
+						std::vector < QUrl > *urls = new std::vector<QUrl>;
 
 						QString url = THE_REPO->getFileFormazioniUrl();
 						unsigned int pos = url.lastIndexOf("/");
@@ -560,7 +550,7 @@ bool singletonQtLogger::checkForUpdates() {
 								"In void singletonQtLogger::checkForUpdates() --> url : "
 										+ url);
 
-						std::vector<QString> * savePaths = new std::vector<
+						std::vector < QString > *savePaths = new std::vector<
 								QString>;
 						QString savePath = THE_REPO->getDownloadPath() + "/"
 								+ listOfResources.at(i).at(j)["file"];
