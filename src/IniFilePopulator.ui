@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>IniFilePopulatorClass</class>
  <widget class="QDialog" name="IniFilePopulatorClass">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -38,180 +41,7 @@
    <string>Configuration</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="2" column="1">
-    <widget class="QPushButton" name="formazioniButton">
-     <property name="text">
-      <string>Formazioni</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="2" colspan="6">
-    <widget class="QLineEdit" name="formazioniLineEdit">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-color: rgb(255, 0, 0);
-/*background-color: rgb(255, 200, 200);*/</string>
-     </property>
-     <property name="readOnly">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QPushButton" name="gazzettaButton">
-     <property name="text">
-      <string>Gazzetta</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="2" colspan="6">
-    <widget class="QLineEdit" name="gazzettaLineEdit">
-     <property name="styleSheet">
-      <string notr="true">border-color: rgb(255, 0, 0);
-/*background-color: rgb(255, 200, 200);*/</string>
-     </property>
-     <property name="readOnly">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1">
-    <widget class="QPushButton" name="risultatiButton">
-     <property name="text">
-      <string>Risultati</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="2" colspan="6">
-    <widget class="QLineEdit" name="risultatiLineEdit">
-     <property name="styleSheet">
-      <string notr="true">border-color: rgb(255, 0, 0);
-/*background-color: rgb(255, 200, 200);*/</string>
-     </property>
-     <property name="readOnly">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <widget class="QPushButton" name="downloadButton">
-     <property name="text">
-      <string>Download</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="2" colspan="6">
-    <widget class="QLineEdit" name="downloadLineEdit">
-     <property name="styleSheet">
-      <string notr="true">border-color: rgb(255, 0, 0);
-/*background-color: rgb(255, 200, 200);*/</string>
-     </property>
-     <property name="readOnly">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="1">
-    <widget class="QPushButton" name="listeButton">
-     <property name="text">
-      <string>Liste</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="2" colspan="6">
-    <widget class="QLineEdit" name="listeLineEdit">
-     <property name="minimumSize">
-      <size>
-       <width>268</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-color: rgb(255, 0, 0);
-/*background-color: rgb(255, 200, 200);*/</string>
-     </property>
-     <property name="readOnly">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="1">
-    <widget class="QLabel" name="label_2">
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Formazioni Url</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="2" colspan="6">
-    <widget class="QLineEdit" name="formazioniUrlLineEdit">
-     <property name="styleSheet">
-      <string notr="true">border-color: rgb(255, 0, 0);
-/*background-color: rgb(200, 255, 200);*/</string>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="1">
-    <widget class="QLabel" name="label_3">
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Gazzetta Url</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="2" colspan="6">
-    <widget class="QLineEdit" name="gazzettaUrlLineEdit">
-     <property name="styleSheet">
-      <string notr="true">border-color: rgb(255, 0, 0);
-/*background-color: rgb(200, 255, 200);*/</string>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="1">
-    <widget class="QLabel" name="debugLabel">
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Debug</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="2">
-    <widget class="QCheckBox" name="trueCheckBox">
-     <property name="text">
-      <string>TRUE</string>
-     </property>
-     <attribute name="buttonGroup">
-      <string>trueFalseButtonGroup</string>
-     </attribute>
-    </widget>
-   </item>
-   <item row="0" column="1" colspan="7">
+   <item row="0" column="0" colspan="3">
     <widget class="QLabel" name="label">
      <property name="minimumSize">
       <size>
@@ -240,21 +70,205 @@
      </property>
     </widget>
    </item>
-   <item row="10" column="1" colspan="7">
+   <item row="1" column="0">
+    <widget class="QPushButton" name="formazioniButton">
+     <property name="text">
+      <string>Formazioni</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1" colspan="2">
+    <widget class="QLineEdit" name="formazioniLineEdit">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-color: rgb(255, 0, 0);
+/*background-color: rgb(255, 200, 200);*/</string>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QPushButton" name="gazzettaButton">
+     <property name="text">
+      <string>Gazzetta</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1" colspan="2">
+    <widget class="QLineEdit" name="gazzettaLineEdit">
+     <property name="styleSheet">
+      <string notr="true">border-color: rgb(255, 0, 0);
+/*background-color: rgb(255, 200, 200);*/</string>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QPushButton" name="risultatiButton">
+     <property name="text">
+      <string>Risultati</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1" colspan="2">
+    <widget class="QLineEdit" name="risultatiLineEdit">
+     <property name="styleSheet">
+      <string notr="true">border-color: rgb(255, 0, 0);
+/*background-color: rgb(255, 200, 200);*/</string>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QPushButton" name="downloadButton">
+     <property name="text">
+      <string>Download</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1" colspan="2">
+    <widget class="QLineEdit" name="downloadLineEdit">
+     <property name="styleSheet">
+      <string notr="true">border-color: rgb(255, 0, 0);
+/*background-color: rgb(255, 200, 200);*/</string>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QPushButton" name="listeButton">
+     <property name="text">
+      <string>Liste</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1" colspan="2">
+    <widget class="QLineEdit" name="listeLineEdit">
+     <property name="styleSheet">
+      <string notr="true">border-color: rgb(255, 0, 0);
+/*background-color: rgb(255, 200, 200);*/</string>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Formazioni Url</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1" colspan="2">
+    <widget class="QLineEdit" name="formazioniUrlLineEdit">
+     <property name="styleSheet">
+      <string notr="true">border-color: rgb(255, 0, 0);
+/*background-color: rgb(200, 255, 200);*/</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Gazzetta Url</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1" colspan="2">
+    <widget class="QLineEdit" name="gazzettaUrlLineEdit">
+     <property name="styleSheet">
+      <string notr="true">border-color: rgb(255, 0, 0);
+/*background-color: rgb(200, 255, 200);*/</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="debugLabel">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Debug</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QCheckBox" name="trueCheckBox">
+       <property name="text">
+        <string>TRUE</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string>trueFalseButtonGroup</string>
+       </attribute>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="falseCheckBox">
+       <property name="text">
+        <string>FALSE</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string>trueFalseButtonGroup</string>
+       </attribute>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="9" column="2">
     <widget class="QPushButton" name="okButton">
      <property name="text">
       <string>Ok</string>
      </property>
-    </widget>
-   </item>
-   <item row="9" column="3">
-    <widget class="QCheckBox" name="falseCheckBox">
-     <property name="text">
-      <string>FALSE</string>
-     </property>
-     <attribute name="buttonGroup">
-      <string>trueFalseButtonGroup</string>
-     </attribute>
     </widget>
    </item>
   </layout>
