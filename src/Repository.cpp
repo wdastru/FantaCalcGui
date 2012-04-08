@@ -11,6 +11,7 @@
 
 #include <stdlib.h>
 #include <QFile>
+#include <QtCore/QDebug>
 
 Repository::Repository() {
 	/*
@@ -24,12 +25,11 @@ Repository::Repository() {
 
 #ifdef WIN32
 	this->UserProfile = QString::fromAscii(getenv("USERPROFILE"));
-	//qDebug() << UserProfile;
-#endif
-#ifdef LINUX
+#else
 	this->UserProfile = "/home/" + QString::fromAscii(getenv("USERNAME"));
-	//qDebug() << UserProfile;
 #endif
+
+	qDebug() << "UserProfile = '" + this->UserProfile+"'";
 
 	this->formazioniPath = this->UserProfile + "/FantaCalcGui/formazioni/";
 	this->gazzettaPath = this->UserProfile + "/FantaCalcGui/gazzetta/";
