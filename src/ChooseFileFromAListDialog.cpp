@@ -28,7 +28,7 @@
 
 ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 		QString _fileGazzetta, QWidget *parent) :
-	QDialog(parent) {
+		QDialog(parent) {
 
 	//	LOG(DEBUG, "In ChooseFileFromAListDialog constructor.");
 
@@ -160,17 +160,17 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 		groupBoxAway->setLayout(vboxAway);
 		groupBoxNeutro1->setLayout(vboxNeutro1);
 		groupBoxNeutro2->setLayout(vboxNeutro2);
-		/**/
+
 		int max_size;
 		(groupBoxLabelsFormazioni->sizeHint().height()
-				> groupBoxHome->sizeHint().height()) ? max_size
-				= groupBoxLabelsFormazioni->sizeHint().height() : max_size
-				= groupBoxHome->sizeHint().height();
-		(max_size > groupBoxAway->sizeHint().height()) ? max_size = max_size
+				> groupBoxHome->sizeHint().height()) ?
+				max_size = groupBoxLabelsFormazioni->sizeHint().height() :
+				max_size = groupBoxHome->sizeHint().height();
+		(max_size > groupBoxAway->sizeHint().height()) ?
 				: max_size = groupBoxAway->sizeHint().height();
-		(max_size > groupBoxNeutro1->sizeHint().height()) ? max_size = max_size
+		(max_size > groupBoxNeutro1->sizeHint().height()) ?
 				: max_size = groupBoxNeutro1->sizeHint().height();
-		(max_size > groupBoxNeutro2->sizeHint().height()) ? max_size = max_size
+		(max_size > groupBoxNeutro2->sizeHint().height()) ?
 				: max_size = groupBoxNeutro2->sizeHint().height();
 
 		groupBoxLabelsFormazioni->setFixedHeight(max_size);
@@ -178,7 +178,6 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 		groupBoxAway->setFixedHeight(max_size);
 		groupBoxNeutro1->setFixedHeight(max_size);
 		groupBoxNeutro2->setFixedHeight(max_size);
-		/**/
 
 		QHBoxLayout * hboxRadio1 = new QHBoxLayout;
 		hboxRadio1->addWidget(groupBoxHome);
@@ -200,12 +199,10 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 
 		file1->close();
 	} else {
-		LOG(
-				FATAL,
+		LOG(FATAL,
 				"In ChooseFileFromAListDialog constructor: Il file "
 						+ _fileFormazioni + " non esiste.");
 	} // fine GroupBox : FilesBox, HomeAwayBox e CampoNeutroBox
-
 
 	time = QTime::currentTime().toString("hh:mm:ss.zzz");
 
@@ -255,8 +252,7 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 
 		file2->close();
 	} else {
-		LOG(
-				FATAL,
+		LOG(FATAL,
 				"In ChooseFileFromAListDialog constructor: Il file "
 						+ _fileGazzetta + " non esiste.");
 	}
@@ -472,14 +468,16 @@ void ChooseFileFromAListDialog::doDownload() {
 			QUrl::fromLocalFile(
 					THE_REPO->getFormazioniUrl() + this->getAwayFile()));
 	urls->push_back(
-			QUrl::fromLocalFile(THE_REPO->getGazzettaUrl() + this->getGazFile()));
+			QUrl::fromLocalFile(
+					THE_REPO->getGazzettaUrl() + this->getGazFile()));
 
 	std::vector<QString> * savePaths = new std::vector<QString>;
 	savePaths->push_back(
 			THE_REPO->getDownloadPath() + '/' + this->getHomeFile());
 	savePaths->push_back(
 			THE_REPO->getDownloadPath() + '/' + this->getAwayFile());
-	savePaths->push_back(THE_REPO->getGazzettaPath() + '/' + this->getGazFile());
+	savePaths->push_back(
+			THE_REPO->getGazzettaPath() + '/' + this->getGazFile());
 
 	Downloader filesDownloader(THE_LOGGER, urls, savePaths);
 	filesDownloader.show();
@@ -513,14 +511,12 @@ bool ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 		fAway.open(QIODevice::ReadOnly);
 
 		if (!fHome.isReadable())
-			LOG(
-					FATAL,
+			LOG(FATAL,
 					"In void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file : "
 							+ fHome.fileName() + " non � apribile.");
 
 		else if (!fAway.isReadable())
-			LOG(
-					FATAL,
+			LOG(FATAL,
 					"In void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file : "
 							+ fHome.fileName() + " non � apribile.");
 
@@ -541,8 +537,7 @@ bool ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 		fOut.open(QIODevice::WriteOnly);
 
 		if (!fOut.isWritable()) {
-			LOG(
-					FATAL,
+			LOG(FATAL,
 					"In : void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file "
 							+ fileOut + " non � apribile in scrittura.");
 			this->close();
@@ -557,7 +552,7 @@ bool ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 		unsigned int modulo[4];
 		str += "modulo : " + line + "\n";
 
-		std::vector<std::string> vect;
+		std::vector < std::string > vect;
 		vect = tokenize(line.toStdString(), " -");
 		for (unsigned int i = 0; i < vect.size(); i++)
 			modulo[i] = atoi(vect.at(i).c_str());
@@ -750,8 +745,7 @@ bool ChooseFileFromAListDialog::createFileSquadreFromWebFiles() {
 		fOut.close();
 		return EXIT_SUCCESS;
 	} else {
-		LOG(
-				ERROR,
+		LOG(ERROR,
 				"In ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> download was not successful.");
 		return EXIT_FAILURE;
 	}
@@ -765,8 +759,7 @@ void ChooseFileFromAListDialog::execute() {
 				+ this->getGazFile();
 		this->accept();
 	} else {
-		LOG(
-				DEBUG,
+		LOG(DEBUG,
 				"In void ChooseFileFromAListDialog::execute() --> download of file was not successful.");
 		/* TODO
 		 * completare

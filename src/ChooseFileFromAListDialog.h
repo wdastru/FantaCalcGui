@@ -5,6 +5,9 @@
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtCore/QUrl>
+#include <QtGui/QWidget>
+
+#include <vector>
 
 class QLabel;
 class QPushButton;
@@ -54,8 +57,8 @@ private:
 	std::vector<QLabel *> labelFormazioni;
 	std::vector<QLabel *> labelGazzetta;
 	QLabel * label;
-	QPushButton *okButton;
-	QPushButton *cancelButton;
+	QPushButton * okButton;
+	QPushButton * cancelButton;
 	QGroupBox * FilesBox;
 	QGroupBox * HomeAwayBox;
 	QGroupBox * CampoNeutroBox;

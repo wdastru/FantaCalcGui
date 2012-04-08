@@ -1,5 +1,6 @@
-#include <QApplication>
-#include <QObject>
+
+#include <QtGui/QApplication>
+#include <QtCore/QObject>
 #include "singletonQtLogger.h"
 #include "Repository.h"
 #include "IniFilePopulator.h"
@@ -19,7 +20,7 @@ int main(int argc, char *argv[]) {
 	THE_REPO; // prima si crea il repository dei dati
 	THE_MANAGER; // quindi si legge l'ini file (o lo si crea se non esistente)
 
-	THE_LOGGER; // prima parte l'applicazione
+	THE_LOGGER; // poi parte l'applicazione
 	THE_LOGGER->setVersion(a.applicationVersion());
 	THE_LOGGER->setTitle(a.applicationName());
 
@@ -29,7 +30,6 @@ int main(int argc, char *argv[]) {
 
 	THE_LOGGER->checkForUpdates();
 
-	//THE_REPO; // poi si crea il repository dei dati
 	THE_CONFIGURATOR; // infine il configuratore viene popolato con i dati
 
 	return a.exec();
