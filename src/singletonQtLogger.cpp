@@ -196,7 +196,7 @@ void singletonQtLogger::onlineClicked() {
 	urls->push_back(QUrl::fromLocalFile(THE_REPO->getFileFormazioniUrl()));
 	urls->push_back(QUrl::fromLocalFile(THE_REPO->getFileGazzettaUrl()));
 
-	std::vector < QString > *savePaths = new std::vector<QString>;
+	std::vector<QString> *savePaths = new std::vector<QString>;
 	savePaths->push_back(THE_REPO->getListePath() + "/listaFormazioni.txt");
 	savePaths->push_back(THE_REPO->getListePath() + "/listaGazFiles.txt");
 
@@ -206,7 +206,8 @@ void singletonQtLogger::onlineClicked() {
 		//		LOG(DEBUG,
 		//				"In singletonQtLogger::onlineClicked() --> the download of files succeded.");
 
-		ChooseFiles * chooseFiles = new ChooseFiles();
+		ChooseFiles * chooseFiles = new ChooseFiles(
+				THE_REPO->getListaFormazioni(), THE_REPO->getListaGazFiles());
 		chooseFiles->show();
 
 		ChooseFileFromAListDialog * chooseFileFromAListDialog =
@@ -387,7 +388,7 @@ bool singletonQtLogger::checkForUpdates() {
 
 	//	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates() --> url : " + url);
 
-	std::vector < QString > *savePaths = new std::vector<QString>;
+	std::vector<QString> *savePaths = new std::vector<QString>;
 	QString savePath = THE_REPO->getDownloadPath() + "/updates.xml";
 	savePaths->push_back(savePath);
 
@@ -403,9 +404,9 @@ bool singletonQtLogger::checkForUpdates() {
 		LOG(DEBUG,
 				"Scaricato le informazioni relative agli aggiornamenti disponibili");
 
-		std::vector < QString > content;
-		std::vector < QString > status;
-		std::vector < QString > availableVersions;
+		std::vector<QString> content;
+		std::vector<QString> status;
+		std::vector<QString> availableVersions;
 
 		QDomDocument doc("updates");
 		QFile file(savePath);
@@ -421,15 +422,15 @@ bool singletonQtLogger::checkForUpdates() {
 		// of the outermost element.
 		QDomElement docElem = doc.documentElement();
 
-		QList < QList<QHash<QString, QString> > > listOfResources;
+		QList<QList<QHash<QString, QString> > > listOfResources;
 
 		QDomNode n = docElem.firstChild();
-		QHash < QString, QString > hash;
+		QHash<QString, QString> hash;
 
 		while (!n.isNull()) {
 
 			hash.clear();
-			QList < QHash<QString, QString> > list;
+			QList<QHash<QString, QString> > list;
 
 			QDomElement e = n.toElement(); // try to convert the node to an element.
 			if (!e.isNull()) {
