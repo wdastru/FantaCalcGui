@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ChooseFilesClass</class>
+ <widget class="QWidget" name="ChooseFilesClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>522</width>
+    <height>463</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Choose files</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="formazioniTab">
+      <attribute name="title">
+       <string>Formazioni</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <layout class="QHBoxLayout" name="hBoxFormazioni">
+         <item>
+          <widget class="QGroupBox" name="FilesBox">
+           <property name="title">
+            <string>Files</string>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QGroupBox" name="groupBoxLabelsFormazioni">
+              <property name="title">
+               <string>File</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_2">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="vBoxLabelsFormazioni"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="HomeAwayBox">
+           <property name="title">
+            <string>Andata-Ritorno</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="setCheckable" stdset="0">
+            <bool>false</bool>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QGroupBox" name="groupBoxHome">
+              <property name="title">
+               <string>Casa</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_3">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="vBoxHome"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBoxAway">
+              <property name="title">
+               <string>Fuori</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_4">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="vBoxAway"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="CampoNeutroBox">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="title">
+            <string>Campo Neutro</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QGroupBox" name="groupBoxNeutro1">
+              <property name="title">
+               <string>Neutro</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_5">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="vBoxNeutro1"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBoxNeutro2">
+              <property name="title">
+               <string>Neutro</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_6">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="vBoxNeutro2"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="gazzettaTab">
+      <attribute name="title">
+       <string>Files Gazzetta</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_7">
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="groupBoxGazzetta">
+         <property name="title">
+          <string>Files Gazzetta</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_9">
+          <item row="0" column="0">
+           <layout class="QGridLayout" name="gridLayout_8"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="okButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>OK</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cancelButton">
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

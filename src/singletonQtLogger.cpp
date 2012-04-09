@@ -17,6 +17,7 @@
 #include "Downloader.h"
 #include "NoNetFileDialog.h"
 #include "ChooseFileFromAListDialog.h"
+#include "ChooseFiles.h"
 #include "GazzettaFileReader.h"
 #include "FormazioniFileReader.h"
 #include "FileFormazioniViewer.h"
@@ -204,6 +205,9 @@ void singletonQtLogger::onlineClicked() {
 	if (listsDownloader.requestSucceded()) {
 		//		LOG(DEBUG,
 		//				"In singletonQtLogger::onlineClicked() --> the download of files succeded.");
+
+		ChooseFiles * chooseFiles = new ChooseFiles();
+		chooseFiles->show();
 
 		ChooseFileFromAListDialog * chooseFileFromAListDialog =
 				new ChooseFileFromAListDialog(THE_REPO->getListaFormazioni(),
