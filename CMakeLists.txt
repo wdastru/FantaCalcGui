@@ -12,6 +12,7 @@ SET( SRCS
         src/main.cpp 
         src/IniFileManager.cpp
         src/ChooseFileFromAListDialog.cpp
+        src/ChooseFiles.cpp
         src/Downloader.cpp
         src/NoNetFileDialog.cpp 
         src/GazzettaFileReader.cpp 
@@ -28,6 +29,7 @@ SET( SRCS
         src/resources.rc )
 SET( HDRS 
         src/ChooseFileFromAListDialog.h
+        src/ChooseFiles.h
         src/Downloader.h
         src/NoNetFileDialog.h  
         src/FileFormazioniViewer.h
@@ -38,7 +40,8 @@ SET( HDRS
         src/singletonQtLogger.h )
 SET( UIS  
         src/authenticationdialog.ui
-    	src/IniFilePopulator.ui
+    	src/ChooseFiles.ui
+        src/IniFilePopulator.ui
     	src/FileFormazioniViewer.ui
         src/NoNetFileDialog.ui
         src/singletonQtLogger.ui )
