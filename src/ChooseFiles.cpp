@@ -44,10 +44,10 @@ ChooseFiles::ChooseFiles(QString _fileFormazioni, QString _fileGazzetta,
 			tmpButton2->setFixedHeight(tmpLabel->sizeHint().height());
 			tmpButton3->setFixedHeight(tmpLabel->sizeHint().height());
 			tmpButton4->setFixedHeight(tmpLabel->sizeHint().height());
-			tmpButton1->setFixedWidth(tmpButton1->sizeHint().width());
-			tmpButton2->setFixedWidth(tmpButton2->sizeHint().width());
-			tmpButton3->setFixedWidth(tmpButton3->sizeHint().width());
-			tmpButton4->setFixedWidth(tmpButton4->sizeHint().width());
+			tmpButton1->setFixedWidth(tmpButton1->sizeHint().width() * 1.5);
+			tmpButton2->setFixedWidth(tmpButton2->sizeHint().width() * 1.5);
+			tmpButton3->setFixedWidth(tmpButton3->sizeHint().width() * 1.5);
+			tmpButton4->setFixedWidth(tmpButton4->sizeHint().width() * 1.5);
 
 			labelFormazioni.push_back(tmpLabel);
 			home.push_back(tmpButton1);
@@ -112,7 +112,7 @@ ChooseFiles::ChooseFiles(QString _fileFormazioni, QString _fileGazzetta,
 			tmpLabel->setFixedWidth(tmpLabel->sizeHint().width() + 20);
 			QRadioButton * tmpButton = new QRadioButton("");
 			tmpButton->setFixedHeight(tmpLabel->sizeHint().height());
-			tmpButton->setFixedWidth(tmpButton->sizeHint().width());
+			tmpButton->setFixedWidth(tmpButton->sizeHint().width() * 1.5);
 			labelGazzetta.push_back(tmpLabel);
 			gaz.push_back(tmpButton);
 			connect(gaz.at(i), SIGNAL(toggled(bool)), this,
