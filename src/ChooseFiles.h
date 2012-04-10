@@ -34,7 +34,9 @@ private:
 	int nGazFiles;
 	int nFiles;
 	bool cancelClicked;
-
+	void setupFormazioniTab(QString);
+	void setupGazzettaTab(QString);
+	int height;
 };
 
 #endif // CHOOSEFILES_H
