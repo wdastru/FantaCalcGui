@@ -8,16 +8,75 @@
 
 ChooseFiles::ChooseFiles(QString _fileFormazioni, QString _fileGazzetta,
 		QWidget *parent) :
-		QWidget(parent) {
+	QWidget(parent) {
 	ui.setupUi(this);
+	this->height = 14;
+	setupFormazioniTab(_fileFormazioni);
+	setupGazzettaTab(_fileGazzetta);
+}
 
-	qDebug()
-			<< "In ChooseFiles::ChooseFiles(...) --> fileFormazioni = '"
-					+ _fileFormazioni + "'";
-	qDebug()
-			<< "In ChooseFiles::ChooseFiles(...) --> fileGazzetta = '"
-					+ _fileGazzetta + "'";
+ChooseFiles::~ChooseFiles() {
 
+}
+
+void ChooseFiles::setupGazzettaTab(QString _fileGazzetta) {
+	QFile *fileGazzetta = new QFile(_fileGazzetta);
+
+	if (fileGazzetta->exists()) {
+		fileGazzetta->open(QIODevice::ReadOnly);
+		char buf[1024];
+
+		int i = 0;
+		std::vector < QString > lines;
+		while (!fileGazzetta->atEnd()) {
+			fileGazzetta->readLine(buf, sizeof(buf));
+			if (QString::fromAscii(buf).trimmed().size() == 0)
+				continue; // skip empty lines
+			lines.push_back(QString::fromAscii(buf).trimmed());
+			i++;
+		}
+
+		qDebug() << "In ChooseFiles::ChooseFiles(...) --> lines.size() = "
+				+ QString::number(lines.size());
+
+		int rows = 10;
+		int rowCounter = 0;
+		for (unsigned int i = 0; i < lines.size(); i++) {
+			QLabel * tmpLabel = new QLabel(lines.at(i));
+			tmpLabel->setFont(THE_REPO->fontVariableWidthSmall);
+			tmpLabel->setFixedHeight(this->height);
+			tmpLabel->setFixedWidth(tmpLabel->sizeHint().width() + 20);
+
+			QRadioButton * tmpButton = new QRadioButton("");
+			tmpButton->setFixedHeight(this->height);
+			tmpButton->setFixedWidth(tmpButton->sizeHint().width() * 1.5);
+
+			labelGazzetta.push_back(tmpLabel);
+			gaz.push_back(tmpButton);
+			connect(gaz.at(i), SIGNAL(toggled(bool)), this,
+					SLOT(enableOkButton()));
+			ui.gridGazzettaLayout->addWidget(gaz.at(i), rowCounter,
+					2 * int(i / rows));
+			ui.gridGazzettaLayout->addWidget(labelGazzetta.at(i), rowCounter,
+					2 * int(i / rows) + 1);
+			if (rowCounter >= rows - 1)
+				rowCounter = 0;
+			else
+				rowCounter++;
+		}
+
+		this->nGazFiles = lines.size();
+
+		fileGazzetta->close();
+	} else {
+		LOG(
+				FATAL,
+				"In ChooseFiles constructor: Il file " + _fileGazzetta
+						+ " non esiste.");
+	}
+}
+
+void ChooseFiles::setupFormazioniTab(QString _fileFormazioni) {
 	QFile *fileFormazioni = new QFile(_fileFormazioni);
 
 	if (fileFormazioni->exists()) {
@@ -33,17 +92,18 @@ ChooseFiles::ChooseFiles(QString _fileFormazioni, QString _fileGazzetta,
 				continue; // skip empty lines
 
 			QLabel * tmpLabel = new QLabel(QString::fromAscii(buf).trimmed());
-			tmpLabel->setFixedHeight(tmpLabel->sizeHint().height());
+
+			tmpLabel->setFixedHeight(this->height);
 			tmpLabel->setFont(THE_REPO->fontVariableWidthSmall);
 
 			QRadioButton * tmpButton1 = new QRadioButton();
 			QRadioButton * tmpButton2 = new QRadioButton();
 			QRadioButton * tmpButton3 = new QRadioButton();
 			QRadioButton * tmpButton4 = new QRadioButton();
-			tmpButton1->setFixedHeight(tmpLabel->sizeHint().height());
-			tmpButton2->setFixedHeight(tmpLabel->sizeHint().height());
-			tmpButton3->setFixedHeight(tmpLabel->sizeHint().height());
-			tmpButton4->setFixedHeight(tmpLabel->sizeHint().height());
+			tmpButton1->setFixedHeight(this->height);
+			tmpButton2->setFixedHeight(this->height);
+			tmpButton3->setFixedHeight(this->height);
+			tmpButton4->setFixedHeight(this->height);
 			tmpButton1->setFixedWidth(tmpButton1->sizeHint().width() * 1.5);
 			tmpButton2->setFixedWidth(tmpButton2->sizeHint().width() * 1.5);
 			tmpButton3->setFixedWidth(tmpButton3->sizeHint().width() * 1.5);
@@ -79,67 +139,11 @@ ChooseFiles::ChooseFiles(QString _fileFormazioni, QString _fileGazzetta,
 
 		fileFormazioni->close();
 	} else {
-		LOG(FATAL,
+		LOG(
+				FATAL,
 				"In ChooseFiles constructor: Il file " + _fileFormazioni
 						+ " non esiste.");
 	}
-
-	QFile *fileGazzetta = new QFile(_fileGazzetta);
-
-	if (fileGazzetta->exists()) {
-		fileGazzetta->open(QIODevice::ReadOnly);
-		char buf[1024];
-
-		int i = 0;
-		std::vector<QString> lines;
-		while (!fileGazzetta->atEnd()) {
-			fileGazzetta->readLine(buf, sizeof(buf));
-			if (QString::fromAscii(buf).trimmed().size() == 0)
-				continue; // skip empty lines
-			lines.push_back(QString::fromAscii(buf).trimmed());
-			i++;
-		}
-
-		qDebug()
-				<< "In ChooseFiles::ChooseFiles(...) --> lines.size() = "
-						+ QString::number(lines.size());
-
-		int rows = 10;
-		int rowCounter = 0;
-		for (unsigned int i = 0; i < lines.size(); i++) {
-			QLabel * tmpLabel = new QLabel(lines.at(i));
-			tmpLabel->setFont(THE_REPO->fontVariableWidthSmall);
-			tmpLabel->setFixedWidth(tmpLabel->sizeHint().width() + 20);
-			QRadioButton * tmpButton = new QRadioButton("");
-			tmpButton->setFixedHeight(tmpLabel->sizeHint().height());
-			tmpButton->setFixedWidth(tmpButton->sizeHint().width() * 1.5);
-			labelGazzetta.push_back(tmpLabel);
-			gaz.push_back(tmpButton);
-			connect(gaz.at(i), SIGNAL(toggled(bool)), this,
-					SLOT(enableOkButton()));
-			ui.gridGazzettaLayout->addWidget(gaz.at(i), rowCounter,
-					2 * int(i / rows));
-			ui.gridGazzettaLayout->addWidget(labelGazzetta.at(i), rowCounter,
-					2 * int(i / rows) + 1);
-			if (rowCounter >= rows - 1)
-				rowCounter = 0;
-			else
-				rowCounter++;
-		}
-
-		this->nGazFiles = lines.size();
-
-		fileGazzetta->close();
-	} else {
-		LOG(FATAL,
-				"In ChooseFiles constructor: Il file " + _fileGazzetta
-						+ " non esiste.");
-	}
-
-}
-
-ChooseFiles::~ChooseFiles() {
-
 }
 
 void ChooseFiles::on_okButton_clicked() {
