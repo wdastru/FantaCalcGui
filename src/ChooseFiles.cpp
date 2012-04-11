@@ -146,8 +146,27 @@ void ChooseFiles::setupFormazioniTab(QString _fileFormazioni) {
 	}
 }
 
+void ChooseFiles::on_HomeAwayBox_toggled(bool) {
+	if (ui.HomeAwayBox->isChecked())
+		ui.CampoNeutroBox->setChecked(false);
+	else
+		ui.CampoNeutroBox->setChecked(true);
+
+	this->enableOkButton();
+}
+
+void ChooseFiles::on_CampoNeutroBox_toggled(bool) {
+	if (ui.CampoNeutroBox->isChecked())
+		ui.HomeAwayBox->setChecked(false);
+	else
+		ui.HomeAwayBox->setChecked(true);
+
+	this->enableOkButton();
+}
+
 void ChooseFiles::on_okButton_clicked() {
-	LOG(DEBUG, "In void ChooseFiles::on_okButton_clicked().");
+	qDebug() << "In void ChooseFiles::on_okButton_clicked()";
+
 	//this->doDownload();
 	//if (this->downloadSuccess) {
 	//	this->createFileSquadreFromWebFiles();
@@ -166,14 +185,14 @@ void ChooseFiles::on_okButton_clicked() {
 }
 
 void ChooseFiles::on_cancelButton_clicked() {
-	qDebug() << "In void ChooseFiles::on_okButton_clicked()";
+	qDebug() << "In void ChooseFiles::on_cancelButton_clicked()";
 
-	//for (int i = 0; i < this->nFiles; i++) {
-	//	home.at(i)->setChecked(false);
-	//	away.at(i)->setChecked(false);
-	//	neutro1.at(i)->setChecked(false);
-	//	neutro2.at(i)->setChecked(false);
-	//}
+	for (int i = 0; i < this->nFiles; i++) {
+		home.at(i)->setChecked(false);
+		away.at(i)->setChecked(false);
+		neutro1.at(i)->setChecked(false);
+		neutro2.at(i)->setChecked(false);
+	}
 	for (int i = 0; i < this->nGazFiles; i++)
 		gaz.at(i)->setChecked(false);
 
@@ -182,20 +201,20 @@ void ChooseFiles::on_cancelButton_clicked() {
 }
 
 void ChooseFiles::enableOkButton() {
-	qDebug() << "In void ChooseFiles::enableOkButton()";
+	//qDebug() << "In void ChooseFiles::enableOkButton()";
 
-	//bool homeIsChecked = false;
-	//bool awayIsChecked = false;
-	//bool neutro1IsChecked = false;
-	//bool neutro2IsChecked = false;
+	bool homeIsChecked = false;
+	bool awayIsChecked = false;
+	bool neutro1IsChecked = false;
+	bool neutro2IsChecked = false;
 	bool gazIsChecked = false;
 
-	//for (int i = 0; i < this->nFiles; i++) {
-	//	homeIsChecked = homeIsChecked || home.at(i)->isChecked();
-	//	awayIsChecked = awayIsChecked || away.at(i)->isChecked();
-	//	neutro1IsChecked = neutro1IsChecked || neutro1.at(i)->isChecked();
-	//	neutro2IsChecked = neutro2IsChecked || neutro2.at(i)->isChecked();
-	//}
+	for (int i = 0; i < this->nFiles; i++) {
+		homeIsChecked = homeIsChecked || home.at(i)->isChecked();
+		awayIsChecked = awayIsChecked || away.at(i)->isChecked();
+		neutro1IsChecked = neutro1IsChecked || neutro1.at(i)->isChecked();
+		neutro2IsChecked = neutro2IsChecked || neutro2.at(i)->isChecked();
+	}
 
 	for (int i = 0; i < this->nGazFiles; i++)
 		gazIsChecked = gazIsChecked || gaz.at(i)->isChecked();
@@ -206,12 +225,12 @@ void ChooseFiles::enableOkButton() {
 		ui.okButton->setEnabled(false);
 	}
 
-	//if (this->HomeAwayBox->isChecked() && homeIsChecked && awayIsChecked
-	//		&& gazIsChecked)
-	//	this->okButton->setEnabled(true);
-	//else if (this->CampoNeutroBox->isChecked() && neutro1IsChecked
-	//		&& neutro2IsChecked && gazIsChecked)
-	//	this->okButton->setEnabled(true);
-	//else
-	//	this->okButton->setEnabled(false);
+	if (ui.HomeAwayBox->isChecked() && homeIsChecked && awayIsChecked
+			&& gazIsChecked)
+		ui.okButton->setEnabled(true);
+	else if (ui.CampoNeutroBox->isChecked() && neutro1IsChecked
+			&& neutro2IsChecked && gazIsChecked)
+		ui.okButton->setEnabled(true);
+	else
+		ui.okButton->setEnabled(false);
 }
