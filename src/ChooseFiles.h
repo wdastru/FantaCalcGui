@@ -16,6 +16,8 @@ public:
 private slots:
 	void on_okButton_clicked();
 	void on_cancelButton_clicked();
+	void on_HomeAwayBox_toggled(bool);
+	void on_CampoNeutroBox_toggled(bool);
 	void enableOkButton();
 	//void quit();
 	//void toggle1();
