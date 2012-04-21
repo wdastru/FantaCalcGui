@@ -207,8 +207,10 @@ void singletonQtLogger::onlineClicked() {
 		//				"In singletonQtLogger::onlineClicked() --> the download of files succeded.");
 
 		ChooseFiles * chooseFiles = new ChooseFiles(
-				THE_REPO->getListaFormazioni(), THE_REPO->getListaGazFiles());
+				THE_REPO->getListaFormazioni(), THE_REPO->getListaGazFiles(),
+				THE_LOGGER);
 		chooseFiles->show();
+		chooseFiles->exec();
 
 		ChooseFileFromAListDialog * chooseFileFromAListDialog =
 				new ChooseFileFromAListDialog(THE_REPO->getListaFormazioni(),
