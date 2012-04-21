@@ -1,12 +1,12 @@
 #ifndef CHOOSEFILES_H
 #define CHOOSEFILES_H
 
-#include <QtGui/QWidget>
+#include <QtGui/QDialog>
 #include <QtGui/QRadioButton>
 #include <QtGui/QLabel>
 #include "ui_ChooseFiles.h"
 
-class ChooseFiles: public QWidget {
+class ChooseFiles: public QDialog {
 Q_OBJECT
 
 public:

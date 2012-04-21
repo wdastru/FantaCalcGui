@@ -8,7 +8,7 @@
 
 ChooseFiles::ChooseFiles(QString _fileFormazioni, QString _fileGazzetta,
 		QWidget *parent) :
-	QWidget(parent) {
+	QDialog(parent) {
 	ui.setupUi(this);
 	this->height = 14;
 	setupFormazioniTab(_fileFormazioni);
