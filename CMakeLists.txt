@@ -11,7 +11,6 @@ SET (QT_USE_QTXML TRUE)
 SET( SRCS 
         src/main.cpp 
         src/IniFileManager.cpp
-        src/ChooseFileFromAListDialog.cpp
         src/ChooseFiles.cpp
         src/Downloader.cpp
         src/NoNetFileDialog.cpp 
@@ -28,7 +27,6 @@ SET( SRCS
         src/singletonQtLogger.cpp
         src/resources.rc )
 SET( HDRS 
-        src/ChooseFileFromAListDialog.h
         src/ChooseFiles.h
         src/Downloader.h
         src/NoNetFileDialog.h  

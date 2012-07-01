@@ -12,6 +12,12 @@ Q_OBJECT
 public:
 	ChooseFiles(QString, QString, QWidget *parent = 0);
 	~ChooseFiles();
+	bool wasCancelClicked();
+	QString getFileGazzetta(void);
+	QString getFileFormazioni(void);
+	QString getGazFile();
+	QString getHomeFile();
+	QString getAwayFile();
 
 private slots:
 	void on_okButton_clicked();
@@ -19,7 +25,6 @@ private slots:
 	void on_HomeAwayBox_toggled(bool);
 	void on_CampoNeutroBox_toggled(bool);
 	void enableOkButton();
-	//void quit();
 	//void toggle1();
 	//void toggle2();
 	//void execute();
@@ -33,12 +38,18 @@ private:
 	std::vector<QRadioButton *> gaz;
 	std::vector<QLabel *> labelFormazioni;
 	std::vector<QLabel *> labelGazzetta;
+	QString fileGazzetta;
+	QString fileFormazioni;
 	int nGazFiles;
 	int nFiles;
 	bool cancelClicked;
 	void setupFormazioniTab(QString);
 	void setupGazzettaTab(QString);
 	int height;
+	void doDownload();
+	bool downloadSuccess;
+	bool createFileSquadreFromWebFiles();
+
 };
 
 #endif // CHOOSEFILES_H

@@ -1,10 +1,14 @@
 #include "ChooseFiles.h"
 
 #include <QtCore/QDebug>
+#include <QtCore/QUrl>
+#include <QtCore/QFileInfo>
 
 #include "defines.h"
 #include "singletonQtLogger.h"
 #include "Repository.h"
+#include "Downloader.h"
+#include "tokenize.h"
 
 ChooseFiles::ChooseFiles(QString _fileFormazioni, QString _fileGazzetta,
 		QWidget *parent) :
@@ -167,19 +171,19 @@ void ChooseFiles::on_CampoNeutroBox_toggled(bool) {
 void ChooseFiles::on_okButton_clicked() {
 	qDebug() << "In void ChooseFiles::on_okButton_clicked()";
 
-	//this->doDownload();
-	//if (this->downloadSuccess) {
-	//	this->createFileSquadreFromWebFiles();
-	//	this->fileGazzetta = THE_REPO->getGazzettaPath() + "/"
-	//			+ this->getGazFile();
-	//	this->accept();
-	//} else {
-	//	LOG(DEBUG,
-	//			"In void ChooseFiles::execute() --> download of file was not successful.");
-	//	/* TODO
-	//	 * completare
-	//	 */
-	//}
+	this->doDownload();
+	if (this->downloadSuccess) {
+		this->createFileSquadreFromWebFiles();
+		this->fileGazzetta = THE_REPO->getGazzettaPath() + "/"
+				+ this->getGazFile();
+		this->accept();
+	} else {
+		LOG(DEBUG,
+				"In void ChooseFiles::execute() --> download of file was not successful.");
+		/* TODO
+		 * completare
+		 */
+	}
 
 	this->close();
 }
@@ -233,4 +237,350 @@ void ChooseFiles::enableOkButton() {
 		ui.okButton->setEnabled(true);
 	else
 		ui.okButton->setEnabled(false);
+}
+
+bool ChooseFiles::wasCancelClicked() {
+	return this->cancelClicked;
+}
+
+QString ChooseFiles::getFileGazzetta(void) {
+	return this->fileGazzetta;
+}
+
+QString ChooseFiles::getFileFormazioni(void) {
+	return this->fileFormazioni;
+}
+
+void ChooseFiles::doDownload() {
+	LOG(DEBUG,
+			"In ChooseFileFromAListDialog::doDownload() --> Network will be accessed.");
+
+	std::vector<QUrl> * urls = new std::vector<QUrl>;
+	urls->push_back(
+			QUrl::fromLocalFile(
+					THE_REPO->getFormazioniUrl() + this->getHomeFile()));
+	urls->push_back(
+			QUrl::fromLocalFile(
+					THE_REPO->getFormazioniUrl() + this->getAwayFile()));
+	urls->push_back(
+			QUrl::fromLocalFile(
+					THE_REPO->getGazzettaUrl() + this->getGazFile()));
+
+	std::vector<QString> * savePaths = new std::vector<QString>;
+	savePaths->push_back(
+			THE_REPO->getDownloadPath() + '/' + this->getHomeFile());
+	savePaths->push_back(
+			THE_REPO->getDownloadPath() + '/' + this->getAwayFile());
+	savePaths->push_back(
+			THE_REPO->getGazzettaPath() + '/' + this->getGazFile());
+
+	Downloader filesDownloader(THE_LOGGER, urls, savePaths);
+	filesDownloader.show();
+	filesDownloader.exec();
+
+	if (filesDownloader.requestSucceded()) {
+		this->downloadSuccess = true;
+			LOG(
+					DEBUG,
+					"In ChooseFileFromAListDialog::doDownload() --> the download of files succeded.");
+	} else {
+		this->downloadSuccess = false;
+			LOG(DEBUG,
+					"In ChooseFileFromAListDialog::doDownload() --> the download of files failed.");
+	}
+	return;
+}
+
+QString ChooseFiles::getGazFile() {
+	for (int i = 0; i < this->nGazFiles; i++) {
+		if (this->gaz.at(i)->isChecked())
+			return this->labelGazzetta.at(i)->text();
+	}
+	return QString::null;
+}
+
+QString ChooseFiles::getHomeFile() {
+	if (this->ui.HomeAwayBox->isChecked()) {
+		for (int i = 0; i < this->nFiles; i++) {
+			if (this->home.at(i)->isChecked())
+				return this->labelFormazioni.at(i)->text();
+		}
+	} else if (this->ui.CampoNeutroBox->isChecked()) {
+		for (int i = 0; i < this->nFiles; i++) {
+			if (this->neutro1.at(i)->isChecked())
+				return this->labelFormazioni.at(i)->text();
+		}
+	}
+	return QString::null;
+}
+
+QString ChooseFiles::getAwayFile() {
+	if (this->ui.HomeAwayBox->isChecked()) {
+		for (int i = 0; i < this->nFiles; i++) {
+			if (this->away.at(i)->isChecked())
+				return this->labelFormazioni.at(i)->text();
+		}
+	} else if (this->ui.CampoNeutroBox->isChecked()) {
+		for (int i = 0; i < this->nFiles; i++) {
+			if (this->neutro2.at(i)->isChecked())
+				return this->labelFormazioni.at(i)->text();
+		}
+	}
+	return QString::null;
+}
+
+bool ChooseFiles::createFileSquadreFromWebFiles() {
+	LOG(DEBUG, "In ChooseFiles::createFileSquadreFromWebFiles().");
+
+	if (this->downloadSuccess) {
+
+		LOG(
+				DEBUG,
+				"In ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> download was successful.");
+
+		QFile fHome(THE_REPO->getDownloadPath() + "/" + this->getHomeFile());
+		QFile fAway(THE_REPO->getDownloadPath() + "/" + this->getAwayFile());
+
+		fHome.open(QIODevice::ReadOnly);
+		fAway.open(QIODevice::ReadOnly);
+
+		if (!fHome.isReadable())
+			LOG(FATAL,
+					"In void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file : "
+							+ fHome.fileName() + " non � apribile.");
+
+		else if (!fAway.isReadable())
+			LOG(FATAL,
+					"In void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file : "
+							+ fHome.fileName() + " non � apribile.");
+
+		QFileInfo FIfHome(fHome);
+		QFileInfo FIfAway(fAway);
+
+		QFile fGaz(this->getGazFile());
+		QFileInfo FIfGaz(fGaz);
+
+		QString fileOut = THE_REPO->getFormazioniPath() + '/'
+				+ FIfHome.baseName().split("_").at(0) + "_"
+				+ FIfAway.baseName().split("_").at(0) + "_" + FIfGaz.baseName()
+				+ ".txt";
+
+		this->fileFormazioni = fileOut;
+
+		QFile fOut(fileOut);
+		fOut.open(QIODevice::WriteOnly);
+
+		if (!fOut.isWritable()) {
+			LOG(FATAL,
+					"In : void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file "
+							+ fileOut + " non � apribile in scrittura.");
+			this->close();
+			return EXIT_FAILURE;
+		}
+
+		unsigned int ruolo[4] = { 3, 8, 8, 6 };
+		QString str = "nome squadra : " + FIfHome.baseName().split("_").at(0)
+				+ "\n";
+
+		QString line = QString::fromAscii(fHome.readLine(1024)); // Ia riga : modulo tipo
+		unsigned int modulo[4];
+		str += "modulo : " + line + "\n";
+
+		std::vector < std::string > vect;
+		vect = tokenize(line.toStdString(), " -");
+		for (unsigned int i = 0; i < vect.size(); i++)
+			modulo[i] = atoi(vect.at(i).c_str());
+
+		vect.clear();
+		line = QString::fromAscii(fHome.readLine(1024)); // IIa riga titolari
+		unsigned int titolari[4];
+		vect = tokenize(line.toStdString(), " -");
+		for (unsigned int i = 0; i < vect.size(); i++)
+			titolari[i] = atoi(vect.at(i).c_str());
+
+		vect.clear();
+		line = QString::fromAscii(fHome.readLine(1024));
+		unsigned int riserve[4];
+		vect = tokenize(line.toStdString(), " -");
+		for (unsigned int i = 0; i < vect.size(); i++)
+			riserve[i] = atoi(vect.at(i).c_str());
+
+		if (!ui.CampoNeutroBox->isChecked())
+			str += "in casa\n\n";
+
+		unsigned int lineReadCounter = 0;
+
+		for (unsigned int i = 0; i < titolari[0]; i++) {
+			line = QString::fromAscii(fHome.readLine(1024));
+			lineReadCounter++;
+			str += line;
+		}
+
+		for (unsigned int i = 0; i < riserve[0]; i++) {
+			line = QString::fromAscii(fHome.readLine(1024));
+			lineReadCounter++;
+			str += line;
+		}
+
+		while (!(lineReadCounter == ruolo[0])) {
+			line = QString::fromAscii(fHome.readLine(1024));
+			lineReadCounter++;
+		}
+
+		for (unsigned int i = 0; i < titolari[1]; i++) {
+			line = QString::fromAscii(fHome.readLine(1024));
+			lineReadCounter++;
+			str += line;
+		}
+
+		for (unsigned int i = 0; i < riserve[1]; i++) {
+			line = QString::fromAscii(fHome.readLine(1024));
+			lineReadCounter++;
+			str += line;
+		}
+
+		while (!(lineReadCounter == (ruolo[0] + ruolo[1]))) {
+			line = QString::fromAscii(fHome.readLine(1024));
+			lineReadCounter++;
+		}
+
+		for (unsigned int i = 0; i < titolari[2]; i++) {
+			line = QString::fromAscii(fHome.readLine(1024));
+			lineReadCounter++;
+			str += line;
+		}
+
+		for (unsigned int i = 0; i < riserve[2]; i++) {
+			line = QString::fromAscii(fHome.readLine(1024));
+			lineReadCounter++;
+			str += line;
+		}
+
+		while (!(lineReadCounter == (ruolo[0] + ruolo[1] + ruolo[2]))) {
+			line = QString::fromAscii(fHome.readLine(1024));
+			lineReadCounter++;
+		}
+
+		for (unsigned int i = 0; i < titolari[3]; i++) {
+			line = QString::fromAscii(fHome.readLine(1024));
+			lineReadCounter++;
+			str += line;
+		}
+
+		for (unsigned int i = 0; i < riserve[3]; i++) {
+			line = QString::fromAscii(fHome.readLine(1024));
+			lineReadCounter++;
+			str += line;
+		}
+
+		while (!(lineReadCounter == (ruolo[0] + ruolo[1] + ruolo[2] + ruolo[3]))) {
+			line = QString::fromAscii(fHome.readLine(1024));
+			lineReadCounter++;
+		}
+
+		str += "\n###***###\n\n";
+
+		str += "nome squadra : " + FIfAway.baseName().split("_").at(0) + "\n";
+
+		line = QString::fromAscii(fAway.readLine(1024));
+		str += "modulo : " + line + "\n";
+		vect = tokenize(line.toStdString(), " -");
+		for (unsigned int i = 0; i < vect.size(); i++)
+			modulo[i] = atoi(vect.at(i).c_str());
+
+		vect.clear();
+		line = QString::fromAscii(fAway.readLine(1024));
+		vect = tokenize(line.toStdString(), " -");
+		for (unsigned int i = 0; i < vect.size(); i++)
+			titolari[i] = atoi(vect.at(i).c_str());
+
+		vect.clear();
+		line = QString::fromAscii(fAway.readLine(1024));
+		vect = tokenize(line.toStdString(), " -");
+		for (unsigned int i = 0; i < vect.size(); i++)
+			riserve[i] = atoi(vect.at(i).c_str());
+
+		lineReadCounter = 0;
+
+		for (unsigned int i = 0; i < titolari[0]; i++) {
+			line = QString::fromAscii(fAway.readLine(1024));
+			lineReadCounter++;
+			str += line;
+		}
+
+		for (unsigned int i = 0; i < riserve[0]; i++) {
+			line = QString::fromAscii(fAway.readLine(1024));
+			lineReadCounter++;
+			str += line;
+		}
+
+		while (!(lineReadCounter == ruolo[0])) {
+			line = QString::fromAscii(fAway.readLine(1024));
+			lineReadCounter++;
+		}
+
+		for (unsigned int i = 0; i < titolari[1]; i++) {
+			line = QString::fromAscii(fAway.readLine(1024));
+			lineReadCounter++;
+			str += line;
+		}
+
+		for (unsigned int i = 0; i < riserve[1]; i++) {
+			line = QString::fromAscii(fAway.readLine(1024));
+			lineReadCounter++;
+			str += line;
+		}
+
+		while (!(lineReadCounter == (ruolo[0] + ruolo[1]))) {
+			line = QString::fromAscii(fAway.readLine(1024));
+			lineReadCounter++;
+		}
+
+		for (unsigned int i = 0; i < titolari[2]; i++) {
+			line = QString::fromAscii(fAway.readLine(1024));
+			lineReadCounter++;
+			str += line;
+		}
+
+		for (unsigned int i = 0; i < riserve[2]; i++) {
+			line = QString::fromAscii(fAway.readLine(1024));
+			lineReadCounter++;
+			str += line;
+		}
+
+		while (!(lineReadCounter == (ruolo[0] + ruolo[1] + ruolo[2]))) {
+			line = QString::fromAscii(fAway.readLine(1024));
+			lineReadCounter++;
+		}
+
+		for (unsigned int i = 0; i < titolari[3]; i++) {
+			line = QString::fromAscii(fAway.readLine(1024));
+			lineReadCounter++;
+			str += line;
+		}
+
+		for (unsigned int i = 0; i < riserve[3]; i++) {
+			line = QString::fromAscii(fAway.readLine(1024));
+			lineReadCounter++;
+			str += line;
+		}
+
+		while (!(lineReadCounter == (ruolo[0] + ruolo[1] + ruolo[2] + ruolo[3]))) {
+			line = QString::fromAscii(fAway.readLine(1024));
+			lineReadCounter++;
+		}
+
+		fOut.write(str.toAscii());
+
+		LOG(DEBUG, QObject::tr("Creato file squadre : <br>%1").arg(str));
+
+		fHome.close();
+		fAway.close();
+		fOut.close();
+		return EXIT_SUCCESS;
+	} else {
+		LOG(ERROR,
+				"In ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> download was not successful.");
+		return EXIT_FAILURE;
+	}
 }

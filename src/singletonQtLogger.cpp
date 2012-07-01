@@ -212,26 +212,16 @@ void singletonQtLogger::onlineClicked() {
 		chooseFiles->show();
 		chooseFiles->exec();
 
-		ChooseFileFromAListDialog * chooseFileFromAListDialog =
-				new ChooseFileFromAListDialog(THE_REPO->getListaFormazioni(),
-						THE_REPO->getListaGazFiles(), THE_LOGGER);
-		chooseFileFromAListDialog->show();
-		chooseFileFromAListDialog->exec();
+		if (!chooseFiles->wasCancelClicked()) {
+			THE_REPO->fileGazzetta = chooseFiles->getFileGazzetta();
+			THE_REPO->fileFormazioni = chooseFiles->getFileFormazioni();
 
-		if (!chooseFileFromAListDialog->wasCancelClicked()) {
-			THE_REPO->fileGazzetta =
-					chooseFileFromAListDialog->getFileGazzetta();
-			THE_REPO->fileFormazioni =
-					chooseFileFromAListDialog->getFileFormazioni();
-
-			//			LOG(
-			//					DEBUG,
-			//					"In void singletonQtLogger::onlineClicked() --> fileGazzetta : "
-			//							+ THE_REPO->fileGazzetta);
-			//			LOG(
-			//					DEBUG,
-			//					"In void singletonQtLogger::onlineClicked() --> fileFormazioni : "
-			//							+ THE_REPO->fileFormazioni);
+			LOG(DEBUG,
+					"In void singletonQtLogger::onlineClicked() --> fileGazzetta : "
+							+ THE_REPO->fileGazzetta);
+			LOG(DEBUG,
+					"In void singletonQtLogger::onlineClicked() --> fileFormazioni : "
+							+ THE_REPO->fileFormazioni);
 
 			emit(this->onOffClickedFinished());
 
@@ -279,7 +269,7 @@ QString singletonQtLogger::getVersion(void) {
 	return this->version;
 }
 void singletonQtLogger::goOn() {
-	//	LOG(DEBUG, "In singletonQtLogger::goOn().");
+	LOG(DEBUG, "In singletonQtLogger::goOn().");
 
 	// --> lettura file Gazzetta e Formazioni
 	GazzettaFileReader * gazzettaFileReader = new GazzettaFileReader(
@@ -388,16 +378,16 @@ bool singletonQtLogger::checkForUpdates() {
 
 	urls->push_back(QUrl::fromLocalFile(url));
 
-	//	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates() --> url : " + url);
+	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates() --> url : " + url);
 
 	std::vector<QString> *savePaths = new std::vector<QString>;
-	QString savePath = THE_REPO->getDownloadPath() + "/updates.xml";
+	QString savePath = THE_REPO->getDownloadPath() + "updates.xml";
 	savePaths->push_back(savePath);
 
-	//	LOG(
-	//			DEBUG,
-	//			"In void singletonQtLogger::checkForUpdates() --> savePath : "
-	//					+ savePath);
+	LOG(
+			DEBUG,
+			"In void singletonQtLogger::checkForUpdates() --> savePath : "
+					+ savePath);
 
 	Downloader updatesXmlDownloader(THE_LOGGER, urls, savePaths, TRUE);
 

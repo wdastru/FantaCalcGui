@@ -253,8 +253,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>151</width>
-            <height>62</height>
+            <width>758</width>
+            <height>392</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_10">
@@ -346,4 +346,7 @@
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections/>
+ <slots>
+  <slot>quit()</slot>
+ </slots>
 </ui>
