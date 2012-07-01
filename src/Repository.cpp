@@ -6,32 +6,42 @@
  */
 
 #include "Repository.h"
+#include "defines.h"
+#include "StringModifier.h"
 
 #include <stdlib.h>
 #include <QFile>
+#include <QtCore/QDebug>
 
 Repository::Repository() {
 	/*
 	 * DEFAULTS
 	 */
-	this->formazioniUrl
-			= "http://www.cim.unito.it/private/fantacalcio/777/formazioni/";
-	this->gazzettaUrl
-			= "http://www.cim.unito.it/private/fantacalcio/777/filesGazzetta/";
+	this->formazioniUrl =
+			"http://www.cim.unito.it/private/fantacalcio/777/formazioni/";
+	this->gazzettaUrl =
+			"http://www.cim.unito.it/private/fantacalcio/777/filesGazzetta/";
 	this->debugStatus = FALSE; // temporaneo prima che venga letto l'ini file.
 
-	char * UserProfile = getenv("USERPROFILE");
+#ifdef WIN32
+	this->UserProfile = QString::fromAscii(getenv("USERPROFILE"));
+#else
+	this->UserProfile = "/home/" + QString::fromAscii(getenv("USERNAME"));
+#endif
 
-	this->formazioniPath = QString::fromLocal8Bit(UserProfile)
-			+ "\\FantaCalcGui\\formazioni";
-	this->gazzettaPath = QString::fromLocal8Bit(UserProfile)
-			+ "\\FantaCalcGui\\gazzetta";
-	this->risultatiPath = QString::fromLocal8Bit(UserProfile)
-			+ "\\FantaCalcGui\\risultati";
-	this->downloadPath = QString::fromLocal8Bit(UserProfile)
-			+ "\\FantaCalcGui\\download";
-	this->listePath = QString::fromLocal8Bit(UserProfile)
-			+ "\\FantaCalcGui\\liste";
+	qDebug() << "UserProfile = '" + this->UserProfile+"'";
+
+	this->formazioniPath = this->UserProfile + "/FantaCalcGui/formazioni/";
+	this->gazzettaPath = this->UserProfile + "/FantaCalcGui/gazzetta/";
+	this->risultatiPath = this->UserProfile + "/FantaCalcGui/risultati/";
+	this->downloadPath = this->UserProfile + "/FantaCalcGui/download/";
+	this->listePath = this->UserProfile + "/FantaCalcGui/liste/";
+
+	STR_MOD->fixSlashes(this->formazioniPath);
+	STR_MOD->fixSlashes(this->gazzettaPath);
+	STR_MOD->fixSlashes(this->risultatiPath);
+	STR_MOD->fixSlashes(this->downloadPath);
+	STR_MOD->fixSlashes(this->listePath);
 
 	this->fontVariableWidthSmall.setFamily(QString::fromUtf8("Candara"));
 	this->fontVariableWidthSmall.setPointSize(10);

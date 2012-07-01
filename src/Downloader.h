@@ -91,6 +91,7 @@ private:
 	bool hasBeenQuitted;
 	unsigned int downloadSuccesses;
 	unsigned int downloadFailures;
+	bool silent;
 
 };
 

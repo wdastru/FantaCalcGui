@@ -1,12 +1,16 @@
 #ifndef SINGLETONQTLOGGER_H
 #define SINGLETONQTLOGGER_H
 
-#include <QWidget>
-#include <QString>
+#include <QtGui/QWidget>
+#include <QtCore/QString>
 #include "ui_singletonQtLogger.h"
+
+class IniFilePopulator;
 
 class singletonQtLogger: public QWidget {
 Q_OBJECT
+
+friend class IniFilePopulator;
 
 public:
 	static singletonQtLogger* Inst();
@@ -20,6 +24,7 @@ public:
 	QString getVersion(void);
 	void setLogFileName(QString);
 	bool checkForUpdates();
+	bool checkForUpdates_old();
 
 private slots:
 	void saveLogAndClose();

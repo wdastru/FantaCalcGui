@@ -1,8 +1,13 @@
 #include <QtCore/QString>
 #include <QtCore/QTextStream>
+#include <QtCore/QList>
+#include <QtCore/QHash>
+#include <QtCore/QDebug>
 #include <QtGui/QMessageBox>
-#include <QTime>
-#include <QFile>
+#include <QtXml/QDomDocument>
+#include <QtCore/QTime>
+#include <QtCore/QFile>
+#include <QtCore/QObject>
 
 #include "defines.h"
 #include "singletonQtLogger.h"
@@ -18,6 +23,7 @@
 #include "Fanta.h"
 
 #include <vector>
+#include <string>
 
 singletonQtLogger* singletonQtLogger::pInstance = NULL;
 singletonQtLogger* singletonQtLogger::Inst() {
@@ -27,7 +33,7 @@ singletonQtLogger* singletonQtLogger::Inst() {
 	return pInstance;
 }
 singletonQtLogger::singletonQtLogger(QWidget *parent) :
-	QWidget(parent) {
+		QWidget(parent) {
 	this->ui.setupUi(this);
 	this->init();
 	this->show();
@@ -38,44 +44,36 @@ void singletonQtLogger::init() {
 singletonQtLogger::~singletonQtLogger() {
 }
 void singletonQtLogger::Logging(QString type, QString message) {
-	this->fileContent += (message + "\n");
 
-	if (type == "INFO")
+	if (type == "INFO") {
+		this->ui.plainTextEdit->appendHtml(" " + message);
+	} else if (type == "ERROR") {
 		this->ui.plainTextEdit->appendHtml(
-				"[" + QTime::currentTime().toString("hh:mm:ss.zzz")
-						+ "] INFO    : " + message);
-	else if (type == "ERROR")
-		this->ui.plainTextEdit->appendHtml(
-				"<span style='color:#FF0000;'>["
-						+ QTime::currentTime().toString("hh:mm:ss.zzz")
-						+ "] ERROR   : " + message + "</span>");
-	else if (type == "DEBUG") {
+				"<span style='color:#FF0000;'> ERROR : " + message + "</span>");
+	} else if (type == "DEBUG") {
 		if (THE_REPO->debugStatus) {
-			this->ui.plainTextEdit->appendHtml(
-					"[" + QTime::currentTime().toString("hh:mm:ss.zzz")
-							+ "] DEBUG   : " + message);
+			this->ui.plainTextEdit->appendHtml(" " + message);
 		}
-	} else if (type == "FATAL")
+	} else if (type == "FATAL") {
 		this->ui.plainTextEdit->appendHtml(
-				"<span style='color:#FF0000; font-weight:bold'>["
-						+ QTime::currentTime().toString("hh:mm:ss.zzz")
-						+ "] FATAL   : " + message + "</span>");
-	else if (type == "WARN")
+				"<span style='color:#FF0000; font-weight:bold'> FATAL ERROR : "
+						+ message + "</span>");
+	} else if (type == "WARN") {
 		this->ui.plainTextEdit->appendHtml(
-				"<span style='color:#FF8800;'>["
-						+ QTime::currentTime().toString("hh:mm:ss.zzz")
-						+ "] WARNING : " + message + "</span>");
-	else if (type == "FILE") {
+				"<span style='color:#FF8800;'> WARNING : " + message
+						+ "</span>");
+	} else if (type == "FILE") {
 		;
 	} else if (type == "UPDATE") {
 		this->ui.plainTextEdit->appendHtml(
-				"<span style='color:#00CC00; font-weight:bold'>["
-						+ QTime::currentTime().toString("hh:mm:ss.zzz")
-						+ "] UPDATE : " + message + "</span>");
+				"<span style='color:#00CC00; font-weight:bold'> UPDATE : "
+						+ message + "</span>");
 	} else
 		this->ui.plainTextEdit->appendHtml(
-				"[" + QTime::currentTime().toString("hh:mm:ss.zzz")
-						+ "] !!!! : Type " + type + " not recognized.");
+				" !!!! : Type " + type + " not recognized.");
+
+	this->fileContent += (message + "<br/>");
+
 	return;
 }
 void singletonQtLogger::setTitle(QString _title) {
@@ -90,18 +88,18 @@ void singletonQtLogger::saveLogFile() {
 	QFile * file = new QFile;
 
 	if (this->ui.outputFileNameLineEdit->text().isEmpty()) {
-		this->setLogFileName(THE_MANAGER->getWorkDir() + "log.txt");
+		QString logFileName = THE_MANAGER->getWorkDir() + "\\log.txt";
+		STR_MOD->fixSlashes(logFileName);
+		this->setLogFileName(logFileName);
 		file->setFileName(this->logFileName);
-		this->Inst()->Logging(
-				"DEBUG",
-				"In singletonQtLogger::saveLogFile() --> logFileName is empty. Continue with "
+		this->Inst()->Logging("DEBUG",
+				"In singletonQtLogger::saveLogFile() --> logFileName is empty.<br>Saving to "
 						+ this->logFileName);
 	} else {
 		file->setFileName(
 				THE_REPO->risultatiPath + "\\"
 						+ this->ui.outputFileNameLineEdit->text());
-		this->Inst()->Logging(
-				"DEBUG",
+		this->Inst()->Logging("DEBUG",
 				"In singletonQtLogger::saveLogFile() --> logFileName is "
 						+ this->logFileName);
 	}
@@ -129,7 +127,7 @@ void singletonQtLogger::saveLogFile() {
 		QMessageBox msgBox;
 		msgBox.setWindowTitle("File cannot be saved !");
 		msgBox.setInformativeText(
-				tr("Unable to save the file %1: %2.") .arg(this->logFileName).arg(
+				tr("Unable to save the file %1: %2.").arg(this->logFileName).arg(
 						file->errorString()));
 		msgBox.setStandardButtons(QMessageBox::Ok);
 		msgBox.setDefaultButton(QMessageBox::Ok);
@@ -137,18 +135,23 @@ void singletonQtLogger::saveLogFile() {
 		msgBox.setFont(THE_REPO->fontVariableWidthSmall);
 		msgBox.exec();
 
-		//		QMessageBox::information(
-		//				this,
-		//				tr("HTTP"),
-		//				tr("Unable to save the file %1: %2.") .arg(this->logFileName).arg(
-		//						file->errorString()));
 		return;
 	}
 
+	fileContent.replace("<br>", "\n");
 	fileContent.replace("<br/>", "\n");
 	fileContent.replace("<br />", "\n");
 	fileContent.replace("<pre>", "");
 	fileContent.replace("</pre>", "\n");
+	fileContent.replace("&nbsp;", " ");
+	fileContent.replace("<span style='color:#FF0000;'> ERROR : ", "");
+	fileContent.replace(
+			"<span style='color:#FF0000; font-weight:bold'> FATAL ERROR : ",
+			"");
+	fileContent.replace("<span style='color:#FF8800;'> WARNING : ", "");
+	fileContent.replace(
+			"<span style='color:#00CC00; font-weight:bold'> UPDATE : ", "");
+	fileContent.replace("</span>", "\n");
 
 	fileContent += "\n File prodotto da FantaCalcGui.exe " + this->getVersion()
 			+ "\n";
@@ -173,37 +176,34 @@ void singletonQtLogger::configClicked() {
 	THE_CONFIGURATOR->exec();
 }
 void singletonQtLogger::onlineClicked() {
-	LOG(DEBUG,
-			"In void singletonQtLogger::onlineClicked() : network will be accessed.");
+	LOG(DEBUG, "Modalita' online<br>");
 
-	LOG(
-			DEBUG,
-			"In void singletonQtLogger::onlineClicked() --> THE_REPO->getFileFormazioniUrl() : "
-					+ THE_REPO->getFileFormazioniUrl());
-	LOG(
-			DEBUG,
-			"In void singletonQtLogger::onlineClicked() --> THE_REPO->getFileGazzettaUrl() : "
-					+ THE_REPO->getFileGazzettaUrl());
-	LOG(
-			DEBUG,
-			"In void singletonQtLogger::onlineClicked() --> THE_REPO->getListePath : "
-					+ THE_REPO->getListePath());
+	//	LOG(
+	//			DEBUG,
+	//			"In void singletonQtLogger::onlineClicked() --> THE_REPO->getFileFormazioniUrl() : "
+	//					+ THE_REPO->getFileFormazioniUrl());
+	//	LOG(
+	//			DEBUG,
+	//			"In void singletonQtLogger::onlineClicked() --> THE_REPO->getFileGazzettaUrl() : "
+	//					+ THE_REPO->getFileGazzettaUrl());
+	//	LOG(
+	//			DEBUG,
+	//			"In void singletonQtLogger::onlineClicked() --> THE_REPO->getListePath : "
+	//					+ THE_REPO->getListePath());
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	urls->push_back(QUrl::fromLocalFile(THE_REPO->getFileFormazioniUrl()));
 	urls->push_back(QUrl::fromLocalFile(THE_REPO->getFileGazzettaUrl()));
 
-	std::vector<QString> * savePaths = new std::vector<QString>;
+	std::vector < QString > *savePaths = new std::vector<QString>;
 	savePaths->push_back(THE_REPO->getListePath() + "/listaFormazioni.txt");
 	savePaths->push_back(THE_REPO->getListePath() + "/listaGazFiles.txt");
 
 	Downloader listsDownloader(THE_LOGGER, urls, savePaths, TRUE);
-//	listsDownloader.show();
-//	listsDownloader.exec();
 
 	if (listsDownloader.requestSucceded()) {
-		LOG(DEBUG,
-				"In singletonQtLogger::onlineClicked() --> the download of files succeded.");
+		//		LOG(DEBUG,
+		//				"In singletonQtLogger::onlineClicked() --> the download of files succeded.");
 
 		ChooseFileFromAListDialog * chooseFileFromAListDialog =
 				new ChooseFileFromAListDialog(THE_REPO->getListaFormazioni(),
@@ -212,25 +212,24 @@ void singletonQtLogger::onlineClicked() {
 		chooseFileFromAListDialog->exec();
 
 		if (!chooseFileFromAListDialog->wasCancelClicked()) {
-			THE_REPO->fileGazzetta
-					= chooseFileFromAListDialog->getFileGazzetta();
-			THE_REPO->fileFormazioni
-					= chooseFileFromAListDialog->getFileFormazioni();
+			THE_REPO->fileGazzetta =
+					chooseFileFromAListDialog->getFileGazzetta();
+			THE_REPO->fileFormazioni =
+					chooseFileFromAListDialog->getFileFormazioni();
 
-			LOG(
-					DEBUG,
-					"In void singletonQtLogger::onlineClicked() --> fileGazzetta : "
-							+ THE_REPO->fileGazzetta);
-			LOG(
-					DEBUG,
-					"In void singletonQtLogger::onlineClicked() --> fileFormazioni : "
-							+ THE_REPO->fileFormazioni);
+			//			LOG(
+			//					DEBUG,
+			//					"In void singletonQtLogger::onlineClicked() --> fileGazzetta : "
+			//							+ THE_REPO->fileGazzetta);
+			//			LOG(
+			//					DEBUG,
+			//					"In void singletonQtLogger::onlineClicked() --> fileFormazioni : "
+			//							+ THE_REPO->fileFormazioni);
 
 			emit(this->onOffClickedFinished());
 
 		} else {
-			LOG(
-					DEBUG,
+			LOG(DEBUG,
 					"In void singletonQtLogger::onlineClicked() --> Cancel clicked in ChooseFileFromAListDialog.");
 			return;
 		}
@@ -242,8 +241,7 @@ void singletonQtLogger::onlineClicked() {
 	}
 }
 void singletonQtLogger::offlineClicked() {
-	LOG(DEBUG,
-			"In singletonQtLogger::offlineClicked() --> Network will not be accessed.");
+	LOG(DEBUG, "Modalita' offline<br>");
 
 	NoNetFileDialog * noNetFileDialog = new NoNetFileDialog(THE_LOGGER);
 	noNetFileDialog->exec();
@@ -252,21 +250,18 @@ void singletonQtLogger::offlineClicked() {
 		THE_REPO->fileFormazioni = noNetFileDialog->getFileNameSquadre();
 		THE_REPO->fileGazzetta = noNetFileDialog->getFileNameGazzetta();
 
-		LOG(
-				DEBUG,
-				"In void singletonQtLogger::offlineClicked() --> fileGazzetta : "
-						+ THE_REPO->fileGazzetta);
-		LOG(
-				DEBUG,
-				"In void singletonQtLogger::offlineClicked() --> fileFormazioni : "
-						+ THE_REPO->fileFormazioni);
+		LOG(DEBUG,
+				QObject::tr("File gazzetta : %1").arg(THE_REPO->fileGazzetta));
+		LOG(DEBUG,
+				QObject::tr("File formazioni : %1").arg(
+						THE_REPO->fileFormazioni));
 
 		emit(this->onOffClickedFinished());
 
 	} else {
-		LOG(
-				DEBUG,
-				"In void singletonQtLogger::offlineClicked() --> noNetFileDialog has been aborted.");
+		//		LOG(
+		//				DEBUG,
+		//				"In void singletonQtLogger::offlineClicked() --> noNetFileDialog has been aborted.");
 		return;
 	}
 }
@@ -277,7 +272,7 @@ QString singletonQtLogger::getVersion(void) {
 	return this->version;
 }
 void singletonQtLogger::goOn() {
-	LOG(DEBUG, "In singletonQtLogger::goOn().");
+	//	LOG(DEBUG, "In singletonQtLogger::goOn().");
 
 	// --> lettura file Gazzetta e Formazioni
 	GazzettaFileReader * gazzettaFileReader = new GazzettaFileReader(
@@ -296,11 +291,11 @@ void singletonQtLogger::goOn() {
 			THE_VIEWER->exec();
 
 			if (THE_VIEWER->getResult() == 1) {
-				LOG(DEBUG,
-						"In singletonQtLogger::goOn() --> THE_VIEWER returned 1.");
+				//				LOG(DEBUG,
+				//						"In singletonQtLogger::goOn() --> THE_VIEWER returned 1.");
 			} else {
-				LOG(DEBUG,
-						"In singletonQtLogger::goOn() --> THE_VIEWER returned 0.");
+				//				LOG(DEBUG,
+				//						"In singletonQtLogger::goOn() --> THE_VIEWER returned 0.");
 				break;
 			}
 
@@ -308,15 +303,16 @@ void singletonQtLogger::goOn() {
 
 			retVal = formazioniFileReader->execute();
 
-			LOG(
-					DEBUG,
+			LOG(DEBUG,
 					"In singletonQtLogger::goOn() --> formazioniFileReader::execute() returned "
 							+ my::toQString<unsigned int>(retVal) + ".");
+
 		} catch (QString& str) {
-			LOG(
-					DEBUG,
+
+			LOG(DEBUG,
 					"In singletonQtLogger::goOn() --> exception caught! retVal : "
 							+ my::toQString<unsigned int>(retVal) + ", " + str);
+
 		}
 	} while (retVal != FORMFILEREAD_OK);
 	// <-- lettura file Gazzetta e Formazioni
@@ -340,15 +336,20 @@ void singletonQtLogger::goOn() {
 						+ "_" + QFileInfo(THE_REPO->fileGazzetta).fileName());
 		this->setLogFileName(THE_REPO->getRisultatiPath() + "/" + fileName);
 
-		LOG(
-				DEBUG,
-				"In singletonQtLogger::goOn() --> file name temporaneo : "
-						+ fileName + ".");
+		LOG(DEBUG,
+				QObject::tr(
+						"In singletonQtLogger::goOn() --> file name temporaneo : %1").arg(
+						fileName));
 
 		FANTA->printTitolo(
 				FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
+
 		FANTA->printRiepilogo();
 		FANTA->printFormations();
+
+		LOG(INFO, "<br/><br/>&nbsp;&nbsp;&nbsp;DETTAGLIO SQUADRE : <br/>");
+
+		FANTA->printPlayersInfo();
 
 		this->ui.outputFileNameLineEdit->setEnabled(true);
 		this->ui.outputFileNameLineEdit->setText(fileName);
@@ -361,106 +362,169 @@ void singletonQtLogger::setLogFileName(QString filename) {
 	this->logFileName = filename;
 }
 bool singletonQtLogger::checkForUpdates() {
-	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates.");
+
+	//	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates().");
+
+	QStringList current = this->getVersion().split(QRegExp("\\\."));
+	int verCurrent = current.at(0).toInt();
+	int majCurrent = current.at(1).toInt();
+	int minCurrent = current.at(2).toInt();
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	QString url = THE_REPO->getFileFormazioniUrl();
 	unsigned int pos = url.lastIndexOf("/");
 	url = url.left(pos);
 	pos = url.lastIndexOf("/");
-	url = url.left(pos) + "/downloads.txt";
+	url = url.left(pos);
+	pos = url.lastIndexOf("/");
+	url = url.left(pos) + "/download/updates.xml";
 
 	urls->push_back(QUrl::fromLocalFile(url));
 
-	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates() --> url : " + url);
+	//	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates() --> url : " + url);
 
-	std::vector<QString> * savePaths = new std::vector<QString>;
-	QString savePath = THE_REPO->getDownloadPath() + "/downloads.txt";
+	std::vector < QString > *savePaths = new std::vector<QString>;
+	QString savePath = THE_REPO->getDownloadPath() + "/updates.xml";
 	savePaths->push_back(savePath);
 
-	LOG(
-			DEBUG,
-			"In void singletonQtLogger::checkForUpdates() --> savePath : "
-					+ savePath);
+	//	LOG(
+	//			DEBUG,
+	//			"In void singletonQtLogger::checkForUpdates() --> savePath : "
+	//					+ savePath);
 
-	Downloader downloadsDownloader(THE_LOGGER, urls, savePaths, TRUE);
-//	downloadsDownloader.show();
-//	downloadsDownloader.exec();
+	Downloader updatesXmlDownloader(THE_LOGGER, urls, savePaths, TRUE);
 
-	if (downloadsDownloader.requestSucceded()) { // download succeded
-		QFile *file = new QFile(savePath);
-		std::vector<QString> content;
-		std::vector<QString> status;
-		std::vector<QString> availableVersions;
+	if (updatesXmlDownloader.requestSucceded()) { // download succeded
 
-		if (file->exists()) {
-			file->open(QIODevice::ReadOnly);
-			QTextStream in(file);
+		LOG(DEBUG,
+				"Scaricato le informazioni relative agli aggiornamenti disponibili");
 
-			int i = 0;
-			while (!in.atEnd()) {
-				content.push_back(in.readLine(0));//reads a line of text file
+		std::vector < QString > content;
+		std::vector < QString > status;
+		std::vector < QString > availableVersions;
 
-				int start = content.at(i).indexOf(QRegExp("[0-9]"));
-				int end = content.at(i).lastIndexOf(QRegExp("[0-9]")) + 1;
+		QDomDocument doc("updates");
+		QFile file(savePath);
+		if (!file.open(QIODevice::ReadOnly))
+			return false;
+		if (!doc.setContent(&file)) {
+			file.close();
+			return false;
+		}
+		file.close();
 
-				QString versionAvailable =
-						content.at(i).mid(start, end - start);
+		// print out the element names of all elements that are direct children
+		// of the outermost element.
+		QDomElement docElem = doc.documentElement();
 
-				QStringList current = this->getVersion().split(QRegExp("\\\."));
-				int verCurrent = current.at(0).toInt();
-				int majCurrent = current.at(1).toInt();
-				int minCurrent = current.at(2).toInt();
+		QList < QList<QHash<QString, QString> > > listOfResources;
 
-				QStringList available = versionAvailable.split(QRegExp("\\\."));
-				int verAvailable = available.at(0).toInt();
-				int majAvailable = available.at(1).toInt();
-				int minAvailable = available.at(2).toInt();
+		QDomNode n = docElem.firstChild();
+		QHash < QString, QString > hash;
 
-				availableVersions.push_back(versionAvailable);
+		while (!n.isNull()) {
 
-				if (verAvailable > verCurrent) {
-					status.push_back("new");
-				} else if (verAvailable == verCurrent) {
-					if (majAvailable > majCurrent) {
-						status.push_back("new");
-					} else if (majAvailable == majCurrent) {
-						if (minAvailable > minCurrent) {
-							status.push_back("new");
-						} else {
-							status.push_back("old");
+			hash.clear();
+			QList < QHash<QString, QString> > list;
+
+			QDomElement e = n.toElement(); // try to convert the node to an element.
+			if (!e.isNull()) {
+
+				QDomNode m = n.firstChild();
+				while (!m.isNull()) {
+					QDomElement f = m.toElement(); // try to convert the node to an element.
+					if (!f.isNull()) {
+
+						if (f.tagName() == "file") {
+							hash.insert("file", f.text());
+						} else if (f.tagName() == "version") {
+							hash.insert("version", f.text());
+
+							QStringList available = f.text().split(
+									QRegExp("\\\."));
+							int verAvailable = available.at(0).toInt();
+							int majAvailable = available.at(1).toInt();
+							int minAvailable = available.at(2).toInt();
+
+							availableVersions.push_back(f.text());
+
+							if (verAvailable > verCurrent) {
+								hash.insert("status", "new");
+							} else if (verAvailable == verCurrent) {
+								if (majAvailable > majCurrent) {
+									hash.insert("status", "new");
+								} else if (majAvailable == majCurrent) {
+									if (minAvailable > minCurrent) {
+										hash.insert("status", "new");
+									} else if (minAvailable == minCurrent) {
+										hash.insert("status", "current");
+									} else {
+										hash.insert("status", "old");
+									}
+								} else {
+									hash.insert("status", "old");
+								}
+							} else {
+								hash.insert("status", "old");
+							}
+
+						} else if (f.tagName() == "description") {
+							hash.insert("description", f.text());
+						} else if (f.tagName() == "new") {
+							hash.insert("new", f.text());
 						}
-					} else {
-						status.push_back("old");
-					}
-				} else {
-					status.push_back("old");
-				}
 
-				LOG(
-						DEBUG,
-						"In void singletonQtLogger::checkForUpdates() --> content.at("
-								+ my::toQString<int>(i) + ") : "
-								+ content.at(i) + ", version : "
-								+ availableVersions.at(i) + " (" + status.at(i)
-								+ ")");
-				++i;
+					}
+					m = m.nextSibling();
+				}
+				list.push_back(hash);
 			}
 
-			for (int i = 0; i < content.size(); ++i) {
+			listOfResources.push_back(list);
 
-				if (status.at(i) == "new") {
-					LOG(
-							UPDATE,
+			//			for (int i = 0; i < list.size(); ++i) {
+			//				LOG(
+			//						DEBUG,
+			//						"In void singletonQtLogger::checkForUpdates() --> <br>hash[\"file\"] : "
+			//								+ hash["file"] + ", <br>hash[\"version\"] : "
+			//								+ hash["version"]
+			//								+ ", <br>hash[\"description\"] : "
+			//								+ hash["description"]
+			//								+ ", <br>hash[\"status\"] : " + hash["status"]
+			//								+ ", <br>hash[\"new\"] : " + hash["new"]);
+			//			}
+
+			n = n.nextSibling();
+		}
+
+		for (int i = 0; i < listOfResources.size(); ++i) {
+			for (int j = 0; j < listOfResources.at(i).size(); ++j) {
+
+				if (listOfResources.at(i).at(j)["status"] == "new") {
+					LOG(UPDATE,
 							"E' possibile scaricare la versione "
-									+ availableVersions.at(i) + " : "
-									+ content.at(i));
+									+ listOfResources.at(i).at(j)["version"]
+									+ " : "
+									+ listOfResources.at(i).at(j)["file"] + " ("
+									+ listOfResources.at(i).at(j)["description"]
+									+ ")<br>changes : <br>"
+									+ listOfResources.at(i).at(j)["new"]);
+				}
+			}
+		}
+
+		for (int i = 0; i < listOfResources.size(); ++i) {
+			for (int j = 0; j < listOfResources.at(i).size(); ++j) {
+
+				if (listOfResources.at(i).at(j)["status"] == "new") {
 
 					QMessageBox msgBox;
 					msgBox.setWindowTitle("HTTP");
 					msgBox.setInformativeText(
-							tr("New version available. Download %1 ?").arg(
-									content.at(i)));
+							tr("Version %1 available.\nDownload \n%2\n(%3) ?").arg(
+									listOfResources.at(i).at(j)["version"]).arg(
+									listOfResources.at(i).at(j)["file"]).arg(
+									listOfResources.at(i).at(j)["description"]));
 					msgBox.setStandardButtons(
 							QMessageBox::Yes | QMessageBox::No);
 					msgBox.setDefaultButton(QMessageBox::No);
@@ -469,7 +533,7 @@ bool singletonQtLogger::checkForUpdates() {
 					int answer = msgBox.exec();
 
 					if (answer == QMessageBox::Yes) {
-						std::vector<QUrl> * urls = new std::vector<QUrl>;
+						std::vector < QUrl > *urls = new std::vector<QUrl>;
 
 						QString url = THE_REPO->getFileFormazioniUrl();
 						unsigned int pos = url.lastIndexOf("/");
@@ -477,51 +541,49 @@ bool singletonQtLogger::checkForUpdates() {
 						pos = url.lastIndexOf("/");
 						url = url.left(pos);
 						pos = url.lastIndexOf("/");
-						url = url.left(pos) + "/download/" + content.at(i);
+						url = url.left(pos) + "/download/"
+								+ listOfResources.at(i).at(j)["file"];
 
 						urls->push_back(QUrl::fromLocalFile(url));
 
-						LOG(
-								DEBUG,
+						LOG(DEBUG,
 								"In void singletonQtLogger::checkForUpdates() --> url : "
 										+ url);
 
-						std::vector<QString> * savePaths = new std::vector<
+						std::vector < QString > *savePaths = new std::vector<
 								QString>;
 						QString savePath = THE_REPO->getDownloadPath() + "/"
-								+ content.at(i);
+								+ listOfResources.at(i).at(j)["file"];
 						savePaths->push_back(savePath);
 
-						LOG(
-								DEBUG,
+						LOG(DEBUG,
 								"In void singletonQtLogger::checkForUpdates() --> savePath : "
 										+ savePath);
 
-						Downloader updatesDownloader(THE_LOGGER, urls,
-								savePaths);
-						if (downloadsDownloader.requestSucceded()) { // download succeded
-							LOG(
-									DEBUG,
+						Downloader updateDownloader(THE_LOGGER, urls, savePaths,
+								true);
+
+						if (updateDownloader.requestSucceded()) { // download succeded
+							LOG(DEBUG,
 									"In void singletonQtLogger::checkForUpdates() --> download of "
-											+ content.at(i) + " succeded.");
+											+ listOfResources.at(i).at(j)["file"]
+											+ " succeded.");
 						} else {
-							LOG(ERROR, content.at(i) + " download failed.");
+							LOG(ERROR,
+									listOfResources.at(i).at(j)["file"]
+											+ " download failed.");
 
 						}
 					}
 				}
 			}
-
-			file->close();
-		} else {
-			LOG(WARN, "Il file " + savePath + "è mancante.");
-			return false;
 		}
 
 	} else { // download failed
-		LOG(
-				WARN,
-				"Non è stato possibile scaricare le informazioni relative agli aggiornamenti disponibili.");
+		LOG(WARN,
+				"Non e' stato possibile scaricare le informazioni relative agli aggiornamenti disponibili.");
 		return false;
 	}
+
+	return true;
 }

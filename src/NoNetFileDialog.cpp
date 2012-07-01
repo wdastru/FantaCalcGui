@@ -15,7 +15,7 @@ NoNetFileDialog::NoNetFileDialog(QWidget *parent) :
 	QDialog(parent) {
 	ui.setupUi(this);
 	ui.okButton->setEnabled(false);
-	hasFinished = FALSE;
+	//hasFinished = FALSE;
 	hasBeenAborted = FALSE;
 }
 NoNetFileDialog::~NoNetFileDialog() {
@@ -23,18 +23,17 @@ NoNetFileDialog::~NoNetFileDialog() {
 }
 void NoNetFileDialog::setOpenFileNameSquadre() {
 	QString path =
-			THE_REPO->getFormazioniPath().trimmed().replace("\\",
-					"\\\\");
+			THE_REPO->getFormazioniPath().trimmed().replace("\\", "\\\\");
 
 	this->fileNameSquadre = QFileDialog::getOpenFileName(this,
 			tr("Scegli il file con le squadre."), path,
 			tr("Text Files (*.txt);;All Files (*)"));
 
 	if (!this->fileNameSquadre.isEmpty()) {
-		LOG(
-				DEBUG,
-				"In NoNetFileDialog::setOpenFileNameSquadre() --> fileNameSquadre is not empty: "
-						+ this->fileNameSquadre);
+//		LOG(
+//				DEBUG,
+//				"In NoNetFileDialog::setOpenFileNameSquadre() --> fileNameSquadre is not empty: "
+//						+ this->fileNameSquadre);
 		/*
 		 QByteArray ba = this->fileNameSquadre.toLatin1();
 
@@ -53,7 +52,7 @@ void NoNetFileDialog::setOpenFileNameSquadre() {
 		 THE_REPO->writeIniFile();
 		 */
 	} else {
-		LOG(DEBUG,
+		LOG(ERROR,
 				"In NoNetFileDialog::setOpenFileNameSquadre() --> fileNameSquadre is empty.");
 		this->fileNameSquadre = "";
 		//		openFileNameSquadreLabel->setText("");
@@ -62,21 +61,20 @@ void NoNetFileDialog::setOpenFileNameSquadre() {
 	ui.fileSquadreLineEdit->setText(this->fileNameSquadre);
 	this->enableOkButton();
 
-//	THE_MANAGER->writeIniFile();
+	//	THE_MANAGER->writeIniFile();
 }
 void NoNetFileDialog::setOpenFileNameGazzetta() {
-	QString path = THE_REPO->getGazzettaPath().trimmed().replace(
-			"\\", "\\\\");
+	QString path = THE_REPO->getGazzettaPath().trimmed().replace("\\", "\\\\");
 
 	this->fileNameGazzetta = QFileDialog::getOpenFileName(this,
 			tr("Scegli il file della gazzetta."), path,
 			tr("Text Files (*.txt);;All Files (*)"));
 
 	if (!this->fileNameGazzetta.isEmpty()) {
-		LOG(
-				DEBUG,
-				"In NoNetFileDialog::setOpenFileNameGazzetta() --> fileNameGazzetta is not empty: "
-						+ this->fileNameGazzetta);
+//		LOG(
+//				DEBUG,
+//				"In NoNetFileDialog::setOpenFileNameGazzetta() --> fileNameGazzetta is not empty: "
+//						+ this->fileNameGazzetta);
 		/*
 		 openFileNameGazzettaLabel->setText(fileNameGazzetta);
 
@@ -97,7 +95,7 @@ void NoNetFileDialog::setOpenFileNameGazzetta() {
 		 THE_REPO->writeIniFile();
 		 */
 	} else {
-		LOG(DEBUG,
+		LOG(ERROR,
 				"In NoNetFileDialog::setOpenFileNameGazzetta() --> fileNameGazzetta is empty.");
 		this->fileNameGazzetta = "";
 	}
@@ -105,7 +103,6 @@ void NoNetFileDialog::setOpenFileNameGazzetta() {
 	ui.fileGazzettaLineEdit->setText(this->fileNameGazzetta);
 	this->enableOkButton();
 
-//	THE_MANAGER->writeIniFile();
 }
 //void NoNetFileDialog::createEmptyFile() {
 //	ui.newFileLineEdit->setText("file nuovo");
@@ -126,12 +123,12 @@ QString NoNetFileDialog::getFileNameGazzetta() {
 }
 void NoNetFileDialog::okClicked() {
 	this->hasBeenAborted = FALSE;
-	this->hasFinished = TRUE;
-	this->close();
+//	LOG(DEBUG, "In NoNetFileDialog::okClicked().");
+	this->hide();
 }
 void NoNetFileDialog::cancelClicked() {
 	this->hasBeenAborted = TRUE;
-	this->hasFinished = FALSE;
+//	LOG(DEBUG, "In NoNetFileDialog::cancelClicked().");
 	this->close();
 }
 void NoNetFileDialog::closeEvent(QCloseEvent *event) {
