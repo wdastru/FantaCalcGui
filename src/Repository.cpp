@@ -26,7 +26,7 @@ Repository::Repository() {
 #ifdef WIN32
 	this->UserProfile = QString::fromAscii(getenv("USERPROFILE"));
 #else
-	this->UserProfile = "/home/" + QString::fromAscii(getenv("USERNAME"));
+	this->UserProfile = "/home/" + QString::fromAscii(getenv("USER"));
 #endif
 
 	qDebug() << "UserProfile = '" + this->UserProfile+"'";

@@ -1,5 +1,5 @@
-
 #include <QtGui/QApplication>
+#include <QtGui/QStyleFactory>
 #include <QtCore/QObject>
 #include "singletonQtLogger.h"
 #include "Repository.h"
@@ -13,6 +13,7 @@ using namespace std;
 int main(int argc, char *argv[]) {
 
 	QApplication a(argc, argv);
+	QApplication::setStyle(QStyleFactory::create("cleanlooks"));
 	a.setOrganizationName("Eptadone Software");
 	a.setApplicationName("FantaCalcGui");
 	a.setApplicationVersion("3.2.1");

@@ -90,12 +90,12 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 	QString time = QTime::currentTime().toString("hh:mm:ss.zzz");
 
 	/*
-	 * creazione di tre GroupBox:
-	 * FilesBox
-	 * HomeAwayBox
-	 * CampoNeutroBoxs
+	 *   creazione di tre GroupBox:
+	 *   FilesBox
+	 *   HomeAwayBox
+	 *   CampoNeutroBoxs
 	 *
-	 */
+	 * * * * * * * * * * * * */
 
 	if (file1->exists()) {
 		file1->open(QIODevice::ReadOnly);
@@ -104,15 +104,15 @@ ChooseFileFromAListDialog::ChooseFileFromAListDialog(QString _fileFormazioni,
 		int i = 0;
 
 		/*
-		 * creazione dei singoli radio buttons e labels
-		 * e assegnazione degli stessi a:
-		 * std::vector<QRadioButton *> home;
-		 * std::vector<QRadioButton *> away;
-		 * std::vector<QRadioButton *> neutro1;
-		 * std::vector<QRadioButton *> neutro2;
-		 * std::vector<QLabel *> labelFormazioni;
+		 *   creazione dei singoli radio buttons e labels
+		 *   e assegnazione degli stessi a:
+		 *   std::vector<QRadioButton *> home;
+		 *   std::vector<QRadioButton *> away;
+		 *   std::vector<QRadioButton *> neutro1;
+		 *   std::vector<QRadioButton *> neutro2;
+		 *   std::vector<QLabel *> labelFormazioni;
 		 *
-		 */
+		 * * * * * * * * * * * * * * * * * * * * * * * * */
 
 		while (!file1->atEnd()) {
 			file1->readLine(buf, sizeof(buf));

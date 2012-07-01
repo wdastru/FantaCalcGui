@@ -17,6 +17,7 @@
 #include "Downloader.h"
 #include "NoNetFileDialog.h"
 #include "ChooseFileFromAListDialog.h"
+#include "ChooseFiles.h"
 #include "GazzettaFileReader.h"
 #include "FormazioniFileReader.h"
 #include "FileFormazioniViewer.h"
@@ -195,7 +196,7 @@ void singletonQtLogger::onlineClicked() {
 	urls->push_back(QUrl::fromLocalFile(THE_REPO->getFileFormazioniUrl()));
 	urls->push_back(QUrl::fromLocalFile(THE_REPO->getFileGazzettaUrl()));
 
-	std::vector < QString > *savePaths = new std::vector<QString>;
+	std::vector<QString> *savePaths = new std::vector<QString>;
 	savePaths->push_back(THE_REPO->getListePath() + "/listaFormazioni.txt");
 	savePaths->push_back(THE_REPO->getListePath() + "/listaGazFiles.txt");
 
@@ -205,26 +206,22 @@ void singletonQtLogger::onlineClicked() {
 		//		LOG(DEBUG,
 		//				"In singletonQtLogger::onlineClicked() --> the download of files succeded.");
 
-		ChooseFileFromAListDialog * chooseFileFromAListDialog =
-				new ChooseFileFromAListDialog(THE_REPO->getListaFormazioni(),
-						THE_REPO->getListaGazFiles(), THE_LOGGER);
-		chooseFileFromAListDialog->show();
-		chooseFileFromAListDialog->exec();
+		ChooseFiles * chooseFiles = new ChooseFiles(
+				THE_REPO->getListaFormazioni(), THE_REPO->getListaGazFiles(),
+				THE_LOGGER);
+		chooseFiles->show();
+		chooseFiles->exec();
 
-		if (!chooseFileFromAListDialog->wasCancelClicked()) {
-			THE_REPO->fileGazzetta =
-					chooseFileFromAListDialog->getFileGazzetta();
-			THE_REPO->fileFormazioni =
-					chooseFileFromAListDialog->getFileFormazioni();
+		if (!chooseFiles->wasCancelClicked()) {
+			THE_REPO->fileGazzetta = chooseFiles->getFileGazzetta();
+			THE_REPO->fileFormazioni = chooseFiles->getFileFormazioni();
 
-			//			LOG(
-			//					DEBUG,
-			//					"In void singletonQtLogger::onlineClicked() --> fileGazzetta : "
-			//							+ THE_REPO->fileGazzetta);
-			//			LOG(
-			//					DEBUG,
-			//					"In void singletonQtLogger::onlineClicked() --> fileFormazioni : "
-			//							+ THE_REPO->fileFormazioni);
+			LOG(DEBUG,
+					"In void singletonQtLogger::onlineClicked() --> fileGazzetta : "
+							+ THE_REPO->fileGazzetta);
+			LOG(DEBUG,
+					"In void singletonQtLogger::onlineClicked() --> fileFormazioni : "
+							+ THE_REPO->fileFormazioni);
 
 			emit(this->onOffClickedFinished());
 
@@ -272,7 +269,7 @@ QString singletonQtLogger::getVersion(void) {
 	return this->version;
 }
 void singletonQtLogger::goOn() {
-	//	LOG(DEBUG, "In singletonQtLogger::goOn().");
+	LOG(DEBUG, "In singletonQtLogger::goOn().");
 
 	// --> lettura file Gazzetta e Formazioni
 	GazzettaFileReader * gazzettaFileReader = new GazzettaFileReader(
@@ -381,16 +378,16 @@ bool singletonQtLogger::checkForUpdates() {
 
 	urls->push_back(QUrl::fromLocalFile(url));
 
-	//	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates() --> url : " + url);
+	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates() --> url : " + url);
 
-	std::vector < QString > *savePaths = new std::vector<QString>;
-	QString savePath = THE_REPO->getDownloadPath() + "/updates.xml";
+	std::vector<QString> *savePaths = new std::vector<QString>;
+	QString savePath = THE_REPO->getDownloadPath() + "updates.xml";
 	savePaths->push_back(savePath);
 
-	//	LOG(
-	//			DEBUG,
-	//			"In void singletonQtLogger::checkForUpdates() --> savePath : "
-	//					+ savePath);
+	LOG(
+			DEBUG,
+			"In void singletonQtLogger::checkForUpdates() --> savePath : "
+					+ savePath);
 
 	Downloader updatesXmlDownloader(THE_LOGGER, urls, savePaths, TRUE);
 
@@ -399,9 +396,9 @@ bool singletonQtLogger::checkForUpdates() {
 		LOG(DEBUG,
 				"Scaricato le informazioni relative agli aggiornamenti disponibili");
 
-		std::vector < QString > content;
-		std::vector < QString > status;
-		std::vector < QString > availableVersions;
+		std::vector<QString> content;
+		std::vector<QString> status;
+		std::vector<QString> availableVersions;
 
 		QDomDocument doc("updates");
 		QFile file(savePath);
@@ -417,15 +414,15 @@ bool singletonQtLogger::checkForUpdates() {
 		// of the outermost element.
 		QDomElement docElem = doc.documentElement();
 
-		QList < QList<QHash<QString, QString> > > listOfResources;
+		QList<QList<QHash<QString, QString> > > listOfResources;
 
 		QDomNode n = docElem.firstChild();
-		QHash < QString, QString > hash;
+		QHash<QString, QString> hash;
 
 		while (!n.isNull()) {
 
 			hash.clear();
-			QList < QHash<QString, QString> > list;
+			QList<QHash<QString, QString> > list;
 
 			QDomElement e = n.toElement(); // try to convert the node to an element.
 			if (!e.isNull()) {
