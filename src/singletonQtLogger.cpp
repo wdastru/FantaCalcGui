@@ -89,7 +89,7 @@ void singletonQtLogger::saveLogFile() {
 	QFile * file = new QFile;
 
 	if (this->ui.outputFileNameLineEdit->text().isEmpty()) {
-		QString logFileName = THE_MANAGER->getWorkDir() + "\\log.txt";
+		QString logFileName = THE_MANAGER->getWorkDir() + "/log.txt";
 		STR_MOD->fixSlashes(logFileName);
 		this->setLogFileName(logFileName);
 		file->setFileName(this->logFileName);
@@ -98,7 +98,7 @@ void singletonQtLogger::saveLogFile() {
 						+ this->logFileName);
 	} else {
 		file->setFileName(
-				THE_REPO->risultatiPath + "\\"
+				THE_REPO->risultatiPath + "/"
 						+ this->ui.outputFileNameLineEdit->text());
 		this->Inst()->Logging("DEBUG",
 				"In singletonQtLogger::saveLogFile() --> logFileName is "
