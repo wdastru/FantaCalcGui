@@ -33,5 +33,22 @@ int main(int argc, char *argv[]) {
 
 	THE_CONFIGURATOR; // infine il configuratore viene popolato con i dati
 
+	/*
+	QFontDatabase database;
+	foreach (const QString &family, database.families()) {
+		LOG(INFO, family);
+
+		foreach (const QString &style, database.styles(family)) {
+			LOG(INFO, style);
+
+			QString sizes;
+			foreach (int points, database.smoothSizes(family, style))
+				sizes += QString::number(points) + " ";
+
+			LOG(INFO, sizes);
+		}
+	}
+	/**/
+
 	return a.exec();
 }
