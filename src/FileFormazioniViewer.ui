@@ -6,91 +6,94 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>437</height>
+    <width>611</width>
+    <height>328</height>
    </rect>
   </property>
   <property name="font">
    <font>
-    <family>Candara</family>
+    <family>DejaVu Sans</family>
     <pointsize>10</pointsize>
    </font>
   </property>
   <property name="windowTitle">
-   <string>File Formazioni Viewer</string>
+   <string>Logger</string>
   </property>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>600</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Candara</family>
-     <pointsize>16</pointsize>
-     <weight>75</weight>
-     <italic>false</italic>
-     <bold>true</bold>
-     <underline>false</underline>
-     <strikeout>false</strikeout>
-     <stylestrategy>PreferDefault</stylestrategy>
-     <kerning>true</kerning>
-    </font>
-   </property>
-   <property name="text">
-    <string>Formazioni</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QPlainTextEdit" name="plainTextEdit">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>39</y>
-     <width>580</width>
-     <height>351</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Lucida Console</family>
-     <pointsize>9</pointsize>
-    </font>
-   </property>
-   <property name="tabChangesFocus">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QDialogButtonBox" name="buttonBox">
-   <property name="geometry">
-    <rect>
-     <x>435</x>
-     <y>400</y>
-     <width>156</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Candara</family>
-     <pointsize>10</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-     <kerning>false</kerning>
-    </font>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <property name="margin">
+      <number>10</number>
+     </property>
+     <item row="1" column="0" colspan="2">
+      <widget class="QPlainTextEdit" name="plainTextEdit">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="font">
+        <font>
+         <family>Lucida Console</family>
+         <pointsize>9</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="backgroundVisible">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0" colspan="2">
+      <widget class="QLabel" name="label">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Candara</family>
+         <pointsize>16</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+         <strikeout>false</strikeout>
+         <kerning>false</kerning>
+        </font>
+       </property>
+       <property name="text">
+        <string>Formazioni</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignHCenter|Qt::AlignTop</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QDialogButtonBox" name="buttonBox">
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>plainTextEdit</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
@@ -100,12 +103,12 @@
    <slot>saveFileAndClose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>465</x>
-     <y>412</y>
+     <x>302</x>
+     <y>292</y>
     </hint>
     <hint type="destinationlabel">
-     <x>163</x>
-     <y>403</y>
+     <x>305</x>
+     <y>163</y>
     </hint>
    </hints>
   </connection>
@@ -116,18 +119,22 @@
    <slot>quit()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>512</x>
-     <y>411</y>
+     <x>302</x>
+     <y>292</y>
     </hint>
     <hint type="destinationlabel">
-     <x>299</x>
-     <y>218</y>
+     <x>305</x>
+     <y>163</y>
     </hint>
    </hints>
   </connection>
  </connections>
  <slots>
-  <slot>saveFileAndClose()</slot>
-  <slot>quit()</slot>
+  <signal>onOffClickedFinished()</signal>
+  <slot>saveLogAndClose()</slot>
+  <slot>configClicked()</slot>
+  <slot>onlineClicked()</slot>
+  <slot>offlineClicked()</slot>
+  <slot>goOn()</slot>
  </slots>
 </ui>
