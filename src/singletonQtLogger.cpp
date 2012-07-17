@@ -154,7 +154,7 @@ void singletonQtLogger::saveLogFile() {
 	fileContent.replace("<pre>", "");
 	fileContent.replace("</pre>", "\n");
 
-	fileContent += "\n File prodotto da FantaCalcGui.exe " + this->getVersion()
+	fileContent += "\n File prodotto da FantaCalcGui " + this->getVersion()
 			+ "\n";
 
 	file->write(this->fileContent.toStdString().c_str());
@@ -593,7 +593,7 @@ bool singletonQtLogger::checkForUpdates() {
 	} else { // download failed
 		LOG(
 				WARN,
-				"Non è stato possibile scaricare le informazioni relative agli aggiornamenti disponibili.");
+				"Non ï¿½ stato possibile scaricare le informazioni relative agli aggiornamenti disponibili.");
 		return false;
 	}
 
