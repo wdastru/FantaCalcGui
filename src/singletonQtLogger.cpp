@@ -154,7 +154,7 @@ void singletonQtLogger::saveLogFile() {
 			"<span style='color:#00CC00; font-weight:bold'> UPDATE : ", "");
 	fileContent.replace("</span>", "\n");
 
-	fileContent += "\n File prodotto da FantaCalcGui.exe " + this->getVersion()
+	fileContent += "\n File prodotto da FantaCalcGui " + this->getVersion()
 			+ "\n";
 
 	file->write(this->fileContent.toStdString().c_str());
