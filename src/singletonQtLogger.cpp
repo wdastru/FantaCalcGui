@@ -16,7 +16,6 @@
 #include "Repository.h"
 #include "Downloader.h"
 #include "NoNetFileDialog.h"
-#include "ChooseFileFromAListDialog.h"
 #include "ChooseFiles.h"
 #include "GazzettaFileReader.h"
 #include "FormazioniFileReader.h"
