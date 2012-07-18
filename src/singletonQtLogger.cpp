@@ -359,7 +359,7 @@ void singletonQtLogger::setLogFileName(QString filename) {
 }
 bool singletonQtLogger::checkForUpdates() {
 
-	//	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates().");
+	//	qDebug << "In void singletonQtLogger::checkForUpdates().";
 
 	QStringList current = this->getVersion().split(QRegExp("\\\."));
 	int verCurrent = current.at(0).toInt();
@@ -377,23 +377,20 @@ bool singletonQtLogger::checkForUpdates() {
 
 	urls->push_back(QUrl::fromLocalFile(url));
 
-	LOG(DEBUG, "In void singletonQtLogger::checkForUpdates() --> url : " + url);
+	// qDebug << "In void singletonQtLogger::checkForUpdates() --> url : " + url;
 
 	std::vector<QString> *savePaths = new std::vector<QString>;
 	QString savePath = THE_REPO->getDownloadPath() + "updates.xml";
 	savePaths->push_back(savePath);
 
-	LOG(
-			DEBUG,
-			"In void singletonQtLogger::checkForUpdates() --> savePath : "
-					+ savePath);
+	// qDebug << "In void singletonQtLogger::checkForUpdates() --> savePath : " + savePath;
 
 	Downloader updatesXmlDownloader(THE_LOGGER, urls, savePaths, TRUE);
 
 	if (updatesXmlDownloader.requestSucceded()) { // download succeded
 
 		LOG(DEBUG,
-				"Scaricato le informazioni relative agli aggiornamenti disponibili");
+				"Scaricato le informazioni relative agli aggiornamenti disponibili.");
 
 		std::vector<QString> content;
 		std::vector<QString> status;
@@ -478,17 +475,13 @@ bool singletonQtLogger::checkForUpdates() {
 
 			listOfResources.push_back(list);
 
-			//			for (int i = 0; i < list.size(); ++i) {
-			//				LOG(
-			//						DEBUG,
-			//						"In void singletonQtLogger::checkForUpdates() --> <br>hash[\"file\"] : "
-			//								+ hash["file"] + ", <br>hash[\"version\"] : "
-			//								+ hash["version"]
-			//								+ ", <br>hash[\"description\"] : "
-			//								+ hash["description"]
-			//								+ ", <br>hash[\"status\"] : " + hash["status"]
-			//								+ ", <br>hash[\"new\"] : " + hash["new"]);
-			//			}
+			//for (int i = 0; i < list.size(); ++i) {
+			//	qDebug() << "In void singletonQtLogger::checkForUpdates() --> \n hash[\"file\"] : " + hash["file"] \
+			//			+ ", \n hash[\"version\"] : " + hash["version"] \
+			//			+ ", \n hash[\"description\"] : " + hash["description"] \
+			//			+ ", \n hash[\"status\"] : " + hash["status"] \
+			//			+ ", \n hash[\"new\"] : " + hash["new"];
+			//}
 
 			n = n.nextSibling();
 		}
@@ -542,25 +535,21 @@ bool singletonQtLogger::checkForUpdates() {
 
 						urls->push_back(QUrl::fromLocalFile(url));
 
-						LOG(DEBUG,
-								"In void singletonQtLogger::checkForUpdates() --> url : "
-										+ url);
+						qDebug() << "In void singletonQtLogger::checkForUpdates() --> url : " + url;
 
 						std::vector < QString > *savePaths = new std::vector<
 								QString>;
 						QString savePath = THE_REPO->getDownloadPath() + listOfResources.at(i).at(j)["file"];
 						savePaths->push_back(savePath);
 
-						LOG(DEBUG,
-								"In void singletonQtLogger::checkForUpdates() --> savePath : "
-										+ savePath);
+						qDebug() << "In void singletonQtLogger::checkForUpdates() --> savePath : " + savePath;
 
 						Downloader updateDownloader(THE_LOGGER, urls, savePaths,
 								true);
 
 						if (updateDownloader.requestSucceded()) { // download succeded
 							LOG(DEBUG,
-									"In void singletonQtLogger::checkForUpdates() --> download of "
+									"Download of "
 											+ listOfResources.at(i).at(j)["file"]
 											+ " succeded.");
 						} else {
