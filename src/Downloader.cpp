@@ -50,7 +50,11 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 		std::vector<QString>* _savePaths, bool _silent) :
 	QDialog(parent) {
 
-	//	LOG(DEBUG, "In Downloader::Downloader(...) constructor.");
+	//qDebug() << "In Downloader::Downloader(...).";
+    //
+	//for (int i = 0; i < _savePaths->size(); ++i) {
+	//	qDebug() << "In Downloader::Downloader(...). _savePaths.at(" + my::toQString<int>(i) + ") = " + _savePaths->at(i);
+	//}
 
 	this->silent = _silent;
 	this->resize(600, 0);

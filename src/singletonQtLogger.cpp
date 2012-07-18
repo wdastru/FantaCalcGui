@@ -196,8 +196,8 @@ void singletonQtLogger::onlineClicked() {
 	urls->push_back(QUrl::fromLocalFile(THE_REPO->getFileGazzettaUrl()));
 
 	std::vector<QString> *savePaths = new std::vector<QString>;
-	savePaths->push_back(THE_REPO->getListePath() + "/listaFormazioni.txt");
-	savePaths->push_back(THE_REPO->getListePath() + "/listaGazFiles.txt");
+	savePaths->push_back(THE_REPO->getListePath() + "listaFormazioni.txt");
+	savePaths->push_back(THE_REPO->getListePath() + "listaGazFiles.txt");
 
 	Downloader listsDownloader(THE_LOGGER, urls, savePaths, TRUE);
 
@@ -548,8 +548,7 @@ bool singletonQtLogger::checkForUpdates() {
 
 						std::vector < QString > *savePaths = new std::vector<
 								QString>;
-						QString savePath = THE_REPO->getDownloadPath() + "/"
-								+ listOfResources.at(i).at(j)["file"];
+						QString savePath = THE_REPO->getDownloadPath() + listOfResources.at(i).at(j)["file"];
 						savePaths->push_back(savePath);
 
 						LOG(DEBUG,
