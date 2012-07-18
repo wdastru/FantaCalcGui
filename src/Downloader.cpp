@@ -127,13 +127,8 @@ void Downloader::downloadFiles() {
 		QString fullUrlString = url.scheme() + "://" + url.authority()
 				+ url.path();
 
-		//		LOG(DEBUG, "In Downloader::downloadFile() --> url : " + fullUrlString);
-		//
-		//		LOG(
-		//				DEBUG,
-		//				"In Downloader::downloadFile() --> savePaths->at("
-		//						+ my::toQString<unsigned int>(i) + ") : "
-		//						+ savePaths->at(i));
+		//qDebug() << "In Downloader::downloadFile() --> url : " + fullUrlString;
+		//qDebug() << "In Downloader::downloadFile() --> savePaths->at(" + my::toQString<unsigned int>(i) + ") : "	+ savePaths->at(i);
 
 		if (!this->silent) {
 			LOG(DEBUG, QObject::tr("Downloading %1").arg(fullUrlString));
