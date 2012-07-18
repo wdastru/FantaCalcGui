@@ -253,7 +253,7 @@ QString ChooseFiles::getFileFormazioni(void) {
 
 void ChooseFiles::doDownload() {
 	LOG(DEBUG,
-			"In ChooseFileFromAListDialog::doDownload() --> Network will be accessed.");
+			"In ChoosFiles::doDownload() --> Network will be accessed.");
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	urls->push_back(
@@ -282,11 +282,11 @@ void ChooseFiles::doDownload() {
 		this->downloadSuccess = true;
 			LOG(
 					DEBUG,
-					"In ChooseFileFromAListDialog::doDownload() --> the download of files succeded.");
+					"In ChoosFiles::doDownload() --> the download of files succeded.");
 	} else {
 		this->downloadSuccess = false;
 			LOG(DEBUG,
-					"In ChooseFileFromAListDialog::doDownload() --> the download of files failed.");
+					"In ChoosFiles::doDownload() --> the download of files failed.");
 	}
 	return;
 }
@@ -336,7 +336,7 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 
 		LOG(
 				DEBUG,
-				"In ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> download was successful.");
+				"In ChoosFiles::createFileSquadreFromWebFiles() --> download was successful.");
 
 		QFile fHome(THE_REPO->getDownloadPath() + "/" + this->getHomeFile());
 		QFile fAway(THE_REPO->getDownloadPath() + "/" + this->getAwayFile());
@@ -346,13 +346,13 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 
 		if (!fHome.isReadable())
 			LOG(FATAL,
-					"In void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file : "
-							+ fHome.fileName() + " non � apribile.");
+					"In void ChoosFiles::createFileSquadreFromWebFiles() --> il file : "
+							+ fHome.fileName() + " non e' apribile.");
 
 		else if (!fAway.isReadable())
 			LOG(FATAL,
-					"In void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file : "
-							+ fHome.fileName() + " non � apribile.");
+					"In void ChoosFiles::createFileSquadreFromWebFiles() --> il file : "
+							+ fHome.fileName() + " non e' apribile.");
 
 		QFileInfo FIfHome(fHome);
 		QFileInfo FIfAway(fAway);
@@ -372,8 +372,8 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 
 		if (!fOut.isWritable()) {
 			LOG(FATAL,
-					"In : void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file "
-							+ fileOut + " non � apribile in scrittura.");
+					"In : void ChoosFiles::createFileSquadreFromWebFiles() --> il file "
+							+ fileOut + " non e' apribile in scrittura.");
 			this->close();
 			return EXIT_FAILURE;
 		}
@@ -580,7 +580,7 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 		return EXIT_SUCCESS;
 	} else {
 		LOG(ERROR,
-				"In ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> download was not successful.");
+				"In ChoosFiles::createFileSquadreFromWebFiles() --> download was not successful.");
 		return EXIT_FAILURE;
 	}
 }

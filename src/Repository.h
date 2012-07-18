@@ -16,7 +16,6 @@ class Repository {
 	friend class IniFilePopulator;
 	friend class IniFileManager;
 	friend class singletonQtLogger;
-	friend class ChooseFileFromAListDialog;
 	friend class ChooseFiles;
 	friend class Downloader;
 	friend class FileFormazioniViewer;

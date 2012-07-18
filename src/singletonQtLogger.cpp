@@ -226,7 +226,7 @@ void singletonQtLogger::onlineClicked() {
 
 		} else {
 			LOG(DEBUG,
-					"In void singletonQtLogger::onlineClicked() --> Cancel clicked in ChooseFileFromAListDialog.");
+					"In void singletonQtLogger::onlineClicked() --> Cancel clicked in ChooseFiles.");
 			return;
 		}
 	} else {
