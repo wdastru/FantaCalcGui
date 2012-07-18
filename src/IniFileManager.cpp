@@ -139,7 +139,7 @@ void IniFileManager::readIniFile() {
 
 	QFile *iniFile = new QFile(this->iniFileName);
 	if (iniFile->exists()) {
-		LOG(DEBUG, QObject::tr("%1 esiste").arg(this->iniFileName));
+		qDebug() << QObject::tr("Reading %1").arg(this->iniFileName);
 		iniFile->open(QIODevice::ReadOnly);
 		char buf[1024];
 
@@ -199,7 +199,7 @@ void IniFileManager::readIniFile() {
 						"%1 non esiste<br>Inserire le informazioni di configurazione").arg(
 						this->iniFileName));
 
-		LOG(DEBUG, "In void IniFileManager::readIniFile() : workDir = " + this->workDir);
+		qDebug() << "In void IniFileManager::readIniFile() : workDir = " + this->workDir;
 		THE_CONFIGURATOR->setStartDir(this->workDir);
 
 		/*
