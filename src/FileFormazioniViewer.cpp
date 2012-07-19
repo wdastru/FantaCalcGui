@@ -4,6 +4,7 @@
 #include "singletonQtLogger.h"
 
 #include <QTextDocumentWriter>
+#include <QtCore/QDebug>
 
 FileFormazioniViewer* FileFormazioniViewer::pInstance = NULL;
 
@@ -34,46 +35,46 @@ void FileFormazioniViewer::setFile(QString filename) {
 						QString::fromLocal8Bit(file->readAll()));
 			} else {
 				/* TODO
-				 * completare
-				 */
+				 * completare:
+				 * if file is not readable
+				 * * * * * * * * * * * * * */
 			}
 		} else {
 			/* TODO
-			 * completare
-			 */
+			 * completare:
+			 * if file is not open
+			 * * * * * * * * * * * */
 		}
 
 	} else {
 		/* TODO
-		 * completare
-		 */
+		 * completare:
+		 * if file does not exists
+		 * * * * * * * * * * * * * */
 	}
 
 	QFont f("Courier");
 	this->ui.plainTextEdit->setFont(f);
 }
 void FileFormazioniViewer::saveFileAndClose() {
-	LOG(DEBUG, "In FileFormazioniViewer::saveFileAndClose().");
+	//qDebug() << "In FileFormazioniViewer::saveFileAndClose().";
 
 	this->result = FORMFILEVIEWER_OK;
 
 	QTextDocumentWriter writer(this->filename);
 	if (writer.write(this->ui.plainTextEdit->document())) {
-		LOG(
-				DEBUG,
-				"In FileFormazioniViewer::saveFileAndClose() --> write of "
-						+ this->filename + " was successful.");
+		//qDebug() << "In FileFormazioniViewer::saveFileAndClose() --> write of " + this->filename + " was successful.";
 	} else {
+		qDebug() << "In FileFormazioniViewer::saveFileAndClose() --> write of " + this->filename + " was not successful.";
 		LOG(
 				ERROR,
-				"In FileFormazioniViewer::saveFileAndClose() --> write of "
-						+ this->filename + " was not successful.");
+				"Writing of " + this->filename + " was not successful.");
 	}
 
 	this->close();
 }
 void FileFormazioniViewer::quit() {
-	LOG(DEBUG, "In FileFormazioniViewer::quit().");
+	//qDebug() << "In FileFormazioniViewer::quit().";
 	this->result = FORMFILEVIEWER_CANCEL;
 	this->close();
 }
