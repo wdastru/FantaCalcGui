@@ -560,7 +560,7 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 
 		fOut.write(str.toAscii());
 
-		LOG(DEBUG, QObject::tr("Creato file squadre : <br>%1").arg(str));
+		LOG(DEBUG, QObject::tr("<br>Creato file squadre : <br>%1").arg(str));
 
 		fHome.close();
 		fAway.close();
