@@ -178,18 +178,9 @@ void singletonQtLogger::configClicked() {
 void singletonQtLogger::onlineClicked() {
 	LOG(DEBUG, "<br>Modalita' online<br>");
 
-	//	LOG(
-	//			DEBUG,
-	//			"In void singletonQtLogger::onlineClicked() --> THE_REPO->getFileFormazioniUrl() : "
-	//					+ THE_REPO->getFileFormazioniUrl());
-	//	LOG(
-	//			DEBUG,
-	//			"In void singletonQtLogger::onlineClicked() --> THE_REPO->getFileGazzettaUrl() : "
-	//					+ THE_REPO->getFileGazzettaUrl());
-	//	LOG(
-	//			DEBUG,
-	//			"In void singletonQtLogger::onlineClicked() --> THE_REPO->getListePath : "
-	//					+ THE_REPO->getListePath());
+	//qDebug() << "In void singletonQtLogger::onlineClicked() --> THE_REPO->getFileFormazioniUrl() : " + THE_REPO->getFileFormazioniUrl();
+	//qDebug() << "In void singletonQtLogger::onlineClicked() --> THE_REPO->getFileGazzettaUrl() : " + THE_REPO->getFileGazzettaUrl();
+	//qDebug() << "In void singletonQtLogger::onlineClicked() --> THE_REPO->getListePath : " + THE_REPO->getListePath();
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	urls->push_back(QUrl::fromLocalFile(THE_REPO->getFileFormazioniUrl()));
@@ -202,8 +193,7 @@ void singletonQtLogger::onlineClicked() {
 	Downloader listsDownloader(THE_LOGGER, urls, savePaths, TRUE);
 
 	if (listsDownloader.requestSucceded()) {
-		//		LOG(DEBUG,
-		//				"In singletonQtLogger::onlineClicked() --> the download of files succeded.");
+		//qDebug() << "In singletonQtLogger::onlineClicked() --> the download of files succeded.";
 
 		ChooseFiles * chooseFiles = new ChooseFiles(
 				THE_REPO->getListaFormazioni(), THE_REPO->getListaGazFiles(),
@@ -215,25 +205,19 @@ void singletonQtLogger::onlineClicked() {
 			THE_REPO->fileGazzetta = chooseFiles->getFileGazzetta();
 			THE_REPO->fileFormazioni = chooseFiles->getFileFormazioni();
 
-			LOG(DEBUG,
-					"In void singletonQtLogger::onlineClicked() --> fileGazzetta : "
-							+ THE_REPO->fileGazzetta);
-			LOG(DEBUG,
-					"In void singletonQtLogger::onlineClicked() --> fileFormazioni : "
-							+ THE_REPO->fileFormazioni);
+			//qDebug() << "In void singletonQtLogger::onlineClicked() --> fileGazzetta : " + THE_REPO->fileGazzetta;
+			//qDebug() << "In void singletonQtLogger::onlineClicked() --> fileFormazioni : " + THE_REPO->fileFormazioni;
 
 			emit(this->onOffClickedFinished());
 
 		} else {
-			LOG(DEBUG,
-					"In void singletonQtLogger::onlineClicked() --> Cancel clicked in ChooseFiles.");
+			//qDebug() << "In void singletonQtLogger::onlineClicked() --> Cancel clicked in ChooseFiles.";
 			return;
 		}
 	} else {
 		/* TODO
 		 * inserire exception
-		 */
-		;
+		 * * * * * * * * * * * */
 	}
 }
 void singletonQtLogger::offlineClicked() {
@@ -255,9 +239,7 @@ void singletonQtLogger::offlineClicked() {
 		emit(this->onOffClickedFinished());
 
 	} else {
-		//		LOG(
-		//				DEBUG,
-		//				"In void singletonQtLogger::offlineClicked() --> noNetFileDialog has been aborted.");
+		qDebug() << "In void singletonQtLogger::offlineClicked() --> noNetFileDialog has been aborted.";
 		return;
 	}
 }
@@ -268,7 +250,7 @@ QString singletonQtLogger::getVersion(void) {
 	return this->version;
 }
 void singletonQtLogger::goOn() {
-	LOG(DEBUG, "In singletonQtLogger::goOn().");
+	qDebug() << "In singletonQtLogger::goOn().";
 
 	// --> lettura file Gazzetta e Formazioni
 	GazzettaFileReader * gazzettaFileReader = new GazzettaFileReader(
@@ -287,11 +269,9 @@ void singletonQtLogger::goOn() {
 			THE_VIEWER->exec();
 
 			if (THE_VIEWER->getResult() == 1) {
-				//				LOG(DEBUG,
-				//						"In singletonQtLogger::goOn() --> THE_VIEWER returned 1.");
+				//qDebug() << "In singletonQtLogger::goOn() --> THE_VIEWER returned 1.";
 			} else {
-				//				LOG(DEBUG,
-				//						"In singletonQtLogger::goOn() --> THE_VIEWER returned 0.");
+				//qDebug() << "In singletonQtLogger::goOn() --> THE_VIEWER returned 0.";
 				break;
 			}
 
@@ -305,9 +285,7 @@ void singletonQtLogger::goOn() {
 
 		} catch (QString& str) {
 
-			LOG(DEBUG,
-					"In singletonQtLogger::goOn() --> exception caught! retVal : "
-							+ my::toQString<unsigned int>(retVal) + ", " + str);
+			qDebug() << "In singletonQtLogger::goOn() --> exception caught! retVal : " + my::toQString<unsigned int>(retVal) + ", " + str;
 
 		}
 	} while (retVal != FORMFILEREAD_OK);
