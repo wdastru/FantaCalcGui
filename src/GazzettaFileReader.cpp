@@ -5,6 +5,8 @@
  *      Author: WAleViolaeIvan
  */
 
+#include <QtCore/QDebug>
+
 #include "Fanta.h"
 #include "GazzettaFileReader.h"
 #include "StringModifier.h"
@@ -20,10 +22,11 @@ GazzettaFileReader::~GazzettaFileReader() {
 }
 
 std::vector<std::vector<std::string> > GazzettaFileReader::getOutput() {
-	LOG(DEBUG, "In GazzettaFileReader::getOutput().");
+	//qDebug() << "In GazzettaFileReader::getOutput().";
 
 	std::ifstream fGaz(this->fileGazzetta.toStdString().c_str());
 	if (!fGaz) {
+		qDebug() << "In GazzettaFileReader::getOutput() --> il file gazzetta  : " + this->fileGazzetta + " non esiste!";
 		LOG(
 				FATAL,
 				"In GazzettaFileReader::getOutput() --> il file gazzetta  : "
