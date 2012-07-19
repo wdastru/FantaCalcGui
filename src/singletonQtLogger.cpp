@@ -176,7 +176,7 @@ void singletonQtLogger::configClicked() {
 	THE_CONFIGURATOR->exec();
 }
 void singletonQtLogger::onlineClicked() {
-	LOG(DEBUG, "Modalita' online<br>");
+	LOG(DEBUG, "<br>Modalita' online<br>");
 
 	//	LOG(
 	//			DEBUG,
@@ -237,7 +237,7 @@ void singletonQtLogger::onlineClicked() {
 	}
 }
 void singletonQtLogger::offlineClicked() {
-	LOG(DEBUG, "Modalita' offline<br>");
+	LOG(DEBUG, "<br>Modalita' offline<br>");
 
 	NoNetFileDialog * noNetFileDialog = new NoNetFileDialog(THE_LOGGER);
 	noNetFileDialog->exec();
