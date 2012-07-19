@@ -37,7 +37,7 @@ Fanta::~Fanta() {
 }
 void Fanta::initialize() {
 
-	LOG(DEBUG, "In Fanta::initialize().");
+	//qDebug() << "In Fanta::initialize().";
 
 	for (size_t k = 0; k < 2; k++) {
 		for (size_t j = 0; j < 4; j++) {
