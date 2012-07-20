@@ -316,12 +316,12 @@ void singletonQtLogger::goOn() {
 						fileName));
 
 		FANTA->printTitolo(
-				FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1));
+				FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1), INFO);
 
 		FANTA->printRiepilogo();
 		FANTA->printFormations();
 
-		LOG(INFO, "<br/><br/>&nbsp;&nbsp;&nbsp;DETTAGLIO SQUADRE : <br/>");
+		LOG(DEBUG, "<br/><br/>&nbsp;&nbsp;&nbsp;DETTAGLIO SQUADRE : <br/>");
 
 		FANTA->printPlayersInfo();
 
