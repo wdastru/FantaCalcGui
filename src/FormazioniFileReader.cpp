@@ -157,15 +157,12 @@ unsigned int FormazioniFileReader::execute() {
 					}
 				}
 
-				if (v_Found.size() != 1) {
+				if (v_Found.size() > 1) {
 					LOG(DEBUG, QString::fromStdString(line) + " : trovate " + my::toQString<size_t>(v_Found.size()) + " corrispondenze");
 					//qDebug() << "In FormazioniFileReader::execute() --> " \
 						+ QString::fromStdString(line) \
 						+ " : v_Found.size = " \
 						+ my::toQString<size_t>(v_Found.size());
-				}
-
-				if (v_Found.size() > 1) {
 
 					std::vector<std::string> temp;
 					temp.clear();
@@ -229,9 +226,7 @@ unsigned int FormazioniFileReader::execute() {
 
 					} while (v_Found.size() > 1);
 
-				}
-
-				if (v_Found.size() == 0) {
+				} else if (v_Found.size() == 0) {
 					/*
 					 *  Non sono stati trovati giocatori che contengono
 					 *  la string di ricerca.
@@ -277,9 +272,7 @@ unsigned int FormazioniFileReader::execute() {
 										whichOfLevenshteinDialog.chosenLevenshtein
 												- 1));
 					}
-				}
-
-				if (v_Found.size() == 1) {
+				} else if (v_Found.size() == 1) {
 					/*
 					 *  aggiungo le due colonne mancanti
 					 *  nel file della Gazzetta : GDV e GDP
@@ -311,7 +304,9 @@ unsigned int FormazioniFileReader::execute() {
 								+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColNomeCognome)) \
 								+ " ( " \
 								+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColSquadra)) \
-								+ " ).");
+								+ " )." \
+								+ "<br>" \
+								+ QString::fromStdString(v_Found.at(0)));
 
 						break;
 
@@ -377,6 +372,11 @@ unsigned int FormazioniFileReader::execute() {
 						+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColSquadra)) \
 						+ " ) trovato.");
 
+				} else {
+					LOG(ERROR, "Trovati " \
+						+ my::toQString<int>(v_Found.size()) \
+						+ " players.");
+					qDebug() << "In FormazioniFileReader::execute() --> found " << v_Found.size() << " players.";
 				}
 			}
 		}
