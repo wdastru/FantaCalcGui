@@ -186,7 +186,7 @@ unsigned int FormazioniFileReader::execute() {
 							}
 						}
 
-						if (temp.size() > 1) { // pi� di una corrispondenza esatta (!!!)
+						if (temp.size() > 1) { // piu' di una corrispondenza esatta (!!!)
 							for (unsigned int j = 0; j < temp.size(); j++) {
 								std::string tmpStr =
 										this->prepareStringToPresent(
@@ -226,7 +226,9 @@ unsigned int FormazioniFileReader::execute() {
 
 					} while (v_Found.size() > 1);
 
-				} else if (v_Found.size() == 0) {
+				}
+
+				if (v_Found.size() == 0) {
 					/*
 					 *  Non sono stati trovati giocatori che contengono
 					 *  la string di ricerca.
@@ -270,17 +272,12 @@ unsigned int FormazioniFileReader::execute() {
 												- 1));
 
 						LOG(DEBUG, ""); // blank line in log file only
-						LOG(INFO, " -> scelto " \
-							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColNomeCognome)) \
-							+ " ( " \
-							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColSquadra)) \
-							+ " ).");
-						LOG(DEBUG, "    [" \
-							+ QString::fromStdString(v_Found.at(0)) \
-							+ "]");
-
+						LOG(INFO, "    scelto " \
+							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColNomeCognome)));
 					}
-				} else if (v_Found.size() == 1) {
+				}
+
+				if (v_Found.size() == 1) {
 					/*
 					 *  aggiungo le due colonne mancanti
 					 *  nel file della Gazzetta : GDV e GDP
@@ -314,7 +311,7 @@ unsigned int FormazioniFileReader::execute() {
 							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColSquadra)) \
 							+ " ).");
 						LOG(DEBUG, "    [" \
-							+ QString::fromStdString(v_Found.at(0)) \
+							+ QString::fromStdString(v_Found.at(0)).replace("\t", " ") \
 							+ "]");
 
 						if (STR_MOD->msk(v_Found.at(0), DELIM,ColGoalDecVitt) == "1") {
@@ -375,11 +372,6 @@ unsigned int FormazioniFileReader::execute() {
 						break;
 					}
 
-				} else {
-					LOG(ERROR, "Trovati " \
-						+ my::toQString<int>(v_Found.size()) \
-						+ " players.");
-					qDebug() << "In FormazioniFileReader::execute()  -> found " << v_Found.size() << " players.";
 				}
 			}
 		}
