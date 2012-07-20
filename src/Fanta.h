@@ -105,7 +105,7 @@ public:
 	QString getFileGazzetta();
 //	void setFileGazzetta(QString);
 	void printRiepilogo();
-	void printTitolo(std::string);
+	void printTitolo(std::string, std::string);
 	void printPlayersInfo();
 	unsigned int getAmmonizioniTot(unsigned int) const ;
 	unsigned int getEspulsioniTot(unsigned int) const ;

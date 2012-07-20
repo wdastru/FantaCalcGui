@@ -25,11 +25,11 @@ unsigned int FormazioniFileReader::execute() {
 
 	std::ifstream fSqua(this->fileFormazioni.toStdString().c_str());
 	if (!fSqua) {
-		qDebug() << "In FormazioniFileReader::execute() --> il file formazioni  : " + this->fileFormazioni + " non esiste o non e' leggibile!";
+		qDebug() << "In FormazioniFileReader::execute()  -> il file formazioni  : " + this->fileFormazioni + " non esiste o non e' leggibile!";
 		LOG(FATAL, "Il file formazioni  : " + this->fileFormazioni + " non esiste o non e' leggibile!");
 		return FORMFILEREAD_NO_FORM_FILE;
 	} else {
-		//qDebug() << "In FormazioniFileReader::execute() --> file formazioni  : " + this->fileFormazioni;
+		//qDebug() << "In FormazioniFileReader::execute()  -> file formazioni  : " + this->fileFormazioni;
 	}
 
 	std::string line;
@@ -50,10 +50,10 @@ unsigned int FormazioniFileReader::execute() {
 				 *  ###***### serve per separare le due squadre nel file di input
 				 *  se trovato passa alla prossima squadra o esce dal loop for
 				 */
-				//qDebug() << "In FormazioniFileReader::execute() --> separatore : " + QString::fromStdString(line);
+				//qDebug() << "In FormazioniFileReader::execute()  -> separatore : " + QString::fromStdString(line);
 				break;
 			} else if (line.find("#", 0) != std::string::npos) {// # indica linee di commento
-				//qDebug() << "In FormazioniFileReader::execute() --> commento : " + QString::fromStdString(line);
+				//qDebug() << "In FormazioniFileReader::execute()  -> commento : " + QString::fromStdString(line);
 				continue;
 			} else if (line.find("nome squadra", 0) != std::string::npos) { // nome squadra
 				/*
@@ -83,7 +83,7 @@ unsigned int FormazioniFileReader::execute() {
 				if (xx == EXIT_FAILURE) {
 					LOG(
 							ERROR,
-							"In FormazioniFileReader::execute() --> Modulo non consentito!<br/>Controllare il file di input."
+							"In FormazioniFileReader::execute()  -> Modulo non consentito!<br/>Controllare il file di input."
 									+ QString::fromStdString(
 											FANTA->getModuloSquadra(k)));
 					//goto restart;
@@ -95,7 +95,7 @@ unsigned int FormazioniFileReader::execute() {
 				LOG(DEBUG, "In casa");
 				continue;
 			} else { // riga "buona"
-				// --> sostituzione lettere accentate ed eliminazione caratteri "non-lettera"
+				//  -> sostituzione lettere accentate ed eliminazione caratteri "non-lettera"
 				STR_MOD->modifyAccents(line);
 				STR_MOD->onlyLettersBegin(line);
 				STR_MOD->onlyLettersEnd(line);
@@ -159,7 +159,7 @@ unsigned int FormazioniFileReader::execute() {
 
 				if (v_Found.size() > 1) {
 					LOG(DEBUG, QString::fromStdString(line) + " : trovate " + my::toQString<size_t>(v_Found.size()) + " corrispondenze");
-					//qDebug() << "In FormazioniFileReader::execute() --> " \
+					//qDebug() << "In FormazioniFileReader::execute()  -> " \
 						+ QString::fromStdString(line) \
 						+ " : v_Found.size = " \
 						+ my::toQString<size_t>(v_Found.size());
@@ -186,7 +186,7 @@ unsigned int FormazioniFileReader::execute() {
 							}
 						}
 
-						if (temp.size() > 1) { // pi� di una corrispondenza esatta (!!!)
+						if (temp.size() > 1) { // piu' di una corrispondenza esatta (!!!)
 							for (unsigned int j = 0; j < temp.size(); j++) {
 								std::string tmpStr =
 										this->prepareStringToPresent(
@@ -203,7 +203,7 @@ unsigned int FormazioniFileReader::execute() {
 									temp.at(whichOfTheseDialog.chosenThese - 1));
 
 						} else if (temp.size() == 1) {
-							//qDebug() << "In FormazioniFileReader::execute() --> found : TRUE.";
+							//qDebug() << "In FormazioniFileReader::execute()  -> found : TRUE.";
 							v_Found = temp;
 						} else { // nessuna corrispondenza esatta
 
@@ -226,7 +226,9 @@ unsigned int FormazioniFileReader::execute() {
 
 					} while (v_Found.size() > 1);
 
-				} else if (v_Found.size() == 0) {
+				}
+
+				if (v_Found.size() == 0) {
 					/*
 					 *  Non sono stati trovati giocatori che contengono
 					 *  la string di ricerca.
@@ -237,26 +239,23 @@ unsigned int FormazioniFileReader::execute() {
 					vector<string> Levenshteins; // possibili giocatori
 					Levenshteins = this->findLevenstheins(line);
 
-					LOG(WARN, QObject::tr("--> non trovato %1").arg(QString::fromStdString(line)));
+					LOG(DEBUG, "");
+					LOG(WARN, QObject::tr(" -> non trovato %1.").arg(QString::fromStdString(line)));
 
 					if (Levenshteins.empty()) {
 						LOG(ERROR,
 								"ATTENZIONE !!! Nessun giocatore trovato.<br/>");
 					} else {
-						LOG(DEBUG, "--> trovati " \
+						LOG(DEBUG, "    trovati " \
 							+ my::toQString<signed int>(Levenshteins.size()) \
-							+ " possibili sostituti.");
-
-						// qDebug() << "In FormazioniFileReader::execute() --> trovati "\
-								+ my::toQString<signed int>(Levenshteins.size()) \
-								+ " possibili sostituti.");
+							+ " possibili sostituti:");
 
 						for (unsigned int j = 0; j < Levenshteins.size(); j++) {
 							std::string tmpStr = this->prepareStringToPresent(
 									Levenshteins.at(j), j);
 							v_WhichOfTheseLevenshtein.push_back(tmpStr);
 
-							LOG(DEBUG, "--> "\
+							LOG(DEBUG, "      "\
 								+ QString::fromStdString(tmpStr));
 						}
 
@@ -271,26 +270,32 @@ unsigned int FormazioniFileReader::execute() {
 								Levenshteins.at(
 										whichOfLevenshteinDialog.chosenLevenshtein
 												- 1));
+
+						LOG(DEBUG, ""); // blank line in log file only
+						LOG(INFO, "    scelto " \
+							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColNomeCognome)));
 					}
-				} else if (v_Found.size() == 1) {
+				}
+
+				if (v_Found.size() == 1) {
 					/*
 					 *  aggiungo le due colonne mancanti
 					 *  nel file della Gazzetta : GDV e GDP
 					 */
 					if (gdv) {
-						v_Found.at(0) += "\t1\t0";
+						v_Found.at(0) += "1\t0";
 					} else if (gdp) {
-						v_Found.at(0) += "\t0\t1";
+						v_Found.at(0) += "0\t1";
 					} else {
-						v_Found.at(0) += "\t0\t0";
+						v_Found.at(0) += "0\t0";
 					}
 
-					//qDebug() << "In FormazioniFileReader::execute() --> before switch : v_Found.at(0) = " \
+					//qDebug() << "In FormazioniFileReader::execute()  -> before switch : v_Found.at(0) = " \
 									+ QString::fromStdString(v_Found.at(0)) \
 									+ " (squadra " \
 									+ my::toQString<unsigned int>(k) + ")";
 
-					//qDebug() << "In FormazioniFileReader::execute() --> FANTA->Team[" \
+					//qDebug() << "In FormazioniFileReader::execute()  -> FANTA->Team[" \
 									+ my::toQString<unsigned int>(k) \
 									+ "].size() = " \
 									+ my::toQString<unsigned int>( \
@@ -298,85 +303,75 @@ unsigned int FormazioniFileReader::execute() {
 
 					switch (FANTA->addPlayer(v_Found.at(0), k)) {
 					case PLAYER_OK:
-						//LOG(INFO, QString::fromStdString(STR_MOD->leftString(STR_MOD->msk(v_Found.at(0),DELIM, ColNomeCognome), 15) \
-								+ " ---> ok").replace(QString(" "), QString("&nbsp;")));
-						LOG(INFO, "--> trovato " \
-								+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColNomeCognome)) \
-								+ " ( " \
-								+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColSquadra)) \
-								+ " )." \
-								+ "<br>" \
-								+ QString::fromStdString(v_Found.at(0)));
+
+						LOG(DEBUG, ""); // blank line in log file only
+						LOG(INFO, " -> trovato " \
+							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColNomeCognome)) \
+							+ " ( " \
+							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColSquadra)) \
+							+ " ).");
+						LOG(DEBUG, "    [" \
+							+ QString::fromStdString(v_Found.at(0)).replace("\t", " ") \
+							+ "]");
+
+						if (STR_MOD->msk(v_Found.at(0), DELIM,ColGoalDecVitt) == "1") {
+							LOG(DEBUG, "    goal decisivo vittoria.");
+						} else if (STR_MOD->msk(v_Found.at(0), DELIM,ColGoalDecPar) == "1") {
+							LOG(DEBUG, "    goal decisivo pareggio.");
+						}
 
 						break;
 
 					case PLAYER_REPEATED:
-						LOG(
-								ERROR,
-								QObject::tr(
-										"ATTENZIONE !!! --> %1 ( %2 ) ripetuto.<br/>Controllare il file di input.").arg(
-										QString::fromStdString(
-												STR_MOD->msk(v_Found.at(0),
-														DELIM, ColNomeCognome))).arg(
-										QString::fromStdString(
-												STR_MOD->msk(v_Found.at(0),
-														DELIM, ColSquadra))).replace(
-										QString(" "), QString("&nbsp;")));
+						LOG(ERROR, \
+							QObject::tr("ATTENZIONE !!!  -> %1 ( %2 ) ripetuto.<br/>Controllare il file di input.").arg( \
+								QString::fromStdString( \
+										STR_MOD->msk(v_Found.at(0), \
+												DELIM, ColNomeCognome))).arg( \
+								QString::fromStdString( \
+										STR_MOD->msk(v_Found.at(0), \
+												DELIM, ColSquadra))).replace( \
+								QString(" "), QString("&nbsp;")));
 
 						return FORMFILEREAD_REPEATED;
 						break;
 
 					case PLAYER_GDV_NO_GOAL:
-						LOG(
-								ERROR,
-								QObject::tr(
-										"ATTENZIONE !!! --> %1 ( %2 ).<br/>Giocatore indicato con GDV senza che abbia segnato !!!<br/>Controllare il file di input.").arg(
-										QString::fromStdString(
-												STR_MOD->msk(v_Found.at(0),
-														DELIM, ColNomeCognome))).arg(
-										QString::fromStdString(
-												STR_MOD->msk(v_Found.at(0),
-														DELIM, ColSquadra))));
+						LOG(ERROR,
+							QObject::tr("ATTENZIONE !!!  -> %1 ( %2 ).<br/>Giocatore indicato con GDV senza che abbia segnato !!!<br/>Controllare il file di input.").arg(
+								QString::fromStdString(
+										STR_MOD->msk(v_Found.at(0),
+												DELIM, ColNomeCognome))).arg(
+								QString::fromStdString(
+										STR_MOD->msk(v_Found.at(0),
+												DELIM, ColSquadra))));
 
 						return FORMFILEREAD_GDV_NO_GOAL;
 						break;
 
 					case PLAYER_GDP_NO_GOAL:
-						LOG(
-								ERROR,
-								QObject::tr(
-										"ATTENZIONE !!! --> %1 ( %2 ).<br/>Giocatore indicato con GDP senza che abbia segnato !!!<br/>Controllare il file di input.").arg(
-										QString::fromStdString(
-												STR_MOD->msk(v_Found.at(0),
-														DELIM, ColNomeCognome))).arg(
-										QString::fromStdString(
-												STR_MOD->msk(v_Found.at(0),
-														DELIM, ColSquadra))));
+						LOG(ERROR,
+							QObject::tr("ATTENZIONE !!!  -> %1 ( %2 ).<br/>Giocatore indicato con GDP senza che abbia segnato !!!<br/>Controllare il file di input.").arg(
+								QString::fromStdString(
+										STR_MOD->msk(v_Found.at(0),
+												DELIM, ColNomeCognome))).arg(
+								QString::fromStdString(
+										STR_MOD->msk(v_Found.at(0),
+												DELIM, ColSquadra))));
 
 						return FORMFILEREAD_GDP_NO_GOAL;
 						break;
 
 					case PLAYER_ERROR:
 						LOG(ERROR,
-								"ATTENZIONE !!! --> PLAYER ERROR.<br/>Controllare il file di input.");
+								"ATTENZIONE !!!  -> PLAYER ERROR.<br/>Controllare il file di input.");
 						break;
 
 					default:
-						qDebug() << "In FormazioniFileReader::execute() --> switch : default.";
+						qDebug() << "In FormazioniFileReader::execute()  -> switch : default.";
 						break;
 					}
 
-					//LOG(DEBUG, "--> " \
-						+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColNomeCognome)) \
-						+ " ( " \
-						+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColSquadra)) \
-						+ " ) trovato.");
-
-				} else {
-					LOG(ERROR, "Trovati " \
-						+ my::toQString<int>(v_Found.size()) \
-						+ " players.");
-					qDebug() << "In FormazioniFileReader::execute() --> found " << v_Found.size() << " players.";
 				}
 			}
 		}
@@ -412,19 +407,17 @@ std::vector<std::string> FormazioniFileReader::findLevenstheins(
 				} else {
 					LOG(
 							ERROR,
-							"In FormazioniFileReader::findLevenstheins(line) --> il file della Gazzetta non sembra essere valido !");
+							"In FormazioniFileReader::findLevenstheins(line)  -> il file della Gazzetta non sembra essere valido !");
 					//return FORMFILEREAD_BAD_GAZ_FILE;
 				}
 			}
 		}
 
-		LOG(
-				DEBUG,
-				"In FormazioniFileReader::findLevenstheins(line) --> distance : "
-						+ my::toQString<signed int>(distance)
-						+ " - line size : "
-						+ my::toQString<size_t>(line.size()) + " - trovati : "
-						+ my::toQString<signed int>(Levenshteins.size()));
+		//qDebug() << "In FormazioniFileReader::findLevenstheins(line)  -> distance : " \
+						+ my::toQString<signed int>(distance) \
+						+ " - line size : " \
+						+ my::toQString<size_t>(line.size()) + " - trovati : " \
+						+ my::toQString<signed int>(Levenshteins.size());
 
 		if (Levenshteins.size() <= 1) {
 			continue;
