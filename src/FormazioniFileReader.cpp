@@ -279,8 +279,10 @@ unsigned int FormazioniFileReader::execute() {
 					 */
 					if (gdv) {
 						v_Found.at(0) += "\t1\t0";
+						LOG(DEBUG, "Goal decisivo vittoria.<br/>");
 					} else if (gdp) {
 						v_Found.at(0) += "\t0\t1";
+						LOG(DEBUG, "Goal decisivo pareggio.<br/>");
 					} else {
 						v_Found.at(0) += "\t0\t0";
 					}
@@ -298,60 +300,54 @@ unsigned int FormazioniFileReader::execute() {
 
 					switch (FANTA->addPlayer(v_Found.at(0), k)) {
 					case PLAYER_OK:
-						//LOG(INFO, QString::fromStdString(STR_MOD->leftString(STR_MOD->msk(v_Found.at(0),DELIM, ColNomeCognome), 15) \
-								+ " ---> ok").replace(QString(" "), QString("&nbsp;")));
+
 						LOG(INFO, "--> trovato " \
-								+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColNomeCognome)) \
-								+ " ( " \
-								+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColSquadra)) \
-								+ " )." \
-								+ "<br>" \
-								+ QString::fromStdString(v_Found.at(0)));
+							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColNomeCognome)) \
+							+ " ( " \
+							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColSquadra)) \
+							+ " ).");
+						LOG(DEBUG, "  [" \
+							+ QString::fromStdString(v_Found.at(0)) \
+							+ "]");
 
 						break;
 
 					case PLAYER_REPEATED:
-						LOG(
-								ERROR,
-								QObject::tr(
-										"ATTENZIONE !!! --> %1 ( %2 ) ripetuto.<br/>Controllare il file di input.").arg(
-										QString::fromStdString(
-												STR_MOD->msk(v_Found.at(0),
-														DELIM, ColNomeCognome))).arg(
-										QString::fromStdString(
-												STR_MOD->msk(v_Found.at(0),
-														DELIM, ColSquadra))).replace(
-										QString(" "), QString("&nbsp;")));
+						LOG(ERROR, \
+							QObject::tr("ATTENZIONE !!! --> %1 ( %2 ) ripetuto.<br/>Controllare il file di input.").arg( \
+								QString::fromStdString( \
+										STR_MOD->msk(v_Found.at(0), \
+												DELIM, ColNomeCognome))).arg( \
+								QString::fromStdString( \
+										STR_MOD->msk(v_Found.at(0), \
+												DELIM, ColSquadra))).replace( \
+								QString(" "), QString("&nbsp;")));
 
 						return FORMFILEREAD_REPEATED;
 						break;
 
 					case PLAYER_GDV_NO_GOAL:
-						LOG(
-								ERROR,
-								QObject::tr(
-										"ATTENZIONE !!! --> %1 ( %2 ).<br/>Giocatore indicato con GDV senza che abbia segnato !!!<br/>Controllare il file di input.").arg(
-										QString::fromStdString(
-												STR_MOD->msk(v_Found.at(0),
-														DELIM, ColNomeCognome))).arg(
-										QString::fromStdString(
-												STR_MOD->msk(v_Found.at(0),
-														DELIM, ColSquadra))));
+						LOG(ERROR,
+							QObject::tr("ATTENZIONE !!! --> %1 ( %2 ).<br/>Giocatore indicato con GDV senza che abbia segnato !!!<br/>Controllare il file di input.").arg(
+								QString::fromStdString(
+										STR_MOD->msk(v_Found.at(0),
+												DELIM, ColNomeCognome))).arg(
+								QString::fromStdString(
+										STR_MOD->msk(v_Found.at(0),
+												DELIM, ColSquadra))));
 
 						return FORMFILEREAD_GDV_NO_GOAL;
 						break;
 
 					case PLAYER_GDP_NO_GOAL:
-						LOG(
-								ERROR,
-								QObject::tr(
-										"ATTENZIONE !!! --> %1 ( %2 ).<br/>Giocatore indicato con GDP senza che abbia segnato !!!<br/>Controllare il file di input.").arg(
-										QString::fromStdString(
-												STR_MOD->msk(v_Found.at(0),
-														DELIM, ColNomeCognome))).arg(
-										QString::fromStdString(
-												STR_MOD->msk(v_Found.at(0),
-														DELIM, ColSquadra))));
+						LOG(ERROR,
+							QObject::tr("ATTENZIONE !!! --> %1 ( %2 ).<br/>Giocatore indicato con GDP senza che abbia segnato !!!<br/>Controllare il file di input.").arg(
+								QString::fromStdString(
+										STR_MOD->msk(v_Found.at(0),
+												DELIM, ColNomeCognome))).arg(
+								QString::fromStdString(
+										STR_MOD->msk(v_Found.at(0),
+												DELIM, ColSquadra))));
 
 						return FORMFILEREAD_GDP_NO_GOAL;
 						break;
@@ -365,12 +361,6 @@ unsigned int FormazioniFileReader::execute() {
 						qDebug() << "In FormazioniFileReader::execute() --> switch : default.";
 						break;
 					}
-
-					//LOG(DEBUG, "--> " \
-						+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColNomeCognome)) \
-						+ " ( " \
-						+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColSquadra)) \
-						+ " ) trovato.");
 
 				} else {
 					LOG(ERROR, "Trovati " \
