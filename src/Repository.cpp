@@ -29,7 +29,7 @@ Repository::Repository() {
 	this->UserProfile = "/home/" + QString::fromAscii(getenv("USER"));
 #endif
 
-	qDebug() << "UserProfile = '" + this->UserProfile+"'";
+	//qDebug() << "UserProfile = '" + this->UserProfile+"'";
 
 	this->formazioniPath = this->UserProfile + "/FantaCalcGui/formazioni/";
 	this->gazzettaPath = this->UserProfile + "/FantaCalcGui/gazzetta/";
@@ -100,6 +100,3 @@ QString Repository::getGazzettaUrl() {
 bool Repository::getDebugStatus() {
 	return this->debugStatus;
 }
-//void Repository::setFormazioniPath(QString dir) {
-//	this->formazioniPath = dir;
-//}

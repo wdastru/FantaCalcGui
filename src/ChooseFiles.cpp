@@ -40,8 +40,7 @@ void ChooseFiles::setupGazzettaTab(QString _fileGazzetta) {
 			i++;
 		}
 
-		qDebug() << "In ChooseFiles::ChooseFiles(...) --> lines.size() = "
-				+ QString::number(lines.size());
+		//qDebug() << "In ChooseFiles::ChooseFiles(...) --> lines.size() = " + QString::number(lines.size());
 
 		int rows = 10;
 		int rowCounter = 0;
@@ -73,10 +72,7 @@ void ChooseFiles::setupGazzettaTab(QString _fileGazzetta) {
 
 		fileGazzetta->close();
 	} else {
-		LOG(
-				FATAL,
-				"In ChooseFiles constructor: Il file " + _fileGazzetta
-						+ " non esiste.");
+		LOG(FATAL, "In ChooseFiles constructor: Il file " + _fileGazzetta + " non esiste.");
 	}
 }
 
@@ -169,7 +165,7 @@ void ChooseFiles::on_CampoNeutroBox_toggled(bool) {
 }
 
 void ChooseFiles::on_okButton_clicked() {
-	qDebug() << "In void ChooseFiles::on_okButton_clicked()";
+	//qDebug() << "In void ChooseFiles::on_okButton_clicked()";
 
 	this->doDownload();
 	if (this->downloadSuccess) {
@@ -189,7 +185,7 @@ void ChooseFiles::on_okButton_clicked() {
 }
 
 void ChooseFiles::on_cancelButton_clicked() {
-	qDebug() << "In void ChooseFiles::on_cancelButton_clicked()";
+	//qDebug() << "In void ChooseFiles::on_cancelButton_clicked()";
 
 	for (int i = 0; i < this->nFiles; i++) {
 		home.at(i)->setChecked(false);
@@ -252,8 +248,7 @@ QString ChooseFiles::getFileFormazioni(void) {
 }
 
 void ChooseFiles::doDownload() {
-	LOG(DEBUG,
-			"In ChooseFileFromAListDialog::doDownload() --> Network will be accessed.");
+	//qDebug() << "In ChooseFiles::doDownload() --> Network will be accessed.";
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	urls->push_back(
@@ -280,13 +275,11 @@ void ChooseFiles::doDownload() {
 
 	if (filesDownloader.requestSucceded()) {
 		this->downloadSuccess = true;
-			LOG(
-					DEBUG,
-					"In ChooseFileFromAListDialog::doDownload() --> the download of files succeded.");
+		//qDebug() << "In ChooseFiles::doDownload() --> the download of files succeded.";
 	} else {
 		this->downloadSuccess = false;
-			LOG(DEBUG,
-					"In ChooseFileFromAListDialog::doDownload() --> the download of files failed.");
+		LOG(ERROR, "The download of files failed.");
+		qDebug() << "In ChooseFiles::doDownload() --> the download of files failed.";
 	}
 	return;
 }
@@ -330,13 +323,11 @@ QString ChooseFiles::getAwayFile() {
 }
 
 bool ChooseFiles::createFileSquadreFromWebFiles() {
-	LOG(DEBUG, "In ChooseFiles::createFileSquadreFromWebFiles().");
+	//qDebug() << "In ChooseFiles::createFileSquadreFromWebFiles().";
 
 	if (this->downloadSuccess) {
 
-		LOG(
-				DEBUG,
-				"In ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> download was successful.");
+		// qDebug() << "In ChooseFiles::createFileSquadreFromWebFiles() --> download was successful.";
 
 		QFile fHome(THE_REPO->getDownloadPath() + "/" + this->getHomeFile());
 		QFile fAway(THE_REPO->getDownloadPath() + "/" + this->getAwayFile());
@@ -344,15 +335,13 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 		fHome.open(QIODevice::ReadOnly);
 		fAway.open(QIODevice::ReadOnly);
 
-		if (!fHome.isReadable())
-			LOG(FATAL,
-					"In void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file : "
-							+ fHome.fileName() + " non � apribile.");
-
-		else if (!fAway.isReadable())
-			LOG(FATAL,
-					"In void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file : "
-							+ fHome.fileName() + " non � apribile.");
+		if (!fHome.isReadable()) {
+			LOG(FATAL, "Il file : " + fHome.fileName() + " non e' apribile.");
+			qDebug() << "In void ChooseFiles::createFileSquadreFromWebFiles() --> il file : " + fHome.fileName() + " non e' apribile.";
+		} else if (!fAway.isReadable()) {
+			LOG(FATAL, "Il file : " + fAway.fileName() + " non e' apribile.");
+			qDebug() << "In void ChooseFiles::createFileSquadreFromWebFiles() --> il file : " + fAway.fileName() + " non e' apribile.";
+		}
 
 		QFileInfo FIfHome(fHome);
 		QFileInfo FIfAway(fAway);
@@ -371,9 +360,8 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 		fOut.open(QIODevice::WriteOnly);
 
 		if (!fOut.isWritable()) {
-			LOG(FATAL,
-					"In : void ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> il file "
-							+ fileOut + " non � apribile in scrittura.");
+			qDebug() << "In : void ChooseFiles::createFileSquadreFromWebFiles() --> il file " + fileOut + " non e' apribile in scrittura.";
+			LOG(FATAL, "Il file " + fileOut + " non e' apribile in scrittura.");
 			this->close();
 			return EXIT_FAILURE;
 		}
@@ -572,15 +560,15 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 
 		fOut.write(str.toAscii());
 
-		LOG(DEBUG, QObject::tr("Creato file squadre : <br>%1").arg(str));
+		LOG(DEBUG, QObject::tr("<br>Creato file squadre : <br>%1").arg(str));
 
 		fHome.close();
 		fAway.close();
 		fOut.close();
 		return EXIT_SUCCESS;
 	} else {
-		LOG(ERROR,
-				"In ChooseFileFromAListDialog::createFileSquadreFromWebFiles() --> download was not successful.");
+		qDebug() << "In ChooseFiles::createFileSquadreFromWebFiles() --> download was not successful.";
+		LOG(ERROR, "Download was not successful.");
 		return EXIT_FAILURE;
 	}
 }

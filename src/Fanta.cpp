@@ -20,7 +20,6 @@ Fanta * Fanta::Inst() {
 	}
 	return pInstance;
 }
-
 Fanta * Fanta::Refresh() {
 	if (pInstance != NULL)
 		delete pInstance;
@@ -37,7 +36,7 @@ Fanta::~Fanta() {
 }
 void Fanta::initialize() {
 
-	LOG(DEBUG, "In Fanta::initialize().");
+	//qDebug() << "In Fanta::initialize().";
 
 	for (size_t k = 0; k < 2; k++) {
 		for (size_t j = 0; j < 4; j++) {
@@ -168,10 +167,7 @@ void Fanta::setAtHome(unsigned int k) {
 }
 unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 	try {
-		LOG(
-				DEBUG,
-				"In Fanta::addPlayer(...) --> str : " + QString::fromStdString(
-						str));
+		//qDebug() << "In Fanta::addPlayer(...) --> str : " + QString::fromStdString(str);
 
 		Fanta::player tmpPlayer;
 
@@ -316,97 +312,97 @@ unsigned int Fanta::LevenshteinDistance(const std::string& s1,
 }
 void Fanta::execute() {
 
-	LOG(DEBUG, "In void Fanta::execute().");
+	//qDebug() << "In void Fanta::execute().";
 
 	try {
 		this->checkGiocatoSenzaVoto();
 	} catch (...) {
-		LOG(DEBUG,
-				"In void Fanta::execute() --> exception caught in checkGiocatoSenzaVoto().");
+		LOG(ERROR, "Exception caught in checkGiocatoSenzaVoto().");
+		qDebug() << "In void Fanta::execute() --> exception caught in checkGiocatoSenzaVoto().";
 	}
 
 	try {
 		this->checkNonHaGiocato();
 	} catch (...) {
-		LOG(DEBUG,
-				"In void Fanta::execute() --> exception caught in checkNonHaGiocato().");
+		LOG(ERROR, "Exception caught in checkNonHaGiocato().");
+		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	try {
 		this->orderByRuolo();
 	} catch (...) {
-		LOG(DEBUG,
-				"In void Fanta::execute() --> exception caught in orderByRuolo().");
+		LOG(ERROR, "In void Fanta::execute() --> exception caught in orderByRuolo().");
+		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	try {
 		this->fillWithNonHaGiocato();
 	} catch (...) {
-		LOG(DEBUG,
-				"In void Fanta::execute() --> exception caught in fillWithNonHaGiocato().");
+		LOG(ERROR, "Exception caught in fillWithNonHaGiocato().");
+		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	try {
 		this->substitutions();
 	} catch (...) {
-		LOG(DEBUG,
-				"In void Fanta::execute() --> exception caught in substitutions().");
+		LOG(ERROR, "Exception caught in substitutions().");
+		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	try {
 		this->calculateFantaVoto();
 	} catch (...) {
-		LOG(DEBUG,
-				"In void Fanta::execute() --> exception caught in calculateFantaVoto().");
+		LOG(ERROR, "Exception caught in calculateFantaVoto().");
+		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	try {
 		this->calculateDefenseMean();
 	} catch (...) {
-		LOG(DEBUG,
-				"In void Fanta::execute() --> exception caught in calculateDefenseMean().");
+		LOG(ERROR, "Exception caught in calculateDefenseMean().");
+		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	try {
 		this->calculateDefenseModifier();
 	} catch (...) {
-		LOG(DEBUG,
-				"In void Fanta::execute() --> exception caught in calculateDefenseModifier().");
+		LOG(ERROR, "Exception caught in calculateDefenseModifier().");
+		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	try {
 		this->calculateSfide();
 	} catch (...) {
-		LOG(DEBUG,
-				"In void Fanta::execute() --> exception caught in calculateSfide().");
+		LOG(ERROR, "Exception caught in calculateSfide().");
+		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	try {
 		this->calculateTotal();
 	} catch (...) {
-		LOG(DEBUG,
-				"In void Fanta::execute() --> exception caught in calculateTotal().");
+		LOG(ERROR, "Exception caught in calculateTotal().");
+		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	try {
 		this->calculateGoals();
 	} catch (...) {
-		LOG(DEBUG,
-				"In void Fanta::execute() --> exception caught in calculateGoals().");
+		LOG(ERROR, "Exception caught in calculateGoals().");
+		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	try {
 		this->calculateScorers();
 	} catch (...) {
-		LOG(DEBUG,
-				"In void Fanta::execute() --> exception caught in calculateScorers().");
+		LOG(ERROR, "Exception caught in calculateScorers().");
+		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	return;
 }
 void Fanta::checkGiocatoSenzaVoto() {
 
-	LOG(DEBUG, "In Fanta::checkGiocatoSenzaVoto().");
+	//qDebug() << "In Fanta::checkGiocatoSenzaVoto().";
 
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
@@ -543,7 +539,7 @@ void Fanta::checkGiocatoSenzaVoto() {
 }
 QString Fanta::questionMessage(QString playerName) {
 
-	LOG(DEBUG, "In Fanta::questionMessage().");
+	//qDebug() << "In Fanta::questionMessage().";
 
 	QString title = "Ha giocato almeno 25' ?";
 
@@ -559,10 +555,10 @@ QString Fanta::questionMessage(QString playerName) {
 			QMessageBox::Yes | QMessageBox::No);
 	if (reply == QMessageBox::Yes) {
 		answer = "Yes";
-		LOG(DEBUG, "In Fanta::questionMessage() --> returning " + answer + ".");
+		//qDebug() << "In Fanta::questionMessage() --> returning " + answer + ".";
 	} else if (reply == QMessageBox::No) {
 		answer = "No";
-		LOG(DEBUG, "In Fanta::questionMessage() --> returning " + answer + ".");
+		//qDebug() << "In Fanta::questionMessage() --> returning " + answer + ".";
 	} else {
 		answer = "Error";
 		LOG(ERROR, "In Fanta::questionMessage() --> returning " + answer + ".");
@@ -572,7 +568,7 @@ QString Fanta::questionMessage(QString playerName) {
 }
 void Fanta::checkNonHaGiocato() {
 
-	LOG(DEBUG, "In Fanta::checkNonHaGiocato().");
+	//qDebug() << "In Fanta::checkNonHaGiocato().";
 
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
@@ -626,7 +622,7 @@ void Fanta::checkNonHaGiocato() {
 }
 void Fanta::orderByRuolo() {
 
-	LOG(DEBUG, "In Fanta::orderByRuolo().");
+	//qDebug() << "In Fanta::orderByRuolo().";
 
 	try {
 		for (unsigned int k = 0; k < 2; k++)// loop sulle squadre
@@ -677,7 +673,7 @@ void Fanta::orderByRuolo() {
 }
 void Fanta::fillWithNonHaGiocato() {
 
-	LOG(DEBUG, "In Fanta::fillWithNonHaGiocato().");
+	//qDebug() << "In Fanta::fillWithNonHaGiocato().";
 
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
@@ -697,7 +693,7 @@ void Fanta::fillWithNonHaGiocato() {
 }
 void Fanta::substitutions() {
 
-	LOG(DEBUG, "In Fanta::substitutions().");
+	//qDebug() << "In Fanta::substitutions().";
 
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
@@ -834,7 +830,7 @@ void Fanta::substitutions() {
 }
 void Fanta::calculateFantaVoto() {
 
-	LOG(DEBUG, "In Fanta::calculateFantaVoto().");
+	//qDebug() << "In Fanta::calculateFantaVoto().";
 
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
@@ -864,7 +860,7 @@ void Fanta::calculateFantaVoto() {
 }
 void Fanta::calculateDefenseMean() {
 
-	LOG(DEBUG, "In Fanta::calculateDefenseMean().");
+	//qDebug() << "In Fanta::calculateDefenseMean().";
 
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
@@ -890,7 +886,7 @@ void Fanta::calculateDefenseMean() {
 }
 void Fanta::calculateDefenseModifier() {
 
-	LOG(DEBUG, "In Fanta::calculateDefenseModifier().");
+	//qDebug() << "In Fanta::calculateDefenseModifier().";
 
 	for (size_t i = 0; i < 9; i++) {
 		if (Fanta::defenseMean[0] >= Fanta::modifierVoti[i]
@@ -916,7 +912,7 @@ void Fanta::calculateDefenseModifier() {
 }
 void Fanta::calculateSfide() {
 
-	LOG(DEBUG, "In Fanta::calculateSfide().");
+	//qDebug() << "In Fanta::calculateSfide().";
 
 	/*
 	 *  difensori - attaccanti
@@ -1008,7 +1004,7 @@ void Fanta::calculateSfide() {
 }
 void Fanta::calculateTotal() {
 
-	LOG(DEBUG, "In Fanta::calculateTotal().");
+	//qDebug() << "In Fanta::calculateTotal().";
 
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
@@ -1065,7 +1061,7 @@ void Fanta::calculateTotal() {
 }
 void Fanta::calculateGoals() {
 
-	LOG(DEBUG, "In Fanta::calculateGoals().");
+	//qDebug() << "In Fanta::calculateGoals().";
 
 	for (size_t k = 0; k < 2; k++) {
 		for (size_t i = 0;; i++) {
@@ -1134,7 +1130,7 @@ void Fanta::calculateGoals() {
 }
 void Fanta::calculateScorers() {
 
-	LOG(DEBUG, "In Fanta::calculateScorers().");
+	//qDebug() << "In Fanta::calculateScorers().";
 
 	vector<Fanta::player> tmpVector[2];
 
@@ -1193,9 +1189,6 @@ void Fanta::bSort(std::vector<Fanta::player> & vect) {
 QString Fanta::getFileGazzetta() {
 	return this->fileGazzetta;
 }
-//void Fanta::setFileGazzetta(QString _fileGazzetta) {
-//	this->fileGazzetta = _fileGazzetta;
-//}
 void Fanta::printRiepilogo() {
 
 	FANTA->longerNameLength = (FANTA->getTeamName(0).size()
