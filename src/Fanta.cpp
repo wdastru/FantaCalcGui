@@ -1391,7 +1391,7 @@ void Fanta::printRiepilogo() {
 
 	LOG(INFO, output.replace(QString(" "), QString("&nbsp;")));
 }
-void Fanta::printTitolo(std::string str) {
+void Fanta::printTitolo(std::string str, std::string where) {
 	QString tmp = "<br/>   +";
 	for (unsigned int i = 0; i < str.size() + 6; i++) {
 		tmp += "-";
@@ -1428,15 +1428,20 @@ void Fanta::printTitolo(std::string str) {
 		tmp += "-";
 	tmp += "+<br/>";
 
-	LOG(INFO, tmp.replace(QString(" "), QString("&nbsp;")));
+	if (where == DEBUG) {
+		LOG(DEBUG, tmp.replace(QString(" "), QString("&nbsp;")));
+	} else if (where == INFO) {
+		LOG(INFO, tmp.replace(QString(" "), QString("&nbsp;")));
+	}
+
 }
 void Fanta::printPlayersInfo() {
 	for (size_t k = 0; k < 2; k++) // squadre
 	{
 
-		LOG(INFO, "<br/><br/>");
+		LOG(DEBUG, "<br/><br/>");
 
-		FANTA->printTitolo(FANTA->teamName.at(k));
+		FANTA->printTitolo(FANTA->teamName.at(k), DEBUG);
 
 		QString tmp = "";
 
@@ -1538,7 +1543,7 @@ void Fanta::printPlayersInfo() {
 			}
 		}
 
-		LOG(INFO, tmp.replace(QString(" "), QString("&nbsp;")));
+		LOG(DEBUG, tmp.replace(QString(" "), QString("&nbsp;")));
 	}
 }
 unsigned int Fanta::getAmmonizioniTot(unsigned int k) const {
