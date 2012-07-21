@@ -888,6 +888,7 @@ void Fanta::calculateDefenseMean() {
 }
 void Fanta::calculateDefenseModifier() {
 
+	LOG(DEBUG, "<br/> *** Modificatore della difesa ***");
 	//qDebug() << "In Fanta::calculateDefenseModifier().";
 
 	for (size_t i = 0; i < 9; i++) {
@@ -904,12 +905,10 @@ void Fanta::calculateDefenseModifier() {
 
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
-		LOG(
-				DEBUG,
-				"In Fanta::calculateDefenseModifier() --> Squadra "
-						+ QString::fromStdString(this->getTeamName(k))
-						+ " modificatore = " + my::toQString<signed int>(
-						Fanta::modifier[k]) + ".");
+		LOG(DEBUG, "<br> -> " \
+				+ QString::fromStdString(this->getTeamName(k)) \
+				+ "<br>      modificatore : " \
+				+ my::toQString<signed int>(Fanta::modifier[k]));
 	}
 }
 void Fanta::calculateSfide() {
