@@ -664,6 +664,7 @@ void Fanta::fillWithNonHaGiocato() {
 }
 void Fanta::substitutions() {
 
+	LOG(DEBUG, "<br/> *** Sostituzioni ***<br/>");
 	//qDebug() << "In Fanta::substitutions().";
 
 	for (size_t k = 0; k < 2; k++) // squadra
@@ -704,7 +705,7 @@ void Fanta::substitutions() {
 	}
 
 	/*
-	 *  se il primo panchinaro non ha giocato lo swappa con il secondo:
+	 *  se il primo panchinaro non ha giocato lo swappa con il secondo;
 	 *  se anch'esso non ha giocato non serve a nulla, se ha giocato lo porta in prima posizione
 	 */
 
@@ -724,6 +725,11 @@ void Fanta::substitutions() {
 	unsigned int a[7] = { 0, 3, 2, 1, 3, 2, 1 }; // ordine delle sostituzioni
 
 	for (size_t k = 0; k < 2; k++) {
+
+		LOG(DEBUG, " -> " \
+				+ QString::fromStdString(this->getTeamName(k)) \
+				+ " :");
+
 		for (size_t t = 0; t < 3; t++) { // ripetere il loop sottostante per esaurire tutte le sostituzioni
 			for (size_t i = 0; i < 7; i++) { // loop sulla dimensione di a[]
 				unsigned int w = Fanta::modulo[k][a[i]];
@@ -739,24 +745,16 @@ void Fanta::substitutions() {
 									!= "---") {
 								sostituzioni[k]++;
 
-								LOG(
-										DEBUG,
-										"In Fanta::substitutions() --> Sostituzione di "
-												+ QString::fromStdString(
-														Fanta::teamOrderedByRuolo[k][a[i]].at(
-																j).Nome_Sost)
-												+ " ("
-												+ QString::fromStdString(
-														Fanta::teamOrderedByRuolo[k][a[i]].at(
-																j).Squadra_Sost)
-												+ ") con "
-												+ QString::fromStdString(
-														Fanta::teamOrderedByRuolo[k][a[i]].at(
-																x).Nome) + " ("
-												+ QString::fromStdString(
-														Fanta::teamOrderedByRuolo[k][a[i]].at(
-																x).Squadra)
-												+ ").");
+								LOG(DEBUG, \
+										"      " \
+										+ QString::fromStdString(Fanta::teamOrderedByRuolo[k][a[i]].at(x).Nome) \
+										+ " (" \
+										+ QString::fromStdString(Fanta::teamOrderedByRuolo[k][a[i]].at(x).Squadra) \
+										+ ") al posto di " \
+										+ QString::fromStdString(Fanta::teamOrderedByRuolo[k][a[i]].at(j).Nome_Sost) \
+										+ " (" \
+										+ QString::fromStdString(Fanta::teamOrderedByRuolo[k][a[i]].at(j).Squadra_Sost) \
+										+ ").");
 
 								swap(
 										Fanta::teamOrderedByRuolo[k][a[i]].at(x),
@@ -781,23 +779,22 @@ void Fanta::substitutions() {
 		}
 	}
 
-	for (size_t k = 0; k < 2; k++) // squadra
-	{
-		for (size_t i = 0; i < 4; i++) // ruolo
-		{
-			for (size_t j = 0; j < Fanta::teamOrderedByRuolo[k][i].size(); j++) {
-				LOG(
-						DEBUG,
-						"In Fanta::substitutions() --> Squadra "
-								+ QString::fromStdString(this->getTeamName(k))
-								+ " : " + my::toQString<signed int>(
-								this->teamOrderedByRuolo[k][i].at(j).Ruolo)
-								+ " " + QString::fromStdString(
-								this->teamOrderedByRuolo[k][i].at(j).Nome)
-								+ ".");
-			}
-		}
-	}
+	//for (size_t k = 0; k < 2; k++) // squadra
+	//{
+	//	for (size_t i = 0; i < 4; i++) // ruolo
+	//	{
+	//		for (size_t j = 0; j < Fanta::teamOrderedByRuolo[k][i].size(); j++) {
+	//			qDebug() \
+	//					<< "In Fanta::substitutions() --> Squadra " \
+	//					<< QString::fromStdString(this->getTeamName(k)) \
+	//					<< " : " \
+	//					<< my::toQString<signed int>(this->teamOrderedByRuolo[k][i].at(j).Ruolo) \
+	//					<< " " \
+	//					<< QString::fromStdString(this->teamOrderedByRuolo[k][i].at(j).Nome) \
+	//					<< ".";
+	//		}
+	//	}
+	//}
 }
 void Fanta::calculateFantaVoto() {
 
