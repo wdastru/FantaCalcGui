@@ -845,28 +845,37 @@ void Fanta::calculateFantaVoto() {
 }
 void Fanta::calculateDefenseMean() {
 
+	LOG(DEBUG, "<br/> *** Media difesa ***<br/>");
 	//qDebug() << "In Fanta::calculateDefenseMean().";
 
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
+		LOG(DEBUG, \
+				" -> " \
+				+ QString::fromStdString(this->getTeamName(k)) + " : <br>");
+
 		size_t j = 0;
 		while (j < Fanta::modulo[k][1]) {
 			if (Fanta::teamOrderedByRuolo[k][1].at(j).VotoGazzetta != 0) {
-				Fanta::defenseMean[k]
-						+= Fanta::teamOrderedByRuolo[k][1].at(j).VotoGazzetta;
+				Fanta::defenseMean[k] +=
+						Fanta::teamOrderedByRuolo[k][1].at(j).VotoGazzetta;
 				Fanta::defenders[k]++;
+
+				LOG(DEBUG, "    [" \
+						+ my::toQString<size_t>(j + 1) \
+						+ "] " \
+						+ QString::fromStdString(Fanta::teamOrderedByRuolo[k][1].at(j).Nome) \
+						+ " (" \
+						+ my::toQString<float>(Fanta::teamOrderedByRuolo[k][1].at(j).VotoGazzetta) \
+						+ ")");
 			}
 			j++;
 		}
 		Fanta::defenseMean[k] /= Fanta::defenders[k];
 
-		LOG(
-				DEBUG,
-				"In Fanta::calculateDefenseMean() --> Squadra "
-						+ QString::fromStdString(this->getTeamName(k)) + " : "
-						+ my::toQString<unsigned int>(Fanta::defenders[k])
-						+ " difensori, media = " + my::toQString<double>(
-						Fanta::defenseMean[k]) + ".");
+		LOG(DEBUG, "<br>    media = " \
+				+ my::toQString<double>(Fanta::defenseMean[k]) \
+				+ "<br>");
 	}
 }
 void Fanta::calculateDefenseModifier() {
