@@ -798,33 +798,50 @@ void Fanta::substitutions() {
 }
 void Fanta::calculateFantaVoto() {
 
+	LOG(DEBUG, "<br/> *** Fantavoti ***");
 	//qDebug() << "In Fanta::calculateFantaVoto().";
 
-	for (size_t k = 0; k < 2; k++) // squadra
-	{
-		for (size_t i = 0; i < 4; i++) // ruolo
-		{
+	int longerName = 0;
+
+	for (size_t k = 0; k < 2; k++) { // squadra
+		for (size_t i = 0; i < 4; i++) { // ruolo
 			size_t j = 0;
 			while (j < Fanta::modulo[k][i]) {
-				Fanta::teamOrderedByRuolo[k][i].at(j).FantaVoto
-						= Fanta::teamOrderedByRuolo[k][i].at(j).FantaVotoGazzetta
-								+ Fanta::teamOrderedByRuolo[k][i].at(j).GoalDecVitt
-								+ Fanta::teamOrderedByRuolo[k][i].at(j).GoalDecPar
-										* 0.5;
+				Fanta::teamOrderedByRuolo[k][i].at(j).FantaVoto =
+						Fanta::teamOrderedByRuolo[k][i].at(j).FantaVotoGazzetta
+						+ Fanta::teamOrderedByRuolo[k][i].at(j).GoalDecVitt
+						+ Fanta::teamOrderedByRuolo[k][i].at(j).GoalDecPar * 0.5;
 
-				LOG(
-						DEBUG,
-						"In Fanta::calculateFantaVoto() --> Squadra "
-								+ QString::fromStdString(this->getTeamName(k))
-								+ " : " + QString::fromStdString(
-								this->teamOrderedByRuolo[k][i].at(j).Nome)
-								+ " FV = " + my::toQString<float>(
-								this->teamOrderedByRuolo[k][i].at(j).FantaVoto)
-								+ ".");
+				(this->teamOrderedByRuolo[k][i].at(j).Nome.size() > longerName) \
+						? \
+						longerName=this->teamOrderedByRuolo[k][i].at(j).Nome.size() \
+						: \
+						longerName;
+
 				j++;
 			}
 		}
 	}
+
+	for (size_t k = 0; k < 2; k++) { // squadra
+		LOG(DEBUG,
+				"<br> -> " + QString::fromStdString(this->getTeamName(k)) + " :<br>");
+
+		for (size_t i = 0; i < 4; i++) { // ruolo
+
+			size_t j = 0;
+
+			while (j < Fanta::modulo[k][i]) {
+				LOG(DEBUG, "    " \
+						+ QString::fromStdString(STR_MOD->leftString(this->teamOrderedByRuolo[k][i].at(j).Nome, longerName)) \
+						+ " : " \
+						+ my::toQString<float>(this->teamOrderedByRuolo[k][i].at(j).FantaVoto));
+
+				j++;
+			}
+		}
+	}
+
 }
 void Fanta::calculateDefenseMean() {
 
