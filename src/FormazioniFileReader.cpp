@@ -271,7 +271,6 @@ unsigned int FormazioniFileReader::execute() {
 										whichOfLevenshteinDialog.chosenLevenshtein
 												- 1));
 
-						LOG(DEBUG, ""); // blank line in log file only
 						LOG(INFO, "    scelto " \
 							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColNomeCognome)));
 					}
