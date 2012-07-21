@@ -563,11 +563,15 @@ QString Fanta::questionMessage(QString playerName) {
 }
 void Fanta::checkNonHaGiocato() {
 
-	LOG(DEBUG, "<br/> *** Giocatori che non hanno giocato ***<br/>");
+	LOG(DEBUG, "<br/> *** Giocatori che non hanno giocato ***");
 	//qDebug() << "In Fanta::checkNonHaGiocato().";
 
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
+		LOG(DEBUG, \
+				"<br> -> " \
+				+ QString::fromStdString(this->getTeamName(k)) + " :");
+
 		for (size_t j = 0; j < this->Team[k].size(); j++) // loop sui giocatori
 		{
 			if (this->Team[k].at(j).VotoGazzetta == 0) {
@@ -576,7 +580,7 @@ void Fanta::checkNonHaGiocato() {
 					this->Team[k].at(j).daSostituire = 1; // viene marcato per l'eliminazione
 
 					LOG(DEBUG, \
-							" -> " \
+							"      " \
 							+ QString::fromStdString(this->Team[k].at(j).Nome) \
 							+ " (" \
 							+ QString::fromStdString(this->Team[k].at(j).Squadra) \
@@ -586,7 +590,7 @@ void Fanta::checkNonHaGiocato() {
 					this->Team[k].at(j).VotoGazzetta
 							= this->Team[k].at(j).FantaVotoGazzetta;
 					LOG(DEBUG, \
-							" -> " \
+							"      " \
 							+ QString::fromStdString(this->Team[k].at(j).Nome) \
 							+ " (" \
 							+ QString::fromStdString(this->Team[k].at(j).Squadra) \
