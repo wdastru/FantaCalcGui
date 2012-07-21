@@ -563,6 +563,7 @@ QString Fanta::questionMessage(QString playerName) {
 }
 void Fanta::checkNonHaGiocato() {
 
+	LOG(DEBUG, "<br/> *** Giocatori che non hanno giocato ***<br/>");
 	//qDebug() << "In Fanta::checkNonHaGiocato().";
 
 	for (size_t k = 0; k < 2; k++) // squadra
@@ -574,43 +575,34 @@ void Fanta::checkNonHaGiocato() {
 
 					this->Team[k].at(j).daSostituire = 1; // viene marcato per l'eliminazione
 
-					LOG(
-							DEBUG,
-							"In Fanta::checkNonHaGiocato() --> "
-									+ QString::fromStdString(
-											this->Team[k].at(j).Nome) + " ("
-									+ QString::fromStdString(
-											this->Team[k].at(j).Squadra)
-									+ ") non ha giocato.");
+					LOG(DEBUG, \
+							" -> " \
+							+ QString::fromStdString(this->Team[k].at(j).Nome) \
+							+ " (" \
+							+ QString::fromStdString(this->Team[k].at(j).Squadra) \
+							+ ").");
 				} else {
 					// ma ha ricevuto voto dalla Gazzetta (caso di partite sospese ??? )
 					this->Team[k].at(j).VotoGazzetta
 							= this->Team[k].at(j).FantaVotoGazzetta;
-					LOG(
-							DEBUG,
-							"In Fanta::checkNonHaGiocato() --> "
-									+ QString::fromStdString(
-											this->Team[k].at(j).Nome) + " ("
-									+ QString::fromStdString(
-											this->Team[k].at(j).Squadra)
-									+ ") non ha giocato, ma ha ricevuto voto("
-									+ QString::fromStdString(
-											my::toString<float>(
-													this->Team[k].at(j).FantaVotoGazzetta))
-									+ ").");
+					LOG(DEBUG, \
+							" -> " \
+							+ QString::fromStdString(this->Team[k].at(j).Nome) \
+							+ " (" \
+							+ QString::fromStdString(this->Team[k].at(j).Squadra) \
+							+ ") non ha giocato, ma ha ricevuto voto(" \
+							+ QString::fromStdString(my::toString<float>(this->Team[k].at(j).FantaVotoGazzetta)) \
+							+ ").");
 				}
 			} else {
-				LOG(
-						DEBUG,
-						"In Fanta::checkNonHaGiocato() --> "
-								+ QString::fromStdString(
-										this->Team[k].at(j).Nome) + " ("
-								+ QString::fromStdString(
-										this->Team[k].at(j).Squadra)
-								+ ") fantavoto : " + QString::fromStdString(
-								my::toString<float>(
-										this->Team[k].at(j).FantaVotoGazzetta))
-								+ ".");
+				//LOG(DEBUG, \
+						" -> " \
+						+ QString::fromStdString(this->Team[k].at(j).Nome) \
+						+ " (" \
+						+ QString::fromStdString(this->Team[k].at(j).Squadra) \
+						+ ") fantavoto : " \
+						+ QString::fromStdString(my::toString<float>(this->Team[k].at(j).FantaVotoGazzetta)) \
+						+ ".");
 			}
 		}
 	}
