@@ -615,20 +615,6 @@ void Fanta::orderByRuolo() {
 		for (unsigned int k = 0; k < 2; k++)// loop sulle squadre
 		{
 			try {
-				LOG(
-						DEBUG,
-						"In Fanta::orderByRuolo() --> Squadra : "
-								+ QString::fromStdString(this->teamName.at(k)));
-				throw(this->teamName.at(k));
-			} catch (std::string str) {
-				LOG(
-						DEBUG,
-						"In Fanta::orderByRuolo() --> exception caught : this->teamName.at("
-								+ my::toQString<unsigned int>(k) + ") = "
-								+ QString::fromStdString(str));
-			}
-
-			try {
 				for (signed int i = 0; i < 4; i++) // loop sui ruoli
 				{
 
@@ -637,25 +623,22 @@ void Fanta::orderByRuolo() {
 						if (this->Team[k].at(j).Ruolo == i) {
 							Fanta::teamOrderedByRuolo[k][i].push_back(
 									this->Team[k].at(j));
-							LOG(
-									DEBUG,
-									"In Fanta::orderByRuolo() --> "
-											+ QString::fromStdString(
-													my::toString<unsigned int>(
-															i)) + " "
-											+ QString::fromStdString(
-													this->Team[k].at(j).Nome));
+							//qDebug() \
+									<< "In Fanta::orderByRuolo() --> " \
+									<< QString::fromStdString(my::toString<unsigned int>(i)) \
+									<< " " \
+									<< QString::fromStdString(this->Team[k].at(j).Nome);
 						}
 					}
 				}
 			} catch (...) {
 				LOG(FATAL,
-						"In Fanta::orderByRuolo() --> exception caught in for (i) loop.");
+						"Exception caught in ruoli loop.");
 			}
 		}
 	} catch (...) {
 		LOG(FATAL,
-				"In Fanta::orderByRuolo() --> exception caught in for (k) loop.");
+				"Exception caught in squadre loop.");
 	}
 }
 void Fanta::fillWithNonHaGiocato() {
