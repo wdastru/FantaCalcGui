@@ -92,16 +92,16 @@ void singletonQtLogger::saveLogFile() {
 		STR_MOD->fixSlashes(logFileName);
 		this->setLogFileName(logFileName);
 		file->setFileName(this->logFileName);
-		this->Inst()->Logging("DEBUG",
-				"In singletonQtLogger::saveLogFile() --> logFileName is empty.<br>Saving to "
-						+ this->logFileName);
+		//qDebug() << "In singletonQtLogger::saveLogFile() --> logFileName is empty.<br>Saving to " \
+				+ this->logFileName;
 	} else {
 		file->setFileName(
-				THE_REPO->risultatiPath + "/"
+				THE_REPO->risultatiPath
 						+ this->ui.outputFileNameLineEdit->text());
-		this->Inst()->Logging("DEBUG",
-				"In singletonQtLogger::saveLogFile() --> logFileName is "
-						+ this->logFileName);
+
+		//qDebug() << "In singletonQtLogger::saveLogFile() --> logFileName is " \
+				<< this->logFileName;
+
 	}
 
 	if (QFile::exists(this->logFileName)) {
@@ -250,7 +250,7 @@ QString singletonQtLogger::getVersion(void) {
 	return this->version;
 }
 void singletonQtLogger::goOn() {
-	qDebug() << "In singletonQtLogger::goOn().";
+	//qDebug() << "In singletonQtLogger::goOn().";
 
 	// --> lettura file Gazzetta e Formazioni
 	GazzettaFileReader * gazzettaFileReader = new GazzettaFileReader(
@@ -279,8 +279,7 @@ void singletonQtLogger::goOn() {
 
 			retVal = formazioniFileReader->execute();
 
-			LOG(DEBUG,
-					"In singletonQtLogger::goOn() --> formazioniFileReader::execute() returned "
+			//qDebug() << "In singletonQtLogger::goOn() --> formazioniFileReader::execute() returned " \
 							+ my::toQString<unsigned int>(retVal) + ".");
 
 		} catch (QString& str) {
@@ -298,10 +297,10 @@ void singletonQtLogger::goOn() {
 	try {
 		FANTA->execute();
 	} catch (...) {
-		LOG(DEBUG, "In singletonQtLogger::goOn() --> exception caught.");
+		qDebug() << "In singletonQtLogger::goOn() --> exception caught.";
 	}
 
-	LOG(DEBUG, "In singletonQtLogger::goOn() --> after FANTA->execute() call.");
+	//qDebug() << "In singletonQtLogger::goOn() --> after FANTA->execute() call.";
 
 	try {
 		QString fileName(
@@ -310,10 +309,7 @@ void singletonQtLogger::goOn() {
 						+ "_" + QFileInfo(THE_REPO->fileGazzetta).fileName());
 		this->setLogFileName(THE_REPO->getRisultatiPath() + "/" + fileName);
 
-		LOG(DEBUG,
-				QObject::tr(
-						"In singletonQtLogger::goOn() --> file name temporaneo : %1").arg(
-						fileName));
+		//qDebug() << QObject::tr("In singletonQtLogger::goOn() --> file name temporaneo : %1").arg(fileName);
 
 		FANTA->printTitolo(
 				FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1), INFO);
@@ -328,8 +324,8 @@ void singletonQtLogger::goOn() {
 		this->ui.outputFileNameLineEdit->setEnabled(true);
 		this->ui.outputFileNameLineEdit->setText(fileName);
 	} catch (...) {
-		LOG(DEBUG,
-				"In singletonQtLogger::goOn() --> exception caught after FANTA->execute().");
+		LOG(ERROR, "Exception caught after FANTA->execute().");
+		qDebug() << "In singletonQtLogger::goOn() --> exception caught after FANTA->execute().";
 	}
 }
 void singletonQtLogger::setLogFileName(QString filename) {
