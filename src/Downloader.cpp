@@ -148,7 +148,7 @@ void Downloader::downloadFiles() {
 			this->downloadSuccesses++;
 			//qDebug() << tr("In void Downloader::downloadFiles(). Download of %1 succeded.").arg(QFileInfo(this->savePaths->at(i)).fileName());
 			if (!this->silent) {
-				LOG(INFO, tr("Scaricato %1").arg(QFileInfo(this->savePaths->at(i)).fileName()));
+				//LOG(INFO, tr("Scaricato %1").arg(QFileInfo(this->savePaths->at(i)).fileName()));
 			}
 
 		} else {

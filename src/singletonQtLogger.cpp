@@ -153,8 +153,8 @@ void singletonQtLogger::saveLogFile() {
 			"<span style='color:#00CC00; font-weight:bold'> UPDATE : ", "");
 	fileContent.replace("</span>", "\n");
 
-	fileContent += "\n File prodotto da FantaCalcGui " + this->getVersion()
-			+ "\n";
+	fileContent += "\n File prodotto con FantaCalcGui v" + this->getVersion()
+			+ "\n\n";
 
 	file->write(this->fileContent.toStdString().c_str());
 	file->close();
@@ -176,7 +176,9 @@ void singletonQtLogger::configClicked() {
 	THE_CONFIGURATOR->exec();
 }
 void singletonQtLogger::onlineClicked() {
-	LOG(DEBUG, "<br>Modalita' online<br>");
+	LOG(DEBUG, "<br> ========================");
+	LOG(DEBUG, 	   " === Modalita' online ===");
+	LOG(DEBUG,     " ========================<br>");
 
 	//qDebug() << "In void singletonQtLogger::onlineClicked() --> THE_REPO->getFileFormazioniUrl() : " + THE_REPO->getFileFormazioniUrl();
 	//qDebug() << "In void singletonQtLogger::onlineClicked() --> THE_REPO->getFileGazzettaUrl() : " + THE_REPO->getFileGazzettaUrl();
@@ -221,7 +223,9 @@ void singletonQtLogger::onlineClicked() {
 	}
 }
 void singletonQtLogger::offlineClicked() {
-	LOG(DEBUG, "<br>Modalita' offline<br>");
+	LOG(DEBUG, "<br> =========================");
+	LOG(DEBUG,     " === Modalita' offline ===");
+	LOG(DEBUG,     " =========================<br>");
 
 	NoNetFileDialog * noNetFileDialog = new NoNetFileDialog(THE_LOGGER);
 	noNetFileDialog->exec();
@@ -231,15 +235,15 @@ void singletonQtLogger::offlineClicked() {
 		THE_REPO->fileGazzetta = noNetFileDialog->getFileNameGazzetta();
 
 		LOG(DEBUG,
-				QObject::tr("File gazzetta : %1").arg(THE_REPO->fileGazzetta));
+				QObject::tr("    File gazzetta   : %1").arg(THE_REPO->fileGazzetta));
 		LOG(DEBUG,
-				QObject::tr("File formazioni : %1").arg(
+				QObject::tr("    File formazioni : %1").arg(
 						THE_REPO->fileFormazioni));
 
 		emit(this->onOffClickedFinished());
 
 	} else {
-		qDebug() << "In void singletonQtLogger::offlineClicked() --> noNetFileDialog has been aborted.";
+		//qDebug() << "In void singletonQtLogger::offlineClicked() --> noNetFileDialog has been aborted.";
 		return;
 	}
 }
@@ -317,7 +321,7 @@ void singletonQtLogger::goOn() {
 		FANTA->printRiepilogo();
 		FANTA->printFormations();
 
-		LOG(DEBUG, "<br/><br/>&nbsp;&nbsp;&nbsp;DETTAGLIO SQUADRE : <br/>");
+		LOG(DEBUG, "<br/><br/>    DETTAGLIO GIOCATORI<br/>");
 
 		FANTA->printPlayersInfo();
 
@@ -333,6 +337,9 @@ void singletonQtLogger::setLogFileName(QString filename) {
 }
 bool singletonQtLogger::checkForUpdates() {
 
+	LOG(DEBUG, "<br> =============================");
+	LOG(DEBUG,     " === Ricerca aggiornamenti ===");
+	LOG(DEBUG,     " =============================<br>");
 	//	qDebug << "In void singletonQtLogger::checkForUpdates().";
 
 	QStringList current = this->getVersion().split(QRegExp("\\\."));
@@ -363,8 +370,7 @@ bool singletonQtLogger::checkForUpdates() {
 
 	if (updatesXmlDownloader.requestSucceded()) { // download succeded
 
-		LOG(DEBUG,
-				"Scaricato le informazioni relative agli aggiornamenti disponibili.");
+		//qDebug() << "    Scaricato le informazioni relative agli aggiornamenti disponibili";
 
 		std::vector<QString> content;
 		std::vector<QString> status;
@@ -460,20 +466,30 @@ bool singletonQtLogger::checkForUpdates() {
 			n = n.nextSibling();
 		}
 
+		bool foundUpdates = false;
+
 		for (int i = 0; i < listOfResources.size(); ++i) {
 			for (int j = 0; j < listOfResources.at(i).size(); ++j) {
 
 				if (listOfResources.at(i).at(j)["status"] == "new") {
-					LOG(UPDATE,
-							"E' possibile scaricare la versione "
-									+ listOfResources.at(i).at(j)["version"]
-									+ " : "
-									+ listOfResources.at(i).at(j)["file"] + " ("
-									+ listOfResources.at(i).at(j)["description"]
-									+ ")<br>changes : <br>"
+					LOG(UPDATE, \
+							"    E' possibile scaricare la versione " \
+									+ listOfResources.at(i).at(j)["version"] \
+									+ " : " \
+									+ listOfResources.at(i).at(j)["file"] + " (" \
+									+ listOfResources.at(i).at(j)["description"] \
+									+ ")<br>changes : <br>" \
 									+ listOfResources.at(i).at(j)["new"]);
+
+					foundUpdates = true;
 				}
 			}
+		}
+
+		if (!foundUpdates) {
+			LOG(UPDATE, \
+					"    La versione e' aggiornata");
+
 		}
 
 		for (int i = 0; i < listOfResources.size(); ++i) {

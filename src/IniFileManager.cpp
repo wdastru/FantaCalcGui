@@ -26,7 +26,7 @@ IniFileManager* IniFileManager::pInstance = NULL;
 
 IniFileManager::IniFileManager() {
 
-	qDebug() << "In IniFileManager::IniFileManager()";
+	//qDebug() << "In IniFileManager::IniFileManager()";
 
 	QDir dir(THE_REPO->UserProfile);
 
@@ -57,9 +57,10 @@ QString IniFileManager::getWorkDir() {
 void IniFileManager::writeIniFile() {
 	QFile * iniFile = new QFile(this->iniFileName);
 	if (iniFile->exists()) {
-		LOG(DEBUG,
-				"In IniFileManager::writeIniFile() --> " + this->iniFileName
-						+ " exists.");
+		//qDebug() << "In IniFileManager::writeIniFile() --> " \
+				+ this->iniFileName \
+				+ " exists.";
+
 		iniFile->open(QIODevice::WriteOnly);
 
 		iniFile->write("[File Formazioni Path]\n");
@@ -139,7 +140,7 @@ void IniFileManager::readIniFile() {
 
 	QFile *iniFile = new QFile(this->iniFileName);
 	if (iniFile->exists()) {
-		qDebug() << QObject::tr("Reading %1").arg(this->iniFileName);
+		//qDebug() << QObject::tr("Reading %1").arg(this->iniFileName);
 		iniFile->open(QIODevice::ReadOnly);
 		char buf[1024];
 
@@ -190,7 +191,7 @@ void IniFileManager::readIniFile() {
 		else
 			THE_REPO->debugStatus = FALSE;
 
-		qDebug() << "THE_REPO->formazioniPath = " << THE_REPO->formazioniPath;
+		//qDebug() << "THE_REPO->formazioniPath = " << THE_REPO->formazioniPath;
 
 		iniFile->close();
 	} else {
@@ -199,7 +200,7 @@ void IniFileManager::readIniFile() {
 						"%1 non esiste<br>Inserire le informazioni di configurazione").arg(
 						this->iniFileName));
 
-		qDebug() << "In void IniFileManager::readIniFile() : workDir = " + this->workDir;
+		//qDebug() << "In void IniFileManager::readIniFile() : workDir = " + this->workDir;
 		THE_CONFIGURATOR->setStartDir(this->workDir);
 
 		/*

@@ -231,7 +231,7 @@ void HttpWindow::httpFinished() {
 	} else {
 		LOG(
 				DEBUG,
-				tr("Downloaded %1 to %2").arg(
+				tr("    Scaricato %1 in %2").arg(
 						QFileInfo(this->file->fileName()).fileName()).arg(
 						QFileInfo(this->file->fileName()).path()));
 

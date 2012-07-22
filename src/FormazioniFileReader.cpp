@@ -22,7 +22,9 @@ void FormazioniFileReader::setPlayers(
 }
 unsigned int FormazioniFileReader::execute() {
 
-	LOG(DEBUG, "<br/> *** Lettura file di input ***");
+	LOG(DEBUG, "<br/> =============================");
+	LOG(DEBUG,      " === Lettura file di input ===");
+	LOG(DEBUG,      " =============================");
 	//qDebug() << In FormazioniFileReader::execute().";
 
 	std::ifstream fSqua(this->fileFormazioni.toStdString().c_str());
@@ -165,7 +167,11 @@ unsigned int FormazioniFileReader::execute() {
 				}
 
 				if (v_Found.size() > 1) {
-					LOG(DEBUG, QString::fromStdString(line) + " : trovate " + my::toQString<size_t>(v_Found.size()) + " corrispondenze");
+					LOG(DEBUG, "<br>    " \
+							+ QString::fromStdString(line) \
+							+ " : trovate " \
+							+ my::toQString<size_t>(v_Found.size()) \
+							+ " corrispondenze");
 					//qDebug() << "In FormazioniFileReader::execute()  -> " \
 						+ QString::fromStdString(line) \
 						+ " : v_Found.size = " \
@@ -178,15 +184,16 @@ unsigned int FormazioniFileReader::execute() {
 
 						for (unsigned int j = 0; j < v_Found.size(); j++) {
 
-							LOG(DEBUG, QString::fromStdString(this->prepareStringToPresent(v_Found.at(j), j)) \
-								+ " : ");
+							LOG(DEBUG, "    " \
+									+ QString::fromStdString(this->prepareStringToPresent(v_Found.at(j), j)) \
+									+ " : ");
 
 							if (FANTA->LevenshteinDistance(
 									line,
 									STR_MOD->onlySurname(
 											STR_MOD->msk(v_Found.at(j), DELIM,
 													ColNomeCognome))) == 0) { // corrispondenza esatta
-								LOG(DEBUG, "Trovata corrispondenza esatta : " \
+								LOG(DEBUG, "    Trovata corrispondenza esatta : " \
 									+ QString::fromStdString(line));
 
 								temp.push_back(v_Found.at(j)); // aggiungi corrispondenza esatta						}
@@ -344,7 +351,7 @@ unsigned int FormazioniFileReader::execute() {
 
 					case PLAYER_GDV_NO_GOAL:
 						LOG(ERROR,
-							QObject::tr("ATTENZIONE !!!  -> %1 ( %2 ).<br/>Giocatore indicato con GDV senza che abbia segnato !!!<br/>Controllare il file di input.").arg(
+							QObject::tr("<br/>    ATTENZIONE !!!  -> %1 ( %2 ).<br/>    Giocatore indicato con GDV senza che abbia segnato !!!<br/>    Controllare il file di input.").arg(
 								QString::fromStdString(
 										STR_MOD->msk(v_Found.at(0),
 												DELIM, ColNomeCognome))).arg(
@@ -357,7 +364,7 @@ unsigned int FormazioniFileReader::execute() {
 
 					case PLAYER_GDP_NO_GOAL:
 						LOG(ERROR,
-							QObject::tr("ATTENZIONE !!!  -> %1 ( %2 ).<br/>Giocatore indicato con GDP senza che abbia segnato !!!<br/>Controllare il file di input.").arg(
+							QObject::tr("<br/>    ATTENZIONE !!!  -> %1 ( %2 ).<br/>    Giocatore indicato con GDP senza che abbia segnato !!!<br/>    Controllare il file di input.").arg(
 								QString::fromStdString(
 										STR_MOD->msk(v_Found.at(0),
 												DELIM, ColNomeCognome))).arg(

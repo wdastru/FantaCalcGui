@@ -232,7 +232,7 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 		tmpPlayer.GoalDecVitt = atoi(
 				STR_MOD->msk(str, DELIM, ColGoalDecVitt).c_str());
 		if (tmpPlayer.GoalDecVitt != 0 && tmpPlayer.GoalFatti == 0) {
-			LOG(DEBUG, "In Fanta::addPlayer( ... ) --> PLAYER_GDV_NO_GOAL");
+			//qDebug() << "In Fanta::addPlayer( ... ) --> PLAYER_GDV_NO_GOAL";
 			Fanta::Team[k].push_back(this->fakePlayer);
 			return PLAYER_GDV_NO_GOAL;
 		}
@@ -240,7 +240,7 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 		tmpPlayer.GoalDecPar = atoi(
 				STR_MOD->msk(str, DELIM, ColGoalDecPar).c_str());
 		if (tmpPlayer.GoalDecPar != 0 && tmpPlayer.GoalFatti == 0) {
-			LOG(DEBUG, "In Fanta::addPlayer( ... ) --> PLAYER_GDP_NO_GOAL");
+			//qDebug() << "In Fanta::addPlayer( ... ) --> PLAYER_GDP_NO_GOAL";
 			Fanta::Team[k].push_back(this->fakePlayer);
 			return PLAYER_GDP_NO_GOAL;
 		}
@@ -402,8 +402,10 @@ void Fanta::execute() {
 }
 void Fanta::checkGiocatoSenzaVoto() {
 
-	LOG(DEBUG, "<br/> *** Giocatori senza voto ***<br/>");
-	//qDebug() << "In Fanta::checkGiocatoSenzaVoto().";
+	LOG(DEBUG, "<br/> ============================");
+	LOG(DEBUG,      " === Giocatori senza voto ===");
+	LOG(DEBUG,      " ============================<br/>");
+		//qDebug() << "In Fanta::checkGiocatoSenzaVoto().";
 
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
@@ -563,7 +565,9 @@ QString Fanta::questionMessage(QString playerName) {
 }
 void Fanta::checkNonHaGiocato() {
 
-	LOG(DEBUG, "<br/> *** Giocatori che non hanno giocato ***");
+	LOG(DEBUG, "<br/> =======================================");
+	LOG(DEBUG,      " === Giocatori che non hanno giocato ===");
+	LOG(DEBUG,      " =======================================");
 	//qDebug() << "In Fanta::checkNonHaGiocato().";
 
 	for (size_t k = 0; k < 2; k++) // squadra
@@ -668,7 +672,9 @@ void Fanta::fillWithNonHaGiocato() {
 }
 void Fanta::substitutions() {
 
-	LOG(DEBUG, "<br/> *** Sostituzioni ***");
+	LOG(DEBUG, "<br/> ====================");
+	LOG(DEBUG,      " === Sostituzioni ===");
+	LOG(DEBUG,      " ====================");
 	//qDebug() << "In Fanta::substitutions().";
 
 	for (size_t k = 0; k < 2; k++) // squadra
@@ -802,7 +808,9 @@ void Fanta::substitutions() {
 }
 void Fanta::calculateFantaVoto() {
 
-	LOG(DEBUG, "<br/> *** Fantavoti ***");
+	LOG(DEBUG, "<br/> =================");
+	LOG(DEBUG,      " === Fantavoti ===");
+	LOG(DEBUG,      " =================");
 	//qDebug() << "In Fanta::calculateFantaVoto().";
 
 	int longerName = 0;
@@ -854,7 +862,9 @@ void Fanta::calculateFantaVoto() {
 }
 void Fanta::calculateDefenseMean() {
 
-	LOG(DEBUG, "<br/> *** Media difesa ***");
+	LOG(DEBUG, "<br/> ====================");
+	LOG(DEBUG,      " === Media difesa ===");
+	LOG(DEBUG,      " ====================");
 	//qDebug() << "In Fanta::calculateDefenseMean().";
 
 	for (size_t k = 0; k < 2; k++) // squadra
@@ -888,7 +898,9 @@ void Fanta::calculateDefenseMean() {
 }
 void Fanta::calculateDefenseModifier() {
 
-	LOG(DEBUG, "<br/> *** Modificatore della difesa ***");
+	LOG(DEBUG, "<br/> =================================");
+	LOG(DEBUG,      " === Modificatore della difesa ===");
+	LOG(DEBUG,      " =================================");
 	//qDebug() << "In Fanta::calculateDefenseModifier().";
 
 	for (size_t i = 0; i < 9; i++) {
@@ -913,7 +925,9 @@ void Fanta::calculateDefenseModifier() {
 }
 void Fanta::calculateSfide() {
 
-	LOG(DEBUG, "<br/> *** Calcolo sfide ***<br>");
+	LOG(DEBUG, "<br/> =====================");
+	LOG(DEBUG,      " === Calcolo sfide ===");
+	LOG(DEBUG,      " =====================<br>");
 	//qDebug() << "In Fanta::calculateSfide().";
 
 	QString winner, loser, team;
@@ -1077,7 +1091,9 @@ void Fanta::calculateSfide() {
 }
 void Fanta::calculateTotal() {
 
-	LOG(DEBUG, "<br/> *** Calcolo punteggio ***");
+	LOG(DEBUG, "<br/> =========================");
+	LOG(DEBUG,      " === Calcolo punteggio ===");
+	LOG(DEBUG,      " =========================");
 	//qDebug() << "In Fanta::calculateTotal().";
 
 	for (size_t k = 0; k < 2; k++) // squadra
@@ -1146,7 +1162,9 @@ void Fanta::calculateTotal() {
 }
 void Fanta::calculateGoals() {
 
-	LOG(DEBUG, "<br/> *** Calcolo goals ***");
+	LOG(DEBUG, "<br/> =====================");
+	LOG(DEBUG,      " === Calcolo goals ===");
+	LOG(DEBUG,      " =====================");
 	//qDebug() << "In Fanta::calculateGoals().";
 
 	for (size_t k = 0; k < 2; k++) {
@@ -1215,7 +1233,9 @@ void Fanta::calculateGoals() {
 }
 void Fanta::calculateScorers() {
 
-	LOG(DEBUG, "<br/> *** Marcatori ***");
+	LOG(DEBUG, "<br/> =================");
+	LOG(DEBUG,      " === Marcatori ===");
+	LOG(DEBUG,      " =================");
 	//qDebug() << "In Fanta::calculateScorers().";
 
 	vector<Fanta::player> tmpVector[2];
@@ -1527,8 +1547,6 @@ void Fanta::printTitolo(std::string str, std::string where) {
 void Fanta::printPlayersInfo() {
 	for (size_t k = 0; k < 2; k++) // squadre
 	{
-
-		LOG(DEBUG, "<br/><br/>");
 
 		FANTA->printTitolo(FANTA->teamName.at(k), DEBUG);
 
