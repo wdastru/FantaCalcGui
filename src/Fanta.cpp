@@ -1077,33 +1077,44 @@ void Fanta::calculateSfide() {
 }
 void Fanta::calculateTotal() {
 
+	LOG(DEBUG, "<br/> *** Calcolo punteggio ***");
 	//qDebug() << "In Fanta::calculateTotal().";
 
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
 		QString message;
+
+		LOG(DEBUG, \
+				"<br> -> " \
+				+ QString::fromStdString(this->getTeamName(k)));
+
+
 		Fanta::Total[k] += Fanta::atHome[k];
-		message = "In Fanta::calculateTotal() --> squadra "
-				+ QString::fromStdString(this->getTeamName(k)) + " : "
-				+ my::toQString<double>(Fanta::Total[k]) + " in casa ("
-				+ my::toQString<unsigned int>(Fanta::atHome[k]) + ").";
+		message = "      " \
+				+ my::toQString<double>(Fanta::Total[k]) \
+				+ " (" \
+				+ my::toQString<unsigned int>(Fanta::atHome[k]) \
+				+ ", in casa)";
+
 
 		LOG(DEBUG, message);
 
 		Fanta::Total[k] += Fanta::modifier[k];
-		message = "In Fanta::calculateTotal() --> squadra "
-				+ QString::fromStdString(this->getTeamName(k)) + " : "
-				+ (my::toQString<double>(Fanta::Total[k])
-						+ " modificatore difesa (" + my::toQString<signed int>(
-						Fanta::modifier[k]) + ").");
+		message = "      " \
+				+ my::toQString<double>(Fanta::Total[k]) \
+				+ " (" \
+				+ my::toQString<signed int>(Fanta::modifier[k]) \
+				+ ", modificatore difesa)";
+
 		LOG(DEBUG, message);
 
 		Fanta::Total[k] += Fanta::sfide[k];
-		message = "In Fanta::calculateTotal() --> squadra "
-				+ QString::fromStdString(this->getTeamName(k)) + " : "
-				+ (my::toQString<double>(Fanta::Total[k]) + " sfide vinte."
-						+ " (" + my::toQString<unsigned int>(Fanta::sfide[k])
-						+ ").");
+		message = "      " \
+				+ my::toQString<double>(Fanta::Total[k]) \
+				+ " (" \
+				+ my::toQString<unsigned int>(Fanta::sfide[k]) \
+				+ ", sfide)";
+
 		LOG(DEBUG, message);
 
 		for (size_t i = 0; i < 4; i++) // ruolo
@@ -1113,22 +1124,23 @@ void Fanta::calculateTotal() {
 				Fanta::Total[k]
 						+= Fanta::teamOrderedByRuolo[k][i].at(j).FantaVoto;
 
-				message = "In Fanta::calculateTotal() --> squadra "
-						+ QString::fromStdString(this->getTeamName(k)) + " : "
-						+ my::toQString<double>(Fanta::Total[k]) + " "
-						+ QString::fromStdString(
-								Fanta::teamOrderedByRuolo[k][i].at(j).Nome)
-						+ " (" + my::toQString<float>(
-						Fanta::teamOrderedByRuolo[k][i].at(j).FantaVoto) + ").";
+				message = "      " \
+						+ my::toQString<double>(Fanta::Total[k]) \
+						+ " (" \
+						+ my::toQString<float>(Fanta::teamOrderedByRuolo[k][i].at(j).FantaVoto) \
+						+ ", " \
+						+ QString::fromStdString(Fanta::teamOrderedByRuolo[k][i].at(j).Nome) \
+						+ ")";
+
 				LOG(DEBUG, message);
 
 				j++;
 			}
 		}
 
-		message = "In Fanta::calculateTotal() --> squadra "
-				+ QString::fromStdString(this->getTeamName(k)) + " : Totale "
+		message = "<br>    Totale : "
 				+ my::toQString<double>(Fanta::Total[k]);
+
 		LOG(DEBUG, message);
 	}
 }
