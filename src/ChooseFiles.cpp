@@ -4,6 +4,8 @@
 #include <QtCore/QUrl>
 #include <QtCore/QFileInfo>
 
+#include <sstream>
+
 #include "defines.h"
 #include "singletonQtLogger.h"
 #include "Repository.h"
@@ -560,7 +562,18 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 
 		fOut.write(str.toAscii());
 
-		LOG(DEBUG, QObject::tr("<br>Creato file squadre : <br>%1").arg(str));
+		LOG(DEBUG, QObject::tr("<br> *** File di input ***<br>"));
+
+		std::istringstream iss(str.toStdString().c_str());
+		std::string x;
+		const int Limit = 255;
+		char input[Limit];
+
+		while(!iss.eof()) {
+			iss.getline(input, Limit);
+			x = std::string(input);
+			LOG(DEBUG, QObject::tr("    %1").arg(QString::fromStdString(x)));
+		}
 
 		fHome.close();
 		fAway.close();
