@@ -1215,6 +1215,7 @@ void Fanta::calculateGoals() {
 }
 void Fanta::calculateScorers() {
 
+	LOG(DEBUG, "<br/> *** Marcatori ***");
 	//qDebug() << "In Fanta::calculateScorers().";
 
 	vector<Fanta::player> tmpVector[2];
@@ -1234,19 +1235,22 @@ void Fanta::calculateScorers() {
 
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
+
+		LOG(DEBUG, \
+				"<br> -> " \
+				+ QString::fromStdString(this->getTeamName(k)));
+
 		if (Fanta::goals[k] == 0)
 			continue;
 		do {
 			Fanta::bSort(tmpVector[k]);
 			Fanta::scorers[k].push_back(tmpVector[k].at(0).Nome);
 
-			LOG(
-					DEBUG,
-					"In Fanta::calculateScorers() --> squadra "
-							+ QString::fromStdString(this->getTeamName(k))
-							+ " : " + QString::fromStdString(
-							tmpVector[k].at(0).Nome) + " (" + my::toQString<
-							float>(tmpVector[k].at(0).FantaVoto) + ").");
+			LOG(DEBUG, \
+					"      " \
+					+ QString::fromStdString(tmpVector[k].at(0).Nome) \
+					+ " (" + my::toQString<float>(tmpVector[k].at(0).FantaVoto) \
+					+ ")");
 
 			tmpVector[k].at(0).FantaVoto -= 3.0;
 		} while (Fanta::scorers[k].size() < Fanta::goals[k]);
