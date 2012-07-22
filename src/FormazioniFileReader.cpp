@@ -21,6 +21,8 @@ void FormazioniFileReader::setPlayers(
 	this->allThePlayers = _allThePlayers;
 }
 unsigned int FormazioniFileReader::execute() {
+
+	LOG(DEBUG, "<br/> *** Lettura file di input ***");
 	//qDebug() << In FormazioniFileReader::execute().";
 
 	std::ifstream fSqua(this->fileFormazioni.toStdString().c_str());
@@ -51,6 +53,9 @@ unsigned int FormazioniFileReader::execute() {
 				 *  se trovato passa alla prossima squadra o esce dal loop for
 				 */
 				//qDebug() << "In FormazioniFileReader::execute()  -> separatore : " + QString::fromStdString(line);
+
+				LOG(DEBUG, "<br>    ---------------------------------");
+
 				break;
 			} else if (line.find("#", 0) != std::string::npos) {// # indica linee di commento
 				//qDebug() << "In FormazioniFileReader::execute()  -> commento : " + QString::fromStdString(line);
@@ -67,16 +72,18 @@ unsigned int FormazioniFileReader::execute() {
 					line = "Squadra" + my::toString<unsigned int>(k + 1);
 				FANTA->setTeamName(line, k);
 
-				LOG(INFO, "<br/>&nbsp;&nbsp;==== "
-								+ QString::fromStdString(FANTA->getTeamName(k)).toUpper()
-								+ " ====<br/><br/>");
+				//LOG(INFO, "<br/>&nbsp;&nbsp;==== "
+				//				+ QString::fromStdString(FANTA->getTeamName(k)).toUpper()
+				//				+ " ====<br/><br/>");
 
-				LOG(DEBUG, "nome squadra : "
+				LOG(DEBUG, "<br>    nome squadra : "
 								+ QString::fromStdString(line));
 
 				continue;
 			} else if (line.find("modulo", 0) != std::string::npos) { // modulo
-				LOG(DEBUG, QString::fromStdString(line));
+				LOG(DEBUG, \
+						+ "    " \
+						+ QString::fromStdString(line));
 
 				unsigned int xx;
 				xx = FANTA->setModulo(line, k);
@@ -92,7 +99,7 @@ unsigned int FormazioniFileReader::execute() {
 				}
 			} else if (line.find("in casa", 0) != std::string::npos) { // in casa
 				FANTA->setAtHome(k);
-				LOG(DEBUG, "In casa");
+				LOG(DEBUG, "    in casa");
 				continue;
 			} else { // riga "buona"
 				//  -> sostituzione lettere accentate ed eliminazione caratteri "non-lettera"
@@ -240,7 +247,7 @@ unsigned int FormazioniFileReader::execute() {
 					Levenshteins = this->findLevenstheins(line);
 
 					LOG(DEBUG, "");
-					LOG(WARN, QObject::tr(" -> non trovato %1.").arg(QString::fromStdString(line)));
+					LOG(WARN, QObject::tr("    non trovato %1.").arg(QString::fromStdString(line)));
 
 					if (Levenshteins.empty()) {
 						LOG(ERROR,
@@ -304,12 +311,12 @@ unsigned int FormazioniFileReader::execute() {
 					case PLAYER_OK:
 
 						LOG(DEBUG, ""); // blank line in log file only
-						LOG(INFO, " -> trovato " \
+						LOG(INFO, "    trovato " \
 							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColNomeCognome)) \
 							+ " ( " \
 							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColSquadra)) \
 							+ " ).");
-						LOG(DEBUG, "    [" \
+						LOG(DEBUG, "      [" \
 							+ QString::fromStdString(v_Found.at(0)).replace("\t", " ") \
 							+ "]");
 
