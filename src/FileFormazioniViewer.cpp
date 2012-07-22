@@ -53,8 +53,7 @@ void FileFormazioniViewer::setFile(QString filename) {
 		 * * * * * * * * * * * * * */
 	}
 
-	QFont f("Courier");
-	this->ui.plainTextEdit->setFont(f);
+	this->ui.plainTextEdit->setFont(THE_REPO->fontFixedWidth);
 }
 void FileFormazioniViewer::saveFileAndClose() {
 	//qDebug() << "In FileFormazioniViewer::saveFileAndClose().";
