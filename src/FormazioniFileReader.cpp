@@ -369,6 +369,54 @@ unsigned int FormazioniFileReader::execute() {
 						return FORMFILEREAD_REPEATED;
 						break;
 
+					case PLAYER_GDV_NOT_PLAYED:
+						LOG(ERROR, \
+							QObject::tr("<br/>    ATTENZIONE !!!  -> %1 ( %2 ).<br/>    Giocatore indicato con GDV senza che abbia giocato !!!<br/>    Controllare il file di input.").arg( \
+								QString::fromStdString( \
+										STR_MOD->msk(v_Found.at(0), \
+												DELIM, ColNomeCognome))).arg( \
+								QString::fromStdString( \
+										STR_MOD->msk(v_Found.at(0), \
+												DELIM, ColSquadra))));
+
+						msgBox.setInformativeText( \
+								QObject::tr( \
+										"%1 ( %2 )<br>Giocatore indicato con GDV senza che abbia giocato !!!<br>Controllare il file di input").arg( \
+										QString::fromStdString( \
+												STR_MOD->msk(v_Found.at(0), \
+														DELIM, ColNomeCognome))).arg( \
+										QString::fromStdString( \
+												STR_MOD->msk(v_Found.at(0), \
+														DELIM, ColSquadra))));
+						msgBox.exec();
+
+						return FORMFILEREAD_GDV_NOT_PLAYED;
+						break;
+
+					case PLAYER_GDP_NOT_PLAYED:
+						LOG(ERROR, \
+							QObject::tr("<br/>    ATTENZIONE !!!  -> %1 ( %2 ).<br/>    Giocatore indicato con GDP senza che abbia giocato !!!<br/>    Controllare il file di input.").arg( \
+								QString::fromStdString( \
+										STR_MOD->msk(v_Found.at(0), \
+												DELIM, ColNomeCognome))).arg( \
+								QString::fromStdString( \
+										STR_MOD->msk(v_Found.at(0), \
+												DELIM, ColSquadra))));
+
+						msgBox.setInformativeText( \
+								QObject::tr( \
+										"%1 ( %2 )<br>Giocatore indicato con GDP senza che abbia giocato !!!<br>Controllare il file di input").arg( \
+										QString::fromStdString( \
+												STR_MOD->msk(v_Found.at(0), \
+														DELIM, ColNomeCognome))).arg( \
+										QString::fromStdString( \
+												STR_MOD->msk(v_Found.at(0), \
+														DELIM, ColSquadra))));
+						msgBox.exec();
+
+						return FORMFILEREAD_GDP_NOT_PLAYED;
+						break;
+
 					case PLAYER_GDV_NO_GOAL:
 						LOG(ERROR, \
 							QObject::tr("<br/>    ATTENZIONE !!!  -> %1 ( %2 ).<br/>    Giocatore indicato con GDV senza che abbia segnato !!!<br/>    Controllare il file di input.").arg( \

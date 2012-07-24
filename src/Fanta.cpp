@@ -231,6 +231,14 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 		// --> goal decisivi
 		tmpPlayer.GoalDecVitt = atoi(
 				STR_MOD->msk(str, DELIM, ColGoalDecVitt).c_str());
+
+		qDebug() << QString::fromStdString(tmpPlayer.Nome) << " : " << tmpPlayer.GoalDecVitt << " - " << tmpPlayer.FantaVotoGazzetta << " - " << tmpPlayer.GoalFatti;
+
+		if (tmpPlayer.GoalDecVitt != 0 && tmpPlayer.FantaVotoGazzetta == 0) {
+			qDebug() << "In Fanta::addPlayer( ... ) --> PLAYER_GDV_NOT_PLAYED";
+			Fanta::Team[k].push_back(this->fakePlayer);
+			return PLAYER_GDV_NOT_PLAYED;
+		}
 		if (tmpPlayer.GoalDecVitt != 0 && tmpPlayer.GoalFatti == 0) {
 			//qDebug() << "In Fanta::addPlayer( ... ) --> PLAYER_GDV_NO_GOAL";
 			Fanta::Team[k].push_back(this->fakePlayer);
@@ -239,6 +247,11 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 
 		tmpPlayer.GoalDecPar = atoi(
 				STR_MOD->msk(str, DELIM, ColGoalDecPar).c_str());
+		if (tmpPlayer.GoalDecPar != 0 && tmpPlayer.FantaVotoGazzetta == 0) {
+			//qDebug() << "In Fanta::addPlayer( ... ) --> PLAYER_GDP_NOT_PLAYED";
+			Fanta::Team[k].push_back(this->fakePlayer);
+			return PLAYER_GDP_NOT_PLAYED;
+		}
 		if (tmpPlayer.GoalDecPar != 0 && tmpPlayer.GoalFatti == 0) {
 			//qDebug() << "In Fanta::addPlayer( ... ) --> PLAYER_GDP_NO_GOAL";
 			Fanta::Team[k].push_back(this->fakePlayer);
