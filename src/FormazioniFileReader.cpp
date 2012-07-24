@@ -8,8 +8,10 @@
 #include "singletonQtLogger.h"
 #include <QtCore/QDebug>
 #include <QtCore/QObject>
+#include <QtGui/QMessageBox>
 #include "FormazioniFileReader.h"
 #include "Fanta.h"
+#include "Repository.h"
 
 FormazioniFileReader::FormazioniFileReader(QString _fileFormazioni) {
 	this->fileFormazioni = _fileFormazioni;
@@ -314,6 +316,13 @@ unsigned int FormazioniFileReader::execute() {
 									+ my::toQString<unsigned int>( \
 											FANTA->Team[k].size());
 
+					QMessageBox msgBox;
+					msgBox.setStandardButtons(QMessageBox::Ok);
+					msgBox.setDefaultButton(QMessageBox::Ok);
+					msgBox.setIcon(QMessageBox::Information);
+					msgBox.setFont(THE_REPO->fontVariableWidthSmall);
+					msgBox.setWindowTitle("ATTENZIONE !!!");
+
 					switch (FANTA->addPlayer(v_Found.at(0), k)) {
 					case PLAYER_OK:
 
@@ -337,7 +346,7 @@ unsigned int FormazioniFileReader::execute() {
 
 					case PLAYER_REPEATED:
 						LOG(ERROR, \
-							QObject::tr("ATTENZIONE !!!  -> %1 ( %2 ) ripetuto.<br/>Controllare il file di input.").arg( \
+							QObject::tr("<br>    ATTENZIONE !!!  -> %1 ( %2 ) ripetuto.<br/>    Controllare il file di input.").arg( \
 								QString::fromStdString( \
 										STR_MOD->msk(v_Found.at(0), \
 												DELIM, ColNomeCognome))).arg( \
@@ -346,38 +355,77 @@ unsigned int FormazioniFileReader::execute() {
 												DELIM, ColSquadra))).replace( \
 								QString(" "), QString("&nbsp;")));
 
+						msgBox.setInformativeText( \
+								QObject::tr("%1 ( %2 ) ripetuto.<br>Controllare il file di input.").arg( \
+									QString::fromStdString( \
+											STR_MOD->msk(v_Found.at(0), \
+													DELIM, ColNomeCognome))).arg( \
+									QString::fromStdString( \
+											STR_MOD->msk(v_Found.at(0), \
+													DELIM, ColSquadra))).replace( \
+									QString(" "), QString("&nbsp;")));
+						msgBox.exec();
+
 						return FORMFILEREAD_REPEATED;
 						break;
 
 					case PLAYER_GDV_NO_GOAL:
-						LOG(ERROR,
-							QObject::tr("<br/>    ATTENZIONE !!!  -> %1 ( %2 ).<br/>    Giocatore indicato con GDV senza che abbia segnato !!!<br/>    Controllare il file di input.").arg(
-								QString::fromStdString(
-										STR_MOD->msk(v_Found.at(0),
-												DELIM, ColNomeCognome))).arg(
-								QString::fromStdString(
-										STR_MOD->msk(v_Found.at(0),
+						LOG(ERROR, \
+							QObject::tr("<br/>    ATTENZIONE !!!  -> %1 ( %2 ).<br/>    Giocatore indicato con GDV senza che abbia segnato !!!<br/>    Controllare il file di input.").arg( \
+								QString::fromStdString( \
+										STR_MOD->msk(v_Found.at(0), \
+												DELIM, ColNomeCognome))).arg( \
+								QString::fromStdString( \
+										STR_MOD->msk(v_Found.at(0), \
 												DELIM, ColSquadra))));
+
+						msgBox.setInformativeText( \
+								QObject::tr( \
+										"%1 ( %2 )<br>Giocatore indicato con GDV senza che abbia segnato !!!<br>Controllare il file di input").arg( \
+										QString::fromStdString( \
+												STR_MOD->msk(v_Found.at(0), \
+														DELIM, ColNomeCognome))).arg( \
+										QString::fromStdString( \
+												STR_MOD->msk(v_Found.at(0), \
+														DELIM, ColSquadra))));
+						msgBox.exec();
 
 						return FORMFILEREAD_GDV_NO_GOAL;
 						break;
 
 					case PLAYER_GDP_NO_GOAL:
-						LOG(ERROR,
-							QObject::tr("<br/>    ATTENZIONE !!!  -> %1 ( %2 ).<br/>    Giocatore indicato con GDP senza che abbia segnato !!!<br/>    Controllare il file di input.").arg(
-								QString::fromStdString(
-										STR_MOD->msk(v_Found.at(0),
-												DELIM, ColNomeCognome))).arg(
-								QString::fromStdString(
-										STR_MOD->msk(v_Found.at(0),
+						LOG(ERROR, \
+							QObject::tr("<br/>    ATTENZIONE !!!  -> %1 ( %2 ).<br/>    Giocatore indicato con GDP senza che abbia segnato !!!<br/>    Controllare il file di input.").arg( \
+								QString::fromStdString( \
+										STR_MOD->msk(v_Found.at(0), \
+												DELIM, ColNomeCognome))).arg( \
+								QString::fromStdString( \
+										STR_MOD->msk(v_Found.at(0), \
 												DELIM, ColSquadra))));
+
+						msgBox.setInformativeText( \
+								QObject::tr( \
+										"%1 ( %2 )<br>Giocatore indicato con GDP senza che abbia segnato !!!<br>Controllare il file di input").arg( \
+										QString::fromStdString( \
+												STR_MOD->msk(v_Found.at(0), \
+														DELIM, ColNomeCognome))).arg( \
+										QString::fromStdString( \
+												STR_MOD->msk(v_Found.at(0), \
+														DELIM, ColSquadra))));
+						msgBox.exec();
 
 						return FORMFILEREAD_GDP_NO_GOAL;
 						break;
 
 					case PLAYER_ERROR:
-						LOG(ERROR,
-								"ATTENZIONE !!!  -> PLAYER ERROR.<br/>Controllare il file di input.");
+						LOG(ERROR, \
+								"<br>    ATTENZIONE !!!  -> PLAYER ERROR.<br/>    Controllare il file di input.");
+
+						msgBox.setInformativeText( \
+								QObject::tr( \
+										"PLAYER ERROR<br>Controllare il file di input."));
+						msgBox.exec();
+
 						break;
 
 					default:
