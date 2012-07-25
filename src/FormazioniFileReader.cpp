@@ -288,11 +288,35 @@ unsigned int FormazioniFileReader::execute() {
 												- 1));
 
 						LOG(INFO, "    scelto " \
-							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColNomeCognome)));
+							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM, ColNomeCognome)));
 					}
 				}
 
 				if (v_Found.size() == 1) {
+
+					/*
+					 * riempi i dati mancanti (stringhe nulle) con '-'
+					 *
+					 * * * * * * * * * * * * * * * * */
+					size_t i = 0;
+					while (STR_MOD->msk(v_Found.at(0), DELIM, i) != "TnotF!") {
+						i++;
+					} // trova l'ultimo token
+					i--;
+
+					if (i < 14) { // non sono presenti tutti i dati (o meglio sono stringhe nulle)
+
+						QString toAdd;
+						for (unsigned int j = i; j<14; j++) {
+							toAdd += "\t-";
+						}
+						toAdd += "\t";
+
+						unsigned int index = QString::fromStdString(v_Found.at(0)).indexOf("\t\t");
+						v_Found.at(0) = v_Found.at(0).substr(0, index) + toAdd.toStdString();
+					}
+					/* * * * * * * * * * * * * * * * */
+
 					/*
 					 *  aggiungo le due colonne mancanti
 					 *  nel file della Gazzetta : GDV e GDP
