@@ -317,10 +317,18 @@ unsigned int FormazioniFileReader::execute() {
 					}
 					/* * * * * * * * * * * * * * * * */
 
+					QMessageBox msgBox;
+					msgBox.setStandardButtons(QMessageBox::Ok);
+					msgBox.setDefaultButton(QMessageBox::Ok);
+					msgBox.setIcon(QMessageBox::Information);
+					msgBox.setFont(THE_REPO->fontVariableWidthSmall);
+					msgBox.setWindowTitle("ATTENZIONE !!!");
+
 					/*
 					 *  aggiungo le due colonne mancanti
 					 *  nel file della Gazzetta : GDV e GDP
-					 */
+					 *
+					 * * * * * * * * * * * * * * * * * * * */
 					if (gdv) {
 						v_Found.at(0) += "1\t0";
 					} else if (gdp) {
@@ -339,13 +347,6 @@ unsigned int FormazioniFileReader::execute() {
 									+ "].size() = " \
 									+ my::toQString<unsigned int>( \
 											FANTA->Team[k].size());
-
-					QMessageBox msgBox;
-					msgBox.setStandardButtons(QMessageBox::Ok);
-					msgBox.setDefaultButton(QMessageBox::Ok);
-					msgBox.setIcon(QMessageBox::Information);
-					msgBox.setFont(THE_REPO->fontVariableWidthSmall);
-					msgBox.setWindowTitle("ATTENZIONE !!!");
 
 					switch (FANTA->addPlayer(v_Found.at(0), k)) {
 					case PLAYER_OK:
