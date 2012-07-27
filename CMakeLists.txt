@@ -49,7 +49,6 @@ SET( TEST_HDRS
 		src/Test/test.h )
 
 SET( TEST_SRCS 
-		src/Test/main.cpp
 		src/Test/test.cpp )
 
 QT4_WRAP_UI( UI_HDRS ${UIS} )

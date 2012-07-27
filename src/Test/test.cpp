@@ -7,15 +7,12 @@
 
  #include "test.h"
 
-Test::Test() {};
-
 void Test::toUpper()
  {
      QString str = "Hello";
      QCOMPARE(str.toUpper(), QString("HELLO"));
  }
 
+QTest::qExec();
 
-
-
-
+//#include "test.moc"
