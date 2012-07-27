@@ -24,6 +24,7 @@ SET( SRCS
         src/httpwindow.cpp
         src/singletonQtLogger.cpp
         src/resources.rc )
+		
 SET( HDRS 
         src/ChooseFiles.h
         src/Downloader.h
@@ -41,11 +42,22 @@ SET( UIS
         src/NoNetFileDialog.ui
         src/singletonQtLogger.ui )
 
+SET( TEST_HDRS 
+		src/Test/test.h )
+
+SET( TEST_SRCS 
+		src/Test/main.cpp
+		src/Test/test.cpp )
+
 QT4_WRAP_UI( UI_HDRS ${UIS} )
 QT4_WRAP_CPP( MOC_SRCS ${HDRS} )
+
+QT4_WRAP_CPP( MOC_TEST_SRCS ${TEST_HDRS} )
 
 INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} )
 
 ADD_EXECUTABLE( FantaCalcGui ${SRCS} ${MOC_SRCS} ${UI_HDRS} )
-
 TARGET_LINK_LIBRARIES( FantaCalcGui ${QT_LIBRARIES} ${QT_QTNETWORK_LIBRARIES} ${QT_QTXML_LIBRARIES} )
+
+ADD_EXECUTABLE( test ${TEST_SRCS} ${MOC_TEST_SRCS} )
+TARGET_LINK_LIBRARIES( test ${QT_LIBRARIES} ${QT_QTTEST_LIBRARIES} )
