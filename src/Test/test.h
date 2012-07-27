@@ -13,8 +13,8 @@
 
  public:
      Test();
- private slots:
  	 void toUpper();
+ private slots:
  };
 
 
