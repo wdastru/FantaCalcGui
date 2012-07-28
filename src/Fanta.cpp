@@ -1284,8 +1284,12 @@ void Fanta::calculateScorers() {
 				"<br> -> " \
 				+ QString::fromStdString(this->getTeamName(k)));
 
-		if (Fanta::goals[k] == 0)
+		if (Fanta::goals[k] == 0) {
+			LOG(DEBUG, \
+					"      ---");
 			continue;
+		}
+
 		do {
 			Fanta::bSort(tmpVector[k]);
 			Fanta::scorers[k].push_back(tmpVector[k].at(0).Nome);
