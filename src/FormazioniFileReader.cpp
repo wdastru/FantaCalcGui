@@ -186,7 +186,7 @@ unsigned int FormazioniFileReader::execute() {
 
 						for (unsigned int j = 0; j < v_Found.size(); j++) {
 
-							LOG(DEBUG, "    " \
+							LOG(DEBUG, "      " \
 									+ QString::fromStdString(this->prepareStringToPresent(v_Found.at(j), j)) \
 									+ " : ");
 
@@ -238,6 +238,9 @@ unsigned int FormazioniFileReader::execute() {
 									whichOfTheseDialog.chosenThese - 1);
 							v_Found.clear();
 							v_Found.push_back(temp);
+
+							LOG(INFO, "    scelto " \
+								+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM, ColNomeCognome)));
 						}
 
 					} while (v_Found.size() > 1);
@@ -362,9 +365,9 @@ unsigned int FormazioniFileReader::execute() {
 							+ "]");
 
 						if (STR_MOD->msk(v_Found.at(0), DELIM,ColGoalDecVitt) == "1") {
-							LOG(DEBUG, "    goal decisivo vittoria.");
+							LOG(DEBUG, "      - goal decisivo vittoria.");
 						} else if (STR_MOD->msk(v_Found.at(0), DELIM,ColGoalDecPar) == "1") {
-							LOG(DEBUG, "    goal decisivo pareggio.");
+							LOG(DEBUG, "      - goal decisivo pareggio.");
 						}
 
 						break;
