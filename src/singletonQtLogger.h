@@ -20,8 +20,10 @@ public:
 	virtual ~singletonQtLogger();
 	void setTitle(QString);
 	void setVersion(QString);
+	void setRevision(QString);
 	QString getTitle(void);
 	QString getVersion(void);
+	QString getRevision(void);
 	void setLogFileName(QString);
 	bool checkForUpdates();
 	bool checkForUpdates_old();
@@ -46,6 +48,7 @@ private:
 	QString fileContent;
 	QString logFileName;
 	QString version;
+	QString revision;
 	QString fileGazzetta;
 	QString fileFormazioni;
 };

@@ -23,11 +23,14 @@ int main(int argc, char *argv[]) {
 
 	THE_LOGGER; // poi parte l'applicazione
 	THE_LOGGER->setVersion(a.applicationVersion());
+
+#include "revision.h"
+
 	THE_LOGGER->setTitle(a.applicationName());
 
 	LOG(INFO,
-			QObject::tr("<br> Benvenuti in %1 v%2 !!!<br>").arg(
-					THE_LOGGER->getTitle()).arg(THE_LOGGER->getVersion()));
+			QObject::tr("<br> Benvenuti in %1 v%2 (rev. %3) !!!<br>").arg(
+					THE_LOGGER->getTitle()).arg(THE_LOGGER->getVersion()).arg(THE_LOGGER->getRevision().left(6)));
 
 	THE_LOGGER->checkForUpdates();
 
