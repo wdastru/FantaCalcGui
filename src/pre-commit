@@ -18,15 +18,15 @@ if ( $ENV{'OS'} eq "Windows_NT" )      {
 	print "Linux\n";
 
 	 if ( $hostname eq "PESTODURO" ) {
-					print "Pestoduro\n";
-		    	chdir "/home/waleviolaeivan/Sorgenti/FantaCalcGuiNew/src/";
-		    	$revision = qx(git rev-parse HEAD);     
-		    	chomp($revision);       
-					print "$revision\n";
-		    	system("sed 's/XXX/$revision/g' revision.h.in > revision.h");
+		print "Pestoduro\n";
+    	chdir "/home/waleviolaeivan/Sorgenti/FantaCalcGuiNew/";
+    	$revision = qx(git rev-parse HEAD);     
+    	chomp($revision);       
+		print "$revision\n";
+    	system("sed 's/XXX/$revision/g' src/revision.h.in > src/revision.h");
 	 } else {
-		    	print " Not on Pestoduro. Exiting.\n";
-		    	exit(); 
+    	print " Not on Pestoduro. Exiting.\n";
+    	exit(); 
 	 }
 } else {
 		print " System not recognized. Exiting.\n";
