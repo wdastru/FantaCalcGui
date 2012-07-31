@@ -15,14 +15,15 @@ if ( $ENV{'OS'} eq "Windows_NT" )      {
        }
 } elsif ( $uname eq "Linux" ) {
 
-	print "Linux\n";
+	#print "Linux\n";
 
 	 if ( $hostname eq "PESTODURO" ) {
-		print "Pestoduro\n";
+		#print "Pestoduro\n";
     	chdir "/home/waleviolaeivan/Sorgenti/FantaCalcGuiNew/";
     	$revision = qx(git rev-parse HEAD);     
     	chomp($revision);       
-		print "$revision\n";
+		#print "$revision\n";
+    	system("git add src/revision.h");
     	system("sed 's/XXX/$revision/g' src/revision.h.in > src/revision.h");
 	 } else {
     	print " Not on Pestoduro. Exiting.\n";
