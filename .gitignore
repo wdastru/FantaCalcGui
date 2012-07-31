@@ -1,3 +1,5 @@
 build/
 .fuse*
 installer/*.exe
+*~
+src/revision.h

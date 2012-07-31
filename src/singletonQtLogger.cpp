@@ -84,6 +84,11 @@ void singletonQtLogger::setVersion(QString _version) {
 	this->version = _version;
 	this->ui.versionLabel->setText(_version);
 }
+void singletonQtLogger::setRevision(QString _revision) {
+	this->revision = _revision;
+	qDebug() << "In void singletonQtLogger::setRevision(QString _revision): revision = " + this->revision;
+	//this->ui.versionLabel->setText(_version);
+}
 void singletonQtLogger::saveLogFile() {
 	QFile * file = new QFile;
 
@@ -154,7 +159,7 @@ void singletonQtLogger::saveLogFile() {
 	fileContent.replace("</span>", "\n");
 
 	fileContent += "\n File prodotto con FantaCalcGui v" + this->getVersion()
-			+ "\n\n";
+			+ " (rev. " + THE_LOGGER->getRevision().left(6) + ")\n\n";
 
 	file->write(this->fileContent.toStdString().c_str());
 	file->close();
@@ -252,6 +257,9 @@ QString singletonQtLogger::getTitle(void) {
 }
 QString singletonQtLogger::getVersion(void) {
 	return this->version;
+}
+QString singletonQtLogger::getRevision(void) {
+	return this->revision;
 }
 void singletonQtLogger::goOn() {
 	//qDebug() << "In singletonQtLogger::goOn().";
