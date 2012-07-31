@@ -20,7 +20,7 @@ if ( $ENV{'OS'} eq "Windows_NT" )      {
 	 if ( $hostname eq "PESTODURO" ) {
 		#print "Pestoduro\n";
     	chdir "/home/waleviolaeivan/Sorgenti/FantaCalcGuiNew/";
-    	$revision = qx(git rev-parse HEAD);     
+    	$revision = qx(git rev-parse --short HEAD);     
     	chomp($revision);       
 		#print "$revision\n";
     	system("sed 's/XXX/$revision/g' src/revision.h.in > src/revision.h");

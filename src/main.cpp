@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
 
 	LOG(INFO,
 			QObject::tr("<br> Benvenuti in %1 v%2 (rev. %3) !!!<br>").arg(
-					THE_LOGGER->getTitle()).arg(THE_LOGGER->getVersion()).arg(THE_LOGGER->getRevision().left(6)));
+					THE_LOGGER->getTitle()).arg(THE_LOGGER->getVersion()).arg(THE_LOGGER->getRevision()));
 
 	THE_LOGGER->checkForUpdates();
 
