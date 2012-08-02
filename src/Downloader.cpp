@@ -82,7 +82,7 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 
 	downloadButton = new QPushButton(tr("Download"));
 	downloadButton->setDefault(true);
-	quitButton = new QPushButton(tr("Quit"));
+	quitButton = new QPushButton(tr("Cancel"));
 	quitButton->setAutoDefault(false);
 
 	buttonBox = new QDialogButtonBox;

@@ -171,19 +171,21 @@ void ChooseFiles::on_okButton_clicked() {
 
 	this->doDownload();
 	if (this->downloadSuccess) {
+		//qDebug() << "In on_okButton_clicked() --> downloadSuccess is true.";
 		this->createFileSquadreFromWebFiles();
 		this->fileGazzetta = THE_REPO->getGazzettaPath() + "/"
 				+ this->getGazFile();
 		this->accept();
 	} else {
-		LOG(DEBUG,
-				"In void ChooseFiles::execute() --> download of file was not successful.");
-		/* TODO
-		 * completare
-		 */
+		if (!this->filesDownloader->wasCancelClicked()) {
+			qDebug() << "In on_okButton_clicked() --> downloadSuccess is false.";
+			/* TODO
+			 * completare ?
+			 * * * * * * * * */
+		}
 	}
 
-	this->close();
+	//this->close();
 }
 
 void ChooseFiles::on_cancelButton_clicked() {
@@ -271,17 +273,20 @@ void ChooseFiles::doDownload() {
 	savePaths->push_back(
 			THE_REPO->getGazzettaPath() + this->getGazFile());
 
-	Downloader filesDownloader(THE_LOGGER, urls, savePaths);
-	filesDownloader.show();
-	filesDownloader.exec();
+	this->filesDownloader = new Downloader(THE_LOGGER, urls, savePaths);
+	this->filesDownloader->show();
+	this->filesDownloader->exec();
 
-	if (filesDownloader.requestSucceded()) {
+	if (this->filesDownloader->requestSucceded()) {
+		//qDebug() << "In ChooseFiles::doDownload() --> request succeded.";
 		this->downloadSuccess = true;
-		//qDebug() << "In ChooseFiles::doDownload() --> the download of files succeded.";
 	} else {
+		if (!this->filesDownloader->wasCancelClicked()) {
+			LOG(ERROR, "The download of files failed.");
+			qDebug() << "In ChooseFiles::doDownload() --> request not succeded.";
+		}
+
 		this->downloadSuccess = false;
-		LOG(ERROR, "The download of files failed.");
-		qDebug() << "In ChooseFiles::doDownload() --> the download of files failed.";
 	}
 	return;
 }

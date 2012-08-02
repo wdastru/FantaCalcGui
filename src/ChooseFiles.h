@@ -4,7 +4,10 @@
 #include <QtGui/QDialog>
 #include <QtGui/QRadioButton>
 #include <QtGui/QLabel>
+
 #include "ui_ChooseFiles.h"
+
+#include "Downloader.h"
 
 class ChooseFiles: public QDialog {
 Q_OBJECT
@@ -49,6 +52,7 @@ private:
 	void doDownload();
 	bool downloadSuccess;
 	bool createFileSquadreFromWebFiles();
+	Downloader* filesDownloader;
 
 };
 

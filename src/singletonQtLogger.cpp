@@ -86,7 +86,7 @@ void singletonQtLogger::setVersion(QString _version) {
 }
 void singletonQtLogger::setRevision(QString _revision) {
 	this->revision = _revision;
-	qDebug() << "In void singletonQtLogger::setRevision(QString _revision): revision = " + this->revision;
+	//qDebug() << "In void singletonQtLogger::setRevision(QString _revision): revision = " + this->revision;
 	//this->ui.versionLabel->setText(_version);
 }
 void singletonQtLogger::saveLogFile() {
@@ -200,7 +200,7 @@ void singletonQtLogger::onlineClicked() {
 	Downloader listsDownloader(THE_LOGGER, urls, savePaths, TRUE);
 
 	if (listsDownloader.requestSucceded()) {
-		//qDebug() << "In singletonQtLogger::onlineClicked() --> the download of files succeded.";
+		//qDebug() << "In singletonQtLogger::onlineClicked() --> listsDownloader request succeded.";
 
 		ChooseFiles * chooseFiles = new ChooseFiles(
 				THE_REPO->getListaFormazioni(), THE_REPO->getListaGazFiles(),
@@ -222,8 +222,9 @@ void singletonQtLogger::onlineClicked() {
 			return;
 		}
 	} else {
+		qDebug() << "In singletonQtLogger::onlineClicked() --> listsDownloader request not succeded.";
 		/* TODO
-		 * inserire exception
+		 * handle exception
 		 * * * * * * * * * * * */
 	}
 }
