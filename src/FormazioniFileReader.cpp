@@ -9,9 +9,11 @@
 #include <QtCore/QDebug>
 #include <QtCore/QObject>
 #include <QtGui/QMessageBox>
+#include <QtGui>
 #include "FormazioniFileReader.h"
 #include "Fanta.h"
 #include "Repository.h"
+#include "WhichOfLevenshteinDialog.h"
 
 FormazioniFileReader::FormazioniFileReader(QString _fileFormazioni) {
 	this->fileFormazioni = _fileFormazioni;
@@ -285,13 +287,56 @@ unsigned int FormazioniFileReader::execute() {
 								v_WhichOfTheseLevenshtein);
 						whichOfLevenshteinDialog.exec();
 
+						/*
+						 * TODO
+						 *
+						 * usare QInputDialog::getItem(this, tr("Scegli"),
+						 * this->player + " non trovato. Giocatori con nome simile:", items,
+						 * 0, false, &ok); ?
+						 *
+						 * Eliminare WhichOfLevenshteinDialog?
+						 * Si deve modificare FormazioniFileReader xche'
+						 * QInputDialog::getItem(this, ... richiede this
+						 * e FormazioniFileReader non e' un QWidget
+						 *
+						 * * * * * * * * * * * * * * * * * * * * * * */
+
+						//code :
+
+						//unsigned int chosenLevenshtein;
+						//QStringList items;
+						//for (size_t i = 0; i < v_WhichOfTheseLevenshtein.size(); i++) {
+						//	items << tr(v_WhichOfTheseLevenshtein.at(i).c_str());
+						//}
+						//bool ok;
+						//QString msg = QString::fromStdString(line) \
+						//		+ " non trovato. Giocatori con nome simile:";
+						//QString item = QInputDialog::getItem(this, tr("Scegli"),
+						//			msg, items,
+						//			0, false, &ok);
+						//if (ok && !item.isEmpty()) {
+						//	itemLabel->setText(item);
+						//	std::ostringstream oss;
+						//	oss << item.toAscii().constData();
+						//	chosenLevenshtein = atoi(STR_MOD->msk(oss.str(), "[]", 0).c_str());
+						//} else {
+						//	/*
+						//	 * TODO
+						//	 * handle exception
+						//	 * * * * * * * * * * */
+						//}
+                        //
+						//v_Found.push_back(Levenshteins.at(chosenLevenshtein	- 1));
+
+
 						v_Found.push_back(
 								Levenshteins.at(
 										whichOfLevenshteinDialog.chosenLevenshtein
-												- 1));
+										- 1));
 
-						LOG(INFO, "    scelto " \
-							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM, ColNomeCognome)));
+						LOG(INFO, "    scelto "
+								+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM, ColNomeCognome)));
+
 					}
 				}
 

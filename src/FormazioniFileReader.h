@@ -15,14 +15,13 @@
 
 #include "StringModifier.h"
 #include "WhichOfTheseDialog.h"
-#include "WhichOfLevenshteinDialog.h"
 #include "toString.h"
 #include "defines.h"
 
 using namespace std;
 
-
 class FormazioniFileReader {
+
 public:
 	FormazioniFileReader(QString);
 	virtual ~FormazioniFileReader();
