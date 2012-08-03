@@ -19,6 +19,7 @@
 #include "ChooseFiles.h"
 #include "GazzettaFileReader.h"
 #include "FormazioniFileReader.h"
+#include "FileFormazioniReader.h"
 #include "FileFormazioniViewer.h"
 #include "Fanta.h"
 
@@ -269,7 +270,15 @@ void singletonQtLogger::goOn() {
 	GazzettaFileReader * gazzettaFileReader = new GazzettaFileReader(
 			THE_REPO->fileGazzetta);
 	FormazioniFileReader * formazioniFileReader = new FormazioniFileReader(
-			THE_REPO->fileFormazioni);
+				THE_REPO->fileFormazioni);
+
+	/*
+	 * new FileFormazioniReader class
+	 * * * * * * * * * * * * * * * * * * */
+	FileFormazioniReader * fileFormazioniReader = new FileFormazioniReader(
+				THE_REPO->fileFormazioni, THE_LOGGER);
+
+	/* * * * * * * * * * * * * * * * * */
 
 	formazioniFileReader->setPlayers(gazzettaFileReader->getOutput());
 

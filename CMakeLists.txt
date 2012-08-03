@@ -17,6 +17,7 @@ SET( SRCS
         src/GazzettaFileReader.cpp 
         src/FormazioniFileReader.cpp 
         src/FileFormazioniViewer.cpp 
+        src/FileFormazioniReader.cpp 
         src/Fanta.cpp        
         src/WhichOfTheseDialog.cpp
         src/WhichOfLevenshteinDialog.cpp
@@ -31,6 +32,7 @@ SET( HDRS
         src/Downloader.h
         src/NoNetFileDialog.h  
         src/FileFormazioniViewer.h
+        src/FileFormazioniReader.h 
         src/WhichOfTheseDialog.h
         src/WhichOfLevenshteinDialog.h
         src/IniFilePopulator.h
