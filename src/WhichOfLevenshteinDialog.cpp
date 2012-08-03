@@ -44,6 +44,9 @@ void WhichOfLevenshteinDialog::closeEvent(QCloseEvent *event)
     event->ignore();
 }
 void WhichOfLevenshteinDialog::setItem() {
+
+	//qDebug() << "In void WhichOfLevenshteinDialog::setItem().";
+
 	QStringList items;
 
 	for (size_t i = 0; i < WhichOfLevenshteinDialog::ListOfLevenshtein.size(); i++)
@@ -75,10 +78,7 @@ void WhichOfLevenshteinDialog::enableQuitButton()
 }
 void WhichOfLevenshteinDialog::exit()
 {
-    remove("tmp");
-    remove("tmp2");
-    remove("tmp3");
-    exit();
+    this->exit();
 }
 void WhichOfLevenshteinDialog::setListOfLevenshtein( std::vector < std::string > list)
 {
