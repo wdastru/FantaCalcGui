@@ -6,7 +6,6 @@
 #include <QtGui>
 #include "Fanta.h"
 #include "Repository.h"
-#include "WhichOfLevenshteinDialog.h"
 #include "WhichOfTheseDialog.h"
 
 FileFormazioniReader::FileFormazioniReader(QString _fileFormazioni,
@@ -46,7 +45,7 @@ unsigned int FileFormazioniReader::execute() {
 	if (!fSqua) {
 		qDebug() << "In FileFormazioniReader::execute()  -> il file formazioni  : " + this->fileFormazioni + " non esiste o non e' leggibile!";
 		LOG(FATAL, "Il file formazioni  : " + this->fileFormazioni + " non esiste o non e' leggibile!");
-		return FORMFILEREAD_NO_FORM_FILE;
+		return FILEFORMREADER_NO_FORM_FILE;
 	} else {
 		//qDebug() << "In FileFormazioniReader::execute()  -> file formazioni  : " + this->fileFormazioni;
 	}
@@ -291,59 +290,28 @@ unsigned int FileFormazioniReader::execute() {
 								+ QString::fromStdString(tmpStr));
 						}
 
-						WhichOfLevenshteinDialog whichOfLevenshteinDialog;
-						whichOfLevenshteinDialog.setPlayer(
-								QString::fromStdString(line));
-						whichOfLevenshteinDialog.setListOfLevenshtein(
-								v_WhichOfTheseLevenshtein);
-						whichOfLevenshteinDialog.exec();
+						unsigned int chosenLevenshtein;
+						QStringList items;
+						for (size_t i = 0; i < v_WhichOfTheseLevenshtein.size(); i++) {
+							items << tr(v_WhichOfTheseLevenshtein.at(i).c_str());
+						}
+						bool ok;
+						QString msg = QString::fromStdString(line) \
+								+ " non trovato. Giocatori con nome simile:";
+						QString item = QInputDialog::getItem(this, tr("Scegli"),
+									msg, items,
+									0, false, &ok);
+						if (ok && !item.isEmpty()) {
+							//itemLabel->setText(item);
+							std::ostringstream oss;
+							oss << item.toAscii().constData();
+							chosenLevenshtein = atoi(STR_MOD->msk(oss.str(), "[]", 0).c_str());
+						} else {
+							qDebug() << "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) returned false or item is empty";
+							return FILEFORMREADER_GETITEMERR;
+						}
 
-						/*
-						 * TODO
-						 *
-						 * usare QInputDialog::getItem(this, tr("Scegli"),
-						 * this->player + " non trovato. Giocatori con nome simile:", items,
-						 * 0, false, &ok); ?
-						 *
-						 * Eliminare WhichOfLevenshteinDialog?
-						 * Si deve modificare FileFormazioniReader xche'
-						 * QInputDialog::getItem(this, ... richiede this
-						 * e FileFormazioniReader non e' un QWidget
-						 *
-						 * * * * * * * * * * * * * * * * * * * * * * */
-
-						//code :
-
-						//unsigned int chosenLevenshtein;
-						//QStringList items;
-						//for (size_t i = 0; i < v_WhichOfTheseLevenshtein.size(); i++) {
-						//	items << tr(v_WhichOfTheseLevenshtein.at(i).c_str());
-						//}
-						//bool ok;
-						//QString msg = QString::fromStdString(line) \
-						//		+ " non trovato. Giocatori con nome simile:";
-						//QString item = QInputDialog::getItem(this, tr("Scegli"),
-						//			msg, items,
-						//			0, false, &ok);
-						//if (ok && !item.isEmpty()) {
-						//	itemLabel->setText(item);
-						//	std::ostringstream oss;
-						//	oss << item.toAscii().constData();
-						//	chosenLevenshtein = atoi(STR_MOD->msk(oss.str(), "[]", 0).c_str());
-						//} else {
-						//	/*
-						//	 * TODO
-						//	 * handle exception
-						//	 * * * * * * * * * * */
-						//}
-                        //
-						//v_Found.push_back(Levenshteins.at(chosenLevenshtein	- 1));
-
-
-						v_Found.push_back(
-								Levenshteins.at(
-										whichOfLevenshteinDialog.chosenLevenshtein
-										- 1));
+						v_Found.push_back(Levenshteins.at(chosenLevenshtein	- 1));
 
 						LOG(INFO, "    scelto "
 								+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM, ColNomeCognome)));
@@ -450,7 +418,7 @@ unsigned int FileFormazioniReader::execute() {
 									QString(" "), QString("&nbsp;")));
 						msgBox.exec();
 
-						return FORMFILEREAD_REPEATED;
+						return FILEFORMREADER_REPEATED;
 						break;
 
 					case PLAYER_GDV_NOT_PLAYED:
@@ -474,7 +442,7 @@ unsigned int FileFormazioniReader::execute() {
 														DELIM, ColSquadra))));
 						msgBox.exec();
 
-						return FORMFILEREAD_GDV_NOT_PLAYED;
+						return FILEFORMREADER_GDV_NOT_PLAYED;
 						break;
 
 					case PLAYER_GDP_NOT_PLAYED:
@@ -498,7 +466,7 @@ unsigned int FileFormazioniReader::execute() {
 														DELIM, ColSquadra))));
 						msgBox.exec();
 
-						return FORMFILEREAD_GDP_NOT_PLAYED;
+						return FILEFORMREADER_GDP_NOT_PLAYED;
 						break;
 
 					case PLAYER_GDV_NO_GOAL:
@@ -522,7 +490,7 @@ unsigned int FileFormazioniReader::execute() {
 														DELIM, ColSquadra))));
 						msgBox.exec();
 
-						return FORMFILEREAD_GDV_NO_GOAL;
+						return FILEFORMREADER_GDV_NO_GOAL;
 						break;
 
 					case PLAYER_GDP_NO_GOAL:
@@ -546,7 +514,7 @@ unsigned int FileFormazioniReader::execute() {
 														DELIM, ColSquadra))));
 						msgBox.exec();
 
-						return FORMFILEREAD_GDP_NO_GOAL;
+						return FILEFORMREADER_GDP_NO_GOAL;
 						break;
 
 					case PLAYER_ERROR:
@@ -569,7 +537,7 @@ unsigned int FileFormazioniReader::execute() {
 			}
 		}
 	}
-	return FORMFILEREAD_OK;
+	return FILEFORMREADER_OK;
 }
 std::vector<std::string> FileFormazioniReader::findLevenstheins(
 		std::string line) {
@@ -601,7 +569,7 @@ std::vector<std::string> FileFormazioniReader::findLevenstheins(
 					LOG(
 							ERROR,
 							"In FileFormazioniReader::findLevenstheins(line)  -> il file della Gazzetta non sembra essere valido !");
-					//return FORMFILEREAD_BAD_GAZ_FILE;
+					//return FILEFORMREADER_BAD_GAZ_FILE;
 				}
 			}
 		}
