@@ -5,18 +5,23 @@
 
 #include "defines.h"
 
+using namespace std;
+
 class FileFormazioniReader: public QDialog {
 Q_OBJECT
 
 public:
 	FileFormazioniReader(QString, QWidget *parent = 0);
-
-private slots:
+	virtual ~FileFormazioniReader();
+	void setPlayers( vector< vector< string > >);
+	unsigned int execute();
 
 private:
 	QString fileFormazioni;
-
-protected:
+	void init();
+	vector< vector< string > > allThePlayers;
+	vector < string > findLevenstheins(string);
+	string prepareStringToPresent(string, signed int);
 
 };
 

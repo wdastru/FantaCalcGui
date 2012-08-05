@@ -20,6 +20,7 @@ class Repository {
 	friend class Downloader;
 	friend class FileFormazioniViewer;
 	friend class FormazioniFileReader;
+	friend class FileFormazioniReader;
 	friend class Less25MinDialog;
 	friend class HttpWindow;
 	friend class Fanta;
