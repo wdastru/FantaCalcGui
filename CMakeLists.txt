@@ -15,7 +15,6 @@ SET( SRCS
         src/Downloader.cpp
         src/NoNetFileDialog.cpp 
         src/GazzettaFileReader.cpp 
-        src/FormazioniFileReader.cpp 
         src/FileFormazioniViewer.cpp 
         src/FileFormazioniReader.cpp 
         src/Fanta.cpp        

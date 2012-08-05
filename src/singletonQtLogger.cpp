@@ -18,7 +18,6 @@
 #include "NoNetFileDialog.h"
 #include "ChooseFiles.h"
 #include "GazzettaFileReader.h"
-#include "FormazioniFileReader.h"
 #include "FileFormazioniReader.h"
 #include "FileFormazioniViewer.h"
 #include "Fanta.h"
@@ -269,18 +268,9 @@ void singletonQtLogger::goOn() {
 	// --> lettura file Gazzetta e Formazioni
 	GazzettaFileReader * gazzettaFileReader = new GazzettaFileReader(
 			THE_REPO->fileGazzetta);
-	//FormazioniFileReader * formazioniFileReader = new FormazioniFileReader( \
-				THE_REPO->fileFormazioni);
-
-	/*
-	 * new FileFormazioniReader class
-	 * * * * * * * * * * * * * * * * * * */
 	FileFormazioniReader * fileFormazioniReader = new FileFormazioniReader( \
 				THE_REPO->fileFormazioni, THE_LOGGER);
 
-	/* * * * * * * * * * * * * * * * * */
-
-	//formazioniFileReader->setPlayers(gazzettaFileReader->getOutput());
 	fileFormazioniReader->setPlayers(gazzettaFileReader->getOutput());
 
 	THE_VIEWER->setFile(THE_REPO->fileFormazioni);
@@ -300,11 +290,8 @@ void singletonQtLogger::goOn() {
 
 			Fanta::Refresh();
 
-			//retVal = formazioniFileReader->execute();
 			retVal = fileFormazioniReader->execute();
 
-			//qDebug() << "In singletonQtLogger::goOn() --> formazioniFileReader::execute() returned " \
-										+ my::toQString<unsigned int>(retVal) + ".");
 			//qDebug() << "In singletonQtLogger::goOn() --> fileFormazioniReader::execute() returned " \
 										+ my::toQString<unsigned int>(retVal) + ".");
 

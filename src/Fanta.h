@@ -22,7 +22,6 @@ using namespace std;
 
 class Fanta {
 
-	friend class FormazioniFileReader;
 	friend class FileFormazioniReader;
 
 private:

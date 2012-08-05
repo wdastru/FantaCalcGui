@@ -19,7 +19,6 @@ class Repository {
 	friend class ChooseFiles;
 	friend class Downloader;
 	friend class FileFormazioniViewer;
-	friend class FormazioniFileReader;
 	friend class FileFormazioniReader;
 	friend class Less25MinDialog;
 	friend class HttpWindow;
