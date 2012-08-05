@@ -1,41 +1,54 @@
-/*
- * FormazioniFileReader.cpp
- *
- *  Created on: 29/lug/2011
- *      Author: WAleViolaeIvan
- */
-
+#include "FileFormazioniReader.h"
 #include "singletonQtLogger.h"
 #include <QtCore/QDebug>
 #include <QtCore/QObject>
 #include <QtGui/QMessageBox>
-#include "FormazioniFileReader.h"
+#include <QtGui>
 #include "Fanta.h"
 #include "Repository.h"
+#include "WhichOfLevenshteinDialog.h"
+#include "WhichOfTheseDialog.h"
 
-FormazioniFileReader::FormazioniFileReader(QString _fileFormazioni) {
+FileFormazioniReader::FileFormazioniReader(QString _fileFormazioni,
+		QWidget *parent) :
+		QDialog(parent) {
 	this->fileFormazioni = _fileFormazioni;
+
+	//QString a = "pippo";
+	//QString b = "pluto";
+	//QString c = "cicci";
+    //
+	//QStringList items;
+    //
+	//items.push_back(a);
+	//items.push_back(b);
+	//items.push_back(c);
+    //
+	//bool ok;
+	//QString item = QInputDialog::getItem(this, tr("Scegli"),
+	//		"Gugu non trovato. Giocatori con nome simile:", items, 0,
+	//		false, &ok);
 }
-FormazioniFileReader::~FormazioniFileReader() {
+FileFormazioniReader::~FileFormazioniReader() {
 }
-void FormazioniFileReader::setPlayers(
+void FileFormazioniReader::setPlayers(
 		std::vector<std::vector<std::string> > _allThePlayers) {
 	this->allThePlayers = _allThePlayers;
 }
-unsigned int FormazioniFileReader::execute() {
+unsigned int FileFormazioniReader::execute() {
 
 	LOG(DEBUG, "<br/> =============================");
 	LOG(DEBUG,      " === Lettura file di input ===");
 	LOG(DEBUG,      " =============================");
-	//qDebug() << In FormazioniFileReader::execute().";
+	//qDebug() << In FileFormazioniReader::execute().";
 
 	std::ifstream fSqua(this->fileFormazioni.toStdString().c_str());
 	if (!fSqua) {
-		qDebug() << "In FormazioniFileReader::execute()  -> il file formazioni  : " + this->fileFormazioni + " non esiste o non e' leggibile!";
+		qDebug() << "In FileFormazioniReader::execute()  -> il file formazioni  : " + this->fileFormazioni + " non esiste o non e' leggibile!";
 		LOG(FATAL, "Il file formazioni  : " + this->fileFormazioni + " non esiste o non e' leggibile!");
 		return FORMFILEREAD_NO_FORM_FILE;
 	} else {
-		//qDebug() << "In FormazioniFileReader::execute()  -> file formazioni  : " + this->fileFormazioni;
+		//qDebug() << "In FileFormazioniReader::execute()  -> file formazioni  : " + this->fileFormazioni;
 	}
 
 	std::string line;
@@ -56,13 +69,13 @@ unsigned int FormazioniFileReader::execute() {
 				 *  ###***### serve per separare le due squadre nel file di input
 				 *  se trovato passa alla prossima squadra o esce dal loop for
 				 */
-				//qDebug() << "In FormazioniFileReader::execute()  -> separatore : " + QString::fromStdString(line);
+				//qDebug() << "In FileFormazioniReader::execute()  -> separatore : " + QString::fromStdString(line);
 
 				LOG(DEBUG, "<br>    ---------------------------------");
 
 				break;
 			} else if (line.find("#", 0) != std::string::npos) {// # indica linee di commento
-				//qDebug() << "In FormazioniFileReader::execute()  -> commento : " + QString::fromStdString(line);
+				//qDebug() << "In FileFormazioniReader::execute()  -> commento : " + QString::fromStdString(line);
 				continue;
 			} else if (line.find("nome squadra", 0) != std::string::npos) { // nome squadra
 				/*
@@ -94,7 +107,7 @@ unsigned int FormazioniFileReader::execute() {
 				if (xx == EXIT_FAILURE) {
 					LOG(
 							ERROR,
-							"In FormazioniFileReader::execute()  -> Modulo non consentito!<br/>Controllare il file di input."
+							"In FileFormazioniReader::execute()  -> Modulo non consentito!<br/>Controllare il file di input."
 									+ QString::fromStdString(
 											FANTA->getModuloSquadra(k)));
 					//goto restart;
@@ -174,7 +187,7 @@ unsigned int FormazioniFileReader::execute() {
 							+ " : trovate " \
 							+ my::toQString<size_t>(v_Found.size()) \
 							+ " corrispondenze");
-					//qDebug() << "In FormazioniFileReader::execute()  -> " \
+					//qDebug() << "In FileFormazioniReader::execute()  -> " \
 						+ QString::fromStdString(line) \
 						+ " : v_Found.size = " \
 						+ my::toQString<size_t>(v_Found.size());
@@ -219,7 +232,7 @@ unsigned int FormazioniFileReader::execute() {
 									temp.at(whichOfTheseDialog.chosenThese - 1));
 
 						} else if (temp.size() == 1) {
-							//qDebug() << "In FormazioniFileReader::execute()  -> found : TRUE.";
+							//qDebug() << "In FileFormazioniReader::execute()  -> found : TRUE.";
 							v_Found = temp;
 						} else { // nessuna corrispondenza esatta
 
@@ -285,13 +298,56 @@ unsigned int FormazioniFileReader::execute() {
 								v_WhichOfTheseLevenshtein);
 						whichOfLevenshteinDialog.exec();
 
+						/*
+						 * TODO
+						 *
+						 * usare QInputDialog::getItem(this, tr("Scegli"),
+						 * this->player + " non trovato. Giocatori con nome simile:", items,
+						 * 0, false, &ok); ?
+						 *
+						 * Eliminare WhichOfLevenshteinDialog?
+						 * Si deve modificare FileFormazioniReader xche'
+						 * QInputDialog::getItem(this, ... richiede this
+						 * e FileFormazioniReader non e' un QWidget
+						 *
+						 * * * * * * * * * * * * * * * * * * * * * * */
+
+						//code :
+
+						//unsigned int chosenLevenshtein;
+						//QStringList items;
+						//for (size_t i = 0; i < v_WhichOfTheseLevenshtein.size(); i++) {
+						//	items << tr(v_WhichOfTheseLevenshtein.at(i).c_str());
+						//}
+						//bool ok;
+						//QString msg = QString::fromStdString(line) \
+						//		+ " non trovato. Giocatori con nome simile:";
+						//QString item = QInputDialog::getItem(this, tr("Scegli"),
+						//			msg, items,
+						//			0, false, &ok);
+						//if (ok && !item.isEmpty()) {
+						//	itemLabel->setText(item);
+						//	std::ostringstream oss;
+						//	oss << item.toAscii().constData();
+						//	chosenLevenshtein = atoi(STR_MOD->msk(oss.str(), "[]", 0).c_str());
+						//} else {
+						//	/*
+						//	 * TODO
+						//	 * handle exception
+						//	 * * * * * * * * * * */
+						//}
+                        //
+						//v_Found.push_back(Levenshteins.at(chosenLevenshtein	- 1));
+
+
 						v_Found.push_back(
 								Levenshteins.at(
 										whichOfLevenshteinDialog.chosenLevenshtein
-												- 1));
+										- 1));
 
-						LOG(INFO, "    scelto " \
-							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM, ColNomeCognome)));
+						LOG(INFO, "    scelto "
+								+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM, ColNomeCognome)));
+
 					}
 				}
 
@@ -340,12 +396,12 @@ unsigned int FormazioniFileReader::execute() {
 						v_Found.at(0) += "0\t0";
 					}
 
-					//qDebug() << "In FormazioniFileReader::execute()  -> before switch : v_Found.at(0) = " \
+					//qDebug() << "In FileFormazioniReader::execute()  -> before switch : v_Found.at(0) = " \
 									+ QString::fromStdString(v_Found.at(0)) \
 									+ " (squadra " \
 									+ my::toQString<unsigned int>(k) + ")";
 
-					//qDebug() << "In FormazioniFileReader::execute()  -> FANTA->Team[" \
+					//qDebug() << "In FileFormazioniReader::execute()  -> FANTA->Team[" \
 									+ my::toQString<unsigned int>(k) \
 									+ "].size() = " \
 									+ my::toQString<unsigned int>( \
@@ -505,7 +561,7 @@ unsigned int FormazioniFileReader::execute() {
 						break;
 
 					default:
-						qDebug() << "In FormazioniFileReader::execute()  -> switch : default.";
+						qDebug() << "In FileFormazioniReader::execute()  -> switch : default.";
 						break;
 					}
 
@@ -515,7 +571,7 @@ unsigned int FormazioniFileReader::execute() {
 	}
 	return FORMFILEREAD_OK;
 }
-std::vector<std::string> FormazioniFileReader::findLevenstheins(
+std::vector<std::string> FileFormazioniReader::findLevenstheins(
 		std::string line) {
 	/*
 	 *  loop per cercare corrispondenze;
@@ -544,13 +600,13 @@ std::vector<std::string> FormazioniFileReader::findLevenstheins(
 				} else {
 					LOG(
 							ERROR,
-							"In FormazioniFileReader::findLevenstheins(line)  -> il file della Gazzetta non sembra essere valido !");
+							"In FileFormazioniReader::findLevenstheins(line)  -> il file della Gazzetta non sembra essere valido !");
 					//return FORMFILEREAD_BAD_GAZ_FILE;
 				}
 			}
 		}
 
-		//qDebug() << "In FormazioniFileReader::findLevenstheins(line)  -> distance : " \
+		//qDebug() << "In FileFormazioniReader::findLevenstheins(line)  -> distance : " \
 						+ my::toQString<signed int>(distance) \
 						+ " - line size : " \
 						+ my::toQString<size_t>(line.size()) + " - trovati : " \
@@ -564,7 +620,7 @@ std::vector<std::string> FormazioniFileReader::findLevenstheins(
 
 	return Levenshteins;
 }
-std::string FormazioniFileReader::prepareStringToPresent(std::string str,
+std::string FileFormazioniReader::prepareStringToPresent(std::string str,
 		signed int j) {
 	string tmpRuolo = STR_MOD->msk(str, DELIM, ColRuolo);
 	if (tmpRuolo == "P")
@@ -587,6 +643,6 @@ std::string FormazioniFileReader::prepareStringToPresent(std::string str,
 
 	return tmpStr;
 }
-void FormazioniFileReader::init() {
+void FileFormazioniReader::init() {
 	;
 }
