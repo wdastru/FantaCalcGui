@@ -300,7 +300,7 @@ void singletonQtLogger::goOn() {
 			qDebug() << "In singletonQtLogger::goOn() --> exception caught! retVal : " + my::toQString<unsigned int>(retVal) + ", " + str;
 
 		}
-	} while (retVal != FORMFILEREAD_OK);
+	} while (retVal != FILEFORMREADER_OK);
 	// <-- lettura file Gazzetta e Formazioni
 
 	if (THE_VIEWER->getResult() == 0) { // in caso di break

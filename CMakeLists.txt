@@ -18,8 +18,6 @@ SET( SRCS
         src/FileFormazioniViewer.cpp 
         src/FileFormazioniReader.cpp 
         src/Fanta.cpp        
-        src/WhichOfTheseDialog.cpp
-        src/WhichOfLevenshteinDialog.cpp
         src/IniFilePopulator.cpp
         src/Repository.cpp 
         src/StringModifier.cpp 
@@ -31,9 +29,7 @@ SET( HDRS
         src/Downloader.h
         src/NoNetFileDialog.h  
         src/FileFormazioniViewer.h
-        src/FileFormazioniReader.h 
-        src/WhichOfTheseDialog.h
-        src/WhichOfLevenshteinDialog.h
+        src/FileFormazioniReader.h
         src/IniFilePopulator.h
         src/httpwindow.h
         src/singletonQtLogger.h )
