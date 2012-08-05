@@ -6,7 +6,6 @@
 #include <QtGui>
 #include "Fanta.h"
 #include "Repository.h"
-#include "WhichOfTheseDialog.h"
 
 FileFormazioniReader::FileFormazioniReader(QString _fileFormazioni,
 		QWidget *parent) :
@@ -222,13 +221,31 @@ unsigned int FileFormazioniReader::execute() {
 								v_WhichOfThese.push_back(tmpStr);
 							}
 
-							WhichOfTheseDialog whichOfTheseDialog;
-							whichOfTheseDialog.setListOfThese(v_WhichOfThese);
-							whichOfTheseDialog.exec();
+							int chosenThese = -1;
+
+						    QStringList items;
+						    for (size_t i = 0; i < v_WhichOfThese.size(); i++)
+						        items << tr( v_WhichOfThese.at( i ).c_str() );
+
+						    bool ok;
+						    QString item = QInputDialog::getItem(this, \
+						    		tr("Scegli"), \
+						    		tr("Quale di questi?"), \
+						    		items, \
+						    		0, \
+						    		false, \
+						    		&ok);
+
+						    if (ok && !item.isEmpty())
+						    {
+						        std::ostringstream oss;
+						        oss << item.toAscii().constData();
+						        chosenThese = atoi(STR_MOD->msk( oss.str(), "[]", 0 ).c_str() );
+						    }
 
 							v_Found.clear();
 							v_Found.push_back(
-									temp.at(whichOfTheseDialog.chosenThese - 1));
+									temp.at(chosenThese - 1));
 
 						} else if (temp.size() == 1) {
 							//qDebug() << "In FileFormazioniReader::execute()  -> found : TRUE.";
@@ -242,12 +259,29 @@ unsigned int FileFormazioniReader::execute() {
 								v_WhichOfThese.push_back(tmpStr);
 							}
 
-							WhichOfTheseDialog whichOfTheseDialog;
-							whichOfTheseDialog.setListOfThese(v_WhichOfThese);
-							whichOfTheseDialog.exec();
+							int chosenThese = -1;
 
-							std::string temp = v_Found.at(
-									whichOfTheseDialog.chosenThese - 1);
+							QStringList items;
+							for (size_t i = 0; i < v_WhichOfThese.size(); i++)
+								items << tr( v_WhichOfThese.at( i ).c_str() );
+
+							bool ok;
+							QString item = QInputDialog::getItem(this, \
+									tr("Scegli"), \
+									tr("Quale di questi?"), \
+									items, \
+									0, \
+									false, \
+									&ok);
+
+							if (ok && !item.isEmpty())
+							{
+								std::ostringstream oss;
+								oss << item.toAscii().constData();
+								chosenThese = atoi(STR_MOD->msk( oss.str(), "[]", 0 ).c_str() );
+							}
+
+							std::string temp = v_Found.at(chosenThese - 1);
 							v_Found.clear();
 							v_Found.push_back(temp);
 
