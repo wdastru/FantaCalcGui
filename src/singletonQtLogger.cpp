@@ -82,7 +82,7 @@ void singletonQtLogger::setTitle(QString _title) {
 }
 void singletonQtLogger::setVersion(QString _version) {
 	this->version = _version;
-	this->ui.versionLabel->setText(_version);
+	this->ui.versionLabel->setText("v"+_version);
 }
 void singletonQtLogger::setRevision(QString _revision) {
 	this->revision = _revision;
@@ -146,8 +146,8 @@ void singletonQtLogger::saveLogFile() {
 	fileContent.replace("<br>", "\n");
 	fileContent.replace("<br/>", "\n");
 	fileContent.replace("<br />", "\n");
-	fileContent.replace("<pre>", "");
-	fileContent.replace("</pre>", "\n");
+	fileContent.replace("<p>", "");
+	fileContent.replace("</p>", "\n");
 	fileContent.replace("&nbsp;", " ");
 	fileContent.replace("<span style='color:#FF0000;'> ERROR : ", "");
 	fileContent.replace(

@@ -43,14 +43,14 @@ Repository::Repository() {
 	STR_MOD->fixSlashes(this->downloadPath);
 	STR_MOD->fixSlashes(this->listePath);
 
-	this->fontVariableWidthSmall.setFamily(QString::fromUtf8("Candara"));
+	this->fontVariableWidthSmall.setFamily(QString::fromUtf8("Ubuntu"));
 	this->fontVariableWidthSmall.setPointSize(10);
 
-	this->fontVariableWidthBig.setFamily(QString::fromUtf8("Candara"));
+	this->fontVariableWidthBig.setFamily(QString::fromUtf8("Ubuntu"));
 	this->fontVariableWidthBig.setPointSize(16);
 
-	this->fontFixedWidth.setFamily(QString::fromUtf8("Lucida Console"));
-	this->fontFixedWidth.setPointSize(9);
+	this->fontFixedWidth.setFamily(QString::fromUtf8("Ubuntu Mono"));
+	this->fontFixedWidth.setPointSize(10);
 }
 
 Repository::~Repository() {

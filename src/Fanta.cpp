@@ -1758,32 +1758,42 @@ unsigned int Fanta::getAssistTot(unsigned int k) const {
 void Fanta::printFormations() {
 	QString output = "";
 
-	std::string
-			bordi =
-					"<pre> |                                                                                |</pre>";
-	std::string
-			fondo =
-					"<pre> +------------------------------+------------------+------------------------------+</pre>";
+	QString bordi =
+					"<p> |                                                                                |</p>";
 
-	std::string
+	QString fondo =
+					"<p> +------------------------------+------------------+------------------------------+</p>";
+
+	QString
 			area =
-					"<pre> |                              |__________________|                              |</pre>";
+					"<p> |                              |__________________|                              |</p>";
 
-	std::string
+	QString
 			area_sotto =
 					area
-							+ "<pre> |                                      \\__/                                      |</pre>"
+							+ "<p> |                                      \\__/                                      |</p>"
 							+ bordi;
 
-	std::string
+	QString
 			area_sopra =
-					"<pre> |                                       __                                       |</pre><pre> |                               _______/__\\_______                               |</pre><pre> |                              |                  |                              |</pre>";
+					"<p> |                                       __                                       |</p><p> |                               _______/__\\_______                               |</p><p> |                              |                  |                              |</p>";
 
-	std::string
+	QString
 			separatore =
-					"<pre> |                                       ___                                      |</pre><pre> |                                      /   \\                                     |</pre><pre> |-------------------------------------(--o--)------------------------------------|</pre><pre> |                                      \\___/                                     |</pre><pre> |                                                                                |</pre>";
+					"<p> |                                       ___                                      |</p><p> |                                      /   \\                                     |</p><p> |-------------------------------------(--o--)------------------------------------|</p><p> |                                      \\___/                                     |</p><p> |                                                                                |</p>";
 
-	output += QString::fromStdString(fondo);
+	bordi = bordi.replace(" ", "&nbsp;");
+	fondo = fondo.replace(" ", "&nbsp;");
+	area = area.replace(" ", "&nbsp;");
+	area_sotto = area_sotto.replace(" ", "&nbsp;");
+	area_sopra = area_sopra.replace(" ", "&nbsp;");
+	separatore = separatore.replace(" ", "&nbsp;");
+
+
+
+
+
+	output += fondo;
 
 	/*
 	 *  squadra in casa    : por --> att
@@ -1795,7 +1805,7 @@ void Fanta::printFormations() {
 	{
 		for (size_t j = 0; j < 4; j++) // ruoli
 		{
-			std::string tmpString = "<pre> |";
+			QString tmpString = "<p> |";
 
 			/*
 			 *  nomi giocatori
@@ -1803,44 +1813,44 @@ void Fanta::printFormations() {
 			for (size_t i = 0; i < Fanta::modulo[k][a[k][j]]; i++) { // giocatori
 				if (Fanta::modulo[k][a[k][j]] == 3) {
 					tmpString
-							+= STR_MOD->centerString(
+							+= QString::fromStdString(STR_MOD->centerString(
 									STR_MOD->onlySurname(
 											Fanta::teamOrderedByRuolo[k][a[k][j]].at(
-													i).Nome), 26);
+													i).Nome), 26));
 				} else if (a[k][j] == 0) { // portiere
 					if (k == 1) {
-						output += QString::fromStdString(area_sopra);
+						output += area_sopra;
 					}
 
 					tmpString
-							+= "                              |"
+							+= QString::fromStdString("                              |"
 									+ STR_MOD->centerString(
 											STR_MOD->onlySurname(
 													Fanta::teamOrderedByRuolo[k][a[k][j]].at(
 															i).Nome), 18)
-									+ "|                              |";
+									+ "|                              |");
 				} else {
 					tmpString
-							+= STR_MOD->centerString(
+							+= QString::fromStdString(STR_MOD->centerString(
 									STR_MOD->onlySurname(
 											Fanta::teamOrderedByRuolo[k][a[k][j]].at(
 													i).Nome),
-									80 / Fanta::modulo[k][a[k][j]]);
+									80 / Fanta::modulo[k][a[k][j]]));
 				}
 			}
 
 			if (Fanta::modulo[k][a[k][j]] == 3) {
-				output += QString::fromStdString(tmpString + "  |</pre>");
+				output += tmpString + "  |</p>";
 			} else if (a[k][j] == 0) {
-				output += QString::fromStdString(tmpString) + "</pre>";
+				output += tmpString + "</p>";
 			} else {
-				output += QString::fromStdString(tmpString + "|</pre>");
+				output += tmpString + "|</p>";
 			}
 
 			tmpString = "";
 
 			if (a[k][j] != 0)
-				tmpString += "<pre> |";
+				tmpString += "<p> |";
 
 			/*
 			 *  voti giocatori
@@ -1848,7 +1858,7 @@ void Fanta::printFormations() {
 			for (size_t i = 0; i < Fanta::modulo[k][a[k][j]]; i++) { // giocatori
 				if (Fanta::modulo[k][a[k][j]] == 3) {
 					tmpString
-							+= STR_MOD->centerString(
+							+= QString::fromStdString(STR_MOD->centerString(
 									(my::toString(
 											Fanta::teamOrderedByRuolo[k][a[k][j]].at(
 													i).FantaVoto) + " ("
@@ -1856,10 +1866,10 @@ void Fanta::printFormations() {
 											+ my::toString(
 													Fanta::teamOrderedByRuolo[k][a[k][j]].at(
 															i).VotoGazzetta)
-											+ ")"), 26);
+											+ ")"), 26));
 				} else if (a[k][j] == 0) { // portiere
 					tmpString
-							+= "<pre> |                              |"
+							+= QString::fromStdString("<p> |                              |"
 									+ STR_MOD->centerString(
 											(my::toString(
 													Fanta::teamOrderedByRuolo[k][a[k][j]].at(
@@ -1870,14 +1880,14 @@ void Fanta::printFormations() {
 															Fanta::teamOrderedByRuolo[k][a[k][j]].at(
 																	i).VotoGazzetta)
 													+ ")"), 18)
-									+ "|                              |";
+									+ "|                              |");
 
 					if (k == 0) {
-						tmpString += "</pre>" + area_sotto;
+						tmpString += "</p>" + area_sotto;
 					}
 				} else {
 					tmpString
-							+= STR_MOD->centerString(
+							+= QString::fromStdString(STR_MOD->centerString(
 									(my::toString(
 											Fanta::teamOrderedByRuolo[k][a[k][j]].at(
 													i).FantaVoto) + " ("
@@ -1886,27 +1896,27 @@ void Fanta::printFormations() {
 													Fanta::teamOrderedByRuolo[k][a[k][j]].at(
 															i).VotoGazzetta)
 											+ ")"),
-									80 / Fanta::modulo[k][a[k][j]]);
+									80 / Fanta::modulo[k][a[k][j]]));
 				}
 			}
 
 			if (Fanta::modulo[k][a[k][j]] == 3) {
-				output += QString::fromStdString(
-						tmpString + "  |</pre>" + bordi);
+				output += tmpString + "  |</p>" + bordi;
 			} else if (a[k][j] == 0) {
-				output += QString::fromStdString(tmpString);
+				output += tmpString;
 			} else {
-				output += QString::fromStdString(tmpString + "|</pre>" + bordi);
+				output += tmpString + "|</p>" + bordi;
 			}
 
 			tmpString = "";
 		}
 
 		if (k == 0) {
-			output += QString::fromStdString(separatore + bordi);
+			output += separatore + bordi;
 		}
 	}
 
-	output += QString::fromStdString("</pre>" + fondo);
+	output += "</p>" + fondo;
+	output = output.replace(" ", "&nbsp;");
 	LOG(INFO, output);
 }

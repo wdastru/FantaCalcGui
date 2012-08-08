@@ -12,7 +12,7 @@
   </property>
   <property name="font">
    <font>
-    <family>DejaVu Sans</family>
+    <family>Ubuntu</family>
     <pointsize>10</pointsize>
    </font>
   </property>
@@ -32,8 +32,8 @@
        </property>
        <property name="font">
         <font>
-         <family>Lucida Console</family>
-         <pointsize>9</pointsize>
+         <family>Ubuntu</family>
+         <pointsize>10</pointsize>
          <weight>50</weight>
          <italic>false</italic>
          <bold>false</bold>
@@ -63,7 +63,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Candara</family>
+         <family>Ubuntu</family>
          <pointsize>16</pointsize>
          <weight>75</weight>
          <bold>true</bold>
