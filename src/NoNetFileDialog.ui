@@ -31,12 +31,6 @@
     <height>117</height>
    </size>
   </property>
-  <property name="font">
-   <font>
-    <family>Candara</family>
-    <pointsize>10</pointsize>
-   </font>
-  </property>
   <property name="windowTitle">
    <string>Choose Files</string>
   </property>

@@ -30,13 +30,15 @@
        <property name="enabled">
         <bool>true</bool>
        </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>400</height>
+        </size>
+       </property>
        <property name="font">
         <font>
-         <family>Ubuntu</family>
-         <pointsize>10</pointsize>
-         <weight>50</weight>
-         <italic>false</italic>
-         <bold>false</bold>
+         <family>Ubuntu Mono</family>
         </font>
        </property>
        <property name="autoFillBackground">
