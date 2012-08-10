@@ -131,7 +131,8 @@ void Fanta::setTeamName(const std::string str, unsigned int k) {
 	} else {
 		LOG(
 				WARN,
-				"In Fanta::setTeamName(const std::string str, unsigned int k) --> Tried to add more than 2 team names!");
+				"Tentativo di aggiungere piu' di due nomi di squadra in setTeamName(const std::string str, unsigned int k)");
+		qDebug() << "In Fanta::setTeamName(const std::string str, unsigned int k) --> Tried to add more than 2 team names!";
 		exit(1);
 	}
 }

@@ -270,7 +270,7 @@ unsigned int FileFormazioniReader::execute() {
 							v_Found.clear();
 							v_Found.push_back(temp);
 
-							LOG(INFO, "    scelto " \
+							LOG(DEBUG, "    scelto " \
 								+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM, ColNomeCognome)));
 						}
 
@@ -290,7 +290,7 @@ unsigned int FileFormazioniReader::execute() {
 					Levenshteins = this->findLevenstheins(line);
 
 					LOG(DEBUG, "");
-					LOG(WARN, QObject::tr("    non trovato %1.").arg(QString::fromStdString(line)));
+					LOG(DEBUG, QObject::tr("    non trovato %1.").arg(QString::fromStdString(line)));
 
 					if (Levenshteins.empty()) {
 						LOG(ERROR,
@@ -332,7 +332,7 @@ unsigned int FileFormazioniReader::execute() {
 
 						v_Found.push_back(Levenshteins.at(chosenLevenshtein	- 1));
 
-						LOG(INFO, "    scelto "
+						LOG(DEBUG, "    scelto "
 								+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM, ColNomeCognome)));
 
 					}
@@ -398,7 +398,7 @@ unsigned int FileFormazioniReader::execute() {
 					case PLAYER_OK:
 
 						LOG(DEBUG, ""); // blank line in log file only
-						LOG(INFO, "    trovato " \
+						LOG(DEBUG, "    trovato " \
 							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColNomeCognome)) \
 							+ " ( " \
 							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColSquadra)) \

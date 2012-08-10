@@ -324,13 +324,18 @@ void singletonQtLogger::goOn() {
 
 		//qDebug() << QObject::tr("In singletonQtLogger::goOn() --> file name temporaneo : %1").arg(fileName);
 
-		FANTA->printTitolo(
-				FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1), INFO);
+		LOG(DEBUG, "<br/> =================");
+		LOG(DEBUG,      " === Riepilogo ===");
+		LOG(DEBUG,      " =================");
+
+		FANTA->printTitolo(FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1), INFO);
 
 		FANTA->printRiepilogo();
 		FANTA->printFormations();
 
-		LOG(DEBUG, "<br/><br/>    DETTAGLIO GIOCATORI<br/>");
+		LOG(DEBUG, "<br/> ===========================");
+		LOG(DEBUG,      " === Dettaglio giocatori ===");
+		LOG(DEBUG,      " ===========================");
 
 		FANTA->printPlayersInfo();
 
@@ -563,7 +568,7 @@ bool singletonQtLogger::checkForUpdates() {
 		}
 
 	} else { // download failed
-		LOG(WARN,
+		LOG(DEBUG,
 				"Non e' stato possibile scaricare le informazioni relative agli aggiornamenti disponibili.");
 		return false;
 	}
