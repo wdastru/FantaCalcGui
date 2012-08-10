@@ -42,12 +42,8 @@ SET( UIS
         src/NoNetFileDialog.ui
         src/singletonQtLogger.ui )
 
-SET( TEST_HDRS 
-		src/Test/test.h )
-
 SET( TEST_SRCS 
-		src/Test/main.cpp
-		src/Test/test.cpp )
+		src/test.cpp )
 
 QT4_WRAP_UI( UI_HDRS ${UIS} )
 QT4_WRAP_CPP( MOC_SRCS ${HDRS} )

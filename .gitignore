@@ -3,3 +3,6 @@ build/
 installer/*.exe
 *~
 src/revision.h
+*.moc
+*.o
+
