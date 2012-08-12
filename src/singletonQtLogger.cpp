@@ -82,7 +82,10 @@ void singletonQtLogger::setTitle(QString _title) {
 }
 void singletonQtLogger::setVersion(QString _version) {
 	this->version = _version;
-	this->ui.versionLabel->setText("v"+_version);
+	this->ui.versionLabel->setText("v" \
+			+ _version \
+			+ " rev. " \
+			+ this->getRevision());
 }
 void singletonQtLogger::setRevision(QString _revision) {
 	this->revision = _revision;

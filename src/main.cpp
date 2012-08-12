@@ -22,10 +22,10 @@ int main(int argc, char *argv[]) {
 	THE_MANAGER; // quindi si legge l'ini file (o lo si crea se non esistente)
 
 	THE_LOGGER; // poi parte l'applicazione
+
+	#include "revision.h"
+
 	THE_LOGGER->setVersion(a.applicationVersion());
-
-#include "revision.h"
-
 	THE_LOGGER->setTitle(a.applicationName());
 
 	LOG(INFO,
