@@ -90,9 +90,8 @@ unsigned int FileFormazioniReader::execute() {
 				if (xx == EXIT_FAILURE) {
 					LOG(
 							ERROR,
-							"In FileFormazioniReader::execute()  -> Modulo non consentito!<br/>Controllare il file di input."
-									+ QString::fromStdString(
-											FANTA->getModuloSquadra(k)));
+							"In FileFormazioniReader::execute()  -> Modulo non consentito : " + QString::fromStdString(
+									FANTA->getModuloSquadra(k)) + "<br/>Controllare il file di input.");
 					//goto restart;
 				} else {
 					continue;
