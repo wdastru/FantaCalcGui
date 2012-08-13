@@ -287,8 +287,10 @@ unsigned int FileFormazioniReader::execute() {
 							v_Found.clear();
 							v_Found.push_back(temp);
 
-							LOG(DEBUG, "    scelto " \
-								+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM, ColNomeCognome)));
+							LOG(DEBUG, "    scelto [" \
+									+ my::toQString<int>(chosenThese) \
+									+ "] " \
+									+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM, ColNomeCognome)));
 						}
 
 					} while (v_Found.size() > 1);
@@ -355,9 +357,10 @@ unsigned int FileFormazioniReader::execute() {
 
 						v_Found.push_back(Levenshteins.at(chosenLevenshtein	- 1));
 
-						LOG(DEBUG, "    scelto "
+						LOG(DEBUG, "    scelto [" \
+								+ my::toQString<int>(chosenLevenshtein) \
+								+ "] " \
 								+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM, ColNomeCognome)));
-
 					}
 				}
 
