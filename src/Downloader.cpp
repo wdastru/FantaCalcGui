@@ -56,6 +56,8 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 	//	qDebug() << "In Downloader::Downloader(...). _savePaths.at(" + my::toQString<int>(i) + ") = " + _savePaths->at(i);
 	//}
 
+	this->setFont(THE_REPO->fontVariableWidthSmall);
+
 	this->silent = _silent; // per evitare di notificare l'avvenuto download in
 	this->resize(600, 0);
 	this->setMinimumSize(600, 0);
@@ -105,8 +107,7 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 	mainLayout->addWidget(buttonBox);
 
 	setLayout(mainLayout);
-	setFont(THE_REPO->fontVariableWidthSmall);
-	setWindowTitle(tr("Downloader"));
+	this->setWindowTitle("FantaCalcGui - Download");
 
 	if (silent) {
 		this->downloadFiles();

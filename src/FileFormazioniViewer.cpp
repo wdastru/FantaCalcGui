@@ -17,6 +17,9 @@ FileFormazioniViewer* FileFormazioniViewer::Inst() {
 FileFormazioniViewer::FileFormazioniViewer(QWidget *parent) :
 	QDialog(parent) {
 	ui.setupUi(this);
+	this->setFont(THE_REPO->fontVariableWidthSmall);
+	this->ui.plainTextEdit->setFont(THE_REPO->fontFixedWidth);
+	this->setWindowTitle("FantaCalcGui - Formazioni");
 }
 FileFormazioniViewer::~FileFormazioniViewer() {
 
@@ -29,7 +32,7 @@ void FileFormazioniViewer::setFile(QString filename) {
 		if (file->isOpen()) {
 			if (file->isReadable()) {
 
-				this->setFont(THE_REPO->fontFixedWidth);
+				//this->setFont(THE_REPO->fontFixedWidth);
 
 				this->ui.plainTextEdit->setPlainText(
 						QString::fromLocal8Bit(file->readAll()));
@@ -53,7 +56,7 @@ void FileFormazioniViewer::setFile(QString filename) {
 		 * * * * * * * * * * * * * */
 	}
 
-	this->ui.plainTextEdit->setFont(THE_REPO->fontFixedWidth);
+	//this->ui.plainTextEdit->setFont(THE_REPO->fontFixedWidth);
 }
 void FileFormazioniViewer::saveFileAndClose() {
 	//qDebug() << "In FileFormazioniViewer::saveFileAndClose().";

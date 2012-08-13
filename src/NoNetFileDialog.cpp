@@ -4,7 +4,7 @@
  * @ Project : FantaCalcGuiNew
  * @ File Name : NoNetFileDialog.cpp
  * @ Date : 16/07/2011
- * @ Author : Walter Dastrù
+ * @ Author : Walter Dastrï¿½
  *
  */
 
@@ -13,9 +13,11 @@
 
 NoNetFileDialog::NoNetFileDialog(QWidget *parent) :
 	QDialog(parent) {
+
+	this->setFont(THE_REPO->fontVariableWidthSmall);
 	ui.setupUi(this);
 	ui.okButton->setEnabled(false);
-	//hasFinished = FALSE;
+	this->setWindowTitle("FantaCalcGui - Scegli i file offline");
 	hasBeenAborted = FALSE;
 }
 NoNetFileDialog::~NoNetFileDialog() {
@@ -104,10 +106,6 @@ void NoNetFileDialog::setOpenFileNameGazzetta() {
 	this->enableOkButton();
 
 }
-//void NoNetFileDialog::createEmptyFile() {
-//	ui.newFileLineEdit->setText("file nuovo");
-//	this->enableOkButton();
-//}
 void NoNetFileDialog::enableOkButton() {
 	if (ui.fileSquadreLineEdit->text().isEmpty()
 			|| ui.fileGazzettaLineEdit->text().isEmpty())

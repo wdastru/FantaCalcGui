@@ -19,6 +19,8 @@ IniFilePopulator::IniFilePopulator(QWidget *parent) :
 	//LOG(DEBUG, "In IniFilePopulator() constructor.");
 	this->startDir = "";
 	ui.setupUi(this);
+	this->setFont(THE_REPO->fontVariableWidthSmall);
+	this->setWindowTitle("FantaCalcGui - Configurazione");
 }
 IniFilePopulator::~IniFilePopulator() {
 

@@ -25,8 +25,28 @@ Repository::Repository() {
 
 #ifdef WIN32
 	this->UserProfile = QString::fromAscii(getenv("USERPROFILE"));
+
+	this->fontVariableWidthSmall.setFamily(QString::fromUtf8("Segoe UI"));
+	this->fontVariableWidthSmall.setPointSize(10);
+
+	this->fontVariableWidthBig.setFamily(QString::fromUtf8("Segoe UI"));
+	this->fontVariableWidthBig.setBold(true);
+	this->fontVariableWidthBig.setPointSize(16);
+
+	this->fontFixedWidth.setFamily(QString::fromUtf8("Lucida Console"));
+	this->fontFixedWidth.setPointSize(10);
 #else
 	this->UserProfile = "/home/" + QString::fromAscii(getenv("USER"));
+
+	this->fontVariableWidthSmall.setFamily(QString::fromUtf8("Ubuntu"));
+	this->fontVariableWidthSmall.setPointSize(10);
+
+	this->fontVariableWidthBig.setFamily(QString::fromUtf8("Ubuntu"));
+	this->fontVariableWidthBig.setBold(true);
+	this->fontVariableWidthBig.setPointSize(16);
+
+	this->fontFixedWidth.setFamily(QString::fromUtf8("Ubuntu Mono"));
+	this->fontFixedWidth.setPointSize(10);
 #endif
 
 	//qDebug() << "UserProfile = '" + this->UserProfile+"'";
@@ -42,15 +62,6 @@ Repository::Repository() {
 	STR_MOD->fixSlashes(this->risultatiPath);
 	STR_MOD->fixSlashes(this->downloadPath);
 	STR_MOD->fixSlashes(this->listePath);
-
-	this->fontVariableWidthSmall.setFamily(QString::fromUtf8("Ubuntu"));
-	this->fontVariableWidthSmall.setPointSize(10);
-
-	this->fontVariableWidthBig.setFamily(QString::fromUtf8("Ubuntu"));
-	this->fontVariableWidthBig.setPointSize(16);
-
-	this->fontFixedWidth.setFamily(QString::fromUtf8("Ubuntu Mono"));
-	this->fontFixedWidth.setPointSize(10);
 }
 
 Repository::~Repository() {
