@@ -429,7 +429,7 @@ void Fanta::checkGiocatoSenzaVoto() {
 
 	LOG(DEBUG, "<br/> ============================");
 	LOG(DEBUG,      " === Giocatori senza voto ===");
-	LOG(DEBUG,      " ============================<br/>");
+	LOG(DEBUG,      " ============================<br/><br/>");
 		//qDebug() << "In Fanta::checkGiocatoSenzaVoto().";
 
 	for (size_t k = 0; k < 2; k++) // squadra
