@@ -225,7 +225,16 @@ unsigned int FileFormazioniReader::execute() {
 						        std::ostringstream oss;
 						        oss << item.toAscii().constData();
 						        chosenThese = atoi(STR_MOD->msk( oss.str(), "[]", 0 ).c_str() );
-						    }
+						    } else if (!ok ) {
+								qDebug() << "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : returned false.";
+								return FILEFORMREADER_GETITEMERR;
+						    } else if ( item.isEmpty() ) {
+								qDebug() << "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : item is empty.";
+								return FILEFORMREADER_GETITEMERR;
+							} else {
+								qDebug() << "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : unknown error.";
+								return FILEFORMREADER_GETITEMERR;
+							}
 
 							v_Found.clear();
 							v_Found.push_back(
@@ -263,6 +272,15 @@ unsigned int FileFormazioniReader::execute() {
 								std::ostringstream oss;
 								oss << item.toAscii().constData();
 								chosenThese = atoi(STR_MOD->msk( oss.str(), "[]", 0 ).c_str() );
+						    } else if (!ok ) {
+								qDebug() << "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : returned false.";
+								return FILEFORMREADER_GETITEMERR;
+						    } else if ( item.isEmpty() ) {
+								qDebug() << "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : item is empty.";
+								return FILEFORMREADER_GETITEMERR;
+							} else {
+								qDebug() << "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : unknown error.";
+								return FILEFORMREADER_GETITEMERR;
 							}
 
 							std::string temp = v_Found.at(chosenThese - 1);
@@ -324,8 +342,14 @@ unsigned int FileFormazioniReader::execute() {
 							std::ostringstream oss;
 							oss << item.toAscii().constData();
 							chosenLevenshtein = atoi(STR_MOD->msk(oss.str(), "[]", 0).c_str());
+					    } else if (!ok ) {
+							qDebug() << "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : returned false.";
+							return FILEFORMREADER_GETITEMERR;
+					    } else if ( item.isEmpty() ) {
+							qDebug() << "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : item is empty.";
+							return FILEFORMREADER_GETITEMERR;
 						} else {
-							qDebug() << "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) returned false or item is empty";
+							qDebug() << "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : unknown error.";
 							return FILEFORMREADER_GETITEMERR;
 						}
 
@@ -606,6 +630,7 @@ std::vector<std::string> FileFormazioniReader::findLevenstheins(
 
 	return Levenshteins;
 }
+
 std::string FileFormazioniReader::prepareStringToPresent(std::string str,
 		signed int j) {
 	string tmpRuolo = STR_MOD->msk(str, DELIM, ColRuolo);
