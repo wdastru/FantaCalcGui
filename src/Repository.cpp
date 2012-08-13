@@ -34,7 +34,7 @@ Repository::Repository() {
 	this->fontVariableWidthBig.setPointSize(16);
 
 	this->fontFixedWidth.setFamily(QString::fromUtf8("Lucida Console"));
-	this->fontFixedWidth.setPointSize(10);
+	this->fontFixedWidth.setPointSize(8);
 #else
 	this->UserProfile = "/home/" + QString::fromAscii(getenv("USER"));
 
