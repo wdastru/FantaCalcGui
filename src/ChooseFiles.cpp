@@ -16,6 +16,8 @@ ChooseFiles::ChooseFiles(QString _fileFormazioni, QString _fileGazzetta,
 		QWidget *parent) :
 	QDialog(parent) {
 	ui.setupUi(this);
+	this->setFont(THE_REPO->fontVariableWidthSmall);
+	this->setWindowTitle("FantaCalcGui - Scegli i file online");
 	this->height = 14;
 	setupFormazioniTab(_fileFormazioni);
 	setupGazzettaTab(_fileGazzetta);
@@ -48,7 +50,7 @@ void ChooseFiles::setupGazzettaTab(QString _fileGazzetta) {
 		int rowCounter = 0;
 		for (unsigned int i = 0; i < lines.size(); i++) {
 			QLabel * tmpLabel = new QLabel(lines.at(i));
-			tmpLabel->setFont(THE_REPO->fontVariableWidthSmall);
+			//tmpLabel->setFont(THE_REPO->fontVariableWidthSmall);
 			tmpLabel->setFixedHeight(this->height);
 			tmpLabel->setFixedWidth(tmpLabel->sizeHint().width() + 20);
 
@@ -96,7 +98,7 @@ void ChooseFiles::setupFormazioniTab(QString _fileFormazioni) {
 			QLabel * tmpLabel = new QLabel(QString::fromAscii(buf).trimmed());
 
 			tmpLabel->setFixedHeight(this->height);
-			tmpLabel->setFont(THE_REPO->fontVariableWidthSmall);
+			//tmpLabel->setFont(THE_REPO->fontVariableWidthSmall);
 
 			QRadioButton * tmpButton1 = new QRadioButton();
 			QRadioButton * tmpButton2 = new QRadioButton();

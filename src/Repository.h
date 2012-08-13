@@ -18,6 +18,7 @@ class Repository {
 	friend class singletonQtLogger;
 	friend class ChooseFiles;
 	friend class Downloader;
+	friend class NoNetFileDialog;
 	friend class FileFormazioniViewer;
 	friend class FileFormazioniReader;
 	friend class Less25MinDialog;
