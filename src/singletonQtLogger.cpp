@@ -41,7 +41,7 @@ singletonQtLogger::singletonQtLogger(QWidget *parent) :
 void singletonQtLogger::init() {
 	this->setFont(THE_REPO->fontVariableWidthSmall);
 	this->ui.setupUi(this);
-	this->ui.titleLabel->setFont(THE_REPO->fontVariableWidthBig);
+	//this->ui.titleLabel->setFont(THE_REPO->fontVariableWidthBig);
 	this->ui.plainTextEdit->setFont(THE_REPO->fontFixedWidth);
 	this->setWindowTitle("FantaCalcGui - Logger");
 }
@@ -82,7 +82,7 @@ void singletonQtLogger::Logging(QString type, QString message) {
 }
 void singletonQtLogger::setTitle(QString _title) {
 	this->title = _title;
-	this->ui.titleLabel->setText(_title);
+	//this->ui.titleLabel->setText(_title);
 }
 void singletonQtLogger::setVersion(QString _version) {
 	this->version = _version;
