@@ -53,6 +53,8 @@
 HttpWindow::HttpWindow(QWidget *parent, QUrl _url, QString _savePath) :
 	QDialog(parent) {
 
+	this->setFont(THE_REPO->fontVariableWidthSmall);
+
 	this->fullUrlString = _url.scheme() + "://" + _url.authority()
 			+ _url.path();
 
