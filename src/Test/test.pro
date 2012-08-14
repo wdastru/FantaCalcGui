@@ -1,3 +1,3 @@
-SOURCES = testqstring.cpp
+SOURCES = test.cpp ../StringModifier.cpp
 CONFIG  += qtestlib
 
