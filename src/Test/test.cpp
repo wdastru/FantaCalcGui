@@ -52,7 +52,7 @@ private slots:
 	void onlyLettersAndNumbersBegin();
 	void onlyLettersAndNumbersEnd();
 	void removeNotAllowedChars();
-
+	void onlySurname();
 };
 
 void Test::onlyLettersBegin() {
@@ -70,21 +70,32 @@ void Test::onlyLettersAndNumbersBegin() {
 	std::string str2 = ",, //Hello";
 	STR_MOD->onlyLettersAndNumbersBegin(str1);
 	STR_MOD->onlyLettersAndNumbersBegin(str2);
-	std::string str = str1 + str2;
-	QCOMPARE(QString::fromStdString(str), QString("1HelloHello"));
+	QCOMPARE(QString::fromStdString(str1), QString("1Hello"));
+	QCOMPARE(QString::fromStdString(str2), QString("Hello"));
 }
 void Test::onlyLettersAndNumbersEnd() {
 	std::string str1 = "Hello1.. //";
 	std::string str2 = "Hello.. //";
 	STR_MOD->onlyLettersAndNumbersEnd(str1);
 	STR_MOD->onlyLettersAndNumbersEnd(str2);
-	std::string str = str1 + str2;
-	QCOMPARE(QString::fromStdString(str), QString("Hello1Hello"));
+	QCOMPARE(QString::fromStdString(str1), QString("Hello1"));
+	QCOMPARE(QString::fromStdString(str2), QString("Hello"));
 }
 void Test::removeNotAllowedChars() {
 	std::string str = "\\/:*?\"<>|";
 	STR_MOD->removeNotAllowedChars(str);
 	QCOMPARE(QString::fromStdString(str), QString(""));
+}
+void Test::onlySurname() {
+	std::string str1 = "824	DEL PIERO	JUVENTUS	A	1	19	6	6	0	0	0	0	0	0";
+	std::string str2 = "204	ALVAREZ P.S.	CATANIA	D	1	6	5.5	6	0	-0.5	0	0	0	0";
+	std::string str3 = "124	FREY S.	GENOA	P	1	11	4.5	6	-1	-0.5	0	0	0	0";
+	std::string surname1 = STR_MOD->onlySurname(STR_MOD->msk(str1, DELIM, ColNomeCognome));
+	std::string surname2 = STR_MOD->onlySurname(STR_MOD->msk(str2, DELIM, ColNomeCognome));
+	std::string surname3 = STR_MOD->onlySurname(STR_MOD->msk(str3, DELIM, ColNomeCognome));
+	QCOMPARE(QString::fromStdString(surname1), QString("DEL PIERO"));
+	QCOMPARE(QString::fromStdString(surname2), QString("ALVAREZ"));
+	QCOMPARE(QString::fromStdString(surname3), QString("FREY"));
 }
 
 QTEST_MAIN(Test)
