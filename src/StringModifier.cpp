@@ -66,9 +66,14 @@ void StringModifier::removeNotAllowedChars(std::string & str) {
 	} while (size != str.size());
 }
 std::string StringModifier::onlySurname(std::string str) {
-	while (((str.at(str.size() - 1) < 'A' || str.at(str.size() - 1) > 'Z')
-			|| (str.at(str.size() - 2) < 'A' || str.at(str.size() - 2) > 'Z'))
-			&& str.size() > 1 && str.at(str.size() - 1) != '\'')
+	while ( \
+			( \
+				(str.at(str.size() - 1) < 'A' || str.at(str.size() - 1) > 'Z') || \
+				(str.at(str.size() - 2) < 'A' || str.at(str.size() - 2) > 'Z') \
+			) \
+			&& str.size() > 1 \
+			&& str.at(str.size() - 1) != '\'' \
+		   )
 		str.erase(str.size() - 1, 1);
 	return str;
 }
@@ -231,7 +236,6 @@ std::string StringModifier::msk(std::string riga, std::string delim,
 		return v.at(idx);
 
 }
-
 void StringModifier::fixSlashes(QString & qString) {
 #ifdef WIN32
 	qString.replace("/", "\\");
