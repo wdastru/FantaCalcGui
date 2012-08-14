@@ -68,9 +68,28 @@ unsigned int FileFormazioniReader::execute() {
 				STR_MOD->onlyLettersAndNumbersBegin(line);
 				STR_MOD->onlyLettersAndNumbersEnd(line);
 				STR_MOD->removeNotAllowedChars(line);
-				if (line.size() == 0)
-					line = "Squadra" + my::toString<unsigned int>(k + 1);
-				FANTA->setTeamName(line, k);
+
+				if (line == " ") {
+					line = "";
+				}
+
+				if (line.size() == 0) {
+					//line = "Squadra" + my::toString<unsigned int>(k + 1);
+					qDebug() << "In FileFormazioniReader::execute() -> manca nome squadra. <br/>Controllare il file di input.";
+
+					QMessageBox msgBox;
+					msgBox.setStandardButtons(QMessageBox::Ok);
+					msgBox.setDefaultButton(QMessageBox::Ok);
+					msgBox.setIcon(QMessageBox::Information);
+					msgBox.setFont(THE_REPO->fontVariableWidthSmall);
+					msgBox.setWindowTitle("ATTENZIONE !!!");
+					msgBox.setInformativeText("Manca il nome della squadra. <br/>Controllare il file di input.");
+					msgBox.exec();
+
+					return FILEFORMREADER_EMPTYTEAMNAME;
+				} else {
+					FANTA->setTeamName(line, k);
+				}
 
 				//LOG(INFO, "<br/>&nbsp;&nbsp;==== "
 				//				+ QString::fromStdString(FANTA->getTeamName(k)).toUpper()
@@ -88,10 +107,18 @@ unsigned int FileFormazioniReader::execute() {
 				unsigned int xx;
 				xx = FANTA->setModulo(line, k);
 				if (xx == EXIT_FAILURE) {
-					LOG(
-							ERROR,
-							"In FileFormazioniReader::execute()  -> Modulo non consentito : " + QString::fromStdString(
-									FANTA->getModuloSquadra(k)) + "<br/>Controllare il file di input.");
+					qDebug() << "In FileFormazioniReader::execute()  -> Modulo non consentito : " + QString::fromStdString(line) + "<br/>Controllare il file di input.";
+
+					QMessageBox msgBox;
+					msgBox.setStandardButtons(QMessageBox::Ok);
+					msgBox.setDefaultButton(QMessageBox::Ok);
+					msgBox.setIcon(QMessageBox::Information);
+					msgBox.setFont(THE_REPO->fontVariableWidthSmall);
+					msgBox.setWindowTitle("ATTENZIONE !!!");
+					msgBox.setInformativeText(QObject::tr("Modulo non consentito (%1). <br/>Controllare il file di input.").arg(QString::fromStdString(line)));
+					msgBox.exec();
+
+					return FILEFORMREADER_WRONGMODULE;
 					//goto restart;
 				} else {
 					continue;
