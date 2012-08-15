@@ -41,9 +41,9 @@
 #include <iostream>
 
 #include <QtTest/QtTest>
-#include "../defines.h"
-#include "../StringModifier.h"
-#include "../Fanta.h"
+#include "defines.h"
+#include "StringModifier.h"
+#include "Fanta.h"
 
 class Test: public QObject {
 Q_OBJECT
@@ -112,8 +112,13 @@ void Test::leftQString() {
 	QCOMPARE(qStr, QString("pippo     "));
 }
 void Test::LevenshteinDistance() {
-	unsigned int distance = FANTA->LevenshteinDistance("pippo", "pippo");
+	int distance;
+	distance = FANTA->LevenshteinDistance("pippo", "pippo");
 	QCOMPARE(distance, 0);
+	distance = FANTA->LevenshteinDistance("pipo", "pippo");
+	QCOMPARE(distance, 1);
+	distance = FANTA->LevenshteinDistance("piplo", "pippo");
+	QCOMPARE(distance, 1);
 }
 
 QTEST_MAIN(Test)
