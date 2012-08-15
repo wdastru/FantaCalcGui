@@ -43,18 +43,28 @@ SET( UIS
         src/singletonQtLogger.ui )
 
 SET( TEST_SRCS 
-		src/Test/test.cpp
-		src/StringModifier.cpp )
+		src/test.cpp
+        src/IniFileManager.cpp
+        src/ChooseFiles.cpp
+        src/Downloader.cpp
+        src/NoNetFileDialog.cpp 
+        src/GazzettaFileReader.cpp 
+        src/FileFormazioniViewer.cpp 
+        src/FileFormazioniReader.cpp 
+        src/Fanta.cpp        
+        src/IniFilePopulator.cpp
+        src/Repository.cpp 
+        src/StringModifier.cpp 
+        src/httpwindow.cpp
+        src/singletonQtLogger.cpp )
 
 QT4_WRAP_UI( UI_HDRS ${UIS} )
 QT4_WRAP_CPP( MOC_SRCS ${HDRS} )
-
-QT4_WRAP_CPP( MOC_TEST_SRCS ${TEST_HDRS} )
 
 INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} )
 
 ADD_EXECUTABLE( FantaCalcGui ${SRCS} ${MOC_SRCS} ${UI_HDRS} )
 TARGET_LINK_LIBRARIES( FantaCalcGui ${QT_LIBRARIES} ${QT_QTNETWORK_LIBRARIES} ${QT_QTXML_LIBRARIES} )
 
-ADD_EXECUTABLE( test ${TEST_SRCS} ${MOC_TEST_SRCS} )
-TARGET_LINK_LIBRARIES( test ${QT_LIBRARIES} ${QT_QTTEST_LIBRARIES} )
+ADD_EXECUTABLE( test ${TEST_SRCS}  ${MOC_SRCS} ${UI_HDRS} )
+TARGET_LINK_LIBRARIES( test ${QT_LIBRARIES} ${QT_QTTEST_LIBRARIES} ${QT_QTNETWORK_LIBRARIES} ${QT_QTXML_LIBRARIES} )

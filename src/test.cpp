@@ -41,8 +41,9 @@
 #include <iostream>
 
 #include <QtTest/QtTest>
-#include "../defines.h"
-#include "../StringModifier.h"
+#include "defines.h"
+#include "StringModifier.h"
+#include "Fanta.h"
 
 class Test: public QObject {
 Q_OBJECT
@@ -55,6 +56,7 @@ private slots:
 	void onlySurname();
 	void leftString();
 	void leftQString();
+	void LevenshteinDistance();
 };
 
 void Test::onlyLettersBegin() {
@@ -108,6 +110,15 @@ void Test::leftQString() {
 	QString qStr = "pippo";
 	qStr = STR_MOD->leftQString(qStr, 10);
 	QCOMPARE(qStr, QString("pippo     "));
+}
+void Test::LevenshteinDistance() {
+	int distance;
+	distance = FANTA->LevenshteinDistance("pippo", "pippo");
+	QCOMPARE(distance, 0);
+	distance = FANTA->LevenshteinDistance("pipo", "pippo");
+	QCOMPARE(distance, 1);
+	distance = FANTA->LevenshteinDistance("piplo", "pippo");
+	QCOMPARE(distance, 1);
 }
 
 QTEST_MAIN(Test)
