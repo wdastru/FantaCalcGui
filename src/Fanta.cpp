@@ -297,13 +297,13 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 		return PLAYER_ERROR;
 	}
 }
-
-const unsigned int cost_del = 1;
-const unsigned int cost_ins = 1;
-const unsigned int cost_sub = 1;
-
 unsigned int Fanta::LevenshteinDistance(const std::string& s1,
 		const std::string& s2) {
+
+	const unsigned int cost_del = 1;
+	const unsigned int cost_ins = 1;
+	const unsigned int cost_sub = 1;
+
 	unsigned int n1 = s1.length();
 	unsigned int n2 = s2.length();
 
