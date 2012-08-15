@@ -44,6 +44,8 @@
 #include "defines.h"
 #include "StringModifier.h"
 #include "Fanta.h"
+#include "GazzettaFileReader.h"
+#include "FileFormazioniReader.h"
 
 class Test: public QObject {
 Q_OBJECT
@@ -57,6 +59,7 @@ private slots:
 	void leftString();
 	void leftQString();
 	void LevenshteinDistance();
+	void gazzettaFileReader_getOutput();
 };
 
 void Test::onlyLettersBegin() {
@@ -94,9 +97,12 @@ void Test::onlySurname() {
 	std::string str1 = "824	DEL PIERO	JUVENTUS	A	1	19	6	6	0	0	0	0	0	0";
 	std::string str2 = "204	ALVAREZ P.S.	CATANIA	D	1	6	5.5	6	0	-0.5	0	0	0	0";
 	std::string str3 = "124	FREY S.	GENOA	P	1	11	4.5	6	-1	-0.5	0	0	0	0";
-	std::string surname1 = STR_MOD->onlySurname(STR_MOD->msk(str1, DELIM, ColNomeCognome));
-	std::string surname2 = STR_MOD->onlySurname(STR_MOD->msk(str2, DELIM, ColNomeCognome));
-	std::string surname3 = STR_MOD->onlySurname(STR_MOD->msk(str3, DELIM, ColNomeCognome));
+	std::string surname1 =
+			STR_MOD->onlySurname(STR_MOD->msk(str1, DELIM, ColNomeCognome));
+	std::string surname2 =
+			STR_MOD->onlySurname(STR_MOD->msk(str2, DELIM, ColNomeCognome));
+	std::string surname3 =
+			STR_MOD->onlySurname(STR_MOD->msk(str3, DELIM, ColNomeCognome));
 	QCOMPARE(QString::fromStdString(surname1), QString("DEL PIERO"));
 	QCOMPARE(QString::fromStdString(surname2), QString("ALVAREZ"));
 	QCOMPARE(QString::fromStdString(surname3), QString("FREY"));
@@ -119,6 +125,27 @@ void Test::LevenshteinDistance() {
 	QCOMPARE(distance, 1);
 	distance = FANTA->LevenshteinDistance("piplo", "pippo");
 	QCOMPARE(distance, 1);
+}
+void Test::gazzettaFileReader_getOutput() {
+	GazzettaFileReader * gazzettaFileReader =
+			new GazzettaFileReader(
+					"/home/waleviolaeivan/Sorgenti/FantaCalcGuiNew/src/TestFiles/12.txt");
+	FileFormazioniReader * fileFormazioniReader =
+			new FileFormazioniReader(
+					"/home/waleviolaeivan/Sorgenti/FantaCalcGuiNew/src/TestFiles/real_patelavache_12.txt");
+
+	std::vector < std::vector<std::string> > Gazzetta;
+	Gazzetta.resize(26);
+
+	Gazzetta = gazzettaFileReader->getOutput();
+
+	for (unsigned int i = 0; i < Gazzetta.size(); ++i) {
+		for (unsigned int j = 0; j < Gazzetta.at(i).size(); ++j) {
+			std::string nomeCognome = STR_MOD->msk(Gazzetta.at(i).at(j), DELIM, 1);
+			char c = 65+i;
+			QCOMPARE(nomeCognome[0], c);
+		}
+	}
 }
 
 QTEST_MAIN(Test)
