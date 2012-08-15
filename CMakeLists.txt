@@ -44,7 +44,10 @@ SET( UIS
 
 SET( TEST_SRCS 
 		src/Test/test.cpp
-		src/StringModifier.cpp )
+        src/singletonQtLogger.cpp
+        src/Fanta.cpp        
+        src/Repository.cpp 
+        src/StringModifier.cpp )
 
 QT4_WRAP_UI( UI_HDRS ${UIS} )
 QT4_WRAP_CPP( MOC_SRCS ${HDRS} )
