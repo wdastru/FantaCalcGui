@@ -53,6 +53,8 @@ private slots:
 	void onlyLettersAndNumbersEnd();
 	void removeNotAllowedChars();
 	void onlySurname();
+	void leftString();
+	void leftQString();
 };
 
 void Test::onlyLettersBegin() {
@@ -96,6 +98,16 @@ void Test::onlySurname() {
 	QCOMPARE(QString::fromStdString(surname1), QString("DEL PIERO"));
 	QCOMPARE(QString::fromStdString(surname2), QString("ALVAREZ"));
 	QCOMPARE(QString::fromStdString(surname3), QString("FREY"));
+}
+void Test::leftString() {
+	std::string str = "pippo";
+	str = STR_MOD->leftString(str, 10);
+	QCOMPARE(QString::fromStdString(str), QString("pippo     "));
+}
+void Test::leftQString() {
+	QString qStr = "pippo";
+	qStr = STR_MOD->leftQString(qStr, 10);
+	QCOMPARE(qStr, QString("pippo     "));
 }
 
 QTEST_MAIN(Test)
