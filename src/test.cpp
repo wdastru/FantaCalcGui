@@ -57,6 +57,7 @@ private slots:
 	void leftString();
 	void leftQString();
 	void LevenshteinDistance();
+	void checkGiocatoSenzaVoto();
 };
 
 void Test::onlyLettersBegin() {
@@ -120,7 +121,9 @@ void Test::LevenshteinDistance() {
 	distance = FANTA->LevenshteinDistance("piplo", "pippo");
 	QCOMPARE(distance, 1);
 }
-
+void Test::checkGiocatoSenzaVoto() {
+	QCOMPARE(QString("pippo"), QString("pippo"));
+}
 QTEST_MAIN(Test)
 #include "test.moc"
 
