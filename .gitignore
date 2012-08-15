@@ -6,4 +6,7 @@ src/revision.h
 *.moc
 *.o
 src/Test/test
-
+CMakeCache.txt
+CMakeFiles/
+src/Makefile
+src/Test/Makefile
