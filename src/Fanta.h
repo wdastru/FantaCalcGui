@@ -23,6 +23,7 @@ using namespace std;
 class Fanta {
 
 	friend class FileFormazioniReader;
+	friend class Test;
 
 private:
 	static Fanta * pInstance;
