@@ -13,6 +13,7 @@ SET( SRCS
         src/IniFileManager.cpp
         src/ChooseFiles.cpp
         src/Downloader.cpp
+        src/Uploader.cpp
         src/NoNetFileDialog.cpp 
         src/GazzettaFileReader.cpp 
         src/FileFormazioniViewer.cpp 
@@ -28,6 +29,7 @@ SET( SRCS
 SET( HDRS 
         src/ChooseFiles.h
         src/Downloader.h
+        src/Uploader.h
         src/NoNetFileDialog.h  
         src/FileFormazioniViewer.h
         src/FileFormazioniReader.h
@@ -47,6 +49,7 @@ SET( TEST_SRCS
         src/IniFileManager.cpp
         src/ChooseFiles.cpp
         src/Downloader.cpp
+        src/Uploader.cpp
         src/NoNetFileDialog.cpp 
         src/GazzettaFileReader.cpp 
         src/FileFormazioniViewer.cpp 

@@ -1,3 +1,4 @@
+#include <QDebug>
 #include <QtGui/QApplication>
 #include <QtGui/QStyleFactory>
 #include <QtCore/QObject>
@@ -8,6 +9,8 @@
 #include "Fanta.h"
 #include "defines.h"
 
+#include "Uploader.h"
+
 using namespace std;
 
 int main(int argc, char *argv[]) {
@@ -17,6 +20,11 @@ int main(int argc, char *argv[]) {
 	a.setOrganizationName("Eptadone Software");
 	a.setApplicationName("FantaCalcGui");
 	a.setApplicationVersion("3.2.1");
+
+	Uploader uploader;
+	uploader.upload("ciccio");
+
+	qDebug() << "Ciao!";
 
 	THE_REPO; // prima si crea il repository dei dati
 	THE_MANAGER; // quindi si legge l'ini file (o lo si crea se non esistente)
