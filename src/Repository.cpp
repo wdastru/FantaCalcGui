@@ -18,9 +18,9 @@ Repository::Repository() {
 	 * DEFAULTS
 	 */
 	this->formazioniUrl =
-			"http://www.cim.unito.it/private/fantacalcio/777/formazioni/";
+			"http://www.cim.unito.it/website/private/fantacalcio/777/formazioni/";
 	this->gazzettaUrl =
-			"http://www.cim.unito.it/private/fantacalcio/777/filesGazzetta/";
+			"http://www.cim.unito.it/website/private/fantacalcio/777/filesGazzetta/";
 	this->debugStatus = FALSE; // temporaneo prima che venga letto l'ini file.
 
 #ifdef WIN32
