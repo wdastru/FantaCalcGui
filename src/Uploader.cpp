@@ -1,205 +1,118 @@
-/****************************************************************************
- **
- ** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
- ** All rights reserved.
- ** Contact: Nokia Corporation (qt-info@nokia.com)
- **
- ** This file is part of the examples of the Qt Toolkit.
- **
- ** $QT_BEGIN_LICENSE:BSD$
- ** You may use this file under the terms of the BSD license as follows:
- **
- ** "Redistribution and use in source and binary forms, with or without
- ** modification, are permitted provided that the following conditions are
- ** met:
- **   * Redistributions of source code must retain the above copyright
- **     notice, this list of conditions and the following disclaimer.
- **   * Redistributions in binary form must reproduce the above copyright
- **     notice, this list of conditions and the following disclaimer in
- **     the documentation and/or other materials provided with the
- **     distribution.
- **   * Neither the name of Nokia Corporation and its Subsidiary(-ies) nor
- **     the names of its contributors may be used to endorse or promote
- **     products derived from this software without specific prior written
- **     permission.
- **
- ** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- ** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- ** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- ** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- ** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- ** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- ** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- ** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- ** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- ** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- ** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
- ** $QT_END_LICENSE$
- **
- ****************************************************************************/
-
-#include <QtGui>
-#include <QDebug>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkRequest>
-#include <QtNetwork/QHttpResponseHeader>
 
 #include "Uploader.h"
-#include "Repository.h"
-#include "toString.h"
+#include <QtNetwork/QHttpRequestHeader>
+#include <QtNetwork/QNetworkRequest>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QUrl>
 
-Uploader::Uploader(QWidget *parent) :
-		QDialog(parent) {
+Uploader::Uploader() {
+	connect(&http, SIGNAL(done(bool)), this, SLOT(httpDone(bool)));
+	connect(this, SIGNAL(signalMessage(QString)), &textbox, SLOT(
+			append(QString)));
+	//textbox.show();
 }
 
-void Uploader::upload(QString _file) {
-	_file = "ciccio.txt";
+Uploader::~Uploader() {
+// TODO Auto-generated destructor stub
+}
 
-	QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-	//connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
+void Uploader::httpDone(bool error) {
+	buffer.reset();
+	emit signalMessage("XML is:" + buffer.readAll());
+	buffer.close();
+}
 
-	QFileInfo finfo(_file);
-
-	QString target =
-			"http://localhost/www.cim.unito.it/private/fantacalcio/777/tappo.txt";
+void Uploader::upload() {
 	QUrl url;
-	url.setUrl(target);
+	url.setUrl(
+			"http://awh1.stagekatalyst.net/katalyst/services/v1.0/CreateDelivery");
+	http.setHost(url.host(), QHttp::ConnectionModeHttp, url.port(80));
 
-	QNetworkRequest *request = new QNetworkRequest();
-	request->setUrl(url);
+	QString boundary;
+	QString sessionID = "6E17D5D3-3F0E-20E6-E8AD-51A3E8739003";
+	QString data;
+	QString crlf;
+	QByteArray requestContent;
 
-	QString bound = "---------------------------723690991551375881941828858";
-	QByteArray data(QString("--" + bound + "\r\n").toAscii());
-	data += "Content-Disposition: form-data; name=\"action\"\r\n\r\n";
-	data += "\r\n";
-	data += QString("--" + bound + "\r\n").toAscii();
-	data += "Content-Disposition: form-data; name=\"file\"; filename=\""
-			+ finfo.fileName() + "\"\r\n";
-	data += "Content-Type: image/" + finfo.suffix().toLower() + "\r\n\r\n";
-	QFile file(finfo.absoluteFilePath());
-	file.open(QIODevice::ReadOnly);
-	data += file.readAll();
-	data += "\r\n";
-	data += QString("--" + bound + "\r\n").toAscii();
-	data += QString("--" + bound + "\r\n").toAscii();
-	data += "Content-Disposition: form-data; name=\"desc\"\r\n\r\n";
-	data += "Description for my image here :)\r\n";
-	data += "\r\n";
-	request->setRawHeader(QString("Accept-Encoding").toAscii(),
-			QString("gzip,deflate").toAscii());
-	request->setRawHeader(QString("Content-Type").toAscii(),
-			QString("multipart/form-data; boundary=" + bound).toAscii());
-	request->setRawHeader(QString("Content-Length").toAscii(),
-			QString::number(data.length()).toAscii());
+	boundary = "---------------------------7d934a10503cc";
+	crlf = 0x0d;
+	crlf += 0x0a;
 
-	qDebug() << data;
+	QFile *file = new QFile("d:\\Shared_ReadOnly\\upload_files\\1_page.pdf");
 
-	QNetworkReply * reply = manager->post(*request, data);
+//**************** set-1 ************************
+	data = "--" + boundary + crlf
+			+ "Content-Disposition: form-data; name=\"file1\"; ";
+	data += "filename=\"file1.pdf\"";
+	data += crlf + "Content-Type: Application/Octet" + crlf + crlf;
 
-	//connect(reply, SIGNAL(finished()), this, SLOT(fin()));
+	file->open(QIODevice::ReadOnly);
+	requestContent.insert(0, data);
+	requestContent.append(file->readAll());
+	requestContent.append(crlf);
+	file->close();
+//**************** set-1 ended ************************
 
-	//QHttp *http = new QHttp(this); // http declared as a member of Uploader class
-	//connect(http, SIGNAL(requestFinished(int,bool)), SLOT(httpRequestFinished(int, bool)));
-	//
-	//QString boundary = "---------------------------723690991551375881941828858";
-	//
-	//// action
-	//QByteArray data(QString("--" + boundary + "\r\n").toAscii());
-	//data += "Content-Disposition: form-data; name=\"action\"\r\n\r\n";
-	//data += "file_upload\r\n";
-	//
-	//// file
-	//data += QString("--" + boundary + "\r\n").toAscii();
-	//data += "Content-Disposition: form-data; name=\"sfile\"; filename=\"test1.jpg\"\r\n";
-	//data += "Content-Type: image/jpeg\r\n\r\n";
-	//
-	//QFile file(_file);
-	//if (!file.open(QIODevice::ReadOnly))
-	//    return;
-	//
-	//data += file.readAll();
-	//data += "\r\n";
-	//
-	//// password
-	//data += QString("--" + boundary + "\r\n").toAscii();
-	//data += "Content-Disposition: form-data; name=\"password\"\r\n\r\n";
-	////data += "password\r\n"; // put password if needed
-	//data += "\r\n";
-	//
-	//// description
-	//data += QString("--" + boundary + "\r\n").toAscii();
-	//data += "Content-Disposition: form-data; name=\"description\"\r\n\r\n";
-	////data += "description\r\n"; // put description if needed
-	//data += "\r\n";
-	//
-	//// agree
-	//data += QString("--" + boundary + "\r\n").toAscii();
-	//data += "Content-Disposition: form-data; name=\"agree\"\r\n\r\n";
-	//data += "1\r\n";
-	//
-	//data += QString("--" + boundary + "--\r\n").toAscii();
-	//
-	//QHttpRequestHeader header("POST", "/cabinet/upload/");
-	//header.setValue("Host", "data.cod.ru");
-	//header.setValue("User-Agent", "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1.9) Gecko/20100401 Ubuntu/9.10 (karmic) Firefox/3.5.9");
-	//header.setValue("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-	//header.setValue("Accept-Language", "en-us,en;q=0.5");
-	//header.setValue("Accept-Encoding", "gzip,deflate");
-	//header.setValue("Accept-Charset", "ISO-8859-1,utf-8;q=0.7,*;q=0.7");
-	//header.setValue("Keep-Alive", "300");
-	//header.setValue("Connection", "keep-alive");
-	//header.setValue("Referer", "http://data.cod.ru/");
-	//
-	////multipart/form-data; boundary=---------------------------723690991551375881941828858
-	//
-	//header.setValue("Content-Type", "multipart/form-data; boundary=" + boundary);
-	//header.setValue("Content-Length", QString::number(data.length()));
-	//
-	//http->setHost("data.cod.ru");
-	//http->request(header, data);
-	//
-	//file.close();
+	file = new QFile("d:\\Shared_ReadOnly\\upload_files\\3_page.pdf");
+
+//**************** set-2 ************************
+	data = "--" + boundary + crlf
+			+ "Content-Disposition: form-data; name=\"file2\"; ";
+	data += "filename=\"file2.pdf\"";
+	data += crlf + "Content-Type: Application/Octet" + crlf + crlf;
+
+	file->open(QIODevice::ReadOnly);
+	requestContent.append(data);
+	requestContent.append(file->readAll());
+	requestContent.append(crlf);
+	file->close();
+//**************** set-2 Ended ************************
+	requestContent.append("--" + boundary + "--" + crlf); //this is the request terminator
+
+//*********** Prepare request header ******************
+	QHttpRequestHeader header = http.currentRequest();
+	header.setRequest("POST",
+			"http://awh1.stagekatalyst.net/katalyst/services/v1.0/CreateDelivery?mailBoxId=NETMBX09082&sessionId="
+					+ sessionID
+					+ "&siteAddress=katalyst3.stagekatalyst.net&subject=kjsdfhjksd");
+	header.setContentType(tr("multipart/form-data; boundary=") + boundary);
+	header.addValue("Connection", "Keep-Alive");
+	header.addValue("Host", "http://awh1.stagekatalyst.net");
+
+	buffer.open(QIODevice::ReadWrite);
+
+	httpID = http.request(header, requestContent, &buffer); //sending the request
+
+	http.close();
 }
 
-//void Uploader::httpRequestFinished(int, bool)
-//{
-//    //QHttpResponseHeader response = http->lastResponse();
-//    //if (response.statusCode()==302)
-//    //{
-//    //    qDebug() << "file accepted; get it from:";
-//    //    qDebug() << "data.cod.ru" << response.value("Location");
-//    //}
-//}
+void Uploader::SlotUploadDB(QString _DB_FILE)
+{
+	QString bound;
+	QString crlf;
+	QString data;
+	QByteArray dataToSend;
+	QFile file(_DB_FILE);
+	file.open(QIODevice::ReadOnly);
 
-//void Uploader::uploader(QString _file)
-//{
-//  QNetworkAccessManager *http=new QNetworkAccessManager(this);
-//  QFileInfo finfo(_file);
-//
-//  QUrl *url = new QUrl("http://localhost/www.cim.unito.it/fantacalcio/777/uploadedfile.txt");
-//  QNetworkRequest r;
-//
-//  QString bound="---------------------------723690991551375881941828858";
-//  QByteArray data(QString("--"+bound+"\r\n").toAscii());
-//  data += "Content-Disposition: form-data; name=\"action\"\r\n\r\n";
-//  data += "\r\n";
-//  data += QString("--" + bound + "\r\n").toAscii();
-//  data += "Content-Disposition: form-data; name=\"file\"; filename=\""+finfo.fileName()+"\"\r\n";
-//  data += "Content-Type: image/"+finfo.suffix().toLower()+"\r\n\r\n";
-//  QFile file(finfo.absoluteFilePath());
-//  file.open(QIODevice::ReadOnly);
-//  data += file.readAll();
-//  data += "\r\n";
-//  data += QString("--" + bound + "\r\n").toAscii();
-//  data += QString("--" + bound + "\r\n").toAscii();
-//  data += "Content-Disposition: form-data; name=\"desc\"\r\n\r\n";
-//  data += "Description for my image here :)\r\n";
-//  data += "\r\n";
-//  r.setRawHeader(QString("Accept-Encoding").toAscii(), QString("gzip,deflate").toAscii());
-//  r.setRawHeader(QString("Content-Type").toAscii(),QString("multipart/form-data; boundary=" + bound).toAscii());
-//  r.setRawHeader(QString("Content-Length").toAscii(), QString::number(data.length()).toAscii());
-//
-//  QNetworkReply * rep = http->post(r,data);
-//
-//  connect(rep,SIGNAL(finished()),this,SLOT(fin()));
-//  }
+	bound = "---------------------------7d935033608e2";
+	crlf = 0x0d;
+	crlf += 0x0a;
+	data = "--" + bound + crlf + "Content-Disposition: form-data; name=\"uploaded_file\"; ";
+	data += "filename=\"" + file.fileName() + "\"";
+	data += crlf + "Content-Type: application/octet-stream" + crlf + crlf;
+	dataToSend.insert(0,data);
+	dataToSend.append(file.readAll());
+	dataToSend.append(crlf + "--" + bound + "--" + crlf);
+
+	QUrl url("http://localhost/www.cim.unito.it/website/private/fantacalcio/test.php");
+	QNetworkRequest * req = new QNetworkRequest();
+	req->setUrl(url);
+	req->setHeader(QNetworkRequest::ContentTypeHeader, "multipart/form-data; boundary=" + bound);
+	file.close();
+
+	QNetworkAccessManager * manager = new QNetworkAccessManager();
+	connect(manager, SIGNAL(finished(QNetworkReply*)), SLOT(SlotRequestFinished(QNetworkReply*)));
+	QNetworkReply * reply = manager->post(*req, dataToSend);
+	//connect(reply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(SlotSetProgressLevel(qint64, qint64)));
+}

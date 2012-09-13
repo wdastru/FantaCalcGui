@@ -9,6 +9,7 @@
 #include "Fanta.h"
 #include "defines.h"
 
+
 #include "Uploader.h"
 
 using namespace std;
@@ -22,7 +23,7 @@ int main(int argc, char *argv[]) {
 	a.setApplicationVersion("3.2.1");
 
 	Uploader uploader;
-	uploader.upload("ciccio");
+	uploader.SlotUploadDB("/media/DATI/Sorgenti/FantaCalcGuiNew/src/TestFiles/test_upload.txt");
 
 	qDebug() << "Ciao!";
 
