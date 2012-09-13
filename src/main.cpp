@@ -6,11 +6,9 @@
 #include "Repository.h"
 #include "IniFilePopulator.h"
 #include "IniFileManager.h"
+#include "httpwindow.h"
 #include "Fanta.h"
 #include "defines.h"
-
-
-#include "Uploader.h"
 
 using namespace std;
 
@@ -22,15 +20,18 @@ int main(int argc, char *argv[]) {
 	a.setApplicationName("FantaCalcGui");
 	a.setApplicationVersion("3.2.1");
 
-	Uploader uploader;
-	uploader.SlotUploadDB("/media/DATI/Sorgenti/FantaCalcGuiNew/src/TestFiles/test_upload.txt");
-
-	qDebug() << "Ciao!";
+	//Uploader uploader;
+	//uploader.upload("/media/DATI/Sorgenti/FantaCalcGuiNew/src/TestFiles/test_upload.txt");
 
 	THE_REPO; // prima si crea il repository dei dati
 	THE_MANAGER; // quindi si legge l'ini file (o lo si crea se non esistente)
 
 	THE_LOGGER; // poi parte l'applicazione
+
+	QUrl url("http://localhost/www.cim.unito.it/website/private/fantacalcio/777/");
+	HttpWindow * httpWindow = new HttpWindow(THE_LOGGER, url, "test_upload.txt");
+	httpWindow->upload("/media/DATI/Sorgenti/FantaCalcGuiNew/src/TestFiles/test_upload.txt");
+
 
 	#include "revision.h"
 

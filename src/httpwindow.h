@@ -68,6 +68,7 @@ public:
 	void startRequest(QUrl url);
 	bool downloadSuccessful();
 	void downloadFile();
+	void upload(QString);
 
 private slots:
 	void cancelDownload();

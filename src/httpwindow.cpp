@@ -51,12 +51,12 @@
 #include "ui_authenticationdialog.h"
 
 HttpWindow::HttpWindow(QWidget *parent, QUrl _url, QString _savePath) :
-	QDialog(parent) {
+		QDialog(parent) {
 
 	this->setFont(THE_REPO->fontVariableWidthSmall);
 
 	this->fullUrlString = _url.scheme() + "://" + _url.authority()
-			+ _url.path();
+	+ _url.path();
 
 	this->downloadSuccess = false;
 
@@ -89,35 +89,35 @@ HttpWindow::HttpWindow(QWidget *parent, QUrl _url, QString _savePath) :
 	//	connect(urlLineEdit, SIGNAL(textChanged(QString)), this,
 	//			SLOT(enableDownloadButton()));
 
-	connect(&qnam,
-			SIGNAL(authenticationRequired(QNetworkReply*,QAuthenticator*)),
-			this,
-			SLOT(slotAuthenticationRequired(QNetworkReply*,QAuthenticator*)));
-	/*
-	 #ifndef QT_NO_OPENSSL
-	 connect(&qnam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this,
-	 SLOT(sslErrors(QNetworkReply*,QList<QSslError>)));
-	 #endif
-	 connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
-	 connect(downloadButton, SIGNAL(clicked()), this, SLOT(downloadFile()));
-	 connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
+			connect(&qnam,
+					SIGNAL(authenticationRequired(QNetworkReply*,QAuthenticator*)),
+					this,
+					SLOT(slotAuthenticationRequired(QNetworkReply*,QAuthenticator*)));
+			/*
+			 #ifndef QT_NO_OPENSSL
+			 connect(&qnam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this,
+			 SLOT(sslErrors(QNetworkReply*,QList<QSslError>)));
+			 #endif
+			 connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
+			 connect(downloadButton, SIGNAL(clicked()), this, SLOT(downloadFile()));
+			 connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
 
-	 QHBoxLayout *topLayout = new QHBoxLayout;
-	 topLayout->addWidget(urlLabel);
-	 topLayout->addWidget(urlLineEdit);
+			 QHBoxLayout *topLayout = new QHBoxLayout;
+			 topLayout->addWidget(urlLabel);
+			 topLayout->addWidget(urlLineEdit);
 
-	 QVBoxLayout *mainLayout = new QVBoxLayout;
-	 mainLayout->addLayout(topLayout);
-	 mainLayout->addWidget(statusLabel);
-	 mainLayout->addWidget(buttonBox);
-	 setLayout(mainLayout);
+			 QVBoxLayout *mainLayout = new QVBoxLayout;
+			 mainLayout->addLayout(topLayout);
+			 mainLayout->addWidget(statusLabel);
+			 mainLayout->addWidget(buttonBox);
+			 setLayout(mainLayout);
 
-	 setWindowTitle(tr("HTTP Client"));
-	 urlLineEdit->setFocus();
-	 */
+			 setWindowTitle(tr("HTTP Client"));
+			 urlLineEdit->setFocus();
+			 */
 
-	this->downloadFile();
-}
+			this->downloadFile();
+		}
 
 void HttpWindow::startRequest(QUrl url) {
 	reply = qnam.get(QNetworkRequest(url));
@@ -197,9 +197,9 @@ void HttpWindow::httpFinished() {
 		this->file->remove();
 
 		LOG(
-				ERROR,
-				tr("Error downloading %1 : %2.").arg(file->fileName()).arg(
-						reply->errorString()));
+		ERROR,
+		tr("Error downloading %1 : %2.").arg(file->fileName()).arg(
+				reply->errorString()));
 
 		this->downloadSuccess = false;
 
@@ -232,10 +232,10 @@ void HttpWindow::httpFinished() {
 
 	} else {
 		LOG(
-				DEBUG,
-				tr("    Scaricato %1 in %2").arg(
-						QFileInfo(this->file->fileName()).fileName()).arg(
-						QFileInfo(this->file->fileName()).path()));
+		DEBUG,
+		tr("    Scaricato %1 in %2").arg(
+				QFileInfo(this->file->fileName()).fileName()).arg(
+				QFileInfo(this->file->fileName()).path()));
 
 		this->downloadSuccess = true;
 	}
@@ -269,11 +269,36 @@ bool HttpWindow::downloadSuccessful() {
 	return this->downloadSuccess;
 }
 
-/*
- void HttpWindow::enableDownloadButton() {
- downloadButton->setEnabled(!urlLineEdit->text().isEmpty());
- }
- */
+void HttpWindow::upload(QString _file) {
+	QString bound;
+	QString crlf;
+	QString data;
+	QByteArray dataToSend;
+	QFile file(_file);
+	file.open(QIODevice::ReadOnly);
+
+	bound = "---------------------------7d935033608e2";
+	crlf = 0x0d;
+	crlf += 0x0a;
+	data = "--" + bound + crlf
+			+ "Content-Disposition: form-data; name=\"uploaded_file\"; ";
+	data += "filename=\"" + file.fileName() + "\"";
+	data += crlf + "Content-Type: application/octet-stream" + crlf + crlf;
+	dataToSend.insert(0, data);
+	dataToSend.append(file.readAll());
+	dataToSend.append(crlf + "--" + bound + "--" + crlf);
+
+	QUrl url(
+			"http://localhost/www.cim.unito.it/website/private/fantacalcio/test.php");
+	QNetworkRequest * req = new QNetworkRequest();
+	req->setUrl(url);
+	req->setHeader(QNetworkRequest::ContentTypeHeader,
+			"multipart/form-data; boundary=" + bound);
+	file.close();
+
+//connect(manager, SIGNAL(finished(QNetworkReply*)), SLOT(SlotRequestFinished(QNetworkReply*)));
+	QNetworkReply * reply = qnam.post(*req, dataToSend);
+}
 
 void HttpWindow::slotAuthenticationRequired(QNetworkReply*,
 		QAuthenticator *authenticator) {
