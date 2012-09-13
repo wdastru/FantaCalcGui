@@ -90,6 +90,8 @@ private:
 	QPushButton *quitButton;
 	QDialogButtonBox *buttonBox;
 
+	bool uploadFlag;
+
 	QUrl url;
 	QString savePath;
 	QNetworkAccessManager qnam;

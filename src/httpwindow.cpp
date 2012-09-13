@@ -60,6 +60,8 @@ HttpWindow::HttpWindow(QWidget *parent, QUrl _url, QString _savePath) :
 
 	this->downloadSuccess = false;
 
+	this->uploadFlag = false;
+
 	/*
 	 #ifndef QT_NO_OPENSSL
 	 urlLineEdit = new QLineEdit(fullUrlString);
@@ -231,11 +233,19 @@ void HttpWindow::httpFinished() {
 		 */
 
 	} else {
+
+		if (!uploadFlag) {
 		LOG(
 		DEBUG,
 		tr("    Scaricato %1 in %2").arg(
 				QFileInfo(this->file->fileName()).fileName()).arg(
 				QFileInfo(this->file->fileName()).path()));
+		} else {
+			LOG(
+			DEBUG,
+			tr("    Upload di %1 riuscito").arg(
+					QFileInfo(this->file->fileName()).fileName()));
+		}
 
 		this->downloadSuccess = true;
 	}
@@ -270,10 +280,13 @@ bool HttpWindow::downloadSuccessful() {
 }
 
 void HttpWindow::upload(QString _file) {
+
+	this->uploadFlag = true;
 	QString bound;
 	QString crlf;
 	QString data;
 	QByteArray dataToSend;
+
 	QFile file(_file);
 	file.open(QIODevice::ReadOnly);
 
