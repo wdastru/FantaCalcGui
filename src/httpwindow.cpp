@@ -209,37 +209,14 @@ void HttpWindow::httpFinished() {
 
 		this->downloadSuccess = false;
 
-		/*
-		 QUrl newUrl = url.resolved(redirectionTarget.toUrl());
-
-		 QMessageBox msgBox;
-		 msgBox.setWindowTitle("HTTP");
-		 msgBox.setInformativeText(tr("Redirect to %1 ?").arg(newUrl.toString()));
-		 msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-		 msgBox.setDefaultButton(QMessageBox::No);
-		 msgBox.setIcon(QMessageBox::Question);
-		 msgBox.setFont(THE_REPO->fontVariableWidthSmall);
-		 int answer = msgBox.exec();
-
-		 if (answer == QMessageBox::Yes) {
-		 url = newUrl;
-		 reply->deleteLater();
-		 file->open(QIODevice::WriteOnly);
-		 file->resize(0);
-		 this->downloadSuccess = false;
-		 startRequest(url);
-		 return;
-		 }
-		 */
-
 	} else {
 
 		if (!uploadFlag) {
-		LOG(
-		DEBUG,
-		tr("    Scaricato %1 in %2").arg(
-				QFileInfo(this->file->fileName()).fileName()).arg(
-				QFileInfo(this->file->fileName()).path()));
+			LOG(
+			DEBUG,
+			tr("    Scaricato %1 in %2").arg(
+					QFileInfo(this->file->fileName()).fileName()).arg(
+					QFileInfo(this->file->fileName()).path()));
 		} else {
 			LOG(
 			DEBUG,
@@ -310,7 +287,7 @@ void HttpWindow::upload(QString _file) {
 	file.close();
 
 //connect(manager, SIGNAL(finished(QNetworkReply*)), SLOT(SlotRequestFinished(QNetworkReply*)));
-	QNetworkReply * reply = qnam.post(*req, dataToSend);
+	reply = qnam.post(*req, dataToSend);
 }
 
 void HttpWindow::slotAuthenticationRequired(QNetworkReply*,
