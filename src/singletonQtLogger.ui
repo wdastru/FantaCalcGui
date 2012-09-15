@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>738</width>
-    <height>634</height>
+    <width>863</width>
+    <height>679</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,18 +22,18 @@
      <item row="1" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>nome file di output</string>
+        <string>Nome file di output</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="1" colspan="5">
+     <item row="1" column="1" colspan="6">
       <widget class="QLineEdit" name="outputFileNameLineEdit">
        <property name="enabled">
         <bool>false</bool>
        </property>
       </widget>
      </item>
-     <item row="0" column="0" colspan="6">
+     <item row="0" column="0" colspan="7">
       <widget class="QPlainTextEdit" name="plainTextEdit">
        <property name="enabled">
         <bool>true</bool>
@@ -67,22 +67,6 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="4" colspan="2">
-      <widget class="QLabel" name="versionLabel">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>version</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
      <item row="2" column="0">
       <widget class="QPushButton" name="onlineButton">
        <property name="sizePolicy">
@@ -99,6 +83,72 @@
        </property>
        <property name="text">
         <string>Online</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QPushButton" name="uploadCampButton">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>Campionato</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="6">
+      <widget class="QPushButton" name="exitButton">
+       <property name="minimumSize">
+        <size>
+         <width>125</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Exit</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2" colspan="5">
+      <widget class="QLabel" name="versionLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>version</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="3" colspan="3">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="uploadLabel">
+       <property name="text">
+        <string>Upload :</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QPushButton" name="uploadCoppaButton">
+       <property name="text">
+        <string>Coppa</string>
        </property>
       </widget>
      </item>
@@ -128,18 +178,18 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="3">
-      <widget class="QPushButton" name="exitButton">
-       <property name="minimumSize">
+     <item row="3" column="1" colspan="6">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
         <size>
-         <width>125</width>
-         <height>0</height>
+         <width>40</width>
+         <height>20</height>
         </size>
        </property>
-       <property name="text">
-        <string>Exit</string>
-       </property>
-      </widget>
+      </spacer>
      </item>
     </layout>
    </item>
@@ -150,9 +200,6 @@
   <tabstop>plainTextEdit</tabstop>
   <tabstop>outputFileNameLineEdit</tabstop>
   <tabstop>onlineButton</tabstop>
-  <tabstop>offlineButton</tabstop>
-  <tabstop>configButton</tabstop>
-  <tabstop>exitButton</tabstop>
  </tabstops>
  <resources/>
  <connections>

@@ -34,6 +34,8 @@ private slots:
 	void onlineClicked();
 	void offlineClicked();
 	void goOn();
+	void on_uploadCampButton_clicked();
+	void on_uploadCoppaButton_clicked();
 
 signals:
 	void onOffClickedFinished();

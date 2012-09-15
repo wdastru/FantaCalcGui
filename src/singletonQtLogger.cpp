@@ -42,9 +42,9 @@ void singletonQtLogger::init() {
 	this->setFont(THE_REPO->fontVariableWidthSmall);
 	this->ui.setupUi(this);
 	//this->ui.titleLabel->setFont(THE_REPO->fontVariableWidthBig);
-	this->ui.plainTextEdit->setFont(THE_REPO->fontFixedWidth);
-	this->setWindowTitle("FantaCalcGui - Logger");
-}
+			this->ui.plainTextEdit->setFont(THE_REPO->fontFixedWidth);
+			this->setWindowTitle("FantaCalcGui - Logger");
+		}
 singletonQtLogger::~singletonQtLogger() {
 }
 void singletonQtLogger::Logging(QString type, QString message) {
@@ -61,20 +61,20 @@ void singletonQtLogger::Logging(QString type, QString message) {
 	} else if (type == "FATAL") {
 		this->ui.plainTextEdit->appendHtml(
 				"<span style='color:#FF0000; font-weight:bold'> FATAL ERROR : "
-						+ message + "</span>");
+				+ message + "</span>");
 	} else if (type == "WARN") {
 		this->ui.plainTextEdit->appendHtml(
 				"<span style='color:#FF8800;'> WARNING : " + message
-						+ "</span>");
+				+ "</span>");
 	} else if (type == "FILE") {
 		;
 	} else if (type == "UPDATE") {
 		this->ui.plainTextEdit->appendHtml(
 				"<span style='color:#00CC00; font-weight:bold'> UPDATE : "
-						+ message + "</span>");
+				+ message + "</span>");
 	} else
-		this->ui.plainTextEdit->appendHtml(
-				" !!!! : Type " + type + " not recognized.");
+	this->ui.plainTextEdit->appendHtml(
+			" !!!! : Type " + type + " not recognized.");
 
 	this->fileContent += (message + "<br/>");
 
@@ -86,10 +86,8 @@ void singletonQtLogger::setTitle(QString _title) {
 }
 void singletonQtLogger::setVersion(QString _version) {
 	this->version = _version;
-	this->ui.versionLabel->setText("v" \
-			+ _version \
-			+ " rev. " \
-			+ this->getRevision());
+	this->ui.versionLabel->setText(
+			"v" + _version + " rev. " + this->getRevision());
 }
 void singletonQtLogger::setRevision(QString _revision) {
 	this->revision = _revision;
@@ -109,7 +107,7 @@ void singletonQtLogger::saveLogFile() {
 	} else {
 		file->setFileName(
 				THE_REPO->risultatiPath
-						+ this->ui.outputFileNameLineEdit->text());
+				+ this->ui.outputFileNameLineEdit->text());
 
 		//qDebug() << "In singletonQtLogger::saveLogFile() --> logFileName is " \
 				<< this->logFileName;
@@ -189,8 +187,8 @@ void singletonQtLogger::configClicked() {
 }
 void singletonQtLogger::onlineClicked() {
 	LOG(DEBUG, "<br> ========================");
-	LOG(DEBUG, 	   " === Modalita' online ===");
-	LOG(DEBUG,     " ========================<br>");
+	LOG(DEBUG, " === Modalita' online ===");
+	LOG(DEBUG, " ========================<br>");
 
 	//qDebug() << "In void singletonQtLogger::onlineClicked() --> THE_REPO->getFileFormazioniUrl() : " + THE_REPO->getFileFormazioniUrl();
 	//qDebug() << "In void singletonQtLogger::onlineClicked() --> THE_REPO->getFileGazzettaUrl() : " + THE_REPO->getFileGazzettaUrl();
@@ -237,8 +235,8 @@ void singletonQtLogger::onlineClicked() {
 }
 void singletonQtLogger::offlineClicked() {
 	LOG(DEBUG, "<br> =========================");
-	LOG(DEBUG,     " === Modalita' offline ===");
-	LOG(DEBUG,     " =========================<br>");
+	LOG(DEBUG, " === Modalita' offline ===");
+	LOG(DEBUG, " =========================<br>");
 
 	NoNetFileDialog * noNetFileDialog = new NoNetFileDialog(THE_LOGGER);
 	noNetFileDialog->exec();
@@ -275,7 +273,7 @@ void singletonQtLogger::goOn() {
 	// --> lettura file Gazzetta e Formazioni
 	GazzettaFileReader * gazzettaFileReader = new GazzettaFileReader(
 			THE_REPO->fileGazzetta);
-	FileFormazioniReader * fileFormazioniReader = new FileFormazioniReader( \
+			FileFormazioniReader * fileFormazioniReader = new FileFormazioniReader( \
 				THE_REPO->fileFormazioni, THE_LOGGER);
 
 	fileFormazioniReader->setPlayers(gazzettaFileReader->getOutput());
@@ -348,6 +346,10 @@ void singletonQtLogger::goOn() {
 
 		this->ui.outputFileNameLineEdit->setEnabled(true);
 		this->ui.outputFileNameLineEdit->setText(fileName);
+
+		this->ui.uploadCampButton->setEnabled(true);
+		this->ui.uploadCoppaButton->setEnabled(true);
+
 	} catch (...) {
 		LOG(ERROR, "Exception caught after FANTA->execute().");
 		qDebug() << "In singletonQtLogger::goOn() --> exception caught after FANTA->execute().";
@@ -359,8 +361,8 @@ void singletonQtLogger::setLogFileName(QString filename) {
 bool singletonQtLogger::checkForUpdates() {
 
 	LOG(DEBUG, "<br> =============================");
-	LOG(DEBUG,     " === Ricerca aggiornamenti ===");
-	LOG(DEBUG,     " =============================<br>");
+	LOG(DEBUG, " === Ricerca aggiornamenti ===");
+	LOG(DEBUG, " =============================<br>");
 	//	qDebug << "In void singletonQtLogger::checkForUpdates().";
 
 	QStringList current = this->getVersion().split(QRegExp("\\\."));
@@ -379,13 +381,13 @@ bool singletonQtLogger::checkForUpdates() {
 
 	urls->push_back(QUrl::fromLocalFile(url));
 
-	// qDebug << "In void singletonQtLogger::checkForUpdates() --> url : " + url;
+	qDebug() << "In void singletonQtLogger::checkForUpdates() --> url : " + url;
 
 	std::vector<QString> *savePaths = new std::vector<QString>;
 	QString savePath = THE_REPO->getDownloadPath() + "updates.xml";
 	savePaths->push_back(savePath);
 
-	// qDebug << "In void singletonQtLogger::checkForUpdates() --> savePath : " + savePath;
+	qDebug() << "In void singletonQtLogger::checkForUpdates() --> savePath : " + savePath;
 
 	Downloader updatesXmlDownloader(THE_LOGGER, urls, savePaths, TRUE);
 
@@ -400,7 +402,7 @@ bool singletonQtLogger::checkForUpdates() {
 		QDomDocument doc("updates");
 		QFile file(savePath);
 		if (!file.open(QIODevice::ReadOnly))
-			return false;
+		return false;
 		if (!doc.setContent(&file)) {
 			file.close();
 			return false;
@@ -435,7 +437,7 @@ bool singletonQtLogger::checkForUpdates() {
 							hash.insert("version", f.text());
 
 							QStringList available = f.text().split(
-									QRegExp("\\\."));
+							QRegExp("\\\."));
 							int verAvailable = available.at(0).toInt();
 							int majAvailable = available.at(1).toInt();
 							int minAvailable = available.at(2).toInt();
@@ -493,14 +495,14 @@ bool singletonQtLogger::checkForUpdates() {
 			for (int j = 0; j < listOfResources.at(i).size(); ++j) {
 
 				if (listOfResources.at(i).at(j)["status"] == "new") {
-					LOG(UPDATE, \
-							"    E' possibile scaricare la versione " \
-									+ listOfResources.at(i).at(j)["version"] \
-									+ " : " \
-									+ listOfResources.at(i).at(j)["file"] + " (" \
-									+ listOfResources.at(i).at(j)["description"] \
-									+ ")<br>changes : <br>" \
-									+ listOfResources.at(i).at(j)["new"]);
+					LOG(UPDATE,
+					"    E' possibile scaricare la versione "
+					+ listOfResources.at(i).at(j)["version"]
+					+ " : "
+					+ listOfResources.at(i).at(j)["file"] + " ("
+					+ listOfResources.at(i).at(j)["description"]
+					+ ")<br>changes : <br>"
+					+ listOfResources.at(i).at(j)["new"]);
 
 					foundUpdates = true;
 				}
@@ -508,8 +510,8 @@ bool singletonQtLogger::checkForUpdates() {
 		}
 
 		if (!foundUpdates) {
-			LOG(UPDATE, \
-					"    La versione e' aggiornata");
+			LOG(UPDATE,
+			"    La versione e' aggiornata");
 
 		}
 
@@ -521,12 +523,12 @@ bool singletonQtLogger::checkForUpdates() {
 					QMessageBox msgBox;
 					msgBox.setWindowTitle("HTTP");
 					msgBox.setInformativeText(
-							tr("Version %1 available.\nDownload \n%2\n(%3) ?").arg(
-									listOfResources.at(i).at(j)["version"]).arg(
-									listOfResources.at(i).at(j)["file"]).arg(
-									listOfResources.at(i).at(j)["description"]));
+					tr("Version %1 available.\nDownload \n%2\n(%3) ?").arg(
+							listOfResources.at(i).at(j)["version"]).arg(
+							listOfResources.at(i).at(j)["file"]).arg(
+							listOfResources.at(i).at(j)["description"]));
 					msgBox.setStandardButtons(
-							QMessageBox::Yes | QMessageBox::No);
+					QMessageBox::Yes | QMessageBox::No);
 					msgBox.setDefaultButton(QMessageBox::No);
 					msgBox.setIcon(QMessageBox::Question);
 					msgBox.setFont(THE_REPO->fontVariableWidthSmall);
@@ -542,31 +544,31 @@ bool singletonQtLogger::checkForUpdates() {
 						url = url.left(pos);
 						pos = url.lastIndexOf("/");
 						url = url.left(pos) + "/download/"
-								+ listOfResources.at(i).at(j)["file"];
+						+ listOfResources.at(i).at(j)["file"];
 
 						urls->push_back(QUrl::fromLocalFile(url));
 
 						qDebug() << "In void singletonQtLogger::checkForUpdates() --> url : " + url;
 
 						std::vector < QString > *savePaths = new std::vector<
-								QString>;
+						QString>;
 						QString savePath = THE_REPO->getDownloadPath() + listOfResources.at(i).at(j)["file"];
 						savePaths->push_back(savePath);
 
 						qDebug() << "In void singletonQtLogger::checkForUpdates() --> savePath : " + savePath;
 
 						Downloader updateDownloader(THE_LOGGER, urls, savePaths,
-								true);
+						true);
 
 						if (updateDownloader.requestSucceded()) { // download succeded
 							LOG(DEBUG,
-									"Download of "
-											+ listOfResources.at(i).at(j)["file"]
-											+ " succeded.");
+							"Download of "
+							+ listOfResources.at(i).at(j)["file"]
+							+ " succeded.");
 						} else {
 							LOG(ERROR,
-									listOfResources.at(i).at(j)["file"]
-											+ " download failed.");
+							listOfResources.at(i).at(j)["file"]
+							+ " download failed.");
 
 						}
 					}
@@ -576,9 +578,67 @@ bool singletonQtLogger::checkForUpdates() {
 
 	} else { // download failed
 		LOG(DEBUG,
-				"Non e' stato possibile scaricare le informazioni relative agli aggiornamenti disponibili.");
+		"Non e' stato possibile scaricare le informazioni relative agli aggiornamenti disponibili.");
 		return false;
 	}
 
 	return true;
+}
+void singletonQtLogger::on_uploadCampButton_clicked() {
+	//qDebug() << "In void singletonQtLogger::on_uploadCampButton_clicked()";
+
+	std::vector<QUrl> * urls = new std::vector<QUrl>;
+	std::vector<QString> *savePaths = new std::vector<QString>;
+
+	urls->push_back(
+			QUrl::fromLocalFile(
+					"http://localhost/www.cim.unito.it/website/private/fantacalcio/777/datiCampionato.txt"));
+	savePaths->push_back(THE_REPO->getDownloadPath() + "datiCampionato.txt");
+	urls->push_back(
+			QUrl::fromLocalFile(
+					"http://localhost/www.cim.unito.it/website/private/fantacalcio/squadre.inc.php"));
+	savePaths->push_back(THE_REPO->getDownloadPath() + "squadre.inc.php");
+	urls->push_back(
+			QUrl::fromLocalFile(
+					"http://localhost/www.cim.unito.it/website/private/fantacalcio/calendario.inc.php"));
+	savePaths->push_back(THE_REPO->getDownloadPath() + "calendario.inc.php");
+
+	Downloader datiCampDownloader(THE_LOGGER, urls, savePaths, TRUE);
+
+	if (datiCampDownloader.requestSucceded()) { // download succeded
+		qDebug()
+				<< "In void singletonQtLogger::on_uploadCampButton_clicked(). Download of files succeded.";
+	} else { // download failed
+		LOG(WARN, "Non e' stato possibile scaricare i file necessari.");
+	}
+
+}
+void singletonQtLogger::on_uploadCoppaButton_clicked() {
+	//qDebug() << "In void singletonQtLogger::on_uploadCoppaButton_clicked()";
+
+	std::vector<QUrl> * urls = new std::vector<QUrl>;
+	std::vector<QString> *savePaths = new std::vector<QString>;
+
+	urls->push_back(
+			QUrl::fromLocalFile(
+					"http://localhost/www.cim.unito.it/website/private/fantacalcio/777/datiCoppa.txt"));
+	savePaths->push_back(THE_REPO->getDownloadPath() + "datiCoppa.txt");
+	urls->push_back(
+			QUrl::fromLocalFile(
+					"http://localhost/www.cim.unito.it/website/private/fantacalcio/squadre.inc.php"));
+	savePaths->push_back(THE_REPO->getDownloadPath() + "squadre.inc.php");
+	urls->push_back(
+			QUrl::fromLocalFile(
+					"http://localhost/www.cim.unito.it/website/private/fantacalcio/calendarioCoppa.inc.php"));
+	savePaths->push_back(THE_REPO->getDownloadPath() + "calendarioCoppa.inc.php");
+
+	Downloader datiCoppaDownloader(THE_LOGGER, urls, savePaths, TRUE);
+
+	if (datiCoppaDownloader.requestSucceded()) { // download succeded
+		qDebug()
+				<< "In void singletonQtLogger::on_uploadCoppaButton_clicked(). Download of files succeded.";
+	} else { // download failed
+		LOG(WARN, "Non e' stato possibile scaricare i file necessari.");
+	}
+
 }
