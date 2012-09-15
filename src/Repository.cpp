@@ -35,7 +35,8 @@ Repository::Repository() {
 
 	this->fontFixedWidth.setFamily(QString::fromUtf8("Lucida Console"));
 	this->fontFixedWidth.setPointSize(8);
-#else
+#endif
+#ifdef LINUX
 	this->UserProfile = "/home/" + QString::fromAscii(getenv("USER"));
 
 	this->fontVariableWidthSmall.setFamily(QString::fromUtf8("Ubuntu"));
@@ -48,7 +49,20 @@ Repository::Repository() {
 	this->fontFixedWidth.setFamily(QString::fromUtf8("Ubuntu Mono"));
 	this->fontFixedWidth.setPointSize(10);
 #endif
-
+#ifdef __MACH__
+	this->UserProfile = "/Users/" + QString::fromAscii(getenv("USER"));
+    
+    this->fontVariableWidthSmall.setFamily(QString::fromUtf8("Segoe UI"));
+	this->fontVariableWidthSmall.setPointSize(10);
+    
+	this->fontVariableWidthBig.setFamily(QString::fromUtf8("Segoe UI"));
+	this->fontVariableWidthBig.setBold(true);
+	this->fontVariableWidthBig.setPointSize(16);
+    
+	this->fontFixedWidth.setFamily(QString::fromUtf8("Lucida Console"));
+	this->fontFixedWidth.setPointSize(8);
+#endif
+    
 	//qDebug() << "UserProfile = '" + this->UserProfile+"'";
 
 	this->formazioniPath = this->UserProfile + "/FantaCalcGui/formazioni/";

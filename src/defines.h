@@ -50,7 +50,7 @@
 #define FATAL "FATAL"
 #define WARN  "WARN"
 #define DBG "DBG"
-#define UPDATE "UPDATE"
+#define UPDATE 		"UPDATE"
 #define TOFILE  "FILE"
 #endif /* TYPE_OF_LOG_MSG */
 

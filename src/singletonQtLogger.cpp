@@ -367,7 +367,7 @@ bool singletonQtLogger::checkForUpdates() {
 	LOG(DBG, " =============================<br>");
 	//	qDebug << "In void singletonQtLogger::checkForUpdates().";
 
-	QStringList current = this->getVersion().split(QRegExp("\\\."));
+	QStringList current = this->getVersion().split(QRegExp("\\\\."));
 	int verCurrent = current.at(0).toInt();
 	int majCurrent = current.at(1).toInt();
 	int minCurrent = current.at(2).toInt();
@@ -438,7 +438,7 @@ bool singletonQtLogger::checkForUpdates() {
 						} else if (f.tagName() == "version") {
 							hash.insert("version", f.text());
 
-							QStringList available = f.text().split(QRegExp("\\\."));
+							QStringList available = f.text().split(QRegExp("\\\\."));
 							int verAvailable = available.at(0).toInt();
 							int majAvailable = available.at(1).toInt();
 							int minAvailable = available.at(2).toInt();

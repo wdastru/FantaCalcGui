@@ -80,7 +80,7 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 
 			matches.push_back(str);
 
-			QStringList list = str.split(QRegExp("\/"),
+			QStringList list = str.split(QRegExp("\\/"),
 					QString::SkipEmptyParts);
 
 			//int i = list.at(0).at(3).digitValue();
@@ -91,11 +91,11 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 
 			if ((str.indexOf(
 					QRegExp(
-							"^(gruppi[0-9]{1,2}|semi[0-3]|finali[0-3])\/-\/-\/-\/-\/"))
+							"^(gruppi[0-9]{1,2}|semi[0-3]|finali[0-3])\\/-\\/-\\/-\\/-\\/"))
 					== -1)
 					&& (str.indexOf(
 							QRegExp(
-									"^(gruppi[0-9]{1,2}|semi[0-3]|finali[0-3])\/\/\/\/\/"))
+									"^(gruppi[0-9]{1,2}|semi[0-3]|finali[0-3])\\/\\/\\/\\/\\/"))
 							== -1)) {
 				style = "background:#FF0000"; // risultato gia' presente
 			} else {
@@ -285,7 +285,7 @@ void MatchChooserCoppa::quit() {
 
 		QString title = "ATTENZIONE!!!";
 
-		QStringList items = match.split(QRegExp("\/"), QString::SkipEmptyParts);
+		QStringList items = match.split(QRegExp("\\/"), QString::SkipEmptyParts);
 
 		if (items.size() == 1
 				|| (items.at(1) == "-" && items.at(2) == "-"

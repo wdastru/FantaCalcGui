@@ -84,7 +84,7 @@ MatchChooserCamp::MatchChooserCamp(QWidget *parent) :
 
 			matches.push_back(str);
 
-			QStringList list = str.split(QRegExp("\/"),
+			QStringList list = str.split(QRegExp("\\/"),
 					QString::SkipEmptyParts);
 
 			int i = list.at(0).at(3).digitValue();
@@ -94,8 +94,8 @@ MatchChooserCamp::MatchChooserCamp(QWidget *parent) :
 			//qDebug() << list.at(0).at(1) << list.at(0).at(2) << list.at(0).at(3);
 			//qDebug() << str << " " << str.indexOf(QRegExp("a[0-3][0-6][0-3]\/\/\/\/\/"));
 
-			if ((str.indexOf(QRegExp("a[0-3][0-6][0-3]\/\/\/\/\/")) == -1)
-					&& (str.indexOf(QRegExp("a[0-3][0-6][0-3]\/-\/-\/-\/-\/")) == -1)) {
+			if ((str.indexOf(QRegExp("a[0-3][0-6][0-3]\\/\\/\\/\\/\\/")) == -1)
+					&& (str.indexOf(QRegExp("a[0-3][0-6][0-3]\\/-\\/-\\/-\\/-\\/")) == -1)) {
 				style = "background:#FF0000"; // risultato gia' presente
 			} else {
 				style = "background:#00FF00"; // risultato mancante
@@ -253,7 +253,7 @@ void MatchChooserCamp::quit() {
 
 		qDebug() << match;
 
-		QStringList items = match.split(QRegExp("\/"), QString::SkipEmptyParts);
+		QStringList items = match.split(QRegExp("\\/"), QString::SkipEmptyParts);
 
 		if (items.size() == 1
 				|| (items.at(1) == "-" && items.at(2) == "-"
