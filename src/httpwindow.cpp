@@ -54,72 +54,20 @@ HttpWindow::HttpWindow(QWidget *parent, QUrl _url, QString _savePath) :
 		QDialog(parent) {
 
 	this->setFont(THE_REPO->fontVariableWidthSmall);
-
 	this->fullUrlString = _url.scheme() + "://" + _url.authority()
 	+ _url.path();
-
 	this->downloadSuccess = false;
-
 	this->uploadFlag = false;
-
-	/*
-	 #ifndef QT_NO_OPENSSL
-	 urlLineEdit = new QLineEdit(fullUrlString);
-	 #else
-	 urlLineEdit = new QLineEdit(fullUrlString);
-	 #endif
-	 */
-
 	this->savePath = _savePath;
-	/*
-	 urlLabel = new QLabel(tr("&URL:"));
-	 urlLabel->setBuddy(urlLineEdit);
-	 statusLabel = new QLabel(tr("Please enter the URL of a file you want to "
-	 "download."));
-
-	 downloadButton = new QPushButton(tr("Download"));
-	 downloadButton->setDefault(true);
-	 quitButton = new QPushButton(tr("Quit"));
-	 quitButton->setAutoDefault(false);
-
-	 buttonBox = new QDialogButtonBox;
-	 buttonBox->addButton(downloadButton, QDialogButtonBox::ActionRole);
-	 buttonBox->addButton(quitButton, QDialogButtonBox::RejectRole);
-	 */
 	progressDialog = new QProgressDialog(this);
 
-	//	connect(urlLineEdit, SIGNAL(textChanged(QString)), this,
-	//			SLOT(enableDownloadButton()));
+	connect(&qnam,
+			SIGNAL(authenticationRequired(QNetworkReply*,QAuthenticator*)),
+			this,
+			SLOT(slotAuthenticationRequired(QNetworkReply*,QAuthenticator*)));
 
-			connect(&qnam,
-					SIGNAL(authenticationRequired(QNetworkReply*,QAuthenticator*)),
-					this,
-					SLOT(slotAuthenticationRequired(QNetworkReply*,QAuthenticator*)));
-			/*
-			 #ifndef QT_NO_OPENSSL
-			 connect(&qnam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this,
-			 SLOT(sslErrors(QNetworkReply*,QList<QSslError>)));
-			 #endif
-			 connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
-			 connect(downloadButton, SIGNAL(clicked()), this, SLOT(downloadFile()));
-			 connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
-
-			 QHBoxLayout *topLayout = new QHBoxLayout;
-			 topLayout->addWidget(urlLabel);
-			 topLayout->addWidget(urlLineEdit);
-
-			 QVBoxLayout *mainLayout = new QVBoxLayout;
-			 mainLayout->addLayout(topLayout);
-			 mainLayout->addWidget(statusLabel);
-			 mainLayout->addWidget(buttonBox);
-			 setLayout(mainLayout);
-
-			 setWindowTitle(tr("HTTP Client"));
-			 urlLineEdit->setFocus();
-			 */
-
-			this->downloadFile();
-		}
+	this->downloadFile();
+}
 
 void HttpWindow::startRequest(QUrl url) {
 	reply = qnam.get(QNetworkRequest(url));
@@ -164,6 +112,7 @@ void HttpWindow::downloadFile() {
 
 	// schedule the request
 	httpRequestAborted = false;
+
 	startRequest(url);
 }
 
@@ -219,9 +168,9 @@ void HttpWindow::httpFinished() {
 					QFileInfo(this->file->fileName()).path()));
 		} else {
 			LOG(
-			DEBUG,
-			tr("    Upload di %1 riuscito").arg(
-					QFileInfo(this->file->fileName()).fileName()));
+					DEBUG,
+					tr("    Upload di %1 riuscito").arg(
+							QFileInfo(this->file->fileName()).fileName()));
 		}
 
 		this->downloadSuccess = true;
@@ -286,7 +235,6 @@ void HttpWindow::upload(QString _file) {
 			"multipart/form-data; boundary=" + bound);
 	file.close();
 
-//connect(manager, SIGNAL(finished(QNetworkReply*)), SLOT(SlotRequestFinished(QNetworkReply*)));
 	reply = qnam.post(*req, dataToSend);
 }
 
