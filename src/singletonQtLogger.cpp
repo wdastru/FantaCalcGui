@@ -20,6 +20,7 @@
 #include "GazzettaFileReader.h"
 #include "FileFormazioniReader.h"
 #include "FileFormazioniViewer.h"
+#include "MatchChooserCamp.h"
 #include "Fanta.h"
 
 #include <vector>
@@ -436,8 +437,7 @@ bool singletonQtLogger::checkForUpdates() {
 						} else if (f.tagName() == "version") {
 							hash.insert("version", f.text());
 
-							QStringList available = f.text().split(
-							QRegExp("\\\."));
+							QStringList available = f.text().split(QRegExp("\\\."));
 							int verAvailable = available.at(0).toInt();
 							int majAvailable = available.at(1).toInt();
 							int minAvailable = available.at(2).toInt();
@@ -596,12 +596,12 @@ void singletonQtLogger::on_uploadCampButton_clicked() {
 	savePaths->push_back(THE_REPO->getDownloadPath() + "datiCampionato.txt");
 	urls->push_back(
 			QUrl::fromLocalFile(
-					"http://localhost/www.cim.unito.it/website/private/fantacalcio/squadre.inc.php"));
-	savePaths->push_back(THE_REPO->getDownloadPath() + "squadre.inc.php");
+					"http://localhost/www.cim.unito.it/website/private/fantacalcio/calendario.inc"));
+	savePaths->push_back(THE_REPO->getDownloadPath() + "calendario.inc");
 	urls->push_back(
 			QUrl::fromLocalFile(
-					"http://localhost/www.cim.unito.it/website/private/fantacalcio/calendario.inc.php"));
-	savePaths->push_back(THE_REPO->getDownloadPath() + "calendario.inc.php");
+					"http://localhost/www.cim.unito.it/website/private/fantacalcio/squadre.inc"));
+	savePaths->push_back(THE_REPO->getDownloadPath() + "squadre.inc");
 
 	Downloader datiCampDownloader(THE_LOGGER, urls, savePaths, TRUE);
 
@@ -611,6 +611,12 @@ void singletonQtLogger::on_uploadCampButton_clicked() {
 	} else { // download failed
 		LOG(WARN, "Non e' stato possibile scaricare i file necessari.");
 	}
+
+	MatchChooserCamp *matchChooserCamp = new MatchChooserCamp();
+	matchChooserCamp->setData();
+	matchChooserCamp->exec();
+
+	qDebug() << matchChooserCamp->getChosenMatch();
 
 }
 void singletonQtLogger::on_uploadCoppaButton_clicked() {
