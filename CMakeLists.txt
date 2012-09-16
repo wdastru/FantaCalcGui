@@ -23,6 +23,7 @@ SET( SRCS
         src/StringModifier.cpp 
         src/httpwindow.cpp
         src/singletonQtLogger.cpp
+        src/MatchChooserCamp.cpp
         src/resources.rc )
 		
 SET( HDRS 
@@ -33,6 +34,7 @@ SET( HDRS
         src/FileFormazioniReader.h
         src/IniFilePopulator.h
         src/httpwindow.h
+        src/MatchChooserCamp.h
         src/singletonQtLogger.h )
 SET( UIS  
         src/authenticationdialog.ui
@@ -40,6 +42,7 @@ SET( UIS
         src/IniFilePopulator.ui
     	src/FileFormazioniViewer.ui
         src/NoNetFileDialog.ui
+        src/MatchChooserCamp.ui
         src/singletonQtLogger.ui )
 
 SET( TEST_SRCS 
@@ -56,6 +59,7 @@ SET( TEST_SRCS
         src/Repository.cpp 
         src/StringModifier.cpp 
         src/httpwindow.cpp
+        src/MatchChooserCamp.cpp
         src/singletonQtLogger.cpp )
 
 QT4_WRAP_UI( UI_HDRS ${UIS} )
