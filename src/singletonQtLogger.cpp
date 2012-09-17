@@ -585,7 +585,7 @@ bool singletonQtLogger::checkForUpdates() {
 	return true;
 }
 void singletonQtLogger::on_uploadCampButton_clicked() {
-	//qDebug() << "In void singletonQtLogger::on_uploadCampButton_clicked()";
+	qDebug() << "In void singletonQtLogger::on_uploadCampButton_clicked()";
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	std::vector<QString> *savePaths = new std::vector<QString>;
@@ -616,9 +616,21 @@ void singletonQtLogger::on_uploadCampButton_clicked() {
 	matchChooserCamp->setData();
 	matchChooserCamp->exec();
 
-	qDebug() << matchChooserCamp->getChosenMatch();
+	if (matchChooserCamp->getChosenMatch() != "") {
+		qDebug() << "chosenMatch is " << matchChooserCamp->getChosenMatch();
 
+		/* TODO
+		 * completare
+		 * * * * * * */
+	} else {
+		qDebug() << "chosenMatch is empty";
+
+		/* TODO
+		 * completare
+		 * * * * * * */
+	}
 }
+
 void singletonQtLogger::on_uploadCoppaButton_clicked() {
 	//qDebug() << "In void singletonQtLogger::on_uploadCoppaButton_clicked()";
 

@@ -18,10 +18,9 @@ MatchChooserCamp::MatchChooserCamp(QWidget *parent) :
 
 		for (int j = 0; j < 4; ++j) {
 			buttons[i][j] = new QRadioButton();
+			//buttons[i][j]->setStyleSheet("background:#FF0000;");
 		}
-	}
 
-	for (int i = 0; i < 28; ++i) {
 		ui.gridLayout->addWidget(labels[i][0], i, 0);
 		ui.gridLayout->addWidget(labels[i][1], i, 1);
 		ui.gridLayout->addWidget(buttons[i][0], i, 2);
@@ -30,6 +29,47 @@ MatchChooserCamp::MatchChooserCamp(QWidget *parent) :
 		ui.gridLayout->addWidget(buttons[i][3], i, 5);
 	}
 
+	QFile *fileDatiCamp = new QFile(THE_REPO->getDownloadPath() +"datiCampionato.txt");
+	if (fileDatiCamp->exists()) {
+		fileDatiCamp->open(QIODevice::ReadOnly);
+		char buf[1024];
+
+		while (!fileDatiCamp->atEnd()) {
+			fileDatiCamp->readLine(buf, sizeof(buf));
+
+			QString str = QString::fromAscii(buf).trimmed();
+			QString style;
+
+			if (str.size() == 0) {
+				continue; // skip empty lines
+			}
+
+			QStringList list = str.split(QRegExp("\/"), QString::SkipEmptyParts);
+
+			int i = list.at(0).at(3).digitValue();
+			int j = list.at(0).at(2).digitValue();
+			int k = list.at(0).at(1).digitValue();
+
+			//qDebug() << list.at(0).at(1) << list.at(0).at(2) << list.at(0).at(3);
+			//qDebug() << str << " " << str.indexOf(QRegExp("a[0-3][0-6][0-3]\/\/\/\/\/"));
+
+			if (str.indexOf(QRegExp("a[0-3][0-6][0-3]\/\/\/\/\/")) == -1) {
+				style = "background:#FF0000"; // risultato gia' presente
+			} else {
+				style = "background:#00FF00"; // risultato mancante
+			}
+
+			buttons[4*j+k][i]->setStyleSheet(style);
+
+		}
+	} else {
+		qDebug() << fileDatiCamp->fileName() + " does not exist";
+
+		/* TODO
+		 * completare
+		 * * * * * * */
+	}
+	qDebug() << "Out of MatchChooserCamp::MatchChooserCamp(QWidget *parent)";
 }
 
 MatchChooserCamp::~MatchChooserCamp() {
@@ -89,10 +129,11 @@ void MatchChooserCamp::setData() {
 			fileCalendario->readLine(buf, sizeof(buf));
 
 			QString str = QString::fromAscii(buf).trimmed();
+
 			if (str.size() == 0) {
 				continue; // skip empty lines
 			} else if (str.indexOf(
-					QRegExp("super.*longName.*super.*longName.*")) != -1) {
+				QRegExp("super.*longName.*super.*longName.*")) != -1) {
 				str.replace(QRegExp("\\$super"), "");
 				str.replace(QRegExp("\\$longName"), "");
 				str.replace(QRegExp("\\[[0-9]\\]"), "");
@@ -102,6 +143,9 @@ void MatchChooserCamp::setData() {
 				str.replace(QRegExp("\\]"), "");
 				str.replace(QRegExp("'"), "");
 				lines.push_back(str);
+
+				//qDebug() << str;
+
 			}
 		}
 
@@ -119,6 +163,9 @@ void MatchChooserCamp::setData() {
 		 * completare
 		 * * * * * * */
 	}
+
+	//qDebug() << "In void MatchChooserCamp::setData() 3";
+
 }
 
 void MatchChooserCamp::quit() {
@@ -128,18 +175,23 @@ void MatchChooserCamp::quit() {
 	for (int i = 0; i < 4; ++i) {
 		for (int j = 0; j < 7; ++j) {
 			for (int k = 0; k < 4; ++k) {
-				if (buttons[4*j+k][i]->isChecked()) {
-					chosenMatch = "a" + QString::number(k)
-							+ QString::number(j) + QString::number(i);
+
+				//qDebug() << "button[" << 4*j+k << "][" << i << "]";
+				if (buttons[4 * j + k][i]->isChecked()) {
+					//qDebug() << "checked";
+					chosenMatch = "a" + QString::number(k) + QString::number(j)
+							+ QString::number(i);
 				}
 			}
 		}
+	}
 
-		if (!chosenMatch.isEmpty()) {
-			this->close();
-		} else {
-			return;
-		}
+	//qDebug() << "In void MatchChooserCamp::quit(). chosenMatch = " << chosenMatch;
+
+	if (!chosenMatch.isEmpty()) {
+		this->close();
+	} else {
+		return;
 	}
 }
 
