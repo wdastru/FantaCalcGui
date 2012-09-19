@@ -25,6 +25,7 @@ private:
 	QLabel *labels[28][2];
 	QRadioButton *buttons[28][4];
 	QString chosenMatch;
+	std::vector<QString> matches;
 };
 
 #endif // MATCHCHOOSER_H

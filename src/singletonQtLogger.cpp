@@ -382,13 +382,13 @@ bool singletonQtLogger::checkForUpdates() {
 
 	urls->push_back(QUrl::fromLocalFile(url));
 
-	qDebug() << "In void singletonQtLogger::checkForUpdates() --> url : " + url;
+	//qDebug() << "In void singletonQtLogger::checkForUpdates() --> url : " + url;
 
 	std::vector<QString> *savePaths = new std::vector<QString>;
 	QString savePath = THE_REPO->getDownloadPath() + "updates.xml";
 	savePaths->push_back(savePath);
 
-	qDebug() << "In void singletonQtLogger::checkForUpdates() --> savePath : " + savePath;
+	//qDebug() << "In void singletonQtLogger::checkForUpdates() --> savePath : " + savePath;
 
 	Downloader updatesXmlDownloader(THE_LOGGER, urls, savePaths, TRUE);
 
@@ -585,7 +585,11 @@ bool singletonQtLogger::checkForUpdates() {
 	return true;
 }
 void singletonQtLogger::on_uploadCampButton_clicked() {
-	qDebug() << "In void singletonQtLogger::on_uploadCampButton_clicked()";
+	//qDebug() << "In void singletonQtLogger::on_uploadCampButton_clicked()";
+
+	LOG(DEBUG, "<br/> ==========================================");
+	LOG(DEBUG,      " === Pubblicazione risultati campionato ===");
+	LOG(DEBUG,      " ==========================================<br/><br/>");
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	std::vector<QString> *savePaths = new std::vector<QString>;
@@ -606,31 +610,17 @@ void singletonQtLogger::on_uploadCampButton_clicked() {
 	Downloader datiCampDownloader(THE_LOGGER, urls, savePaths, TRUE);
 
 	if (datiCampDownloader.requestSucceded()) { // download succeded
-		qDebug()
-				<< "In void singletonQtLogger::on_uploadCampButton_clicked(). Download of files succeded.";
+		// qDebug() << "In void singletonQtLogger::on_uploadCampButton_clicked(). Download of files succeded.";
 	} else { // download failed
 		LOG(WARN, "Non e' stato possibile scaricare i file necessari.");
+		qDebug() << "In void singletonQtLogger::on_uploadCampButton_clicked(). Download of files failed.";
 	}
 
 	MatchChooserCamp *matchChooserCamp = new MatchChooserCamp();
 	matchChooserCamp->setData();
 	matchChooserCamp->exec();
 
-	if (matchChooserCamp->getChosenMatch() != "") {
-		qDebug() << "chosenMatch is " << matchChooserCamp->getChosenMatch();
-
-		/* TODO
-		 * completare
-		 * * * * * * */
-	} else {
-		qDebug() << "chosenMatch is empty";
-
-		/* TODO
-		 * completare
-		 * * * * * * */
-	}
 }
-
 void singletonQtLogger::on_uploadCoppaButton_clicked() {
 	//qDebug() << "In void singletonQtLogger::on_uploadCoppaButton_clicked()";
 

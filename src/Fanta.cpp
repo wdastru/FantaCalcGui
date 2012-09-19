@@ -1921,3 +1921,15 @@ void Fanta::printFormations() {
 	output = output.replace(" ", "&nbsp;");
 	LOG(INFO, output);
 }
+unsigned int Fanta::getGoals(unsigned int k) const {
+	return Fanta::goals[k];
+}
+double Fanta::getTotal(unsigned int k) const {
+	return Fanta::Total[k];
+}
+std::string Fanta::getScorer(unsigned int k, unsigned int i) const {
+	return Fanta::scorers[k].at(i);
+}
+unsigned int Fanta::getScorersSize(unsigned int k) const {
+	return Fanta::scorers[k].size();
+}

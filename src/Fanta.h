@@ -114,6 +114,10 @@ public:
 	unsigned int getGoalDecParTot(unsigned int) const ;
 	unsigned int getAssistTot(unsigned int) const ;
 	unsigned int getSubstitutions(unsigned int) const ;
+	unsigned int getGoals(unsigned int) const;
+	double getTotal(unsigned int) const;
+	std::string getScorer(unsigned int, unsigned int) const;
+	unsigned int getScorersSize(unsigned int k) const;
 	void printFormations();
 
 	//	void printTitolo3(std::string);

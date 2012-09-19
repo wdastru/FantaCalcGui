@@ -25,10 +25,6 @@ int main(int argc, char *argv[]) {
 
 	THE_LOGGER; // poi parte l'applicazione
 
-	QUrl url("http://localhost/www.cim.unito.it/website/private/fantacalcio/777/");
-	HttpWindow * httpWindow = new HttpWindow(THE_LOGGER, url, "test_upload.txt");
-	httpWindow->upload("/media/DATI/Sorgenti/FantaCalcGuiNew/src/TestFiles/test_upload.txt");
-
 	#include "revision.h"
 
 	THE_LOGGER->setVersion(a.applicationVersion());

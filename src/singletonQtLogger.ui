@@ -22,7 +22,7 @@
      <item row="1" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Nome file di output</string>
+        <string>Nome file di output :</string>
        </property>
       </widget>
      </item>
@@ -89,7 +89,7 @@
      <item row="4" column="0">
       <widget class="QPushButton" name="uploadCampButton">
        <property name="enabled">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <property name="text">
         <string>Campionato</string>
@@ -138,15 +138,18 @@
        </property>
       </spacer>
      </item>
-     <item row="3" column="0">
+     <item row="3" column="0" colspan="2">
       <widget class="QLabel" name="uploadLabel">
        <property name="text">
-        <string>Upload :</string>
+        <string>Pubblicazione risultati :</string>
        </property>
       </widget>
      </item>
      <item row="4" column="1">
       <widget class="QPushButton" name="uploadCoppaButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="text">
         <string>Coppa</string>
        </property>
@@ -178,7 +181,7 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="1" colspan="6">
+     <item row="3" column="2" colspan="5">
       <spacer name="horizontalSpacer_2">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
