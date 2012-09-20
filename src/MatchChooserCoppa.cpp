@@ -157,13 +157,14 @@ void MatchChooserCoppa::setData() {
 		 * * * * * * */
 	}
 
+	std::map<QString, QString> mapRemap;
+	std::vector<QString> lines;
+
 	QFile *fileCalendario = new QFile(THE_REPO->getDownloadPath() +"calendarioCoppa.inc");
 	if (fileCalendario->exists()) {
 		fileCalendario->open(QIODevice::ReadOnly);
 		char buf[1024];
 
-		std::vector<QString> remap;
-		std::vector<QString> lines;
 		while (!fileCalendario->atEnd()) {
 
 			fileCalendario->readLine(buf, sizeof(buf));
@@ -183,9 +184,11 @@ void MatchChooserCoppa::setData() {
 				str.replace(QRegExp("\\["), "");
 				str.replace(QRegExp("\\]"), "");
 				str.replace(QRegExp("'"), "");
-				remap.push_back(str);
 
-				//qDebug() << str;
+				mapRemap[str.split(" ", QString::SkipEmptyParts).at(0).trimmed()] =
+						str.split(" ", QString::SkipEmptyParts).at(1).trimmed();
+
+				//qDebug() << str.split(" ", QString::SkipEmptyParts).at(0).trimmed() << " " << str.split(" ", QString::SkipEmptyParts).at(1).trimmed();
 
 			} else if (str.indexOf(
 			// $superCoppa[0][0][0] = $aCoppa;	$superCoppa[0][0][1] = $bCoppa;
@@ -205,18 +208,28 @@ void MatchChooserCoppa::setData() {
 			}
 		}
 
-		for (int i = 0; i < 20; ++i) {
+		for (int i = 0; i < 12; ++i) {
 
-			qDebug() << i;
+			qDebug() << lines.at(i).split(" ", QString::SkipEmptyParts).at(0)
+					<< " "
+					<< lines.at(i).split(" ", QString::SkipEmptyParts).at(1);
 
-			QStringList list = remap.at(i).split(" ", QString::SkipEmptyParts);
-			QStringList list = lines.at(i).split(" ", QString::SkipEmptyParts);
+			labels[i][0]->setText(
+					map[mapRemap[lines.at(i).split(" ", QString::SkipEmptyParts).at(
+							0).trimmed()]]);
+			labels[i][1]->setText(
+					map[mapRemap[lines.at(i).split(" ", QString::SkipEmptyParts).at(
+							1).trimmed()]]);
+		}
 
-			qDebug() << list[0] << " " << list[1];
-			qDebug() << map[list[0]] << " " << map[list[1]];
+		for (int i = 12; i < 16; ++i) {
+			labels[i][0]->setText("semifinale " + QString::number(i - 11));
+			labels[i][1]->setText("semifinale " + QString::number(i - 11));
+		}
 
-			labels[i][0]->setText(map[list[0].trimmed()]);
-			labels[i][1]->setText(map[list[1].trimmed()]);
+		for (int i = 16; i < 20; ++i) {
+			labels[i][0]->setText("finale " + QString::number(i - 15));
+			labels[i][1]->setText("finale " + QString::number(i - 15));
 		}
 
 	} else {
