@@ -113,7 +113,7 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 		 * * * * * * */
 	}
 
-	qDebug() << "Out of MatchChooserCoppa::MatchChooserCoppa(QWidget *parent)";
+	//qDebug() << "Out of MatchChooserCoppa::MatchChooserCoppa(QWidget *parent)";
 }
 
 MatchChooserCoppa::~MatchChooserCoppa() {
@@ -214,10 +214,6 @@ void MatchChooserCoppa::setData() {
 
 		for (int i = 0; i < 12; ++i) {
 
-			qDebug() << lines.at(i).split(" ", QString::SkipEmptyParts).at(0)
-					<< " "
-					<< lines.at(i).split(" ", QString::SkipEmptyParts).at(1);
-
 			labels[i][0]->setText(
 					map[mapRemap[lines.at(i).split(" ", QString::SkipEmptyParts).at(
 							0).trimmed()]]);
@@ -244,12 +240,12 @@ void MatchChooserCoppa::setData() {
 		 * * * * * * */
 	}
 
-	qDebug() << "Out of void MatchChooserCoppa::setData().";
+	//qDebug() << "Out of void MatchChooserCoppa::setData().";
 }
 
 void MatchChooserCoppa::quit() {
 
-	qDebug() << "In void MatchChooserCoppa::quit().";
+	//qDebug() << "In void MatchChooserCoppa::quit().";
 
 	QString ids[20];
 	for (int i = 0; i < 12; ++i) {
@@ -281,11 +277,11 @@ void MatchChooserCoppa::quit() {
 		QString message;
 		QString match;
 
-		qDebug() << "chosenMatch.toInt() : " << chosenMatch.toInt();
+		//qDebug() << "chosenMatch.toInt() : " << chosenMatch.toInt();
 
 		match = matches.at(chosenMatch.toInt());
 
-		qDebug() << "In void MatchChooserCoppa::quit(). match = " << match;
+		//qDebug() << "In void MatchChooserCoppa::quit(). match = " << match;
 
 		QString title = "ATTENZIONE!!!";
 
