@@ -89,10 +89,14 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 
 			//qDebug() << list.at(0) << " " << str;
 
-			if (str.indexOf(
+			if ((str.indexOf(
 					QRegExp(
 							"^(gruppi[0-9]{1,2}|semi[0-3]|finali[0-3])\/-\/-\/-\/-\/"))
-					== -1) {
+					== -1)
+					&& (str.indexOf(
+							QRegExp(
+									"^(gruppi[0-9]{1,2}|semi[0-3]|finali[0-3])\/\/\/\/\/"))
+							== -1)) {
 				style = "background:#FF0000"; // risultato gia' presente
 			} else {
 				style = "background:#00FF00"; // risultato mancante
@@ -247,25 +251,28 @@ void MatchChooserCoppa::quit() {
 
 	qDebug() << "In void MatchChooserCoppa::quit().";
 
+	QString ids[20];
+	for (int i = 0; i < 12; ++i) {
+		ids[i] = "gruppi" + QString::number(i);
+	}
+	for (int i = 12; i < 16; ++i) {
+		ids[i] = "semi" + QString::number(i);
+	}
+	for (int i = 16; i < 20; ++i) {
+		ids[i] = "finali" + QString::number(i);
+	}
+
 	chosenMatch = "";
 	QString home;
 	QString away;
 
-	//for (int i = 0; i < 4; ++i) {
-	//	for (int j = 0; j < 7; ++j) {
-	//		for (int k = 0; k < 4; ++k) {
-	//
-	//			//qDebug() << "button[" << 4*j+k << "][" << i << "]";
-	//			if (buttons[i]->isChecked()) {
-	//				//qDebug() << "checked";
-	//				chosenMatch = "a" + QString::number(k) + QString::number(j)
-	//						+ QString::number(i);
-	//				home = labels[i][0]->text();
-	//				away = labels[i][1]->text();
-	//			}
-	//		}
-	//	}
-	//}
+	for (int i = 0; i < 20; ++i) {
+		if (buttons[i]->isChecked()) {
+			chosenMatch = QString::number(i);
+			home = labels[i][0]->text();
+			away = labels[i][1]->text();
+		}
+	}
 
 	//qDebug() << "In void MatchChooserCoppa::quit(). chosenMatch = " << chosenMatch;
 
@@ -274,21 +281,19 @@ void MatchChooserCoppa::quit() {
 		QString message;
 		QString match;
 
-		for (int i = 0; i < matches.size(); ++i) {
+		qDebug() << "chosenMatch.toInt() : " << chosenMatch.toInt();
 
-			if (matches.at(i).indexOf(chosenMatch) != -1) {
-				match = matches.at(i);
-				break;
-			}
-		}
+		match = matches.at(chosenMatch.toInt());
 
-		//qDebug() << "In void MatchChooserCoppa::quit(). match = " << match;
+		qDebug() << "In void MatchChooserCoppa::quit(). match = " << match;
 
 		QString title = "ATTENZIONE!!!";
 
 		QStringList items = match.split(QRegExp("\/"), QString::SkipEmptyParts);
 
-		if (items.size() == 1) { // risultato non ancora presente
+		if (items.size() == 1
+				|| (items.at(1) == "-" && items.at(2) == "-"
+						&& items.at(3) == "-" && items.at(4) == "-")) { // risultato non ancora presente
 			message += "I seguenti dati verranno salvati:<br><br>";
 		} else { // risultato gia' presente che verrà sostituito
 			message += "I dati:<br><br>";
@@ -325,14 +330,14 @@ void MatchChooserCoppa::quit() {
 		if (reply == QMessageBox::Yes) {
 			//qDebug() << "In void MatchChooserCoppa::quit() --> yes";
 
-			QFile *file = new QFile(THE_REPO->getDownloadPath() +"datiCampionato.txt");
+			QFile *file = new QFile(THE_REPO->getDownloadPath() +"datiCoppa.txt");
 			file->open(QIODevice::WriteOnly);
 			for (int i = 0; i < matches.size(); ++i) {
-				if (matches.at(i).indexOf(chosenMatch) == -1) {
+				if (i != chosenMatch.toInt()) {
 					file->write(matches.at(i).toStdString().c_str());
 				} else {
 					QString line;
-					line += chosenMatch;
+					line += ids[chosenMatch.toInt()];
 					line += "/";
 					line += my::toQString<unsigned int>(FANTA->getGoals(0)) + "/" + my::toQString<unsigned int>(FANTA->getGoals(1)) + "/" ;
 					line += my::toQString<double>(FANTA->getTotal(0)) + "/" + my::toQString<double>(FANTA->getTotal(1)) + "/";
@@ -354,8 +359,8 @@ void MatchChooserCoppa::quit() {
 
 			QUrl url(
 					"http://localhost/www.cim.unito.it/website/private/fantacalcio/777/");
-			HttpWindow * httpWindow = new HttpWindow(THE_LOGGER, url, "datiCampionato.txt");
-			httpWindow->upload(THE_REPO->getDownloadPath() + "datiCampionato.txt");
+			HttpWindow * httpWindow = new HttpWindow(THE_LOGGER, url, "datiCoppa.txt");
+			httpWindow->upload(THE_REPO->getDownloadPath() + "datiCoppa.txt");
 
 		} else if (reply == QMessageBox::No) {
 				//qDebug() << "In void MatchChooserCoppa::quit() --> No";

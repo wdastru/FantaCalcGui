@@ -94,7 +94,8 @@ MatchChooserCamp::MatchChooserCamp(QWidget *parent) :
 			//qDebug() << list.at(0).at(1) << list.at(0).at(2) << list.at(0).at(3);
 			//qDebug() << str << " " << str.indexOf(QRegExp("a[0-3][0-6][0-3]\/\/\/\/\/"));
 
-			if (str.indexOf(QRegExp("a[0-3][0-6][0-3]\/\/\/\/\/")) == -1) {
+			if ((str.indexOf(QRegExp("a[0-3][0-6][0-3]\/\/\/\/\/")) == -1)
+					&& (str.indexOf(QRegExp("a[0-3][0-6][0-3]\/-\/-\/-\/-\/")) == -1)) {
 				style = "background:#FF0000"; // risultato gia' presente
 			} else {
 				style = "background:#00FF00"; // risultato mancante
@@ -250,9 +251,13 @@ void MatchChooserCamp::quit() {
 
 		QString title = "ATTENZIONE!!!";
 
+		qDebug() << match;
+
 		QStringList items = match.split(QRegExp("\/"), QString::SkipEmptyParts);
 
-		if (items.size() == 1) { // risultato non ancora presente
+		if (items.size() == 1
+				|| (items.at(1) == "-" && items.at(2) == "-"
+						&& items.at(3) == "-" && items.at(4) == "-")) { // risultato non ancora presente
 			message += "I seguenti dati verranno salvati:<br><br>";
 		} else { // risultato gia' presente che verrà sostituito
 			message += "I dati:<br><br>";
@@ -322,19 +327,19 @@ void MatchChooserCamp::quit() {
 			httpWindow->upload(THE_REPO->getDownloadPath() + "datiCampionato.txt");
 
 		} else if (reply == QMessageBox::No) {
-			//qDebug() << "In void MatchChooserCamp::quit() --> No";
+				//qDebug() << "In void MatchChooserCamp::quit() --> No";
 
-			/*
-			 * TODO
-			 * completare ?
-			 * * * * * * * */
-		} else {
-			LOG(ERROR, "In void MatchChooserCamp::quit() --> ???");
-			/*
-			 * TODO
-			 * completare ?
-			 * * * * * * * */
-		}
+				/*
+				 * TODO
+				 * completare ?
+				 * * * * * * * */
+			} else {
+				LOG(ERROR, "In void MatchChooserCamp::quit() --> ???");
+				/*
+				 * TODO
+				 * completare ?
+				 * * * * * * * */
+			}
 
 		this->close();
 
