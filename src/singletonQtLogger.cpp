@@ -21,6 +21,7 @@
 #include "FileFormazioniReader.h"
 #include "FileFormazioniViewer.h"
 #include "MatchChooserCamp.h"
+#include "MatchChooserCoppa.h"
 #include "Fanta.h"
 
 #include <vector>
@@ -624,6 +625,10 @@ void singletonQtLogger::on_uploadCampButton_clicked() {
 void singletonQtLogger::on_uploadCoppaButton_clicked() {
 	//qDebug() << "In void singletonQtLogger::on_uploadCoppaButton_clicked()";
 
+	LOG(DEBUG, "<br/> =====================================");
+	LOG(DEBUG,      " === Pubblicazione risultati coppa ===");
+	LOG(DEBUG,      " =====================================<br/><br/>");
+
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	std::vector<QString> *savePaths = new std::vector<QString>;
 
@@ -633,12 +638,12 @@ void singletonQtLogger::on_uploadCoppaButton_clicked() {
 	savePaths->push_back(THE_REPO->getDownloadPath() + "datiCoppa.txt");
 	urls->push_back(
 			QUrl::fromLocalFile(
-					"http://localhost/www.cim.unito.it/website/private/fantacalcio/squadre.inc.php"));
-	savePaths->push_back(THE_REPO->getDownloadPath() + "squadre.inc.php");
+					"http://localhost/www.cim.unito.it/website/private/fantacalcio/squadre.inc"));
+	savePaths->push_back(THE_REPO->getDownloadPath() + "squadre.inc");
 	urls->push_back(
 			QUrl::fromLocalFile(
-					"http://localhost/www.cim.unito.it/website/private/fantacalcio/calendarioCoppa.inc.php"));
-	savePaths->push_back(THE_REPO->getDownloadPath() + "calendarioCoppa.inc.php");
+					"http://localhost/www.cim.unito.it/website/private/fantacalcio/calendarioCoppa.inc"));
+	savePaths->push_back(THE_REPO->getDownloadPath() + "calendarioCoppa.inc");
 
 	Downloader datiCoppaDownloader(THE_LOGGER, urls, savePaths, TRUE);
 
@@ -647,6 +652,11 @@ void singletonQtLogger::on_uploadCoppaButton_clicked() {
 				<< "In void singletonQtLogger::on_uploadCoppaButton_clicked(). Download of files succeded.";
 	} else { // download failed
 		LOG(WARN, "Non e' stato possibile scaricare i file necessari.");
+		qDebug() << "In void singletonQtLogger::on_uploadCoppaButton_clicked(). Download of files failed.";
 	}
+
+	MatchChooserCoppa *matchChooserCoppa = new MatchChooserCoppa();
+	matchChooserCoppa->setData();
+	matchChooserCoppa->exec();
 
 }
