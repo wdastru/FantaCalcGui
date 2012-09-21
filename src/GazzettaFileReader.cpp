@@ -12,7 +12,7 @@
 #include "StringModifier.h"
 
 GazzettaFileReader::GazzettaFileReader(QString _fileGazzetta) {
-//	LOG(DEBUG, "In GazzettaFileReader::GazzettaFileReader( ... ).");
+//	LOG(DBG, "In GazzettaFileReader::GazzettaFileReader( ... ).");
 	this->fileGazzetta = _fileGazzetta;
 //	FANTA->setFileGazzetta(_fileGazzetta);
 }

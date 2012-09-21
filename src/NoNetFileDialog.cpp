@@ -33,7 +33,7 @@ void NoNetFileDialog::setOpenFileNameSquadre() {
 
 	if (!this->fileNameSquadre.isEmpty()) {
 //		LOG(
-//				DEBUG,
+//				DBG,
 //				"In NoNetFileDialog::setOpenFileNameSquadre() --> fileNameSquadre is not empty: "
 //						+ this->fileNameSquadre);
 		/*
@@ -74,7 +74,7 @@ void NoNetFileDialog::setOpenFileNameGazzetta() {
 
 	if (!this->fileNameGazzetta.isEmpty()) {
 //		LOG(
-//				DEBUG,
+//				DBG,
 //				"In NoNetFileDialog::setOpenFileNameGazzetta() --> fileNameGazzetta is not empty: "
 //						+ this->fileNameGazzetta);
 		/*
@@ -121,12 +121,12 @@ QString NoNetFileDialog::getFileNameGazzetta() {
 }
 void NoNetFileDialog::okClicked() {
 	this->hasBeenAborted = FALSE;
-//	LOG(DEBUG, "In NoNetFileDialog::okClicked().");
+//	LOG(DBG, "In NoNetFileDialog::okClicked().");
 	this->hide();
 }
 void NoNetFileDialog::cancelClicked() {
 	this->hasBeenAborted = TRUE;
-//	LOG(DEBUG, "In NoNetFileDialog::cancelClicked().");
+//	LOG(DBG, "In NoNetFileDialog::cancelClicked().");
 	this->close();
 }
 void NoNetFileDialog::closeEvent(QCloseEvent *event) {

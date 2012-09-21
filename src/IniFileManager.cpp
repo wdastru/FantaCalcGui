@@ -47,7 +47,7 @@ IniFileManager::~IniFileManager() {
 }
 void IniFileManager::setWorkDir(QString dir) {
 	this->workDir = dir;
-	LOG(DEBUG,
+	LOG(DBG,
 			"In IniFileManager::setWorkDir(QString dir) --> workDir set to "
 					+ this->workDir);
 }
@@ -92,7 +92,7 @@ void IniFileManager::writeIniFile() {
 
 		iniFile->close();
 	} else {
-		LOG(DEBUG,
+		LOG(DBG,
 				"In IniFileManager::writeIniFile() --> " + this->iniFileName
 						+ " does not exists.");
 		QString path = this->workDir;

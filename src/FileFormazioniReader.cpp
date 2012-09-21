@@ -20,9 +20,9 @@ void FileFormazioniReader::setPlayers(
 }
 unsigned int FileFormazioniReader::execute() {
 
-	LOG(DEBUG, "<br/> =============================");
-	LOG(DEBUG,      " === Lettura file di input ===");
-	LOG(DEBUG,      " =============================");
+	LOG(DBG, "<br/> =============================");
+	LOG(DBG,      " === Lettura file di input ===");
+	LOG(DBG,      " =============================");
 	//qDebug() << In FileFormazioniReader::execute().";
 
 	std::ifstream fSqua(this->fileFormazioni.toStdString().c_str());
@@ -54,7 +54,7 @@ unsigned int FileFormazioniReader::execute() {
 				 */
 				//qDebug() << "In FileFormazioniReader::execute()  -> separatore : " + QString::fromStdString(line);
 
-				LOG(DEBUG, "<br>    ---------------------------------");
+				LOG(DBG, "<br>    ---------------------------------");
 
 				break;
 			} else if (line.find("#", 0) != std::string::npos) {// # indica linee di commento
@@ -95,12 +95,12 @@ unsigned int FileFormazioniReader::execute() {
 				//				+ QString::fromStdString(FANTA->getTeamName(k)).toUpper()
 				//				+ " ====<br/><br/>");
 
-				LOG(DEBUG, "<br>    nome squadra : "
+				LOG(DBG, "<br>    nome squadra : "
 								+ QString::fromStdString(line));
 
 				continue;
 			} else if (line.find("modulo", 0) != std::string::npos) { // modulo
-				LOG(DEBUG, \
+				LOG(DBG, \
 						+ "    " \
 						+ QString::fromStdString(line));
 
@@ -125,7 +125,7 @@ unsigned int FileFormazioniReader::execute() {
 				}
 			} else if (line.find("in casa", 0) != std::string::npos) { // in casa
 				FANTA->setAtHome(k);
-				LOG(DEBUG, "    in casa");
+				LOG(DBG, "    in casa");
 				continue;
 			} else { // riga "buona"
 				//  -> sostituzione lettere accentate ed eliminazione caratteri "non-lettera"
@@ -191,7 +191,7 @@ unsigned int FileFormazioniReader::execute() {
 				}
 
 				if (v_Found.size() > 1) {
-					LOG(DEBUG, "<br>    " \
+					LOG(DBG, "<br>    " \
 							+ QString::fromStdString(line) \
 							+ " : trovate " \
 							+ my::toQString<size_t>(v_Found.size()) \
@@ -208,7 +208,7 @@ unsigned int FileFormazioniReader::execute() {
 
 						for (unsigned int j = 0; j < v_Found.size(); j++) {
 
-							LOG(DEBUG, "      " \
+							LOG(DBG, "      " \
 									+ QString::fromStdString(this->prepareStringToPresent(v_Found.at(j), j)) \
 									+ " : ");
 
@@ -217,7 +217,7 @@ unsigned int FileFormazioniReader::execute() {
 									STR_MOD->onlySurname(
 											STR_MOD->msk(v_Found.at(j), DELIM,
 													ColNomeCognome))) == 0) { // corrispondenza esatta
-								LOG(DEBUG, "    Trovata corrispondenza esatta : " \
+								LOG(DBG, "    Trovata corrispondenza esatta : " \
 									+ QString::fromStdString(line));
 
 								temp.push_back(v_Found.at(j)); // aggiungi corrispondenza esatta						}
@@ -314,7 +314,7 @@ unsigned int FileFormazioniReader::execute() {
 							v_Found.clear();
 							v_Found.push_back(temp);
 
-							LOG(DEBUG, "    scelto [" \
+							LOG(DBG, "    scelto [" \
 									+ my::toQString<int>(chosenThese) \
 									+ "] " \
 									+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM, ColNomeCognome)));
@@ -335,14 +335,14 @@ unsigned int FileFormazioniReader::execute() {
 					vector<string> Levenshteins; // possibili giocatori
 					Levenshteins = this->findLevenstheins(line);
 
-					LOG(DEBUG, "");
-					LOG(DEBUG, QObject::tr("    non trovato %1.").arg(QString::fromStdString(line)));
+					LOG(DBG, "");
+					LOG(DBG, QObject::tr("    non trovato %1.").arg(QString::fromStdString(line)));
 
 					if (Levenshteins.empty()) {
 						LOG(ERROR,
 								"ATTENZIONE !!! Nessun giocatore trovato.<br/>");
 					} else {
-						LOG(DEBUG, "    trovati " \
+						LOG(DBG, "    trovati " \
 							+ my::toQString<signed int>(Levenshteins.size()) \
 							+ " possibili sostituti:");
 
@@ -351,7 +351,7 @@ unsigned int FileFormazioniReader::execute() {
 									Levenshteins.at(j), j);
 							v_WhichOfTheseLevenshtein.push_back(tmpStr);
 
-							LOG(DEBUG, "      "\
+							LOG(DBG, "      "\
 								+ QString::fromStdString(tmpStr));
 						}
 
@@ -384,7 +384,7 @@ unsigned int FileFormazioniReader::execute() {
 
 						v_Found.push_back(Levenshteins.at(chosenLevenshtein	- 1));
 
-						LOG(DEBUG, "    scelto [" \
+						LOG(DBG, "    scelto [" \
 								+ my::toQString<int>(chosenLevenshtein) \
 								+ "] " \
 								+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM, ColNomeCognome)));
@@ -450,20 +450,20 @@ unsigned int FileFormazioniReader::execute() {
 					switch (FANTA->addPlayer(v_Found.at(0), k)) {
 					case PLAYER_OK:
 
-						LOG(DEBUG, ""); // blank line in log file only
-						LOG(DEBUG, "    trovato " \
+						LOG(DBG, ""); // blank line in log file only
+						LOG(DBG, "    trovato " \
 							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColNomeCognome)) \
 							+ " ( " \
 							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColSquadra)) \
 							+ " ).");
-						LOG(DEBUG, "      [" \
+						LOG(DBG, "      [" \
 							+ QString::fromStdString(v_Found.at(0)).replace("\t", " ") \
 							+ "]");
 
 						if (STR_MOD->msk(v_Found.at(0), DELIM,ColGoalDecVitt) == "1") {
-							LOG(DEBUG, "      - goal decisivo vittoria.");
+							LOG(DBG, "      - goal decisivo vittoria.");
 						} else if (STR_MOD->msk(v_Found.at(0), DELIM,ColGoalDecPar) == "1") {
-							LOG(DEBUG, "      - goal decisivo pareggio.");
+							LOG(DBG, "      - goal decisivo pareggio.");
 						}
 
 						break;
