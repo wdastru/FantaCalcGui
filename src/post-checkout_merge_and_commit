@@ -6,28 +6,39 @@ chomp($uname);
 $hostname = qx(hostname);
 chomp($hostname);
 
-if ( $ENV{'OS'} eq "Windows_NT" )      {
+$OSX = qx(scutil --get LocalHostName);
+chomp($OSX);
+
+if ( $ENV{'OS'} eq "Windows_NT" ) {
+    
        if ( $ENV{'COMPUTERNAME'} eq "LAFAMIGLIA" ) {
                #chdir "D:\\Sorgenti\\Perl";
        } else {
                print " Not on LaFamiglia. Exiting.\n";
                exit();
        }
+    
 } elsif ( $uname eq "Linux" ) {
 
-	#print "Linux\n";
-
-	 if ( $hostname eq "PESTODURO" ) {
-		#print "Pestoduro\n";
+	if ( $hostname eq "PESTODURO" ) {
+		
     	chdir "/home/waleviolaeivan/Sorgenti/FantaCalcGuiNew/";
     	$revision = qx(git rev-parse --short HEAD);     
-    	chomp($revision);       
-		#print "$revision\n";
+    	chomp($revision);
     	system("sed 's/XXX/$revision/g' src/revision.h.in > src/revision.h");
+        
 	 } else {
     	print " Not on Pestoduro. Exiting.\n";
     	exit(); 
 	 }
+} elsif ( $OSX eq "django" ) {
+    
+    chdir "/Users/espakm/src/FantaCalcGui/";
+    $revision = qx(git rev-parse --short HEAD);     
+    chomp($revision);       
+    print "$revision\n";
+    system("sed 's/XXX/$revision/g' src/revision.h.in > src/revision.h");
+
 } else {
 		print " System not recognized. Exiting.\n";
 		exit();

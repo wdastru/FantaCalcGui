@@ -24,6 +24,8 @@ Repository::Repository() {
 	this->debugStatus = FALSE; // temporaneo prima che venga letto l'ini file.
 
 #ifdef WIN32
+	qDebug() << "Platform WIN32";
+
 	this->UserProfile = QString::fromAscii(getenv("USERPROFILE"));
 
 	this->fontVariableWidthSmall.setFamily(QString::fromUtf8("Segoe UI"));
@@ -35,7 +37,24 @@ Repository::Repository() {
 
 	this->fontFixedWidth.setFamily(QString::fromUtf8("Lucida Console"));
 	this->fontFixedWidth.setPointSize(8);
-#else
+#else // ! def WIN32
+#ifdef __MACH__
+	qDebug() << "Platform __MACH__";
+
+	this->UserProfile = "/Users/" + QString::fromAscii(getenv("USER"));
+
+	this->fontVariableWidthSmall.setFamily(QString::fromUtf8("Segoe UI"));
+	this->fontVariableWidthSmall.setPointSize(10);
+
+	this->fontVariableWidthBig.setFamily(QString::fromUtf8("Segoe UI"));
+	this->fontVariableWidthBig.setBold(true);
+	this->fontVariableWidthBig.setPointSize(16);
+
+	this->fontFixedWidth.setFamily(QString::fromUtf8("Lucida Console"));
+	this->fontFixedWidth.setPointSize(8);
+#else // ! def __MACH__ ! def WIN32 -->  LINUX?
+	qDebug() << "Platform LINUX (?)";
+
 	this->UserProfile = "/home/" + QString::fromAscii(getenv("USER"));
 
 	this->fontVariableWidthSmall.setFamily(QString::fromUtf8("Ubuntu"));
@@ -47,6 +66,7 @@ Repository::Repository() {
 
 	this->fontFixedWidth.setFamily(QString::fromUtf8("Ubuntu Mono"));
 	this->fontFixedWidth.setPointSize(10);
+#endif
 #endif
 
 	//qDebug() << "UserProfile = '" + this->UserProfile+"'";

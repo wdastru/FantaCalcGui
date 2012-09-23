@@ -367,10 +367,20 @@ bool singletonQtLogger::checkForUpdates() {
 	LOG(DBG, " =============================<br>");
 	//	qDebug << "In void singletonQtLogger::checkForUpdates().";
 
+#ifdef __MACH__
+	QStringList current = this->getVersion().split(QRegExp("\\\\."));
+#else
 	QStringList current = this->getVersion().split(QRegExp("\\\."));
+#endif
+
 	int verCurrent = current.at(0).toInt();
 	int majCurrent = current.at(1).toInt();
 	int minCurrent = current.at(2).toInt();
+
+	qDebug() << verCurrent;
+	qDebug() << majCurrent;
+	qDebug() << minCurrent;
+
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	QString url = THE_REPO->getFileFormazioniUrl();
