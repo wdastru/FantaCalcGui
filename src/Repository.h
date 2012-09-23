@@ -39,6 +39,7 @@ public:
 	QString getListePath();
 	QString getFileFormazioniUrl();
 	QString getFileGazzettaUrl();
+	QString getUrl();
 	QString getFormazioniUrl();
 	QString getGazzettaUrl();
 	bool getDebugStatus();
@@ -52,6 +53,7 @@ private:
 	QString listePath;
 	QString downloadPath;
 	QString formazioniUrl;
+	QString url;
 	QString gazzettaUrl;
 	QString fileGazzetta;
 	QString fileFormazioni;

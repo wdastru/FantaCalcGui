@@ -19,16 +19,14 @@ public:
 	QString getRisultatiPath();
 	QString getDownloadPath();
 	QString getListePath();
-	QString getFormazioniUrl();
-	QString getGazzettaUrl();
+	QString getUrl();
 	bool getDebugStatus();
 	void setFormazioniPath(QString);
 	void setGazzettaPath(QString);
 	void setRisultatiPath(QString);
 	void setDownloadPath(QString);
 	void setListePath(QString);
-	void setFormazioniUrl(QString);
-	void setGazzettaUrl(QString);
+	void setUrl(QString);
 	void setDebugStatus(bool);
 
 private slots:

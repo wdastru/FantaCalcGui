@@ -17,10 +17,10 @@ Repository::Repository() {
 	/*
 	 * DEFAULTS
 	 */
-	this->formazioniUrl =
-			"http://www.cim.unito.it/website/private/fantacalcio/777/formazioni/";
-	this->gazzettaUrl =
-			"http://www.cim.unito.it/website/private/fantacalcio/777/filesGazzetta/";
+	this->url =
+			"http://www.cim.unito.it/website/private/fantacalcio/";
+	this->formazioniUrl = this->url + "777/formazioni/";
+	this->gazzettaUrl = this->url + "777/filesGazzetta/";
 	this->debugStatus = FALSE; // temporaneo prima che venga letto l'ini file.
 
 #ifdef WIN32
@@ -117,10 +117,14 @@ QString Repository::getListaGazFiles() {
 	return this->listePath + "/listaGazFiles.txt";
 }
 QString Repository::getFileFormazioniUrl() {
-	return this->getFormazioniUrl() + "listaFormazioni.txt";
+	return this->getUrl() + "777/formazioni/listaFormazioni.txt";
 }
 QString Repository::getFileGazzettaUrl() {
-	return this->getGazzettaUrl() + "listaGazFiles.txt";
+	return this->getUrl() + "777/filesGazzetta/listaGazFiles.txt";
+}
+QString Repository::getUrl() {
+	//qDebug() << "In QString Repository::getUrl()";
+	return this->url;
 }
 QString Repository::getFormazioniUrl() {
 	return this->formazioniUrl;

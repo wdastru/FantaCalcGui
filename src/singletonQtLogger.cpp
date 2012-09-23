@@ -182,8 +182,7 @@ void singletonQtLogger::configClicked() {
 	THE_CONFIGURATOR->setRisultatiPath(THE_REPO->getRisultatiPath());
 	THE_CONFIGURATOR->setListePath(THE_REPO->getListePath());
 	THE_CONFIGURATOR->setDownloadPath(THE_REPO->getDownloadPath());
-	THE_CONFIGURATOR->setFormazioniUrl(THE_REPO->getFormazioniUrl());
-	THE_CONFIGURATOR->setGazzettaUrl(THE_REPO->getGazzettaUrl());
+	THE_CONFIGURATOR->setUrl(THE_REPO->getUrl());
 	THE_CONFIGURATOR->setDebugStatus(THE_REPO->getDebugStatus());
 	THE_CONFIGURATOR->exec();
 }
@@ -191,10 +190,6 @@ void singletonQtLogger::onlineClicked() {
 	LOG(DBG, "<br> ========================");
 	LOG(DBG, " === Modalita' online ===");
 	LOG(DBG, " ========================<br>");
-
-	//qDebug() << "In void singletonQtLogger::onlineClicked() --> THE_REPO->getFileFormazioniUrl() : " + THE_REPO->getFileFormazioniUrl();
-	//qDebug() << "In void singletonQtLogger::onlineClicked() --> THE_REPO->getFileGazzettaUrl() : " + THE_REPO->getFileGazzettaUrl();
-	//qDebug() << "In void singletonQtLogger::onlineClicked() --> THE_REPO->getListePath : " + THE_REPO->getListePath();
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	urls->push_back(QUrl::fromLocalFile(THE_REPO->getFileFormazioniUrl()));
@@ -377,9 +372,9 @@ bool singletonQtLogger::checkForUpdates() {
 	int majCurrent = current.at(1).toInt();
 	int minCurrent = current.at(2).toInt();
 
-	qDebug() << verCurrent;
-	qDebug() << majCurrent;
-	qDebug() << minCurrent;
+	//qDebug() << verCurrent;
+	//qDebug() << majCurrent;
+	//qDebug() << minCurrent;
 
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;

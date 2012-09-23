@@ -31,8 +31,9 @@ void IniFilePopulator::updateInternalData() {
 	THE_REPO->risultatiPath = ui.risultatiLineEdit->text();
 	THE_REPO->downloadPath = ui.downloadLineEdit->text();
 	THE_REPO->listePath = ui.listeLineEdit->text();
-	THE_REPO->formazioniUrl = ui.formazioniUrlLineEdit->text();
-	THE_REPO->gazzettaUrl = ui.gazzettaUrlLineEdit->text();
+	THE_REPO->url = ui.urlLineEdit->text();
+	THE_REPO->formazioniUrl = ui.urlLineEdit->text() + "777/formazioni/";
+	THE_REPO->gazzettaUrl = ui.urlLineEdit->text() + "777/filesGazzetta/";
 
 	if (this->ui.trueCheckBox->isChecked()) {
 		THE_REPO->debugStatus = true;
@@ -187,11 +188,8 @@ QString IniFilePopulator::getListePath() {
 QString IniFilePopulator::getDownloadPath() {
 	return this->ui.downloadLineEdit->text();
 }
-QString IniFilePopulator::getFormazioniUrl() {
-	return this->ui.formazioniUrlLineEdit->text();
-}
-QString IniFilePopulator::getGazzettaUrl() {
-	return this->ui.gazzettaUrlLineEdit->text();
+QString IniFilePopulator::getUrl() {
+	return this->ui.urlLineEdit->text();
 }
 bool IniFilePopulator::getDebugStatus() {
 	if (this->ui.trueCheckBox->isChecked())
@@ -239,19 +237,12 @@ void IniFilePopulator::setDownloadPath(QString str) {
 	//					+ str);
 	this->ui.downloadLineEdit->setText(str);
 }
-void IniFilePopulator::setFormazioniUrl(QString str) {
+void IniFilePopulator::setUrl(QString str) {
 	//	LOG(
 	//			DBG,
-	//			"In void IniFilePopulator::setFormazioniUrl(QString str ) --> str : "
+	//			"In void IniFilePopulator::setUrl(QString str ) --> str : "
 	//					+ str);
-	this->ui.formazioniUrlLineEdit->setText(str);
-}
-void IniFilePopulator::setGazzettaUrl(QString str) {
-	//	LOG(
-	//			DBG,
-	//			"In void IniFilePopulator::setGazzettaUrl(QString str ) --> str : "
-	//					+ str);
-	this->ui.gazzettaUrlLineEdit->setText(str);
+	this->ui.urlLineEdit->setText(str);
 }
 void IniFilePopulator::setDebugStatus(bool status) {
 	if (status) {

@@ -57,9 +57,7 @@ QString IniFileManager::getWorkDir() {
 void IniFileManager::writeIniFile() {
 	QFile * iniFile = new QFile(this->iniFileName);
 	if (iniFile->exists()) {
-		//qDebug() << "In IniFileManager::writeIniFile() --> " \
-				+ this->iniFileName \
-				+ " exists.";
+		qDebug() << "In IniFileManager::writeIniFile() --> " + this->iniFileName + " exists.";
 
 		iniFile->open(QIODevice::WriteOnly);
 
@@ -78,11 +76,14 @@ void IniFileManager::writeIniFile() {
 		iniFile->write("\n[Liste Path]\n");
 		iniFile->write(THE_REPO->listePath.toAscii().trimmed());
 
-		iniFile->write("\n[File Formazioni Url]\n");
-		iniFile->write(THE_REPO->formazioniUrl.toAscii().trimmed());
+		iniFile->write("\n[Url]\n");
+		iniFile->write(THE_REPO->url.toAscii().trimmed());
 
-		iniFile->write("\n[File Gazzetta Url]\n");
-		iniFile->write(THE_REPO->gazzettaUrl.toAscii().trimmed());
+		//iniFile->write("\n[File Formazioni Url]\n");
+		//iniFile->write(THE_REPO->formazioniUrl.toAscii().trimmed());
+        //
+		//iniFile->write("\n[File Gazzetta Url]\n");
+		//iniFile->write(THE_REPO->gazzettaUrl.toAscii().trimmed());
 
 		iniFile->write("\n[Debug]\n");
 		if (THE_REPO->debugStatus)
@@ -92,9 +93,10 @@ void IniFileManager::writeIniFile() {
 
 		iniFile->close();
 	} else {
+		qDebug() << "In IniFileManager::writeIniFile() --> " + this->iniFileName + " does not exists.";
 		LOG(DBG,
-				"In IniFileManager::writeIniFile() --> " + this->iniFileName
-						+ " does not exists.");
+						"In IniFileManager::writeIniFile() --> " + this->iniFileName
+								+ " does not exists.");
 		QString path = this->workDir;
 
 		path.replace("/", "\\");
@@ -116,11 +118,14 @@ void IniFileManager::writeIniFile() {
 			iniFile->write("\n[Liste Path]\n");
 			iniFile->write(THE_REPO->listePath.toAscii().trimmed());
 
-			iniFile->write("\n[File Formazioni Url]\n");
-			iniFile->write(THE_REPO->formazioniUrl.toAscii().trimmed());
+			iniFile->write("\n[Url]\n");
+			iniFile->write(THE_REPO->url.toAscii().trimmed());
 
-			iniFile->write("\n[File Gazzetta Url]\n");
-			iniFile->write(THE_REPO->gazzettaUrl.toAscii().trimmed());
+			//iniFile->write("\n[File Formazioni Url]\n");
+			//iniFile->write(THE_REPO->formazioniUrl.toAscii().trimmed());
+            //
+			//iniFile->write("\n[File Gazzetta Url]\n");
+			//iniFile->write(THE_REPO->gazzettaUrl.toAscii().trimmed());
 
 			iniFile->write("\n[Debug]\n");
 			if (THE_REPO->debugStatus)
@@ -164,25 +169,36 @@ void IniFileManager::readIniFile() {
 		iniFile->readLine(buf, sizeof(buf));
 		THE_REPO->listePath = QString::fromAscii(buf).trimmed();
 
-		iniFile->readLine(buf, sizeof(buf)); // [File Formazioni Url]
+		iniFile->readLine(buf, sizeof(buf)); // [Url]
 		iniFile->readLine(buf, sizeof(buf));
 		/*
 		 *  se buf è vuoto lascia il valore di default
 		 *  impostato nel costruttore di THE_REPO
 		 */
 		if (!QString::fromAscii(buf).trimmed().isEmpty()) {
-			THE_REPO->formazioniUrl = QString::fromAscii(buf).trimmed();
+			THE_REPO->url = QString::fromAscii(buf).trimmed();
 		}
 
-		iniFile->readLine(buf, sizeof(buf)); // [File Gazzetta Url]
-		iniFile->readLine(buf, sizeof(buf));
-		/*
-		 *  se buf è vuoto lascia il valore di default
-		 *  impostato nel costruttore di THE_REPO
-		 */
-		if (!QString::fromAscii(buf).trimmed().isEmpty()) {
-			THE_REPO->gazzettaUrl = QString::fromAscii(buf).trimmed();
-		}
+
+		//iniFile->readLine(buf, sizeof(buf)); // [File Formazioni Url]
+		//iniFile->readLine(buf, sizeof(buf));
+		///*
+		// *  se buf è vuoto lascia il valore di default
+		// *  impostato nel costruttore di THE_REPO
+		// */
+		//if (!QString::fromAscii(buf).trimmed().isEmpty()) {
+		//	THE_REPO->formazioniUrl = QString::fromAscii(buf).trimmed();
+		//}
+        //
+		//iniFile->readLine(buf, sizeof(buf)); // [File Gazzetta Url]
+		//iniFile->readLine(buf, sizeof(buf));
+		///*
+		// *  se buf è vuoto lascia il valore di default
+		// *  impostato nel costruttore di THE_REPO
+		// */
+		//if (!QString::fromAscii(buf).trimmed().isEmpty()) {
+		//	THE_REPO->gazzettaUrl = QString::fromAscii(buf).trimmed();
+		//}
 
 		iniFile->readLine(buf, sizeof(buf)); // [Debug]
 		iniFile->readLine(buf, sizeof(buf));
@@ -192,6 +208,9 @@ void IniFileManager::readIniFile() {
 			THE_REPO->debugStatus = FALSE;
 
 		//qDebug() << "THE_REPO->formazioniPath = " << THE_REPO->formazioniPath;
+		qDebug() << "THE_REPO->url = " << THE_REPO->url;
+		qDebug() << "THE_REPO->formazioniUrl = " << THE_REPO->formazioniUrl;
+		qDebug() << "THE_REPO->gazzettaUrl = " << THE_REPO->gazzettaUrl;
 
 		iniFile->close();
 	} else {
@@ -207,8 +226,9 @@ void IniFileManager::readIniFile() {
 		 * utilizza i valori comunque presenti in Repository::Repository()
 		 */
 
-		THE_CONFIGURATOR->setFormazioniUrl(THE_REPO->formazioniUrl);
-		THE_CONFIGURATOR->setGazzettaUrl(THE_REPO->gazzettaUrl);
+		THE_CONFIGURATOR->setUrl(THE_REPO->url);
+		//THE_CONFIGURATOR->setFormazioniUrl(THE_REPO->formazioniUrl);
+		//THE_CONFIGURATOR->setGazzettaUrl(THE_REPO->gazzettaUrl);
 		THE_CONFIGURATOR->setFormazioniPath(THE_REPO->formazioniPath);
 		THE_CONFIGURATOR->setGazzettaPath(THE_REPO->gazzettaPath);
 		THE_CONFIGURATOR->setRisultatiPath(THE_REPO->risultatiPath);
