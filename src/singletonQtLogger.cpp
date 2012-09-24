@@ -601,16 +601,13 @@ void singletonQtLogger::on_uploadCampButton_clicked() {
 	std::vector<QString> *savePaths = new std::vector<QString>;
 
 	urls->push_back(
-			QUrl::fromLocalFile(
-					"http://localhost/www.cim.unito.it/website/private/fantacalcio/777/datiCampionato.txt"));
+			QUrl::fromLocalFile(THE_REPO->getUrl() + "777/datiCampionato.txt"));
 	savePaths->push_back(THE_REPO->getDownloadPath() + "datiCampionato.txt");
 	urls->push_back(
-			QUrl::fromLocalFile(
-					"http://localhost/www.cim.unito.it/website/private/fantacalcio/calendario.inc"));
+			QUrl::fromLocalFile(THE_REPO->getUrl() + "calendario.inc"));
 	savePaths->push_back(THE_REPO->getDownloadPath() + "calendario.inc");
 	urls->push_back(
-			QUrl::fromLocalFile(
-					"http://localhost/www.cim.unito.it/website/private/fantacalcio/squadre.inc"));
+			QUrl::fromLocalFile(THE_REPO->getUrl() + "squadre.inc"));
 	savePaths->push_back(THE_REPO->getDownloadPath() + "squadre.inc");
 
 	Downloader datiCampDownloader(THE_LOGGER, urls, savePaths, TRUE);
@@ -638,16 +635,13 @@ void singletonQtLogger::on_uploadCoppaButton_clicked() {
 	std::vector<QString> *savePaths = new std::vector<QString>;
 
 	urls->push_back(
-			QUrl::fromLocalFile(
-					"http://localhost/www.cim.unito.it/website/private/fantacalcio/777/datiCoppa.txt"));
+			QUrl::fromLocalFile(THE_REPO->getUrl() + "777/datiCoppa.txt"));
 	savePaths->push_back(THE_REPO->getDownloadPath() + "datiCoppa.txt");
 	urls->push_back(
-			QUrl::fromLocalFile(
-					"http://localhost/www.cim.unito.it/website/private/fantacalcio/squadre.inc"));
+			QUrl::fromLocalFile(THE_REPO->getUrl() + "squadre.inc"));
 	savePaths->push_back(THE_REPO->getDownloadPath() + "squadre.inc");
 	urls->push_back(
-			QUrl::fromLocalFile(
-					"http://localhost/www.cim.unito.it/website/private/fantacalcio/calendarioCoppa.inc"));
+			QUrl::fromLocalFile(THE_REPO->getUrl() + "calendarioCoppa.inc"));
 	savePaths->push_back(THE_REPO->getDownloadPath() + "calendarioCoppa.inc");
 
 	Downloader datiCoppaDownloader(THE_LOGGER, urls, savePaths, TRUE);
