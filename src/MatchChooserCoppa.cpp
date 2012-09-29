@@ -354,7 +354,7 @@ void MatchChooserCoppa::quit() {
 			//qDebug() << "In void MatchChooserCoppa::quit(). 3";
 
 			QUrl url(
-					"http://localhost/www.cim.unito.it/website/private/fantacalcio/777/");
+					"http://www.cim.unito.it/website/private/fantacalcio/777/");
 			HttpWindow * httpWindow = new HttpWindow(THE_LOGGER, url, "datiCoppa.txt");
 			httpWindow->upload(THE_REPO->getDownloadPath() + "datiCoppa.txt");
 
