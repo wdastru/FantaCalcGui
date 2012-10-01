@@ -18,7 +18,7 @@ Repository::Repository() {
 	 * DEFAULTS
 	 */
 	this->url =
-			"http://www.cim.unito.it/website/private/fantacalcio/";
+			"http://www.cim.unito.it/website/private/fantacalcio/"; // temporaneo prima che venga letto l'ini file.
 	this->formazioniUrl = this->url + "777/formazioni/";
 	this->gazzettaUrl = this->url + "777/filesGazzetta/";
 	this->debugStatus = FALSE; // temporaneo prima che venga letto l'ini file.

@@ -227,8 +227,7 @@ void HttpWindow::upload(QString _file) {
 	dataToSend.append(file.readAll());
 	dataToSend.append(crlf + "--" + bound + "--" + crlf);
 
-	QUrl url(
-			"http://www.cim.unito.it/website/private/fantacalcio/test.php");
+	QUrl url(THE_REPO->getUrl() + "test.php");
 	QNetworkRequest * req = new QNetworkRequest();
 	req->setUrl(url);
 	req->setHeader(QNetworkRequest::ContentTypeHeader,

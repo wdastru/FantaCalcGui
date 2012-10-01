@@ -321,8 +321,8 @@ void MatchChooserCamp::quit() {
 
 			//qDebug() << "In void MatchChooserCamp::quit(). 3";
 
-			QUrl url(
-					"http://www.cim.unito.it/website/private/fantacalcio/777/");
+
+			QUrl url(THE_REPO->getUrl());
 			HttpWindow * httpWindow = new HttpWindow(THE_LOGGER, url, "datiCampionato.txt");
 			httpWindow->upload(THE_REPO->getDownloadPath() + "datiCampionato.txt");
 
