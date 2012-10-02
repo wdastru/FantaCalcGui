@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
-echo -e "\n +--------------------------------+";
-echo -e "\n + post-checkout_merge_and_commit |";
+print "\n +--------------------------------+";
+print "\n | post-checkout_merge_and_commit |";
 
 $uname = qx(uname);
 
@@ -46,5 +46,5 @@ if ( $ENV{'OS'} eq "Windows_NT" ) {
 		exit();
 }
 
-echo -e "\n + revision : $revision           +";
-echo -e "\n +--------------------------------+\n";
+print "\n + revision : $revision           +";
+print "\n +--------------------------------+\n";
