@@ -165,8 +165,10 @@ void IniFileManager::readIniFile() {
 		 */
 		if (!QString::fromAscii(buf).trimmed().isEmpty()) {
 			THE_REPO->url = QString::fromAscii(buf).trimmed();
+			THE_REPO->formazioniUrl = THE_REPO->getUrl() + "777/formazioni/";
+			THE_REPO->gazzettaUrl = THE_REPO->getUrl() + "777/filesGazzetta/";
+			// qDebug() << "In IniFileManager::readIniFile(). QString::fromAscii(buf).trimmed() is not empty";
 		}
-
 
 		iniFile->readLine(buf, sizeof(buf)); // [Debug]
 		iniFile->readLine(buf, sizeof(buf));
@@ -175,11 +177,6 @@ void IniFileManager::readIniFile() {
 		else
 			THE_REPO->debugStatus = FALSE;
 
-		//qDebug() << "THE_REPO->formazioniPath = " << THE_REPO->formazioniPath;
-		//qDebug() << "THE_REPO->url = " << THE_REPO->url;
-		//qDebug() << "THE_REPO->formazioniUrl = " << THE_REPO->formazioniUrl;
-		//qDebug() << "THE_REPO->gazzettaUrl = " << THE_REPO->gazzettaUrl;
-
 		iniFile->close();
 	} else {
 		LOG(INFO,
@@ -187,7 +184,6 @@ void IniFileManager::readIniFile() {
 						"%1 non esiste<br>Inserire le informazioni di configurazione").arg(
 						this->iniFileName));
 
-		//qDebug() << "In void IniFileManager::readIniFile() : workDir = " + this->workDir;
 		THE_CONFIGURATOR->setStartDir(this->workDir);
 
 		/*

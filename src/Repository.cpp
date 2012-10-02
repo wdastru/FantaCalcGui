@@ -16,12 +16,14 @@
 Repository::Repository() {
 	/*
 	 * DEFAULTS
-	 */
+	 * temporanei prima che
+	 * venga letto l'ini file
+	 * * * * * * * * * * * * */
 	this->url =
-			"http://www.cim.unito.it/website/private/fantacalcio/"; // temporaneo prima che venga letto l'ini file.
+			"http://www.cim.unito.it/website/private/fantacalcio/";
 	this->formazioniUrl = this->url + "777/formazioni/";
 	this->gazzettaUrl = this->url + "777/filesGazzetta/";
-	this->debugStatus = FALSE; // temporaneo prima che venga letto l'ini file.
+	this->debugStatus = FALSE;
 
 #ifdef WIN32
 	qDebug() << "Platform WIN32";
