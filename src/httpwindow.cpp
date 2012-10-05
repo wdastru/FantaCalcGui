@@ -234,6 +234,8 @@ void HttpWindow::upload(QString _file) {
 			"multipart/form-data; boundary=" + bound);
 	file.close();
 
+	progressDialog->setLabelText(tr("Uploading %1.").arg(QFileInfo(file).fileName()));
+
 	reply = qnam.post(*req, dataToSend);
 }
 
