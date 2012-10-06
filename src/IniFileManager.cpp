@@ -5,6 +5,11 @@
  *      Author: WAleViolaeIvan
  */
 
+#define READ_NOT_EMPTY_LINE \
+	do { \
+		iniFile->readLine(buf, sizeof(buf)); \
+	} while (QString::fromAscii(buf).trimmed() == "");
+
 #include "IniFileManager.h"
 #include "IniFilePopulator.h"
 #include "Repository.h"
@@ -48,8 +53,8 @@ IniFileManager::~IniFileManager() {
 void IniFileManager::setWorkDir(QString dir) {
 	this->workDir = dir;
 	LOG(DBG,
-			"In IniFileManager::setWorkDir(QString dir) --> workDir set to "
-					+ this->workDir);
+	"In IniFileManager::setWorkDir(QString dir) --> workDir set to "
+	+ this->workDir);
 }
 QString IniFileManager::getWorkDir() {
 	return this->workDir;
@@ -81,16 +86,18 @@ void IniFileManager::writeIniFile() {
 
 		iniFile->write("\n[Debug]\n");
 		if (THE_REPO->debugStatus)
-			iniFile->write("TRUE");
+		iniFile->write("TRUE");
 		else
-			iniFile->write("FALSE");
+		iniFile->write("FALSE");
 
 		iniFile->close();
 	} else {
-		qDebug() << "In IniFileManager::writeIniFile() --> " + this->iniFileName + " does not exists.";
+		qDebug()
+				<< "In IniFileManager::writeIniFile() --> " + this->iniFileName
+						+ " does not exists.";
 		LOG(DBG,
-						"In IniFileManager::writeIniFile() --> " + this->iniFileName
-								+ " does not exists.");
+		"In IniFileManager::writeIniFile() --> " + this->iniFileName
+		+ " does not exists.");
 		QString path = this->workDir;
 
 		path.replace("/", "\\");
@@ -117,9 +124,9 @@ void IniFileManager::writeIniFile() {
 
 			iniFile->write("\n[Debug]\n");
 			if (THE_REPO->debugStatus)
-				iniFile->write("TRUE");
+			iniFile->write("TRUE");
 			else
-				iniFile->write("FALSE");
+			iniFile->write("FALSE");
 
 		} else {
 			;
@@ -133,56 +140,90 @@ void IniFileManager::readIniFile() {
 
 	QFile *iniFile = new QFile(this->iniFileName);
 	if (iniFile->exists()) {
-		//qDebug() << QObject::tr("Reading %1").arg(this->iniFileName);
 		iniFile->open(QIODevice::ReadOnly);
 		char buf[1024];
 
-		iniFile->readLine(buf, sizeof(buf)); // [File Formazioni Path]
-		iniFile->readLine(buf, sizeof(buf));
-		THE_REPO->formazioniPath = QString::fromAscii(buf).trimmed();
+		std::map<QString, int> map;
+		map["[File Formazioni Path]"] = 1;
+		map["[File Gazzetta Path]"] = 2;
+		map["[File Output Path]"] = 3;
+		map["[Download Path]"] = 4;
+		map["[Liste Path]"] = 5;
+		map["[Url]"] = 6;
+		map["[Debug]"] = 7;
 
-		iniFile->readLine(buf, sizeof(buf)); // [File Gazzetta Path]
-		iniFile->readLine(buf, sizeof(buf));
-		THE_REPO->gazzettaPath = QString::fromAscii(buf).trimmed();
+		while (!iniFile->atEnd()) {
 
-		iniFile->readLine(buf, sizeof(buf)); // [File Output Path]
-		iniFile->readLine(buf, sizeof(buf));
-		THE_REPO->risultatiPath = QString::fromAscii(buf).trimmed();
+			READ_NOT_EMPTY_LINE
 
-		iniFile->readLine(buf, sizeof(buf)); // [Download Path]
-		iniFile->readLine(buf, sizeof(buf));
-		THE_REPO->downloadPath = QString::fromAscii(buf).trimmed();
+			//qDebug() << QString::fromAscii(buf).trimmed();
 
-		iniFile->readLine(buf, sizeof(buf)); // [Liste Path]
-		iniFile->readLine(buf, sizeof(buf));
-		THE_REPO->listePath = QString::fromAscii(buf).trimmed();
+			switch (map[QString::fromAscii(buf).trimmed()]) {
+				case 1: { // [File Formazioni Path]
+					READ_NOT_EMPTY_LINE
+					//qDebug() << "1 : " << QString::fromAscii(buf).trimmed();
+					THE_REPO->formazioniPath = QString::fromAscii(buf).trimmed();
+				}
+				break;
+				case 2: { // "[File Gazzetta Path]"
+					READ_NOT_EMPTY_LINE
+					//qDebug() << "2 : " << QString::fromAscii(buf).trimmed();
+					THE_REPO->gazzettaPath = QString::fromAscii(buf).trimmed();
+				}
+				break;
+				case 3: { // "[File Output Path]"
+					READ_NOT_EMPTY_LINE
+					//qDebug() << "3 : " << QString::fromAscii(buf).trimmed();
+					THE_REPO->risultatiPath = QString::fromAscii(buf).trimmed();
+				}
+				break;
+				case 4: { // "[Download Path]"
+					READ_NOT_EMPTY_LINE
+					//qDebug() << "4 : " << QString::fromAscii(buf).trimmed();
+					THE_REPO->downloadPath = QString::fromAscii(buf).trimmed();
+				}
+				break;
+				case 5: { // "[Liste Path]"
+					READ_NOT_EMPTY_LINE
+					//qDebug() << "5 : " << QString::fromAscii(buf).trimmed();
+					THE_REPO->listePath = QString::fromAscii(buf).trimmed();
+				}
+				break;
+				case 6: { // "[Url]"
+					READ_NOT_EMPTY_LINE
+					//qDebug() << "6 : " << QString::fromAscii(buf).trimmed();
+					if (!QString::fromAscii(buf).trimmed().isEmpty()) {
+						THE_REPO->url = QString::fromAscii(buf).trimmed();
+						THE_REPO->formazioniUrl = THE_REPO->getUrl() + "777/formazioni/";
+						THE_REPO->gazzettaUrl = THE_REPO->getUrl() + "777/filesGazzetta/";
+					}
+				}
+				break;
+				case 7: { // "[Debug]"
+					READ_NOT_EMPTY_LINE
+					//qDebug() << "7 : " << QString::fromAscii(buf).trimmed();
+					if (QString::fromAscii(buf).trimmed() == "TRUE") {
+						THE_REPO->debugStatus = TRUE;
+					} else {
+						THE_REPO->debugStatus = FALSE;
+					}
+				}
+				break;
 
-		iniFile->readLine(buf, sizeof(buf)); // [Url]
-		iniFile->readLine(buf, sizeof(buf));
-		/*
-		 *  se buf è vuoto lascia il valore di default
-		 *  impostato nel costruttore di THE_REPO
-		 */
-		if (!QString::fromAscii(buf).trimmed().isEmpty()) {
-			THE_REPO->url = QString::fromAscii(buf).trimmed();
-			THE_REPO->formazioniUrl = THE_REPO->getUrl() + "777/formazioni/";
-			THE_REPO->gazzettaUrl = THE_REPO->getUrl() + "777/filesGazzetta/";
-			// qDebug() << "In IniFileManager::readIniFile(). QString::fromAscii(buf).trimmed() is not empty";
+				default:
+					/* no more valid entries are ignored
+					 * a line has to be read (the value)
+					 * * * * * * * * * * * * * * * * * * */
+					READ_NOT_EMPTY_LINE
+				break;
+			}
 		}
-
-		iniFile->readLine(buf, sizeof(buf)); // [Debug]
-		iniFile->readLine(buf, sizeof(buf));
-		if (QString::fromAscii(buf).trimmed() == "TRUE")
-			THE_REPO->debugStatus = TRUE;
-		else
-			THE_REPO->debugStatus = FALSE;
-
 		iniFile->close();
 	} else {
 		LOG(INFO,
-				QObject::tr(
-						"%1 non esiste<br>Inserire le informazioni di configurazione").arg(
-						this->iniFileName));
+		QObject::tr(
+				"%1 non esiste<br>Inserire le informazioni di configurazione").arg(
+				this->iniFileName));
 
 		THE_CONFIGURATOR->setStartDir(this->workDir);
 

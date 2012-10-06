@@ -71,8 +71,6 @@ Repository::Repository() {
 #endif
 #endif
 
-	//qDebug() << "UserProfile = '" + this->UserProfile+"'";
-
 	this->formazioniPath = this->UserProfile + "/FantaCalcGui/formazioni/";
 	this->gazzettaPath = this->UserProfile + "/FantaCalcGui/gazzetta/";
 	this->risultatiPath = this->UserProfile + "/FantaCalcGui/risultati/";
