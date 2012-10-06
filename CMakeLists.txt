@@ -25,6 +25,7 @@ SET( SRCS
         src/singletonQtLogger.cpp
         src/MatchChooserCamp.cpp
         src/MatchChooserCoppa.cpp
+        src/UpdatesChooser.cpp
         src/resources.rc )
 		
 SET( HDRS 
@@ -37,6 +38,7 @@ SET( HDRS
         src/httpwindow.h
         src/MatchChooserCamp.h
         src/MatchChooserCoppa.h
+        src/UpdatesChooser.h
         src/singletonQtLogger.h )
 SET( UIS  
         src/authenticationdialog.ui
@@ -46,6 +48,7 @@ SET( UIS
         src/NoNetFileDialog.ui
         src/MatchChooserCamp.ui
         src/MatchChooserCoppa.ui
+        src/UpdatesChooser.ui
         src/singletonQtLogger.ui )
 
 SET( TEST_SRCS 
@@ -64,6 +67,7 @@ SET( TEST_SRCS
         src/httpwindow.cpp
         src/MatchChooserCamp.cpp
         src/MatchChooserCoppa.cpp
+        src/UpdatesChooser.cpp
         src/singletonQtLogger.cpp )
 
 QT4_WRAP_UI( UI_HDRS ${UIS} )

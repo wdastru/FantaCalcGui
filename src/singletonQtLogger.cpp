@@ -22,6 +22,7 @@
 #include "FileFormazioniViewer.h"
 #include "MatchChooserCamp.h"
 #include "MatchChooserCoppa.h"
+#include "UpdatesChooser.h"
 #include "Fanta.h"
 
 #include <vector>
@@ -376,7 +377,6 @@ bool singletonQtLogger::checkForUpdates() {
 	//qDebug() << majCurrent;
 	//qDebug() << minCurrent;
 
-
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	QString url = THE_REPO->getFileFormazioniUrl();
 	unsigned int pos = url.lastIndexOf("/");
@@ -420,7 +420,7 @@ bool singletonQtLogger::checkForUpdates() {
 		// of the outermost element.
 		QDomElement docElem = doc.documentElement();
 
-		QList<QList<QHash<QString, QString> > > listOfResources;
+		QList<QHash<QString, QString> > listOfResources;
 
 		QDomNode n = docElem.firstChild();
 		QHash<QString, QString> hash;
@@ -428,7 +428,7 @@ bool singletonQtLogger::checkForUpdates() {
 		while (!n.isNull()) {
 
 			hash.clear();
-			QList<QHash<QString, QString> > list;
+			QHash<QString, QString> list;
 
 			QDomElement e = n.toElement(); // try to convert the node to an element.
 			if (!e.isNull()) {
@@ -479,108 +479,103 @@ bool singletonQtLogger::checkForUpdates() {
 					}
 					m = m.nextSibling();
 				}
-				list.push_back(hash);
 			}
 
-			listOfResources.push_back(list);
-
-			//for (int i = 0; i < list.size(); ++i) {
-			//	qDebug() << "In void singletonQtLogger::checkForUpdates() --> \n hash[\"file\"] : " + hash["file"] \
-			//			+ ", \n hash[\"version\"] : " + hash["version"] \
-			//			+ ", \n hash[\"description\"] : " + hash["description"] \
-			//			+ ", \n hash[\"status\"] : " + hash["status"] \
-			//			+ ", \n hash[\"new\"] : " + hash["new"];
-			//}
-
+			listOfResources.push_back(hash);
 			n = n.nextSibling();
 		}
 
 		bool foundUpdates = false;
 
 		for (int i = 0; i < listOfResources.size(); ++i) {
-			for (int j = 0; j < listOfResources.at(i).size(); ++j) {
+			if (listOfResources.at(i)["status"] == "new") {
+				LOG(UPDATE,
+				"    E' possibile scaricare la versione "
+				+ listOfResources.at(i)["version"]
+				+ " : "
+				+ listOfResources.at(i)["file"] + " ("
+				+ listOfResources.at(i)["description"]
+				+ ")<br>changes : <br>"
+				+ listOfResources.at(i)["new"]);
 
-				if (listOfResources.at(i).at(j)["status"] == "new") {
-					LOG(UPDATE,
-					"    E' possibile scaricare la versione "
-					+ listOfResources.at(i).at(j)["version"]
-					+ " : "
-					+ listOfResources.at(i).at(j)["file"] + " ("
-					+ listOfResources.at(i).at(j)["description"]
-					+ ")<br>changes : <br>"
-					+ listOfResources.at(i).at(j)["new"]);
-
-					foundUpdates = true;
-				}
+				foundUpdates = true;
 			}
 		}
 
 		if (!foundUpdates) {
-			LOG(UPDATE,
-			"    La versione e' aggiornata");
-
+			LOG(UPDATE, "    La versione e' aggiornata");
+			return true;
 		}
 
-		for (int i = 0; i < listOfResources.size(); ++i) {
-			for (int j = 0; j < listOfResources.at(i).size(); ++j) {
+		std::vector<QString> updates;
 
-				if (listOfResources.at(i).at(j)["status"] == "new") {
+		//for (int i = 0; i < listOfResources.size(); ++i) {
+		//	//qDebug() << "i : " << i << " " << listOfResources.at(i)["file"];
+		//	if (listOfResources.at(i)["status"] == "new") {
+        //
+		//		updates.push_back(listOfResources.at(i)["version"] + " - " + listOfResources.at(i)["file"]);
+        //
+		//		/*
+		//		 QMessageBox msgBox;
+        //
+		//		 msgBox.setWindowTitle("HTTP");
+		//		 msgBox.setInformativeText(
+		//		 tr("Version %1 available.\nDownload \n%2\n(%3) ?").arg(
+		//		 listOfResources.at(i).at(j)["version"]).arg(
+		//		 listOfResources.at(i).at(j)["file"]).arg(
+		//		 listOfResources.at(i).at(j)["description"]));
+		//		 msgBox.setStandardButtons(
+		//		 QMessageBox::Yes | QMessageBox::No);
+		//		 msgBox.setDefaultButton(QMessageBox::No);
+		//		 msgBox.setIcon(QMessageBox::Question);
+		//		 msgBox.setFont(THE_REPO->fontVariableWidthSmall);
+		//		 int answer = msgBox.exec();
+        //
+		//		 if (answer == QMessageBox::Yes) {
+		//		 std::vector < QUrl > *urls = new std::vector<QUrl>;
+        //
+		//		 QString url = THE_REPO->getFileFormazioniUrl();
+		//		 unsigned int pos = url.lastIndexOf("/");
+		//		 url = url.left(pos);
+		//		 pos = url.lastIndexOf("/");
+		//		 url = url.left(pos);
+		//		 pos = url.lastIndexOf("/");
+		//		 url = url.left(pos) + "/download/"
+		//		 + listOfResources.at(i).at(j)["file"];
+        //
+		//		 urls->push_back(QUrl::fromLocalFile(url));
+        //
+		//		 //qDebug() << "In void singletonQtLogger::checkForUpdates() --> url : " + url;
+        //
+		//		 std::vector < QString > *savePaths = new std::vector<
+		//		 QString>;
+		//		 QString savePath = THE_REPO->getDownloadPath() + listOfResources.at(i).at(j)["file"];
+		//		 savePaths->push_back(savePath);
+        //
+		//		 //qDebug() << "In void singletonQtLogger::checkForUpdates() --> savePath : " + savePath;
+        //
+		//		 Downloader updateDownloader(THE_LOGGER, urls, savePaths,
+		//		 true);
+        //
+		//		 if (updateDownloader.requestSucceded()) { // download succeded
+		//		 LOG(DBG,
+		//		 "Download of "
+		//		 + listOfResources.at(i).at(j)["file"]
+		//		 + " succeded.");
+		//		 } else {
+		//		 LOG(ERROR,
+		//		 listOfResources.at(i).at(j)["file"]
+		//		 + " download failed.");
+        //
+		//		 }
+		//		 }
+		//		 */
+		//	}
+		//}
 
-					QMessageBox msgBox;
-					msgBox.setWindowTitle("HTTP");
-					msgBox.setInformativeText(
-					tr("Version %1 available.\nDownload \n%2\n(%3) ?").arg(
-							listOfResources.at(i).at(j)["version"]).arg(
-							listOfResources.at(i).at(j)["file"]).arg(
-							listOfResources.at(i).at(j)["description"]));
-					msgBox.setStandardButtons(
-					QMessageBox::Yes | QMessageBox::No);
-					msgBox.setDefaultButton(QMessageBox::No);
-					msgBox.setIcon(QMessageBox::Question);
-					msgBox.setFont(THE_REPO->fontVariableWidthSmall);
-					int answer = msgBox.exec();
-
-					if (answer == QMessageBox::Yes) {
-						std::vector < QUrl > *urls = new std::vector<QUrl>;
-
-						QString url = THE_REPO->getFileFormazioniUrl();
-						unsigned int pos = url.lastIndexOf("/");
-						url = url.left(pos);
-						pos = url.lastIndexOf("/");
-						url = url.left(pos);
-						pos = url.lastIndexOf("/");
-						url = url.left(pos) + "/download/"
-						+ listOfResources.at(i).at(j)["file"];
-
-						urls->push_back(QUrl::fromLocalFile(url));
-
-						qDebug() << "In void singletonQtLogger::checkForUpdates() --> url : " + url;
-
-						std::vector < QString > *savePaths = new std::vector<
-						QString>;
-						QString savePath = THE_REPO->getDownloadPath() + listOfResources.at(i).at(j)["file"];
-						savePaths->push_back(savePath);
-
-						qDebug() << "In void singletonQtLogger::checkForUpdates() --> savePath : " + savePath;
-
-						Downloader updateDownloader(THE_LOGGER, urls, savePaths,
-						true);
-
-						if (updateDownloader.requestSucceded()) { // download succeded
-							LOG(DBG,
-							"Download of "
-							+ listOfResources.at(i).at(j)["file"]
-							+ " succeded.");
-						} else {
-							LOG(ERROR,
-							listOfResources.at(i).at(j)["file"]
-							+ " download failed.");
-
-						}
-					}
-				}
-			}
-		}
+		UpdatesChooser *chooser = new UpdatesChooser(listOfResources, this);
+		chooser->exec();
+		qDebug() << chooser->getUpdate();
 
 	} else { // download failed
 		LOG(DBG,
@@ -594,20 +589,20 @@ void singletonQtLogger::on_uploadCampButton_clicked() {
 	//qDebug() << "In void singletonQtLogger::on_uploadCampButton_clicked()";
 
 	LOG(DBG, "<br/> ==========================================");
-	LOG(DBG,      " === Pubblicazione risultati campionato ===");
-	LOG(DBG,      " ==========================================<br/><br/>");
+	LOG(DBG, " === Pubblicazione risultati campionato ===");
+	LOG(DBG, " ==========================================<br/><br/>");
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	std::vector<QString> *savePaths = new std::vector<QString>;
 
 	urls->push_back(
-			QUrl::fromLocalFile(THE_REPO->getUrl() + "777/datiCampionato.txt"));
+	QUrl::fromLocalFile(THE_REPO->getUrl() + "777/datiCampionato.txt"));
 	savePaths->push_back(THE_REPO->getDownloadPath() + "datiCampionato.txt");
 	urls->push_back(
-			QUrl::fromLocalFile(THE_REPO->getUrl() + "calendario.inc"));
+	QUrl::fromLocalFile(THE_REPO->getUrl() + "calendario.inc"));
 	savePaths->push_back(THE_REPO->getDownloadPath() + "calendario.inc");
 	urls->push_back(
-			QUrl::fromLocalFile(THE_REPO->getUrl() + "squadre.inc"));
+	QUrl::fromLocalFile(THE_REPO->getUrl() + "squadre.inc"));
 	savePaths->push_back(THE_REPO->getDownloadPath() + "squadre.inc");
 
 	Downloader datiCampDownloader(THE_LOGGER, urls, savePaths, TRUE);
@@ -628,27 +623,27 @@ void singletonQtLogger::on_uploadCoppaButton_clicked() {
 	//qDebug() << "In void singletonQtLogger::on_uploadCoppaButton_clicked()";
 
 	LOG(DBG, "<br/> =====================================");
-	LOG(DBG,      " === Pubblicazione risultati coppa ===");
-	LOG(DBG,      " =====================================<br/><br/>");
+	LOG(DBG, " === Pubblicazione risultati coppa ===");
+	LOG(DBG, " =====================================<br/><br/>");
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	std::vector<QString> *savePaths = new std::vector<QString>;
 
 	urls->push_back(
-			QUrl::fromLocalFile(THE_REPO->getUrl() + "777/datiCoppa.txt"));
+	QUrl::fromLocalFile(THE_REPO->getUrl() + "777/datiCoppa.txt"));
 	savePaths->push_back(THE_REPO->getDownloadPath() + "datiCoppa.txt");
 	urls->push_back(
-			QUrl::fromLocalFile(THE_REPO->getUrl() + "squadre.inc"));
+	QUrl::fromLocalFile(THE_REPO->getUrl() + "squadre.inc"));
 	savePaths->push_back(THE_REPO->getDownloadPath() + "squadre.inc");
 	urls->push_back(
-			QUrl::fromLocalFile(THE_REPO->getUrl() + "calendarioCoppa.inc"));
+	QUrl::fromLocalFile(THE_REPO->getUrl() + "calendarioCoppa.inc"));
 	savePaths->push_back(THE_REPO->getDownloadPath() + "calendarioCoppa.inc");
 
 	Downloader datiCoppaDownloader(THE_LOGGER, urls, savePaths, TRUE);
 
 	if (datiCoppaDownloader.requestSucceded()) { // download succeded
 		qDebug()
-				<< "In void singletonQtLogger::on_uploadCoppaButton_clicked(). Download of files succeded.";
+		<< "In void singletonQtLogger::on_uploadCoppaButton_clicked(). Download of files succeded.";
 	} else { // download failed
 		LOG(WARN, "Non e' stato possibile scaricare i file necessari.");
 		qDebug() << "In void singletonQtLogger::on_uploadCoppaButton_clicked(). Download of files failed.";
