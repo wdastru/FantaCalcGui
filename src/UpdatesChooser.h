@@ -6,24 +6,28 @@
 #include <QtGui/QRadioButton>
 #include "ui_UpdatesChooser.h"
 
-class UpdatesChooser : public QDialog
-{
-    Q_OBJECT
+#include "Repository.h"
 
-public:
-    UpdatesChooser(QList<QHash<QString, QString> >&, QWidget *parent = 0);
-    ~UpdatesChooser();
-    int getUpdate();
+class UpdatesChooser: public QDialog {
+	Q_OBJECT
 
-private slots:
-	void checkRadioButtons();
-	void enableOkButton();
+	friend class Repository;
 
-private:
-    Ui::UpdatesChooserClass ui;
-    std::vector<QRadioButton *> radioButtons;
-    std::vector<QLabel *> labels;
-    int chosenUpdate;
+	public:
+		UpdatesChooser(QList<QHash<QString, QString> >&, QWidget *parent = 0);
+		~UpdatesChooser();
+
+	private slots:
+		void checkRadioButtons();
+		void enableOkButton();
+		void setExistingDirectory();
+
+	private:
+		Ui::UpdatesChooserClass ui;
+		std::vector<QRadioButton *> radioButtons;
+		std::vector<QLabel *> labels;
+		int chosenUpdate;
+		QList<QHash<QString, QString> > *pResources;
 
 };
 

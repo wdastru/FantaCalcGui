@@ -489,6 +489,7 @@ bool singletonQtLogger::checkForUpdates() {
 
 		for (int i = 0; i < listOfResources.size(); ++i) {
 			if (listOfResources.at(i)["status"] == "new") {
+				LOG(INFO, "");
 				LOG(UPDATE,
 				"    E' possibile scaricare la versione "
 				+ listOfResources.at(i)["version"]
@@ -507,75 +508,12 @@ bool singletonQtLogger::checkForUpdates() {
 			return true;
 		}
 
-		std::vector<QString> updates;
+		LOG(INFO, "");
 
-		//for (int i = 0; i < listOfResources.size(); ++i) {
-		//	//qDebug() << "i : " << i << " " << listOfResources.at(i)["file"];
-		//	if (listOfResources.at(i)["status"] == "new") {
-        //
-		//		updates.push_back(listOfResources.at(i)["version"] + " - " + listOfResources.at(i)["file"]);
-        //
-		//		/*
-		//		 QMessageBox msgBox;
-        //
-		//		 msgBox.setWindowTitle("HTTP");
-		//		 msgBox.setInformativeText(
-		//		 tr("Version %1 available.\nDownload \n%2\n(%3) ?").arg(
-		//		 listOfResources.at(i).at(j)["version"]).arg(
-		//		 listOfResources.at(i).at(j)["file"]).arg(
-		//		 listOfResources.at(i).at(j)["description"]));
-		//		 msgBox.setStandardButtons(
-		//		 QMessageBox::Yes | QMessageBox::No);
-		//		 msgBox.setDefaultButton(QMessageBox::No);
-		//		 msgBox.setIcon(QMessageBox::Question);
-		//		 msgBox.setFont(THE_REPO->fontVariableWidthSmall);
-		//		 int answer = msgBox.exec();
-        //
-		//		 if (answer == QMessageBox::Yes) {
-		//		 std::vector < QUrl > *urls = new std::vector<QUrl>;
-        //
-		//		 QString url = THE_REPO->getFileFormazioniUrl();
-		//		 unsigned int pos = url.lastIndexOf("/");
-		//		 url = url.left(pos);
-		//		 pos = url.lastIndexOf("/");
-		//		 url = url.left(pos);
-		//		 pos = url.lastIndexOf("/");
-		//		 url = url.left(pos) + "/download/"
-		//		 + listOfResources.at(i).at(j)["file"];
-        //
-		//		 urls->push_back(QUrl::fromLocalFile(url));
-        //
-		//		 //qDebug() << "In void singletonQtLogger::checkForUpdates() --> url : " + url;
-        //
-		//		 std::vector < QString > *savePaths = new std::vector<
-		//		 QString>;
-		//		 QString savePath = THE_REPO->getDownloadPath() + listOfResources.at(i).at(j)["file"];
-		//		 savePaths->push_back(savePath);
-        //
-		//		 //qDebug() << "In void singletonQtLogger::checkForUpdates() --> savePath : " + savePath;
-        //
-		//		 Downloader updateDownloader(THE_LOGGER, urls, savePaths,
-		//		 true);
-        //
-		//		 if (updateDownloader.requestSucceded()) { // download succeded
-		//		 LOG(DBG,
-		//		 "Download of "
-		//		 + listOfResources.at(i).at(j)["file"]
-		//		 + " succeded.");
-		//		 } else {
-		//		 LOG(ERROR,
-		//		 listOfResources.at(i).at(j)["file"]
-		//		 + " download failed.");
-        //
-		//		 }
-		//		 }
-		//		 */
-		//	}
-		//}
+		std::vector<QString> updates;
 
 		UpdatesChooser *chooser = new UpdatesChooser(listOfResources, this);
 		chooser->exec();
-		qDebug() << chooser->getUpdate();
 
 	} else { // download failed
 		LOG(DBG,

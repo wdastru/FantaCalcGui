@@ -1,10 +1,17 @@
 #include "UpdatesChooser.h"
+#include "Downloader.h"
+#include "defines.h"
+
+#include "QFileDialog"
+#include "QDebug"
+#include "QUrl"
 
 UpdatesChooser::UpdatesChooser(QList<QHash<QString, QString> >& resources,
 		QWidget *parent) :
 		QDialog(parent) {
 	ui.setupUi(this);
 
+	pResources = &resources;
 	chosenUpdate = -1;
 
 	this->setWindowTitle("Scegli l'update che fa per te ...");
@@ -17,7 +24,8 @@ UpdatesChooser::UpdatesChooser(QList<QHash<QString, QString> >& resources,
 			labels.push_back(label);
 			QRadioButton *radio = new QRadioButton();
 
-			QObject::connect(radio, SIGNAL(toggled(bool)), this, SLOT(enableOkButton()));
+			QObject::connect(radio, SIGNAL(toggled(bool)), this,
+					SLOT(enableOkButton()));
 
 			radioButtons.push_back(radio);
 
@@ -25,6 +33,10 @@ UpdatesChooser::UpdatesChooser(QList<QHash<QString, QString> >& resources,
 			ui.gridLayout->addWidget(labels.at(i), i, 1);
 		}
 	}
+
+	ui.dirLabel->setText(THE_REPO->getDownloadPath());
+
+	connect(ui.setDir, SIGNAL(clicked()), this, SLOT(setExistingDirectory()));
 }
 
 UpdatesChooser::~UpdatesChooser() {
@@ -35,15 +47,50 @@ void UpdatesChooser::checkRadioButtons() {
 	for (int i = 0; i < radioButtons.size(); ++i) {
 		if (radioButtons.at(i)->isChecked()) {
 			chosenUpdate = i;
+			break;
 		}
 	}
+
+	std::vector<QUrl> * urls = new std::vector<QUrl>;
+	QString url = THE_REPO->getUrl() + "download/" + pResources->at(chosenUpdate)["file"];
+	urls->push_back(QUrl::fromLocalFile(url));
+
+	//qDebug() << url;
+
+	std::vector<QString> *savePaths = new std::vector<QString>;
+	QString savePath = ui.dirLabel->text() + "/"
+			+ pResources->at(chosenUpdate)["file"];
+	savePaths->push_back(savePath);
+
+	//qDebug() << savePath;
+
+	Downloader updateDownloader(THE_LOGGER, urls, savePaths, true);
+
+	if (updateDownloader.requestSucceded()) { // download succeded
+		LOG(DBG,
+		"Download of "
+		+ pResources->at(chosenUpdate)["file"]
+		+ " succeded.");
+	} else {
+		LOG(ERROR,
+				pResources->at(chosenUpdate)["file"]
+				+ " download failed.");
+
+	}
+
 	this->close();
 }
 
-int UpdatesChooser::getUpdate() {
-	return chosenUpdate;
+void UpdatesChooser::enableOkButton() {
+	ui.okButton->setEnabled(true);
 }
 
-void UpdatesChooser::enableOkButton(){
-	ui.okButton->setEnabled(true);
+void UpdatesChooser::setExistingDirectory() {
+	QFileDialog::Options options = QFileDialog::DontResolveSymlinks
+			| QFileDialog::ShowDirsOnly;
+	QString directory = QFileDialog::getExistingDirectory(this,
+			tr("QFileDialog::getExistingDirectory()"), ui.dirLabel->text(),
+			options);
+	if (!directory.isEmpty())
+		ui.dirLabel->setText(directory);
 }
