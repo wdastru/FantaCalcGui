@@ -580,8 +580,7 @@ void singletonQtLogger::on_uploadCoppaButton_clicked() {
 	Downloader datiCoppaDownloader(THE_LOGGER, urls, savePaths, TRUE);
 
 	if (datiCoppaDownloader.requestSucceded()) { // download succeded
-		qDebug()
-		<< "In void singletonQtLogger::on_uploadCoppaButton_clicked(). Download of files succeded.";
+		//qDebug() << "In void singletonQtLogger::on_uploadCoppaButton_clicked(). Download of files succeded.";
 	} else { // download failed
 		LOG(WARN, "Non e' stato possibile scaricare i file necessari.");
 		qDebug() << "In void singletonQtLogger::on_uploadCoppaButton_clicked(). Download of files failed.";

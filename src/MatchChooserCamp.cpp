@@ -251,7 +251,7 @@ void MatchChooserCamp::quit() {
 
 		QString title = "ATTENZIONE!!!";
 
-		qDebug() << match;
+		//qDebug() << match;
 
 		QStringList items = match.split(QRegExp("\\/"), QString::SkipEmptyParts);
 
