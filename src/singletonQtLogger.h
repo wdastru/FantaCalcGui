@@ -25,8 +25,7 @@ public:
 	QString getVersion(void);
 	QString getRevision(void);
 	void setLogFileName(QString);
-	bool checkForUpdates();
-	bool checkForUpdates_old();
+	//bool checkForUpdates_old();
 
 private slots:
 	void saveLogAndClose();
@@ -36,6 +35,9 @@ private slots:
 	void goOn();
 	void on_uploadCampButton_clicked();
 	void on_uploadCoppaButton_clicked();
+
+public slots:
+	bool checkForUpdates();
 
 signals:
 	void onOffClickedFinished();
