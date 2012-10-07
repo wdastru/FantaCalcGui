@@ -119,7 +119,6 @@ void HttpWindow::downloadFile() {
 }
 
 void HttpWindow::cancelDownload() {
-	statusLabel->setText(tr("Download canceled."));
 	httpRequestAborted = true;
 	reply->abort();
 	this->close();
@@ -237,7 +236,8 @@ void HttpWindow::upload(QString _file) {
 			"multipart/form-data; boundary=" + bound);
 	file.close();
 
-	progressDialog->setLabelText(tr("Uploading %1.").arg(QFileInfo(file).fileName()));
+	progressDialog->setLabelText(
+			tr("Uploading %1.").arg(QFileInfo(file).fileName()));
 
 	reply = qnam.post(*req, dataToSend);
 }
@@ -264,6 +264,10 @@ void HttpWindow::slotAuthenticationRequired(QNetworkReply*,
 	authenticator->setUser("laboratorio");
 	authenticator->setPassword("NMR12345");
 	//	}
+}
+
+bool HttpWindow::aborted() {
+	return this->httpRequestAborted;
 }
 
 /*

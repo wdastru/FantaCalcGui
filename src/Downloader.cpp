@@ -128,6 +128,7 @@ void Downloader::downloadFiles() {
 	this->statusLabelText = "";
 	this->downloadFailures = 0;
 	this->downloadSuccesses = 0;
+	this->downloadAborts = 0;
 
 	for (unsigned int i = 0; i < urlLineEditVector.size(); ++i) {
 		QUrl url = QUrl(urlLineEditVector.at(i)->text());
@@ -152,6 +153,10 @@ void Downloader::downloadFiles() {
 				//LOG(INFO, tr("Scaricato %1").arg(QFileInfo(this->savePaths->at(i)).fileName()));
 			}
 
+		} else if(this->httpClients.at(i)->aborted()) {
+			this->downloadAborts++;
+			qDebug() << tr("In void Downloader::downloadFiles(). Download of %1 aborted.").arg(QFileInfo(this->savePaths->at(i)).fileName());
+			LOG(WARN, tr("Scaricamento di %1 interrotto.").arg(QFileInfo(this->savePaths->at(i)).fileName()));
 		} else {
 			this->downloadFailures++;
 			qDebug() << tr("In void Downloader::downloadFiles(). Download of %1 failed.").arg(QFileInfo(this->savePaths->at(i)).fileName());
@@ -168,6 +173,13 @@ void Downloader::downloadFiles() {
 }
 bool Downloader::requestSucceded() {
 	if (this->downloadSuccesses == this->savePaths->size()) {
+		return true;
+	} else {
+		return false;
+	}
+}
+bool Downloader::requestAborted() {
+	if (this->downloadAborts > 0) {
 		return true;
 	} else {
 		return false;

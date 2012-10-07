@@ -59,39 +59,41 @@ class HttpWindow;
 QT_END_NAMESPACE
 
 class Downloader: public QDialog {
-Q_OBJECT
+	Q_OBJECT
 
-public:
-	Downloader(QWidget *parent = 0,
-			std::vector<QUrl>* _urls = new std::vector<QUrl>,
-			std::vector<QString>* _savePaths = new std::vector<QString>, bool silent = FALSE);
+	public:
+		Downloader(QWidget *parent = 0, std::vector<QUrl>* _urls =
+				new std::vector<QUrl>, std::vector<QString>* _savePaths =
+				new std::vector<QString>, bool silent = FALSE);
 
-	bool requestSucceded();
-	bool wasCancelClicked();
+		bool requestSucceded();
+		bool requestAborted();
+		bool wasCancelClicked();
 
-private slots:
-	void downloadFiles();
-	void quit();
+	private slots:
+		void downloadFiles();
+		void quit();
 
-private:
-	QLabel *statusLabel;
-	QPushButton *downloadButton;
-	QPushButton *quitButton;
-	QDialogButtonBox *buttonBox;
-	bool httpRequestSucceded;
+	private:
+		QLabel *statusLabel;
+		QPushButton *downloadButton;
+		QPushButton *quitButton;
+		QDialogButtonBox *buttonBox;
+		bool httpRequestSucceded;
 
-	QLineEdit *urlLineEdit;
-	QLabel *urlLabel;
-	std::vector<QLabel *> urlLabelVector;
-	std::vector<QLineEdit *> urlLineEditVector;
-	std::vector<QString>* savePaths;
-	std::vector<QUrl>* urls;
-	std::vector<HttpWindow *> httpClients;
-	QString statusLabelText;
-	bool hasBeenQuitted;
-	unsigned int downloadSuccesses;
-	unsigned int downloadFailures;
-	bool silent;
+		QLineEdit *urlLineEdit;
+		QLabel *urlLabel;
+		std::vector<QLabel *> urlLabelVector;
+		std::vector<QLineEdit *> urlLineEditVector;
+		std::vector<QString>* savePaths;
+		std::vector<QUrl>* urls;
+		std::vector<HttpWindow *> httpClients;
+		QString statusLabelText;
+		bool hasBeenQuitted;
+		unsigned int downloadSuccesses;
+		unsigned int downloadFailures;
+		unsigned int downloadAborts;
+		bool silent;
 
 };
 

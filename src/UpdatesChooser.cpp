@@ -71,6 +71,11 @@ void UpdatesChooser::checkRadioButtons() {
 		"Download of "
 		+ pResources->at(chosenUpdate)["file"]
 		+ " succeded.");
+	} else if (updateDownloader.requestAborted()) {
+		LOG(WARN,
+				pResources->at(chosenUpdate)["file"]
+				+ " download aborted.");
+
 	} else {
 		LOG(ERROR,
 				pResources->at(chosenUpdate)["file"]

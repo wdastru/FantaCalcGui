@@ -69,29 +69,18 @@ public:
 	bool downloadSuccessful();
 	void downloadFile();
 	void upload(QString);
+	bool aborted();
 
 private slots:
 	void cancelDownload();
 	void httpFinished();
 	void httpReadyRead();
 	void updateDataReadProgress(qint64 bytesRead, qint64 totalBytes);
-//	void enableDownloadButton();
 	void slotAuthenticationRequired(QNetworkReply*, QAuthenticator *);
-//#ifndef QT_NO_OPENSSL
-//	void sslErrors(QNetworkReply*, const QList<QSslError> &errors);
-//#endif
 
 private:
-	QLabel *statusLabel;
-	QLabel *urlLabel;
-	QLineEdit *urlLineEdit;
 	QProgressDialog *progressDialog;
-	QPushButton *downloadButton;
-	QPushButton *quitButton;
-	QDialogButtonBox *buttonBox;
-
 	bool uploadFlag;
-
 	QUrl url;
 	QString savePath;
 	QNetworkAccessManager qnam;
