@@ -68,9 +68,9 @@ FunctionEnd
 
 Section "MainSection" SEC01
   SetOutPath "$INSTDIR"
-  SetOverwrite ifnewer
-  File "G:\Sorgenti\FantaCalcGuiNew_Win32Build\FantaCalcGui.exe"
   SetOverwrite try
+  File "G:\Sorgenti\FantaCalcGuiNew_Win32Build\FantaCalcGui.exe"
+  File "C:\mingw\bin\libstdc++-6.dll"
   File "${QT}\libgcc_s_dw2-1.dll"
   File "${QT}\mingwm10.dll"
   File "${QT}\QtCore4.dll"
