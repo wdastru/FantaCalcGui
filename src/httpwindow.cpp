@@ -66,6 +66,8 @@ HttpWindow::HttpWindow(QWidget *parent, QUrl _url, QString _savePath) :
 			this,
 			SLOT(slotAuthenticationRequired(QNetworkReply*,QAuthenticator*)));
 
+	connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
+
 	this->downloadFile();
 }
 
