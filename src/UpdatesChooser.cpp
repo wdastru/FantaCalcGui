@@ -23,6 +23,7 @@ UpdatesChooser::UpdatesChooser(QList<QHash<QString, QString> >& resources,
 							+ resources.at(i)["description"] + ")");
 			labels.push_back(label);
 			QRadioButton *radio = new QRadioButton();
+			radio->setFixedWidth(radio->sizeHint().width() * 1.5);
 
 			QObject::connect(radio, SIGNAL(toggled(bool)), this,
 					SLOT(enableOkButton()));

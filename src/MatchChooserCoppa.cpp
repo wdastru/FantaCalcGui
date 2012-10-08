@@ -25,6 +25,7 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 		}
 
 		buttons[i] = new QRadioButton();
+		buttons[i]->setFixedWidth(buttons[i]->sizeHint().width() * 2.0);
 
 		//qDebug() << QString::number(i) << " " << QString::number(i % 4);
 

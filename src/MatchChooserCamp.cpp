@@ -26,6 +26,7 @@ MatchChooserCamp::MatchChooserCamp(QWidget *parent) :
 
 		for (int j = 0; j < 4; ++j) {
 			buttons[i][j] = new QRadioButton();
+			buttons[i][j]->setFixedWidth(buttons[i][j]->sizeHint().width() * 2.0);
 		}
 
 		//qDebug() << QString::number(i) << " " << QString::number(i % 4);
