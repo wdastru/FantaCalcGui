@@ -958,15 +958,39 @@ void Fanta::calculateSfide() {
 	QString winner, loser, team;
 	int longerName = max(this->getTeamName(0).size(), this->getTeamName(1).size());
 
-	/*
-	 *  difensori - attaccanti
-	 */
-
 	QString def0 = QString::fromStdString(Fanta::teamOrderedByRuolo[0][1].at(0).Nome) \
 				+ " (" \
 				+ my::toQString<float>(Fanta::teamOrderedByRuolo[0][1].at(0).VotoGazzetta) \
 				+ ", " \
 				+ QString::fromStdString(this->getTeamName(0)) \
+				+ ")";
+
+	QString cen0 = QString::fromStdString(Fanta::teamOrderedByRuolo[0][2].at(0).Nome) \
+				+ " (" \
+				+ my::toQString<float>(Fanta::teamOrderedByRuolo[0][2].at(0).VotoGazzetta) \
+				+ ", " \
+				+ QString::fromStdString(this->getTeamName(0)) \
+				+ ")";
+
+	QString att0 = QString::fromStdString(Fanta::teamOrderedByRuolo[0][3].at(0).Nome) \
+				+ " (" \
+				+ my::toQString<float>(Fanta::teamOrderedByRuolo[0][3].at(0).VotoGazzetta) \
+				+ ", " \
+				+ QString::fromStdString(this->getTeamName(0)) \
+				+ ")";
+
+	QString def1 = QString::fromStdString(Fanta::teamOrderedByRuolo[1][1].at(0).Nome) \
+				+ " (" \
+				+ my::toQString<float>(Fanta::teamOrderedByRuolo[1][1].at(0).VotoGazzetta) \
+				+ ", " \
+				+ QString::fromStdString(this->getTeamName(1)) \
+				+ ")";
+
+	QString cen1 = QString::fromStdString(Fanta::teamOrderedByRuolo[1][2].at(0).Nome) \
+				+ " (" \
+				+ my::toQString<float>(Fanta::teamOrderedByRuolo[1][2].at(0).VotoGazzetta) \
+				+ ", " \
+				+ QString::fromStdString(this->getTeamName(1)) \
 				+ ")";
 
 	QString att1 = QString::fromStdString(Fanta::teamOrderedByRuolo[1][3].at(0).Nome) \
@@ -975,6 +999,10 @@ void Fanta::calculateSfide() {
 				+ ", " \
 				+ QString::fromStdString(this->getTeamName(1)) \
 				+ ")";
+
+	/*
+	 *  difensori - attaccanti
+	 */
 
 	if (Fanta::teamOrderedByRuolo[0][1].at(0).VotoGazzetta
 			> Fanta::teamOrderedByRuolo[1][3].at(0).VotoGazzetta) {
@@ -1011,20 +1039,6 @@ void Fanta::calculateSfide() {
 	 *  centrocampisti - centrocampisti
 	 */
 
-	QString cen0 = QString::fromStdString(Fanta::teamOrderedByRuolo[0][2].at(0).Nome) \
-				+ " (" \
-				+ my::toQString<float>(Fanta::teamOrderedByRuolo[0][2].at(0).VotoGazzetta) \
-				+ ", " \
-				+ QString::fromStdString(this->getTeamName(0)) \
-				+ ")";
-
-	QString cen1 = QString::fromStdString(Fanta::teamOrderedByRuolo[1][2].at(0).Nome) \
-				+ " (" \
-				+ my::toQString<float>(Fanta::teamOrderedByRuolo[1][2].at(0).VotoGazzetta) \
-				+ ", " \
-				+ QString::fromStdString(this->getTeamName(1)) \
-				+ ")";
-
 	if (Fanta::teamOrderedByRuolo[0][2].at(0).VotoGazzetta
 			> Fanta::teamOrderedByRuolo[1][2].at(0).VotoGazzetta) {
 		Fanta::sfide[0]++;
@@ -1060,20 +1074,6 @@ void Fanta::calculateSfide() {
 	 *  attaccanti - difensori
 	 */
 
-	QString att0 = QString::fromStdString(Fanta::teamOrderedByRuolo[0][3].at(0).Nome) \
-				+ " (" \
-				+ my::toQString<float>(Fanta::teamOrderedByRuolo[0][3].at(0).VotoGazzetta) \
-				+ ", " \
-				+ QString::fromStdString(this->getTeamName(0)) \
-				+ ")";
-
-	QString def1 = QString::fromStdString(Fanta::teamOrderedByRuolo[1][1].at(0).Nome) \
-				+ " (" \
-				+ my::toQString<float>(Fanta::teamOrderedByRuolo[1][1].at(0).VotoGazzetta) \
-				+ ", " \
-				+ QString::fromStdString(this->getTeamName(1)) \
-				+ ")";
-
 	if (Fanta::teamOrderedByRuolo[0][3].at(0).VotoGazzetta
 			> Fanta::teamOrderedByRuolo[1][1].at(0).VotoGazzetta) {
 		Fanta::sfide[0]++;
@@ -1087,8 +1087,8 @@ void Fanta::calculateSfide() {
 		Fanta::sfide[1]++;
 
 		team = STR_MOD->leftQString(QString::fromStdString(this->getTeamName(1)), longerName);
-		winner = def0;
-		loser = att1;
+		winner = def1;
+		loser = att0;
 
 	} else {
 
