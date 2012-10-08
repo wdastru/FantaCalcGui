@@ -114,6 +114,8 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 		 * * * * * * */
 	}
 
+	setData();
+
 	//qDebug() << "Out of MatchChooserCoppa::MatchChooserCoppa(QWidget *parent)";
 }
 

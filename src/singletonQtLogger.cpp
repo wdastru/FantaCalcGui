@@ -553,7 +553,6 @@ void singletonQtLogger::on_uploadCampButton_clicked() {
 	}
 
 	MatchChooserCamp *matchChooserCamp = new MatchChooserCamp();
-	matchChooserCamp->setData();
 	matchChooserCamp->exec();
 
 }
@@ -587,7 +586,6 @@ void singletonQtLogger::on_uploadCoppaButton_clicked() {
 	}
 
 	MatchChooserCoppa *matchChooserCoppa = new MatchChooserCoppa();
-	matchChooserCoppa->setData();
 	matchChooserCoppa->exec();
 
 }

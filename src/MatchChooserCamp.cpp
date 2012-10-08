@@ -112,6 +112,8 @@ MatchChooserCamp::MatchChooserCamp(QWidget *parent) :
 		 * * * * * * */
 	}
 
+	setData();
+
 	//qDebug() << "Out of MatchChooserCamp::MatchChooserCamp(QWidget *parent)";
 }
 
