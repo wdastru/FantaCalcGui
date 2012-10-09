@@ -25,7 +25,7 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 		}
 
 		buttons[i] = new QRadioButton();
-		buttons[i]->setFixedWidth(buttons[i]->sizeHint().width() * 2.0);
+		buttons[i]->setFixedHeight(buttons[i]->sizeHint().height());
 
 		//qDebug() << QString::number(i) << " " << QString::number(i % 4);
 
@@ -82,7 +82,7 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 			matches.push_back(str);
 
 			QStringList list = str.split(QRegExp("\\/"),
-					QString::SkipEmptyParts);
+					QString::KeepEmptyParts);
 
 			//int i = list.at(0).at(3).digitValue();
 			//int j = list.at(0).at(2).digitValue();
@@ -104,6 +104,14 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 			}
 
 			buttons[i]->setStyleSheet(style);
+			if ((list.at(1) != "" && list.at(1) != "-")
+					&& (list.at(2) != "" && list.at(2) != "-")) {
+				buttons[i]->setText(list.at(1) + "-" + list.at(2));
+			} else {
+				buttons[i]->setText("-");
+			}
+			buttons[i]->setFixedWidth(buttons[i]->sizeHint().width());
+
 			++i;
 		}
 	} else {
@@ -288,7 +296,8 @@ void MatchChooserCoppa::quit() {
 
 		QString title = "ATTENZIONE!!!";
 
-		QStringList items = match.split(QRegExp("\\/"), QString::SkipEmptyParts);
+		QStringList items = match.split(QRegExp("\\/"),
+				QString::SkipEmptyParts);
 
 		if (items.size() == 1
 				|| (items.at(1) == "-" && items.at(2) == "-"

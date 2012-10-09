@@ -26,7 +26,7 @@ MatchChooserCamp::MatchChooserCamp(QWidget *parent) :
 
 		for (int j = 0; j < 4; ++j) {
 			buttons[i][j] = new QRadioButton();
-			buttons[i][j]->setFixedWidth(buttons[i][j]->sizeHint().width() * 2.0);
+			buttons[i][j]->setFixedHeight(buttons[i][j]->sizeHint().height());
 		}
 
 		//qDebug() << QString::number(i) << " " << QString::number(i % 4);
@@ -86,7 +86,7 @@ MatchChooserCamp::MatchChooserCamp(QWidget *parent) :
 			matches.push_back(str);
 
 			QStringList list = str.split(QRegExp("\\/"),
-					QString::SkipEmptyParts);
+					QString::KeepEmptyParts);
 
 			int i = list.at(0).at(3).digitValue();
 			int j = list.at(0).at(2).digitValue();
@@ -96,13 +96,21 @@ MatchChooserCamp::MatchChooserCamp(QWidget *parent) :
 			//qDebug() << str << " " << str.indexOf(QRegExp("a[0-3][0-6][0-3]\/\/\/\/\/"));
 
 			if ((str.indexOf(QRegExp("a[0-3][0-6][0-3]\\/\\/\\/\\/\\/")) == -1)
-					&& (str.indexOf(QRegExp("a[0-3][0-6][0-3]\\/-\\/-\\/-\\/-\\/")) == -1)) {
+					&& (str.indexOf(
+							QRegExp("a[0-3][0-6][0-3]\\/-\\/-\\/-\\/-\\/"))
+							== -1)) {
 				style = "background:#FF0000"; // risultato gia' presente
 			} else {
 				style = "background:#00FF00"; // risultato mancante
 			}
 
 			buttons[4 * j + k][i]->setStyleSheet(style);
+			if ((list.at(1) != "" && list.at(1) != "-")
+					&& (list.at(2) != "" && list.at(2) != "-")) {
+				buttons[4 * j + k][i]->setText(list.at(1) + "-" + list.at(2));
+			} else {
+				buttons[4 * j + k][i]->setText("-");
+			}
 		}
 	} else {
 		qDebug() << fileDatiCamp->fileName() + " does not exist";
@@ -178,6 +186,7 @@ void MatchChooserCamp::setData() {
 				continue; // skip empty lines
 			} else if (str.indexOf(
 					QRegExp("super.*longName.*super.*longName.*")) != -1) {
+
 				str.replace(QRegExp("\\$super"), "");
 				str.replace(QRegExp("\\$longName"), "");
 				str.replace(QRegExp("\\[[0-9]\\]"), "");
@@ -187,8 +196,6 @@ void MatchChooserCamp::setData() {
 				str.replace(QRegExp("\\]"), "");
 				str.replace(QRegExp("'"), "");
 				lines.push_back(str);
-
-				//qDebug() << str;
 
 			}
 		}
@@ -256,7 +263,8 @@ void MatchChooserCamp::quit() {
 
 		//qDebug() << match;
 
-		QStringList items = match.split(QRegExp("\\/"), QString::SkipEmptyParts);
+		QStringList items = match.split(QRegExp("\\/"),
+				QString::SkipEmptyParts);
 
 		if (items.size() == 1
 				|| (items.at(1) == "-" && items.at(2) == "-"
