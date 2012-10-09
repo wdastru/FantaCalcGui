@@ -108,7 +108,7 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 					&& (list.at(2) != "" && list.at(2) != "-")) {
 				buttons[i]->setText(list.at(1) + "-" + list.at(2));
 			} else {
-				buttons[i]->setText("-");
+				buttons[i]->setText("  -   ");
 			}
 			buttons[i]->setFixedWidth(buttons[i]->sizeHint().width());
 

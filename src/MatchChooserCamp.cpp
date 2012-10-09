@@ -109,7 +109,7 @@ MatchChooserCamp::MatchChooserCamp(QWidget *parent) :
 					&& (list.at(2) != "" && list.at(2) != "-")) {
 				buttons[4 * j + k][i]->setText(list.at(1) + "-" + list.at(2));
 			} else {
-				buttons[4 * j + k][i]->setText("-");
+				buttons[4 * j + k][i]->setText(" - ");
 			}
 		}
 	} else {
