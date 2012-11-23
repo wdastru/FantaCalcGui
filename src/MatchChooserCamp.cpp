@@ -254,13 +254,6 @@ void MatchChooserCamp::quit() {
 
 			if (matches.at(i).indexOf(chosenMatch) != -1) {
 				match = matches.at(i);
-				//if ((i > 27 && i < 56) || (i > 83)) {
-				//	qDebug() << "ritorno : " << i;
-				//	ritorno = true;
-				//} else {
-				//	qDebug() << "andata : " << i;
-				//	ritorno = false;
-				//}
 				break;
 			}
 		}
