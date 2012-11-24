@@ -322,16 +322,7 @@ void MatchChooserCamp::quit() {
 					file->write(matches.at(i).toStdString().c_str());
 				} else {
 					QString line;
-					line += chosenMatch;
-					line += "/";
-					line += goalHome
-					+ "/"
-					+ goalAway
-					+ "/";
-					line += puntiHome
-					+ "/"
-					+ puntiAway
-					+ "/";
+					line += chosenMatch + "/" + goalHome + "/" + goalAway	+ "/" + puntiHome + "/"	+ puntiAway	+ "/";
 					for (int j = 0; j < FANTA->getScorersSize(0); ++j) {
 						line += QString::fromStdString(FANTA->getScorer(0, j))
 						+ "/";
