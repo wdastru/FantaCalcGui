@@ -5,7 +5,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "FantaCalcGui"
-!define PRODUCT_VERSION "v3.3.1"
+!define PRODUCT_VERSION "v3.3.2"
 !define PRODUCT_PUBLISHER "EPTADONE Software Inc."
 !define PRODUCT_WEB_SITE "http://www.cim.unito.it/private/fantacalcio/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\FantaCalcGui.exe"
