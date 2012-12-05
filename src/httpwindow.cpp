@@ -229,7 +229,8 @@ void HttpWindow::upload(QString _file) {
 	dataToSend.append(file.readAll());
 	dataToSend.append(crlf + "--" + bound + "--" + crlf);
 
-	QUrl url(THE_REPO->getUrl() + "test.php");
+	//QUrl url(THE_REPO->getUrl() + "test.php");
+	QUrl url(THE_REPO->getUrl() + "uploader_FantaCalcGui.php");
 	QNetworkRequest * req = new QNetworkRequest();
 	req->setUrl(url);
 	req->setHeader(QNetworkRequest::ContentTypeHeader,
