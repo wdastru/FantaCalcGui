@@ -18,6 +18,7 @@ public:
 
 private slots:
 	void quit();
+	void deleteResult();
 
 private:
 	Ui::MatchChooserCampClass ui;
