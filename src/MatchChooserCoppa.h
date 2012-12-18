@@ -5,7 +5,7 @@
 #include <QLabel>
 #include <QRadioButton>
 
-#include "ui_MatchChooserCamp.h"
+#include "ui_MatchChooserCoppa.h"
 
 class MatchChooserCoppa: public QDialog {
 Q_OBJECT
@@ -18,9 +18,11 @@ public:
 
 private slots:
 	void quit();
+	void deleteResult();
+
 
 private:
-	Ui::MatchChooserCampClass ui;
+	Ui::MatchChooserCoppaClass ui;
 
 	QLabel *labels[20][2];
 	QRadioButton *buttons[20];
