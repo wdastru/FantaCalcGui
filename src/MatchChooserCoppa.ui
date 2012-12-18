@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>300</width>
-    <height>400</height>
+    <width>492</width>
+    <height>408</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,8 +24,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>278</width>
-        <height>339</height>
+        <width>472</width>
+        <height>353</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
@@ -56,11 +56,42 @@
     </widget>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="deleteButton">
+       <property name="text">
+        <string>Delete</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="okButton">
+       <property name="text">
+        <string>OK</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cancelButton">
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
@@ -68,39 +99,56 @@
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
+   <sender>deleteButton</sender>
+   <signal>clicked()</signal>
    <receiver>MatchChooserCoppaClass</receiver>
-   <slot>close()</slot>
+   <slot>deleteResult()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>337</x>
-     <y>455</y>
+     <x>257</x>
+     <y>384</y>
     </hint>
     <hint type="destinationlabel">
-     <x>337</x>
-     <y>240</y>
+     <x>245</x>
+     <y>203</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
+   <sender>okButton</sender>
+   <signal>clicked()</signal>
    <receiver>MatchChooserCoppaClass</receiver>
    <slot>quit()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>337</x>
-     <y>455</y>
+     <x>348</x>
+     <y>384</y>
     </hint>
     <hint type="destinationlabel">
-     <x>337</x>
-     <y>240</y>
+     <x>245</x>
+     <y>203</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cancelButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MatchChooserCoppaClass</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>439</x>
+     <y>384</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>245</x>
+     <y>203</y>
     </hint>
    </hints>
   </connection>
  </connections>
  <slots>
   <slot>quit()</slot>
+  <slot>deleteResult()</slot>
  </slots>
 </ui>
