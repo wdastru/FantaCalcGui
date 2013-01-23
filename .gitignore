@@ -3,7 +3,6 @@ build/
 installer/*.exe
 *~
 src/revision.h
-*.moc
 *.o
 src/Test/test
 CMakeCache.txt
