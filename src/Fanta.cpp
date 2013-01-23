@@ -5,14 +5,15 @@
  *      Author: WAleViolaeIvan
  */
 
+#include <QtWidgets/QMessageBox>
+#include <QtCore/QDebug>
+#include <QtCore/QObject>
+
 #include "Fanta.h"
 #include "defines.h"
 #include "singletonQtLogger.h"
 #include "StringModifier.h"
 #include "Repository.h"
-#include <QMessageBox>
-#include <QDebug>
-#include <QObject>
 
 Fanta * Fanta::Inst() {
 	if (pInstance == NULL) {

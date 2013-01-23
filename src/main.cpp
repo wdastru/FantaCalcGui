@@ -1,7 +1,8 @@
-#include <QDebug>
+#include <QtCore/QDebug>
 #include <QtGui/QApplication>
-#include <QtGui/QStyleFactory>
+#include <QtWidgets/QStyleFactory>
 #include <QtCore/QObject>
+
 #include "singletonQtLogger.h"
 #include "Repository.h"
 #include "IniFilePopulator.h"

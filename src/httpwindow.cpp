@@ -39,10 +39,10 @@
  **
  ****************************************************************************/
 
-#include <QtGui>
+#include <QtGui/QtGui>
 #include <QtNetwork/QtNetwork>
-#include <QDebug>
-#include <QUrl>
+#include <QtCore/Debug>
+#include <QtCore/QUrl>
 
 #include "defines.h"
 #include "Repository.h"

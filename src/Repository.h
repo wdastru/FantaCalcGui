@@ -5,8 +5,8 @@
  *      Author: WAleViolaeIvan
  */
 
-#include <QString>
-#include <QFont>
+#include <QtCore/QString>
+#include <QtGui/QFont>
 
 #ifndef REPOSITORY_H_
 #define REPOSITORY_H_

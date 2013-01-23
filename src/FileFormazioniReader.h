@@ -1,7 +1,7 @@
 #ifndef FILEFORMAZIONIREADER_H
 #define FILEFORMAZIONIREADER_H
 
-#include <QtGui/QDialog>
+#include <QtWidgets/QDialog>
 
 #include "defines.h"
 

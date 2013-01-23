@@ -41,9 +41,9 @@
 #ifndef DOWNLOADER_H
 #define DOWNLOADER_H
 
-#include <QDialog>
+#include <QtWidgets/QDialog>
 #include <QtNetwork/QNetworkAccessManager>
-#include <QUrl>
+#include <QtCore/QUrl>
 
 #include "singletonQtLogger.h"
 #include "defines.h"

@@ -1,9 +1,9 @@
 #ifndef MATCHCHOOSERCAMP_H
 #define MATCHCHOOSERCAMP_H
 
-#include <QtGui/QDialog>
-#include <QLabel>
-#include <QRadioButton>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QRadioButton>
 
 #include "ui_MatchChooserCamp.h"
 

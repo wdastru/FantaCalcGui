@@ -38,8 +38,8 @@
  **
  ****************************************************************************/
 
-#include <QtGui>
-#include <QDebug>
+#include <QtGui/QtGui>
+#include <QtCore/QDebug>
 
 #include "httpwindow.h"
 #include "Downloader.h"

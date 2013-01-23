@@ -9,7 +9,7 @@
 #define STRINGMODIFIER_H_
 
 #include "string"
-#include <QString>
+#include <QtCore/QString>
 #include "vector"
 
 class StringModifier {
