@@ -232,7 +232,7 @@ void MatchChooserCamp::quit() {
 
 				//qDebug() << "button[" << 4*j+k << "][" << i << "]";
 				if (buttons[4 * j + k][i]->isChecked()) {
-					//qDebug() << "checked";
+					qDebug() << "checked";
 					chosenMatch = "a" + QString::number(k) + QString::number(j)
 							+ QString::number(i);
 					home = labels[4 * j + k][0]->text();
@@ -285,12 +285,12 @@ void MatchChooserCamp::quit() {
 			message += "verranno sostituiti con :<br><br>";
 		}
 
-		squadraHome = QString::fromStdString(FANTA->getTeamName(1));
-		squadraAway = QString::fromStdString(FANTA->getTeamName(0));
-		goalHome = my::toQString<unsigned int>(FANTA->getGoals(1));
-		goalAway = my::toQString<unsigned int>(FANTA->getGoals(0));
-		puntiHome = my::toQString<double>(FANTA->getTotal(1));
-		puntiAway = my::toQString<double>(FANTA->getTotal(0));
+		squadraHome = QString::fromStdString(FANTA->getTeamName(0));
+		squadraAway = QString::fromStdString(FANTA->getTeamName(1));
+		goalHome = my::toQString<unsigned int>(FANTA->getGoals(0));
+		goalAway = my::toQString<unsigned int>(FANTA->getGoals(1));
+		puntiHome = my::toQString<double>(FANTA->getTotal(0));
+		puntiAway = my::toQString<double>(FANTA->getTotal(1));
 
 		message += squadraHome + " : " + goalHome + " (" + puntiHome + ")";
 		message += "<br>";
@@ -313,7 +313,7 @@ void MatchChooserCamp::quit() {
 		//qDebug() << "In void MatchChooserCamp::quit(). 2";
 
 		if (reply == QMessageBox::Yes) {
-			//qDebug() << "In void MatchChooserCamp::quit() --> yes";
+			qDebug() << "In void MatchChooserCamp::quit() --> yes";
 
 			QFile *file = new QFile(THE_REPO->getDownloadPath() + "datiCampionato.txt");
 			file->open(QIODevice::WriteOnly);
@@ -322,7 +322,13 @@ void MatchChooserCamp::quit() {
 					file->write(matches.at(i).toStdString().c_str());
 				} else {
 					QString line;
-					line += chosenMatch + "/" + goalHome + "/" + goalAway	+ "/" + puntiHome + "/"	+ puntiAway	+ "/";
+
+					if (chosenMatch.at(3) == 0 || chosenMatch.at(3) == 2) {
+						line += chosenMatch + "/" + goalAway + "/" + goalHome + "/" + puntiAway + "/"	+ puntiHome	+ "/";
+					} else {
+						line += chosenMatch + "/" + goalHome + "/" + goalAway + "/" + puntiHome + "/"	+ puntiAway	+ "/";
+					}
+
 					for (int j = 0; j < FANTA->getScorersSize(0); ++j) {
 						line += QString::fromStdString(FANTA->getScorer(0, j))
 						+ "/";
@@ -333,6 +339,7 @@ void MatchChooserCamp::quit() {
 					}
 
 					file->write(line.toStdString().c_str());
+					qDebug() << "In void MatchChooserCamp::quit(). " << line;
 
 				}
 				file->write("\n");
