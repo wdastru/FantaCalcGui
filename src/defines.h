@@ -11,8 +11,16 @@
 #include <QtCore/QTime>
 #include "toString.h"
 
+#ifndef TRUE
+#define TRUE true
+#endif /* TRUE */
+
+#ifndef FALSE
+#define FALSE false
+#endif /* FALSE */
+
 #ifndef ERROR_STYLE
-#define ERROR_STYLE(msg) <span style='color:#FF0000;'> ERROR : msg</span>
+#define ERROR_STYLE(msg) <span style='color:#FF0000;'> ERR : msg</span>
 #endif /* ERROR_STYLE */
 
 #ifndef UPDATE_STYLE
@@ -24,7 +32,7 @@
 #endif /* WARNING_STYLE */
 
 #ifndef FATAL_STYLE
-#define FATAL_STYLE(msg) <span style='color:#FF0000; font-weight:bold'> FATAL ERROR : msg</span>
+#define FATAL_STYLE(msg) <span style='color:#FF0000; font-weight:bold'> FATAL ERR : msg</span>
 #endif /* FATAL_STYLE */
 
 #ifndef HOMEAWAY_BOX_IS_CHECKED
@@ -46,7 +54,7 @@
 #ifndef TYPE_OF_LOG_MSG
 #define TYPE_OF_LOG_MSG
 #define INFO  "INFO"
-#define ERROR "ERROR"
+#define ERR "ERROR"
 #define FATAL "FATAL"
 #define WARN  "WARN"
 #define DBG "DBG"

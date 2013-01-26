@@ -3,7 +3,8 @@
 #include <QtCore/QDebug>
 #include <QtCore/QObject>
 #include <QtGui/QMessageBox>
-#include <QtGui>
+#include <QtGui/QInputDialog>
+//#include <QtGui>
 #include "Fanta.h"
 #include "Repository.h"
 
@@ -339,7 +340,7 @@ unsigned int FileFormazioniReader::execute() {
 					LOG(DBG, QObject::tr("    non trovato %1.").arg(QString::fromStdString(line)));
 
 					if (Levenshteins.empty()) {
-						LOG(ERROR,
+						LOG(ERR,
 								"ATTENZIONE !!! Nessun giocatore trovato.<br/>");
 					} else {
 						LOG(DBG, "    trovati " \
@@ -469,7 +470,7 @@ unsigned int FileFormazioniReader::execute() {
 						break;
 
 					case PLAYER_REPEATED:
-						LOG(ERROR, \
+						LOG(ERR, \
 							QObject::tr("<br>    ATTENZIONE !!!  -> %1 ( %2 ) ripetuto.<br/>    Controllare il file di input.").arg( \
 								QString::fromStdString( \
 										STR_MOD->msk(v_Found.at(0), \
@@ -494,7 +495,7 @@ unsigned int FileFormazioniReader::execute() {
 						break;
 
 					case PLAYER_GDV_NOT_PLAYED:
-						LOG(ERROR, \
+						LOG(ERR, \
 							QObject::tr("<br/>    ATTENZIONE !!!  -> %1 ( %2 ).<br/>    Giocatore indicato con GDV senza che abbia giocato !!!<br/>    Controllare il file di input.").arg( \
 								QString::fromStdString( \
 										STR_MOD->msk(v_Found.at(0), \
@@ -518,7 +519,7 @@ unsigned int FileFormazioniReader::execute() {
 						break;
 
 					case PLAYER_GDP_NOT_PLAYED:
-						LOG(ERROR, \
+						LOG(ERR, \
 							QObject::tr("<br/>    ATTENZIONE !!!  -> %1 ( %2 ).<br/>    Giocatore indicato con GDP senza che abbia giocato !!!<br/>    Controllare il file di input.").arg( \
 								QString::fromStdString( \
 										STR_MOD->msk(v_Found.at(0), \
@@ -542,7 +543,7 @@ unsigned int FileFormazioniReader::execute() {
 						break;
 
 					case PLAYER_GDV_NO_GOAL:
-						LOG(ERROR, \
+						LOG(ERR, \
 							QObject::tr("<br/>    ATTENZIONE !!!  -> %1 ( %2 ).<br/>    Giocatore indicato con GDV senza che abbia segnato !!!<br/>    Controllare il file di input.").arg( \
 								QString::fromStdString( \
 										STR_MOD->msk(v_Found.at(0), \
@@ -566,7 +567,7 @@ unsigned int FileFormazioniReader::execute() {
 						break;
 
 					case PLAYER_GDP_NO_GOAL:
-						LOG(ERROR, \
+						LOG(ERR, \
 							QObject::tr("<br/>    ATTENZIONE !!!  -> %1 ( %2 ).<br/>    Giocatore indicato con GDP senza che abbia segnato !!!<br/>    Controllare il file di input.").arg( \
 								QString::fromStdString( \
 										STR_MOD->msk(v_Found.at(0), \
@@ -590,7 +591,7 @@ unsigned int FileFormazioniReader::execute() {
 						break;
 
 					case PLAYER_ERROR:
-						LOG(ERROR, \
+						LOG(ERR, \
 								"<br>    ATTENZIONE !!!  -> PLAYER ERROR.<br/>    Controllare il file di input.");
 
 						msgBox.setInformativeText( \
@@ -639,7 +640,7 @@ std::vector<std::string> FileFormazioniReader::findLevenstheins(
 					}
 				} else {
 					LOG(
-							ERROR,
+							ERR,
 							"In FileFormazioniReader::findLevenstheins(line)  -> il file della Gazzetta non sembra essere valido !");
 					//return FILEFORMREADER_BAD_GAZ_FILE;
 				}

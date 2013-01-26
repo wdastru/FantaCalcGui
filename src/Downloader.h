@@ -41,7 +41,7 @@
 #ifndef DOWNLOADER_H
 #define DOWNLOADER_H
 
-#include <QtWidgets/QDialog>
+#include <QtGui/QDialog>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtCore/QUrl>
 
@@ -64,7 +64,7 @@ class Downloader: public QDialog {
 	public:
 		Downloader(QWidget *parent = 0, std::vector<QUrl>* _urls =
 				new std::vector<QUrl>, std::vector<QString>* _savePaths =
-				new std::vector<QString>, bool silent = FALSE);
+				new std::vector<QString>, bool silent = false);
 
 		bool requestSucceded();
 		bool requestAborted();

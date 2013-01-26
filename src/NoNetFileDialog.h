@@ -4,7 +4,7 @@
  * @ Project : FantaCalcGuiNew
  * @ File Name : NoNetFileDialog.h
  * @ Date : 16/07/2011
- * @ Author : Walter Dastrù
+ * @ Author : Walter Dastrï¿½
  *
  */
 

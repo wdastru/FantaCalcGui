@@ -349,7 +349,7 @@ void singletonQtLogger::goOn() {
 		this->ui.uploadCoppaButton->setEnabled(true);
 
 	} catch (...) {
-		LOG(ERROR, "Exception caught after FANTA->execute().");
+		LOG(ERR, "Exception caught after FANTA->execute().");
 		qDebug() << "In singletonQtLogger::goOn() --> exception caught after FANTA->execute().";
 	}
 }

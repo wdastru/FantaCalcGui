@@ -1,6 +1,6 @@
 #include <QtCore/QDebug>
 #include <QtGui/QApplication>
-#include <QtWidgets/QStyleFactory>
+#include <QtGui/QStyleFactory>
 #include <QtCore/QObject>
 
 #include "singletonQtLogger.h"

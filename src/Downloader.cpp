@@ -160,7 +160,7 @@ void Downloader::downloadFiles() {
 		} else {
 			this->downloadFailures++;
 			qDebug() << tr("In void Downloader::downloadFiles(). Download of %1 failed.").arg(QFileInfo(this->savePaths->at(i)).fileName());
-			LOG(ERROR, tr("Scaricamento di %1 fallito.").arg(QFileInfo(this->savePaths->at(i)).fileName()));
+			LOG(ERR, tr("Scaricamento di %1 fallito.").arg(QFileInfo(this->savePaths->at(i)).fileName()));
 		}
 
 		//qDebug() << tr("Download successes : %1").arg(my::toQString<unsigned int>(this->downloadSuccesses));

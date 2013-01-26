@@ -2,6 +2,7 @@
 
 #include <QtCore/QDebug>
 #include <QtCore/QUrl>
+#include <QtCore/QString>
 #include <QtCore/QFileInfo>
 
 #include <sstream>
@@ -284,7 +285,7 @@ void ChooseFiles::doDownload() {
 		this->downloadSuccess = true;
 	} else {
 		if (!this->filesDownloader->wasCancelClicked()) {
-			LOG(ERROR, "The download of files failed.");
+			LOG(ERR, "The download of files failed.");
 			qDebug() << "In ChooseFiles::doDownload() --> request not succeded.";
 		}
 
@@ -590,7 +591,7 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 		return EXIT_SUCCESS;
 	} else {
 		qDebug() << "In ChooseFiles::createFileSquadreFromWebFiles() --> download was not successful.";
-		LOG(ERROR, "Download was not successful.");
+		LOG(ERR, "Download was not successful.");
 		return EXIT_FAILURE;
 	}
 }

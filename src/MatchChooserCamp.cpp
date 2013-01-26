@@ -1,10 +1,10 @@
 #include "MatchChooserCamp.h"
 
-#include <QFile>
-#include <QDebug>
-#include <QRegExp>
-#include <QMessageBox>
-#include <QFrame>
+#include <QtCore/QFile>
+#include <QtCore/QDebug>
+#include <QtCore/QRegExp>
+#include <QtGui/QMessageBox>
+#include <QtGui/QFrame>
 
 #include "defines.h"
 #include "Fanta.h"
@@ -362,7 +362,7 @@ void MatchChooserCamp::quit() {
 			 * completare ?
 			 * * * * * * * */
 		} else {
-			LOG(ERROR, "In void MatchChooserCamp::quit() --> ???");
+			LOG(ERR, "In void MatchChooserCamp::quit() --> ???");
 			/*
 			 * TODO
 			 * completare ?
@@ -487,7 +487,7 @@ void MatchChooserCamp::deleteResult() {
 			 * completare ?
 			 * * * * * * * */
 		} else {
-			LOG(ERROR, "In void MatchChooserCamp::quit() --> ???");
+			LOG(ERR, "In void MatchChooserCamp::quit() --> ???");
 			/*
 			 * TODO
 			 * completare ?

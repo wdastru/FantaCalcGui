@@ -17,7 +17,7 @@
 
 #include <QtCore/QDir>
 #include <QtCore/QTextStream>
-#include <QObject>
+#include <QtCore/QObject>
 #include <QtCore/QDebug>
 
 IniFileManager* IniFileManager::Inst() {

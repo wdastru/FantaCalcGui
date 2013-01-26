@@ -1,8 +1,8 @@
 #ifndef INIFILEPOPULATOR_H
 #define INIFILEPOPULATOR_H
 
-#include <QtWidgets/QDialog>
-#include <QtWidgets/QFileDialog>
+#include <QtGui/QFileDialog>
+#include <QtGui/QDialog>
 
 #include "IniFileManager.h"
 #include "ui_IniFilePopulator.h"
