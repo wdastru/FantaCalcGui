@@ -130,9 +130,6 @@ void Test::gazzettaFileReader_getOutput() {
 	GazzettaFileReader * gazzettaFileReader =
 			new GazzettaFileReader(
 					"/home/waleviolaeivan/Sorgenti/FantaCalcGuiNew/src/TestFiles/12.txt");
-	FileFormazioniReader * fileFormazioniReader =
-			new FileFormazioniReader(
-					"/home/waleviolaeivan/Sorgenti/FantaCalcGuiNew/src/TestFiles/real_patelavache_12.txt");
 
 	std::vector < std::vector<std::string> > Gazzetta;
 	Gazzetta.resize(26);

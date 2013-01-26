@@ -1,5 +1,6 @@
 #include <QtCore/QObject>
 #include <QtCore/QDebug>
+#include <QtCore/QDir>
 
 #include "Repository.h"
 #include "IniFileManager.h"
@@ -67,7 +68,7 @@ bool IniFilePopulator::createDirs() {
 				LOG(DBG, QObject::tr("Creata cartella %1").arg(paths->at(i)));
 				retVal = retVal && true;
 			} else {
-				LOG(ERROR,
+				LOG(ERR,
 						QObject::tr(
 								"Non e' stato possibile creare la cartella %1").arg(
 								paths->at(i)));
@@ -265,7 +266,7 @@ void IniFilePopulator::toggleDebugStatus() {
 		//THE_LOGGER->ui.plainTextEdit->setPlainText(THE_LOGGER->fileContent.replace("&nbsp;", " "));
 		//qDebug() << "void IniFilePopulator::toggleDebugStatus() --> FALSE is checked.";
 	} else {
-		LOG(ERROR,
+		LOG(ERR,
 				"void IniFilePopulator::toggleDebugStatus() --> status is not defined: set to FALSE.");
 		THE_REPO->debugStatus = FALSE;
 	}

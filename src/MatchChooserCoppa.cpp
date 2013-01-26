@@ -1,10 +1,10 @@
 #include "MatchChooserCoppa.h"
 
-#include <QFile>
-#include <QDebug>
-#include <QRegExp>
-#include <QMessageBox>
-#include <QFrame>
+#include <QtCore/QFile>
+#include <QtCore/QDebug>
+#include <QtCore/QRegExp>
+#include <QtGui/QMessageBox>
+#include <QtGui/QFrame>
 
 #include "defines.h"
 #include "Fanta.h"
@@ -375,7 +375,7 @@ void MatchChooserCoppa::quit() {
 				 * completare ?
 				 * * * * * * * */
 			} else {
-				LOG(ERROR, "In void MatchChooserCoppa::quit() --> ???");
+				LOG(ERR, "In void MatchChooserCoppa::quit() --> ???");
 				/*
 				 * TODO
 				 * completare ?
@@ -495,7 +495,7 @@ void MatchChooserCoppa::deleteResult() {
 				 * completare ?
 				 * * * * * * * */
 			} else {
-				LOG(ERROR, "In void MatchChooserCoppa::quit() --> ???");
+				LOG(ERR, "In void MatchChooserCoppa::quit() --> ???");
 				/*
 				 * TODO
 				 * completare ?

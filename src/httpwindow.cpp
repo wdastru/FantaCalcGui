@@ -40,8 +40,9 @@
  ****************************************************************************/
 
 #include <QtGui/QtGui>
+#include <QtGui/QProgressDialog>
 #include <QtNetwork/QtNetwork>
-#include <QtCore/Debug>
+#include <QtCore/QDebug>
 #include <QtCore/QUrl>
 
 #include "defines.h"
@@ -150,7 +151,7 @@ void HttpWindow::httpFinished() {
 		this->file->remove();
 
 		LOG(
-		ERROR,
+		ERR,
 		tr("Error downloading %1 : %2.").arg(file->fileName()).arg(
 				reply->errorString()));
 

@@ -42,9 +42,9 @@ SET( HDRS
         src/singletonQtLogger.h )
 SET( UIS  
         src/authenticationdialog.ui
-    	src/ChooseFiles.ui
+        src/ChooseFiles.ui
         src/IniFilePopulator.ui
-    	src/FileFormazioniViewer.ui
+        src/FileFormazioniViewer.ui
         src/NoNetFileDialog.ui
         src/MatchChooserCamp.ui
         src/MatchChooserCoppa.ui
@@ -52,7 +52,7 @@ SET( UIS
         src/singletonQtLogger.ui )
 
 SET( TEST_SRCS 
-		src/test.cpp
+        src/test.cpp
         src/IniFileManager.cpp
         src/ChooseFiles.cpp
         src/Downloader.cpp
@@ -78,5 +78,8 @@ INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} )
 ADD_EXECUTABLE( FantaCalcGui ${SRCS} ${MOC_SRCS} ${UI_HDRS} )
 TARGET_LINK_LIBRARIES( FantaCalcGui ${QT_LIBRARIES} ${QT_QTNETWORK_LIBRARIES} ${QT_QTXML_LIBRARIES} )
 
-ADD_EXECUTABLE( test ${TEST_SRCS}  ${MOC_SRCS} ${UI_HDRS} )
-TARGET_LINK_LIBRARIES( test ${QT_LIBRARIES} ${QT_QTTEST_LIBRARIES} ${QT_QTNETWORK_LIBRARIES} ${QT_QTXML_LIBRARIES} )
+IF(UNIX) 
+	ADD_EXECUTABLE( test ${TEST_SRCS}  ${MOC_SRCS} ${UI_HDRS} )
+	TARGET_LINK_LIBRARIES( test ${QT_LIBRARIES} ${QT_QTTEST_LIBRARIES} ${QT_QTNETWORK_LIBRARIES} ${QT_QTXML_LIBRARIES} )
+ENDIF(UNIX)
+

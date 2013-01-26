@@ -41,9 +41,9 @@
 #ifndef HTTPWINDOW_H
 #define HTTPWINDOW_H
 
-#include <QDialog>
+#include <QtGui/QDialog>
 #include <QtNetwork/QNetworkAccessManager>
-#include <QUrl>
+#include <QtCore/QUrl>
 
 QT_BEGIN_NAMESPACE
 class QDialogButtonBox;

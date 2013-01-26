@@ -2,9 +2,9 @@
 #include "Downloader.h"
 #include "defines.h"
 
-#include "QFileDialog"
-#include "QDebug"
-#include "QUrl"
+#include "QtGui/QFileDialog"
+#include "QtCore/QDebug"
+#include "QtCore/QUrl"
 
 UpdatesChooser::UpdatesChooser(QList<QHash<QString, QString> >& resources,
 		QWidget *parent) :
@@ -78,7 +78,7 @@ void UpdatesChooser::checkRadioButtons() {
 				+ " download aborted.");
 
 	} else {
-		LOG(ERROR,
+		LOG(ERR,
 				pResources->at(chosenUpdate)["file"]
 				+ " download failed.");
 

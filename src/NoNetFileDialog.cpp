@@ -54,7 +54,7 @@ void NoNetFileDialog::setOpenFileNameSquadre() {
 		 THE_REPO->writeIniFile();
 		 */
 	} else {
-		LOG(ERROR,
+		LOG(ERR,
 				"In NoNetFileDialog::setOpenFileNameSquadre() --> fileNameSquadre is empty.");
 		this->fileNameSquadre = "";
 		//		openFileNameSquadreLabel->setText("");
@@ -97,7 +97,7 @@ void NoNetFileDialog::setOpenFileNameGazzetta() {
 		 THE_REPO->writeIniFile();
 		 */
 	} else {
-		LOG(ERROR,
+		LOG(ERR,
 				"In NoNetFileDialog::setOpenFileNameGazzetta() --> fileNameGazzetta is empty.");
 		this->fileNameGazzetta = "";
 	}

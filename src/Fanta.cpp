@@ -5,7 +5,7 @@
  *      Author: WAleViolaeIvan
  */
 
-#include <QtWidgets/QMessageBox>
+#include <QtGui/QMessageBox>
 #include <QtCore/QDebug>
 #include <QtCore/QObject>
 
@@ -343,84 +343,84 @@ void Fanta::execute() {
 	try {
 		this->checkGiocatoSenzaVoto();
 	} catch (...) {
-		LOG(ERROR, "Exception caught in checkGiocatoSenzaVoto().");
+		LOG(ERR, "Exception caught in checkGiocatoSenzaVoto().");
 		qDebug() << "In void Fanta::execute() --> exception caught in checkGiocatoSenzaVoto().";
 	}
 
 	try {
 		this->checkNonHaGiocato();
 	} catch (...) {
-		LOG(ERROR, "Exception caught in checkNonHaGiocato().");
+		LOG(ERR, "Exception caught in checkNonHaGiocato().");
 		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	try {
 		this->orderByRuolo();
 	} catch (...) {
-		LOG(ERROR, "In void Fanta::execute() --> exception caught in orderByRuolo().");
+		LOG(ERR, "In void Fanta::execute() --> exception caught in orderByRuolo().");
 		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	try {
 		this->fillWithNonHaGiocato();
 	} catch (...) {
-		LOG(ERROR, "Exception caught in fillWithNonHaGiocato().");
+		LOG(ERR, "Exception caught in fillWithNonHaGiocato().");
 		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	try {
 		this->substitutions();
 	} catch (...) {
-		LOG(ERROR, "Exception caught in substitutions().");
+		LOG(ERR, "Exception caught in substitutions().");
 		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	try {
 		this->calculateFantaVoto();
 	} catch (...) {
-		LOG(ERROR, "Exception caught in calculateFantaVoto().");
+		LOG(ERR, "Exception caught in calculateFantaVoto().");
 		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	try {
 		this->calculateDefenseMean();
 	} catch (...) {
-		LOG(ERROR, "Exception caught in calculateDefenseMean().");
+		LOG(ERR, "Exception caught in calculateDefenseMean().");
 		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	try {
 		this->calculateDefenseModifier();
 	} catch (...) {
-		LOG(ERROR, "Exception caught in calculateDefenseModifier().");
+		LOG(ERR, "Exception caught in calculateDefenseModifier().");
 		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	try {
 		this->calculateSfide();
 	} catch (...) {
-		LOG(ERROR, "Exception caught in calculateSfide().");
+		LOG(ERR, "Exception caught in calculateSfide().");
 		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	try {
 		this->calculateTotal();
 	} catch (...) {
-		LOG(ERROR, "Exception caught in calculateTotal().");
+		LOG(ERR, "Exception caught in calculateTotal().");
 		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	try {
 		this->calculateGoals();
 	} catch (...) {
-		LOG(ERROR, "Exception caught in calculateGoals().");
+		LOG(ERR, "Exception caught in calculateGoals().");
 		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
 	try {
 		this->calculateScorers();
 	} catch (...) {
-		LOG(ERROR, "Exception caught in calculateScorers().");
+		LOG(ERR, "Exception caught in calculateScorers().");
 		qDebug() << "In void Fanta::execute() --> exception caught in checkNonHaGiocato().";
 	}
 
@@ -584,7 +584,7 @@ QString Fanta::questionMessage(QString playerName) {
 		//qDebug() << "In Fanta::questionMessage() --> returning " + answer + ".";
 	} else {
 		answer = "Error";
-		LOG(ERROR, "In Fanta::questionMessage() --> returning " + answer + ".");
+		LOG(ERR, "In Fanta::questionMessage() --> returning " + answer + ".");
 	}
 
 	return answer;

@@ -5,13 +5,14 @@
  *      Author: WAleViolaeIvan
  */
 
+#include <QtCore/QFile>
+#include <QtCore/QDebug>
+
+#include <stdlib.h>
+
 #include "Repository.h"
 #include "defines.h"
 #include "StringModifier.h"
-
-#include <stdlib.h>
-#include <QFile>
-#include <QtCore/QDebug>
 
 Repository::Repository() {
 	/*

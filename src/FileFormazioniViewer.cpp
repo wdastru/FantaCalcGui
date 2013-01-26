@@ -3,7 +3,7 @@
 #include "defines.h"
 #include "singletonQtLogger.h"
 
-#include <QTextDocumentWriter>
+#include <QtGui/QTextDocumentWriter>
 #include <QtCore/QDebug>
 
 FileFormazioniViewer* FileFormazioniViewer::pInstance = NULL;
@@ -69,7 +69,7 @@ void FileFormazioniViewer::saveFileAndClose() {
 	} else {
 		qDebug() << "In FileFormazioniViewer::saveFileAndClose() --> write of " + this->filename + " was not successful.";
 		LOG(
-				ERROR,
+				ERR,
 				"Writing of " + this->filename + " was not successful.");
 	}
 
