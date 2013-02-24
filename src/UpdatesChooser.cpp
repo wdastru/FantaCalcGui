@@ -1,10 +1,16 @@
 #include "UpdatesChooser.h"
 #include "Downloader.h"
 #include "defines.h"
+#ifdef _WIN32
+#include "windows.h"
+#include "shellapi.h"
+#endif
 
 #include "QtGui/QFileDialog"
 #include "QtCore/QDebug"
 #include "QtCore/QUrl"
+#include "QtGui/QMessageBox"
+#include "QtCore/QRegExp"
 
 UpdatesChooser::UpdatesChooser(QList<QHash<QString, QString> >& resources,
 		QWidget *parent) :
@@ -24,6 +30,8 @@ UpdatesChooser::UpdatesChooser(QList<QHash<QString, QString> >& resources,
 			labels.push_back(label);
 			QRadioButton *radio = new QRadioButton();
 			radio->setFixedWidth(radio->sizeHint().width() * 1.5);
+			radio->setText(resources.at(i)["file"] + " ("
+							+ resources.at(i)["description"] + ")");
 
 			QObject::connect(radio, SIGNAL(toggled(bool)), this,
 					SLOT(enableOkButton()));
@@ -31,7 +39,7 @@ UpdatesChooser::UpdatesChooser(QList<QHash<QString, QString> >& resources,
 			radioButtons.push_back(radio);
 
 			ui.gridLayout->addWidget(radioButtons.at(i), i, 0);
-			ui.gridLayout->addWidget(labels.at(i), i, 1);
+			//ui.gridLayout->addWidget(labels.at(i), i, 1);
 		}
 	}
 
@@ -72,7 +80,79 @@ void UpdatesChooser::checkRadioButtons() {
 		"Download of "
 		+ pResources->at(chosenUpdate)["file"]
 		+ " succeded.");
-	} else if (updateDownloader.requestAborted()) {
+
+		//qDebug() << "In void UpdatesChooser::checkRadioButtons() --> answered Yes";
+		//qDebug() << "In void UpdatesChooser::checkRadioButtons() --> search for .exe returned " << url.indexOf(QRegExp("\\.exe$"), 0);
+
+		if (url.indexOf(QRegExp("\\.exe$"), 0) != -1) { // urls is an .exe file
+			QString title = "Domanda";
+			QString message = "Installo la nuova versione ?\nIl programma verra' terminato.";
+
+#ifdef _WIN32
+#endif // _WIN32
+#ifdef __APPLE__
+			message += "\n(richiede wine).";
+#endif // __APPLE__
+#ifdef __linux__
+			message += "\n(richiede wine).";
+#endif // __linux__
+			QString answer;
+
+			QMessageBox::StandardButton reply;
+			reply = QMessageBox::question(this, title, message,
+					QMessageBox::Yes | QMessageBox::No);
+			if (reply == QMessageBox::Yes) {
+
+#ifdef _WIN32
+				std::string command = "\"" + savePath.toStdString() + "\"";
+				ShellExecute(NULL, "open", command.c_str(), NULL, NULL, SW_SHOWNORMAL);
+#endif // _WIN32
+#ifdef __APPLE__
+				std::string command = "wine " + savePath.toStdString() + " &";
+				int retVal = system(command.c_str());
+#endif // __APPLE__
+#ifdef __linux__
+				std::string command = "wine " + savePath.toStdString() + " &";
+				int retVal = system(command.c_str());
+#endif // __linux__
+				exit(0);
+
+			} else if (reply == QMessageBox::No) {
+				this->close();
+				return;
+			} else {
+				LOG(ERR, "In void UpdatesChooser::checkRadioButtons() --> error");
+			}
+		} else if (url.indexOf(QRegExp("\\.zip$"), 0) != -1) { // urls is a .zip file
+
+#ifdef __APPLE__
+#else
+			QString title = "Domanda";
+			QString message = "Aprire la cartella di destinazione ?";
+			QString answer;
+
+			QMessageBox::StandardButton reply;
+			reply = QMessageBox::question(this, title, message,
+					QMessageBox::Yes | QMessageBox::No);
+			if (reply == QMessageBox::Yes) {
+
+#ifdef _WIN32
+				ShellExecute(NULL, "open", "explorer.exe", ui.dirLabel->text().toStdString().c_str(), NULL, SW_SHOWNORMAL);
+#endif // _WIN32
+#ifdef __linux__
+				std::string command = "nautilus " + ui.dirLabel->text().toStdString() + " &";
+				int retVal = system(command.c_str());
+#endif // __linux_
+			} else if (reply == QMessageBox::No) {
+				this->close();
+				return;
+			} else {
+				LOG(ERR, "In void UpdatesChooser::checkRadioButtons() --> error");
+			}
+#endif // __APPLE__
+		}
+	}
+	else if (updateDownloader.requestAborted()) {
 		LOG(WARN,
 				pResources->at(chosenUpdate)["file"]
 				+ " download aborted.");
