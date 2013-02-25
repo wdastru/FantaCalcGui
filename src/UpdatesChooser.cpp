@@ -30,8 +30,6 @@ UpdatesChooser::UpdatesChooser(QList<QHash<QString, QString> >& resources,
 			labels.push_back(label);
 			QRadioButton *radio = new QRadioButton();
 			radio->setFixedWidth(radio->sizeHint().width() * 1.5);
-			radio->setText(resources.at(i)["file"] + " ("
-							+ resources.at(i)["description"] + ")");
 
 			QObject::connect(radio, SIGNAL(toggled(bool)), this,
 					SLOT(enableOkButton()));
@@ -39,7 +37,7 @@ UpdatesChooser::UpdatesChooser(QList<QHash<QString, QString> >& resources,
 			radioButtons.push_back(radio);
 
 			ui.gridLayout->addWidget(radioButtons.at(i), i, 0);
-			//ui.gridLayout->addWidget(labels.at(i), i, 1);
+			ui.gridLayout->addWidget(labels.at(i), i, 1);
 		}
 	}
 
