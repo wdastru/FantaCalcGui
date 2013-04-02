@@ -228,8 +228,8 @@ void MatchChooserCamp::quit() {
 
 	for (int i = 0; i < 4; ++i) {
 		for (int j = 0; j < 7; ++j) {
-			for (int k = 0; k < 4; ++k) {
 
+			for (int k = 0; k < 4; ++k) {
 				//qDebug() << "button[" << 4*j+k << "][" << i << "]";
 				if (buttons[4 * j + k][i]->isChecked()) {
 					qDebug() << "checked";
@@ -323,10 +323,14 @@ void MatchChooserCamp::quit() {
 				} else {
 					QString line;
 
-					if (chosenMatch.at(3) == 0 || chosenMatch.at(3) == 2) {
+					if (chosenMatch.at(3) == '1' || chosenMatch.at(3) == '3') {
 						line += chosenMatch + "/" + goalAway + "/" + goalHome + "/" + puntiAway + "/"	+ puntiHome	+ "/";
-					} else {
+					} else if (chosenMatch.at(3) == '0' || chosenMatch.at(3) == '2') {
 						line += chosenMatch + "/" + goalHome + "/" + goalAway + "/" + puntiHome + "/"	+ puntiAway	+ "/";
+					} else {
+						qDebug() << "In void MatchChooserCamp::quit(). Errore! Risultato non salvato.";
+						LOG(ERR, "Errore, risultato della partita non pubblicato.");
+						return;
 					}
 
 					for (int j = 0; j < FANTA->getScorersSize(0); ++j) {
@@ -339,7 +343,6 @@ void MatchChooserCamp::quit() {
 					}
 
 					file->write(line.toStdString().c_str());
-					qDebug() << "In void MatchChooserCamp::quit(). " << line;
 
 				}
 				file->write("\n");
