@@ -3,8 +3,8 @@
 #include <QtCore/QFile>
 #include <QtCore/QDebug>
 #include <QtCore/QRegExp>
-#include <QtGui/QMessageBox>
-#include <QtGui/QFrame>
+#include <QtWidgets/QMessageBox>
+#include <QtWidgets/QFrame>
 
 #include "defines.h"
 #include "Fanta.h"
@@ -72,7 +72,7 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 		while (!fileDatiCoppa->atEnd()) {
 			fileDatiCoppa->readLine(buf, sizeof(buf));
 
-			QString str = QString::fromAscii(buf).trimmed();
+			QString str = QString::fromLatin1(buf).trimmed();
 			QString style;
 
 			if (str.size() == 0) {
@@ -145,7 +145,7 @@ void MatchChooserCoppa::setData() {
 		while (!fileSquadre->atEnd()) {
 			fileSquadre->readLine(buf, sizeof(buf));
 
-			QString str = QString::fromAscii(buf).trimmed();
+			QString str = QString::fromLatin1(buf).trimmed();
 			if (str.size() == 0) {
 				continue; // skip empty lines
 			} else if (str.indexOf(
@@ -184,7 +184,7 @@ void MatchChooserCoppa::setData() {
 
 			fileCalendario->readLine(buf, sizeof(buf));
 
-			QString str = QString::fromAscii(buf).trimmed();
+			QString str = QString::fromLatin1(buf).trimmed();
 
 			if (str.size() == 0) {
 				continue; // skip empty lines

@@ -5,7 +5,7 @@
  *      Author: WAleViolaeIvan
  */
 
-#include <QtGui/QMessageBox>
+#include <QtWidgets/QMessageBox>
 #include <QtCore/QDebug>
 #include <QtCore/QObject>
 

@@ -2,8 +2,8 @@
 #include "singletonQtLogger.h"
 #include <QtCore/QDebug>
 #include <QtCore/QObject>
-#include <QtGui/QMessageBox>
-#include <QtGui/QInputDialog>
+#include <QtWidgets/QMessageBox>
+#include <QtWidgets/QInputDialog>
 //#include <QtGui>
 #include "Fanta.h"
 #include "Repository.h"
@@ -251,7 +251,7 @@ unsigned int FileFormazioniReader::execute() {
 						    if (ok && !item.isEmpty())
 						    {
 						        std::ostringstream oss;
-						        oss << item.toAscii().constData();
+						        oss << item.toLatin1().constData();
 						        chosenThese = atoi(STR_MOD->msk( oss.str(), "[]", 0 ).c_str() );
 						    } else if (!ok ) {
 								qDebug() << "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : returned false.";
@@ -298,7 +298,7 @@ unsigned int FileFormazioniReader::execute() {
 							if (ok && !item.isEmpty())
 							{
 								std::ostringstream oss;
-								oss << item.toAscii().constData();
+								oss << item.toLatin1().constData();
 								chosenThese = atoi(STR_MOD->msk( oss.str(), "[]", 0 ).c_str() );
 						    } else if (!ok ) {
 								qDebug() << "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : returned false.";
@@ -370,7 +370,7 @@ unsigned int FileFormazioniReader::execute() {
 						if (ok && !item.isEmpty()) {
 							//itemLabel->setText(item);
 							std::ostringstream oss;
-							oss << item.toAscii().constData();
+							oss << item.toLatin1().constData();
 							chosenLevenshtein = atoi(STR_MOD->msk(oss.str(), "[]", 0).c_str());
 					    } else if (!ok ) {
 							qDebug() << "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : returned false.";

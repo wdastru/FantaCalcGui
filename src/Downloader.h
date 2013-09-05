@@ -41,7 +41,7 @@
 #ifndef DOWNLOADER_H
 #define DOWNLOADER_H
 
-#include <QtGui/QDialog>
+#include <QtWidgets/QDialog>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtCore/QUrl>
 

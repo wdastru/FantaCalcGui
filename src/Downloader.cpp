@@ -39,6 +39,7 @@
  ****************************************************************************/
 
 #include <QtGui/QtGui>
+#include <QtWidgets/QDialogButtonBox>
 #include <QtCore/QDebug>
 
 #include "httpwindow.h"

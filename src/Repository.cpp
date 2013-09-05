@@ -29,7 +29,7 @@ Repository::Repository() {
 #ifdef WIN32
 	qDebug() << "Platform WIN32";
 
-	this->UserProfile = QString::fromAscii(getenv("USERPROFILE"));
+	this->UserProfile = QString::fromLatin1(getenv("USERPROFILE"));
 
 	this->fontVariableWidthSmall.setFamily(QString::fromUtf8("Segoe UI"));
 	this->fontVariableWidthSmall.setPointSize(10);
@@ -44,7 +44,7 @@ Repository::Repository() {
 #ifdef __MACH__
 	qDebug() << "Platform __MACH__";
 
-	this->UserProfile = "/Users/" + QString::fromAscii(getenv("USER"));
+	this->UserProfile = "/Users/" + QString::fromLatin1(getenv("USER"));
 
 	this->fontVariableWidthSmall.setFamily(QString::fromUtf8("Segoe UI"));
 	this->fontVariableWidthSmall.setPointSize(10);
@@ -58,7 +58,7 @@ Repository::Repository() {
 #else // ! def __MACH__ ! def WIN32 -->  LINUX?
 	qDebug() << "Platform LINUX (?)";
 
-	this->UserProfile = "/home/" + QString::fromAscii(getenv("USER"));
+	this->UserProfile = "/home/" + QString::fromLatin1(getenv("USER"));
 
 	this->fontVariableWidthSmall.setFamily(QString::fromUtf8("Ubuntu"));
 	this->fontVariableWidthSmall.setPointSize(10);
