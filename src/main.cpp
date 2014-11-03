@@ -1,6 +1,8 @@
 #include <QtCore/QDebug>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QStyleFactory>
+//#include <QtWidgets/QApplication>
+//#include <QtWidgets/QStyleFactory>
+#include <QtGui/QApplication>
+#include <QtGui/QStyleFactory>
 #include <QtCore/QObject>
 
 #include "singletonQtLogger.h"
@@ -19,7 +21,7 @@ int main(int argc, char *argv[]) {
 	QApplication::setStyle(QStyleFactory::create("cleanlooks"));
 	a.setOrganizationName("Eptadone Software");
 	a.setApplicationName("FantaCalcGui");
-	a.setApplicationVersion("3.4.0");
+	a.setApplicationVersion("3.4.1");
 
 	THE_REPO; // prima si crea il repository dei dati
 	THE_MANAGER; // quindi si legge l'ini file (o lo si crea se non esistente)

@@ -41,7 +41,8 @@
 #ifndef HTTPWINDOW_H
 #define HTTPWINDOW_H
 
-#include <QtWidgets/QDialog>
+//#include <QtWidgets/QDialog>
+#include <QtGui/QDialog>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtCore/QUrl>
 

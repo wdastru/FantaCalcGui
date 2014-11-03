@@ -1,9 +1,12 @@
 #ifndef CHOOSEFILES_H
 #define CHOOSEFILES_H
 
-#include <QtWidgets/QDialog>
-#include <QtWidgets/QRadioButton>
-#include <QtWidgets/QLabel>
+//#include <QtWidgets/QDialog>
+//#include <QtWidgets/QRadioButton>
+//#include <QtWidgets/QLabel>
+#include <QtGui/QDialog>
+#include <QtGui/QRadioButton>
+#include <QtGui/QLabel>
 
 #include "ui_ChooseFiles.h"
 

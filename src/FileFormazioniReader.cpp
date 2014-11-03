@@ -2,8 +2,10 @@
 #include "singletonQtLogger.h"
 #include <QtCore/QDebug>
 #include <QtCore/QObject>
-#include <QtWidgets/QMessageBox>
-#include <QtWidgets/QInputDialog>
+//#include <QtWidgets/QMessageBox>
+//#include <QtWidgets/QInputDialog>
+#include <QtGui/QMessageBox>
+#include <QtGui/QInputDialog>
 //#include <QtGui>
 #include "Fanta.h"
 #include "Repository.h"

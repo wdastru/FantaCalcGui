@@ -3,8 +3,10 @@
 #include <QtCore/QFile>
 #include <QtCore/QDebug>
 #include <QtCore/QRegExp>
-#include <QtWidgets/QMessageBox>
-#include <QtWidgets/QFrame>
+//#include <QtWidgets/QMessageBox>
+//#include <QtWidgets/QFrame>
+#include <QtGui/QMessageBox>
+#include <QtGui/QFrame>
 
 #include "defines.h"
 #include "Fanta.h"
@@ -148,6 +150,9 @@ void MatchChooserCamp::setData() {
 				continue; // skip empty lines
 			} else if (str.indexOf(
 					QRegExp("\\$longName\\[[0-9]\\].*\\$longName.*")) != -1) {
+
+				//qDebug() << str;
+
 				str.replace(QRegExp("\\$longName"), "");
 				str.replace(QRegExp("\\[[0-9]\\]"), "");
 				str.replace(QRegExp("="), "");
@@ -158,6 +163,9 @@ void MatchChooserCamp::setData() {
 				str.replace(QRegExp("'\\s+'"), "'");
 
 				QStringList list = str.split("'", QString::SkipEmptyParts);
+
+				//qDebug() << list;
+
 				map[list[0]] = list[1];
 			}
 		}
@@ -169,6 +177,8 @@ void MatchChooserCamp::setData() {
 		 * completare
 		 * * * * * * */
 	}
+
+	std::map<QString, QString> mapRemap;
 
 	QFile *fileCalendario = new QFile(THE_REPO->getDownloadPath() + "calendario.inc");
 	if (fileCalendario->exists()) {
@@ -187,6 +197,8 @@ void MatchChooserCamp::setData() {
 			} else if (str.indexOf(
 					QRegExp("super.*longName.*super.*longName.*")) != -1) {
 
+				//qDebug() << str;
+
 				str.replace(QRegExp("\\$super"), "");
 				str.replace(QRegExp("\\$longName"), "");
 				str.replace(QRegExp("\\[[0-9]\\]"), "");
@@ -196,15 +208,33 @@ void MatchChooserCamp::setData() {
 				str.replace(QRegExp("\\]"), "");
 				str.replace(QRegExp("'"), "");
 				lines.push_back(str);
+			} else if (str.indexOf(
+					QRegExp("longName.*[A-H].*longName.*[a-h].*")) != -1) {
 
+				//qDebug() << str;
+
+				str.replace(QRegExp("\\$longName"), "");
+				str.replace(QRegExp("="), "");
+				str.replace(QRegExp(";"), "");
+				str.replace(QRegExp("\\["), "");
+				str.replace(QRegExp("\\]"), "");
+				str.replace(QRegExp("'"), "");
+
+				QStringList list = str.split(" ", QString::SkipEmptyParts);
+				mapRemap[list[0].trimmed()] = list[1].trimmed();
 			}
 		}
 
+		//qDebug() << "here";
+		//qDebug() << lines.size();
+
 		for (int i = 0; i < 28; ++i) {
+			//qDebug() << lines.at(i);
+
 			QStringList list = lines.at(i).split(" ", QString::SkipEmptyParts);
 
-			labels[i][0]->setText(map[list[0].trimmed()]);
-			labels[i][1]->setText(map[list[1].trimmed()]);
+			labels[i][0]->setText(map[mapRemap[list[0].trimmed()]]);
+			labels[i][1]->setText(map[mapRemap[list[1].trimmed()]]);
 		}
 
 	} else {
@@ -232,7 +262,7 @@ void MatchChooserCamp::quit() {
 			for (int k = 0; k < 4; ++k) {
 				//qDebug() << "button[" << 4*j+k << "][" << i << "]";
 				if (buttons[4 * j + k][i]->isChecked()) {
-					qDebug() << "checked";
+					//qDebug() << "checked";
 					chosenMatch = "a" + QString::number(k) + QString::number(j)
 							+ QString::number(i);
 					home = labels[4 * j + k][0]->text();
@@ -313,7 +343,7 @@ void MatchChooserCamp::quit() {
 		//qDebug() << "In void MatchChooserCamp::quit(). 2";
 
 		if (reply == QMessageBox::Yes) {
-			qDebug() << "In void MatchChooserCamp::quit() --> yes";
+			//qDebug() << "In void MatchChooserCamp::quit() --> yes";
 
 			QFile *file = new QFile(THE_REPO->getDownloadPath() + "datiCampionato.txt");
 			file->open(QIODevice::WriteOnly);

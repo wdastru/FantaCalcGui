@@ -3,8 +3,10 @@
 #include <QtCore/QFile>
 #include <QtCore/QDebug>
 #include <QtCore/QRegExp>
-#include <QtWidgets/QMessageBox>
-#include <QtWidgets/QFrame>
+//#include <QtWidgets/QMessageBox>
+//#include <QtWidgets/QFrame>
+#include <QtGui/QMessageBox>
+#include <QtGui/QFrame>
 
 #include "defines.h"
 #include "Fanta.h"
@@ -160,6 +162,9 @@ void MatchChooserCoppa::setData() {
 				str.replace(QRegExp("'\\s+'"), "'");
 
 				QStringList list = str.split("'", QString::SkipEmptyParts);
+
+				qDebug() << list;
+
 				map[list[0]] = list[1];
 			}
 		}
@@ -191,6 +196,9 @@ void MatchChooserCoppa::setData() {
 			} else if (str.indexOf(
 					QRegExp("\\$[a-h]Coppa.*\\$longName\\['[a-h]'\\];"))
 					!= -1) {
+
+				//qDebug() << "else if 1";
+
 				str.replace(QRegExp("\\$"), "");
 				str.replace(QRegExp("Coppa"), "");
 				str.replace(QRegExp("longName"), "");
@@ -206,10 +214,12 @@ void MatchChooserCoppa::setData() {
 				//qDebug() << str.split(" ", QString::SkipEmptyParts).at(0).trimmed() << " " << str.split(" ", QString::SkipEmptyParts).at(1).trimmed();
 
 			} else if (str.indexOf(
-			// $superCoppa[0][0][0] = $aCoppa;	$superCoppa[0][0][1] = $bCoppa;
 					QRegExp(
 							"^\\$superCoppa\\[0\\]\\[[0-9]{1,2}\\]\\[[0-1]\\]\\s+=\\s+\\$[a-h]Coppa;\\s+\\$superCoppa\\[0\\]\\[[0-9]{1,2}\\]\\[[0-1]\\]\\s+=\\s+\\$[a-h]Coppa;"))
 					!= -1) {
+
+				//qDebug() << "else if 2";
+
 				str.replace(QRegExp("\\$"), "");
 				str.replace(QRegExp("(Coppa|superCoppa)"), "");
 				str.replace(QRegExp("="), "");

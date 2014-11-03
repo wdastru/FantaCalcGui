@@ -3,7 +3,8 @@
 #include <QtCore/QList>
 #include <QtCore/QHash>
 #include <QtCore/QDebug>
-#include <QtWidgets/QMessageBox>
+//#include <QtWidgets/QMessageBox>
+#include <QtGui/QMessageBox>
 #include <QtXml/QDomDocument>
 #include <QtCore/QTime>
 #include <QtCore/QFile>

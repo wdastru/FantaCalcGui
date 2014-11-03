@@ -1,9 +1,13 @@
 #ifndef UPDATESCHOOSER_H
 #define UPDATESCHOOSER_H
 
-#include <QtWidgets/QDialog>
-#include <QtWidgets/QLabel>
-#include <QtWidgets/QRadioButton>
+//#include <QtWidgets/QDialog>
+//#include <QtWidgets/QLabel>
+//#include <QtWidgets/QRadioButton>
+#include <QtGui/QDialog>
+#include <QtGui/QLabel>
+#include <QtGui/QRadioButton>
+
 #include "ui_UpdatesChooser.h"
 
 #include "Repository.h"

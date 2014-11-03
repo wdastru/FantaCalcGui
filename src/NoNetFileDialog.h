@@ -11,8 +11,10 @@
 #ifndef _NONETFILEDIALOG_H
 #define _NONETFILEDIALOG_H
 
-#include <QtWidgets/QDialog>
-#include <QtWidgets/QFileDialog>
+//#include <QtWidgets/QDialog>
+//#include <QtWidgets/QFileDialog>
+#include <QtGui/QDialog>
+#include <QtGui/QFileDialog>
 
 #include "ui_NoNetFileDialog.h"
 #include "IniFileManager.h"

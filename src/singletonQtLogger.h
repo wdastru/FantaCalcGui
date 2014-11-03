@@ -1,7 +1,8 @@
 #ifndef SINGLETONQTLOGGER_H
 #define SINGLETONQTLOGGER_H
 
-#include <QtWidgets/QWidget>
+//#include <QtWidgets/QWidget>
+#include <QtGui/QWidget>
 
 #include <QtCore/QString>
 #include "ui_singletonQtLogger.h"

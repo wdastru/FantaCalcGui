@@ -6,10 +6,12 @@
 #include "shellapi.h"
 #endif
 
-#include "QtWidgets/QFileDialog"
+//#include "QtWidgets/QFileDialog"
+//#include "QtWidgets/QMessageBox"
+#include "QtGui/QFileDialog"
+#include "QtGui/QMessageBox"
 #include "QtCore/QDebug"
 #include "QtCore/QUrl"
-#include "QtWidgets/QMessageBox"
 #include "QtCore/QRegExp"
 
 UpdatesChooser::UpdatesChooser(QList<QHash<QString, QString> >& resources,

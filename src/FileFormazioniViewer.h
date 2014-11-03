@@ -1,7 +1,8 @@
 #ifndef FILEFORMAZIONIVIEWER_H
 #define FILEFORMAZIONIVIEWER_H
 
-#include <QtWidgets/QDialog>
+//#include <QtWidgets/QDialog>
+#include <QtGui/QDialog>
 #include <QtCore/QFile>
 
 #include "ui_FileFormazioniViewer.h"
