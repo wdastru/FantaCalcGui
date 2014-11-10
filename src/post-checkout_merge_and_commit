@@ -14,12 +14,16 @@ chomp($OSX);
 
 if ( $ENV{'OS'} eq "Windows_NT" ) {
     
-       if ( $ENV{'COMPUTERNAME'} eq "LAFAMIGLIA" ) {
-               #chdir "D:\\Sorgenti\\Perl";
+       if ( $ENV{'COMPUTERNAME'} eq "EPTADONE" ) {
+			chdir "/d/Walter/src/FantaCalcGuiNew/";
        } else {
-               print " Not on LaFamiglia. Exiting.\n";
-               exit();
+			print " Not in a knowm windows system. Exiting.\n";
+			exit();
        }
+
+		$revision = qx(git rev-parse --short HEAD);     
+		chomp($revision);
+		system("sed 's/XXX/$revision/g' src/revision.h.in > src/revision.h");
     
 } elsif ( $uname eq "Linux" ) {
 
