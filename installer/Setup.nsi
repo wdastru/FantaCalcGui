@@ -2,6 +2,7 @@
 
 ; Qt
 !define QT "C:\Qt\4.8.6\bin"
+!define INSTALLER "D:\Sorgenti\FantaCalcGuiNew_Win32Build\installer"
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "FantaCalcGui"
@@ -70,11 +71,20 @@ Section "MainSection" SEC01
   SetOutPath "$INSTDIR"
   SetOverwrite try
   File "D:\Sorgenti\FantaCalcGuiNew_Win32Build\FantaCalcGui.exe"
-  File "${QT}\libwinpthread-1.dll"
-  File "${QT}\QtCore4.dll"
-  File "${QT}\QtGui4.dll"
-  File "${QT}\QtNetwork4.dll"
-  File "${QT}\QtXml4.dll"
+  File "${INSTALLER}\libwinpthread-1.dll"
+  File "${INSTALLER}\libgcc_s_dw2-1.dll"
+  File "${INSTALLER}\libstdc++-6.dll"
+  File "${INSTALLER}\QtCore4.dll"
+  File "${INSTALLER}\QtGui4.dll"
+  File "${INSTALLER}\QtNetwork4.dll"
+  File "${INSTALLER}\QtXml4.dll"
+  #File "${QT}\libwinpthread-1.dll"
+  #File "${QT}\libgcc_s_dw2-1.dll"
+  #File "${QT}\libstdc++-6.dll"
+  #File "${QT}\QtCore4.dll"
+  #File "${QT}\QtGui4.dll"
+  #File "${QT}\QtNetwork4.dll"
+  #File "${QT}\QtXml4.dll"
 
 ; Shortcuts
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
@@ -124,6 +134,8 @@ Section Uninstall
   Delete "$INSTDIR\QtCore4.dll"
   Delete "$INSTDIR\QtXml4.dll"
   Delete "$INSTDIR\libwinpthread-1.dll"
+  Delete "$INSTDIR\libgcc_s_dw2-1.dll"
+  Delete "$INSTDIR\libstdc++-6.dll"
   Delete "$INSTDIR\FantaCalcGui.exe"
   
 ; Windows XP
