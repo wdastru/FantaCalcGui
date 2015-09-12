@@ -16,8 +16,10 @@ if ( $ENV{'OS'} eq "Windows_NT" ) {
     
        if ( $ENV{'COMPUTERNAME'} eq "EPTADONE" ) {
 			chdir "/d/Walter/src/FantaCalcGuiNew/";
-       } else {
-			print " Not in a knowm windows system. Exiting.\n";
+       } elsif ( $ENV{'COMPUTERNAME'} eq "VORTICE" ) {
+			chdir "/d/Sorgenti/FantaCalcGuiNew/";
+	   } else {
+			print " Not in a knowm Windows system. Exiting.\n";
 			exit();
        }
 
