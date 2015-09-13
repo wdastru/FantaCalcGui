@@ -55,5 +55,7 @@ if ( $ENV{'OS'} eq "Windows_NT" ) {
 		exit();
 }
 
+qx(git add src/revision.h);     
+
 print " | revision : $revision             |\n";
 print " +--------------------------------+\n";
