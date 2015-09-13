@@ -2,7 +2,6 @@ build/
 .fuse*
 installer/*.exe
 *~
-src/revision.h
 *.o
 src/Test/test
 CMakeCache.txt
