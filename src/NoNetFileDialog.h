@@ -11,6 +11,8 @@
 #ifndef _NONETFILEDIALOG_H
 #define _NONETFILEDIALOG_H
 
+//#include <QtWidgets/QDialog>
+//#include <QtWidgets/QFileDialog>
 #include <QtGui/QDialog>
 #include <QtGui/QFileDialog>
 

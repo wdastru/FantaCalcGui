@@ -39,13 +39,13 @@ void ChooseFiles::setupGazzettaTab(QString _fileGazzetta) {
 		std::vector < QString > lines;
 		while (!fileGazzetta->atEnd()) {
 			fileGazzetta->readLine(buf, sizeof(buf));
-			if (QString::fromAscii(buf).trimmed().size() == 0)
+			if (QString::fromLatin1(buf).trimmed().size() == 0)
 				continue; // skip empty lines
-			lines.push_back(QString::fromAscii(buf).trimmed());
+			lines.push_back(QString::fromLatin1(buf).trimmed());
 			i++;
 		}
 
-		//qDebug() << "In ChooseFiles::ChooseFiles(...) --> lines.size() = " + QString::number(lines.size());
+		qDebug() << "In ChooseFiles::ChooseFiles(...) --> lines.size() = " + QString::number(lines.size());
 
 		int rows = 10;
 		int rowCounter = 0;
@@ -93,10 +93,10 @@ void ChooseFiles::setupFormazioniTab(QString _fileFormazioni) {
 
 		while (!fileFormazioni->atEnd()) {
 			fileFormazioni->readLine(buf, sizeof(buf));
-			if (QString::fromAscii(buf).trimmed().size() == 0)
+			if (QString::fromLatin1(buf).trimmed().size() == 0)
 				continue; // skip empty lines
 
-			QLabel * tmpLabel = new QLabel(QString::fromAscii(buf).trimmed());
+			QLabel * tmpLabel = new QLabel(QString::fromLatin1(buf).trimmed());
 
 			tmpLabel->setFixedHeight(this->height);
 			//tmpLabel->setFont(THE_REPO->fontVariableWidthSmall);
@@ -170,11 +170,11 @@ void ChooseFiles::on_CampoNeutroBox_toggled(bool) {
 }
 
 void ChooseFiles::on_okButton_clicked() {
-	//qDebug() << "In void ChooseFiles::on_okButton_clicked()";
+	qDebug() << "In void ChooseFiles::on_okButton_clicked()";
 
 	this->doDownload();
 	if (this->downloadSuccess) {
-		//qDebug() << "In on_okButton_clicked() --> downloadSuccess is true.";
+		qDebug() << "In on_okButton_clicked() --> downloadSuccess is true.";
 		this->createFileSquadreFromWebFiles();
 		this->fileGazzetta = THE_REPO->getGazzettaPath() + "/"
 				+ this->getGazFile();
@@ -192,7 +192,7 @@ void ChooseFiles::on_okButton_clicked() {
 }
 
 void ChooseFiles::on_cancelButton_clicked() {
-	//qDebug() << "In void ChooseFiles::on_cancelButton_clicked()";
+	qDebug() << "In void ChooseFiles::on_cancelButton_clicked()";
 
 	for (int i = 0; i < this->nFiles; i++) {
 		home.at(i)->setChecked(false);
@@ -208,7 +208,7 @@ void ChooseFiles::on_cancelButton_clicked() {
 }
 
 void ChooseFiles::enableOkButton() {
-	//qDebug() << "In void ChooseFiles::enableOkButton()";
+	qDebug() << "In void ChooseFiles::enableOkButton()";
 
 	bool homeIsChecked = false;
 	bool awayIsChecked = false;
@@ -255,7 +255,7 @@ QString ChooseFiles::getFileFormazioni(void) {
 }
 
 void ChooseFiles::doDownload() {
-	//qDebug() << "In ChooseFiles::doDownload() --> Network will be accessed.";
+	qDebug() << "In ChooseFiles::doDownload() --> Network will be accessed.";
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	urls->push_back(
@@ -281,7 +281,7 @@ void ChooseFiles::doDownload() {
 	this->filesDownloader->exec();
 
 	if (this->filesDownloader->requestSucceded()) {
-		//qDebug() << "In ChooseFiles::doDownload() --> request succeded.";
+		qDebug() << "In ChooseFiles::doDownload() --> request succeded.";
 		this->downloadSuccess = true;
 	} else {
 		if (!this->filesDownloader->wasCancelClicked()) {
@@ -333,11 +333,11 @@ QString ChooseFiles::getAwayFile() {
 }
 
 bool ChooseFiles::createFileSquadreFromWebFiles() {
-	//qDebug() << "In ChooseFiles::createFileSquadreFromWebFiles().";
+	qDebug() << "In ChooseFiles::createFileSquadreFromWebFiles().";
 
 	if (this->downloadSuccess) {
 
-		// qDebug() << "In ChooseFiles::createFileSquadreFromWebFiles() --> download was successful.";
+		qDebug() << "In ChooseFiles::createFileSquadreFromWebFiles() --> download was successful.";
 
 		QFile fHome(THE_REPO->getDownloadPath() + "/" + this->getHomeFile());
 		QFile fAway(THE_REPO->getDownloadPath() + "/" + this->getAwayFile());
@@ -380,7 +380,7 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 		QString str = "nome squadra : " + FIfHome.baseName().split("_").at(0)
 				+ "\n";
 
-		QString line = QString::fromAscii(fHome.readLine(1024)); // Ia riga : modulo tipo
+		QString line = QString::fromLatin1(fHome.readLine(1024)); // Ia riga : modulo tipo
 		unsigned int modulo[4];
 		str += "modulo : " + line + "\n";
 
@@ -390,14 +390,14 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 			modulo[i] = atoi(vect.at(i).c_str());
 
 		vect.clear();
-		line = QString::fromAscii(fHome.readLine(1024)); // IIa riga titolari
+		line = QString::fromLatin1(fHome.readLine(1024)); // IIa riga titolari
 		unsigned int titolari[4];
 		vect = tokenize(line.toStdString(), " -");
 		for (unsigned int i = 0; i < vect.size(); i++)
 			titolari[i] = atoi(vect.at(i).c_str());
 
 		vect.clear();
-		line = QString::fromAscii(fHome.readLine(1024));
+		line = QString::fromLatin1(fHome.readLine(1024));
 		unsigned int riserve[4];
 		vect = tokenize(line.toStdString(), " -");
 		for (unsigned int i = 0; i < vect.size(); i++)
@@ -409,70 +409,70 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 		unsigned int lineReadCounter = 0;
 
 		for (unsigned int i = 0; i < titolari[0]; i++) {
-			line = QString::fromAscii(fHome.readLine(1024));
+			line = QString::fromLatin1(fHome.readLine(1024));
 			lineReadCounter++;
 			str += line;
 		}
 
 		for (unsigned int i = 0; i < riserve[0]; i++) {
-			line = QString::fromAscii(fHome.readLine(1024));
+			line = QString::fromLatin1(fHome.readLine(1024));
 			lineReadCounter++;
 			str += line;
 		}
 
 		while (!(lineReadCounter == ruolo[0])) {
-			line = QString::fromAscii(fHome.readLine(1024));
+			line = QString::fromLatin1(fHome.readLine(1024));
 			lineReadCounter++;
 		}
 
 		for (unsigned int i = 0; i < titolari[1]; i++) {
-			line = QString::fromAscii(fHome.readLine(1024));
+			line = QString::fromLatin1(fHome.readLine(1024));
 			lineReadCounter++;
 			str += line;
 		}
 
 		for (unsigned int i = 0; i < riserve[1]; i++) {
-			line = QString::fromAscii(fHome.readLine(1024));
+			line = QString::fromLatin1(fHome.readLine(1024));
 			lineReadCounter++;
 			str += line;
 		}
 
 		while (!(lineReadCounter == (ruolo[0] + ruolo[1]))) {
-			line = QString::fromAscii(fHome.readLine(1024));
+			line = QString::fromLatin1(fHome.readLine(1024));
 			lineReadCounter++;
 		}
 
 		for (unsigned int i = 0; i < titolari[2]; i++) {
-			line = QString::fromAscii(fHome.readLine(1024));
+			line = QString::fromLatin1(fHome.readLine(1024));
 			lineReadCounter++;
 			str += line;
 		}
 
 		for (unsigned int i = 0; i < riserve[2]; i++) {
-			line = QString::fromAscii(fHome.readLine(1024));
+			line = QString::fromLatin1(fHome.readLine(1024));
 			lineReadCounter++;
 			str += line;
 		}
 
 		while (!(lineReadCounter == (ruolo[0] + ruolo[1] + ruolo[2]))) {
-			line = QString::fromAscii(fHome.readLine(1024));
+			line = QString::fromLatin1(fHome.readLine(1024));
 			lineReadCounter++;
 		}
 
 		for (unsigned int i = 0; i < titolari[3]; i++) {
-			line = QString::fromAscii(fHome.readLine(1024));
+			line = QString::fromLatin1(fHome.readLine(1024));
 			lineReadCounter++;
 			str += line;
 		}
 
 		for (unsigned int i = 0; i < riserve[3]; i++) {
-			line = QString::fromAscii(fHome.readLine(1024));
+			line = QString::fromLatin1(fHome.readLine(1024));
 			lineReadCounter++;
 			str += line;
 		}
 
 		while (!(lineReadCounter == (ruolo[0] + ruolo[1] + ruolo[2] + ruolo[3]))) {
-			line = QString::fromAscii(fHome.readLine(1024));
+			line = QString::fromLatin1(fHome.readLine(1024));
 			lineReadCounter++;
 		}
 
@@ -480,20 +480,20 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 
 		str += "nome squadra : " + FIfAway.baseName().split("_").at(0) + "\n";
 
-		line = QString::fromAscii(fAway.readLine(1024));
+		line = QString::fromLatin1(fAway.readLine(1024));
 		str += "modulo : " + line + "\n";
 		vect = tokenize(line.toStdString(), " -");
 		for (unsigned int i = 0; i < vect.size(); i++)
 			modulo[i] = atoi(vect.at(i).c_str());
 
 		vect.clear();
-		line = QString::fromAscii(fAway.readLine(1024));
+		line = QString::fromLatin1(fAway.readLine(1024));
 		vect = tokenize(line.toStdString(), " -");
 		for (unsigned int i = 0; i < vect.size(); i++)
 			titolari[i] = atoi(vect.at(i).c_str());
 
 		vect.clear();
-		line = QString::fromAscii(fAway.readLine(1024));
+		line = QString::fromLatin1(fAway.readLine(1024));
 		vect = tokenize(line.toStdString(), " -");
 		for (unsigned int i = 0; i < vect.size(); i++)
 			riserve[i] = atoi(vect.at(i).c_str());
@@ -501,74 +501,74 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 		lineReadCounter = 0;
 
 		for (unsigned int i = 0; i < titolari[0]; i++) {
-			line = QString::fromAscii(fAway.readLine(1024));
+			line = QString::fromLatin1(fAway.readLine(1024));
 			lineReadCounter++;
 			str += line;
 		}
 
 		for (unsigned int i = 0; i < riserve[0]; i++) {
-			line = QString::fromAscii(fAway.readLine(1024));
+			line = QString::fromLatin1(fAway.readLine(1024));
 			lineReadCounter++;
 			str += line;
 		}
 
 		while (!(lineReadCounter == ruolo[0])) {
-			line = QString::fromAscii(fAway.readLine(1024));
+			line = QString::fromLatin1(fAway.readLine(1024));
 			lineReadCounter++;
 		}
 
 		for (unsigned int i = 0; i < titolari[1]; i++) {
-			line = QString::fromAscii(fAway.readLine(1024));
+			line = QString::fromLatin1(fAway.readLine(1024));
 			lineReadCounter++;
 			str += line;
 		}
 
 		for (unsigned int i = 0; i < riserve[1]; i++) {
-			line = QString::fromAscii(fAway.readLine(1024));
+			line = QString::fromLatin1(fAway.readLine(1024));
 			lineReadCounter++;
 			str += line;
 		}
 
 		while (!(lineReadCounter == (ruolo[0] + ruolo[1]))) {
-			line = QString::fromAscii(fAway.readLine(1024));
+			line = QString::fromLatin1(fAway.readLine(1024));
 			lineReadCounter++;
 		}
 
 		for (unsigned int i = 0; i < titolari[2]; i++) {
-			line = QString::fromAscii(fAway.readLine(1024));
+			line = QString::fromLatin1(fAway.readLine(1024));
 			lineReadCounter++;
 			str += line;
 		}
 
 		for (unsigned int i = 0; i < riserve[2]; i++) {
-			line = QString::fromAscii(fAway.readLine(1024));
+			line = QString::fromLatin1(fAway.readLine(1024));
 			lineReadCounter++;
 			str += line;
 		}
 
 		while (!(lineReadCounter == (ruolo[0] + ruolo[1] + ruolo[2]))) {
-			line = QString::fromAscii(fAway.readLine(1024));
+			line = QString::fromLatin1(fAway.readLine(1024));
 			lineReadCounter++;
 		}
 
 		for (unsigned int i = 0; i < titolari[3]; i++) {
-			line = QString::fromAscii(fAway.readLine(1024));
+			line = QString::fromLatin1(fAway.readLine(1024));
 			lineReadCounter++;
 			str += line;
 		}
 
 		for (unsigned int i = 0; i < riserve[3]; i++) {
-			line = QString::fromAscii(fAway.readLine(1024));
+			line = QString::fromLatin1(fAway.readLine(1024));
 			lineReadCounter++;
 			str += line;
 		}
 
 		while (!(lineReadCounter == (ruolo[0] + ruolo[1] + ruolo[2] + ruolo[3]))) {
-			line = QString::fromAscii(fAway.readLine(1024));
+			line = QString::fromLatin1(fAway.readLine(1024));
 			lineReadCounter++;
 		}
 
-		fOut.write(str.toAscii());
+		fOut.write(str.toLatin1());
 
 		LOG(DBG, QObject::tr("<br> ====================="));
 		LOG(DBG,     QObject::tr(" === File di input ==="));
@@ -588,6 +588,8 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 		fHome.close();
 		fAway.close();
 		fOut.close();
+		qDebug() << "Out of ChooseFiles::createFileSquadreFromWebFiles().";
+
 		return EXIT_SUCCESS;
 	} else {
 		qDebug() << "In ChooseFiles::createFileSquadreFromWebFiles() --> download was not successful.";

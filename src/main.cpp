@@ -1,4 +1,6 @@
 #include <QtCore/QDebug>
+//#include <QtWidgets/QApplication>
+//#include <QtWidgets/QStyleFactory>
 #include <QtGui/QApplication>
 #include <QtGui/QStyleFactory>
 #include <QtCore/QObject>

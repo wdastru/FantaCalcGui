@@ -1,6 +1,9 @@
 #ifndef MATCHCHOOSERCOPPA_H
 #define MATCHCHOOSERCOPPA_H
 
+//#include <QtWidgets/QDialog>
+//#include <QtWidgets/QLabel>
+//#include <QtWidgets/QRadioButton>
 #include <QtGui/QDialog>
 #include <QtGui/QLabel>
 #include <QtGui/QRadioButton>

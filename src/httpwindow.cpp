@@ -40,7 +40,10 @@
  ****************************************************************************/
 
 #include <QtGui/QtGui>
+//#include <QtWidgets/QProgressDialog>
+//#include <QtWidgets/QMessageBox>
 #include <QtGui/QProgressDialog>
+#include <QtGui/QMessageBox>
 #include <QtNetwork/QtNetwork>
 #include <QtCore/QDebug>
 #include <QtCore/QUrl>

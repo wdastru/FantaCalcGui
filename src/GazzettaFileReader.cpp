@@ -22,9 +22,12 @@ GazzettaFileReader::~GazzettaFileReader() {
 }
 
 std::vector<std::vector<std::string> > GazzettaFileReader::getOutput() {
-	//qDebug() << "In GazzettaFileReader::getOutput().";
+	qDebug() << "In GazzettaFileReader::getOutput().";
+
+	qDebug() << "In GazzettaFileReader::getOutput(). " << this->fileGazzetta.toStdString().c_str();
 
 	std::ifstream fGaz(this->fileGazzetta.toStdString().c_str());
+
 	if (!fGaz) {
 		qDebug() << "In GazzettaFileReader::getOutput() --> il file gazzetta  : " + this->fileGazzetta + " non esiste!";
 		LOG(
@@ -57,5 +60,8 @@ std::vector<std::vector<std::string> > GazzettaFileReader::getOutput() {
 		}
 	}
 	fGaz.close();
+
+	qDebug() << "Out of GazzettaFileReader::getOutput().";
+
 	return Gazzetta;
 }

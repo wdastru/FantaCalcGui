@@ -3,6 +3,8 @@
 #include <QtCore/QFile>
 #include <QtCore/QDebug>
 #include <QtCore/QRegExp>
+//#include <QtWidgets/QMessageBox>
+//#include <QtWidgets/QFrame>
 #include <QtGui/QMessageBox>
 #include <QtGui/QFrame>
 
@@ -27,7 +29,7 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 		buttons[i] = new QRadioButton();
 		buttons[i]->setFixedHeight(buttons[i]->sizeHint().height());
 
-		//qDebug() << QString::number(i) << " " << QString::number(i % 4);
+		qDebug() << QString::number(i) << " " << QString::number(i % 4);
 
 		int j;
 		int n;
@@ -38,7 +40,7 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 			}
 		}
 
-		//qDebug() << "j" << QString::number(j);
+		qDebug() << "j" << QString::number(j);
 
 		if (i % 4 == 0) {
 			QFrame *line = new QFrame(parent);
@@ -47,7 +49,7 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 			line->setFrameShadow(QFrame::Sunken);
 
 			ui.gridLayout->addWidget(line, i + n, 0, 1, 3);
-			//qDebug() << "i" << QString::number(i + n);
+			qDebug() << "i" << QString::number(i + n);
 		}
 
 		ui.gridLayout->addWidget(labels[i][0], j, 0);
@@ -72,7 +74,7 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 		while (!fileDatiCoppa->atEnd()) {
 			fileDatiCoppa->readLine(buf, sizeof(buf));
 
-			QString str = QString::fromAscii(buf).trimmed();
+			QString str = QString::fromLatin1(buf).trimmed();
 			QString style;
 
 			if (str.size() == 0) {
@@ -88,7 +90,7 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 			//int j = list.at(0).at(2).digitValue();
 			//int k = list.at(0).at(1).digitValue();
 
-			//qDebug() << list.at(0) << " " << str;
+			qDebug() << list.at(0) << " " << str;
 
 			if ((str.indexOf(
 					QRegExp(
@@ -124,7 +126,7 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 
 	setData();
 
-	//qDebug() << "Out of MatchChooserCoppa::MatchChooserCoppa(QWidget *parent)";
+	qDebug() << "Out of MatchChooserCoppa::MatchChooserCoppa(QWidget *parent)";
 }
 
 MatchChooserCoppa::~MatchChooserCoppa() {
@@ -145,7 +147,7 @@ void MatchChooserCoppa::setData() {
 		while (!fileSquadre->atEnd()) {
 			fileSquadre->readLine(buf, sizeof(buf));
 
-			QString str = QString::fromAscii(buf).trimmed();
+			QString str = QString::fromLatin1(buf).trimmed();
 			if (str.size() == 0) {
 				continue; // skip empty lines
 			} else if (str.indexOf(
@@ -160,6 +162,9 @@ void MatchChooserCoppa::setData() {
 				str.replace(QRegExp("'\\s+'"), "'");
 
 				QStringList list = str.split("'", QString::SkipEmptyParts);
+
+				qDebug() << list;
+
 				map[list[0]] = list[1];
 			}
 		}
@@ -184,13 +189,16 @@ void MatchChooserCoppa::setData() {
 
 			fileCalendario->readLine(buf, sizeof(buf));
 
-			QString str = QString::fromAscii(buf).trimmed();
+			QString str = QString::fromLatin1(buf).trimmed();
 
 			if (str.size() == 0) {
 				continue; // skip empty lines
 			} else if (str.indexOf(
 					QRegExp("\\$[a-h]Coppa.*\\$longName\\['[a-h]'\\];"))
 					!= -1) {
+
+				qDebug() << "else if 1";
+
 				str.replace(QRegExp("\\$"), "");
 				str.replace(QRegExp("Coppa"), "");
 				str.replace(QRegExp("longName"), "");
@@ -203,13 +211,15 @@ void MatchChooserCoppa::setData() {
 				mapRemap[str.split(" ", QString::SkipEmptyParts).at(0).trimmed()] =
 						str.split(" ", QString::SkipEmptyParts).at(1).trimmed();
 
-				//qDebug() << str.split(" ", QString::SkipEmptyParts).at(0).trimmed() << " " << str.split(" ", QString::SkipEmptyParts).at(1).trimmed();
+				qDebug() << str.split(" ", QString::SkipEmptyParts).at(0).trimmed() << " " << str.split(" ", QString::SkipEmptyParts).at(1).trimmed();
 
 			} else if (str.indexOf(
-			// $superCoppa[0][0][0] = $aCoppa;	$superCoppa[0][0][1] = $bCoppa;
 					QRegExp(
 							"^\\$superCoppa\\[0\\]\\[[0-9]{1,2}\\]\\[[0-1]\\]\\s+=\\s+\\$[a-h]Coppa;\\s+\\$superCoppa\\[0\\]\\[[0-9]{1,2}\\]\\[[0-1]\\]\\s+=\\s+\\$[a-h]Coppa;"))
 					!= -1) {
+
+				qDebug() << "else if 2";
+
 				str.replace(QRegExp("\\$"), "");
 				str.replace(QRegExp("(Coppa|superCoppa)"), "");
 				str.replace(QRegExp("="), "");
@@ -219,7 +229,7 @@ void MatchChooserCoppa::setData() {
 				str.replace(QRegExp("\\]"), "");
 				lines.push_back(str);
 
-				//qDebug() << str;
+				qDebug() << str;
 			}
 		}
 
@@ -251,12 +261,12 @@ void MatchChooserCoppa::setData() {
 		 * * * * * * */
 	}
 
-	//qDebug() << "Out of void MatchChooserCoppa::setData().";
+	qDebug() << "Out of void MatchChooserCoppa::setData().";
 }
 
 void MatchChooserCoppa::quit() {
 
-	//qDebug() << "In void MatchChooserCoppa::quit().";
+	qDebug() << "In void MatchChooserCoppa::quit().";
 
 	QString ids[20];
 	for (int i = 0; i < 12; ++i) {
@@ -281,18 +291,18 @@ void MatchChooserCoppa::quit() {
 		}
 	}
 
-	//qDebug() << "In void MatchChooserCoppa::quit(). chosenMatch = " << chosenMatch;
+	qDebug() << "In void MatchChooserCoppa::quit(). chosenMatch = " << chosenMatch;
 
 	if (!chosenMatch.isEmpty()) {
 
 		QString message;
 		QString match;
 
-		//qDebug() << "chosenMatch.toInt() : " << chosenMatch.toInt();
+		qDebug() << "chosenMatch.toInt() : " << chosenMatch.toInt();
 
 		match = matches.at(chosenMatch.toInt());
 
-		//qDebug() << "In void MatchChooserCoppa::quit(). match = " << match;
+		qDebug() << "In void MatchChooserCoppa::quit(). match = " << match;
 
 		QString title = "ATTENZIONE!!!";
 
@@ -333,10 +343,10 @@ void MatchChooserCoppa::quit() {
 		reply = QMessageBox::question(this, title, message,
 				QMessageBox::Yes | QMessageBox::No);
 
-		//qDebug() << "In void MatchChooserCoppa::quit(). 2";
+		qDebug() << "In void MatchChooserCoppa::quit(). 2";
 
 		if (reply == QMessageBox::Yes) {
-			//qDebug() << "In void MatchChooserCoppa::quit() --> yes";
+			qDebug() << "In void MatchChooserCoppa::quit() --> yes";
 
 			QFile *file = new QFile(THE_REPO->getDownloadPath() +"datiCoppa.txt");
 			file->open(QIODevice::WriteOnly);
@@ -368,7 +378,7 @@ void MatchChooserCoppa::quit() {
 			httpWindow->upload(THE_REPO->getDownloadPath() + "datiCoppa.txt");
 
 		} else if (reply == QMessageBox::No) {
-				//qDebug() << "In void MatchChooserCoppa::quit() --> No";
+				qDebug() << "In void MatchChooserCoppa::quit() --> No";
 
 				/*
 				 * TODO
@@ -385,11 +395,11 @@ void MatchChooserCoppa::quit() {
 		this->close();
 
 	} else {
-		//qDebug() << "Out of void MatchChooserCoppa::quit(). 1";
+		qDebug() << "Out of void MatchChooserCoppa::quit(). 1";
 		return;
 	}
 
-	//qDebug() << "Out of void MatchChooserCoppa::quit(). 2";
+	qDebug() << "Out of void MatchChooserCoppa::quit(). 2";
 }
 
 QString MatchChooserCoppa::getChosenMatch() {
@@ -398,7 +408,7 @@ QString MatchChooserCoppa::getChosenMatch() {
 
 void MatchChooserCoppa::deleteResult() {
 
-	//qDebug() << "In void MatchChooserCoppa::deleteResult().";
+	qDebug() << "In void MatchChooserCoppa::deleteResult().";
 
 	QString ids[20];
 	for (int i = 0; i < 12; ++i) {
@@ -423,18 +433,18 @@ void MatchChooserCoppa::deleteResult() {
 		}
 	}
 
-	//qDebug() << "In void MatchChooserCoppa::deleteResult(). chosenMatch = " << chosenMatch;
+	qDebug() << "In void MatchChooserCoppa::deleteResult(). chosenMatch = " << chosenMatch;
 
 	if (!chosenMatch.isEmpty()) {
 
 		QString message;
 		QString match;
 
-		//qDebug() << "chosenMatch.toInt() : " << chosenMatch.toInt();
+		qDebug() << "chosenMatch.toInt() : " << chosenMatch.toInt();
 
 		match = matches.at(chosenMatch.toInt());
 
-		//qDebug() << "In void MatchChooserCoppa::deleteResult(). match = " << match;
+		qDebug() << "In void MatchChooserCoppa::deleteResult(). match = " << match;
 
 		QString title = "ATTENZIONE!!!";
 
@@ -463,10 +473,10 @@ void MatchChooserCoppa::deleteResult() {
 		reply = QMessageBox::question(this, title, message,
 				QMessageBox::Yes | QMessageBox::No);
 
-		//qDebug() << "In void MatchChooserCoppa::quit(). 2";
+		qDebug() << "In void MatchChooserCoppa::quit(). 2";
 
 		if (reply == QMessageBox::Yes) {
-			//qDebug() << "In void MatchChooserCoppa::quit() --> yes";
+			qDebug() << "In void MatchChooserCoppa::quit() --> yes";
 
 			QFile *file = new QFile(THE_REPO->getDownloadPath() +"datiCoppa.txt");
 			file->open(QIODevice::WriteOnly);
@@ -488,7 +498,7 @@ void MatchChooserCoppa::deleteResult() {
 			httpWindow->upload(THE_REPO->getDownloadPath() + "datiCoppa.txt");
 
 		} else if (reply == QMessageBox::No) {
-				//qDebug() << "In void MatchChooserCoppa::quit() --> No";
+				qDebug() << "In void MatchChooserCoppa::quit() --> No";
 
 				/*
 				 * TODO
@@ -505,10 +515,10 @@ void MatchChooserCoppa::deleteResult() {
 		this->close();
 
 	} else {
-		//qDebug() << "Out of void MatchChooserCoppa::quit(). 1";
+		qDebug() << "Out of void MatchChooserCoppa::quit(). 1";
 		return;
 	}
 
-	//qDebug() << "Out of void MatchChooserCoppa::quit(). 2";
+	qDebug() << "Out of void MatchChooserCoppa::quit(). 2";
 }
 
