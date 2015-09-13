@@ -72,6 +72,7 @@ Section "MainSection" SEC01
   File "D:\Sorgenti\FantaCalcGuiNew\build\Release\FantaCalcGui.exe"
   File "C:\mingw\bin\libstdc++-6.dll"
   File "C:\MinGW\bin\mingwm10.dll"
+  File "${QT}\libwinpthread-1.dll"
   File "${QT}\libgcc_s_dw2-1.dll"
   File "${QT}\QtCore4.dll"
   File "${QT}\QtGui4.dll"
