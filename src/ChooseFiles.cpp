@@ -45,7 +45,7 @@ void ChooseFiles::setupGazzettaTab(QString _fileGazzetta) {
 			i++;
 		}
 
-		//qDebug() << "In ChooseFiles::ChooseFiles(...) --> lines.size() = " + QString::number(lines.size());
+		qDebug() << "In ChooseFiles::ChooseFiles(...) --> lines.size() = " + QString::number(lines.size());
 
 		int rows = 10;
 		int rowCounter = 0;
@@ -170,11 +170,11 @@ void ChooseFiles::on_CampoNeutroBox_toggled(bool) {
 }
 
 void ChooseFiles::on_okButton_clicked() {
-	//qDebug() << "In void ChooseFiles::on_okButton_clicked()";
+	qDebug() << "In void ChooseFiles::on_okButton_clicked()";
 
 	this->doDownload();
 	if (this->downloadSuccess) {
-		//qDebug() << "In on_okButton_clicked() --> downloadSuccess is true.";
+		qDebug() << "In on_okButton_clicked() --> downloadSuccess is true.";
 		this->createFileSquadreFromWebFiles();
 		this->fileGazzetta = THE_REPO->getGazzettaPath() + "/"
 				+ this->getGazFile();
@@ -192,7 +192,7 @@ void ChooseFiles::on_okButton_clicked() {
 }
 
 void ChooseFiles::on_cancelButton_clicked() {
-	//qDebug() << "In void ChooseFiles::on_cancelButton_clicked()";
+	qDebug() << "In void ChooseFiles::on_cancelButton_clicked()";
 
 	for (int i = 0; i < this->nFiles; i++) {
 		home.at(i)->setChecked(false);
@@ -208,7 +208,7 @@ void ChooseFiles::on_cancelButton_clicked() {
 }
 
 void ChooseFiles::enableOkButton() {
-	//qDebug() << "In void ChooseFiles::enableOkButton()";
+	qDebug() << "In void ChooseFiles::enableOkButton()";
 
 	bool homeIsChecked = false;
 	bool awayIsChecked = false;
@@ -255,7 +255,7 @@ QString ChooseFiles::getFileFormazioni(void) {
 }
 
 void ChooseFiles::doDownload() {
-	//qDebug() << "In ChooseFiles::doDownload() --> Network will be accessed.";
+	qDebug() << "In ChooseFiles::doDownload() --> Network will be accessed.";
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	urls->push_back(
@@ -281,7 +281,7 @@ void ChooseFiles::doDownload() {
 	this->filesDownloader->exec();
 
 	if (this->filesDownloader->requestSucceded()) {
-		//qDebug() << "In ChooseFiles::doDownload() --> request succeded.";
+		qDebug() << "In ChooseFiles::doDownload() --> request succeded.";
 		this->downloadSuccess = true;
 	} else {
 		if (!this->filesDownloader->wasCancelClicked()) {
@@ -333,11 +333,11 @@ QString ChooseFiles::getAwayFile() {
 }
 
 bool ChooseFiles::createFileSquadreFromWebFiles() {
-	//qDebug() << "In ChooseFiles::createFileSquadreFromWebFiles().";
+	qDebug() << "In ChooseFiles::createFileSquadreFromWebFiles().";
 
 	if (this->downloadSuccess) {
 
-		// qDebug() << "In ChooseFiles::createFileSquadreFromWebFiles() --> download was successful.";
+		qDebug() << "In ChooseFiles::createFileSquadreFromWebFiles() --> download was successful.";
 
 		QFile fHome(THE_REPO->getDownloadPath() + "/" + this->getHomeFile());
 		QFile fAway(THE_REPO->getDownloadPath() + "/" + this->getAwayFile());
@@ -588,6 +588,8 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 		fHome.close();
 		fAway.close();
 		fOut.close();
+		qDebug() << "Out of ChooseFiles::createFileSquadreFromWebFiles().";
+
 		return EXIT_SUCCESS;
 	} else {
 		qDebug() << "In ChooseFiles::createFileSquadreFromWebFiles() --> download was not successful.";

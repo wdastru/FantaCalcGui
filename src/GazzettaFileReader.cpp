@@ -22,9 +22,14 @@ GazzettaFileReader::~GazzettaFileReader() {
 }
 
 std::vector<std::vector<std::string> > GazzettaFileReader::getOutput() {
-	//qDebug() << "In GazzettaFileReader::getOutput().";
+	qDebug() << "In GazzettaFileReader::getOutput().";
+
+	qDebug() << "In GazzettaFileReader::getOutput(). " << this->fileGazzetta.toStdString().c_str();
 
 	std::ifstream fGaz(this->fileGazzetta.toStdString().c_str());
+
+	qDebug() << "In GazzettaFileReader::getOutput(). 1";
+
 	if (!fGaz) {
 		qDebug() << "In GazzettaFileReader::getOutput() --> il file gazzetta  : " + this->fileGazzetta + " non esiste!";
 		LOG(
@@ -33,8 +38,12 @@ std::vector<std::vector<std::string> > GazzettaFileReader::getOutput() {
 						+ this->fileGazzetta + " non esiste!");
 	}
 
+	qDebug() << "In GazzettaFileReader::getOutput(). 2";
+
 	std::vector<std::vector<std::string> > Gazzetta;
 	Gazzetta.resize(26);
+
+	qDebug() << "In GazzettaFileReader::getOutput(). Before while loop.";
 
 	while (!fGaz.eof()) {
 		std::string line;
@@ -43,6 +52,8 @@ std::vector<std::vector<std::string> > GazzettaFileReader::getOutput() {
 
 		std::string tmpString;
 		tmpString = line;
+
+		qDebug() << "In GazzettaFileReader::getOutput(). In while loop.";
 
 		for (signed int i = 0; i < 26; i++) {
 			if (line.size() > 0) {
@@ -57,5 +68,8 @@ std::vector<std::vector<std::string> > GazzettaFileReader::getOutput() {
 		}
 	}
 	fGaz.close();
+
+	qDebug() << "Out of GazzettaFileReader::getOutput().";
+
 	return Gazzetta;
 }

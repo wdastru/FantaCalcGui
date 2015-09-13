@@ -124,7 +124,7 @@ QString Repository::getFileGazzettaUrl() {
 	return this->getUrl() + "777/filesGazzetta/listaGazFiles.txt";
 }
 QString Repository::getUrl() {
-	//qDebug() << "In QString Repository::getUrl()";
+	qDebug() << "In QString Repository::getUrl()";
 	return this->url;
 }
 QString Repository::getFormazioniUrl() {

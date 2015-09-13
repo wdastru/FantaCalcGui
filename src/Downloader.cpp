@@ -52,11 +52,11 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 		std::vector<QString>* _savePaths, bool _silent) :
 	QDialog(parent) {
 
-	//qDebug() << "In Downloader::Downloader(...).";
-    //
-	//for (int i = 0; i < _savePaths->size(); ++i) {
-	//	qDebug() << "In Downloader::Downloader(...). _savePaths.at(" + my::toQString<int>(i) + ") = " + _savePaths->at(i);
-	//}
+	qDebug() << "In Downloader::Downloader(...).";
+
+	for (int i = 0; i < _savePaths->size(); ++i) {
+		qDebug() << "In Downloader::Downloader(...). _savePaths.at(" + my::toQString<int>(i) + ") = " + _savePaths->at(i);
+	}
 
 	this->setFont(THE_REPO->fontVariableWidthSmall);
 
@@ -81,8 +81,7 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 		this->urlLabelVector.push_back(new QLabel(tr("URL:")));
 	}
 
-	statusLabel = new QLabel(tr("Please enter the URL of a file you want to "
-		"download."));
+	statusLabel = new QLabel(tr("Please enter the URL of a file you want to download."));
 
 	downloadButton = new QPushButton(tr("Download"));
 	downloadButton->setDefault(true);
@@ -122,7 +121,7 @@ Downloader::Downloader(QWidget *parent, std::vector<QUrl>* _urls,
 	}
 }
 void Downloader::quit() {
-	//qDebug() << "In void Downloader::quit().";
+	qDebug() << "In void Downloader::quit().";
 	this->hasBeenQuitted = true;
 	this->close();
 }
