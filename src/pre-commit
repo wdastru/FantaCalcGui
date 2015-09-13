@@ -1,7 +1,6 @@
 #!/usr/bin/perl
 
 print " +--------------------------------+\n";
-print " | post-checkout_merge_and_commit |\n";
 
 $uname = qx(uname);
 chomp($uname);
