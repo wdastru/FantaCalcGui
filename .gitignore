@@ -9,3 +9,7 @@ CMakeCache.txt
 CMakeFiles/
 src/Makefile
 src/Test/Makefile
+.cproject
+.project
+Default/
+.settings/
