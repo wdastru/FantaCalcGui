@@ -1,0 +1,60 @@
+#!/usr/bin/perl
+
+print " +--------------------------------+\n";
+
+$uname = qx(uname);
+chomp($uname);
+
+$hostname = qx(hostname);
+chomp($hostname);
+
+$OSX = qx(scutil --get LocalHostName);
+chomp($OSX);
+
+if ( $ENV{'OS'} eq "Windows_NT" ) {
+    
+       if ( $ENV{'COMPUTERNAME'} eq "EPTADONE" ) {
+			chdir "/d/Walter/src/FantaCalcGuiNew/";
+       } elsif ( $ENV{'COMPUTERNAME'} eq "VORTICE" ) {
+			chdir "/d/Sorgenti/FantaCalcGuiNew/";
+	   } else {
+			print " Not in a knowm Windows system. Exiting.\n";
+			exit();
+       }
+
+		$revision = qx(git rev-parse --short HEAD);     
+		chomp($revision);
+		system("sed 's/XXX/$revision/g' src/revision.h.in > src/revision.h");
+    
+} elsif ( $uname eq "Linux" ) {
+
+	#print $uname;
+
+	if ( $hostname eq "PESTODURO" ) {
+		
+    	chdir "/home/waleviolaeivan/Sorgenti/FantaCalcGuiNew/";
+    	$revision = qx(git rev-parse --short HEAD);     
+    	chomp($revision);
+    	system("sed 's/XXX/$revision/g' src/revision.h.in > src/revision.h");
+        
+	 } else {
+    	print " Not on Pestoduro. Exiting.\n";
+    	exit(); 
+	 }
+} elsif ( $OSX eq "django" ) {
+    
+    chdir "/Users/espakm/src/FantaCalcGui/";
+    $revision = qx(git rev-parse --short HEAD);     
+    chomp($revision);       
+    print "$revision\n";
+    system("sed 's/XXX/$revision/g' src/revision.h.in > src/revision.h");
+
+} else {
+		print " System not recognized. Exiting.\n";
+		exit();
+}
+
+qx(git add src/revision.h);     
+
+print " | revision : $revision             |\n";
+print " +--------------------------------+\n";

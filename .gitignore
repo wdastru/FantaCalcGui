@@ -2,10 +2,13 @@ build/
 .fuse*
 installer/*.exe
 *~
-src/revision.h
 *.o
 src/Test/test
 CMakeCache.txt
 CMakeFiles/
 src/Makefile
 src/Test/Makefile
+.cproject
+.project
+Default/
+.settings/
