@@ -98,11 +98,11 @@ void Test::onlySurname() {
 	std::string str2 = "204	ALVAREZ P.S.	CATANIA	D	1	6	5.5	6	0	-0.5	0	0	0	0";
 	std::string str3 = "124	FREY S.	GENOA	P	1	11	4.5	6	-1	-0.5	0	0	0	0";
 	std::string surname1 =
-			STR_MOD->onlySurname(STR_MOD->msk(str1, DELIM, ColNomeCognome));
+			STR_MOD->onlySurname(STR_MOD->msk(str1, DELIM, ColCognome));
 	std::string surname2 =
-			STR_MOD->onlySurname(STR_MOD->msk(str2, DELIM, ColNomeCognome));
+			STR_MOD->onlySurname(STR_MOD->msk(str2, DELIM, ColCognome));
 	std::string surname3 =
-			STR_MOD->onlySurname(STR_MOD->msk(str3, DELIM, ColNomeCognome));
+			STR_MOD->onlySurname(STR_MOD->msk(str3, DELIM, ColCognome));
 	QCOMPARE(QString::fromStdString(surname1), QString("DEL PIERO"));
 	QCOMPARE(QString::fromStdString(surname2), QString("ALVAREZ"));
 	QCOMPARE(QString::fromStdString(surname3), QString("FREY"));

@@ -2,11 +2,8 @@
 #include "singletonQtLogger.h"
 #include <QtCore/QDebug>
 #include <QtCore/QObject>
-//#include <QtWidgets/QMessageBox>
-//#include <QtWidgets/QInputDialog>
 #include <QtGui/QMessageBox>
 #include <QtGui/QInputDialog>
-//#include <QtGui>
 #include "Fanta.h"
 #include "Repository.h"
 
@@ -179,16 +176,15 @@ unsigned int FileFormazioniReader::execute() {
 				v_WhichOfTheseLevenshtein.clear();
 
 				unsigned int xx = line[0]; // xx e' il valore ASCII della prima lettera del cognome
-				for (unsigned int j = 0; j
-						< this->allThePlayers[xx - 65].size(); j++) {
+				for (unsigned int j = 0; j< this->allThePlayers[xx - 65].size(); j++) {
 					string tempStrGazz = this->allThePlayers[xx - 65].at(j);
 
 					// cerca nella riga della Gazzetta il nome del giocatore
-					size_t found = STR_MOD->msk(tempStrGazz, DELIM,
-							ColNomeCognome).find(line, 0);
+					size_t found = STR_MOD->msk(tempStrGazz, DELIM,	ColCognome).find(line, 0);
 
 					if (found != string::npos) { // se vero il giocatore e' stato trovato
 						// aggiungi al vettore con tutti i giocatori trovati
+						qDebug() << "In FileFormazioniReader::execute(). " << this->allThePlayers[xx - 65].at(j).c_str();
 						v_Found.push_back(this->allThePlayers[xx - 65].at(j));
 					}
 				}
@@ -219,7 +215,7 @@ unsigned int FileFormazioniReader::execute() {
 									line,
 									STR_MOD->onlySurname(
 											STR_MOD->msk(v_Found.at(j), DELIM,
-													ColNomeCognome))) == 0) { // corrispondenza esatta
+													ColCognome))) == 0) { // corrispondenza esatta
 								LOG(DBG, "    Trovata corrispondenza esatta : " \
 									+ QString::fromStdString(line));
 
@@ -320,7 +316,7 @@ unsigned int FileFormazioniReader::execute() {
 							LOG(DBG, "    scelto [" \
 									+ my::toQString<int>(chosenThese) \
 									+ "] " \
-									+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM, ColNomeCognome)));
+									+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM, ColCognome)));
 						}
 
 					} while (v_Found.size() > 1);
@@ -390,7 +386,7 @@ unsigned int FileFormazioniReader::execute() {
 						LOG(DBG, "    scelto [" \
 								+ my::toQString<int>(chosenLevenshtein) \
 								+ "] " \
-								+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM, ColNomeCognome)));
+								+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM, ColCognome)));
 					}
 				}
 
@@ -455,7 +451,7 @@ unsigned int FileFormazioniReader::execute() {
 
 						LOG(DBG, ""); // blank line in log file only
 						LOG(DBG, "    trovato " \
-							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColNomeCognome)) \
+							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColCognome)) \
 							+ " ( " \
 							+ QString::fromStdString(STR_MOD->msk(v_Found.at(0), DELIM,ColSquadra)) \
 							+ " ).");
@@ -476,7 +472,7 @@ unsigned int FileFormazioniReader::execute() {
 							QObject::tr("<br>    ATTENZIONE !!!  -> %1 ( %2 ) ripetuto.<br/>    Controllare il file di input.").arg( \
 								QString::fromStdString( \
 										STR_MOD->msk(v_Found.at(0), \
-												DELIM, ColNomeCognome))).arg( \
+												DELIM, ColCognome))).arg( \
 								QString::fromStdString( \
 										STR_MOD->msk(v_Found.at(0), \
 												DELIM, ColSquadra))).replace( \
@@ -486,7 +482,7 @@ unsigned int FileFormazioniReader::execute() {
 								QObject::tr("%1 ( %2 ) ripetuto.<br>Controllare il file di input.").arg( \
 									QString::fromStdString( \
 											STR_MOD->msk(v_Found.at(0), \
-													DELIM, ColNomeCognome))).arg( \
+													DELIM, ColCognome))).arg( \
 									QString::fromStdString( \
 											STR_MOD->msk(v_Found.at(0), \
 													DELIM, ColSquadra))).replace( \
@@ -501,7 +497,7 @@ unsigned int FileFormazioniReader::execute() {
 							QObject::tr("<br/>    ATTENZIONE !!!  -> %1 ( %2 ).<br/>    Giocatore indicato con GDV senza che abbia giocato !!!<br/>    Controllare il file di input.").arg( \
 								QString::fromStdString( \
 										STR_MOD->msk(v_Found.at(0), \
-												DELIM, ColNomeCognome))).arg( \
+												DELIM, ColCognome))).arg( \
 								QString::fromStdString( \
 										STR_MOD->msk(v_Found.at(0), \
 												DELIM, ColSquadra))));
@@ -511,7 +507,7 @@ unsigned int FileFormazioniReader::execute() {
 										"%1 ( %2 )<br>Giocatore indicato con GDV senza che abbia giocato !!!<br>Controllare il file di input").arg( \
 										QString::fromStdString( \
 												STR_MOD->msk(v_Found.at(0), \
-														DELIM, ColNomeCognome))).arg( \
+														DELIM, ColCognome))).arg( \
 										QString::fromStdString( \
 												STR_MOD->msk(v_Found.at(0), \
 														DELIM, ColSquadra))));
@@ -525,7 +521,7 @@ unsigned int FileFormazioniReader::execute() {
 							QObject::tr("<br/>    ATTENZIONE !!!  -> %1 ( %2 ).<br/>    Giocatore indicato con GDP senza che abbia giocato !!!<br/>    Controllare il file di input.").arg( \
 								QString::fromStdString( \
 										STR_MOD->msk(v_Found.at(0), \
-												DELIM, ColNomeCognome))).arg( \
+												DELIM, ColCognome))).arg( \
 								QString::fromStdString( \
 										STR_MOD->msk(v_Found.at(0), \
 												DELIM, ColSquadra))));
@@ -535,7 +531,7 @@ unsigned int FileFormazioniReader::execute() {
 										"%1 ( %2 )<br>Giocatore indicato con GDP senza che abbia giocato !!!<br>Controllare il file di input").arg( \
 										QString::fromStdString( \
 												STR_MOD->msk(v_Found.at(0), \
-														DELIM, ColNomeCognome))).arg( \
+														DELIM, ColCognome))).arg( \
 										QString::fromStdString( \
 												STR_MOD->msk(v_Found.at(0), \
 														DELIM, ColSquadra))));
@@ -549,7 +545,7 @@ unsigned int FileFormazioniReader::execute() {
 							QObject::tr("<br/>    ATTENZIONE !!!  -> %1 ( %2 ).<br/>    Giocatore indicato con GDV senza che abbia segnato !!!<br/>    Controllare il file di input.").arg( \
 								QString::fromStdString( \
 										STR_MOD->msk(v_Found.at(0), \
-												DELIM, ColNomeCognome))).arg( \
+												DELIM, ColCognome))).arg( \
 								QString::fromStdString( \
 										STR_MOD->msk(v_Found.at(0), \
 												DELIM, ColSquadra))));
@@ -559,7 +555,7 @@ unsigned int FileFormazioniReader::execute() {
 										"%1 ( %2 )<br>Giocatore indicato con GDV senza che abbia segnato !!!<br>Controllare il file di input").arg( \
 										QString::fromStdString( \
 												STR_MOD->msk(v_Found.at(0), \
-														DELIM, ColNomeCognome))).arg( \
+														DELIM, ColCognome))).arg( \
 										QString::fromStdString( \
 												STR_MOD->msk(v_Found.at(0), \
 														DELIM, ColSquadra))));
@@ -573,7 +569,7 @@ unsigned int FileFormazioniReader::execute() {
 							QObject::tr("<br/>    ATTENZIONE !!!  -> %1 ( %2 ).<br/>    Giocatore indicato con GDP senza che abbia segnato !!!<br/>    Controllare il file di input.").arg( \
 								QString::fromStdString( \
 										STR_MOD->msk(v_Found.at(0), \
-												DELIM, ColNomeCognome))).arg( \
+												DELIM, ColCognome))).arg( \
 								QString::fromStdString( \
 										STR_MOD->msk(v_Found.at(0), \
 												DELIM, ColSquadra))));
@@ -583,7 +579,7 @@ unsigned int FileFormazioniReader::execute() {
 										"%1 ( %2 )<br>Giocatore indicato con GDP senza che abbia segnato !!!<br>Controllare il file di input").arg( \
 										QString::fromStdString( \
 												STR_MOD->msk(v_Found.at(0), \
-														DELIM, ColNomeCognome))).arg( \
+														DELIM, ColCognome))).arg( \
 										QString::fromStdString( \
 												STR_MOD->msk(v_Found.at(0), \
 														DELIM, ColSquadra))));
@@ -629,14 +625,14 @@ std::vector<std::string> FileFormazioniReader::findLevenstheins(
 		for (size_t ii = 0; ii < 26; ii++) { // giocatori della squadra
 			for (size_t jj = 0; jj < this->allThePlayers[ii].size(); jj++) { // giocatori della Gazzetta
 				if (STR_MOD->msk(this->allThePlayers[ii].at(jj), DELIM,
-						ColNomeCognome) != "TnotF!") {
+						ColCognome) != "TnotF!") {
 
 					if (FANTA->LevenshteinDistance(
 							line,
 							STR_MOD->onlySurname(
 									STR_MOD->msk(
 											this->allThePlayers[ii].at(jj),
-											DELIM, ColNomeCognome)))
+											DELIM, ColCognome)))
 							<= distance) {
 						Levenshteins.push_back(this->allThePlayers[ii].at(jj));
 					}
@@ -679,7 +675,7 @@ std::string FileFormazioniReader::prepareStringToPresent(std::string str,
 	string tmpStr = "";
 	tmpStr += ('[' + my::toString<unsigned int>(j + 1) + ']');
 	tmpStr += " ";
-	tmpStr += STR_MOD->msk(str, DELIM, ColNomeCognome);
+	tmpStr += STR_MOD->msk(str, DELIM, ColCognome);
 	tmpStr += " - ";
 	tmpStr += tmpRuolo;
 	tmpStr += " - ";

@@ -100,20 +100,23 @@
 
 #ifndef COLUMNS
 #define COLUMNS
-#define ColNomeCognome			1
+#define ColCognome				1
 #define ColSquadra 				2
-#define ColRuolo 				3
-#define ColFantaVotoGazzetta 	6
-#define ColVotoGazzetta 		7
-#define ColGoalFatti 			8
-#define ColGoalSubiti 			8
-#define ColAmm 					9
-#define ColEsp 					10
-#define ColRigore 				11
-#define ColAutoreti 			12
-#define ColAssist 				13
-#define ColGoalDecVitt  		14 // non presente nel file gazzetta, ma aggiunto dal programma
-#define ColGoalDecPar 			15 // non presente nel file gazzetta, ma aggiunto dal programma
+#define ColRuolo 				4	/* Corpillo ha detto di usare Ruolo2 	*/
+#define ColRuolo2 				3
+#define ColGiocaAncora			5	/* nel file gazzetta ma NON UTILIZZATO 	*/
+#define ColQuotazione 			6	/* nel file gazzetta ma NON UTILIZZATO 	*/
+#define ColFantaVotoGazzetta 	7
+#define ColVotoGazzetta 		8
+#define ColGoalFatti 			9
+#define ColGoalSubiti 			9
+#define ColAmm 					10
+#define ColEsp 					11
+#define ColRigore 				12
+#define ColAutoreti 			13
+#define ColAssist 				14
+#define ColGoalDecVitt  		15 // non presente nel file gazzetta, ma aggiunto dal programma
+#define ColGoalDecPar 			16 // non presente nel file gazzetta, ma aggiunto dal programma
 #endif /* COLUMNS */
 
 #ifndef ADDPLAYER_RETURN_CODES

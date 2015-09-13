@@ -40,11 +40,12 @@ private:
 	signed int modifierValues[9][5];
 	float modifierVoti[10];
 	struct player {
-		std::string Nome;
-		std::string Nome_Sost;
+		std::string Cognome;
+		std::string Cognome_Sost;
 		std::string Squadra;
 		std::string Squadra_Sost;
 		signed int Ruolo;
+		signed int Ruolo2;
 		float FantaVoto;
 		float FantaVotoGazzetta;
 		float VotoGazzetta;

@@ -20,6 +20,7 @@ ChooseFiles::ChooseFiles(QString _fileFormazioni, QString _fileGazzetta,
 	this->setFont(THE_REPO->fontVariableWidthSmall);
 	this->setWindowTitle("FantaCalcGui - Scegli i file online");
 	this->height = 14;
+	this->cancelClicked = FALSE;
 	setupFormazioniTab(_fileFormazioni);
 	setupGazzettaTab(_fileGazzetta);
 }
@@ -61,8 +62,7 @@ void ChooseFiles::setupGazzettaTab(QString _fileGazzetta) {
 
 			labelGazzetta.push_back(tmpLabel);
 			gaz.push_back(tmpButton);
-			connect(gaz.at(i), SIGNAL(toggled(bool)), this,
-					SLOT(enableOkButton()));
+			connect(gaz.at(i), SIGNAL(toggled(bool)), this, SLOT(enableOkButton()));
 			ui.gridGazzettaLayout->addWidget(gaz.at(i), rowCounter,
 					2 * int(i / rows));
 			ui.gridGazzettaLayout->addWidget(labelGazzetta.at(i), rowCounter,
