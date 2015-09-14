@@ -12,3 +12,4 @@ src/Test/Makefile
 .project
 Default/
 .settings/
+src/revision.h

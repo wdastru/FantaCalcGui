@@ -1,6 +1,6 @@
 #ifndef REVISION_H
 #define REVISION_H
 
-THE_LOGGER->setRevision("599e232");
+THE_LOGGER->setRevision("1214491");
 
 #endif
