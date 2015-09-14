@@ -6,7 +6,6 @@ installer/*.exe
 src/Test/test
 CMakeCache.txt
 CMakeFiles/
-src/Makefile
 src/Test/Makefile
 .cproject
 .project
