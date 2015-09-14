@@ -32,7 +32,7 @@ void StringModifier::onlyLettersEnd(std::string & str) {
 		str.erase(str.size() - 1, 1);
 }
 void StringModifier::onlyLettersAndNumbersBegin(std::string & str) {
-	qDebug() << "In void StringModifier::onlyLettersAndNumbersBegin(std::string & str): str = #" + QString::fromStdString(str) + "#";
+	//qDebug() << "In void StringModifier::onlyLettersAndNumbersBegin(std::string & str): str = #" + QString::fromStdString(str) + "#";
 	while ( \
 			(str.at(0) < '0' \
 			|| (str.at(0) > '9' && str.at(0) < 'A') \
@@ -40,16 +40,16 @@ void StringModifier::onlyLettersAndNumbersBegin(std::string & str) {
 			|| str.at(0) > 'z') \
 			&& str.size() >1
 			) str.erase(0, 1);
-	qDebug() << "Out of void StringModifier::onlyLettersAndNumbersBegin(std::string & str): str = #" + QString::fromStdString(str) + "#";
+	//qDebug() << "Out of void StringModifier::onlyLettersAndNumbersBegin(std::string & str): str = #" + QString::fromStdString(str) + "#";
 }
 void StringModifier::onlyLettersAndNumbersEnd(std::string & str) {
-	qDebug() << "In void void StringModifier::onlyLettersAndNumbersEnd(std::string & str): str = #" + QString::fromStdString(str) + "#";
+	//qDebug() << "In void void StringModifier::onlyLettersAndNumbersEnd(std::string & str): str = #" + QString::fromStdString(str) + "#";
 	while ((str.at(str.size() - 1) < '0'
 			|| (str.at(str.size() - 1) > '9' && str.at(str.size() - 1) < 'A')
 			|| (str.at(str.size() - 1) > 'Z' && str.at(str.size() - 1) < 'a')
 			|| str.at(str.size() - 1) > 'z') && str.size() > 1)
 		str.erase(str.size() - 1, 1);
-	qDebug() << "Out of void void StringModifier::onlyLettersAndNumbersEnd(std::string & str): str = #" + QString::fromStdString(str) + "#";
+	//qDebug() << "Out of void void StringModifier::onlyLettersAndNumbersEnd(std::string & str): str = #" + QString::fromStdString(str) + "#";
 }
 void StringModifier::removeNotAllowedChars(std::string & str) {
 
