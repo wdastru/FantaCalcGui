@@ -1,0 +1,645 @@
+102	ANDUJAR Mariano	Napoli	P	P	SI	1	-	-							
+103	BASSI Davide	Atalanta	P	P	SI	1	-	-							
+104	BENUSSI Francesco	Carpi	P	P	SI	2	-	-							
+105	BERISHA Etrit	Lazio	P	P	SI	2	1.5	5.5	-4	0	0	0	0	0	
+106	BERNI Tommaso	Inter	P	P	SI	1	-	-							
+107	BIZZARRI Albano	Chievo	P	P	SI	14	7.5	7.5	0	0	0	0	0	0	
+108	BRIGNOLI Alberto	Sampdoria	P	P	SI	1	-	-							
+109	BRKIC Zeljko	Carpi	P	P	SI	6	3.5	5.5	-2	0	0	0	0	0	
+110	BUFFON Gianluigi	Juventus	P	P	SI	17	4.5	6.5	-2	0	0	0	0	0	
+111	CARRIZO Juan Pablo	Inter	P	P	SI	1	-	-							
+112	CASTELLAZZI Luca	Torino	P	P	SI	1	-	-							
+113	COLOMBI Simone	Palermo	P	P	SI	1	-	-							
+114	CONSIGLI Andrea	Sassuolo	P	P	SI	11	6	6	0	0	0	0	0	0	
+115	COPPOLA Ferdinando	Verona	P	P	SI	1	-	-							
+116	DA COSTA Angelo	Bologna	P	P	SI	1	-	-							
+117	DE SANCTIS Morgan	Roma	P	P	SI	2	-	-							
+118	DONNARUMMA Antonio	Genoa	P	P	SI	1	-	-							
+119	DONNARUMMA Gianluigi	Milan	P	P	SI	1	-	-							
+120	GABRIEL Ferreira Vasconcelos	Napoli	P	P	SI	1	-	-							
+121	GOLLINI Pierluigi	Verona	P	P	SI	1	-	-							
+122	GOMIS Lys	Torino	P	P	SI	1	-	-							
+123	GUERRIERI Guido	Lazio	P	P	SI	1	-	-							
+124	HANDANOVIC Samir	Inter	P	P	SI	15	4.5	6	-1	-0.5	0	0	0	0	
+125	ICHAZO Salvador	Torino	P	P	SI	1	-	-							
+126	KARNEZIS Orestis	Udinese	P	P	SI	13	5	6	-1	0	0	0	0	0	
+127	LAMANNA Eugenio	Genoa	P	P	SI	3	6.5	6.5	0	0	0	0	0	0	
+128	LEALI Nicola	Frosinone	P	P	SI	11	9	8	-2	0	0	3	0	0	
+129	LEZZERINI Luca	Fiorentina	P	P	SI	1	-	-							
+130	LOBONT Bogdan	Roma	P	P	SI	1	-	-							
+131	LOPEZ Diego	Milan	P	P	SI	13	4.5	5.5	-1	0	0	0	0	0	
+132	MARCHETTI Federico	Lazio	P	P	SI	12	-	-							
+133	MERET Alex	Udinese	P	P	SI	1	-	-							
+134	MIRANTE Antonio	Bologna	P	P	SI	11	5	6	-1	0	0	0	0	0	
+135	MURANO Maicol	Carpi	P	P	NO	1	-	-							
+136	NETO Norberto	Juventus	P	P	SI	1	-	-							
+137	PADELLI Daniele	Torino	P	P	SI	12	5	6	-1	0	0	0	0	0	
+138	PEGOLO Gianluca	Sassuolo	P	P	SI	1	-	-							
+139	PELAGOTTI Alberto	Empoli	P	P	SI	1	-	-							
+140	PERIN Mattia	Genoa	P	P	SI	13	-	-							
+141	PIGLIACELLI Mirko	Frosinone	P	P	NO	1	-	-							
+142	POMINI Alberto	Sassuolo	P	P	SI	1	-	-							
+144	PUGGIONI Christian	Sampdoria	P	P	SI	1	-	-							
+145	PUGLIESI Maurizio	Empoli	P	P	SI	1	-	-							
+146	RADUNOVIC Boris	Atalanta	P	P	SI	1	-	-							
+147	RAFAEL De Andrade Bittencourt Pinheiro	Verona	P	P	SI	10	4	6	-2	0	0	0	0	0	
+148	REINA José Manuel	Napoli	P	P	SI	13	4.5	6.5	-2	0	0	0	0	0	
+149	RUBINHO	Juventus	P	P	SI	1	-	S.V.							
+150	SARR Mouhamadou	Bologna	P	P	SI	1	-	-							
+151	SCUFFET Simone	Udinese	P	P	NO	1	-	-							
+152	SECULIN Andrea	Chievo	P	P	SI	1	-	-							
+153	SEPE Luigi	Fiorentina	P	P	SI	10	-	-							
+154	SKORUPSKI Lukasz	Empoli	P	P	SI	8	3	5	-2	0	0	0	0	0	
+155	SORRENTINO Stefano	Palermo	P	P	SI	13	7	7.5	0	-0.5	0	0	0	0	
+156	SPORTIELLO Marco	Atalanta	P	P	SI	13	6	6	0	0	0	0	0	0	
+157	SVEDKAUSKAS Tomas	Roma	P	P	NO	1	-	-							
+158	TATARUSANU Ciprian	Fiorentina	P	P	SI	5	3.5	6.5	-3	0	0	0	0	0	
+159	UJKANI Samir	Genoa	P	P	SI	1	-	-							
+160	VIVIANO Emiliano	Sampdoria	P	P	SI	14	3.5	5.5	-2	0	0	0	0	0	
+161	ZAPPINO Massimo	Frosinone	P	P	SI	2	-	-							
+162	BRESSAN Walter	Chievo	P	P	SI	1	-	-							
+163	SZCZESNY Wojciech	Roma	P	P	SI	16	6	7	-1	0	0	0	0	0	
+164	RAFAEL Cabral barbosa	Napoli	P	P	SI	1	-	-							
+165	PERISAN Samuele	Udinese	P	P	SI	1	0	0	0	0	0	0	0	0	
+166	LIOTTI Andrea	Carpi	P	P	SI	1	0	0	0	0	0	0	0	0	
+167	BELEC Vid	Carpi	P	P	SI	1	0	0	0	0	0	0	0	0	
+168	ALASTRA Fabrizio	Palermo	P	P	SI	1	0	0	0	0	0	0	0	0	
+201	ABATE Ignazio	Milan	D	D	SI	7	-	-							
+202	ACERBI Francesco	Sassuolo	D	D	SI	10	6.5	6.5	0	0	0	0	0	0	
+203	ADNAN Ali Kadhim	Udinese	D	D	SI	6	6.5	6.5	0	0	0	0	0	0	
+204	ALBERTAZZI Michelangelo	Verona	D	D	SI	2	-	-							
+205	ALBIOL Raul	Napoli	D	D	SI	6	5	5	0	0	0	0	0	0	
+206	ALEX	Milan	D	D	SI	7	-	-							
+207	ALONSO Marcos	Fiorentina	D	D	SI	8	8	5.5	3	-0.5	0	0	0	0	
+208	ALTOBELLI Daniele	Frosinone	D	D	NO	2	-	-							
+209	ANDELKOVIC Sinisa	Palermo	D	D	SI	4	-	-							
+210	ANDREOLLI Marco	Inter	D	D	NO	3	-	-							
+211	ANTEI Luca	Sassuolo	D	D	SI	3	-	-							
+212	ANTONELLI Luca	Milan	D	D	SI	10	5.5	5.5	0	0	0	0	0	0	
+213	ARIAUDO Lorenzo	Sassuolo	D	D	SI	3	-	-							
+214	AVELAR Danilo	Torino	D	D	SI	10	7	7	0	0	0	0	0	0	
+215	BAGADUR Ricardo	Fiorentina	D	D	SI	1	-	-							
+216	BARBA Federico	Empoli	D	D	SI	6	5.5	5.5	0	0	0	0	0	0	
+217	BARZAGLI Andrea	Juventus	D	D	SI	10	-	-							
+218	BASANTA José	Fiorentina	D	D	NO	6	-	-							
+219	BASTA Dusan	Lazio	D	D	SI	12	5	5	0	0	0	0	0	0	
+220	BELLINI Gianpaolo	Atalanta	D	D	SI	4	-	-							
+221	BENALOUANE Yohann	Atalanta	D	D	NO	5	-	-							
+222	BERTONCINI Davide	Frosinone	D	D	SI	2	-	-							
+223	BIANCHETTI Matteo	Verona	D	D	SI	3	-	-							
+224	BIRAGHI Cristiano	Chievo	D	D	NO	4	-	-							
+225	BITTANTE Luca	Empoli	D	D	SI	5	-	-							
+226	BLANCHARD Leonardo	Frosinone	D	D	SI	5	4	4.5	0	-0.5	0	0	0	0	
+227	BONI Filippo	Verona	D	D	NO	1	-	-							
+228	BONUCCI Leonardo	Juventus	D	D	SI	13	6	6	0	0	0	0	0	0	
+229	BORGHINI Diego	Empoli	D	D	SI	1	-	-							
+230	BOVO Cesare	Torino	D	D	SI	4	-	-							
+231	BRAAFHEID Edson	Lazio	D	D	SI	4	-	-							
+232	BRIVIO Davide	Atalanta	D	D	SI	3	-	-							
+233	BUBNJIC Igor	Carpi	D	D	SI	3	6	6	0	0	0	0	0	0	
+234	BURDISSO Nicolas	Genoa	D	D	SI	7	6	6	0	0	0	0	0	0	
+235	CACCIATORE Fabrizio	Chievo	D	D	SI	4	6	6	0	0	0	0	0	0	
+236	CACERES Martin	Juventus	D	D	SI	5	5	5	0	0	0	0	0	0	
+237	CALABRIA Davide	Milan	D	D	SI	1	-	-							
+238	CAMPORESE Michele	Empoli	D	D	SI	3	-	-							
+239	CANA Lorik	Lazio	D	D	NO	3	-	-							
+240	CANINI Michele	Atalanta	D	D	SI	2	-	-							
+241	CANNAVARO Paolo	Sassuolo	D	D	SI	6	5.5	6	0	-0.5	0	0	0	0	
+242	CAPRADOSSI Elio	Roma	D	D	SI	1	-	-							
+243	CASSANI Mattia	Sampdoria	D	D	SI	7	5.5	5.5	0	0	0	0	0	0	
+244	CASTAN Leandro	Roma	D	D	SI	6	-	-							
+245	CESAR Bostjan	Chievo	D	D	SI	5	7	7	0	0	0	0	0	0	
+246	CHERUBIN Nicolò	Atalanta	D	D	SI	4	6	6	0	0	0	0	0	0	
+247	CHIELLINI Giorgio	Juventus	D	D	SI	11	4.5	5	0	-0.5	0	0	0	0	
+248	CIOFANI Matteo	Frosinone	D	D	SI	3	-	-							
+249	CISSOKHO Issa	Genoa	D	D	SI	5	6.5	6.5	0	0	0	0	0	0	
+250	CODA Andrea	Sampdoria	D	D	SI	2	5.5	5.5	0	0	0	0	0	0	
+251	COLE Ashley	Roma	D	D	SI	5	-	-							
+252	CONTI Andrea	Atalanta	D	D	SI	2	-	-							
+253	COSTA Andrea	Empoli	D	D	SI	4	-	-							
+254	CRIVELLO Roberto	Frosinone	D	D	SI	4	5	5	0	0	0	0	0	0	
+255	D'AMBROSIO Danilo	Inter	D	D	SI	6	-	-							
+256	DAINELLI Dario	Chievo	D	D	SI	6	-	-							
+257	DANILO Larangeira	Udinese	D	D	SI	10	6	6	0	0	0	0	0	0	
+258	DAPRELA' Fabio	Palermo	D	D	SI	3	-	-							
+259	DE CEGLIE Paolo	Juventus	D	D	NO	3	-	-							
+260	DE MAIO Sebastien	Genoa	D	D	SI	7	6	6	0	0	0	0	0	0	
+261	DE SCIGLIO Mattia	Milan	D	D	SI	5	5.5	5.5	0	0	0	0	0	0	
+262	DE SILVESTRI Lorenzo	Sampdoria	D	D	SI	9	-	-							
+263	DE VRIJ Stefan	Lazio	D	D	SI	10	4	4	0	0	0	0	0	0	
+264	DEL GROSSO Cristiano	Atalanta	D	D	NO	3	-	-							
+265	DERMAKU Kastriot	Empoli	D	D	SI	2	-	-							
+266	DIAKITE' Modibo	Frosinone	D	D	SI	5	4.5	5	0	-0.5	0	0	0	0	
+267	DIMARCO Federico	Inter	D	D	SI	2	-	-							
+268	DODO'	Inter	D	D	SI	4	-	-							
+269	DOMIZZI Maurizio	Udinese	D	D	SI	6	-	-							
+270	DRAME' Boukary	Atalanta	D	D	SI	5	6	6	0	0	0	0	0	0	
+271	EDENILSON Andrade Dos Santos	Udinese	D	D	SI	6	5	5	0	0	0	0	0	0	
+272	ELY Rodrigo	Milan	D	D	SI	1	-	-							
+273	EMERSON Palmieri	Roma	D	D	SI	4	-	-							
+274	EVRA Patrice	Juventus	D	D	SI	8	4	5	0	0	-1	0	0	0	
+275	FARAONI Marco Davide	Udinese	D	D	NO	2	-	-							
+276	FERRARI Alex	Bologna	D	D	SI	2	5.5	6	0	-0.5	0	0	0	0	
+277	FIGUEIRAS Diogo	Genoa	D	D	SI	6	-	-							
+278	FONTANESI Leonardo	Sassuolo	D	D	SI	2	-	-							
+279	FREY Nicolas	Chievo	D	D	SI	5	6.5	6.5	0	0	0	0	0	0	
+280	GABRIEL SILVA Antunes	Carpi	D	D	SI	5	5	5.5	0	-0.5	0	0	0	0	
+281	GAGLIOLO Riccardo	Carpi	D	D	SI	6	6	6	0	0	0	0	0	0	
+282	GAMBERINI Alessandro	Chievo	D	D	SI	5	7	7	0	0	0	0	0	0	
+283	GASTALDELLO Daniele	Bologna	D	D	SI	7	-	-							
+284	GASTON SILVA	Torino	D	D	SI	2	-	-							
+285	GAZZOLA Marcello	Sassuolo	D	D	SI	4	-	-							
+286	GENTILETTI Santiago	Lazio	D	D	SI	8	4	4	0	0	0	0	0	0	
+287	GHOULAM Faouzi	Napoli	D	D	SI	6	5.5	5.5	0	0	0	0	0	0	
+288	GLIK Kamil	Torino	D	D	SI	14	6	6	0	0	0	0	0	0	
+289	GOBBI Massimo	Chievo	D	D	SI	6	7	7	0	0	0	0	0	0	
+290	GOLDANIGA Edoardo	Palermo	D	D	SI	4	5.5	5.5	0	0	0	0	0	0	
+291	GONZALEZ Giancarlo	Palermo	D	D	SI	9	7	7	0	0	0	0	0	0	
+292	HEGAZI Ahmed	Fiorentina	D	D	NO	2	-	-							
+293	HENRIQUE Adriano Buss	Napoli	D	D	SI	3	-	-							
+294	HEURTAUX Thomas	Udinese	D	D	SI	8	5.5	5.5	0	0	0	0	0	0	
+295	HOEDT Wesley	Lazio	D	D	SI	5	-	-							
+296	HYSAJ Elseid	Napoli	D	D	SI	5	5.5	5.5	0	0	0	0	0	0	
+297	ISLA Mauricio	Juventus	D	D	NO	4	-	-							
+298	IZZO Armando	Genoa	D	D	SI	6	5.5	6	0	-0.5	0	0	0	0	
+299	JANSSON Pontus	Torino	D	D	SI	3	-	-							
+300	JUAN JESUS	Inter	D	D	SI	6	5.5	5.5	0	0	0	0	0	0	
+301	KONKO Abdoulay	Lazio	D	D	SI	3	-	-							
+302	KOULIBALY Kalidou	Napoli	D	D	SI	7	5	5	0	0	0	0	0	0	
+303	KRESIC Anton	Atalanta	D	D	SI	1	-	-							
+304	LAURINI Vincent	Empoli	D	D	SI	4	-	-							
+305	LAZAAR Achraf	Palermo	D	D	SI	8	5.5	5.5	0	0	0	0	0	0	
+306	LETIZIA Gaetano	Carpi	D	D	SI	4	5	5.5	0	-0.5	0	0	0	0	
+307	LICHTSTEINER Stephan	Juventus	D	D	SI	13	5	5	0	0	0	0	0	0	
+308	LONGHI Alessandro	Sassuolo	D	D	SI	4	-	-							
+309	LUPERTO Sebastiano	Napoli	D	D	SI	1	-	-							
+310	MAGGIO Christian	Napoli	D	D	SI	5	5.5	5.5	0	0	0	0	0	0	
+311	MAICON Douglas Sisenando	Roma	D	D	SI	10	-	-							
+312	MAIETTA Domenico	Bologna	D	D	SI	3	5.5	5.5	0	0	0	0	0	0	
+313	MAKSIMOVIC Nikola	Torino	D	D	SI	7	6	6	0	0	0	0	0	0	
+314	MANOLAS Kostas	Roma	D	D	SI	11	6.5	6.5	0	0	0	0	0	0	
+315	MARCHESE Giovanni	Genoa	D	D	SI	8	6	6	0	0	0	0	0	0	
+316	MARIO RUI	Empoli	D	D	SI	7	5.5	5.5	0	0	0	0	0	0	
+317	MARQUEZ Rafael	Verona	D	D	SI	6	5.5	5.5	0	0	0	0	0	0	
+318	MARTINELLI Luca	Empoli	D	D	NO	2	-	-							
+319	MASIELLO Andrea	Atalanta	D	D	SI	4	6	6	0	0	0	0	0	0	
+320	MASINA Adam	Bologna	D	D	SI	4	6	6	0	0	0	0	0	0	
+321	MATTIELLO Federico	Chievo	D	D	SI	4	-	-							
+322	MAURICIO	Lazio	D	D	SI	4	-	-							
+323	MBAYE Ibrahima	Bologna	D	D	SI	5	5.5	5.5	0	0	0	0	0	0	
+324	MESBAH Djamel	Sampdoria	D	D	SI	3	-	-							
+325	MEXES Philippe	Milan	D	D	SI	6	-	-							
+326	MIRANDA Joao	Inter	D	D	SI	12	6	6.5	0	-0.5	0	0	0	0	
+327	MOISANDER Niklas	Sampdoria	D	D	SI	7	-	-							
+328	MOLINARO Cristian	Torino	D	D	SI	5	-	-							
+329	MONTOYA Martin	Inter	D	D	SI	7	-	-							
+330	MORAS Evangelos	Verona	D	D	SI	7	5.5	6	0	-0.5	0	0	0	0	
+331	MORETTI Emiliano	Torino	D	D	SI	11	9.5	6.5	3	0	0	0	0	0	
+332	MORLEO Archimede	Bologna	D	D	SI	4	-	-							
+333	MUNOZ Ezequiel	Genoa	D	D	SI	6	-	-							
+334	MURILLO Jeison	Inter	D	D	SI	9	6	6	0	0	0	0	0	0	
+335	NAGATOMO Yuto	Inter	D	D	SI	5	5	5	0	0	0	0	0	0	
+336	OIKONOMOU Marios	Bologna	D	D	SI	4	-	-							
+337	PALETTA Gabriel	Atalanta	D	D	SI	6	-	-							
+338	PARENTE Paolo	Genoa	D	D	SI	1	-	-							
+339	PASQUAL Manuel	Fiorentina	D	D	SI	9	-	-							
+340	PASQUALE Giovanni	Udinese	D	D	SI	3	-	-							
+341	PATRIC	Lazio	D	D	SI	2	5.5	5.5	0	0	0	0	0	0	
+342	PAVLOVIC Daniel	Frosinone	D	D	SI	5	-	-							
+343	PELUSO Federico	Sassuolo	D	D	SI	6	6	6	0	0	0	0	0	0	
+344	PERES Bruno	Torino	D	D	SI	11	6.5	5.5	0	0	0	0	0	1	
+345	PIRIS Ivan	Udinese	D	D	SI	5	6	6	0	0	0	0	0	0	
+346	PIRRELLO Roberto	Palermo	D	D	SI	1	-	-							
+347	PISANO Eros	Verona	D	D	SI	4	5	5	0	0	0	0	0	0	
+348	POLI Fabrizio	Carpi	D	D	NO	3	-	-							
+349	PRCE Franjo	Lazio	D	D	SI	1	-	-							
+350	PUCINO Raffaele	Chievo	D	D	NO	3	-	-							
+351	RADU Stefan	Lazio	D	D	SI	7	4.5	4.5	0	0	0	0	0	0	
+352	RAIMONDI Cristian	Atalanta	D	D	SI	5	-	-							
+353	RANOCCHIA Andrea	Inter	D	D	SI	8	-	-							
+354	REGINI Vasco	Sampdoria	D	D	SI	5	6	6	0	0	0	0	0	0	
+355	RISPOLI Andrea	Palermo	D	D	SI	6	5.5	5.5	0	0	0	0	0	0	
+356	RODRIGUEZ Gonzalo	Fiorentina	D	D	SI	13	4.5	5	0	-0.5	0	0	0	0	
+357	ROMAGNOLI Alessio	Milan	D	D	SI	9	5.5	5.5	0	0	0	0	0	0	
+358	ROMAGNOLI Simone	Carpi	D	D	SI	4	-	-							
+359	RONCAGLIA Facundo	Fiorentina	D	D	SI	4	4.5	4.5	0	0	0	0	0	0	
+360	ROSI Aleandro	Frosinone	D	D	SI	6	6	6	0	0	0	0	0	0	
+361	ROSSETTINI Luca	Bologna	D	D	SI	6	5.5	5.5	0	0	0	0	0	0	
+362	RUGANI Daniele	Juventus	D	D	SI	7	-	-							
+363	RUSSO Adriano	Frosinone	D	D	SI	3	-	-							
+364	SALAMON Bartosz	Sampdoria	D	D	NO	4	-	-							
+365	SANTON Davide	Inter	D	D	SI	6	5.5	6	0	-0.5	0	0	0	0	
+366	SARDO Gennaro	Chievo	D	D	SI	4	-	-							
+367	SARZI Daniele	Carpi	D	D	NO	1	-	-							
+368	SILVESTRE Matias	Sampdoria	D	D	SI	8	5.5	6	0	-0.5	0	0	0	0	
+369	SOUPRAYEN Samuel	Verona	D	D	SI	5	5	5	0	0	0	0	0	0	
+370	SPEROTTO Nicolò	Carpi	D	D	NO	1	-	-							
+371	STENDARDO Guglielmo	Atalanta	D	D	SI	8	9.5	6.5	3	0	0	0	0	0	
+372	STRINIC Ivan	Napoli	D	D	SI	5	-	-							
+373	STRUNA Aljaz	Palermo	D	D	SI	4	3	4	0	0	-1	0	0	0	
+374	SUAGHER Emanuele	Atalanta	D	D	SI	3	-	-							
+375	TAMBE' Alassane	Genoa	D	D	SI	3	-	-							
+376	TERRANOVA Emanuele	Sassuolo	D	D	SI	4	-	-							
+377	TERZI Claudio	Palermo	D	D	NO	3	-	-							
+378	TOMOVIC Nenad	Fiorentina	D	D	SI	6	5	5	0	0	0	0	0	0	
+379	TONELLI Lorenzo	Empoli	D	D	SI	12	5.5	6	0	-0.5	0	0	0	0	
+380	TOROSIDIS Vassilis	Roma	D	D	SI	5	-	-							
+381	TROIANI Michele	Chievo	D	D	NO	1	-	-							
+382	VELAZQUEZ Julian	Palermo	D	D	NO	4	-	-							
+383	VIDIC Nemanja	Inter	D	D	SI	5	-	-							
+384	VITIELLO Roberto	Palermo	D	D	SI	4	-	-							
+385	VRSALJKO Sime	Sassuolo	D	D	SI	9	5.5	5.5	0	0	0	0	0	0	
+386	WAGUE Molla	Udinese	D	D	SI	5	-	-							
+387	WALLACE	Carpi	D	D	SI	5	6	6	0	0	0	0	0	0	
+388	WIDMER Silvan	Udinese	D	D	SI	11	-	-							
+389	WINCK Claudio	Verona	D	D	SI	5	-	-							
+390	YANGA-MBIWA Mapou	Roma	D	D	NO	5	-	-							
+391	ZACCARDO Cristian	Carpi	D	D	SI	3	-	-							
+393	ZANON Damiano	Frosinone	D	D	NO	4	-	-							
+394	ZAPATA Cristian	Milan	D	D	SI	5	5.5	5.5	0	0	0	0	0	0	
+395	ZAPPACOSTA Davide	Torino	D	D	SI	12	-	-							
+396	ZUKANOVIC Ervin	Sampdoria	D	D	SI	9	6	6	0	0	0	0	0	0	
+397	ZUNIGA Juan Camilo	Napoli	D	D	SI	6	-	-							
+398	GILBERTO	Fiorentina	D	D	SI	5	5	5	0	0	0	0	0	0	
+399	HELANDER Filip	Verona	D	D	SI	5	-	-							
+400	SPOLLI Nicolas	Carpi	D	D	SI	6	-	-							
+401	EL KAOUTARI Abdelhamid	Palermo	D	D	SI	8	6.5	6.5	0	0	0	0	0	0	
+402	CHIRICHES Vlad	Napoli	D	D	SI	5	-	-							
+403	ASTORI Davide	Fiorentina	D	D	SI	7	-	-							
+404	CECCARELLI Luca	Bologna	D	D	SI	3	-	-							
+405	GARICS Gyorgy	Bologna	D	D	NO	4	-	-							
+406	ZAMBELLI Marco	Empoli	D	D	SI	6	5.5	5.5	0	0	0	0	0	0	
+407	DELL'ORCO Cristian	Sassuolo	D	D	NO	3	-	-							
+408	KRAFTH Emil	Bologna	D	D	SI	4	-	-							
+409	RUDIGER Antonio	Roma	D	D	SI	8	-	-							
+410	NEUTON	Udinese	D	D	NO	3	-	-							
+411	GYOMBER Norbert	Roma	D	D	SI	3	-	-							
+413	ALEX SANDRO	Juventus	D	D	SI	12	-	-							
+414	DIGNE Lucas	Roma	D	D	SI	7	6.5	6.5	0	0	0	0	0	0	
+415	TOLOI Rafael	Atalanta	D	D	SI	7	-	-							
+416	INSUA Emanuel	Genoa	D	D	NO	5	-	-							
+417	ALDROVANDI Simone	Carpi	D	D	NO	3	0	0	0	0	0	0	0	0	
+418	POPA Razvan	Inter	D	D	SI	1	0	0	0	0	0	0	0	0	
+419	PEREIRA Pedro	Sampdoria	D	D	SI	1	0	0	0	0	0	0	0	0	
+420	TELLES Alex	Inter	D	D	SI	9	0	0	0	0	0	0	0	0	
+421	ANSALDI Cristian	Genoa	D	D	SI	7	0	0	0	0	0	0	0	0	
+422	MORGANELLA Michel	Palermo	D	D	SI	5	0	0	0	0	0	0	0	0	
+423	COSIC Uros	Empoli	D	D	SI	3	0	0	0	0	0	0	0	0	
+424	FELIPE	Udinese	D	D	SI	4	0	0	0	0	0	0	0	0	
+501	ACQUAH Afriyie	Torino	C	C	SI	6	6.5	6.5	0	0	0	0	0	0	
+502	ALLAN Marques Loureiro	Napoli	C	C	SI	11	6.5	5.5	0	0	0	0	0	1	
+503	ANDERSON Felipe	Lazio	T	C	SI	22	4.5	4.5	0	0	0	0	0	0	
+504	ASAMOAH Kwadwo	Juventus	C	C	SI	6	-	-							
+505	BADELJ Milan	Fiorentina	C	C	SI	6	-	-							
+506	BADU Emmanuel	Udinese	C	C	SI	7	-	-							
+507	BAKIC Marko	Fiorentina	C	C	SI	2	-	-							
+508	BARRETO Edgar	Sampdoria	C	C	SI	11	6	6	0	0	0	0	0	0	
+509	BASELLI Daniele	Torino	C	C	SI	12	10	7	3	0	0	0	0	0	
+510	BENALI Ahmad	Palermo	C	C	NO	5	-	-							
+511	BENASSI Marco	Torino	C	C	SI	8	5.5	5.5	0	0	0	0	0	0	
+512	BERTOLACCI Andrea	Milan	C	C	SI	13	4.5	4.5	0	0	0	0	0	0	
+513	BIANCO Raffaele	Carpi	C	C	SI	3	-	-							
+514	BIGLIA Lucas	Lazio	C	C	SI	15	-	-							
+515	BIONDINI Davide	Sassuolo	C	C	SI	5	-	-							
+516	BIRSA Valter	Chievo	T	C	SI	12	12	8	3	0	0	0	0	1	
+517	BOLZONI Francesco	Palermo	C	C	SI	3	-	-							
+518	BONAVENTURA Giacomo	Milan	T	C	SI	16	7.5	6.5	0	0	0	0	0	1	
+519	BRIGHI Matteo	Bologna	C	C	SI	5	-	-							
+520	BRILLANTE Joshua	Empoli	C	C	NO	3	-	-							
+521	BROH Jeremie	Sassuolo	C	C	SI	1	-	-							
+522	BROZOVIC Marcelo	Inter	C	C	SI	8	5	5	0	0	0	0	0	0	
+523	BRUGMAN Gaston	Palermo	C	C	SI	5	-	-							
+524	CANDREVA Antonio	Lazio	T	C	SI	22	5	5	0	0	0	0	0	0	
+525	CAPEZZI Leonardo	Fiorentina	C	C	NO	2	-	-							
+526	CARLINI Massimiliano	Frosinone	T	C	SI	5	6	6	0	0	0	0	0	0	
+527	CARMONA Carlos	Atalanta	C	C	SI	4	-	-							
+528	CASTRO Lucas	Chievo	C	C	SI	12	7	7	0	0	0	0	0	0	
+529	CATALDI Danilo	Lazio	C	C	SI	6	4	4.5	0	-0.5	0	0	0	0	
+530	CHIBSAH Raman	Frosinone	C	C	SI	5	-	-							
+531	CHOCHEV Ivaylo	Palermo	C	C	SI	6	-	-							
+532	CHRISTIANSEN Anders	Chievo	C	C	SI	4	-	-							
+533	CIGARINI Luca	Atalanta	C	C	SI	9	-	-							
+534	CORREA Joaquin	Sampdoria	T	C	SI	8	-	-							
+535	COSTA Tino	Genoa	C	C	SI	10	6.5	6.5	0	0	0	0	0	0	
+536	CRECCO Luca	Lazio	C	C	NO	2	-	-							
+537	CRISETIG Lorenzo	Bologna	C	C	SI	5	5	5	0	0	0	0	0	0	
+538	CROCE Daniele	Empoli	C	C	SI	10	6.5	6.5	0	0	0	0	0	0	
+539	D'ALESSANDRO Marco	Atalanta	T	C	SI	5	-	-							
+540	DE GUZMAN Jonathan	Napoli	T	C	SI	7	-	-							
+541	DE JONG Nigel	Milan	C	C	SI	7	5	5	0	0	0	0	0	0	
+542	DE ROON Marten	Atalanta	C	C	SI	6	7	7	0	0	0	0	0	0	
+543	DE ROSSI Daniele	Roma	C	C	SI	11	5.5	6	0	-0.5	0	0	0	0	
+544	DE VITIS Alessando	Sampdoria	C	C	NO	1	-	-							
+545	DELLA ROCCA Francesco	Palermo	C	C	NO	2	-	-							
+546	DEZI Jacopo	Napoli	C	C	SI	2	-	-							
+547	DI GAUDIO Antonio	Carpi	T	C	SI	11	9.5	6.5	3	0	0	0	0	0	
+548	DIAKHATE Abdou	Fiorentina	C	C	SI	1	-	-							
+549	DIAWARA Amadou	Bologna	C	C	SI	1	5.5	5.5	0	0	0	0	0	0	
+550	DIOUSSE' Assane	Empoli	C	C	SI	3	6.5	6.5	0	0	0	0	0	0	
+551	DUNCAN Joseph Alfred	Sassuolo	C	C	SI	7	6.5	6.5	0	0	0	0	0	0	
+552	EL KADDOURI Omar	Napoli	C	C	SI	8	-	-							
+553	ESTIGARRIBIA Marcelo	Atalanta	C	C	SI	6	-	-							
+554	EVANGELISTA Lucas	Udinese	T	C	SI	3	-	-							
+555	FARNERUD Alexander	Torino	C	C	SI	6	-	-							
+556	FAZZI Nicolò	Fiorentina	T	C	NO	2	-	-							
+557	FERNANDES Bruno	Udinese	T	C	SI	9	6	6.5	0	-0.5	0	0	0	0	
+558	FERNANDEZ Mati	Fiorentina	C	C	SI	11	5	5.5	0	-0.5	0	0	0	0	
+559	FERNANDO Lucas Martins	Sampdoria	C	C	SI	10	5.5	6	0	-0.5	0	0	0	0	
+560	FLORENZI Alessandro	Roma	C	C	SI	14	6.5	6.5	0	0	0	0	0	0	
+561	FRARA Alessandro	Frosinone	C	C	SI	4	-	-							
+562	GAGLIARDINI Roberto	Atalanta	C	C	NO	3	-	-							
+563	GAZZI Alessandro	Torino	C	C	SI	4	-	-							
+564	GIORGI Luigi	Atalanta	C	C	SI	3	6	6	0	0	0	0	0	0	
+565	GNOUKOURI Assane Demoya	Inter	C	C	SI	4	-	-							
+566	GOMEZ Alejandro	Atalanta	T	C	SI	14	10	7	3	0	0	0	0	0	
+567	GORI Mirko	Frosinone	C	C	SI	4	5	5	0	0	0	0	0	0	
+568	GRASSI Alberto	Atalanta	C	C	SI	3	6.5	6.5	0	0	0	0	0	0	
+569	GRECO Leandro	Verona	C	C	SI	5	5.5	5.5	0	0	0	0	0	0	
+570	GUARIN Fredy	Inter	C	C	SI	13	6.5	6.5	0	0	0	0	0	0	
+571	GUCHER Robert	Frosinone	C	C	SI	6	5	5	0	0	0	0	0	0	
+572	GUILHERME Dos Santos Torres	Udinese	C	C	SI	5	-	-							
+573	HALLBERG Melker	Udinese	C	C	NO	2	-	-							
+574	HALLFREDSSON Emil	Verona	C	C	SI	12	6	6	0	0	0	0	0	0	
+575	HAMSIK Marek	Napoli	C	C	SI	19	6	6	0	0	0	0	0	0	
+576	HERNANES Anderson	Juventus	T	C	SI	15	-	-							
+577	HETEMAJ Perparim	Chievo	C	C	SI	7	7	7	0	0	0	0	0	0	
+578	HILJEMARK Oscar	Palermo	C	C	SI	6	5.5	S.V.	0	0	0	0	0	0	
+579	HONDA Keisuke	Milan	T	C	SI	9	-	-							
+580	INLER Gokhan	Napoli	C	C	NO	5	-	-							
+581	IONITA Artur	Verona	C	C	SI	6	-	-							
+582	ITURRA Manuel	Udinese	C	C	SI	4	6	6.5	0	-0.5	0	0	0	0	
+583	IVAN David	Sampdoria	T	C	SI	1	-	-							
+584	IZCO Mariano	Chievo	C	C	SI	7	-	-							
+585	JAJALO Mato	Palermo	C	C	SI	5	6	6.5	0	-0.5	0	0	0	0	
+586	JANKOVIC Bosko	Verona	T	C	SI	9	6	6	0	0	0	0	0	0	
+587	JOAQUIN	Fiorentina	T	C	NO	12	-	-							
+588	JORGINHO	Napoli	C	C	SI	6	5	5	0	0	0	0	0	0	
+589	KEITA Seydou	Roma	C	C	SI	9	6	6	0	0	0	0	0	0	
+590	KHEDIRA Sami	Juventus	C	C	SI	10	-	-							
+591	KISHNA Ricardo	Lazio	T	C	SI	9	4.5	4.5	0	0	0	0	0	0	
+592	KONDOGBIA Geoffrey	Inter	C	C	SI	14	5.5	5.5	0	0	0	0	0	0	
+593	KONE Panagiotis	Udinese	T	C	SI	10	6	6	0	0	0	0	0	0	
+594	KOVACIC Mateo	Inter	C	C	NO	11	-	-							
+595	KRSTICIC Nenad	Sampdoria	C	C	SI	5	-	-							
+596	KRUNIC Rade	Empoli	T	C	SI	3	-	-							
+597	KUCKA Juraj	Milan	C	C	SI	8	6	6	0	0	0	0	0	0	
+598	KURTIC Jasmin	Atalanta	C	C	SI	7	7	7	0	0	0	0	0	0	
+599	LANER Simon	Verona	C	C	NO	2	-	-							
+600	LARIBI Karim	Sassuolo	C	C	SI	6	6.5	6.5	0	0	0	0	0	0	
+601	LAXALT Diego	Genoa	T	C	SI	4	6.5	6.5	0	0	0	0	0	0	
+602	LAZOVIC Darko	Genoa	T	C	SI	8	6	6	0	0	0	0	0	0	
+603	LAZZARI Andrea	Carpi	C	C	SI	8	6	6	0	0	0	0	0	0	
+604	LOLLO Lorenzo	Carpi	C	C	SI	4	5.5	6	0	-0.5	0	0	0	0	
+605	LOPEZ David	Napoli	C	C	SI	7	5.5	5.5	0	0	0	0	0	0	
+606	LULIC Karlo	Sampdoria	C	C	SI	1	-	-							
+607	LULIC Senad	Lazio	C	C	SI	10	4.5	4.5	0	0	0	0	0	0	
+608	MAGNANELLI Francesco	Sassuolo	C	C	SI	7	6	6	0	0	0	0	0	0	
+609	MARCHIONNI Marco	Sampdoria	C	C	NO	3	-	-							
+610	MARCHISIO Claudio	Juventus	C	C	SI	13	-	-							
+611	MARESCA Enzo	Palermo	C	C	SI	4	-	-							
+612	MARRONE Luca	Carpi	C	C	SI	6	5.5	5.5	0	0	0	0	0	0	
+613	MASTOUR Hachim	Milan	T	C	NO	2	-	-							
+614	MAURI José	Milan	C	C	SI	5	-	-							
+615	MBAYE Maodo Malick	Chievo	C	C	NO	1	-	-							
+616	MEDEL Gary	Inter	C	C	SI	6	6	6.5	0	-0.5	0	0	0	0	
+617	MERKEL Alexander	Udinese	C	C	SI	4	4.5	5	0	-0.5	0	0	0	0	
+618	MERTENS Dries	Napoli	T	C	SI	16	-	-							
+619	MIGLIACCIO Giulio	Atalanta	C	C	SI	4	6	6	0	0	0	0	0	0	
+620	MISSIROLI Simone	Sassuolo	C	C	SI	10	5.5	5.5	0	0	0	0	0	0	
+621	MONTOLIVO Riccardo	Milan	C	C	SI	7	-	-							
+622	MORALEZ Maxi	Atalanta	T	C	SI	14	7	7	0	0	0	0	0	0	
+623	MORRISON Ravel	Lazio	C	C	SI	7	5	5	0	0	0	0	0	0	
+624	NAINGGOLAN Radja	Roma	C	C	SI	15	7	7	0	0	0	0	0	0	
+625	NOCERINO Antonio	Milan	C	C	SI	4	4.5	4.5	0	0	0	0	0	0	
+626	OBI Joel	Torino	C	C	SI	3	-	-							
+627	OIKONOMIDIS Christopher	Lazio	C	C	SI	2	-	-							
+628	ONAZI Ogenyi	Lazio	C	C	SI	4	-	-							
+629	PADOIN Simone	Juventus	C	C	SI	4	5	5	0	0	0	0	0	0	
+630	PAGANINI Luca	Frosinone	T	C	SI	5	4.5	5	0	-0.5	0	0	0	0	
+631	PALOMBO Angelo	Sampdoria	C	C	SI	6	6	6	0	0	0	0	0	0	
+632	PAREDES Leandro	Empoli	C	C	SI	4	-	-							
+633	PAROLO Marco	Lazio	C	C	SI	17	5.5	5.5	0	0	0	0	0	0	
+634	PASCIUTI Lorenzo	Carpi	C	C	SI	5	-	-							
+635	PASQUATO Cristian	Juventus	T	C	NO	4	-	-							
+636	PELLEGRINI Lorenzo	Sassuolo	C	C	SI	1	-	-							
+637	PEREYRA Roberto	Juventus	T	C	SI	12	7	6	0	0	0	0	0	1	
+638	PEROTTI Diego	Genoa	T	C	SI	16	-	-							
+639	PETRICCIONE Jacopo	Fiorentina	C	C	NO	1	-	-							
+640	PINZI Giampiero	Chievo	C	C	SI	5	-	-							
+641	PJANIC Miralem	Roma	C	C	SI	18	10	7.5	3	-0.5	0	0	0	0	
+642	POGBA Paul	Juventus	C	C	SI	21	5	5.5	0	-0.5	0	0	0	0	
+643	POLI Andrea	Milan	C	C	SI	5	-	-							
+644	POLITANO Matteo	Sassuolo	T	C	SI	6	6.5	6.5	0	0	0	0	0	0	
+645	PORCARI Filippo	Carpi	C	C	NO	4	-	-							
+646	PUGLIESE Mario	Carpi	C	C	SI	1	-	-							
+647	QUAISON Robin	Palermo	C	C	SI	7	5	5	0	0	0	0	0	0	
+648	RADOVANOVIC Ivan	Chievo	C	C	SI	6	-	-							
+649	RIGONI Luca	Palermo	C	C	SI	17	10	7	3	0	0	0	0	0	
+650	RIGONI Nicola	Chievo	C	C	SI	4	6.5	6.5	0	0	0	0	0	0	
+651	RINCON Tomas	Genoa	C	C	SI	8	7.5	7	0	-0.5	0	0	0	1	
+652	RIZZO Luca	Bologna	C	C	SI	6	-	-							
+653	ROMULO Souza Orestes Caldeira	Verona	C	C	SI	8	-	-							
+654	RONALDO	Empoli	C	C	SI	6	-	-							
+655	ROSSI Fausto	Juventus	C	C	NO	2	-	-							
+656	SABBIONE Alessio	Carpi	C	C	NO	2	-	-							
+657	SALA Jacopo	Verona	C	C	SI	8	5	5	0	0	0	0	0	0	
+658	SAMMARCO Paolo	Frosinone	C	C	SI	4	-	-							
+659	SAPONARA Riccardo	Empoli	T	C	SI	22	10	7	3	0	0	0	0	0	
+660	SHAQIRI Xherdan	Inter	T	C	NO	13	-	-							
+661	SIGNORELLI Franco	Empoli	C	C	NO	4	-	-							
+662	SODDIMO Danilo	Frosinone	T	C	SI	10	5	5	0	0	0	0	0	0	
+663	SORIANO Roberto	Sampdoria	C	C	SI	12	5.5	5.5	0	0	0	0	0	0	
+664	STEVANOVIC Alen	Torino	T	C	NO	3	-	-							
+665	STROOTMAN Kevin	Roma	C	C	SI	11	-	-							
+666	STURARO Stefano	Juventus	C	C	SI	6	5	5	0	0	0	0	0	0	
+667	SUAREZ Mario	Fiorentina	C	C	SI	9	5.5	5.5	0	0	0	0	0	0	
+668	SUSO	Milan	T	C	SI	6	4.5	4.5	0	0	0	0	0	0	
+669	TACHTSIDIS Panagiotis	Genoa	C	C	SI	6	-	-							
+670	UCAN Salih	Roma	C	C	SI	3	-	-							
+671	VAJUSHI Armando	Chievo	C	C	NO	3	-	-							
+672	VALDIFIORI Mirko	Napoli	C	C	SI	11	5	5	0	0	0	0	0	0	
+673	VALERO Borja	Fiorentina	C	C	SI	14	6.5	6.5	0	0	0	0	0	0	
+675	VECINO Matias	Fiorentina	C	C	SI	7	-	-							
+676	VERDI Simone	Milan	T	C	NO	5	-	-							
+677	VERRE Valerio	Udinese	C	C	NO	4	-	-							
+678	VIVES Giuseppe	Torino	C	C	SI	5	5.5	6	0	-0.5	0	0	0	0	
+679	VIVIANI Federico	Verona	C	C	SI	6	6	6	0	0	0	0	0	0	
+680	WSZOLEK Pawel	Verona	C	C	SI	3	-	-							
+681	ZACCAGNI Mattia	Verona	C	C	SI	1	-	-							
+682	ZIELINSKI Piotr	Empoli	T	C	SI	5	6	6	0	0	0	0	0	0	
+683	ZUCULINI Franco	Bologna	C	C	SI	4	-	-							
+684	BRIENZA Franco	Bologna	T	C	SI	16	6.5	6.5	0	0	0	0	0	0	
+685	MARTINHO Raphael	Carpi	C	C	SI	8	-	-							
+686	FEDELE Matteo	Carpi	C	C	SI	4	6	6	0	0	0	0	0	0	
+687	NTCHAM Olivier	Genoa	C	C	SI	5	7.5	7.5	0	0	0	0	0	0	
+688	MILINKOVIC-SAVIC Sergej	Lazio	C	C	SI	5	-	-							
+689	PULGAR Erick	Bologna	C	C	SI	7	6	6	0	0	0	0	0	0	
+690	PEPE Simone	Chievo	C	C	SI	6	6	6	0	0	0	0	0	0	
+691	MAIELLO Raffaele	Empoli	C	C	SI	5	6	6	0	0	0	0	0	0	
+692	SCHELOTTO Ezequiel	Inter	C	C	NO	3	-	-							
+693	CAPEL Diego	Genoa	T	C	SI	9	-	-							
+694	MARQUINHO	Udinese	C	C	SI	8	5.5	S.V.	0	0	0	0	0	0	
+695	INIGUEZ Gaspar	Carpi	C	C	SI	5	-	-							
+696	FALCO Filippo	Bologna	T	C	SI	5	4.5	5	0	-0.5	0	0	0	0	
+697	MAURI Stefano	Lazio	T	C	SI	14	-	-							
+698	NTOW Isaac	Chievo	C	C	NO	2	-	-							
+699	CRIMI Marco	Bologna	C	C	SI	5	-	-							
+700	CUADRADO Juan	Juventus	T	C	SI	18	5.5	5.5	0	0	0	0	0	0	
+701	DONSAH Godfred	Bologna	C	C	SI	9	6.5	6.5	0	0	0	0	0	0	
+702	TONEV Aleksandar	Frosinone	T	C	SI	6	6	6	0	0	0	0	0	0	
+703	CARBONERO Carlos	Sampdoria	C	C	SI	8	-	-							
+704	PERISIC Ivan	Inter	T	C	SI	20	0	0	0	0	0	0	0	0	
+705	MOUNIER Anthony	Bologna	T	C	SI	13	0	0	0	0	0	0	0	0	
+706	VERDU Joan	Fiorentina	T	C	SI	12	0	0	0	0	0	0	0	0	
+707	VAINQUEUR William	Roma	C	C	SI	6	0	0	0	0	0	0	0	0	
+708	SILVESTRO Vincenzo	Bologna	C	C	SI	1	0	0	0	0	0	0	0	0	
+709	VITALE Mattia	Juventus	C	C	SI	1	0	0	0	0	0	0	0	0	
+710	SERINELLI Leonardo	Sampdoria	C	C	SI	1	0	0	0	0	0	0	0	0	
+711	CHECCHIN Luca	Verona	C	C	SI	1	0	0	0	0	0	0	0	0	
+712	BLASZCZYKOWSKI Jakub	Fiorentina	T	C	SI	13	0	0	0	0	0	0	0	0	
+713	COFIE Isaac	Carpi	C	C	SI	6	0	0	0	0	0	0	0	0	
+714	GIACCHERINI Emanuele	Bologna	T	C	SI	14	0	0	0	0	0	0	0	0	
+715	MELO Felipe	Inter	C	C	SI	11	0	0	0	0	0	0	0	0	
+716	PRCIC Sanjin	Torino	C	C	SI	6	0	0	0	0	0	0	0	0	
+717	BUCHEL Marcel	Empoli	C	C	SI	5	0	0	0	0	0	0	0	0	
+718	CHRISTODOULOPOULOS Lazaros	Sampdoria	C	C	SI	7	0	0	0	0	0	0	0	0	
+719	CHALOBAH Nathaniel	Napoli	C	C	SI	4	0	0	0	0	0	0	0	0	
+720	DZEMAILI Blerim	Genoa	C	C	SI	12	0	0	0	0	0	0	0	0	
+721	TAIDER Saphir	Bologna	C	C	SI	8	0	0	0	0	0	0	0	0	
+722	KRIVICIC Marko	Bologna	T	C	SI	1	0	0	0	0	0	0	0	0	
+723	LEMINA Mario	Juventus	C	C	SI	8	0	0	0	0	0	0	0	0	
+724	GINO Federico	Carpi	C	C	SI	4	0	0	0	0	0	0	0	0	
+725	ROCCA Michele	Sampdoria	C	C	SI	1	0	0	0	0	0	0	0	0	
+801	ACQUAFRESCA Robert	Bologna	A	A	SI	11	-	-							
+802	AGUIRRE Rodrigo	Udinese	A	A	SI	5	-	-							
+803	AMAURI De Oliveira	Torino	A	A	SI	8	-	-							
+804	BABACAR Khouma	Fiorentina	A	A	SI	16	-	-							
+805	BACCA Carlos	Milan	A	A	SI	27	9.5	6.5	3	0	0	0	0	0	
+806	BELOTTI Andrea	Torino	A	A	SI	17	-	-							
+807	BENTIVEGNA Accursio	Palermo	T	A	NO	1	-	-							
+808	BERARDI Domenico	Sassuolo	T	A	SI	27	-	-							
+809	BERNARDESCHI Federico	Fiorentina	T	A	SI	11	5.5	5.5	0	0	0	0	0	0	
+810	BIABIANY Jonathan	Inter	T	A	SI	8	-	-							
+811	BIANCHI Rolando	Bologna	A	A	NO	10	-	-							
+812	BOAKYE Richmond	Atalanta	A	A	NO	7	-	-							
+813	BONAZZOLI Federico	Sampdoria	A	A	SI	8	-	-							
+814	CACIA Daniele	Bologna	A	A	SI	12	-	-							
+815	CALLEJON José Maria	Napoli	A	A	SI	18	5	5	0	0	0	0	0	0	
+817	CASSINI Matheus	Palermo	A	A	SI	10	-	-							
+818	CERCI Alessio	Milan	T	A	SI	11	-	-							
+819	CIOFANI Daniel	Frosinone	A	A	SI	12	5.5	5.5	0	0	0	0	0	0	
+820	COMAN Kingsley	Juventus	T	A	NO	6	-	-							
+821	DENIS German	Atalanta	A	A	SI	16	-	-							
+822	DESTRO Mattia	Bologna	A	A	SI	17	5	5.5	0	-0.5	0	0	0	0	
+823	DI NATALE Antonio	Udinese	A	A	SI	25	6	6	0	0	0	0	0	0	
+824	DIONISI Federico	Frosinone	A	A	SI	13	4.5	5	0	-0.5	0	0	0	0	
+825	DJORDJEVIC Filip	Lazio	A	A	SI	17	-	-							
+826	DOUMBIA Seydou	Roma	A	A	NO	16	-	-							
+827	DYBALA Paulo	Juventus	A	A	SI	26	9.5	6.5	3	0	0	0	0	0	
+828	EDER Citadin Martins	Sampdoria	A	A	SI	28	13	7	6	0	0	0	0	0	
+829	FALCINELLI Diego	Sassuolo	A	A	SI	9	6	6	0	0	0	0	0	0	
+830	FARES Mohamed Salim	Verona	A	A	SI	2	-	-							
+831	FLOCCARI Sergio	Sassuolo	A	A	SI	11	-	-							
+832	FLORO FLORES Antonio	Sassuolo	A	A	SI	17	10	7	3	0	0	0	0	0	
+833	GABBIADINI Manolo	Napoli	A	A	SI	23	-	-							
+834	GAKPE' Serge	Genoa	T	A	SI	11	10	7	3	0	0	0	0	0	
+835	GEIJO Alexandre	Udinese	A	A	NO	8	-	-							
+836	GERVINHO	Roma	T	A	SI	14	-	-							
+837	GHIGLIONE Paolo	Genoa	T	A	SI	1	-	-							
+838	GLIOZZI Ettore	Sassuolo	A	A	NO	2	-	-							
+839	GOMEZ Juanito Taleb	Verona	T	A	SI	13	6	6	0	0	0	0	0	0	
+840	GOMEZ Mario	Fiorentina	A	A	NO	20	-	-							
+841	HIGUAIN Gonzalo	Napoli	A	A	SI	34	13	7	6	0	0	0	0	0	
+842	IAGO Falque	Roma	T	A	SI	20	8	7	0	0	0	0	0	1	
+843	IBARBO Victor	Roma	T	A	NO	11	-	-							
+844	ICARDI Mauro	Inter	A	A	SI	33	-	-							
+845	ILICIC Josip	Fiorentina	T	A	SI	19	6	6	0	0	0	0	0	0	
+846	INGLESE Roberto	Chievo	A	A	SI	6	-	-							
+847	INSIGNE Lorenzo	Napoli	T	A	SI	16	7	6	0	0	0	0	0	1	
+848	ITURBE Juan	Roma	T	A	SI	13	6	6	0	0	0	0	0	0	
+849	KEITA Baldé Diao	Lazio	T	A	SI	13	6	6	0	0	0	0	0	0	
+850	KLOSE Miroslav	Lazio	A	A	SI	21	-	-							
+851	LA GUMINA Antonino	Palermo	A	A	SI	2	-	-							
+852	LASAGNA Kevin	Carpi	A	A	SI	10	6	6	0	0	0	0	0	0	
+853	LJAJIC Adem	Inter	T	A	SI	12	-	-							
+854	LLORENTE Fernando	Juventus	A	A	NO	14	-	-							
+855	LOI Antonio	Carpi	T	A	NO	1	-	-							
+856	LOPEZ Maxi	Torino	A	A	SI	16	5.5	6	0	-0.5	0	0	0	0	
+857	LOPEZ Nico	Udinese	A	A	NO	13	-	-							
+858	LUIZ ADRIANO	Milan	A	A	SI	23	11	7	3	0	0	0	0	1	
+859	LUPOLI Arturo	Frosinone	A	A	NO	7	-	-							
+860	MACCARONE Massimo	Empoli	A	A	SI	19	7	6.5	0	-0.5	0	0	0	1	
+861	MANCOSU Matteo	Bologna	A	A	SI	11	5.5	5.5	0	0	0	0	0	0	
+862	MANDZUKIC Mario	Juventus	A	A	SI	24	5	5	0	0	0	0	0	0	
+863	MARILUNGO Guido	Atalanta	A	A	NO	8	-	-							
+864	MARTINEZ Josef	Torino	A	A	SI	12	5.5	5.5	0	0	0	0	0	0	
+865	MATOS	Carpi	T	A	SI	10	6.5	6.5	0	0	0	0	0	0	
+866	MATRI Alessandro	Lazio	A	A	SI	14	-	-							
+867	MBAKOGU Jerry	Carpi	A	A	SI	14	-	-							
+868	MCHEDLIDZE Levan	Empoli	A	A	SI	10	5	5	0	0	0	0	0	0	
+869	MEGGIORINI Riccardo	Chievo	A	A	SI	18	12	8	3	0	0	0	0	1	
+870	MENEZ Jeremy	Milan	T	A	SI	17	-	-							
+871	MONACHELLO Gaetano	Atalanta	A	A	SI	5	-	-							
+872	MORATA Alvaro	Juventus	A	A	SI	25	5	5	0	0	0	0	0	0	
+873	MORRA Claudio	Torino	A	A	NO	2	-	-							
+874	MPOKU Paul-Jose	Chievo	T	A	SI	14	-	-							
+875	MURIEL Luis	Sampdoria	A	A	SI	22	6	6	0	0	0	0	0	0	
+876	NIANG M'Baye	Milan	A	A	SI	14	-	-							
+877	OKAKA Stefano	Sampdoria	A	A	NO	16	-	-							
+878	PALACIO Rodrigo	Inter	A	A	SI	19	6	6	0	0	0	0	0	0	
+879	PALMIERI Federico	Carpi	A	A	NO	1	-	-							
+880	PALOSCHI Alberto	Chievo	A	A	SI	23	13.5	7.5	6	0	0	0	0	0	
+881	PANDEV Goran	Genoa	A	A	SI	15	5.5	5.5	0	0	0	0	0	0	
+882	PANICO Giuseppe	Genoa	A	A	SI	1	-	-							
+883	PAVOLETTI Leonardo	Genoa	A	A	SI	18	10	7	3	0	0	0	0	0	
+884	PAZZINI Giampaolo	Verona	A	A	SI	15	5.5	6	0	-0.5	0	0	0	0	
+885	PELLISSIER Sergio	Chievo	A	A	SI	12	-	-							
+886	PEREA Brayan	Lazio	A	A	NO	4	-	-							
+887	PERICA Stipe	Udinese	A	A	SI	7	-	-							
+888	PINILLA Mauricio	Atalanta	A	A	SI	15	2	5.5	0	-0.5	0	-3	0	0	
+889	PIU Alessandro	Empoli	A	A	SI	2	-	-							
+890	PUCCIARELLI Manuel	Empoli	A	A	SI	12	5	5	0	0	0	0	0	0	
+891	PUSCAS George	Inter	A	A	NO	4	-	-							
+892	QUAGLIARELLA Fabio	Torino	A	A	SI	26	10	7	3	0	0	0	0	0	
+893	REBIC Ante	Fiorentina	A	A	SI	6	5.5	5.5	0	0	0	0	0	0	
+894	ROSSI Giuseppe	Fiorentina	A	A	SI	20	6	6	0	0	0	0	0	0	
+895	SANABRIA Antonio	Roma	A	A	NO	4	-	-							
+896	SANSONE Nicola	Sassuolo	T	A	SI	16	6	6	0	0	0	0	0	0	
+897	SERENI Marcello	Sassuolo	A	A	NO	1	-	-							
+898	SILIGARDI Luca	Verona	T	A	SI	10	-	-							
+899	SOWE Ali	Chievo	A	A	NO	4	-	-							
+900	STOIAN Adrian	Chievo	T	A	NO	4	-	-							
+901	THEREAU Cyril	Udinese	A	A	SI	19	5.5	5.5	0	0	0	0	0	0	
+902	TONI Luca	Verona	A	A	SI	28	5.5	5.5	0	0	0	0	0	0	
+904	TOTTI Francesco	Roma	A	A	SI	19	-	-							
+905	TRAJKOVSKI Aleksandar	Palermo	T	A	SI	8	6	6	0	0	0	0	0	0	
+906	VARGAS Eduardo	Napoli	A	A	NO	12	-	-							
+907	VAZQUEZ Franco	Palermo	T	A	SI	23	8	7	0	0	0	0	0	1	
+908	VERDE Daniele	Frosinone	T	A	SI	11	-	-							
+909	WILCZEK Kamil	Carpi	A	A	SI	10	5	5	0	0	0	0	0	0	
+910	YAMGA Arthur	Chievo	T	A	NO	1	-	-							
+911	ZAPATA Alexis	Udinese	T	A	NO	2	-	-							
+912	ZAPATA Duvan	Udinese	A	A	SI	17	5	5.5	0	-0.5	0	0	0	0	
+913	ZAZA Simone	Juventus	A	A	SI	15	-	-							
+914	JOVETIC Stevan	Inter	T	A	SI	28	13	7	6	0	0	0	0	0	
+915	SALAH Mohamed	Roma	T	A	SI	22	6.5	6.5	0	0	0	0	0	0	
+916	DEFREL Gregoire	Sassuolo	A	A	SI	18	6	6	0	0	0	0	0	0	
+917	LONGO Samuele	Frosinone	A	A	SI	13	5	5	0	0	0	0	0	0	
+918	DZEKO Edin	Roma	A	A	SI	27	9.5	7	3	-0.5	0	0	0	0	
+919	PAPONI Daniele	Bologna	A	A	NO	4	-	-							
+920	CASSANO Antonio	Sampdoria	A	A	SI	17	-	-							
+921	MANAJ Rey	Inter	A	A	SI	2	-	-							
+922	ONETO Edoardo	Sampdoria	A	A	SI	1	-	-							
+923	KALINIC Nikola	Fiorentina	A	A	SI	20	6	6	0	0	0	0	0	0	
+924	DJURDJEVIC Uros	Palermo	A	A	SI	6	-	-							
+925	BALOTELLI Mario	Milan	A	A	SI	21	-	-							
+926	BAEZ Jaime	Fiorentina	A	A	SI	9	-	-							
+927	GILARDINO Alberto	Palermo	A	A	SI	22	-	-							
+928	HIWAT Ryan	Carpi	T	A	NO	4	-	-							
+929	CASTILLO Nicolas	Frosinone	A	A	SI	14	0	0	0	0	0	0	0	0	
+930	BORRIELLO Marco	Carpi	A	A	SI	14	0	0	0	0	0	0	0	0	
+931	LIVAJA Marko	Empoli	A	A	SI	15	0	0	0	0	0	0	0	0	
+932	PONCE Andres	Sampdoria	A	A	SI	2	0	0	0	0	0	0	0	0	
+933	PONCE Ezequiel	Roma	A	A	SI	6	0	0	0	0	0	0	0	0	
+934	RODRIGUEZ Alejandro	Sampdoria	A	A	SI	11	0	0	0	0	0	0	0	0	
+935	MENDEZ Kevin	Roma	A	A	SI	3	0	0	0	0	0	0	0	0	

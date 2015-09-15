@@ -22,14 +22,14 @@ GazzettaFileReader::~GazzettaFileReader() {
 }
 
 std::vector<std::vector<std::string> > GazzettaFileReader::getOutput() {
-	//qDebug() << "In GazzettaFileReader::getOutput().";
+	qDebug() << "In GazzettaFileReader::getOutput().";
 
-	//qDebug() << "In GazzettaFileReader::getOutput(). " << this->fileGazzetta.toStdString().c_str();
+	qDebug() << "In GazzettaFileReader::getOutput(). " << this->fileGazzetta.toStdString().c_str();
 
 	std::ifstream fGaz(this->fileGazzetta.toStdString().c_str());
 
 	if (!fGaz) {
-		//qDebug() << "In GazzettaFileReader::getOutput() --> il file gazzetta  : " + this->fileGazzetta + " non esiste!";
+		qDebug() << "In GazzettaFileReader::getOutput() --> il file gazzetta  : " + this->fileGazzetta + " non esiste!";
 		LOG(
 				FATAL,
 				"In GazzettaFileReader::getOutput() --> il file gazzetta  : "
@@ -41,6 +41,7 @@ std::vector<std::vector<std::string> > GazzettaFileReader::getOutput() {
 
 	while (!fGaz.eof()) {
 		std::string line;
+		qDebug() << "In GazzettaFileReader::getOutput() --> in while loop: " << QString::fromStdString(line);
 		getline(fGaz, line);
 		STR_MOD->modifyCommas(line);
 
@@ -61,7 +62,7 @@ std::vector<std::vector<std::string> > GazzettaFileReader::getOutput() {
 	}
 	fGaz.close();
 
-	//qDebug() << "Out of GazzettaFileReader::getOutput().";
+	qDebug() << "Out of GazzettaFileReader::getOutput().";
 
 	return Gazzetta;
 }
