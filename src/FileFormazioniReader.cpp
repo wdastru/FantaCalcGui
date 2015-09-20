@@ -133,7 +133,9 @@ unsigned int FileFormazioniReader::execute() {
 				STR_MOD->onlyLettersBegin(line);
 				STR_MOD->onlyLettersEnd(line);
 				// <-- sostituzione lettere accentate ed eliminazione caratteri "non-lettera"
-				STR_MOD->toUpperCase(line);
+				//STR_MOD->toUpperCase(line);
+
+				//qDebug() << QString::fromStdString(line);
 
 				if (line.size() <= 1) // evitare le righe con un solo carattere rimasto
 					continue;
@@ -181,6 +183,8 @@ unsigned int FileFormazioniReader::execute() {
 
 					// cerca nella riga della Gazzetta il nome del giocatore
 					size_t found = STR_MOD->msk(tempStrGazz, DELIM,	ColCognome).find(line, 0);
+
+					//qDebug() << QString::number(found) << " "<< QString::fromStdString(STR_MOD->msk(tempStrGazz, DELIM,	ColCognome));
 
 					if (found != string::npos) { // se vero il giocatore e' stato trovato
 						// aggiungi al vettore con tutti i giocatori trovati
