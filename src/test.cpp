@@ -136,16 +136,13 @@ void Test::gazzettaFileReader_getOutput() {
 
 	Gazzetta = gazzettaFileReader->getOutput();
 
-	//for (unsigned int i = 0; i < Gazzetta.size(); ++i) {
-	//	for (unsigned int j = 0; j < Gazzetta.at(i).size(); ++j) {
-	//		std::string nomeCognome = STR_MOD->msk(Gazzetta.at(i).at(j), DELIM, 1);
-	//		char c = 65+i;
-	//		//QCOMPARE(nomeCognome[0], c);
-	//		qDebug() << nomeCognome[0];
-	//		//QCOMPARE(QString("ciccio"), QString("ciccio"));
-	//	}
-	//}
-	QCOMPARE(QString("ciccio"), QString("ciccio"));
+	for (unsigned int i = 0; i < Gazzetta.size(); ++i) {
+		for (unsigned int j = 0; j < Gazzetta.at(i).size(); ++j) {
+			std::string nomeCognome = STR_MOD->msk(Gazzetta.at(i).at(j), DELIM, ColCognome);
+			char c = 65+i;
+			QCOMPARE(nomeCognome[0], c);
+		}
+	}
 }
 
 
