@@ -34,7 +34,7 @@
 ; Start menu page
 var ICONS_GROUP
 !define MUI_STARTMENUPAGE_NODISABLE
-!define MUI_STARTMENUPAGE_DEFAULTFOLDER "FantaCalcGui"
+!define MUI_STARTMENUPAGE_DEFAULTFOLDER "FantaCalcGui ${PRODUCT_VERSION}"
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT "${PRODUCT_UNINST_ROOT_KEY}"
 !define MUI_STARTMENUPAGE_REGISTRY_KEY "${PRODUCT_UNINST_KEY}"
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "${PRODUCT_STARTMENU_REGVAL}"
@@ -128,9 +128,9 @@ Section Uninstall
   Delete "$INSTDIR\QtXml4.dll"
   Delete "$INSTDIR\mingwm10.dll"
   Delete "$INSTDIR\libgcc_s_dw2-1.dll"
-  Delete "$INSTDIR\FantaCalcGui.exe"
   Delete "$INSTDIR\libstdc++-6.dll"
   Delete "$INSTDIR\libwinpthread-1.dll"
+  Delete "$INSTDIR\FantaCalcGui.exe"
 
 ; Windows XP
   Delete "$SMPROGRAMS\$ICONS_GROUP\Uninstall.lnk"
@@ -141,6 +141,11 @@ Section Uninstall
   Delete "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\$ICONS_GROUP\FantaCalcGui.lnk"
   Delete "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\$ICONS_GROUP\Uninstall.lnk"
   Delete "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\$ICONS_GROUP\Fantacalcio Home.lnk"
+
+; Windows 8
+  Delete "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\FantaCalcGui ${PRODUCT_VERSION}\FantaCalcGui.lnk"
+  Delete "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\FantaCalcGui ${PRODUCT_VERSION}\Uninstall.lnk"
+  Delete "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\FantaCalcGui ${PRODUCT_VERSION}\Fantacalcio Home.lnk"
   
   Delete "$DESKTOP\FantaCalcGui.lnk"
 
