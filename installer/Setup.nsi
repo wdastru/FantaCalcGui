@@ -34,7 +34,7 @@
 ; Start menu page
 var ICONS_GROUP
 !define MUI_STARTMENUPAGE_NODISABLE
-!define MUI_STARTMENUPAGE_DEFAULTFOLDER "FantaCalcGui ${PRODUCT_VERSION}"
+!define MUI_STARTMENUPAGE_DEFAULTFOLDER "FantaCalcGui"
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT "${PRODUCT_UNINST_ROOT_KEY}"
 !define MUI_STARTMENUPAGE_REGISTRY_KEY "${PRODUCT_UNINST_KEY}"
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "${PRODUCT_STARTMENU_REGVAL}"
@@ -129,6 +129,8 @@ Section Uninstall
   Delete "$INSTDIR\mingwm10.dll"
   Delete "$INSTDIR\libgcc_s_dw2-1.dll"
   Delete "$INSTDIR\FantaCalcGui.exe"
+  Delete "$INSTDIR\libstdc++-6.dll"
+  Delete "$INSTDIR\libwinpthread-1.dll"
 
 ; Windows XP
   Delete "$SMPROGRAMS\$ICONS_GROUP\Uninstall.lnk"
