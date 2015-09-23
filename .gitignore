@@ -10,3 +10,4 @@ CMakeFiles/
 Default/
 .settings/
 src/revision.h
+installer/*.zip
