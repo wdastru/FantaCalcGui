@@ -135,7 +135,7 @@ unsigned int FileFormazioniReader::execute() {
 				// <-- sostituzione lettere accentate ed eliminazione caratteri "non-lettera"
 				//STR_MOD->toUpperCase(line);
 
-				//qDebug() << QString::fromStdString(line);
+				//qDebug() << "In FileFormazioniReader::execute()  -> " << QString::fromStdString(line);
 
 				if (line.size() <= 1) // evitare le righe con un solo carattere rimasto
 					continue;
@@ -146,10 +146,12 @@ unsigned int FileFormazioniReader::execute() {
 				} // trova l'ultimo token
 				i--;
 
-				if (STR_MOD->msk(line, " ", i) == "GDV") {
+				std::string GD = STR_MOD->msk(line, " ", i);
+				STR_MOD->toUpperCase(GD);
+				if ( GD == "GDV") {
 					gdv = true;
 					line.erase(line.size() - 4, 4);// toglie gdv
-				} else if (STR_MOD->msk(line, " ", i) == "GDP") {
+				} else if ( GD == "GDP") {
 					gdp = true;
 					line.erase(line.size() - 4, 4);// toglie gdp
 				}
