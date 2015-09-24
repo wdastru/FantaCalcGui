@@ -59,15 +59,15 @@ void FileFormazioniViewer::setFile(QString filename) {
 	//this->ui.plainTextEdit->setFont(THE_REPO->fontFixedWidth);
 }
 void FileFormazioniViewer::saveFileAndClose() {
-	//qDebug() << "In FileFormazioniViewer::saveFileAndClose().";
+	LOG(CMDLINE, "In FileFormazioniViewer::saveFileAndClose().");
 
 	this->result = FORMFILEVIEWER_OK;
 
 	QTextDocumentWriter writer(this->filename);
 	if (writer.write(this->ui.plainTextEdit->document())) {
-		//qDebug() << "In FileFormazioniViewer::saveFileAndClose() --> write of " + this->filename + " was successful.";
+		LOG(CMDLINE, "In FileFormazioniViewer::saveFileAndClose() --> write of " + this->filename + " was successful.");
 	} else {
-		//qDebug() << "In FileFormazioniViewer::saveFileAndClose() --> write of " + this->filename + " was not successful.";
+		LOG(CMDLINE, "In FileFormazioniViewer::saveFileAndClose() --> write of " + this->filename + " was not successful.");
 		LOG(
 				ERR,
 				"Writing of " + this->filename + " was not successful.");
@@ -76,7 +76,7 @@ void FileFormazioniViewer::saveFileAndClose() {
 	this->close();
 }
 void FileFormazioniViewer::quit() {
-	//qDebug() << "In FileFormazioniViewer::quit().";
+	LOG(CMDLINE, "In FileFormazioniViewer::quit().");
 	this->result = FORMFILEVIEWER_CANCEL;
 	this->close();
 }

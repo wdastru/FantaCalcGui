@@ -60,6 +60,7 @@
 #define DBG "DBG"
 #define UPDATE 		"UPDATE"
 #define TOFILE  "FILE"
+#define CMDLINE  "CMDLINE"
 #endif /* TYPE_OF_LOG_MSG */
 
 #ifndef THE_LOGGER

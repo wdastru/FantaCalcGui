@@ -12,6 +12,7 @@
 
 #include "Repository.h"
 #include "defines.h"
+#include "singletonQtLogger.h"
 #include "StringModifier.h"
 
 Repository::Repository() {
@@ -20,14 +21,14 @@ Repository::Repository() {
 	 * temporanei prima che
 	 * venga letto l'ini file
 	 * * * * * * * * * * * * */
-	this->url =
-			"http://www.cim.unito.it/website/private/fantacalcio/";
+	this->url ="http://www.cim.unito.it/website/private/fantacalcio/";
 	this->formazioniUrl = this->url + "777/formazioni/";
 	this->gazzettaUrl = this->url + "777/filesGazzetta/";
 	this->debugStatus = FALSE;
 
 #ifdef WIN32
-	//qDebug() << "Platform WIN32";
+
+	LOG(CMDLINE, "Platform WIN32");
 
 	this->UserProfile = QString::fromLatin1(getenv("USERPROFILE"));
 
@@ -42,7 +43,7 @@ Repository::Repository() {
 	this->fontFixedWidth.setPointSize(8);
 #else // ! def WIN32
 #ifdef __MACH__
-	//qDebug() << "Platform __MACH__";
+	LOG(CMDLINE, "Platform __MACH__");
 
 	this->UserProfile = "/Users/" + QString::fromLatin1(getenv("USER"));
 
@@ -56,7 +57,7 @@ Repository::Repository() {
 	this->fontFixedWidth.setFamily(QString::fromUtf8("Lucida Console"));
 	this->fontFixedWidth.setPointSize(8);
 #else // ! def __MACH__ ! def WIN32 -->  LINUX?
-	//qDebug() << "Platform LINUX (?)";
+	LOG(CMDLINE, "Platform LINUX (?)");
 
 	this->UserProfile = "/home/" + QString::fromLatin1(getenv("USER"));
 
@@ -124,7 +125,7 @@ QString Repository::getFileGazzettaUrl() {
 	return this->getUrl() + "777/filesGazzetta/listaGazFiles.txt";
 }
 QString Repository::getUrl() {
-	//qDebug() << "In QString Repository::getUrl()";
+	LOG(CMDLINE, "In QString Repository::getUrl()");
 	return this->url;
 }
 QString Repository::getFormazioniUrl() {
