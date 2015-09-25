@@ -8,6 +8,8 @@
  *
  */
 
+#define DO_DEBUG
+
 #include "NoNetFileDialog.h"
 #include "Repository.h"
 

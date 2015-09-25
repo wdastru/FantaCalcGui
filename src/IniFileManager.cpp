@@ -10,8 +10,6 @@
 		iniFile->readLine(buf, sizeof(buf)); \
 	} while (QString::fromLatin1(buf).trimmed() == "");
 
-#define DO_DEBUG
-
 #include "IniFileManager.h"
 #include "IniFilePopulator.h"
 #include "Repository.h"
@@ -33,7 +31,6 @@ IniFileManager* IniFileManager::pInstance = NULL;
 
 IniFileManager::IniFileManager() {
 
-	DEBUG("In IniFileManager::IniFileManager()");
 	DEBUG("In IniFileManager::IniFileManager()");
 
 	QDir dir(THE_REPO->UserProfile);

@@ -1,3 +1,5 @@
+#define DO_DEBUG
+
 #include "MatchChooserCamp.h"
 
 #include <QtCore/QFile>
@@ -31,7 +33,7 @@ MatchChooserCamp::MatchChooserCamp(QWidget *parent) :
 			buttons[i][j]->setFixedHeight(buttons[i][j]->sizeHint().height());
 		}
 
-		DEBUG(QString::number(i) + " " + QString::number(i % 4));
+		DEBUG("i: " << i << " (i % 4): " << (i % 4));
 
 		int j;
 		int n;
@@ -42,7 +44,7 @@ MatchChooserCamp::MatchChooserCamp(QWidget *parent) :
 			}
 		}
 
-		DEBUG("j" + QString::number(j));
+		DEBUG("j: " << j);
 
 		if (i % 4 == 0) {
 			QFrame *line = new QFrame(parent);
@@ -51,7 +53,7 @@ MatchChooserCamp::MatchChooserCamp(QWidget *parent) :
 			line->setFrameShadow(QFrame::Sunken);
 
 			ui.gridLayout->addWidget(line, i + n, 0, 1, 6);
-			DEBUG("i" + QString::number(i + n));
+			DEBUG("i" << (i + n));
 		}
 
 		ui.gridLayout->addWidget(labels[i][0], j, 0);
@@ -97,9 +99,9 @@ MatchChooserCamp::MatchChooserCamp(QWidget *parent) :
 			QString a = list.at(0).at(1);
 			QString b = list.at(0).at(2);
 			QString c = list.at(0).at(3);
-			DEBUG(a + b + c);
+			DEBUG(a.toStdString().c_str() << b.toStdString().c_str() << c.toStdString().c_str());
 
-			DEBUG(str + " " + str.indexOf(QRegExp("a[0-3][0-6][0-3]\/\/\/\/\/")));
+			DEBUG(str.toStdString().c_str() << " " << str.indexOf(QRegExp("a[0-3][0-6][0-3]\/\/\/\/\/")));
 
 			if ((str.indexOf(QRegExp("a[0-3][0-6][0-3]\\/\\/\\/\\/\\/")) == -1)
 					&& (str.indexOf(
@@ -119,7 +121,7 @@ MatchChooserCamp::MatchChooserCamp(QWidget *parent) :
 			}
 		}
 	} else {
-		DEBUG(fileDatiCamp->fileName() + " does not exist");
+		DEBUG(fileDatiCamp->fileName().toStdString().c_str() << " does not exist");
 
 		/* TODO
 		 * completare
@@ -155,7 +157,7 @@ void MatchChooserCamp::setData() {
 			} else if (str.indexOf(
 					QRegExp("\\$longName\\[[0-9]\\].*\\$longName.*")) != -1) {
 
-				DEBUG(str);
+				DEBUG("str : " << str.toStdString().c_str());
 
 				str.replace(QRegExp("\\$longName"), "");
 				str.replace(QRegExp("\\[[0-9]\\]"), "");
@@ -168,14 +170,14 @@ void MatchChooserCamp::setData() {
 
 				QStringList list = str.split("'", QString::SkipEmptyParts);
 				for (unsigned int i=0; i<list.size(); i++)
-					DEBUG(list.at(i));
+					DEBUG("list.at(" << i << ")" << list.at(i).toStdString().c_str());
 
 				map[list[0]] = list[1];
 			}
 		}
 
 	} else {
-		DEBUG(fileSquadre->fileName() + " does not exist");
+		DEBUG(fileSquadre->fileName().toStdString().c_str() << " does not exist");
 
 		/* TODO
 		 * completare
@@ -201,7 +203,7 @@ void MatchChooserCamp::setData() {
 			} else if (str.indexOf(
 					QRegExp("super.*longName.*super.*longName.*")) != -1) {
 
-				DEBUG(str);
+				DEBUG("str : " << str.toStdString().c_str());
 
 				str.replace(QRegExp("\\$super"), "");
 				str.replace(QRegExp("\\$longName"), "");
@@ -215,7 +217,7 @@ void MatchChooserCamp::setData() {
 			} else if (str.indexOf(
 					QRegExp("longName.*[A-H].*longName.*[a-h].*")) != -1) {
 
-				DEBUG(str);
+				DEBUG("str : " << str.toStdString().c_str());
 
 				str.replace(QRegExp("\\$longName"), "");
 				str.replace(QRegExp("="), "");
@@ -229,11 +231,10 @@ void MatchChooserCamp::setData() {
 			}
 		}
 
-		DEBUG("here");
-		DEBUG(QString::number(lines.size()));
+		DEBUG("lines.size() : " << lines.size());
 
 		for (int i = 0; i < 28; ++i) {
-			DEBUG(lines.at(i));
+			DEBUG("lines.at(" << i << ")" << lines.at(i).toStdString().c_str());
 
 			QStringList list = lines.at(i).split(" ", QString::SkipEmptyParts);
 
@@ -242,7 +243,7 @@ void MatchChooserCamp::setData() {
 		}
 
 	} else {
-		DEBUG(fileCalendario->fileName() + " does not exist");
+		DEBUG(fileCalendario->fileName().toStdString().c_str() << " does not exist");
 
 		/* TODO
 		 * completare
@@ -264,7 +265,7 @@ void MatchChooserCamp::quit() {
 		for (int j = 0; j < 7; ++j) {
 
 			for (int k = 0; k < 4; ++k) {
-				DEBUG("button[" + QString::number(4*j+k) + "][" + i + "]");
+				DEBUG("button[" << (4*j+k) << "][" << i << "]");
 				if (buttons[4 * j + k][i]->isChecked()) {
 					DEBUG("checked");
 					chosenMatch = "a" + QString::number(k) + QString::number(j)
@@ -276,7 +277,7 @@ void MatchChooserCamp::quit() {
 		}
 	}
 
-	DEBUG("In void MatchChooserCamp::quit(). chosenMatch = " + chosenMatch);
+	DEBUG("In void MatchChooserCamp::quit(). chosenMatch = " << chosenMatch.toStdString().c_str());
 
 	if (!chosenMatch.isEmpty()) {
 
@@ -292,12 +293,9 @@ void MatchChooserCamp::quit() {
 			}
 		}
 
-		DEBUG("In void MatchChooserCamp::quit(). match = " + match);
+		DEBUG("In void MatchChooserCamp::quit(). match = " << match.toStdString().c_str());
 
 		QString title = "ATTENZIONE!!!";
-
-		DEBUG(match);
-
 		QStringList items = match.split(QRegExp("\\/"),
 				QString::SkipEmptyParts);
 
@@ -428,7 +426,7 @@ void MatchChooserCamp::deleteResult() {
 		for (int j = 0; j < 7; ++j) {
 			for (int k = 0; k < 4; ++k) {
 
-				DEBUG("button[" + QString::number(4*j+k) + "][" + i + "]");
+				DEBUG("button[" << (4*j+k) << "][" << i << "]");
 				if (buttons[4 * j + k][i]->isChecked()) {
 					DEBUG("checked");
 					chosenMatch = "a" + QString::number(k) + QString::number(j)
@@ -440,7 +438,7 @@ void MatchChooserCamp::deleteResult() {
 		}
 	}
 
-	DEBUG("In void MatchChooserCamp::quit(). chosenMatch = " + chosenMatch);
+	DEBUG("In void MatchChooserCamp::quit(). chosenMatch = " << chosenMatch.toStdString().c_str());
 
 	if (!chosenMatch.isEmpty()) {
 
@@ -456,14 +454,11 @@ void MatchChooserCamp::deleteResult() {
 			}
 		}
 
-		DEBUG("In void MatchChooserCamp::quit(). match = " + match);
+		DEBUG("In void MatchChooserCamp::quit(). match = " << match.toStdString().c_str());
 
 		QString title = "ATTENZIONE!!!";
 
-		DEBUG(match);
-
-		QStringList items = match.split(QRegExp("\\/"),
-				QString::SkipEmptyParts);
+		QStringList items = match.split(QRegExp("\\/"), QString::SkipEmptyParts);
 
 		if (items.size() == 1
 				|| (items.at(1) == "-" && items.at(2) == "-"

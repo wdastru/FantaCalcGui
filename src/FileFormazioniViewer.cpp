@@ -1,3 +1,5 @@
+#define DO_DEBUG
+
 #include "FileFormazioniViewer.h"
 #include "Repository.h"
 #include "defines.h"
@@ -65,9 +67,9 @@ void FileFormazioniViewer::saveFileAndClose() {
 
 	QTextDocumentWriter writer(this->filename);
 	if (writer.write(this->ui.plainTextEdit->document())) {
-		DEBUG("In FileFormazioniViewer::saveFileAndClose() --> write of " + this->filename + " was successful.");
+		DEBUG("In FileFormazioniViewer::saveFileAndClose() --> write of " << this->filename.toStdString().c_str() << " was successful.");
 	} else {
-		DEBUG("In FileFormazioniViewer::saveFileAndClose() --> write of " + this->filename + " was not successful.");
+		DEBUG("In FileFormazioniViewer::saveFileAndClose() --> write of " << this->filename.toStdString().c_str() << " was not successful.");
 		LOG(
 				ERR,
 				"Writing of " + this->filename + " was not successful.");

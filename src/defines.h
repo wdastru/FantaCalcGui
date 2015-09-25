@@ -12,6 +12,7 @@
 #include <QtCore/QString>
 #include "toString.h"
 #include <iostream>
+#include <string>
 
 #ifndef TRUE
 #define TRUE true
@@ -65,7 +66,7 @@
 #define LOG2CMDLINE qDebug()
 
 #ifdef DO_DEBUG
-#define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
+#define __FILENAME__ std::string(__FILE__).substr(32,std::string::npos).c_str()
 #define DEBUG(x) do { std::cerr << __FILENAME__ << "; line " << __LINE__ << "; function " << __func__ << ": " << x << std::endl; } while (0)
 #else
 #define DEBUG(x)

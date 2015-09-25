@@ -1,3 +1,5 @@
+#define DO_DEBUG
+
 #include <QtCore/QString>
 #include <QtCore/QTextStream>
 #include <QtCore/QList>
@@ -96,7 +98,7 @@ void singletonQtLogger::setVersion(QString _version) {
 }
 void singletonQtLogger::setRevision(QString _revision) {
 	this->revision = _revision;
-	DEBUG("In void singletonQtLogger::setRevision(QString _revision): revision = " + this->revision);
+	DEBUG("In void singletonQtLogger::setRevision(QString _revision): revision = " << this->revision.toStdString().c_str());
 	//this->ui.versionLabel->setText(_version);
 }
 void singletonQtLogger::saveLogFile() {
@@ -107,13 +109,13 @@ void singletonQtLogger::saveLogFile() {
 		STR_MOD->fixSlashes(logFileName);
 		this->setLogFileName(logFileName);
 		file->setFileName(this->logFileName);
-		DEBUG("In singletonQtLogger::saveLogFile() --> logFileName is empty.<br>Saving to " + this->logFileName);
+		DEBUG("In singletonQtLogger::saveLogFile() --> logFileName is empty.<br>Saving to " << this->logFileName.toStdString().c_str());
 	} else {
 		file->setFileName(
 				THE_REPO->risultatiPath
 				+ this->ui.outputFileNameLineEdit->text());
 
-		DEBUG("In singletonQtLogger::saveLogFile() --> logFileName is " + this->logFileName);
+		DEBUG("In singletonQtLogger::saveLogFile() --> logFileName is " << this->logFileName.toStdString().c_str());
 
 	}
 
@@ -217,8 +219,8 @@ void singletonQtLogger::onlineClicked() {
 			THE_REPO->fileGazzetta = chooseFiles->getFileGazzetta();
 			THE_REPO->fileFormazioni = chooseFiles->getFileFormazioni();
 
-			DEBUG("In void singletonQtLogger::onlineClicked() --> fileGazzetta : " + THE_REPO->fileGazzetta);
-			DEBUG("In void singletonQtLogger::onlineClicked() --> fileFormazioni : " + THE_REPO->fileFormazioni);
+			DEBUG("In void singletonQtLogger::onlineClicked() --> fileGazzetta : " << THE_REPO->fileGazzetta.toStdString().c_str());
+			DEBUG("In void singletonQtLogger::onlineClicked() --> fileFormazioni : " << THE_REPO->fileFormazioni.toStdString().c_str());
 
 			emit(this->onOffClickedFinished());
 
@@ -297,11 +299,11 @@ void singletonQtLogger::goOn() {
 
 			retVal = fileFormazioniReader->execute();
 
-			DEBUG("In singletonQtLogger::goOn() --> fileFormazioniReader::execute() returned " + my::toQString<unsigned int>(retVal) + ".");
+			DEBUG("In singletonQtLogger::goOn() --> fileFormazioniReader::execute() returned " << retVal << ".");
 
 		} catch (QString& str) {
 
-			DEBUG("In singletonQtLogger::goOn() --> exception caught! retVal : " + my::toQString<unsigned int>(retVal) + ", " + str);
+			DEBUG("In singletonQtLogger::goOn() --> exception caught! retVal : " << retVal << ", " << str.toStdString().c_str());
 
 		}
 	} while (retVal != FILEFORMREADER_OK);
@@ -327,7 +329,7 @@ void singletonQtLogger::goOn() {
 						+ "_" + QFileInfo(THE_REPO->fileGazzetta).fileName());
 		this->setLogFileName(THE_REPO->getRisultatiPath() + "/" + fileName);
 
-		DEBUG(QObject::tr("In singletonQtLogger::goOn() --> file name temporaneo : %1").arg(fileName));
+		DEBUG(QObject::tr("In singletonQtLogger::goOn() --> file name temporaneo : %1").arg(fileName).toStdString().c_str());
 
 		LOG(DBG, "<br/> =================");
 		LOG(DBG,      " === Riepilogo ===");
@@ -376,9 +378,9 @@ bool singletonQtLogger::checkForUpdates() {
 	int majCurrent = current.at(1).toInt();
 	int minCurrent = current.at(2).toInt();
 
-	DEBUG(QString::number(verCurrent));
-	DEBUG(QString::number(majCurrent));
-	DEBUG(QString::number(minCurrent));
+	DEBUG("verCurrent : " << verCurrent);
+	DEBUG("majCurrent : " << majCurrent);
+	DEBUG("minCurrent : " << minCurrent);
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	QString url = THE_REPO->getFileFormazioniUrl();
@@ -391,13 +393,13 @@ bool singletonQtLogger::checkForUpdates() {
 
 	urls->push_back(QUrl::fromLocalFile(url));
 
-	DEBUG("In void singletonQtLogger::checkForUpdates() --> url : " + url);
+	DEBUG("In void singletonQtLogger::checkForUpdates() --> url : " << url.toStdString().c_str());
 
 	std::vector<QString> *savePaths = new std::vector<QString>;
 	QString savePath = THE_REPO->getDownloadPath() + "updates.xml";
 	savePaths->push_back(savePath);
 
-	DEBUG("In void singletonQtLogger::checkForUpdates() --> savePath : " + savePath);
+	DEBUG("In void singletonQtLogger::checkForUpdates() --> savePath : " << savePath.toStdString().c_str());
 
 	Downloader updatesXmlDownloader(THE_LOGGER, urls, savePaths, TRUE);
 

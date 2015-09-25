@@ -1,3 +1,5 @@
+#define DO_DEBUG
+
 #include "MatchChooserCoppa.h"
 
 #include <QtCore/QFile>
@@ -29,7 +31,7 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 		buttons[i] = new QRadioButton();
 		buttons[i]->setFixedHeight(buttons[i]->sizeHint().height());
 
-		DEBUG(QString::number(i) + " " + QString::number(i % 4));
+		DEBUG("i: " << i << " (i % 4): " << (i % 4));
 
 		int j;
 		int n;
@@ -40,7 +42,7 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 			}
 		}
 
-		DEBUG("j" + QString::number(j));
+		DEBUG("j: " + j);
 
 		if (i % 4 == 0) {
 			QFrame *line = new QFrame(parent);
@@ -49,7 +51,7 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 			line->setFrameShadow(QFrame::Sunken);
 
 			ui.gridLayout->addWidget(line, i + n, 0, 1, 3);
-			DEBUG("i" + QString::number(i + n));
+			DEBUG("(i + n) : " << (i + n));
 		}
 
 		ui.gridLayout->addWidget(labels[i][0], j, 0);
@@ -90,7 +92,7 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 			//int j = list.at(0).at(2).digitValue();
 			//int k = list.at(0).at(1).digitValue();
 
-			DEBUG(list.at(0) + " " + str);
+			DEBUG(list.at(0).toStdString().c_str() << " " << str.toStdString().c_str());
 
 			if ((str.indexOf(
 					QRegExp(
@@ -117,7 +119,7 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 			++i;
 		}
 	} else {
-		DEBUG(fileDatiCoppa->fileName() + " does not exist");
+		DEBUG(fileDatiCoppa->fileName().toStdString().c_str() << " does not exist");
 
 		/* TODO
 		 * completare
@@ -164,14 +166,14 @@ void MatchChooserCoppa::setData() {
 				QStringList list = str.split("'", QString::SkipEmptyParts);
 
 				for (unsigned int i=0; i<list.size(); i++)
-					DEBUG(list.at(i));
+					DEBUG("list.at(" << i << ") : " << list.at(i).toStdString().c_str());
 
 				map[list[0]] = list[1];
 			}
 		}
 
 	} else {
-		DEBUG(fileSquadre->fileName() + " does not exist");
+		DEBUG(fileSquadre->fileName().toStdString().c_str() << " does not exist");
 
 		/* TODO
 		 * completare
@@ -212,7 +214,7 @@ void MatchChooserCoppa::setData() {
 				mapRemap[str.split(" ", QString::SkipEmptyParts).at(0).trimmed()] =
 						str.split(" ", QString::SkipEmptyParts).at(1).trimmed();
 
-				DEBUG(str.split(" ", QString::SkipEmptyParts).at(0).trimmed() + " " + str.split(" ", QString::SkipEmptyParts).at(1).trimmed());
+				DEBUG(str.split(" ", QString::SkipEmptyParts).at(0).trimmed().toStdString().c_str() << " " << str.split(" ", QString::SkipEmptyParts).at(1).trimmed().toStdString().c_str());
 
 			} else if (str.indexOf(
 					QRegExp(
@@ -230,7 +232,7 @@ void MatchChooserCoppa::setData() {
 				str.replace(QRegExp("\\]"), "");
 				lines.push_back(str);
 
-				DEBUG(str);
+				DEBUG("str: " << str.toStdString().c_str());
 			}
 		}
 
@@ -255,7 +257,7 @@ void MatchChooserCoppa::setData() {
 		}
 
 	} else {
-		DEBUG(fileCalendario->fileName() + " does not exist");
+		DEBUG(fileCalendario->fileName().toStdString().c_str() << " does not exist");
 
 		/* TODO
 		 * completare
@@ -292,18 +294,18 @@ void MatchChooserCoppa::quit() {
 		}
 	}
 
-	DEBUG("In void MatchChooserCoppa::quit(). chosenMatch = " + chosenMatch);
+	DEBUG("In void MatchChooserCoppa::quit(). chosenMatch = " << chosenMatch.toStdString().c_str());
 
 	if (!chosenMatch.isEmpty()) {
 
 		QString message;
 		QString match;
 
-		DEBUG("chosenMatch.toInt() : " + chosenMatch.toInt());
+		DEBUG("chosenMatch.toInt() : " << chosenMatch.toInt());
 
 		match = matches.at(chosenMatch.toInt());
 
-		DEBUG("In void MatchChooserCoppa::quit(). match = " + match);
+		DEBUG("In void MatchChooserCoppa::quit(). match = " << match.toStdString().c_str());
 
 		QString title = "ATTENZIONE!!!";
 
@@ -434,7 +436,7 @@ void MatchChooserCoppa::deleteResult() {
 		}
 	}
 
-	DEBUG("In void MatchChooserCoppa::deleteResult(). chosenMatch = " + chosenMatch);
+	DEBUG("In void MatchChooserCoppa::deleteResult(). chosenMatch = " << chosenMatch.toStdString().c_str());
 
 	if (!chosenMatch.isEmpty()) {
 
@@ -445,7 +447,7 @@ void MatchChooserCoppa::deleteResult() {
 
 		match = matches.at(chosenMatch.toInt());
 
-		DEBUG("In void MatchChooserCoppa::deleteResult(). match = " + match);
+		DEBUG("In void MatchChooserCoppa::deleteResult(). match = " << match.toStdString().c_str());
 
 		QString title = "ATTENZIONE!!!";
 

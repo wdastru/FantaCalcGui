@@ -1,3 +1,5 @@
+#define DO_DEBUG
+
 #include <QtCore/QObject>
 #include <QtCore/QDebug>
 #include <QtCore/QDir>

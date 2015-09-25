@@ -1,3 +1,5 @@
+#define DO_DEBUG
+
 #include "ChooseFiles.h"
 
 #include <QtCore/QDebug>
@@ -46,7 +48,7 @@ void ChooseFiles::setupGazzettaTab(QString _fileGazzetta) {
 			i++;
 		}
 
-		DEBUG("In ChooseFiles::ChooseFiles(...) --> lines.size() = " + QString::number(lines.size()));
+		DEBUG("In ChooseFiles::ChooseFiles(...) --> lines.size() = " << QString::number(lines.size()).toStdString().c_str());
 
 		int rows = 10;
 		int rowCounter = 0;
@@ -347,10 +349,10 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 
 		if (!fHome.isReadable()) {
 			LOG(FATAL, "Il file : " + fHome.fileName() + " non e' apribile.");
-			DEBUG("In void ChooseFiles::createFileSquadreFromWebFiles() --> il file : " + fHome.fileName() + " non e' apribile.");
+			DEBUG("In void ChooseFiles::createFileSquadreFromWebFiles() --> il file : " << fHome.fileName().toStdString().c_str() << " non e' apribile.");
 		} else if (!fAway.isReadable()) {
 			LOG(FATAL, "Il file : " + fAway.fileName() + " non e' apribile.");
-			DEBUG("In void ChooseFiles::createFileSquadreFromWebFiles() --> il file : " + fAway.fileName() + " non e' apribile.");
+			DEBUG("In void ChooseFiles::createFileSquadreFromWebFiles() --> il file : " << fAway.fileName().toStdString().c_str() << " non e' apribile.");
 		}
 
 		QFileInfo FIfHome(fHome);
@@ -370,7 +372,7 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 		fOut.open(QIODevice::WriteOnly);
 
 		if (!fOut.isWritable()) {
-			DEBUG("In : void ChooseFiles::createFileSquadreFromWebFiles() --> il file " + fileOut + " non e' apribile in scrittura.");
+			DEBUG("In : void ChooseFiles::createFileSquadreFromWebFiles() --> il file " << fileOut.toStdString().c_str() << " non e' apribile in scrittura.");
 			LOG(FATAL, "Il file " + fileOut + " non e' apribile in scrittura.");
 			this->close();
 			return EXIT_FAILURE;

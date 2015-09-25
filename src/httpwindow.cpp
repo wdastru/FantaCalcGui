@@ -39,6 +39,8 @@
  **
  ****************************************************************************/
 
+#define DO_DEBUG
+
 #include <QtGui/QtGui>
 //#include <QtWidgets/QProgressDialog>
 //#include <QtWidgets/QMessageBox>
