@@ -5,6 +5,8 @@
  *      Author: WAleViolaeIvan
  */
 
+#define DO_DEBUG
+
 #include <QtCore/QFile>
 #include <QtCore/QDebug>
 
@@ -28,7 +30,7 @@ Repository::Repository() {
 
 #ifdef WIN32
 
-	LOG(CMDLINE, "Platform WIN32");
+	DEBUG("Platform WIN32");
 
 	this->UserProfile = QString::fromLatin1(getenv("USERPROFILE"));
 
@@ -43,7 +45,7 @@ Repository::Repository() {
 	this->fontFixedWidth.setPointSize(8);
 #else // ! def WIN32
 #ifdef __MACH__
-	LOG(CMDLINE, "Platform __MACH__");
+	DEBUG("Platform __MACH__");
 
 	this->UserProfile = "/Users/" + QString::fromLatin1(getenv("USER"));
 
@@ -57,7 +59,7 @@ Repository::Repository() {
 	this->fontFixedWidth.setFamily(QString::fromUtf8("Lucida Console"));
 	this->fontFixedWidth.setPointSize(8);
 #else // ! def __MACH__ ! def WIN32 -->  LINUX?
-	LOG(CMDLINE, "Platform LINUX (?)");
+	DEBUG("Platform LINUX (?)");
 
 	this->UserProfile = "/home/" + QString::fromLatin1(getenv("USER"));
 
@@ -125,7 +127,7 @@ QString Repository::getFileGazzettaUrl() {
 	return this->getUrl() + "777/filesGazzetta/listaGazFiles.txt";
 }
 QString Repository::getUrl() {
-	LOG(CMDLINE, "In QString Repository::getUrl()");
+	DEBUG("In QString Repository::getUrl()");
 	return this->url;
 }
 QString Repository::getFormazioniUrl() {

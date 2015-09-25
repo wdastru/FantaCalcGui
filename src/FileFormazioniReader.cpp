@@ -23,15 +23,15 @@ unsigned int FileFormazioniReader::execute() {
 	LOG(DBG, "<br/> =============================");
 	LOG(DBG,      " === Lettura file di input ===");
 	LOG(DBG,      " =============================");
-	LOG(CMDLINE, "In FileFormazioniReader::execute().");
+	DEBUG("In FileFormazioniReader::execute().");
 
 	std::ifstream fSqua(this->fileFormazioni.toStdString().c_str());
 	if (!fSqua) {
-		LOG(CMDLINE, "In FileFormazioniReader::execute()  -> il file formazioni  : " + this->fileFormazioni + " non esiste o non e' leggibile!");
+		DEBUG("In FileFormazioniReader::execute()  -> il file formazioni  : " + this->fileFormazioni + " non esiste o non e' leggibile!");
 		LOG(FATAL, "Il file formazioni  : " + this->fileFormazioni + " non esiste o non e' leggibile!");
 		return FILEFORMREADER_NO_FORM_FILE;
 	} else {
-		LOG(CMDLINE, "In FileFormazioniReader::execute()  -> file formazioni  : " + this->fileFormazioni);
+		DEBUG("In FileFormazioniReader::execute()  -> file formazioni  : " + this->fileFormazioni);
 	}
 
 	std::string line;
@@ -52,13 +52,13 @@ unsigned int FileFormazioniReader::execute() {
 				 *  ###***### serve per separare le due squadre nel file di input
 				 *  se trovato passa alla prossima squadra o esce dal loop for
 				 */
-				LOG(CMDLINE, "In FileFormazioniReader::execute()  -> separatore : " + QString::fromStdString(line));
+				DEBUG("In FileFormazioniReader::execute()  -> separatore : " + QString::fromStdString(line));
 
 				LOG(DBG, "<br>    ---------------------------------");
 
 				break;
 			} else if (line.find("#", 0) != std::string::npos) {// # indica linee di commento
-				LOG(CMDLINE, "In FileFormazioniReader::execute()  -> commento : " + QString::fromStdString(line));
+				DEBUG("In FileFormazioniReader::execute()  -> commento : " + QString::fromStdString(line));
 				continue;
 			} else if (line.find("nome squadra", 0) != std::string::npos) { // nome squadra
 				/*
@@ -75,7 +75,7 @@ unsigned int FileFormazioniReader::execute() {
 
 				if (line.size() == 0) {
 					//line = "Squadra" + my::toString<unsigned int>(k + 1);
-					LOG(CMDLINE, "In FileFormazioniReader::execute() -> manca nome squadra. <br/>Controllare il file di input.");
+					DEBUG("In FileFormazioniReader::execute() -> manca nome squadra. <br/>Controllare il file di input.");
 
 					QMessageBox msgBox;
 					msgBox.setStandardButtons(QMessageBox::Ok);
@@ -107,7 +107,7 @@ unsigned int FileFormazioniReader::execute() {
 				unsigned int xx;
 				xx = FANTA->setModulo(line, k);
 				if (xx == EXIT_FAILURE) {
-					LOG(CMDLINE, "In FileFormazioniReader::execute()  -> Modulo non consentito : " + QString::fromStdString(line) + "<br/>Controllare il file di input.");
+					DEBUG("In FileFormazioniReader::execute()  -> Modulo non consentito : " + QString::fromStdString(line) + "<br/>Controllare il file di input.");
 
 					QMessageBox msgBox;
 					msgBox.setStandardButtons(QMessageBox::Ok);
@@ -135,7 +135,7 @@ unsigned int FileFormazioniReader::execute() {
 				// <-- sostituzione lettere accentate ed eliminazione caratteri "non-lettera"
 				//STR_MOD->toUpperCase(line);
 
-				LOG(CMDLINE, "In FileFormazioniReader::execute()  -> " + QString::fromStdString(line));
+				DEBUG("In FileFormazioniReader::execute()  -> " + QString::fromStdString(line));
 
 				if (line.size() <= 1) // evitare le righe con un solo carattere rimasto
 					continue;
@@ -186,11 +186,11 @@ unsigned int FileFormazioniReader::execute() {
 					// cerca nella riga della Gazzetta il nome del giocatore
 					size_t found = STR_MOD->msk(tempStrGazz, DELIM,	ColCognome).find(line, 0);
 
-					LOG(CMDLINE, QString::number(found) + " " + QString::fromStdString(STR_MOD->msk(tempStrGazz, DELIM,	ColCognome)));
+					DEBUG(QString::number(found) + " " + QString::fromStdString(STR_MOD->msk(tempStrGazz, DELIM,	ColCognome)));
 
 					if (found != string::npos) { // se vero il giocatore e' stato trovato
 						// aggiungi al vettore con tutti i giocatori trovati
-						LOG(CMDLINE, "In FileFormazioniReader::execute(). " + QString::fromStdString(this->allThePlayers[xx - 65].at(j)));
+						DEBUG("In FileFormazioniReader::execute(). " + QString::fromStdString(this->allThePlayers[xx - 65].at(j)));
 						v_Found.push_back(this->allThePlayers[xx - 65].at(j));
 					}
 				}
@@ -201,10 +201,7 @@ unsigned int FileFormazioniReader::execute() {
 							+ " : trovate " \
 							+ my::toQString<size_t>(v_Found.size()) \
 							+ " corrispondenze");
-					qDebug() << "In FileFormazioniReader::execute()  -> " \
-						+ QString::fromStdString(line) \
-						+ " : v_Found.size = " \
-						+ my::toQString<size_t>(v_Found.size());
+					DEBUG("In FileFormazioniReader::execute()  -> " + QString::fromStdString(line) + " : v_Found.size = " + my::toQString<size_t>(v_Found.size()));
 
 					std::vector<std::string> temp;
 					temp.clear();
@@ -258,13 +255,13 @@ unsigned int FileFormazioniReader::execute() {
 						        oss << item.toLatin1().constData();
 						        chosenThese = atoi(STR_MOD->msk( oss.str(), "[]", 0 ).c_str() );
 						    } else if (!ok ) {
-								LOG(CMDLINE, "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : returned false.");
+								DEBUG("In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : returned false.");
 								return FILEFORMREADER_GETITEMERR;
 						    } else if ( item.isEmpty() ) {
-								LOG(CMDLINE, "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : item is empty.");
+								DEBUG("In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : item is empty.");
 								return FILEFORMREADER_GETITEMERR;
 							} else {
-								LOG(CMDLINE, "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : unknown error.");
+								DEBUG("In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : unknown error.");
 								return FILEFORMREADER_GETITEMERR;
 							}
 
@@ -273,7 +270,7 @@ unsigned int FileFormazioniReader::execute() {
 									temp.at(chosenThese - 1));
 
 						} else if (temp.size() == 1) {
-							LOG(CMDLINE, "In FileFormazioniReader::execute()  -> found : TRUE.");
+							DEBUG("In FileFormazioniReader::execute()  -> found : TRUE.");
 							v_Found = temp;
 						} else { // nessuna corrispondenza esatta
 
@@ -305,13 +302,13 @@ unsigned int FileFormazioniReader::execute() {
 								oss << item.toLatin1().constData();
 								chosenThese = atoi(STR_MOD->msk( oss.str(), "[]", 0 ).c_str() );
 						    } else if (!ok ) {
-								LOG(CMDLINE, "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : returned false.");
+								DEBUG("In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : returned false.");
 								return FILEFORMREADER_GETITEMERR;
 						    } else if ( item.isEmpty() ) {
-								LOG(CMDLINE, "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : item is empty.");
+								DEBUG("In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : item is empty.");
 								return FILEFORMREADER_GETITEMERR;
 							} else {
-								LOG(CMDLINE, "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : unknown error.");
+								DEBUG("In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : unknown error.");
 								return FILEFORMREADER_GETITEMERR;
 							}
 
@@ -377,13 +374,13 @@ unsigned int FileFormazioniReader::execute() {
 							oss << item.toLatin1().constData();
 							chosenLevenshtein = atoi(STR_MOD->msk(oss.str(), "[]", 0).c_str());
 					    } else if (!ok ) {
-							LOG(CMDLINE, "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : returned false.");
+							DEBUG("In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : returned false.");
 							return FILEFORMREADER_GETITEMERR;
 					    } else if ( item.isEmpty() ) {
-							LOG(CMDLINE, "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : item is empty.");
+							DEBUG("In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : item is empty.");
 							return FILEFORMREADER_GETITEMERR;
 						} else {
-							LOG(CMDLINE, "In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : unknown error.");
+							DEBUG("In FileFormazioniReader::execute()  -> Errore: QInputDialog::getItem(...) : unknown error.");
 							return FILEFORMREADER_GETITEMERR;
 						}
 
@@ -441,16 +438,8 @@ unsigned int FileFormazioniReader::execute() {
 						v_Found.at(0) += "0\t0";
 					}
 
-					qDebug() << "In FileFormazioniReader::execute()  -> before switch : v_Found.at(0) = " \
-									+ QString::fromStdString(v_Found.at(0)) \
-									+ " (squadra " \
-									+ my::toQString<unsigned int>(k) + ")";
-
-					qDebug() << "In FileFormazioniReader::execute()  -> FANTA->Team[" \
-									+ my::toQString<unsigned int>(k) \
-									+ "].size() = " \
-									+ my::toQString<unsigned int>( \
-											FANTA->Team[k].size());
+					DEBUG("In FileFormazioniReader::execute()  -> before switch : v_Found.at(0) = " + QString::fromStdString(v_Found.at(0)) + " (squadra " + my::toQString<unsigned int>(k) + ")");
+					DEBUG("In FileFormazioniReader::execute()  -> FANTA->Team[" + my::toQString<unsigned int>(k) + "].size() = " + my::toQString<unsigned int>(FANTA->Team[k].size()));
 
 					switch (FANTA->addPlayer(v_Found.at(0), k)) {
 					case PLAYER_OK:
@@ -606,7 +595,7 @@ unsigned int FileFormazioniReader::execute() {
 						break;
 
 					default:
-						LOG(CMDLINE, "In FileFormazioniReader::execute()  -> switch : default.");
+						DEBUG("In FileFormazioniReader::execute()  -> switch : default.");
 						break;
 					}
 
@@ -651,11 +640,7 @@ std::vector<std::string> FileFormazioniReader::findLevenstheins(
 			}
 		}
 
-		qDebug() << "In FileFormazioniReader::findLevenstheins(line)  -> distance : " \
-						+ my::toQString<signed int>(distance) \
-						+ " - line size : " \
-						+ my::toQString<size_t>(line.size()) + " - trovati : " \
-						+ my::toQString<signed int>(Levenshteins.size());
+		DEBUG("In FileFormazioniReader::findLevenstheins(line)  -> distance : " + my::toQString<signed int>(distance) + " - line size : " + my::toQString<size_t>(line.size()) + " - trovati : " + my::toQString<signed int>(Levenshteins.size()));
 
 		if (Levenshteins.size() <= 1) {
 			continue;

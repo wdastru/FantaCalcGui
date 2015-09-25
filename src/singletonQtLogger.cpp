@@ -28,6 +28,8 @@
 #include <vector>
 #include <string>
 
+#include <iostream>
+
 singletonQtLogger* singletonQtLogger::pInstance = NULL;
 singletonQtLogger* singletonQtLogger::Inst() {
 	if (pInstance == NULL) {
@@ -72,11 +74,9 @@ void singletonQtLogger::Logging(QString type, QString message) {
 	} else if (type == "FILE") {
 		;
 	} else if (type == "UPDATE") {
-			this->ui.plainTextEdit->appendHtml(
+		this->ui.plainTextEdit->appendHtml(
 					"<span style='color:#00CC00; font-weight:bold'> UPDATE : "
 					+ message + "</span>");
-	} else if (type == "CMDLINE") {
-			qDebug() << message;
 	} else
 	this->ui.plainTextEdit->appendHtml(
 			" !!!! : Type " + type + " not recognized.");
@@ -96,7 +96,7 @@ void singletonQtLogger::setVersion(QString _version) {
 }
 void singletonQtLogger::setRevision(QString _revision) {
 	this->revision = _revision;
-	LOG(CMDLINE, "In void singletonQtLogger::setRevision(QString _revision): revision = " + this->revision);
+	DEBUG("In void singletonQtLogger::setRevision(QString _revision): revision = " + this->revision);
 	//this->ui.versionLabel->setText(_version);
 }
 void singletonQtLogger::saveLogFile() {
@@ -107,15 +107,13 @@ void singletonQtLogger::saveLogFile() {
 		STR_MOD->fixSlashes(logFileName);
 		this->setLogFileName(logFileName);
 		file->setFileName(this->logFileName);
-		qDebug() << "In singletonQtLogger::saveLogFile() --> logFileName is empty.<br>Saving to " \
-				+ this->logFileName;
+		DEBUG("In singletonQtLogger::saveLogFile() --> logFileName is empty.<br>Saving to " + this->logFileName);
 	} else {
 		file->setFileName(
 				THE_REPO->risultatiPath
 				+ this->ui.outputFileNameLineEdit->text());
 
-		qDebug() << "In singletonQtLogger::saveLogFile() --> logFileName is " \
-				<< this->logFileName;
+		DEBUG("In singletonQtLogger::saveLogFile() --> logFileName is " + this->logFileName);
 
 	}
 
@@ -190,7 +188,7 @@ void singletonQtLogger::configClicked() {
 	THE_CONFIGURATOR->exec();
 }
 void singletonQtLogger::onlineClicked() {
-	LOG(CMDLINE, "In singletonQtLogger::onlineClicked().");
+	DEBUG("In singletonQtLogger::onlineClicked().");
 
 	LOG(DBG, "<br> ========================");
 	LOG(DBG, " === Modalita' online ===");
@@ -207,7 +205,7 @@ void singletonQtLogger::onlineClicked() {
 	Downloader listsDownloader(THE_LOGGER, urls, savePaths, TRUE);
 
 	if (listsDownloader.requestSucceded()) {
-		LOG(CMDLINE, "In singletonQtLogger::onlineClicked() --> listsDownloader request succeded.");
+		DEBUG("In singletonQtLogger::onlineClicked() --> listsDownloader request succeded.");
 
 		ChooseFiles * chooseFiles = new ChooseFiles(
 				THE_REPO->getListaFormazioni(), THE_REPO->getListaGazFiles(),
@@ -219,17 +217,17 @@ void singletonQtLogger::onlineClicked() {
 			THE_REPO->fileGazzetta = chooseFiles->getFileGazzetta();
 			THE_REPO->fileFormazioni = chooseFiles->getFileFormazioni();
 
-			LOG(CMDLINE, "In void singletonQtLogger::onlineClicked() --> fileGazzetta : " + THE_REPO->fileGazzetta);
-			LOG(CMDLINE, "In void singletonQtLogger::onlineClicked() --> fileFormazioni : " + THE_REPO->fileFormazioni);
+			DEBUG("In void singletonQtLogger::onlineClicked() --> fileGazzetta : " + THE_REPO->fileGazzetta);
+			DEBUG("In void singletonQtLogger::onlineClicked() --> fileFormazioni : " + THE_REPO->fileFormazioni);
 
 			emit(this->onOffClickedFinished());
 
 		} else {
-			LOG(CMDLINE, "In void singletonQtLogger::onlineClicked() --> Cancel clicked in ChooseFiles.");
+			DEBUG("In void singletonQtLogger::onlineClicked() --> Cancel clicked in ChooseFiles.");
 			return;
 		}
 	} else {
-		LOG(CMDLINE, "In singletonQtLogger::onlineClicked() --> listsDownloader request not succeded.");
+		DEBUG("In singletonQtLogger::onlineClicked() --> listsDownloader request not succeded.");
 		/* TODO
 		 * handle exception
 		 * * * * * * * * * * * */
@@ -256,7 +254,7 @@ void singletonQtLogger::offlineClicked() {
 		emit(this->onOffClickedFinished());
 
 	} else {
-		LOG(CMDLINE, "In void singletonQtLogger::offlineClicked() --> noNetFileDialog has been aborted.");
+		DEBUG("In void singletonQtLogger::offlineClicked() --> noNetFileDialog has been aborted.");
 		return;
 	}
 }
@@ -270,7 +268,7 @@ QString singletonQtLogger::getRevision(void) {
 	return this->revision;
 }
 void singletonQtLogger::goOn() {
-	LOG(CMDLINE, "In singletonQtLogger::goOn().");
+	DEBUG("In singletonQtLogger::goOn().");
 
 	// --> lettura file Gazzetta e Formazioni
 	GazzettaFileReader * gazzettaFileReader = new GazzettaFileReader(
@@ -289,9 +287,9 @@ void singletonQtLogger::goOn() {
 			THE_VIEWER->exec();
 
 			if (THE_VIEWER->getResult() == 1) {
-				LOG(CMDLINE, "In singletonQtLogger::goOn() --> THE_VIEWER returned 1.");
+				DEBUG("In singletonQtLogger::goOn() --> THE_VIEWER returned 1.");
 			} else {
-				LOG(CMDLINE, "In singletonQtLogger::goOn() --> THE_VIEWER returned 0.");
+				DEBUG("In singletonQtLogger::goOn() --> THE_VIEWER returned 0.");
 				break;
 			}
 
@@ -299,28 +297,28 @@ void singletonQtLogger::goOn() {
 
 			retVal = fileFormazioniReader->execute();
 
-			LOG(CMDLINE, "In singletonQtLogger::goOn() --> fileFormazioniReader::execute() returned " + my::toQString<unsigned int>(retVal) + ".");
+			DEBUG("In singletonQtLogger::goOn() --> fileFormazioniReader::execute() returned " + my::toQString<unsigned int>(retVal) + ".");
 
 		} catch (QString& str) {
 
-			LOG(CMDLINE, "In singletonQtLogger::goOn() --> exception caught! retVal : " + my::toQString<unsigned int>(retVal) + ", " + str);
+			DEBUG("In singletonQtLogger::goOn() --> exception caught! retVal : " + my::toQString<unsigned int>(retVal) + ", " + str);
 
 		}
 	} while (retVal != FILEFORMREADER_OK);
 	// <-- lettura file Gazzetta e Formazioni
 
 	if (THE_VIEWER->getResult() == 0) { // in caso di break
-		LOG(CMDLINE, "Out of singletonQtLogger::goOn(). THE_VIEWER->getResult() == 0");
+		DEBUG("Out of singletonQtLogger::goOn(). THE_VIEWER->getResult() == 0");
 		return;
 	}
 
 	try {
 		FANTA->execute();
 	} catch (...) {
-		LOG(CMDLINE, "In singletonQtLogger::goOn() --> exception caught.");
+		DEBUG("In singletonQtLogger::goOn() --> exception caught.");
 	}
 
-	LOG(CMDLINE, "In singletonQtLogger::goOn() --> after FANTA->execute() call.");
+	DEBUG("In singletonQtLogger::goOn() --> after FANTA->execute() call.");
 
 	try {
 		QString fileName(
@@ -329,7 +327,7 @@ void singletonQtLogger::goOn() {
 						+ "_" + QFileInfo(THE_REPO->fileGazzetta).fileName());
 		this->setLogFileName(THE_REPO->getRisultatiPath() + "/" + fileName);
 
-		LOG(CMDLINE, QObject::tr("In singletonQtLogger::goOn() --> file name temporaneo : %1").arg(fileName));
+		DEBUG(QObject::tr("In singletonQtLogger::goOn() --> file name temporaneo : %1").arg(fileName));
 
 		LOG(DBG, "<br/> =================");
 		LOG(DBG,      " === Riepilogo ===");
@@ -352,10 +350,10 @@ void singletonQtLogger::goOn() {
 		this->ui.uploadCampButton->setEnabled(true);
 		this->ui.uploadCoppaButton->setEnabled(true);
 
-		LOG(CMDLINE, "Out of singletonQtLogger::goOn()");
+		DEBUG("Out of singletonQtLogger::goOn()");
 	} catch (...) {
 		LOG(ERR, "Exception caught after FANTA->execute().");
-		LOG(CMDLINE, "Out of singletonQtLogger::goOn() --> exception caught after FANTA->execute().");
+		DEBUG("Out of singletonQtLogger::goOn() --> exception caught after FANTA->execute().");
 	}
 }
 void singletonQtLogger::setLogFileName(QString filename) {
@@ -378,9 +376,9 @@ bool singletonQtLogger::checkForUpdates() {
 	int majCurrent = current.at(1).toInt();
 	int minCurrent = current.at(2).toInt();
 
-	LOG(CMDLINE, QString::number(verCurrent));
-	LOG(CMDLINE, QString::number(majCurrent));
-	LOG(CMDLINE, QString::number(minCurrent));
+	DEBUG(QString::number(verCurrent));
+	DEBUG(QString::number(majCurrent));
+	DEBUG(QString::number(minCurrent));
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	QString url = THE_REPO->getFileFormazioniUrl();
@@ -393,19 +391,19 @@ bool singletonQtLogger::checkForUpdates() {
 
 	urls->push_back(QUrl::fromLocalFile(url));
 
-	LOG(CMDLINE, "In void singletonQtLogger::checkForUpdates() --> url : " + url);
+	DEBUG("In void singletonQtLogger::checkForUpdates() --> url : " + url);
 
 	std::vector<QString> *savePaths = new std::vector<QString>;
 	QString savePath = THE_REPO->getDownloadPath() + "updates.xml";
 	savePaths->push_back(savePath);
 
-	LOG(CMDLINE, "In void singletonQtLogger::checkForUpdates() --> savePath : " + savePath);
+	DEBUG("In void singletonQtLogger::checkForUpdates() --> savePath : " + savePath);
 
 	Downloader updatesXmlDownloader(THE_LOGGER, urls, savePaths, TRUE);
 
 	if (updatesXmlDownloader.requestSucceded()) { // download succeded
 
-		LOG(CMDLINE, "    Scaricato le informazioni relative agli aggiornamenti disponibili");
+		DEBUG("    Scaricato le informazioni relative agli aggiornamenti disponibili");
 
 		std::vector<QString> content;
 		std::vector<QString> status;
@@ -529,7 +527,7 @@ bool singletonQtLogger::checkForUpdates() {
 	return true;
 }
 void singletonQtLogger::on_uploadCampButton_clicked() {
-	LOG(CMDLINE, "In void singletonQtLogger::on_uploadCampButton_clicked()");
+	DEBUG("In void singletonQtLogger::on_uploadCampButton_clicked()");
 
 	LOG(DBG, "<br/> ==========================================");
 	LOG(DBG, " === Pubblicazione risultati campionato ===");
@@ -551,10 +549,10 @@ void singletonQtLogger::on_uploadCampButton_clicked() {
 	Downloader datiCampDownloader(THE_LOGGER, urls, savePaths, TRUE);
 
 	if (datiCampDownloader.requestSucceded()) { // download succeded
-		LOG(CMDLINE, "In void singletonQtLogger::on_uploadCampButton_clicked(). Download of files succeded.");
+		DEBUG("In void singletonQtLogger::on_uploadCampButton_clicked(). Download of files succeded.");
 	} else { // download failed
 		LOG(WARN, "Non e' stato possibile scaricare i file necessari.");
-		LOG(CMDLINE, "In void singletonQtLogger::on_uploadCampButton_clicked(). Download of files failed.");
+		DEBUG("In void singletonQtLogger::on_uploadCampButton_clicked(). Download of files failed.");
 	}
 
 	MatchChooserCamp *matchChooserCamp = new MatchChooserCamp();
@@ -562,7 +560,7 @@ void singletonQtLogger::on_uploadCampButton_clicked() {
 
 }
 void singletonQtLogger::on_uploadCoppaButton_clicked() {
-	LOG(CMDLINE, "In void singletonQtLogger::on_uploadCoppaButton_clicked()");
+	DEBUG("In void singletonQtLogger::on_uploadCoppaButton_clicked()");
 
 	LOG(DBG, "<br/> =====================================");
 	LOG(DBG, " === Pubblicazione risultati coppa ===");
@@ -584,10 +582,10 @@ void singletonQtLogger::on_uploadCoppaButton_clicked() {
 	Downloader datiCoppaDownloader(THE_LOGGER, urls, savePaths, TRUE);
 
 	if (datiCoppaDownloader.requestSucceded()) { // download succeded
-		LOG(CMDLINE, "In void singletonQtLogger::on_uploadCoppaButton_clicked(). Download of files succeded.");
+		DEBUG("In void singletonQtLogger::on_uploadCoppaButton_clicked(). Download of files succeded.");
 	} else { // download failed
 		LOG(WARN, "Non e' stato possibile scaricare i file necessari.");
-		LOG(CMDLINE, "In void singletonQtLogger::on_uploadCoppaButton_clicked(). Download of files failed.");
+		DEBUG("In void singletonQtLogger::on_uploadCoppaButton_clicked(). Download of files failed.");
 	}
 
 	MatchChooserCoppa *matchChooserCoppa = new MatchChooserCoppa();

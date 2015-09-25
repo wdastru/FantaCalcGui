@@ -64,14 +64,14 @@ void UpdatesChooser::checkRadioButtons() {
 	QString url = THE_REPO->getUrl() + "download/" + pResources->at(chosenUpdate)["file"];
 	urls->push_back(QUrl::fromLocalFile(url));
 
-	LOG(CMDLINE, url);
+	DEBUG(url);
 
 	std::vector<QString> *savePaths = new std::vector<QString>;
 	QString savePath = ui.dirLabel->text() + "/"
 			+ pResources->at(chosenUpdate)["file"];
 	savePaths->push_back(savePath);
 
-	LOG(CMDLINE, savePath);
+	DEBUG(savePath);
 
 	Downloader updateDownloader(THE_LOGGER, urls, savePaths, true);
 
@@ -81,8 +81,8 @@ void UpdatesChooser::checkRadioButtons() {
 		+ pResources->at(chosenUpdate)["file"]
 		+ " succeded.");
 
-		LOG(CMDLINE, "In void UpdatesChooser::checkRadioButtons() --> answered Yes");
-		LOG(CMDLINE, "In void UpdatesChooser::checkRadioButtons() --> search for .exe returned " + url.indexOf(QRegExp("\\.exe$"), 0));
+		DEBUG("In void UpdatesChooser::checkRadioButtons() --> answered Yes");
+		DEBUG("In void UpdatesChooser::checkRadioButtons() --> search for .exe returned " + url.indexOf(QRegExp("\\.exe$"), 0));
 
 		if (url.indexOf(QRegExp("\\.exe$"), 0) != -1) { // urls is an .exe file
 			QString title = "Domanda";

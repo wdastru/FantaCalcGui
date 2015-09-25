@@ -9,7 +9,9 @@
 #define DEFINES_H_
 
 #include <QtCore/QTime>
+#include <QtCore/QString>
 #include "toString.h"
+#include <iostream>
 
 #ifndef TRUE
 #define TRUE true
@@ -58,9 +60,17 @@
 #define FATAL "FATAL"
 #define WARN  "WARN"
 #define DBG "DBG"
-#define UPDATE 		"UPDATE"
+#define UPDATE "UPDATE"
 #define TOFILE  "FILE"
-#define CMDLINE  "CMDLINE"
+#define LOG2CMDLINE qDebug()
+
+#ifdef DO_DEBUG
+#define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
+#define DEBUG(x) do { std::cerr << __FILENAME__ << "; line " << __LINE__ << "; function " << __func__ << ": " << x << std::endl; } while (0)
+#else
+#define DEBUG(x)
+#endif
+
 #endif /* TYPE_OF_LOG_MSG */
 
 #ifndef THE_LOGGER
