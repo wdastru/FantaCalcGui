@@ -48,7 +48,7 @@ void ChooseFiles::setupGazzettaTab(QString _fileGazzetta) {
 			i++;
 		}
 
-		DEBUG("In ChooseFiles::ChooseFiles(...) --> lines.size() = " << QString::number(lines.size()).toStdString().c_str());
+		DEBUG("lines.size() = " << QString::number(lines.size()).toStdString().c_str());
 
 		int rows = 10;
 		int rowCounter = 0;
@@ -172,18 +172,18 @@ void ChooseFiles::on_CampoNeutroBox_toggled(bool) {
 }
 
 void ChooseFiles::on_okButton_clicked() {
-	DEBUG("In void ChooseFiles::on_okButton_clicked()");
+	DEBUG("");
 
 	this->doDownload();
 	if (this->downloadSuccess) {
-		DEBUG("In on_okButton_clicked() --> downloadSuccess is true.");
+		DEBUG("downloadSuccess is true.");
 		this->createFileSquadreFromWebFiles();
 		this->fileGazzetta = THE_REPO->getGazzettaPath() + "/"
 				+ this->getGazFile();
 		this->accept();
 	} else {
 		if (!this->filesDownloader->wasCancelClicked()) {
-			DEBUG("In on_okButton_clicked() --> downloadSuccess is false.");
+			DEBUG("downloadSuccess is false.");
 			/* TODO
 			 * completare ?
 			 * * * * * * * * */
@@ -194,7 +194,7 @@ void ChooseFiles::on_okButton_clicked() {
 }
 
 void ChooseFiles::on_cancelButton_clicked() {
-	DEBUG("In void ChooseFiles::on_cancelButton_clicked()");
+	DEBUG("");
 
 	for (int i = 0; i < this->nFiles; i++) {
 		home.at(i)->setChecked(false);
@@ -210,7 +210,7 @@ void ChooseFiles::on_cancelButton_clicked() {
 }
 
 void ChooseFiles::enableOkButton() {
-	DEBUG("In void ChooseFiles::enableOkButton()");
+	DEBUG("");
 
 	bool homeIsChecked = false;
 	bool awayIsChecked = false;
