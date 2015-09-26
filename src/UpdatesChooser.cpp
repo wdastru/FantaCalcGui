@@ -83,9 +83,9 @@ void UpdatesChooser::checkRadioButtons() {
 		+ pResources->at(chosenUpdate)["file"]
 		+ " succeded.");
 
-		DEBUG("answered Yes");
-		DEBUG("search for .exe returned " << url.indexOf(QRegExp("\\.exe$"), 0));
-
+		/*
+		 * INSTALLAZIONE UPDATE
+		 *
 		if (url.indexOf(QRegExp("\\.exe$"), 0) != -1) { // urls is an .exe file
 			QString title = "Domanda";
 			QString message = "Installo la nuova versione ?\nIl programma verra' terminato.";
@@ -152,7 +152,7 @@ void UpdatesChooser::checkRadioButtons() {
 				LOG(ERR, "In void UpdatesChooser::checkRadioButtons() --> error");
 			}
 #endif // __APPLE__
-		}
+		}*/
 	}
 	else if (updateDownloader.requestAborted()) {
 		LOG(WARN,
