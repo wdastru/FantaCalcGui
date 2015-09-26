@@ -137,7 +137,7 @@ unsigned int FileFormazioniReader::execute() {
 				// <-- sostituzione lettere accentate ed eliminazione caratteri "non-lettera"
 				//STR_MOD->toUpperCase(line);
 
-				DEBUG(line.c_str());
+				DEBUG("ricerca di " << line.c_str());
 
 				if (line.size() <= 1) // evitare le righe con un solo carattere rimasto
 					continue;
@@ -188,7 +188,7 @@ unsigned int FileFormazioniReader::execute() {
 					// cerca nella riga della Gazzetta il nome del giocatore
 					size_t found = STR_MOD->msk(tempStrGazz, DELIM,	ColCognome).find(line, 0);
 
-					DEBUG(QString::number(found).toStdString().c_str() << " " << STR_MOD->msk(tempStrGazz, DELIM,	ColCognome).c_str());
+					DEBUG(STR_MOD->msk(tempStrGazz, DELIM,	ColCognome).c_str());
 
 					if (found != string::npos) { // se vero il giocatore e' stato trovato
 						// aggiungi al vettore con tutti i giocatori trovati
@@ -616,20 +616,24 @@ std::vector<std::string> FileFormazioniReader::findLevenstheins(
 	 */
 
 	std::vector<std::string> Levenshteins;
+	Levenshteins.clear();
 
 	for (unsigned int distance = 1;; distance++) { // loop infinito: fino a trovare qualcosa
 		Levenshteins.clear();
 		for (size_t ii = 0; ii < 26; ii++) { // giocatori della squadra
 			for (size_t jj = 0; jj < this->allThePlayers[ii].size(); jj++) { // giocatori della Gazzetta
-				if (STR_MOD->msk(this->allThePlayers[ii].at(jj), DELIM,
-						ColCognome) != "TnotF!") {
+				if (STR_MOD->msk(this->allThePlayers[ii].at(jj), DELIM,	ColCognome) != "TnotF!") {
 
 					if (FANTA->LevenshteinDistance(
 							line,
 							STR_MOD->onlySurname(
-									STR_MOD->msk(
-											this->allThePlayers[ii].at(jj),
-											DELIM, ColCognome)))
+													STR_MOD->msk(
+																	this->allThePlayers[ii].at(jj),
+																	DELIM,
+																	ColCognome
+																)
+												)
+											)
 							<= distance) {
 						Levenshteins.push_back(this->allThePlayers[ii].at(jj));
 					}
@@ -642,12 +646,16 @@ std::vector<std::string> FileFormazioniReader::findLevenstheins(
 			}
 		}
 
-		DEBUG("distance : " << distance << " - line size : " << line.size() << " - trovati : " + Levenshteins.size());
+		DEBUG("distance : " << distance << " - line size : " << line.size() << " - trovati : " << Levenshteins.size());
 
 		if (Levenshteins.size() <= 1) {
 			continue;
-		} else
+		} else {
+			for (unsigned int i=0; i<Levenshteins.size(); i++) {
+				DEBUG("Levenshteins.at(" << i << ") = " << Levenshteins.at(i).c_str());
+			}
 			break;
+		}
 	}
 
 	return Levenshteins;
