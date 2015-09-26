@@ -83,8 +83,8 @@ void UpdatesChooser::checkRadioButtons() {
 		+ pResources->at(chosenUpdate)["file"]
 		+ " succeded.");
 
-		DEBUG("In void UpdatesChooser::checkRadioButtons() --> answered Yes");
-		DEBUG("In void UpdatesChooser::checkRadioButtons() --> search for .exe returned " << url.indexOf(QRegExp("\\.exe$"), 0));
+		DEBUG("answered Yes");
+		DEBUG("search for .exe returned " << url.indexOf(QRegExp("\\.exe$"), 0));
 
 		if (url.indexOf(QRegExp("\\.exe$"), 0) != -1) { // urls is an .exe file
 			QString title = "Domanda";

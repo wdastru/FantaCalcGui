@@ -31,7 +31,7 @@ IniFileManager* IniFileManager::pInstance = NULL;
 
 IniFileManager::IniFileManager() {
 
-	DEBUG("In IniFileManager::IniFileManager()");
+	DEBUG("");
 
 	QDir dir(THE_REPO->UserProfile);
 
@@ -62,7 +62,7 @@ QString IniFileManager::getWorkDir() {
 void IniFileManager::writeIniFile() {
 	QFile * iniFile = new QFile(this->iniFileName);
 	if (iniFile->exists()) {
-		DEBUG("In IniFileManager::writeIniFile() --> " << this->iniFileName.toStdString().c_str() << " exists.");
+		DEBUG(this->iniFileName.toStdString().c_str() << " exists.");
 
 		iniFile->open(QIODevice::WriteOnly);
 
@@ -92,7 +92,7 @@ void IniFileManager::writeIniFile() {
 
 		iniFile->close();
 	} else {
-		DEBUG("In IniFileManager::writeIniFile() --> " << this->iniFileName.toStdString().c_str() << " does not exists.");
+		DEBUG(this->iniFileName.toStdString().c_str() << " does not exists.");
 		LOG(DBG,
 		"In IniFileManager::writeIniFile() --> " + this->iniFileName
 		+ " does not exists.");

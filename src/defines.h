@@ -67,7 +67,7 @@
 
 #ifdef DO_DEBUG
 #define __FILENAME__ std::string(__FILE__).substr(32,std::string::npos).c_str()
-#define DEBUG(x) do { std::cerr << "(" << __FILENAME__ << ":" << __func__ << ":" << __LINE__ << ") " << x << std::endl; } while (0)
+#define DEBUG(x) do { std::cout << "(" << __FILENAME__ << ":" << __func__ << ":" << __LINE__ << ") " << x << std::endl; } while (0)
 #else
 #define DEBUG(x)
 #endif

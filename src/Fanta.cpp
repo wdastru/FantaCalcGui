@@ -39,7 +39,7 @@ Fanta::~Fanta() {
 }
 void Fanta::initialize() {
 
-	DEBUG("In Fanta::initialize().");
+	DEBUG("");
 
 	for (size_t k = 0; k < 2; k++) {
 		for (size_t j = 0; j < 4; j++) {
@@ -135,7 +135,7 @@ void Fanta::setTeamName(const std::string str, unsigned int k) {
 		LOG(
 				WARN,
 				"Tentativo di aggiungere piu' di due nomi di squadra in setTeamName(const std::string str, unsigned int k)");
-		DEBUG("In Fanta::setTeamName(const std::string str, unsigned int k) --> Tried to add more than 2 team names!");
+		DEBUG("Tried to add more than 2 team names!");
 		exit(1);
 	}
 }
@@ -171,30 +171,30 @@ void Fanta::setAtHome(unsigned int k) {
 }
 unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 	try {
-		DEBUG("In Fanta::addPlayer(...) --> str : " << str.c_str());
+		DEBUG("str : " << str.c_str());
 
 		Fanta::player tmpPlayer;
 
-		DEBUG("In Fanta::addPlayer(...). ColCognome            : " << STR_MOD->msk(str, DELIM, ColCognome).c_str());
-//		DEBUG("In Fanta::addPlayer(...). ColNome_Sost          : " << STR_MOD->msk(str, DELIM, ColCognome_Sost).c_str());
-		DEBUG("In Fanta::addPlayer(...). ColSquadra            : " << STR_MOD->msk(str, DELIM, ColSquadra).c_str());
-//		DEBUG("In Fanta::addPlayer(...). ColSquadra_Sost       : " << STR_MOD->msk(str, DELIM, ColSquadra_Sost).c_str());
-		DEBUG("In Fanta::addPlayer(...). ColRuolo              : " << STR_MOD->msk(str, DELIM, ColRuolo).c_str());
-		DEBUG("In Fanta::addPlayer(...). ColRuolo2             : " << STR_MOD->msk(str, DELIM, ColRuolo2).c_str());
-//		DEBUG("In Fanta::addPlayer(...). ColFantaVoto          : " << STR_MOD->msk(str, DELIM, ColFantaVoto).c_str());
-		DEBUG("In Fanta::addPlayer(...). ColFantaVotoGazzetta  : " << STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta).c_str());
-		DEBUG("In Fanta::addPlayer(...). ColVotoGazzetta       : " << STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str());
-		DEBUG("In Fanta::addPlayer(...). ColGoalFatti          : " << STR_MOD->msk(str, DELIM, ColGoalFatti).c_str());
-		DEBUG("In Fanta::addPlayer(...). ColGoalSubiti         : " << STR_MOD->msk(str, DELIM, ColGoalSubiti).c_str());
-		DEBUG("In Fanta::addPlayer(...). ColAutoreti           : " << STR_MOD->msk(str, DELIM, ColAutoreti).c_str());
-//		DEBUG("In Fanta::addPlayer(...). ColRigoreParato       : " << STR_MOD->msk(str, DELIM, ColRigoreParato).c_str());
-//		DEBUG("In Fanta::addPlayer(...). ColRigoreSbagliato    : " << STR_MOD->msk(str, DELIM, ColRigoreSbagliato).c_str());
-		DEBUG("In Fanta::addPlayer(...). ColGoalDecVitt        : " << STR_MOD->msk(str, DELIM, ColGoalDecVitt).c_str());
-		DEBUG("In Fanta::addPlayer(...). ColGoalDecPar         : " << STR_MOD->msk(str, DELIM, ColGoalDecPar).c_str());
-		DEBUG("In Fanta::addPlayer(...). ColAssist             : " << STR_MOD->msk(str, DELIM, ColAssist).c_str());
-		DEBUG("In Fanta::addPlayer(...). ColAmm                : " << STR_MOD->msk(str, DELIM, ColAmm).c_str());
-		DEBUG("In Fanta::addPlayer(...). ColEsp                : " << STR_MOD->msk(str, DELIM, ColEsp).c_str());
-//		DEBUG("In Fanta::addPlayer(...). ColdaSostituire       : " << STR_MOD->msk(str, DELIM, ColdaSostituire).c_str());
+		DEBUG("ColCognome            : " << STR_MOD->msk(str, DELIM, ColCognome).c_str());
+//		DEBUG("ColNome_Sost          : " << STR_MOD->msk(str, DELIM, ColCognome_Sost).c_str());
+		DEBUG("ColSquadra            : " << STR_MOD->msk(str, DELIM, ColSquadra).c_str());
+//		DEBUG("ColSquadra_Sost       : " << STR_MOD->msk(str, DELIM, ColSquadra_Sost).c_str());
+		DEBUG("ColRuolo              : " << STR_MOD->msk(str, DELIM, ColRuolo).c_str());
+		DEBUG("ColRuolo2             : " << STR_MOD->msk(str, DELIM, ColRuolo2).c_str());
+//		DEBUG("ColFantaVoto          : " << STR_MOD->msk(str, DELIM, ColFantaVoto).c_str());
+		DEBUG("ColFantaVotoGazzetta  : " << STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta).c_str());
+		DEBUG("ColVotoGazzetta       : " << STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str());
+		DEBUG("ColGoalFatti          : " << STR_MOD->msk(str, DELIM, ColGoalFatti).c_str());
+		DEBUG("ColGoalSubiti         : " << STR_MOD->msk(str, DELIM, ColGoalSubiti).c_str());
+		DEBUG("ColAutoreti           : " << STR_MOD->msk(str, DELIM, ColAutoreti).c_str());
+//		DEBUG("ColRigoreParato       : " << STR_MOD->msk(str, DELIM, ColRigoreParato).c_str());
+//		DEBUG("ColRigoreSbagliato    : " << STR_MOD->msk(str, DELIM, ColRigoreSbagliato).c_str());
+		DEBUG("ColGoalDecVitt        : " << STR_MOD->msk(str, DELIM, ColGoalDecVitt).c_str());
+		DEBUG("ColGoalDecPar         : " << STR_MOD->msk(str, DELIM, ColGoalDecPar).c_str());
+		DEBUG("ColAssist             : " << STR_MOD->msk(str, DELIM, ColAssist).c_str());
+		DEBUG("ColAmm                : " << STR_MOD->msk(str, DELIM, ColAmm).c_str());
+		DEBUG("ColEsp                : " << STR_MOD->msk(str, DELIM, ColEsp).c_str());
+//		DEBUG("ColdaSostituire       : " << STR_MOD->msk(str, DELIM, ColdaSostituire).c_str());
 
 		// nome
 		tmpPlayer.Cognome = STR_MOD->msk(str, DELIM, ColCognome);
@@ -238,8 +238,8 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 		}
 
 		DEBUG(str.c_str());
-		DEBUG("#" << STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str() << "#");
-		DEBUG("#" << STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta).c_str() << "#");
+		DEBUG("_" << STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str() << "_");
+		DEBUG("_" << STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta).c_str() << "_");
 
 		// fantavoto
 		if (STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta) == "-")
@@ -260,8 +260,8 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 					STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str());
 		}
 
-		DEBUG("VotoGazzetta = #" << tmpPlayer.VotoGazzetta << "#");
-		DEBUG("FantaVotoGazzetta = #" << tmpPlayer.FantaVotoGazzetta << "#");
+		DEBUG("VotoGazzetta = _" << tmpPlayer.VotoGazzetta << "_");
+		DEBUG("FantaVotoGazzetta = _" << tmpPlayer.FantaVotoGazzetta << "_");
 
 		// --> goal decisivi
 		tmpPlayer.GoalDecVitt = atoi(
@@ -274,21 +274,21 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 
 		if (tmpPlayer.GoalDecVitt != 0) {
 			if (tmpPlayer.FantaVotoGazzetta == 0) {
-				DEBUG("In Fanta::addPlayer( ... ) --> PLAYER_GDV_NOT_PLAYED");
+				DEBUG("PLAYER_GDV_NOT_PLAYED");
 				Fanta::Team[k].push_back(this->fakePlayer);
 				return PLAYER_GDV_NOT_PLAYED;
 			} else if (tmpPlayer.GoalFatti == 0) {
-				DEBUG("In Fanta::addPlayer( ... ) --> PLAYER_GDV_NO_GOAL");
+				DEBUG("PLAYER_GDV_NO_GOAL");
 				Fanta::Team[k].push_back(this->fakePlayer);
 				return PLAYER_GDV_NO_GOAL;
 			}
 		} else if (tmpPlayer.GoalDecPar != 0) {
 			if (tmpPlayer.FantaVotoGazzetta == 0) {
-				DEBUG("In Fanta::addPlayer( ... ) --> PLAYER_GDP_NOT_PLAYED");
+				DEBUG("PLAYER_GDP_NOT_PLAYED");
 				Fanta::Team[k].push_back(this->fakePlayer);
 				return PLAYER_GDP_NOT_PLAYED;
 			} else if (tmpPlayer.GoalFatti == 0) {
-				DEBUG("In Fanta::addPlayer( ... ) --> PLAYER_GDP_NO_GOAL");
+				DEBUG("PLAYER_GDP_NO_GOAL");
 				Fanta::Team[k].push_back(this->fakePlayer);
 				return PLAYER_GDP_NO_GOAL;
 			}
@@ -361,90 +361,90 @@ unsigned int Fanta::LevenshteinDistance(const std::string& s1,
 }
 void Fanta::execute() {
 
-	DEBUG("In void Fanta::execute().");
+	DEBUG("");
 
 	try {
 		this->checkGiocatoSenzaVoto();
 	} catch (...) {
 		LOG(ERR, "Exception caught in checkGiocatoSenzaVoto().");
-		DEBUG("In void Fanta::execute() --> exception caught in checkGiocatoSenzaVoto().");
+		DEBUG("exception caught in checkGiocatoSenzaVoto().");
 	}
 
 	try {
 		this->checkNonHaGiocato();
 	} catch (...) {
 		LOG(ERR, "Exception caught in checkNonHaGiocato().");
-		DEBUG("In void Fanta::execute() --> exception caught in checkNonHaGiocato().");
+		DEBUG("exception caught in checkNonHaGiocato().");
 	}
 
 	try {
 		this->orderByRuolo();
 	} catch (...) {
 		LOG(ERR, "In void Fanta::execute() --> exception caught in orderByRuolo().");
-		DEBUG("In void Fanta::execute() --> exception caught in checkNonHaGiocato().");
+		DEBUG("exception caught in checkNonHaGiocato().");
 	}
 
 	try {
 		this->fillWithNonHaGiocato();
 	} catch (...) {
 		LOG(ERR, "Exception caught in fillWithNonHaGiocato().");
-		DEBUG("In void Fanta::execute() --> exception caught in checkNonHaGiocato().");
+		DEBUG("exception caught in checkNonHaGiocato().");
 	}
 
 	try {
 		this->substitutions();
 	} catch (...) {
 		LOG(ERR, "Exception caught in substitutions().");
-		DEBUG("In void Fanta::execute() --> exception caught in checkNonHaGiocato().");
+		DEBUG("exception caught in checkNonHaGiocato().");
 	}
 
 	try {
 		this->calculateFantaVoto();
 	} catch (...) {
 		LOG(ERR, "Exception caught in calculateFantaVoto().");
-		DEBUG("In void Fanta::execute() --> exception caught in checkNonHaGiocato().");
+		DEBUG("exception caught in checkNonHaGiocato().");
 	}
 
 	try {
 		this->calculateDefenseMean();
 	} catch (...) {
 		LOG(ERR, "Exception caught in calculateDefenseMean().");
-		DEBUG("In void Fanta::execute() --> exception caught in checkNonHaGiocato().");
+		DEBUG("exception caught in checkNonHaGiocato().");
 	}
 
 	try {
 		this->calculateDefenseModifier();
 	} catch (...) {
 		LOG(ERR, "Exception caught in calculateDefenseModifier().");
-		DEBUG("In void Fanta::execute() --> exception caught in checkNonHaGiocato().");
+		DEBUG("exception caught in checkNonHaGiocato().");
 	}
 
 	try {
 		this->calculateSfide();
 	} catch (...) {
 		LOG(ERR, "Exception caught in calculateSfide().");
-		DEBUG("In void Fanta::execute() --> exception caught in checkNonHaGiocato().");
+		DEBUG("exception caught in checkNonHaGiocato().");
 	}
 
 	try {
 		this->calculateTotal();
 	} catch (...) {
 		LOG(ERR, "Exception caught in calculateTotal().");
-		DEBUG("In void Fanta::execute() --> exception caught in checkNonHaGiocato().");
+		DEBUG("exception caught in checkNonHaGiocato().");
 	}
 
 	try {
 		this->calculateGoals();
 	} catch (...) {
 		LOG(ERR, "Exception caught in calculateGoals().");
-		DEBUG("In void Fanta::execute() --> exception caught in checkNonHaGiocato().");
+		DEBUG("exception caught in checkNonHaGiocato().");
 	}
 
 	try {
 		this->calculateScorers();
 	} catch (...) {
 		LOG(ERR, "Exception caught in calculateScorers().");
-		DEBUG("In void Fanta::execute() --> exception caught in checkNonHaGiocato().");
+		DEBUG("exception caught in checkNonHaGiocato().");
 	}
 
 	return;
@@ -454,19 +454,18 @@ void Fanta::checkGiocatoSenzaVoto() {
 	LOG(DBG, "<br/> ============================");
 	LOG(DBG,      " === Giocatori senza voto ===");
 	LOG(DBG,      " ============================<br/><br/>");
-		DEBUG("In Fanta::checkGiocatoSenzaVoto().");
+		DEBUG("");
 
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
 		for (size_t j = 0; j < this->Team[k].size(); j++) { // loop sui giocatori
-			DEBUG("In Fanta::checkGiocatoSenzaVoto() --> " << this->Team[k].at(j).Cognome.c_str());
+			DEBUG( this->Team[k].at(j).Cognome.c_str());
 
 			if (this->Team[k].at(j).VotoGazzetta == -1) { // se S.V.
 
 				if (this->Team[k].at(j).Ruolo == 0) { // se e' un portiere
 
-					DEBUG("<br>Giocato senza voto --> " << this->Team[k].at(j).Cognome.c_str());
-					DEBUG("    portiere.");
+					DEBUG("Giocato senza voto --> " << this->Team[k].at(j).Cognome.c_str() << " - portiere.");
 
 					this->Team[k].at(j).VotoGazzetta = 6.0; // il portiere non si sostituisce se ha giocato (ma non ha preso voto),
 					this->Team[k].at(j).FantaVotoGazzetta
@@ -491,8 +490,7 @@ void Fanta::checkGiocatoSenzaVoto() {
 
 				} else if (this->Team[k].at(j).Ruolo > 0) { //se non e' un portiere
 
-					DEBUG("<br>Giocato senza voto --> " << this->Team[k].at(j).Cognome.c_str());
-					DEBUG("    non portiere.");
+					DEBUG("Giocato senza voto --> " << this->Team[k].at(j).Cognome.c_str() << " - non portiere.");
 
 					QString answer;
 
@@ -503,7 +501,7 @@ void Fanta::checkGiocatoSenzaVoto() {
 										QString::fromStdString(
 												this->Team[k].at(j).Cognome));
 
-						DEBUG("In Fanta::checkGiocatoSenzaVoto() --> piu' di 25 minuti ? " << this->Team[k].at(j).Cognome.c_str() << " " << answer.toStdString().c_str());
+						DEBUG("piu' di 25 minuti ? " << this->Team[k].at(j).Cognome.c_str() << " " << answer.toStdString().c_str());
 
 					} catch (...) {
 						LOG(FATAL,
@@ -540,7 +538,7 @@ void Fanta::checkGiocatoSenzaVoto() {
 
 					} else if (answer == "No") { // giocato meno di 25' --> sostituire
 
-						DEBUG("In Fanta::checkGiocatoSenzaVoto() --> da sostituire.");
+						DEBUG("da sostituire.");
 
 						this->Team[k].at(j).daSostituire = 1; // viene marcato per l'eliminazione
 
@@ -559,7 +557,7 @@ void Fanta::checkGiocatoSenzaVoto() {
 					}
 				} else { // da sostituire
 
-					DEBUG("In Fanta::checkGiocatoSenzaVoto() --> da sostituire.");
+					DEBUG("da sostituire.");
 
 					this->Team[k].at(j).daSostituire = 1; // viene marcato per l'eliminazione
 
@@ -578,7 +576,7 @@ void Fanta::checkGiocatoSenzaVoto() {
 }
 QString Fanta::questionMessage(QString playerName) {
 
-	DEBUG("In Fanta::questionMessage().");
+	DEBUG("");
 
 	QString title = "Ha giocato almeno 25' ?";
 
@@ -594,10 +592,10 @@ QString Fanta::questionMessage(QString playerName) {
 			QMessageBox::Yes | QMessageBox::No);
 	if (reply == QMessageBox::Yes) {
 		answer = "Yes";
-		DEBUG("In Fanta::questionMessage() --> returning " << answer.toStdString().c_str() << ".");
+		DEBUG("returning " << answer.toStdString().c_str() << ".");
 	} else if (reply == QMessageBox::No) {
 		answer = "No";
-		DEBUG("In Fanta::questionMessage() --> returning " << answer.toStdString().c_str() << ".");
+		DEBUG("returning " << answer.toStdString().c_str() << ".");
 	} else {
 		answer = "Error";
 		LOG(ERR, "In Fanta::questionMessage() --> returning " + answer + ".");
@@ -610,7 +608,7 @@ void Fanta::checkNonHaGiocato() {
 	LOG(DBG, "<br/> =======================================");
 	LOG(DBG,      " === Giocatori che non hanno giocato ===");
 	LOG(DBG,      " =======================================");
-	DEBUG("In Fanta::checkNonHaGiocato().");
+	DEBUG("");
 
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
@@ -659,7 +657,7 @@ void Fanta::checkNonHaGiocato() {
 }
 void Fanta::orderByRuolo() {
 
-	DEBUG("In Fanta::orderByRuolo().");
+	DEBUG("");
 
 	try {
 		for (unsigned int k = 0; k < 2; k++)// loop sulle squadre
@@ -673,7 +671,7 @@ void Fanta::orderByRuolo() {
 						if (this->Team[k].at(j).Ruolo == i) {
 							Fanta::teamOrderedByRuolo[k][i].push_back(
 									this->Team[k].at(j));
-							DEBUG("In Fanta::orderByRuolo() --> " << i << " " << this->Team[k].at(j).Cognome.c_str());
+							DEBUG(i << " " << this->Team[k].at(j).Cognome.c_str());
 						}
 					}
 				}
@@ -689,7 +687,7 @@ void Fanta::orderByRuolo() {
 }
 void Fanta::fillWithNonHaGiocato() {
 
-	DEBUG("In Fanta::fillWithNonHaGiocato().");
+	DEBUG("");
 
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
@@ -698,7 +696,7 @@ void Fanta::fillWithNonHaGiocato() {
 			for (size_t j = Fanta::teamOrderedByRuolo[k][i].size(); j
 					< modulo[k][i] + 2; j++) {
 				Fanta::teamOrderedByRuolo[k][i].push_back(Fanta::NonHaGiocato);
-				DEBUG("In Fanta::fillWithNonHaGiocato() --> Squadra " << this->getTeamName(k).c_str() << " : aggiunto un Fanta::NonHaGiocato");
+				DEBUG("Squadra " << this->getTeamName(k).c_str() << " : aggiunto un Fanta::NonHaGiocato");
 				//LOG(DBG, \
 						QString::fromStdString(this->getTeamName(k)) \
 								+ " : aggiunto un Fanta::NonHaGiocato");
@@ -711,7 +709,7 @@ void Fanta::substitutions() {
 	LOG(DBG, "<br/> ====================");
 	LOG(DBG,      " === Sostituzioni ===");
 	LOG(DBG,      " ====================");
-	DEBUG("In Fanta::substitutions().");
+	DEBUG("");
 
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
@@ -830,8 +828,7 @@ void Fanta::substitutions() {
 	//	for (size_t i = 0; i < 4; i++) // ruolo
 	//	{
 	//		for (size_t j = 0; j < Fanta::teamOrderedByRuolo[k][i].size(); j++) {
-	//			DEBUG("In Fanta::substitutions() --> Squadra " << \
-	//					this->getTeamName(k).c_str() << " : " << \
+	//			DEBUG(this->getTeamName(k).c_str() << " : " << \
 	//					this->teamOrderedByRuolo[k][i].at(j).Ruolo << " " << \
 	//					this->teamOrderedByRuolo[k][i].at(j).Cognome.c_str() + ".");
 	//		}
@@ -843,7 +840,7 @@ void Fanta::calculateFantaVoto() {
 	LOG(DBG, "<br/> =================");
 	LOG(DBG,      " === Fantavoti ===");
 	LOG(DBG,      " =================");
-	DEBUG("In Fanta::calculateFantaVoto().");
+	DEBUG("");
 
 	int longerName = 0;
 
@@ -897,7 +894,7 @@ void Fanta::calculateDefenseMean() {
 	LOG(DBG, "<br/> ====================");
 	LOG(DBG,      " === Media difesa ===");
 	LOG(DBG,      " ====================");
-	DEBUG("In Fanta::calculateDefenseMean().");
+	DEBUG("");
 
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
@@ -933,7 +930,7 @@ void Fanta::calculateDefenseModifier() {
 	LOG(DBG, "<br/> =================================");
 	LOG(DBG,      " === Modificatore della difesa ===");
 	LOG(DBG,      " =================================");
-	DEBUG("In Fanta::calculateDefenseModifier().");
+	DEBUG("");
 
 	for (size_t i = 0; i < 9; i++) {
 		if (Fanta::defenseMean[0] >= Fanta::modifierVoti[i]
@@ -960,7 +957,7 @@ void Fanta::calculateSfide() {
 	LOG(DBG, "<br/> =====================");
 	LOG(DBG,      " === Calcolo sfide ===");
 	LOG(DBG,      " =====================<br>");
-	DEBUG("In Fanta::calculateSfide().");
+	DEBUG("");
 
 	QString winner, loser, team;
 	int longerName = max(this->getTeamName(0).size(), this->getTeamName(1).size());
@@ -1126,7 +1123,7 @@ void Fanta::calculateTotal() {
 	LOG(DBG, "<br/> =========================");
 	LOG(DBG,      " === Calcolo punteggio ===");
 	LOG(DBG,      " =========================");
-	DEBUG("In Fanta::calculateTotal().");
+	DEBUG("");
 
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
@@ -1197,7 +1194,7 @@ void Fanta::calculateGoals() {
 	LOG(DBG, "<br/> =====================");
 	LOG(DBG,      " === Calcolo goals ===");
 	LOG(DBG,      " =====================");
-	DEBUG("In Fanta::calculateGoals().");
+	DEBUG("");
 
 	for (size_t k = 0; k < 2; k++) {
 
@@ -1268,7 +1265,7 @@ void Fanta::calculateScorers() {
 	LOG(DBG, "<br/> =================");
 	LOG(DBG,      " === Marcatori ===");
 	LOG(DBG,      " =================");
-	DEBUG("In Fanta::calculateScorers().");
+	DEBUG("");
 
 	vector<Fanta::player> tmpVector[2];
 

@@ -128,7 +128,7 @@ MatchChooserCoppa::MatchChooserCoppa(QWidget *parent) :
 
 	setData();
 
-	DEBUG("Out of MatchChooserCoppa::MatchChooserCoppa(QWidget *parent)");
+	DEBUG("Out");
 }
 
 MatchChooserCoppa::~MatchChooserCoppa() {
@@ -264,12 +264,12 @@ void MatchChooserCoppa::setData() {
 		 * * * * * * */
 	}
 
-	DEBUG("Out of void MatchChooserCoppa::setData().");
+	DEBUG("Out");
 }
 
 void MatchChooserCoppa::quit() {
 
-	DEBUG("In void MatchChooserCoppa::quit().");
+	DEBUG("");
 
 	QString ids[20];
 	for (int i = 0; i < 12; ++i) {
@@ -294,7 +294,7 @@ void MatchChooserCoppa::quit() {
 		}
 	}
 
-	DEBUG("In void MatchChooserCoppa::quit(). chosenMatch = " << chosenMatch.toStdString().c_str());
+	DEBUG("chosenMatch = " << chosenMatch.toStdString().c_str());
 
 	if (!chosenMatch.isEmpty()) {
 
@@ -305,7 +305,7 @@ void MatchChooserCoppa::quit() {
 
 		match = matches.at(chosenMatch.toInt());
 
-		DEBUG("In void MatchChooserCoppa::quit(). match = " << match.toStdString().c_str());
+		DEBUG("match = " << match.toStdString().c_str());
 
 		QString title = "ATTENZIONE!!!";
 
@@ -346,10 +346,10 @@ void MatchChooserCoppa::quit() {
 		reply = QMessageBox::question(this, title, message,
 				QMessageBox::Yes | QMessageBox::No);
 
-		DEBUG("In void MatchChooserCoppa::quit(). 2");
+		DEBUG("2");
 
 		if (reply == QMessageBox::Yes) {
-			DEBUG("In void MatchChooserCoppa::quit() --> yes");
+			DEBUG("yes");
 
 			QFile *file = new QFile(THE_REPO->getDownloadPath() +"datiCoppa.txt");
 			file->open(QIODevice::WriteOnly);
@@ -381,7 +381,7 @@ void MatchChooserCoppa::quit() {
 			httpWindow->upload(THE_REPO->getDownloadPath() + "datiCoppa.txt");
 
 		} else if (reply == QMessageBox::No) {
-				DEBUG("In void MatchChooserCoppa::quit() --> No");
+				DEBUG("No");
 
 				/*
 				 * TODO
@@ -398,11 +398,11 @@ void MatchChooserCoppa::quit() {
 		this->close();
 
 	} else {
-		DEBUG("Out of void MatchChooserCoppa::quit(). 1");
+		DEBUG("Out");
 		return;
 	}
 
-	DEBUG("Out of void MatchChooserCoppa::quit(). 2");
+	DEBUG("Out");
 }
 
 QString MatchChooserCoppa::getChosenMatch() {
@@ -411,7 +411,7 @@ QString MatchChooserCoppa::getChosenMatch() {
 
 void MatchChooserCoppa::deleteResult() {
 
-	DEBUG("In void MatchChooserCoppa::deleteResult().");
+	DEBUG("");
 
 	QString ids[20];
 	for (int i = 0; i < 12; ++i) {
@@ -436,7 +436,7 @@ void MatchChooserCoppa::deleteResult() {
 		}
 	}
 
-	DEBUG("In void MatchChooserCoppa::deleteResult(). chosenMatch = " << chosenMatch.toStdString().c_str());
+	DEBUG("chosenMatch = " << chosenMatch.toStdString().c_str());
 
 	if (!chosenMatch.isEmpty()) {
 
@@ -447,7 +447,7 @@ void MatchChooserCoppa::deleteResult() {
 
 		match = matches.at(chosenMatch.toInt());
 
-		DEBUG("In void MatchChooserCoppa::deleteResult(). match = " << match.toStdString().c_str());
+		DEBUG("match = " << match.toStdString().c_str());
 
 		QString title = "ATTENZIONE!!!";
 
@@ -476,10 +476,10 @@ void MatchChooserCoppa::deleteResult() {
 		reply = QMessageBox::question(this, title, message,
 				QMessageBox::Yes | QMessageBox::No);
 
-		DEBUG("In void MatchChooserCoppa::quit(). 2");
+		DEBUG("2");
 
 		if (reply == QMessageBox::Yes) {
-			DEBUG("In void MatchChooserCoppa::quit() --> yes");
+			DEBUG("yes");
 
 			QFile *file = new QFile(THE_REPO->getDownloadPath() +"datiCoppa.txt");
 			file->open(QIODevice::WriteOnly);
@@ -501,7 +501,7 @@ void MatchChooserCoppa::deleteResult() {
 			httpWindow->upload(THE_REPO->getDownloadPath() + "datiCoppa.txt");
 
 		} else if (reply == QMessageBox::No) {
-				DEBUG("In void MatchChooserCoppa::quit() --> No");
+				DEBUG("No");
 
 				/*
 				 * TODO
@@ -518,10 +518,10 @@ void MatchChooserCoppa::deleteResult() {
 		this->close();
 
 	} else {
-		DEBUG("Out of void MatchChooserCoppa::quit(). 1");
+		DEBUG("Out");
 		return;
 	}
 
-	DEBUG("Out of void MatchChooserCoppa::quit(). 2");
+	DEBUG("Out");
 }
 

@@ -257,7 +257,7 @@ QString ChooseFiles::getFileFormazioni(void) {
 }
 
 void ChooseFiles::doDownload() {
-	DEBUG("In ChooseFiles::doDownload() --> Network will be accessed.");
+	DEBUG("Network will be accessed.");
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	urls->push_back(
@@ -283,12 +283,12 @@ void ChooseFiles::doDownload() {
 	this->filesDownloader->exec();
 
 	if (this->filesDownloader->requestSucceded()) {
-		DEBUG("In ChooseFiles::doDownload() --> request succeded.");
+		DEBUG("request succeded.");
 		this->downloadSuccess = true;
 	} else {
 		if (!this->filesDownloader->wasCancelClicked()) {
 			LOG(ERR, "The download of files failed.");
-			DEBUG("In ChooseFiles::doDownload() --> request not succeded.");
+			DEBUG("request not succeded.");
 		}
 
 		this->downloadSuccess = false;
@@ -335,11 +335,11 @@ QString ChooseFiles::getAwayFile() {
 }
 
 bool ChooseFiles::createFileSquadreFromWebFiles() {
-	DEBUG("In ChooseFiles::createFileSquadreFromWebFiles().");
+	DEBUG("");
 
 	if (this->downloadSuccess) {
 
-		DEBUG("In ChooseFiles::createFileSquadreFromWebFiles() --> download was successful.");
+		DEBUG("download was successful.");
 
 		QFile fHome(THE_REPO->getDownloadPath() + "/" + this->getHomeFile());
 		QFile fAway(THE_REPO->getDownloadPath() + "/" + this->getAwayFile());
@@ -349,10 +349,10 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 
 		if (!fHome.isReadable()) {
 			LOG(FATAL, "Il file : " + fHome.fileName() + " non e' apribile.");
-			DEBUG("In void ChooseFiles::createFileSquadreFromWebFiles() --> il file : " << fHome.fileName().toStdString().c_str() << " non e' apribile.");
+			DEBUG("il file : " << fHome.fileName().toStdString().c_str() << " non e' apribile.");
 		} else if (!fAway.isReadable()) {
 			LOG(FATAL, "Il file : " + fAway.fileName() + " non e' apribile.");
-			DEBUG("In void ChooseFiles::createFileSquadreFromWebFiles() --> il file : " << fAway.fileName().toStdString().c_str() << " non e' apribile.");
+			DEBUG("il file : " << fAway.fileName().toStdString().c_str() << " non e' apribile.");
 		}
 
 		QFileInfo FIfHome(fHome);
@@ -372,7 +372,7 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 		fOut.open(QIODevice::WriteOnly);
 
 		if (!fOut.isWritable()) {
-			DEBUG("In : void ChooseFiles::createFileSquadreFromWebFiles() --> il file " << fileOut.toStdString().c_str() << " non e' apribile in scrittura.");
+			DEBUG("il file " << fileOut.toStdString().c_str() << " non e' apribile in scrittura.");
 			LOG(FATAL, "Il file " + fileOut + " non e' apribile in scrittura.");
 			this->close();
 			return EXIT_FAILURE;
@@ -590,11 +590,11 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 		fHome.close();
 		fAway.close();
 		fOut.close();
-		DEBUG("Out of ChooseFiles::createFileSquadreFromWebFiles().");
+		DEBUG("Out");
 
 		return EXIT_SUCCESS;
 	} else {
-		DEBUG("In ChooseFiles::createFileSquadreFromWebFiles() --> download was not successful.");
+		DEBUG("download was not successful.");
 		LOG(ERR, "Download was not successful.");
 		return EXIT_FAILURE;
 	}

@@ -99,14 +99,15 @@ MatchChooserCamp::MatchChooserCamp(QWidget *parent) :
 			QString a = list.at(0).at(1);
 			QString b = list.at(0).at(2);
 			QString c = list.at(0).at(3);
+
 			DEBUG(a.toStdString().c_str() << b.toStdString().c_str() << c.toStdString().c_str());
+			DEBUG(str.toStdString().c_str() << " " << str.indexOf(QRegExp("a[0-3][0-6][0-3]\\/\\/\\/\\/\\/")));
 
-			DEBUG(str.toStdString().c_str() << " " << str.indexOf(QRegExp("a[0-3][0-6][0-3]\/\/\/\/\/")));
-
-			if ((str.indexOf(QRegExp("a[0-3][0-6][0-3]\\/\\/\\/\\/\\/")) == -1)
-					&& (str.indexOf(
-							QRegExp("a[0-3][0-6][0-3]\\/-\\/-\\/-\\/-\\/"))
-							== -1)) {
+			if (
+					(str.indexOf(QRegExp("a[0-3][0-6][0-3]\\/\\/\\/\\/\\/")) == -1)
+					&&
+					(str.indexOf(QRegExp("a[0-3][0-6][0-3]\\/-\\/-\\/-\\/-\\/"))	== -1)
+				) {
 				style = "background:#FF0000"; // risultato gia' presente
 			} else {
 				style = "background:#00FF00"; // risultato mancante
@@ -130,7 +131,7 @@ MatchChooserCamp::MatchChooserCamp(QWidget *parent) :
 
 	setData();
 
-	DEBUG("Out of MatchChooserCamp::MatchChooserCamp(QWidget *parent)");
+	DEBUG("Out");
 }
 
 MatchChooserCamp::~MatchChooserCamp() {
@@ -250,12 +251,12 @@ void MatchChooserCamp::setData() {
 		 * * * * * * */
 	}
 
-	DEBUG("Out of void MatchChooserCamp::setData().");
+	DEBUG("Out");
 }
 
 void MatchChooserCamp::quit() {
 
-	DEBUG("In void MatchChooserCamp::quit().");
+	DEBUG("");
 
 	chosenMatch = "";
 	QString home;
@@ -277,7 +278,7 @@ void MatchChooserCamp::quit() {
 		}
 	}
 
-	DEBUG("In void MatchChooserCamp::quit(). chosenMatch = " << chosenMatch.toStdString().c_str());
+	DEBUG("chosenMatch = " << chosenMatch.toStdString().c_str());
 
 	if (!chosenMatch.isEmpty()) {
 
@@ -293,7 +294,7 @@ void MatchChooserCamp::quit() {
 			}
 		}
 
-		DEBUG("In void MatchChooserCamp::quit(). match = " << match.toStdString().c_str());
+		DEBUG("match = " << match.toStdString().c_str());
 
 		QString title = "ATTENZIONE!!!";
 		QStringList items = match.split(QRegExp("\\/"),
@@ -342,10 +343,10 @@ void MatchChooserCamp::quit() {
 		reply = QMessageBox::question(this, title, message,
 				QMessageBox::Yes | QMessageBox::No);
 
-		DEBUG("In void MatchChooserCamp::quit(). 2");
+		DEBUG("2");
 
 		if (reply == QMessageBox::Yes) {
-			DEBUG("In void MatchChooserCamp::quit() --> yes");
+			DEBUG("yes");
 
 			QFile *file = new QFile(THE_REPO->getDownloadPath() + "datiCampionato.txt");
 			file->open(QIODevice::WriteOnly);
@@ -360,7 +361,7 @@ void MatchChooserCamp::quit() {
 					} else if (chosenMatch.at(3) == '0' || chosenMatch.at(3) == '2') {
 						line += chosenMatch + "/" + goalHome + "/" + goalAway + "/" + puntiHome + "/"	+ puntiAway	+ "/";
 					} else {
-						DEBUG("In void MatchChooserCamp::quit(). Errore! Risultato non salvato.");
+						DEBUG("Errore! Risultato non salvato.");
 						LOG(ERR, "Errore, risultato della partita non pubblicato.");
 						return;
 					}
@@ -381,7 +382,7 @@ void MatchChooserCamp::quit() {
 			}
 			file->close();
 
-			DEBUG("In void MatchChooserCamp::quit(). 3");
+			DEBUG("3");
 
 			QUrl url(THE_REPO->getUrl());
 			HttpWindow * httpWindow = new HttpWindow(THE_LOGGER, url,
@@ -390,7 +391,7 @@ void MatchChooserCamp::quit() {
 					THE_REPO->getDownloadPath() + "datiCampionato.txt");
 
 		} else if (reply == QMessageBox::No) {
-			DEBUG("In void MatchChooserCamp::quit() --> No");
+			DEBUG("No");
 
 			/*
 			 * TODO
@@ -407,16 +408,16 @@ void MatchChooserCamp::quit() {
 		this->close();
 
 	} else {
-		DEBUG("Out of void MatchChooserCamp::quit(). 1");
+		DEBUG("Out 1");
 		return;
 	}
 
-	DEBUG("Out of void MatchChooserCamp::quit(). 2");
+	DEBUG("Out 2");
 }
 
 void MatchChooserCamp::deleteResult() {
 
-	DEBUG("In void MatchChooserCamp::deleteResult().");
+	DEBUG("");
 
 	chosenMatch = "";
 	QString home;
@@ -438,7 +439,7 @@ void MatchChooserCamp::deleteResult() {
 		}
 	}
 
-	DEBUG("In void MatchChooserCamp::quit(). chosenMatch = " << chosenMatch.toStdString().c_str());
+	DEBUG("chosenMatch = " << chosenMatch.toStdString().c_str());
 
 	if (!chosenMatch.isEmpty()) {
 
@@ -454,7 +455,7 @@ void MatchChooserCamp::deleteResult() {
 			}
 		}
 
-		DEBUG("In void MatchChooserCamp::quit(). match = " << match.toStdString().c_str());
+		DEBUG("match = " << match.toStdString().c_str());
 
 		QString title = "ATTENZIONE!!!";
 
@@ -482,10 +483,10 @@ void MatchChooserCamp::deleteResult() {
 		reply = QMessageBox::question(this, title, message,
 				QMessageBox::Yes | QMessageBox::No);
 
-		DEBUG("In void MatchChooserCamp::quit(). 2");
+		DEBUG("2");
 
 		if (reply == QMessageBox::Yes) {
-			DEBUG("In void MatchChooserCamp::quit() --> yes");
+			DEBUG("yes");
 
 			QFile *file = new QFile(THE_REPO->getDownloadPath() + "datiCampionato.txt");
 			file->open(QIODevice::WriteOnly);
@@ -503,7 +504,7 @@ void MatchChooserCamp::deleteResult() {
 
 			file->close();
 
-			DEBUG("In void MatchChooserCamp::quit(). 3");
+			DEBUG("3");
 
 			QUrl url(THE_REPO->getUrl());
 			HttpWindow * httpWindow = new HttpWindow(THE_LOGGER, url,
@@ -512,7 +513,7 @@ void MatchChooserCamp::deleteResult() {
 					THE_REPO->getDownloadPath() + "datiCampionato.txt");
 
 		} else if (reply == QMessageBox::No) {
-			DEBUG("In void MatchChooserCamp::quit() --> No");
+			DEBUG("No");
 
 			/*
 			 * TODO
@@ -529,11 +530,11 @@ void MatchChooserCamp::deleteResult() {
 		this->close();
 
 	} else {
-		DEBUG("Out of void MatchChooserCamp::deleteResult(). 1");
+		DEBUG("Out");
 		return;
 	}
 
-	DEBUG("Out of void MatchChooserCamp::deleteResult(). 2");
+	DEBUG("Out");
 }
 
 QString MatchChooserCamp::getChosenMatch() {
