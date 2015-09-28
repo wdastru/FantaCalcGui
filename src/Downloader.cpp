@@ -171,6 +171,10 @@ void Downloader::downloadFiles() {
 
 		if (this->downloadSuccesses == this->savePaths->size()) {
 			this->close();
+		} else {
+			/*
+			 * TODO
+			 */
 		}
 	}
 }
