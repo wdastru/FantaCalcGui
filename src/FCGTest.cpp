@@ -46,10 +46,13 @@
 #include "Fanta.h"
 #include "GazzettaFileReader.h"
 #include "FileFormazioniReader.h"
+#include "ChooseFiles.h"
+#include "Repository.h"
 
 class Test: public QObject {
 Q_OBJECT
 private slots:
+	void emptyTest();
 	void onlyLettersBegin();
 	void onlyLettersEnd();
 	void onlyLettersAndNumbersBegin();
@@ -60,8 +63,12 @@ private slots:
 	void leftQString();
 	void LevenshteinDistance();
 	void gazzettaFileReader_getOutput();
+	void chooseFiles_createFileSquadreFromWebFiles();
 };
 
+void Test::emptyTest() {
+	return;
+}
 void Test::onlyLettersBegin() {
 	std::string str = "123Hello";
 	STR_MOD->onlyLettersBegin(str);
@@ -144,8 +151,18 @@ void Test::gazzettaFileReader_getOutput() {
 		}
 	}
 }
+void Test::chooseFiles_createFileSquadreFromWebFiles() {
+	ChooseFiles * chooseFiles = new ChooseFiles("", "");
+//	chooseFiles->createFileSquadreFromWebFiles();
+	return;
+}
 
 
 QTEST_MAIN(Test)
-#include "test.moc"
+/*
+ * da creare con il seguente comando:
+ * c:\Qt\4.8.6\bin\moc.exe FCGTest.cpp > FCGTest.moc
+ * ogni volta che si aggiunte una test unit
+ */
+#include "FCGTest.moc"
 

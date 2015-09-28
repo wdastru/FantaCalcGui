@@ -15,6 +15,8 @@
 class ChooseFiles: public QDialog {
 Q_OBJECT
 
+friend class Test;
+
 public:
 	ChooseFiles(QString, QString, QWidget *parent = 0);
 	~ChooseFiles();
@@ -31,9 +33,6 @@ private slots:
 	void on_HomeAwayBox_toggled(bool);
 	void on_CampoNeutroBox_toggled(bool);
 	void enableOkButton();
-	//void toggle1();
-	//void toggle2();
-	//void execute();
 
 private:
 	Ui::ChooseFilesClass ui;
