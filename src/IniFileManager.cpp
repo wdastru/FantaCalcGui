@@ -31,7 +31,7 @@ IniFileManager* IniFileManager::pInstance = NULL;
 
 IniFileManager::IniFileManager() {
 
-	DEBUG("");
+	//DEBUG("");
 
 	QDir dir(THE_REPO->UserProfile);
 
@@ -62,7 +62,7 @@ QString IniFileManager::getWorkDir() {
 void IniFileManager::writeIniFile() {
 	QFile * iniFile = new QFile(this->iniFileName);
 	if (iniFile->exists()) {
-		DEBUG(this->iniFileName.toStdString().c_str() << " exists.");
+		//DEBUG(this->iniFileName.toStdString().c_str() << " exists.");
 
 		iniFile->open(QIODevice::WriteOnly);
 
@@ -92,7 +92,7 @@ void IniFileManager::writeIniFile() {
 
 		iniFile->close();
 	} else {
-		DEBUG(this->iniFileName.toStdString().c_str() << " does not exists.");
+		//DEBUG(this->iniFileName.toStdString().c_str() << " does not exists.");
 		LOG(DBG,
 		"In IniFileManager::writeIniFile() --> " + this->iniFileName
 		+ " does not exists.");
@@ -154,42 +154,42 @@ void IniFileManager::readIniFile() {
 
 			READ_NOT_EMPTY_LINE
 
-			DEBUG(QString::fromLatin1(buf).trimmed().toStdString().c_str());
+			//DEBUG(QString::fromLatin1(buf).trimmed().toStdString().c_str());
 
 			switch (map[QString::fromLatin1(buf).trimmed()]) {
 				case 1: { // [File Formazioni Path]
 					READ_NOT_EMPTY_LINE
-					DEBUG("1 : " << QString::fromLatin1(buf).trimmed().toStdString().c_str());
+					//DEBUG("1 : " << QString::fromLatin1(buf).trimmed().toStdString().c_str());
 					THE_REPO->formazioniPath = QString::fromLatin1(buf).trimmed();
 				}
 				break;
 				case 2: { // "[File Gazzetta Path]"
 					READ_NOT_EMPTY_LINE
-					DEBUG("2 : " << QString::fromLatin1(buf).trimmed().toStdString().c_str());
+					//DEBUG("2 : " << QString::fromLatin1(buf).trimmed().toStdString().c_str());
 					THE_REPO->gazzettaPath = QString::fromLatin1(buf).trimmed();
 				}
 				break;
 				case 3: { // "[File Output Path]"
 					READ_NOT_EMPTY_LINE
-					DEBUG("3 : " << QString::fromLatin1(buf).trimmed().toStdString().c_str());
+					//DEBUG("3 : " << QString::fromLatin1(buf).trimmed().toStdString().c_str());
 					THE_REPO->risultatiPath = QString::fromLatin1(buf).trimmed();
 				}
 				break;
 				case 4: { // "[Download Path]"
 					READ_NOT_EMPTY_LINE
-					DEBUG("4 : " << QString::fromLatin1(buf).trimmed().toStdString().c_str());
+					//DEBUG("4 : " << QString::fromLatin1(buf).trimmed().toStdString().c_str());
 					THE_REPO->downloadPath = QString::fromLatin1(buf).trimmed();
 				}
 				break;
 				case 5: { // "[Liste Path]"
 					READ_NOT_EMPTY_LINE
-					DEBUG("5 : " << QString::fromLatin1(buf).trimmed().toStdString().c_str());
+					//DEBUG("5 : " << QString::fromLatin1(buf).trimmed().toStdString().c_str());
 					THE_REPO->listePath = QString::fromLatin1(buf).trimmed();
 				}
 				break;
 				case 6: { // "[Url]"
 					READ_NOT_EMPTY_LINE
-					DEBUG("6 : " << QString::fromLatin1(buf).trimmed().toStdString().c_str());
+					//DEBUG("6 : " << QString::fromLatin1(buf).trimmed().toStdString().c_str());
 					if (!QString::fromLatin1(buf).trimmed().isEmpty()) {
 						THE_REPO->url = QString::fromLatin1(buf).trimmed();
 						THE_REPO->formazioniUrl = THE_REPO->getUrl() + "777/formazioni/";
@@ -199,7 +199,7 @@ void IniFileManager::readIniFile() {
 				break;
 				case 7: { // "[Debug]"
 					READ_NOT_EMPTY_LINE
-					DEBUG("7 : " << QString::fromLatin1(buf).trimmed().toStdString().c_str());
+					//DEBUG("7 : " << QString::fromLatin1(buf).trimmed().toStdString().c_str());
 					if (QString::fromLatin1(buf).trimmed() == "TRUE") {
 						THE_REPO->debugStatus = TRUE;
 					} else {

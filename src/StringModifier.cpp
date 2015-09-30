@@ -36,7 +36,7 @@ void StringModifier::onlyLettersEnd(std::string & str) {
 		str.erase(str.size() - 1, 1);
 }
 void StringModifier::onlyLettersAndNumbersBegin(std::string & str) {
-	DEBUG("str = _" << str.c_str() << "_");
+	//DEBUG("str = _" << str.c_str() << "_");
 	while ( \
 			(str.at(0) < '0' \
 			|| (str.at(0) > '9' && str.at(0) < 'A') \
@@ -44,16 +44,16 @@ void StringModifier::onlyLettersAndNumbersBegin(std::string & str) {
 			|| str.at(0) > 'z') \
 			&& str.size() >1
 			) str.erase(0, 1);
-	DEBUG("Out str = _" << str.c_str() << "_");
+	//DEBUG("Out str = _" << str.c_str() << "_");
 }
 void StringModifier::onlyLettersAndNumbersEnd(std::string & str) {
-	DEBUG("str = _" << str.c_str() << "_");
+	//DEBUG("str = _" << str.c_str() << "_");
 	while ((str.at(str.size() - 1) < '0'
 			|| (str.at(str.size() - 1) > '9' && str.at(str.size() - 1) < 'A')
 			|| (str.at(str.size() - 1) > 'Z' && str.at(str.size() - 1) < 'a')
 			|| str.at(str.size() - 1) > 'z') && str.size() > 1)
 		str.erase(str.size() - 1, 1);
-	DEBUG("Out str = _" << str.c_str() << "_");
+	//DEBUG("Out str = _" << str.c_str() << "_");
 }
 void StringModifier::removeNotAllowedChars(std::string & str) {
 

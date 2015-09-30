@@ -63,7 +63,7 @@
 #define DBG "DBG"
 #define UPDATE "UPDATE"
 #define TOFILE  "FILE"
-#define LOG2CMDLINE qDebug()
+#define LOG2CMDLINE q//DEBUG()
 
 #ifdef DO_DEBUG
 #define __FILENAME__ std::string(__FILE__).substr(32,std::string::npos).c_str()

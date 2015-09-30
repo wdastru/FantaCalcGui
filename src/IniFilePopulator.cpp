@@ -262,11 +262,11 @@ void IniFilePopulator::toggleDebugStatus() {
 	if (this->ui.trueCheckBox->isChecked()) {
 		THE_REPO->debugStatus = TRUE;
 		//THE_LOGGER->ui.plainTextEdit->setPlainText(THE_LOGGER->fileContent.replace("&nbsp;", " "));
-		DEBUG("void IniFilePopulator::toggleDebugStatus() --> TRUE is checked.");
+		//DEBUG("void IniFilePopulator::toggleDebugStatus() --> TRUE is checked.");
 	} else if (this->ui.falseCheckBox->isChecked()) {
 		THE_REPO->debugStatus = FALSE;
 		//THE_LOGGER->ui.plainTextEdit->setPlainText(THE_LOGGER->fileContent.replace("&nbsp;", " "));
-		DEBUG("void IniFilePopulator::toggleDebugStatus() --> FALSE is checked.");
+		//DEBUG("void IniFilePopulator::toggleDebugStatus() --> FALSE is checked.");
 	} else {
 		LOG(ERR,
 				"void IniFilePopulator::toggleDebugStatus() --> status is not defined: set to FALSE.");

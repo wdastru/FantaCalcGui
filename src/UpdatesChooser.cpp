@@ -66,14 +66,14 @@ void UpdatesChooser::checkRadioButtons() {
 	QString url = THE_REPO->getUrl() + "download/" + pResources->at(chosenUpdate)["file"];
 	urls->push_back(QUrl::fromLocalFile(url));
 
-	DEBUG("url: " << url.toStdString().c_str());
+	//DEBUG("url: " << url.toStdString().c_str());
 
 	std::vector<QString> *savePaths = new std::vector<QString>;
 	QString savePath = ui.dirLabel->text() + "/"
 			+ pResources->at(chosenUpdate)["file"];
 	savePaths->push_back(savePath);
 
-	DEBUG("savePath: " << savePath.toStdString().c_str());
+	//DEBUG("savePath: " << savePath.toStdString().c_str());
 
 	Downloader updateDownloader(THE_LOGGER, urls, savePaths, true);
 

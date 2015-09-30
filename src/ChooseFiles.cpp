@@ -49,7 +49,7 @@ void ChooseFiles::setupGazzettaTab(QString _fileGazzetta) {
 		}
 
 		for (unsigned int i=0; i<lines.size(); i++) {
-			DEBUG("lines.at(" << i << ") = " << lines.at(i).toStdString().c_str());
+			//DEBUG("lines.at(" << i << ") = " << lines.at(i).toStdString().c_str());
 		}
 
 		int rows = 10;
@@ -81,7 +81,7 @@ void ChooseFiles::setupGazzettaTab(QString _fileGazzetta) {
 
 		fileGazzetta->close();
 	} else {
-		DEBUG("Il file " << _fileGazzetta.toStdString().c_str() << " non esiste.");
+		//DEBUG("Il file " << _fileGazzetta.toStdString().c_str() << " non esiste.");
 		LOG(FATAL, "In ChooseFiles constructor: Il file " + _fileGazzetta + " non esiste.");
 	}
 }
@@ -105,7 +105,7 @@ void ChooseFiles::setupFormazioniTab(QString _fileFormazioni) {
 
 			tmpLabel->setFixedHeight(this->height);
 
-			DEBUG("file(" << i << ") = " << QString::fromLatin1(buf).trimmed().toStdString().c_str());
+			//DEBUG("file(" << i << ") = " << QString::fromLatin1(buf).trimmed().toStdString().c_str());
 
 			QRadioButton * tmpButton1 = new QRadioButton();
 			QRadioButton * tmpButton2 = new QRadioButton();
@@ -176,18 +176,18 @@ void ChooseFiles::on_CampoNeutroBox_toggled(bool) {
 }
 
 void ChooseFiles::on_okButton_clicked() {
-	DEBUG("");
+	//DEBUG("");
 
 	this->doDownload();
 	if (this->downloadSuccess) {
-		DEBUG("downloadSuccess is true.");
+		//DEBUG("downloadSuccess is true.");
 		this->createFileSquadreFromWebFiles();
 		this->fileGazzetta = THE_REPO->getGazzettaPath() + "/"
 				+ this->getGazFile();
 		this->accept();
 	} else {
 		if (!this->filesDownloader->wasCancelClicked()) {
-			DEBUG("downloadSuccess is false.");
+			//DEBUG("downloadSuccess is false.");
 			/* TODO
 			 * completare ?
 			 * * * * * * * * */
@@ -198,7 +198,7 @@ void ChooseFiles::on_okButton_clicked() {
 }
 
 void ChooseFiles::on_cancelButton_clicked() {
-	DEBUG("");
+	//DEBUG("");
 
 	for (int i = 0; i < this->nFiles; i++) {
 		home.at(i)->setChecked(false);
@@ -246,9 +246,9 @@ void ChooseFiles::enableOkButton() {
 		ui.okButton->setEnabled(false);
 
 	if (ui.okButton->isEnabled()) {
-		DEBUG("enableOkButton abilitato");
+		//DEBUG("enableOkButton abilitato");
 	} else {
-		DEBUG("enableOkButton disabilitato");
+		//DEBUG("enableOkButton disabilitato");
 	}
 }
 
@@ -265,7 +265,7 @@ QString ChooseFiles::getFileFormazioni(void) {
 }
 
 void ChooseFiles::doDownload() {
-	DEBUG("Network will be accessed.");
+	//DEBUG("Network will be accessed.");
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	urls->push_back(
@@ -291,12 +291,12 @@ void ChooseFiles::doDownload() {
 	this->filesDownloader->exec();
 
 	if (this->filesDownloader->requestSucceded()) {
-		DEBUG("request succeded.");
+		//DEBUG("request succeded.");
 		this->downloadSuccess = true;
 	} else {
 		if (!this->filesDownloader->wasCancelClicked()) {
 			LOG(ERR, "The download of files failed.");
-			DEBUG("request not succeded.");
+			//DEBUG("request not succeded.");
 		}
 
 		this->downloadSuccess = false;
@@ -343,11 +343,11 @@ QString ChooseFiles::getAwayFile() {
 }
 
 bool ChooseFiles::createFileSquadreFromWebFiles() {
-	DEBUG("");
+	//DEBUG("");
 
 	if (this->downloadSuccess) {
 
-		DEBUG("download was successful.");
+		//DEBUG("download was successful.");
 
 		QFile fHome(THE_REPO->getDownloadPath() + "/" + this->getHomeFile());
 		QFile fAway(THE_REPO->getDownloadPath() + "/" + this->getAwayFile());
@@ -357,10 +357,10 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 
 		if (!fHome.isReadable()) {
 			LOG(FATAL, "Il file : " + fHome.fileName() + " non e' apribile.");
-			DEBUG("il file : " << fHome.fileName().toStdString().c_str() << " non e' apribile.");
+			//DEBUG("il file : " << fHome.fileName().toStdString().c_str() << " non e' apribile.");
 		} else if (!fAway.isReadable()) {
 			LOG(FATAL, "Il file : " + fAway.fileName() + " non e' apribile.");
-			DEBUG("il file : " << fAway.fileName().toStdString().c_str() << " non e' apribile.");
+			//DEBUG("il file : " << fAway.fileName().toStdString().c_str() << " non e' apribile.");
 		}
 
 		QFileInfo FIfHome(fHome);
@@ -380,7 +380,7 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 		fOut.open(QIODevice::WriteOnly);
 
 		if (!fOut.isWritable()) {
-			DEBUG("il file " << fileOut.toStdString().c_str() << " non e' apribile in scrittura.");
+			//DEBUG("il file " << fileOut.toStdString().c_str() << " non e' apribile in scrittura.");
 			LOG(FATAL, "Il file " + fileOut + " non e' apribile in scrittura.");
 			this->close();
 			return EXIT_FAILURE;
@@ -598,11 +598,11 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 		fHome.close();
 		fAway.close();
 		fOut.close();
-		DEBUG("Out");
+		//DEBUG("Out");
 
 		return EXIT_SUCCESS;
 	} else {
-		DEBUG("download was not successful.");
+		//DEBUG("download was not successful.");
 		LOG(ERR, "Download was not successful.");
 		return EXIT_FAILURE;
 	}
