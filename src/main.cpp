@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
 	QApplication::setStyle(QStyleFactory::create("cleanlooks"));
 	a.setOrganizationName("Eptadone Software");
 	a.setApplicationName("FantaCalcGui");
-	a.setApplicationVersion("3.4.1");
+	a.setApplicationVersion("3.4.2");
 
 	THE_REPO; // prima si crea il repository dei dati
 	THE_MANAGER; // quindi si legge l'ini file (o lo si crea se non esistente)
