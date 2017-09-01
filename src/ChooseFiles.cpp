@@ -403,15 +403,23 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 		line = QString::fromLatin1(fHome.readLine(1024)); // IIa riga titolari
 		unsigned int titolari[4];
 		vect = tokenize(line.toStdString(), " -");
-		for (unsigned int i = 0; i < vect.size(); i++)
+		for (unsigned int i = 0; i < vect.size(); i++) {
 			titolari[i] = atoi(vect.at(i).c_str());
+			DEBUG("titolari[" << i << "]" << " = " << vect.at(i).c_str());
+		}
 
 		vect.clear();
 		line = QString::fromLatin1(fHome.readLine(1024));
 		unsigned int riserve[4];
 		vect = tokenize(line.toStdString(), " -");
-		for (unsigned int i = 0; i < vect.size(); i++)
+		vect.at(0) = QString::number(3 - titolari[0]).toStdString();
+		vect.at(1) = QString::number(8 - titolari[1]).toStdString();
+		vect.at(2) = QString::number(8 - titolari[2]).toStdString();
+		vect.at(3) = QString::number(6 - titolari[3]).toStdString();
+		for (unsigned int i = 0; i < vect.size(); i++) {
 			riserve[i] = atoi(vect.at(i).c_str());
+			DEBUG("riserve[" << i << "]" << " = " << vect.at(i).c_str());
+		}
 
 		if (!ui.CampoNeutroBox->isChecked())
 			str += "in casa\n\n";
@@ -499,14 +507,22 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 		vect.clear();
 		line = QString::fromLatin1(fAway.readLine(1024));
 		vect = tokenize(line.toStdString(), " -");
-		for (unsigned int i = 0; i < vect.size(); i++)
+		for (unsigned int i = 0; i < vect.size(); i++) {
 			titolari[i] = atoi(vect.at(i).c_str());
+			DEBUG("titolari[" << i << "]" << " = " << vect.at(i).c_str());
+		}
 
 		vect.clear();
 		line = QString::fromLatin1(fAway.readLine(1024));
 		vect = tokenize(line.toStdString(), " -");
-		for (unsigned int i = 0; i < vect.size(); i++)
+		vect.at(0) = QString::number(3 - titolari[0]).toStdString();
+		vect.at(1) = QString::number(8 - titolari[1]).toStdString();
+		vect.at(2) = QString::number(8 - titolari[2]).toStdString();
+		vect.at(3) = QString::number(6 - titolari[3]).toStdString();
+		for (unsigned int i = 0; i < vect.size(); i++) {
 			riserve[i] = atoi(vect.at(i).c_str());
+			DEBUG("riserve[" << i << "]" << " = " << vect.at(i).c_str());
+		}
 
 		lineReadCounter = 0;
 
