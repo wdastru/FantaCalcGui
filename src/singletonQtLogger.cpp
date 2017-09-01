@@ -314,6 +314,15 @@ void singletonQtLogger::goOn() {
 		return;
 	}
 
+	DEBUG(FANTA->getModulo( 0, 0 ));
+	DEBUG(FANTA->getModulo( 0, 1 ));
+	DEBUG(FANTA->getModulo( 0, 2 ));
+	DEBUG(FANTA->getModulo( 0, 3 ));
+	DEBUG(FANTA->getModulo( 1, 0 ));
+	DEBUG(FANTA->getModulo( 1, 1 ));
+	DEBUG(FANTA->getModulo( 1, 2 ));
+	DEBUG(FANTA->getModulo( 1, 3 ));
+
 	try {
 		FANTA->execute();
 	} catch (...) {

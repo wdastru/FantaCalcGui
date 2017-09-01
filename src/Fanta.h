@@ -64,7 +64,6 @@ private:
 	player NonHaGiocato;
 	player fakePlayer;
 	std::vector<std::string> teamName;
-	unsigned int getModulo(size_t, size_t) const;
 	std::vector<Fanta::player> Team[2];
 	void checkGiocatoSenzaVoto();
 	void checkNonHaGiocato();
@@ -98,6 +97,7 @@ public:
 	std::string getTeamName(unsigned int);
 	unsigned int setModulo(std::string &, size_t);
 	std::string getModuloSquadra(size_t) const ;
+	unsigned int getModulo(size_t, size_t) const;
 	void setAtHome(unsigned int);
 	unsigned int LevenshteinDistance(const std::string& s1,
 			const std::string& s2);
