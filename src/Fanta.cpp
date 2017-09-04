@@ -61,6 +61,11 @@ void Fanta::initialize() {
 
 	Fanta::longerNameLength = 0;
 
+	Fanta::rosa[0] = 3;
+	Fanta::rosa[1] = 8;
+	Fanta::rosa[2] = 8;
+	Fanta::rosa[3] = 6;
+	
 	Fanta::NonHaGiocato.Cognome = "---";
 	Fanta::NonHaGiocato.Cognome_Sost = "---";
 	Fanta::NonHaGiocato.Squadra = "---";
@@ -380,71 +385,79 @@ void Fanta::execute() {
 	try {
 		this->orderByRuolo();
 	} catch (...) {
-		LOG(ERR, "In void Fanta::execute() --> exception caught in orderByRuolo().");
-		DEBUG("exception caught in checkNonHaGiocato().");
+		LOG(ERR, "Exception caught in orderByRuolo().");
+		DEBUG("exception caught in orderByRuolo().");
 	}
 
 	try {
 		this->fillWithNonHaGiocato();
 	} catch (...) {
 		LOG(ERR, "Exception caught in fillWithNonHaGiocato().");
-		DEBUG("exception caught in checkNonHaGiocato().");
+		DEBUG("exception caught in fillWithNonHaGiocato().");
 	}
 
 	try {
 		this->substitutions();
 	} catch (...) {
 		LOG(ERR, "Exception caught in substitutions().");
-		DEBUG("exception caught in checkNonHaGiocato().");
+		DEBUG("exception caught in substitutions().");
 	}
 
+	try {
+		this->bestModule();
+	} catch (...) {
+		LOG(ERR, "Exception caught in bestModule().");
+		DEBUG("exception caught in bestModule().");
+	}
+
+	
 	try {
 		this->calculateFantaVoto();
 	} catch (...) {
 		LOG(ERR, "Exception caught in calculateFantaVoto().");
-		DEBUG("exception caught in checkNonHaGiocato().");
+		DEBUG("exception caught in calculateFantaVoto().");
 	}
 
 	try {
 		this->calculateDefenseMean();
 	} catch (...) {
 		LOG(ERR, "Exception caught in calculateDefenseMean().");
-		DEBUG("exception caught in checkNonHaGiocato().");
+		DEBUG("exception caught in calculateDefenseMean().");
 	}
 
 	try {
 		this->calculateDefenseModifier();
 	} catch (...) {
 		LOG(ERR, "Exception caught in calculateDefenseModifier().");
-		DEBUG("exception caught in checkNonHaGiocato().");
+		DEBUG("exception caught in calculateDefenseModifier().");
 	}
 
 	try {
 		this->calculateSfide();
 	} catch (...) {
 		LOG(ERR, "Exception caught in calculateSfide().");
-		DEBUG("exception caught in checkNonHaGiocato().");
+		DEBUG("exception caught in calculateSfide().");
 	}
 
 	try {
 		this->calculateTotal();
 	} catch (...) {
 		LOG(ERR, "Exception caught in calculateTotal().");
-		DEBUG("exception caught in checkNonHaGiocato().");
+		DEBUG("exception caught in calculateTotal().");
 	}
 
 	try {
 		this->calculateGoals();
 	} catch (...) {
 		LOG(ERR, "Exception caught in calculateGoals().");
-		DEBUG("exception caught in checkNonHaGiocato().");
+		DEBUG("exception caught in calculateGoals().");
 	}
 
 	try {
 		this->calculateScorers();
 	} catch (...) {
 		LOG(ERR, "Exception caught in calculateScorers().");
-		DEBUG("exception caught in checkNonHaGiocato().");
+		DEBUG("exception caught in calculateScorers().");
 	}
 
 	return;
@@ -459,7 +472,7 @@ void Fanta::checkGiocatoSenzaVoto() {
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
 		for (size_t j = 0; j < this->Team[k].size(); j++) { // loop sui giocatori
-			DEBUG( this->Team[k].at(j).Cognome.c_str());
+		//	DEBUG( this->Team[k].at(j).Cognome.c_str());
 
 			if (this->Team[k].at(j).VotoGazzetta == -1) { // se S.V.
 
@@ -671,7 +684,7 @@ void Fanta::orderByRuolo() {
 						if (this->Team[k].at(j).Ruolo == i) {
 							Fanta::teamOrderedByRuolo[k][i].push_back(
 									this->Team[k].at(j));
-							DEBUG(i << " " << this->Team[k].at(j).Cognome.c_str());
+							//DEBUG(i << " " << this->Team[k].at(j).Cognome.c_str());
 						}
 					}
 				}
@@ -823,17 +836,25 @@ void Fanta::substitutions() {
 		}
 	}
 
-	//for (size_t k = 0; k < 2; k++) // squadra
-	//{
-	//	for (size_t i = 0; i < 4; i++) // ruolo
-	//	{
-	//		for (size_t j = 0; j < Fanta::teamOrderedByRuolo[k][i].size(); j++) {
-	//			DEBUG(this->getTeamName(k).c_str() << " : " << \
-	//					this->teamOrderedByRuolo[k][i].at(j).Ruolo << " " << \
-	//					this->teamOrderedByRuolo[k][i].at(j).Cognome.c_str() + ".");
-	//		}
-	//	}
-	//}
+	for (size_t k = 0; k < 2; k++) // squadra
+	{
+		for (size_t i = 0; i < 4; i++) // ruolo
+		{
+			for (size_t j = 0; j < Fanta::teamOrderedByRuolo[k][i].size(); j++) {
+				DEBUG(this->getTeamName(k).c_str() << " : " << \
+						this->teamOrderedByRuolo[k][i].at(j).Ruolo << " " << \
+						this->teamOrderedByRuolo[k][i].at(j).Cognome.c_str() << ".");
+			}
+		}
+	}
+}
+void Fanta::bestModule() {
+
+	LOG(DBG, "<br/> =====================");
+	LOG(DBG,      " === Cambio modulo ===");
+	LOG(DBG,      " =====================");
+	DEBUG("");
+
 }
 void Fanta::calculateFantaVoto() {
 

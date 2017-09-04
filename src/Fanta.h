@@ -65,12 +65,15 @@ private:
 	player fakePlayer;
 	std::vector<std::string> teamName;
 	std::vector<Fanta::player> Team[2];
+	unsigned int rosa[4];
+	unsigned int disponibili[2][4];
 	void checkGiocatoSenzaVoto();
 	void checkNonHaGiocato();
 	void orderByRuolo();
 	std::vector<Fanta::player> teamOrderedByRuolo[2][4];
 	void fillWithNonHaGiocato();
 	void substitutions();
+	void bestModule();
 	void calculateFantaVoto();
 	void calculateDefenseMean();
 	void calculateDefenseModifier();
