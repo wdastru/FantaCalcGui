@@ -49,6 +49,10 @@ void Fanta::initialize() {
 			Fanta::disponibili[k][j] = 0;
 		}
 
+		for (size_t j = 0; j < 10; j++) {
+			Fanta::ruoloDaSostituire[k][j] = -1;
+		}
+
 		Fanta::modulo[k][0] = 1;
 		Fanta::atHome[k] = 0;
 		Fanta::Total[k] = 0.0;
@@ -88,13 +92,6 @@ void Fanta::initialize() {
 		Fanta::scoreModuli[i] = 0;
 		Fanta::moduloPossibile[i] = true;
 	}
-
-	Fanta::ruoloDaSostituire[0][0] = -1;
-	Fanta::ruoloDaSostituire[0][1] = -1;
-	Fanta::ruoloDaSostituire[0][2] = -1;
-	Fanta::ruoloDaSostituire[1][0] = -1;
-	Fanta::ruoloDaSostituire[1][1] = -1;
-	Fanta::ruoloDaSostituire[1][2] = -1;
 
 	Fanta::NonHaGiocato.Cognome = "---";
 	Fanta::NonHaGiocato.Cognome_Sost = "---";

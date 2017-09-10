@@ -33,7 +33,7 @@ private:
 	signed int distanzaModuli[7][4];// giocatori che mancano per arrivare ai moduli possibili
 	unsigned int disponibili[2][4];// giocatori in panchina che possono essere usati
 	double Total[2];
-	signed int ruoloDaSostituire[2][3]; // ruoli da sostituire
+	signed int ruoloDaSostituire[2][10]; // ruoli da sostituire
 	signed int modifier[2];
 	double defenseMean[2];
 	unsigned int defenders[2];
