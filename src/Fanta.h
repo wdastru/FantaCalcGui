@@ -29,13 +29,27 @@ private:
 	static Fanta * pInstance;
 	unsigned int modulo[2][4];// moduli delle squadre
 	unsigned int inCampo[2][4];// giocatori effettivamenti scesi in campo
+	signed int distanza[2][4];// giocatori che mancano per arrivare al modulo
+	signed int distanzaModuli[7][4];// giocatori che mancano per arrivare ai moduli possibili
+	unsigned int disponibili[2][4];// giocatori in panchina che possono essere usati
 	double Total[2];
+	signed int ruoloDaSostituire[2][3]; // ruoli da sostituire
 	signed int modifier[2];
 	double defenseMean[2];
 	unsigned int defenders[2];
 	unsigned int sfide[2];
 	unsigned int goals[2];
 	unsigned int sostituzioni[2];
+
+	unsigned int moduli[7][4];
+	bool moduloPossibile[7];
+	std::string labelModuli[7];
+	std::vector<QString> subsForModuleChange[2];
+	std::vector<QString> subs[2];
+	std::vector<QString> newModule[2];
+
+	signed int scoreModuli[7];
+
 	size_t longerNameLength;
 	signed int modifierValues[9][5];
 	float modifierVoti[10];
@@ -66,14 +80,12 @@ private:
 	std::vector<std::string> teamName;
 	std::vector<Fanta::player> Team[2];
 	unsigned int rosa[4];
-	unsigned int disponibili[2][4];
 	void checkGiocatoSenzaVoto();
 	void checkNonHaGiocato();
 	void orderByRuolo();
 	std::vector<Fanta::player> teamOrderedByRuolo[2][4];
 	void fillWithNonHaGiocato();
 	void substitutions();
-	void bestModule();
 	void calculateFantaVoto();
 	void calculateDefenseMean();
 	void calculateDefenseModifier();
