@@ -725,6 +725,8 @@ void Fanta::substitutions() {
 
 	DEBUG("");
 
+	unsigned int ordineSostituzioni[] = {0, 3, 2, 1, 3, 2, 1, 3, 2, 1};
+
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
 		for (size_t i = 0; i < 4; i++) // ruolo
@@ -936,7 +938,6 @@ void Fanta::substitutions() {
 			}
 
 			DEBUG("sostituzioni possibili");
-			unsigned int ordineSostituzioni[10] = {0, 3, 2, 1, 3, 2, 1, 3, 2, 1};
 
 			while (distanza > 0) {
 				unsigned int index = 0;
@@ -959,7 +960,15 @@ void Fanta::substitutions() {
 			DEBUG("ruoloDaSostituire[" << k << "][2] : " << Fanta::ruoloDaSostituire[k][2]);
 
 		} else {
-			DEBUG("inferiorità numerica e/o cambio modulo");
+			DEBUG("inferiorità numerica");
+
+			for (size_t k = 0; k < 2; k++) // squadra
+			{
+				for (size_t i = 0; i < 10; i++)
+				{
+					Fanta::ruoloDaSostituire[k][i] =  ordineSostituzioni[i];
+				}
+			}
 		}
 	}
 
@@ -981,16 +990,8 @@ void Fanta::substitutions() {
 
 	for (size_t k = 0; k < 2; k++) {
 
-		LOG(DBG, "<br> -> "
-		+ QString::fromStdString(this->getTeamName(k))
-		+ " :");
-
-		for (size_t i = 0; i < Fanta::subsForModuleChange[k].size(); i++) {
-			LOG(DBG, Fanta::subsForModuleChange[k].at(i));
-		}
-
 		//for (size_t t = 0; t < 3; t++) { // ripetere il loop sottostante per esaurire tutte le sostituzioni
-		for (size_t i = 0; i < 3; i++) { // loop sulla seconda dimensione di Fanta::ruoloDaSostituire[k][i]
+		for (size_t i = 0; i < 10; i++) { // loop sulla seconda dimensione di Fanta::ruoloDaSostituire[k][i]
 
 			if (Fanta::ruoloDaSostituire[k][i] == -1)
 			continue;
