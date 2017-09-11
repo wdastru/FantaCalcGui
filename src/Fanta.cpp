@@ -769,24 +769,24 @@ void Fanta::substitutions() {
 	/*
 	 *  sposta i 'NON HA GIOCATO' al fondo dei giocatori in panchina
 	 */
-	for (size_t k = 0; k < 2; k++) // squadra
-	{
-		for (size_t i = 0; i < 4; i++) // ruolo
-		{
-			size_t xx = Fanta::modulo[k][i];
-			size_t yy = Fanta::rosa[i] - 1;
-
-			for (size_t j = 0; j < yy - xx; j++) {
-				for (size_t t = xx; t < yy - j; t++) {
-					if (Fanta::teamOrderedByRuolo[k][i].at(t).Cognome == "---")
-					swap(
-					Fanta::teamOrderedByRuolo[k][i].at(t),
-					Fanta::teamOrderedByRuolo[k][i].at(t + 1)
-					);
-				}
-			}
-		}
-	}
+	//for (size_t k = 0; k < 2; k++) // squadra
+	//{
+	//	for (size_t i = 0; i < 4; i++) // ruolo
+	//	{
+	//		size_t xx = Fanta::modulo[k][i];
+	//		size_t yy = Fanta::rosa[i] - 1;
+    //
+	//		for (size_t j = 0; j < yy - xx; j++) {
+	//			for (size_t t = xx; t < yy - j; t++) {
+	//				if (Fanta::teamOrderedByRuolo[k][i].at(t).Cognome == "---")
+	//				swap(
+	//				Fanta::teamOrderedByRuolo[k][i].at(t),
+	//				Fanta::teamOrderedByRuolo[k][i].at(t + 1)
+	//				);
+	//			}
+	//		}
+	//	}
+	//}
 
 	/*
 	 * determina cosa c'è e cosa serve
@@ -826,7 +826,7 @@ void Fanta::substitutions() {
 
 		if (distanza == 0) {
 			return;
-		} else if (distanza <= 3) {
+		} else /*if (distanza <= 3)*/ {
 			for (size_t i = 0; i < 4; i++) { // ruolo
 				if (Fanta::disponibili[k][i] < Fanta::distanza[k][i]) {
 					cambioModulo = true;
@@ -856,17 +856,22 @@ void Fanta::substitutions() {
 						modulePosition = j;
 					}
 
-//					DEBUG("distanza modulo  " << labelModuli[j].c_str() << " : \t" << Fanta::distanzaModuli[j][0] << "\t" << Fanta::distanzaModuli[j][1] << "\t" << Fanta::distanzaModuli[j][2] << "\t" << Fanta::distanzaModuli[j][3]);
+					//DEBUG("distanza modulo  " << labelModuli[j].c_str() << " : \t" << Fanta::distanzaModuli[j][0] << "\t" << Fanta::distanzaModuli[j][1] << "\t" << Fanta::distanzaModuli[j][2] << "\t" << Fanta::distanzaModuli[j][3]);
 
 					if (
-						static_cast<signed int>(Fanta::disponibili[k][0]) - Fanta::distanzaModuli[j][0] < 0 ||
-						static_cast<signed int>(Fanta::disponibili[k][1]) - Fanta::distanzaModuli[j][1] < 0 ||
-						static_cast<signed int>(Fanta::disponibili[k][2]) - Fanta::distanzaModuli[j][2] < 0 ||
-						static_cast<signed int>(Fanta::disponibili[k][3]) - Fanta::distanzaModuli[j][3] < 0 ) {
+						static_cast<signed int>(Fanta::disponibili[k][0]) < Fanta::distanzaModuli[j][0] ||
+						static_cast<signed int>(Fanta::disponibili[k][1]) < Fanta::distanzaModuli[j][1] ||
+						static_cast<signed int>(Fanta::disponibili[k][2]) < Fanta::distanzaModuli[j][2] ||
+						static_cast<signed int>(Fanta::disponibili[k][3]) < Fanta::distanzaModuli[j][3] ) {
 						moduloPossibile[j] = false;
 					}
 
-					DEBUG("modulo " << j << " (" << labelModuli[j].c_str() << ") possibile? : " << moduloPossibile[j]);
+					DEBUG("modulo " << j << " (" << labelModuli[j].c_str() << ") possibile? : " << moduloPossibile[j] << " | " << \
+							Fanta::distanzaModuli[j][0] << "-" <<\
+							Fanta::distanzaModuli[j][1] << "-" <<\
+							Fanta::distanzaModuli[j][2] << "-" <<\
+							Fanta::distanzaModuli[j][3] \
+							);
 
 				}
 
@@ -959,7 +964,7 @@ void Fanta::substitutions() {
 			DEBUG("ruoloDaSostituire[" << k << "][1] : " << Fanta::ruoloDaSostituire[k][1]);
 			DEBUG("ruoloDaSostituire[" << k << "][2] : " << Fanta::ruoloDaSostituire[k][2]);
 
-		} else {
+		} /*else {
 			DEBUG("inferiorità numerica");
 
 			for (size_t k = 0; k < 2; k++) // squadra
@@ -969,7 +974,7 @@ void Fanta::substitutions() {
 					Fanta::ruoloDaSostituire[k][i] =  ordineSostituzioni[i];
 				}
 			}
-		}
+		}*/
 	}
 
 	for (size_t k = 0; k < 2; k++) // squadra
