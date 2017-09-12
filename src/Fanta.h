@@ -28,10 +28,15 @@ class Fanta {
 private:
 	static Fanta * pInstance;
 	unsigned int modulo[2][4];// moduli delle squadre
-	unsigned int inCampo[2][4];// giocatori effettivamenti scesi in campo
-	signed int distanza[2][4];// giocatori che mancano per arrivare al modulo
-	signed int distanzaModuli[7][4];// giocatori che mancano per arrivare ai moduli possibili
-	unsigned int disponibili[2][4];// giocatori in panchina che possono essere usati
+
+	unsigned int inCampo[2][4];		// giocatori effettivamenti scesi in campo
+	int distanza[2][4];		// giocatori che mancano per arrivare al modulo
+	unsigned int disponibili[2][4];	// giocatori in panchina che possono essere usati
+
+	unsigned int inCampoModuli[7][4];		// giocatori effettivamenti scesi in campo nei moduli possibili
+	int distanzaModuli[7][4];		// giocatori che mancano per arrivare ai moduli possibili
+	unsigned int disponibiliModuli[7][4];		// giocatori in panchina che possono essere usati per i moduli possibili
+
 	double Total[2];
 	signed int ruoloDaSostituire[2][10]; // ruoli da sostituire
 	signed int modifier[2];
