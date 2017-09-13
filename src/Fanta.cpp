@@ -824,29 +824,38 @@ void Fanta::substitutions() {
 		/*
 		 * score dei moduli
 		 */
+		bool cambioModulo = false;
+
 		unsigned int distanza = 0;
 		for (size_t i = 0; i < 4; i++) { // ruolo
 			distanza += Fanta::distanza[k][i];
 		}
 		DEBUG("distanza totale " << k << " : " << distanza);
 
-		bool cambioModulo = false;
-
 		if (distanza == 0) {
 			return;
-		} else /*if (distanza <= 3)*/ {
-			for (size_t i = 0; i < 4; i++) { // ruolo
-				if (Fanta::disponibili[k][i] < Fanta::distanza[k][i]) {
-					cambioModulo = true;
+		} else {
+
+			if (distanza > 3) {
+				cambioModulo = true;
+			} else {
+				for (size_t i = 0; i < 4; i++) { // ruolo
+					if (Fanta::disponibili[k][i] < Fanta::distanza[k][i]) {
+						cambioModulo = true;
+					}
 				}
 			}
 
+			bool foundNewModule = false;
 			if (cambioModulo) {
 				DEBUG("cambio modulo");
 
-				signed int modulePosition = -1;
+				signed int moduloPosition = -1;
 
-				for (size_t j = 0; j < 7; j++) { // esplora i moduli possibili
+				/*
+				 * esplora i moduli possibili
+				 */
+				for (size_t j = 0; j < 7; j++) {
 
 					for (size_t i = 0; i < 4; i++) { // ruolo
 						Fanta::distanzaModuli[j][i] = Fanta::moduli[j][i]
@@ -892,10 +901,10 @@ void Fanta::substitutions() {
 						Fanta::moduli[j][2] == Fanta::modulo[k][2] &&
 						Fanta::moduli[j][3] == Fanta::modulo[k][3]
 					) {
-						modulePosition = j;
+						moduloPosition = j;
 					}
 
-					DEBUG("         posizione nell'array : " << modulePosition);
+					DEBUG("         posizione nell'array : " << moduloPosition);
 
 					/*
 					 * controlla se il modulo è possibile
@@ -906,42 +915,41 @@ void Fanta::substitutions() {
 							+ Fanta::distanzaModuli[j][3];
 					DEBUG("               distanzaTotale : " << distanzaTotale);
 
-					if( distanzaTotale > 3 ||  (
-								static_cast<signed int>(Fanta::disponibiliModuli[j][0])	< Fanta::distanzaModuli[j][0] ||
-								static_cast<signed int>(Fanta::disponibiliModuli[j][1]) < Fanta::distanzaModuli[j][1] ||
-								static_cast<signed int>(Fanta::disponibiliModuli[j][2]) < Fanta::distanzaModuli[j][2] ||
-								static_cast<signed int>(Fanta::disponibiliModuli[j][3]) < Fanta::distanzaModuli[j][3]
-							) ) {
-							moduloPossibile[j] = false;
+					if (distanzaTotale > 3
+							|| (static_cast<signed int>(Fanta::disponibiliModuli[j][0])
+									< Fanta::distanzaModuli[j][0]
+									|| static_cast<signed int>(Fanta::disponibiliModuli[j][1])
+											< Fanta::distanzaModuli[j][1]
+									|| static_cast<signed int>(Fanta::disponibiliModuli[j][2])
+											< Fanta::distanzaModuli[j][2]
+									|| static_cast<signed int>(Fanta::disponibiliModuli[j][3])
+											< Fanta::distanzaModuli[j][3])) {
+						moduloPossibile[j] = false;
 					}
 
 					DEBUG("modulo " << j << " (" << labelModuli[j].c_str() << ") possibile? : " << moduloPossibile[j]);
 
 				}
 
-				bool foundNewModule = false;
-				signed int newModulePosition = modulePosition;
-				for (unsigned int j = modulePosition; j < 7; j++) {
-
-					//DEBUG("forward " << j);
-
+				/*
+				 * Ricerca nuovo modulo
+				 */
+				signed int newModuloPosition = moduloPosition; // modulo originario, se non si trova nulla rimane quello
+				for (unsigned int j = moduloPosition; j < 7; j++) {
 					if (moduloPossibile[j]) {
 						DEBUG( "nuovo modulo : " << labelModuli[j].c_str() );
 						foundNewModule = true;
-						newModulePosition = j;
+						newModuloPosition = j;
 						break;
 					}
 				}
 
 				if (!foundNewModule) {
-					for (unsigned int j = 7; j > modulePosition; j--) {
-
-						//DEBUG("backward " << j);
-
+					for (unsigned int j = 7; j > moduloPosition; j--) {
 						if (moduloPossibile[j]) {
 							DEBUG( "nuovo modulo : " << labelModuli[j].c_str() );
 							foundNewModule = true;
-							newModulePosition = j;
+							newModuloPosition = j;
 							break;
 						}
 					}
@@ -952,39 +960,52 @@ void Fanta::substitutions() {
 				} else {
 
 					for (size_t i = 0; i < 4; i++) // ruolo
-					{
-						if (Fanta::moduli[newModulePosition][i] == Fanta::modulo[k][i] + 1) {
-							QString sub = QString::fromStdString(Fanta::teamOrderedByRuolo[k][i].at(Fanta::modulo[k][i]).Cognome)
-							+ " ("
-							+ QString::fromStdString(Fanta::teamOrderedByRuolo[k][i].at(Fanta::modulo[k][i]).Squadra)
-							+ ") per cambio di modulo.";
-							Fanta::subsForModuleChange[k].push_back(sub);
+							{
+						/*
+						 * salva stringa di sostituzione per cambio modulo
+						 */
+						if (Fanta::moduli[newModuloPosition][i]
+								> Fanta::modulo[k][i]) { // solo per ruolo dove aumenta il numero di giocatori
+
+							for (unsigned int m = Fanta::modulo[k][i];
+									m < Fanta::moduli[newModuloPosition][i];
+									m++)
+							{
+								QString sub =
+										QString::fromStdString(
+												Fanta::teamOrderedByRuolo[k][i].at(
+														Fanta::modulo[k][i]).Cognome)
+												+ " ("
+												+ QString::fromStdString(
+														Fanta::teamOrderedByRuolo[k][i].at(
+																Fanta::modulo[k][i]).Squadra)
+												+ ") per cambio di modulo.";
+								Fanta::subsForModuleChange[k].push_back(sub);
+							}
 						}
 					}
 
 					Fanta::newModule[k].push_back(
 							"Nuovo modulo "
 									+ QString::number(
-											Fanta::moduli[newModulePosition][1])
+											Fanta::moduli[newModuloPosition][1])
 									+ "-"
 									+ QString::number(
-											Fanta::moduli[newModulePosition][2])
+											Fanta::moduli[newModuloPosition][2])
 									+ "-"
 									+ QString::number(
-											Fanta::moduli[newModulePosition][3]) );
+											Fanta::moduli[newModuloPosition][3]));
 
-					Fanta::modulo[k][0] = Fanta::moduli[newModulePosition][0];
-					Fanta::modulo[k][1] = Fanta::moduli[newModulePosition][1];
-					Fanta::modulo[k][2] = Fanta::moduli[newModulePosition][2];
-					Fanta::modulo[k][3] = Fanta::moduli[newModulePosition][3];
+					Fanta::modulo[k][0] = Fanta::moduli[newModuloPosition][0];
+					Fanta::modulo[k][1] = Fanta::moduli[newModuloPosition][1];
+					Fanta::modulo[k][2] = Fanta::moduli[newModuloPosition][2];
+					Fanta::modulo[k][3] = Fanta::moduli[newModuloPosition][3];
 
 				}
 
 				cambioModulo = false;
 
 			}
-
-			DEBUG("sostituzioni possibili");
 
 			while (distanza > 0) {
 				unsigned int index = 0;
@@ -1006,17 +1027,7 @@ void Fanta::substitutions() {
 			DEBUG("ruoloDaSostituire[" << k << "][1] : " << Fanta::ruoloDaSostituire[k][1]);
 			DEBUG("ruoloDaSostituire[" << k << "][2] : " << Fanta::ruoloDaSostituire[k][2]);
 
-		} /*else {
-			DEBUG("inferiorità numerica");
-
-			for (size_t k = 0; k < 2; k++) // squadra
-			{
-				for (size_t i = 0; i < 10; i++)
-				{
-					Fanta::ruoloDaSostituire[k][i] =  ordineSostituzioni[i];
-				}
-			}
-		}*/
+		}
 	}
 
 	for (size_t k = 0; k < 2; k++) // squadra
@@ -1117,9 +1128,14 @@ void Fanta::substitutions() {
 	LOG(DBG, " =====================");
 
 	for (size_t k = 0; k < 2; k++) {
-		if (Fanta::newModule[k].size() > 0)
+		if (Fanta::newModule[k].size() > 0) {
 			LOG(DBG,
-				"<br> -> " + QString::fromStdString(this->getTeamName(k)) + " :");
+			"<br> -> " + QString::fromStdString(this->getTeamName(k)) + " :");
+		}
+
+		if (Fanta::newModule[k].size() > 1) {
+			LOG(WARN, "Trovato più di un muovo modulo!");
+		}
 
 		for (size_t j = 0; j < Fanta::newModule[k].size(); j++) {
 			LOG(DBG, newModule[k].at(j));

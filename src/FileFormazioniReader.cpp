@@ -188,7 +188,7 @@ unsigned int FileFormazioniReader::execute() {
 					// cerca nella riga della Gazzetta il nome del giocatore
 					size_t found = STR_MOD->msk(tempStrGazz, DELIM,	ColCognome).find(line, 0);
 
-					DEBUG(STR_MOD->msk(tempStrGazz, DELIM,	ColCognome).c_str());
+					//DEBUG(STR_MOD->msk(tempStrGazz, DELIM,	ColCognome).c_str());
 
 					if (found != string::npos) { // se vero il giocatore e' stato trovato
 						// aggiungi al vettore con tutti i giocatori trovati
