@@ -713,7 +713,7 @@ void Fanta::orderByRuolo() {
 
 					for (size_t j = 0; j < this->Team[k].size(); j++) // loop sui giocatori
 							{
-						if (this->Team[k].at(j).Ruolo == i) {
+						if (this->Team[k].at(j).Ruolo == i && this->Fanta::teamOrderedByRuolo[k][i].size() < this->rosa[i]) {
 							Fanta::teamOrderedByRuolo[k][i].push_back(
 									this->Team[k].at(j));
 							//DEBUG(i << " " << this->Team[k].at(j).Cognome.c_str());
@@ -753,7 +753,7 @@ void Fanta::fillWithNonHaGiocato() {
 		for (size_t i = 0; i < 4; i++) // ruolo
 				{
 			for (size_t j = Fanta::teamOrderedByRuolo[k][i].size();
-					j < modulo[k][i] + 2; j++) {
+					j < rosa[i]; j++) {
 				Fanta::teamOrderedByRuolo[k][i].push_back(Fanta::NonHaGiocato);
 				DEBUG("Squadra " << this->getTeamName(k).c_str() << " : aggiunto un Fanta::NonHaGiocato");
 				//LOG(DBG, \
@@ -762,8 +762,8 @@ void Fanta::fillWithNonHaGiocato() {
 			}
 		}
 	}
-}
 
+}
 void Fanta::substitutions() {
 
 	DEBUG("");
@@ -1328,7 +1328,6 @@ void Fanta::substitutions() {
 		DEBUG("Exception inside substitutions() block 2");
 	}
 }
-
 void Fanta::calculateFantaVoto() {
 
 	LOG(DBG, "<br/> =================");
