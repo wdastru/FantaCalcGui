@@ -28,14 +28,34 @@ class Fanta {
 private:
 	static Fanta * pInstance;
 	unsigned int modulo[2][4];// moduli delle squadre
-	unsigned int inCampo[2][4];// giocatori effettivamenti scesi in campo
+
+	unsigned int inCampo[2][4];		// giocatori effettivamenti scesi in campo
+	int distanza[2][4];		// giocatori che mancano per arrivare al modulo
+	unsigned int disponibili[2][4];	// giocatori in panchina che possono essere usati
+
+	unsigned int inCampoModuli[7][4];		// giocatori effettivamenti scesi in campo nei moduli possibili
+	int distanzaModuli[7][4];		// giocatori che mancano per arrivare ai moduli possibili
+	unsigned int disponibiliModuli[7][4];		// giocatori in panchina che possono essere usati per i moduli possibili
+	signed int distanzaTotaleModuli[7]; // distanza dei giocatori in campo dai moduli possibili
+
 	double Total[2];
+	signed int ruoloDaSostituire[2][10]; // ruoli da sostituire
 	signed int modifier[2];
 	double defenseMean[2];
 	unsigned int defenders[2];
 	unsigned int sfide[2];
 	unsigned int goals[2];
 	unsigned int sostituzioni[2];
+
+	unsigned int moduli[7][4];
+	bool moduloPossibile[7];
+	std::string labelModuli[7];
+	std::vector<QString> subsForModuleChange[2];
+	std::vector<QString> subs[2];
+	std::vector<QString> newModule[2];
+
+	signed int scoreModuli[7];
+
 	size_t longerNameLength;
 	signed int modifierValues[9][5];
 	float modifierVoti[10];
@@ -64,8 +84,8 @@ private:
 	player NonHaGiocato;
 	player fakePlayer;
 	std::vector<std::string> teamName;
-	unsigned int getModulo(size_t, size_t) const;
 	std::vector<Fanta::player> Team[2];
+	unsigned int rosa[4];
 	void checkGiocatoSenzaVoto();
 	void checkNonHaGiocato();
 	void orderByRuolo();
@@ -98,6 +118,7 @@ public:
 	std::string getTeamName(unsigned int);
 	unsigned int setModulo(std::string &, size_t);
 	std::string getModuloSquadra(size_t) const ;
+	unsigned int getModulo(size_t, size_t) const;
 	void setAtHome(unsigned int);
 	unsigned int LevenshteinDistance(const std::string& s1,
 			const std::string& s2);
