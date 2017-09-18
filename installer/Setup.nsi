@@ -2,10 +2,11 @@
 
 ; Qt
 !define QT "C:\Qt\4.8.6\bin"
+!define INSTALLER_PATH "D:\Sorgenti\FantaCalcGuiNew_Win32Build\installer"
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "FantaCalcGui"
-!define PRODUCT_VERSION "v3.4.1"
+!define PRODUCT_VERSION "v3.5.0"
 !define PRODUCT_PUBLISHER "EPTADONE Software Inc."
 !define PRODUCT_WEB_SITE "http://www.cim.unito.it/private/fantacalcio/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\FantaCalcGui.exe"
@@ -69,15 +70,14 @@ FunctionEnd
 Section "MainSection" SEC01
   SetOutPath "$INSTDIR"
   SetOverwrite try
-  File "D:\Sorgenti\FantaCalcGuiNew\build\Release\FantaCalcGui.exe"
-  File "C:\mingw\bin\libstdc++-6.dll"
-  File "C:\MinGW\bin\mingwm10.dll"
-  File "${QT}\libwinpthread-1.dll"
-  File "${QT}\libgcc_s_dw2-1.dll"
-  File "${QT}\QtCore4.dll"
-  File "${QT}\QtGui4.dll"
-  File "${QT}\QtNetwork4.dll"
-  File "${QT}\QtXml4.dll"
+  File "${INSTALLER_PATH}\FantaCalcGui.exe"
+  File "${INSTALLER_PATH}\libstdc++-6.dll"
+  File "${INSTALLER_PATH}\libwinpthread-1.dll"
+  File "${INSTALLER_PATH}\libgcc_s_dw2-1.dll"
+  File "${INSTALLER_PATH}\QtCore4.dll"
+  File "${INSTALLER_PATH}\QtGui4.dll"
+  File "${INSTALLER_PATH}\QtNetwork4.dll"
+  File "${INSTALLER_PATH}\QtXml4.dll"
 
 ; Shortcuts
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
@@ -126,7 +126,6 @@ Section Uninstall
   Delete "$INSTDIR\QtGui4.dll"
   Delete "$INSTDIR\QtCore4.dll"
   Delete "$INSTDIR\QtXml4.dll"
-  Delete "$INSTDIR\mingwm10.dll"
   Delete "$INSTDIR\libgcc_s_dw2-1.dll"
   Delete "$INSTDIR\libstdc++-6.dll"
   Delete "$INSTDIR\libwinpthread-1.dll"
