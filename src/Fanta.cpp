@@ -232,12 +232,21 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 //		DEBUG("ColNome_Sost          : " << STR_MOD->msk(str, DELIM, ColCognome_Sost).c_str());
 		DEBUG("ColSquadra            : " << STR_MOD->msk(str, DELIM, ColSquadra).c_str());
 //		DEBUG("ColSquadra_Sost       : " << STR_MOD->msk(str, DELIM, ColSquadra_Sost).c_str());
-		DEBUG("ColRuolo              : " << STR_MOD->msk(str, DELIM, ColRuolo).c_str());DEBUG("ColRuolo2             : " << STR_MOD->msk(str, DELIM, ColRuolo2).c_str());
+		DEBUG("ColRuolo              : " << STR_MOD->msk(str, DELIM, ColRuolo).c_str());
+		DEBUG("ColRuolo2             : " << STR_MOD->msk(str, DELIM, ColRuolo2).c_str());
 //		DEBUG("ColFantaVoto          : " << STR_MOD->msk(str, DELIM, ColFantaVoto).c_str());
-		DEBUG("ColFantaVotoGazzetta  : " << STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta).c_str());DEBUG("ColVotoGazzetta       : " << STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str());DEBUG("ColGoalFatti          : " << STR_MOD->msk(str, DELIM, ColGoalFatti).c_str());DEBUG("ColGoalSubiti         : " << STR_MOD->msk(str, DELIM, ColGoalSubiti).c_str());DEBUG("ColAutoreti           : " << STR_MOD->msk(str, DELIM, ColAutoreti).c_str());
+		DEBUG("ColFantaVotoGazzetta  : " << STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta).c_str());
+		DEBUG("ColVotoGazzetta       : " << STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str());
+		DEBUG("ColGoalFatti          : " << STR_MOD->msk(str, DELIM, ColGoalFatti).c_str());
+		DEBUG("ColGoalSubiti         : " << STR_MOD->msk(str, DELIM, ColGoalSubiti).c_str());
+		DEBUG("ColAutoreti           : " << STR_MOD->msk(str, DELIM, ColAutoreti).c_str());
 //		DEBUG("ColRigoreParato       : " << STR_MOD->msk(str, DELIM, ColRigoreParato).c_str());
 //		DEBUG("ColRigoreSbagliato    : " << STR_MOD->msk(str, DELIM, ColRigoreSbagliato).c_str());
-		DEBUG("ColGoalDecVitt        : " << STR_MOD->msk(str, DELIM, ColGoalDecVitt).c_str());DEBUG("ColGoalDecPar         : " << STR_MOD->msk(str, DELIM, ColGoalDecPar).c_str());DEBUG("ColAssist             : " << STR_MOD->msk(str, DELIM, ColAssist).c_str());DEBUG("ColAmm                : " << STR_MOD->msk(str, DELIM, ColAmm).c_str());DEBUG("ColEsp                : " << STR_MOD->msk(str, DELIM, ColEsp).c_str());
+		DEBUG("ColGoalDecVitt        : " << STR_MOD->msk(str, DELIM, ColGoalDecVitt).c_str());
+		DEBUG("ColGoalDecPar         : " << STR_MOD->msk(str, DELIM, ColGoalDecPar).c_str());
+		DEBUG("ColAssist             : " << STR_MOD->msk(str, DELIM, ColAssist).c_str());
+		DEBUG("ColAmm                : " << STR_MOD->msk(str, DELIM, ColAmm).c_str());
+		DEBUG("ColEsp                : " << STR_MOD->msk(str, DELIM, ColEsp).c_str());
 //		DEBUG("ColdaSostituire       : " << STR_MOD->msk(str, DELIM, ColdaSostituire).c_str());
 
 		// nome
@@ -247,7 +256,7 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 		tmpPlayer.Squadra = STR_MOD->msk(str, DELIM, ColSquadra);
 
 		// goal e rigori
-		if (STR_MOD->msk(str, DELIM, ColRuolo) == "P") {
+		if (STR_MOD->msk(str, DELIM, ColRuolo2) == "P") {
 			tmpPlayer.Ruolo = 0;
 			tmpPlayer.GoalSubiti = fabs(
 			atof(STR_MOD->msk(str, DELIM, ColGoalSubiti).c_str()));
@@ -255,23 +264,31 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 			tmpPlayer.RigoreParato = fabs(
 			atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3);
 			tmpPlayer.RigoreSbagliato = 0;
-		} else if (STR_MOD->msk(str, DELIM, ColRuolo) == "D") {
+		} else if (STR_MOD->msk(str, DELIM, ColRuolo2) == "D") {
 			tmpPlayer.Ruolo = 1;
 			tmpPlayer.GoalFatti = atof(
-			STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3;
+			STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 4.5;
 			tmpPlayer.GoalSubiti = 0;
 			tmpPlayer.RigoreSbagliato = fabs(
-			atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3);
+			atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 4.5);
 			tmpPlayer.RigoreParato = 0;
-		} else if (STR_MOD->msk(str, DELIM, ColRuolo) == "C") {
+		} else if (STR_MOD->msk(str, DELIM, ColRuolo2) == "C") {
 			tmpPlayer.Ruolo = 2;
 			tmpPlayer.GoalFatti = atof(
-			STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3;
+			STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 4;
 			tmpPlayer.GoalSubiti = 0;
 			tmpPlayer.RigoreSbagliato = fabs(
-			atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3);
+			atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 4);
 			tmpPlayer.RigoreParato = 0;
-		} else if (STR_MOD->msk(str, DELIM, ColRuolo) == "A") {
+		} else if (STR_MOD->msk(str, DELIM, ColRuolo2) == "T") {
+			tmpPlayer.Ruolo = 2;
+			tmpPlayer.GoalFatti = atof(
+			STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3.5;
+			tmpPlayer.GoalSubiti = 0;
+			tmpPlayer.RigoreSbagliato = fabs(
+			atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3.5);
+			tmpPlayer.RigoreParato = 0;
+		} else if (STR_MOD->msk(str, DELIM, ColRuolo2) == "A") {
 			tmpPlayer.Ruolo = 3;
 			tmpPlayer.GoalFatti = atof(
 			STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3;
@@ -281,7 +298,9 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 			tmpPlayer.RigoreParato = 0;
 		}
 
-		DEBUG(str.c_str());DEBUG("_" << STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str() << "_");DEBUG("_" << STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta).c_str() << "_");
+		DEBUG(str.c_str());
+		DEBUG("_" << STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str() << "_");
+		DEBUG("_" << STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta).c_str() << "_");
 
 		// fantavoto
 		if (STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta) == "-")
@@ -302,7 +321,8 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 			STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str());
 		}
 
-		DEBUG("VotoGazzetta = _" << tmpPlayer.VotoGazzetta << "_");DEBUG("FantaVotoGazzetta = _" << tmpPlayer.FantaVotoGazzetta << "_");
+		DEBUG("VotoGazzetta = _" << tmpPlayer.VotoGazzetta << "_");
+		DEBUG("FantaVotoGazzetta = _" << tmpPlayer.FantaVotoGazzetta << "_");
 
 		// --> goal decisivi
 		tmpPlayer.GoalDecVitt = atoi(
@@ -310,7 +330,8 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 		tmpPlayer.GoalDecPar = atoi(
 		STR_MOD->msk(str, DELIM, ColGoalDecPar).c_str());
 
-		DEBUG("GoalDecVitt = #" << tmpPlayer.GoalDecVitt << "#");DEBUG("GoalDecPar = #" << tmpPlayer.GoalDecPar << "#");
+		DEBUG("GoalDecVitt = #" << tmpPlayer.GoalDecVitt << "#");
+		DEBUG("GoalDecPar = #" << tmpPlayer.GoalDecPar << "#");
 
 		if (tmpPlayer.GoalDecVitt != 0) {
 			if (tmpPlayer.FantaVotoGazzetta == 0) {
