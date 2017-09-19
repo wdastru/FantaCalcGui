@@ -270,31 +270,45 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 			STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 4.5;
 			tmpPlayer.GoalSubiti = 0;
 			tmpPlayer.RigoreSbagliato = fabs(
-			atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 4.5);
+			atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3); /* WHAT TODO ??? */
 			tmpPlayer.RigoreParato = 0;
 		} else if (STR_MOD->msk(str, DELIM, ColRuolo2) == "C") {
 			tmpPlayer.Ruolo = 2;
-			tmpPlayer.GoalFatti = atof(
-			STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 4;
+			if (STR_MOD->msk(str, DELIM, ColRuolo) == "T") {
+				tmpPlayer.GoalFatti = atof(
+				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3.5;
+				tmpPlayer.RigoreSbagliato = fabs(
+				atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3); /* WHAT TODO ??? */
+			} else if (STR_MOD->msk(str, DELIM, ColRuolo) == "C") {
+				tmpPlayer.GoalFatti = atof(
+				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 4;
+				tmpPlayer.RigoreSbagliato = fabs(
+				atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3); /* WHAT TODO ??? */
+			} else {
+				/*
+				 * TODO
+				 */
+			}
 			tmpPlayer.GoalSubiti = 0;
-			tmpPlayer.RigoreSbagliato = fabs(
-			atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 4);
-			tmpPlayer.RigoreParato = 0;
-		} else if (STR_MOD->msk(str, DELIM, ColRuolo2) == "T") {
-			tmpPlayer.Ruolo = 2;
-			tmpPlayer.GoalFatti = atof(
-			STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3.5;
-			tmpPlayer.GoalSubiti = 0;
-			tmpPlayer.RigoreSbagliato = fabs(
-			atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3.5);
 			tmpPlayer.RigoreParato = 0;
 		} else if (STR_MOD->msk(str, DELIM, ColRuolo2) == "A") {
 			tmpPlayer.Ruolo = 3;
-			tmpPlayer.GoalFatti = atof(
-			STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3;
+			if (STR_MOD->msk(str, DELIM, ColRuolo) == "T") {
+				tmpPlayer.GoalFatti = atof(
+				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3.5;
+				tmpPlayer.RigoreSbagliato = fabs(
+				atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3); /* WHAT TODO ??? */
+			} else if (STR_MOD->msk(str, DELIM, ColRuolo) == "A") {
+				tmpPlayer.GoalFatti = atof(
+				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3;
+				tmpPlayer.RigoreSbagliato = fabs(
+				atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3); /* WHAT TODO ??? */
+			} else {
+				/*
+				 * TODO
+				 */
+			}
 			tmpPlayer.GoalSubiti = 0;
-			tmpPlayer.RigoreSbagliato = fabs(
-			atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3);
 			tmpPlayer.RigoreParato = 0;
 		}
 

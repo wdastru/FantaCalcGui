@@ -114,8 +114,8 @@
 #define COLUMNS
 #define ColCognome				1
 #define ColSquadra 				2
-#define ColRuolo 				4	/* Corpillo ha detto di usare Ruolo2 	*/
-#define ColRuolo2 				3
+#define ColRuolo 				3	/* contiene Trequartista 	*/
+#define ColRuolo2 				4	/* ruolo "classico"       	*/
 #define ColGiocaAncora			5	/* nel file gazzetta ma NON UTILIZZATO 	*/
 #define ColQuotazione 			6	/* nel file gazzetta ma NON UTILIZZATO 	*/
 #define ColFantaVotoGazzetta 	7
