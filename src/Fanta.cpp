@@ -228,26 +228,26 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 
 		Fanta::player tmpPlayer;
 
-		DEBUG("ColCognome            : " << STR_MOD->msk(str, DELIM, ColCognome).c_str());
-//		DEBUG("ColNome_Sost          : " << STR_MOD->msk(str, DELIM, ColCognome_Sost).c_str());
-		DEBUG("ColSquadra            : " << STR_MOD->msk(str, DELIM, ColSquadra).c_str());
-//		DEBUG("ColSquadra_Sost       : " << STR_MOD->msk(str, DELIM, ColSquadra_Sost).c_str());
-		DEBUG("ColRuolo              : " << STR_MOD->msk(str, DELIM, ColRuolo).c_str());
-		DEBUG("ColRuolo2             : " << STR_MOD->msk(str, DELIM, ColRuolo2).c_str());
-//		DEBUG("ColFantaVoto          : " << STR_MOD->msk(str, DELIM, ColFantaVoto).c_str());
-		DEBUG("ColFantaVotoGazzetta  : " << STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta).c_str());
-		DEBUG("ColVotoGazzetta       : " << STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str());
-		DEBUG("ColGoalFatti          : " << STR_MOD->msk(str, DELIM, ColGoalFatti).c_str());
-		DEBUG("ColGoalSubiti         : " << STR_MOD->msk(str, DELIM, ColGoalSubiti).c_str());
-		DEBUG("ColAutoreti           : " << STR_MOD->msk(str, DELIM, ColAutoreti).c_str());
-//		DEBUG("ColRigoreParato       : " << STR_MOD->msk(str, DELIM, ColRigoreParato).c_str());
-//		DEBUG("ColRigoreSbagliato    : " << STR_MOD->msk(str, DELIM, ColRigoreSbagliato).c_str());
-		DEBUG("ColGoalDecVitt        : " << STR_MOD->msk(str, DELIM, ColGoalDecVitt).c_str());
-		DEBUG("ColGoalDecPar         : " << STR_MOD->msk(str, DELIM, ColGoalDecPar).c_str());
-		DEBUG("ColAssist             : " << STR_MOD->msk(str, DELIM, ColAssist).c_str());
-		DEBUG("ColAmm                : " << STR_MOD->msk(str, DELIM, ColAmm).c_str());
-		DEBUG("ColEsp                : " << STR_MOD->msk(str, DELIM, ColEsp).c_str());
-//		DEBUG("ColdaSostituire       : " << STR_MOD->msk(str, DELIM, ColdaSostituire).c_str());
+		//DEBUG("ColCognome            : " << STR_MOD->msk(str, DELIM, ColCognome).c_str());
+//		//DEBUG("ColNome_Sost          : " << STR_MOD->msk(str, DELIM, ColCognome_Sost).c_str());
+		//DEBUG("ColSquadra            : " << STR_MOD->msk(str, DELIM, ColSquadra).c_str());
+//		//DEBUG("ColSquadra_Sost       : " << STR_MOD->msk(str, DELIM, ColSquadra_Sost).c_str());
+		//DEBUG("ColRuolo              : " << STR_MOD->msk(str, DELIM, ColRuolo).c_str());
+		//DEBUG("ColRuolo2             : " << STR_MOD->msk(str, DELIM, ColRuolo2).c_str());
+//		//DEBUG("ColFantaVoto          : " << STR_MOD->msk(str, DELIM, ColFantaVoto).c_str());
+		//DEBUG("ColFantaVotoGazzetta  : " << STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta).c_str());
+		//DEBUG("ColVotoGazzetta       : " << STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str());
+		//DEBUG("ColGoalFatti          : " << STR_MOD->msk(str, DELIM, ColGoalFatti).c_str());
+		//DEBUG("ColGoalSubiti         : " << STR_MOD->msk(str, DELIM, ColGoalSubiti).c_str());
+		//DEBUG("ColAutoreti           : " << STR_MOD->msk(str, DELIM, ColAutoreti).c_str());
+//		//DEBUG("ColRigoreParato       : " << STR_MOD->msk(str, DELIM, ColRigoreParato).c_str());
+//		//DEBUG("ColRigoreSbagliato    : " << STR_MOD->msk(str, DELIM, ColRigoreSbagliato).c_str());
+		//DEBUG("ColGoalDecVitt        : " << STR_MOD->msk(str, DELIM, ColGoalDecVitt).c_str());
+		//DEBUG("ColGoalDecPar         : " << STR_MOD->msk(str, DELIM, ColGoalDecPar).c_str());
+		//DEBUG("ColAssist             : " << STR_MOD->msk(str, DELIM, ColAssist).c_str());
+		//DEBUG("ColAmm                : " << STR_MOD->msk(str, DELIM, ColAmm).c_str());
+		//DEBUG("ColEsp                : " << STR_MOD->msk(str, DELIM, ColEsp).c_str());
+//		//DEBUG("ColdaSostituire       : " << STR_MOD->msk(str, DELIM, ColdaSostituire).c_str());
 
 		// nome
 		tmpPlayer.Cognome = STR_MOD->msk(str, DELIM, ColCognome);
@@ -318,9 +318,9 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 			tmpPlayer.RigoreParato = 0;
 		}
 
-		DEBUG(str.c_str());
-		DEBUG("_" << STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str() << "_");
-		DEBUG("_" << STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta).c_str() << "_");
+		//DEBUG(str.c_str());
+		//DEBUG("_" << STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str() << "_");
+		//DEBUG("_" << STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta).c_str() << "_");
 
 		// fantavoto
 		if (STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta) == "-")
@@ -350,8 +350,8 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 		tmpPlayer.GoalDecPar = atoi(
 		STR_MOD->msk(str, DELIM, ColGoalDecPar).c_str());
 
-		DEBUG("GoalDecVitt = #" << tmpPlayer.GoalDecVitt << "#");
-		DEBUG("GoalDecPar = #" << tmpPlayer.GoalDecPar << "#");
+		//DEBUG("GoalDecVitt = #" << tmpPlayer.GoalDecVitt << "#");
+		//DEBUG("GoalDecPar = #" << tmpPlayer.GoalDecPar << "#");
 
 		if (tmpPlayer.GoalDecVitt != 0) {
 			if (tmpPlayer.FantaVotoGazzetta == 0) {
@@ -540,7 +540,14 @@ void Fanta::checkGiocatoSenzaVoto() {
 		for (size_t j = 0; j < this->Team[k].size(); j++) { // loop sui giocatori
 			//	DEBUG( this->Team[k].at(j).Cognome.c_str());
 
-			if (this->Team[k].at(j).VotoGazzetta == -1) { // se S.V.
+			if ( this->Team[k].at(j).VotoGazzetta == -1 && (
+					this->Team[k].at(j).Esp != 0 ||
+					this->Team[k].at(j).Amm != 0 ||
+					this->Team[k].at(j).Autoreti != 0 ||
+					this->Team[k].at(j).Assist != 0 ||
+					this->Team[k].at(j).GoalSubiti != 0 ||
+					this->Team[k].at(j).GoalFatti != 0
+			) ) { // se S.V. ma con bonus/malus
 
 				if (this->Team[k].at(j).Ruolo2 == 0) { // se e' un portiere
 
@@ -569,109 +576,171 @@ void Fanta::checkGiocatoSenzaVoto() {
 
 				} else if (this->Team[k].at(j).Ruolo2 > 0) { //se non e' un portiere
 
-					DEBUG("Giocato senza voto --> " << this->Team[k].at(j).Cognome.c_str() << " - non portiere.");
+					DEBUG("Giocato senza voto --> " << this->Team[k].at(j).Cognome.c_str() << " - giocatore di movimento.");
 
-					QString answer;
+					/*
+					 *
+					 */
+					//QString answer;
+					//
+					//try {
+					//
+					//	answer
+					//	= this->questionMessage(
+					//	QString::fromStdString(
+					//			this->Team[k].at(j).Cognome));
+					//
+					//	DEBUG(this->Team[k].at(j).Cognome.c_str() << " ha giocato piu' di 25 minuti ? " << answer.toStdString().c_str());
+					//
+					//} catch (...) {
+					//	LOG(FATAL,
+					//	"Exception caught in Fanta::checkGiocatoSenzaVoto()!");
+					//}
+					/***/
 
-					try {
+					//if (answer == "Yes") { // giocato piu' di 25'
+					//DEBUG(this->Team[k].at(j).Cognome << ". VotoGazzetta = _" << this->Team[k].at(j).VotoGazzetta << "_");
+					//DEBUG(this->Team[k].at(j).Cognome << ". FantaVotoGazzetta = _" << this->Team[k].at(j).FantaVotoGazzetta << "_");
+					/* TODO
+					 * controllare il regolamento
+					 * riguardante i giocatori
+					 * senza voto
+					 */
+					this->Team[k].at(j).VotoGazzetta = 6.0;
+					this->Team[k].at(j).FantaVotoGazzetta
+					= this->Team[k].at(j).VotoGazzetta
+					- this->Team[k].at(j).Esp - 0.5
+					* this->Team[k].at(j).Amm - 2
+					* this->Team[k].at(j).Autoreti
+					+ this->Team[k].at(j).Assist;
 
-						answer
-						= this->questionMessage(
-						QString::fromStdString(
-								this->Team[k].at(j).Cognome));
+					/*
+					 * goal
+					 */
+					if (this->Team[k].at(j).Ruolo2 == 1) { // D
 
-						DEBUG("piu' di 25 minuti ? " << this->Team[k].at(j).Cognome.c_str() << " " << answer.toStdString().c_str());
+						this->Team[k].at(j).FantaVotoGazzetta += 4.5 * this->Team[k].at(j).GoalFatti;
 
-					} catch (...) {
-						LOG(FATAL,
-						"Exception caught in Fanta::checkGiocatoSenzaVoto()!");
+					} else if (this->Team[k].at(j).Ruolo2 == 2) { // C
+
+						if (this->Team[k].at(j).Ruolo == 4) { // T
+
+							this->Team[k].at(j).FantaVotoGazzetta += 3.5 * this->Team[k].at(j).GoalFatti;
+
+						} else if (this->Team[k].at(j).Ruolo == 2) { // C
+
+							this->Team[k].at(j).FantaVotoGazzetta += 4.0 * this->Team[k].at(j).GoalFatti;
+
+						} else {
+							/*
+							 * TODO
+							 */
+						}
+					} else if (this->Team[k].at(j).Ruolo2 == 3) { // A
+
+						if (this->Team[k].at(j).Ruolo == 4) { // T
+
+							this->Team[k].at(j).FantaVotoGazzetta += 3.5 * this->Team[k].at(j).GoalFatti;
+
+						} else if (this->Team[k].at(j).Ruolo == 3) { // A
+
+							this->Team[k].at(j).FantaVotoGazzetta += 3.0 * this->Team[k].at(j).GoalFatti;
+
+						} else {
+							/*
+							 * TODO
+							 */
+						}
 					}
 
-					if (answer == "Yes") { // giocato piu' di 25'
+					//DEBUG(this->Team[k].at(j).Cognome << ". VotoGazzetta = _" << this->Team[k].at(j).VotoGazzetta << "_");
+					//DEBUG(this->Team[k].at(j).Cognome << ". FantaVotoGazzetta = _" << this->Team[k].at(j).FantaVotoGazzetta << "_");
 
-						/* TODO
-						 * controllare il regolamento
-						 * riguardante i giocatori
-						 * senza voto
-						 */
+					//} else if (answer == "No") { // giocato meno di 25' --> sostituire
+					//
+					//	DEBUG("da sostituire.");
+					//
+					//	this->Team[k].at(j).daSostituire = 1;// viene marcato per l'eliminazione
+					//
+					//	LOG(DBG,
+					//	" -> "
+					//	+ QString::fromStdString(this->Team[k].at(j).Cognome)
+					//	+ " ("
+					//	+ QString::fromStdString(this->Team[k].at(j).Squadra)
+					//	+ ") non ha giocato 25' : verra' effettuata una sostituzione.");
+					//
+					//} else {
+					//	/* TODO
+					//	 * IMPOSSIBILE?
+					//	 * answer is neither Yes or No !!!!!!
+					//	 * * * * * * * * * * * * * * * * * * * */
+					//}
+					//} else { // da sostituire
+					//
+					//	DEBUG("da sostituire.");
+					//
+					//	this->Team[k].at(j).daSostituire = 1;// viene marcato per l'eliminazione
+					//
+					//	LOG(DBG,
+					//	" -> "
+					//	+ QString::fromStdString(this->Team[k].at(j).Cognome)
+					//	+ " ("
+					//	+ QString::fromStdString(this->Team[k].at(j).Squadra)
+					//	+ ") non ha giocato 25' : verra' effettuata una sostituzione.");
+
+					LOG(
+					DBG,
+					" -> "
+					+ QString::fromStdString(
+							this->Team[k].at(j).Cognome) + " ("
+					+ QString::fromStdString(
+							this->Team[k].at(j).Squadra)
+					+ ", giocatore di movimento) senza voto ma con bonus/malus. Fantavoto :  "
+					+ QString::fromStdString(
+							my::toString<float>(
+									this->Team[k].at(j).FantaVotoGazzetta)));
+
+				}
+
+                continue;
+
+			} else if ( this->Team[k].at(j).VotoGazzetta == -1 ) { // se S.V. ma senza bonus/malus
+
+				QString answer;
+
+				try {
+
+					answer
+					= this->questionMessage(
+					QString::fromStdString(
+							this->Team[k].at(j).Cognome));
+
+					DEBUG(this->Team[k].at(j).Cognome.c_str() << " ha giocato piu' di 25 minuti ? " << answer.toStdString().c_str());
+
+				} catch (...) {
+					LOG(FATAL,
+					"Exception caught in Fanta::checkGiocatoSenzaVoto()!");
+				}
+
+				if (answer == "Yes") { // giocato piu' di 25'
+					DEBUG(this->Team[k].at(j).Cognome << ". VotoGazzetta = _" << this->Team[k].at(j).VotoGazzetta << "_");
+					DEBUG(this->Team[k].at(j).Cognome << ". FantaVotoGazzetta = _" << this->Team[k].at(j).FantaVotoGazzetta << "_");
+
+					if ( this->Team[k].at(j).Ruolo2 == 0 ) { // P
 						this->Team[k].at(j).VotoGazzetta = 6.0;
-						this->Team[k].at(j).FantaVotoGazzetta
-						= this->Team[k].at(j).VotoGazzetta
-						- this->Team[k].at(j).Esp - 0.5
-						* this->Team[k].at(j).Amm - 2
-						* this->Team[k].at(j).Autoreti
-						+ this->Team[k].at(j).Assist;
-
-						/*
-						 * goal
-						 */
-						if (this->Team[k].at(j).Ruolo2 == 1) { // D
-
-							this->Team[k].at(j).FantaVotoGazzetta += 4.5 * this->Team[k].at(j).GoalFatti;
-
-						} else if (this->Team[k].at(j).Ruolo2 == 2) { // C
-
-							if (this->Team[k].at(j).Ruolo == 4) { // T
-
-								this->Team[k].at(j).FantaVotoGazzetta += 3.5 * this->Team[k].at(j).GoalFatti;
-
-							} else if (this->Team[k].at(j).Ruolo == 2) { // C
-
-								this->Team[k].at(j).FantaVotoGazzetta += 4.0 * this->Team[k].at(j).GoalFatti;
-
-							} else {
-								/*
-								 * TODO
-								 */
-							}
-						} else if (this->Team[k].at(j).Ruolo2 == 3) { // A
-
-							if (this->Team[k].at(j).Ruolo == 4) { // T
-
-								this->Team[k].at(j).FantaVotoGazzetta += 3.5 * this->Team[k].at(j).GoalFatti;
-
-							} else if (this->Team[k].at(j).Ruolo == 3) { // A
-
-								this->Team[k].at(j).FantaVotoGazzetta += 3.0 * this->Team[k].at(j).GoalFatti;
-
-							} else {
-								/*
-								 * TODO
-								 */
-							}
-						}
-
-						if (this->Team[k].at(j).FantaVotoGazzetta == 6.0) { // no Bonus/Malus
-							this->Team[k].at(j).VotoGazzetta = 5.5;
-							this->Team[k].at(j).FantaVotoGazzetta = 5.5;
-
-							LOG(DBG,
-							" -> "
-							+ QString::fromStdString(this->Team[k].at(j).Cognome)
-							+ " ("
-							+ QString::fromStdString(this->Team[k].at(j).Squadra)
-							+ ") ha giocato 25'.");
-						}
-
-					} else if (answer == "No") { // giocato meno di 25' --> sostituire
-
-						DEBUG("da sostituire.");
-
-						this->Team[k].at(j).daSostituire = 1;// viene marcato per l'eliminazione
-
-						LOG(DBG,
-						" -> "
-						+ QString::fromStdString(this->Team[k].at(j).Cognome)
-						+ " ("
-						+ QString::fromStdString(this->Team[k].at(j).Squadra)
-						+ ") non ha giocato 25' : verra' effettuata una sostituzione.");
-
+						this->Team[k].at(j).FantaVotoGazzetta = 6.0;
 					} else {
-						/* TODO
-						 * IMPOSSIBILE?
-						 * answer is neither Yes or No !!!!!!
-						 * * * * * * * * * * * * * * * * * * * */
+						this->Team[k].at(j).VotoGazzetta = 5.5;
+						this->Team[k].at(j).FantaVotoGazzetta = 5.5;
 					}
+
+					LOG(DBG,
+					" -> "
+					+ QString::fromStdString(this->Team[k].at(j).Cognome)
+					+ " ("
+					+ QString::fromStdString(this->Team[k].at(j).Squadra)
+					+ ") ha giocato 25'.");
+
 				} else { // da sostituire
 
 					DEBUG("da sostituire.");
@@ -687,7 +756,7 @@ void Fanta::checkGiocatoSenzaVoto() {
 				}
 
 				continue;
-			} // se S.V.
+			} // if ... else if ...
 		} // loop giocatori
 	} // loop squadre
 }
