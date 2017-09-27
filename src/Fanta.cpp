@@ -1045,60 +1045,34 @@ void Fanta::substitutions() {
 				 * Ricerca nuovo modulo
 				 */
 				newModuloPosition = moduloPosition; // modulo originario, se non si trova nulla rimane quello
-				for (unsigned int j = moduloPosition; j < 7; j++) {
+				while (!foundNewModule) {
 
-					//DEBUG("primo loop - j = " << j);
+					for (unsigned int j = moduloPosition; j < 7; j++) {
 
-					if (moduloPossibile[j]) {
-						DEBUG( "nuovo modulo " << k << " : " << labelModuli[j].c_str() );
-						foundNewModule = true;
-						newModuloPosition = j;
-						break;
-					}
-				}
-
-				if (!foundNewModule) {
-					for (unsigned int j = moduloPosition; j >= 0; j--) {
-
-						//DEBUG("secondo loop - j = " << j);
+						DEBUG("primo loop - j = " << j);
 
 						if (moduloPossibile[j]) {
 							DEBUG( "nuovo modulo " << k << " : " << labelModuli[j].c_str() );
 							foundNewModule = true;
 							newModuloPosition = j;
+							DEBUG( "before first break");
+							break;
+						}
+					}
+
+					for (unsigned int j = moduloPosition; j >= 0; j--) {
+
+						DEBUG("secondo loop - j = " << j);
+
+						if (moduloPossibile[j]) {
+							DEBUG( "nuovo modulo " << k << " : " << labelModuli[j].c_str() );
+							foundNewModule = true;
+							newModuloPosition = j;
+							DEBUG( "before second break");
 							break;
 						}
 					}
 				}
-
-				//while (!foundNewModule) {
-                //
-				//	for (unsigned int j = moduloPosition; j < 7; j++) {
-                //
-				//		DEBUG("primo loop - j = " << j);
-                //
-				//		if (moduloPossibile[j]) {
-				//			DEBUG( "nuovo modulo " << k << " : " << labelModuli[j].c_str() );
-				//			foundNewModule = true;
-				//			newModuloPosition = j;
-				//			DEBUG( "before first break");
-				//			break;
-				//		}
-				//	}
-                //
-				//	for (unsigned int j = moduloPosition; j >= 0; j--) {
-                //
-				//		DEBUG("secondo loop - j = " << j);
-                //
-				//		if (moduloPossibile[j]) {
-				//			DEBUG( "nuovo modulo " << k << " : " << labelModuli[j].c_str() );
-				//			foundNewModule = true;
-				//			newModuloPosition = j;
-				//			DEBUG( "before second break");
-				//			break;
-				//		}
-				//	}
-				//}
 
 
 				if (!foundNewModule) {
