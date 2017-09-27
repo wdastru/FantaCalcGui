@@ -137,7 +137,7 @@ unsigned int FileFormazioniReader::execute() {
 				// <-- sostituzione lettere accentate ed eliminazione caratteri "non-lettera"
 				//STR_MOD->toUpperCase(line);
 
-				DEBUG("ricerca di " << line.c_str());
+				//DEBUG("ricerca di " << line.c_str());
 
 				if (line.size() <= 1) // evitare le righe con un solo carattere rimasto
 					continue;
@@ -192,7 +192,7 @@ unsigned int FileFormazioniReader::execute() {
 
 					if (found != string::npos) { // se vero il giocatore e' stato trovato
 						// aggiungi al vettore con tutti i giocatori trovati
-						DEBUG(this->allThePlayers[xx - 65].at(j).c_str());
+						//DEBUG(this->allThePlayers[xx - 65].at(j).c_str());
 						v_Found.push_back(this->allThePlayers[xx - 65].at(j));
 					}
 				}
@@ -440,8 +440,8 @@ unsigned int FileFormazioniReader::execute() {
 						v_Found.at(0) += "0\t0";
 					}
 
-					DEBUG("before switch : v_Found.at(0) = " << v_Found.at(0).c_str() << " (squadra " << k << ")");
-					DEBUG("FANTA->Team[" << k + "].size() = " << FANTA->Team[k].size());
+					//DEBUG("before switch : v_Found.at(0) = " << v_Found.at(0).c_str() << " (squadra " << k << ")");
+					//DEBUG("FANTA->Team[" << k + "].size() = " << FANTA->Team[k].size());
 
 					switch (FANTA->addPlayer(v_Found.at(0), k)) {
 					case PLAYER_OK:

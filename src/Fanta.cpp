@@ -224,7 +224,7 @@ void Fanta::setAtHome(unsigned int k) {
 }
 unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 	try {
-		DEBUG("str : " << str.c_str());
+		//DEBUG("str : " << str.c_str());
 
 		Fanta::player tmpPlayer;
 
@@ -341,8 +341,8 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 			STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str());
 		}
 
-		DEBUG("VotoGazzetta = _" << tmpPlayer.VotoGazzetta << "_");
-		DEBUG("FantaVotoGazzetta = _" << tmpPlayer.FantaVotoGazzetta << "_");
+		//DEBUG("VotoGazzetta = _" << tmpPlayer.VotoGazzetta << "_");
+		//DEBUG("FantaVotoGazzetta = _" << tmpPlayer.FantaVotoGazzetta << "_");
 
 		// --> goal decisivi
 		tmpPlayer.GoalDecVitt = atoi(
@@ -553,15 +553,6 @@ void Fanta::checkGiocatoSenzaVoto() {
 
 					DEBUG("Giocato senza voto --> " << this->Team[k].at(j).Cognome.c_str() << " - portiere.");
 
-					this->Team[k].at(j).VotoGazzetta = 6.0;// il portiere non si sostituisce se ha giocato (ma non ha preso voto),
-					this->Team[k].at(j).FantaVotoGazzetta
-					= this->Team[k].at(j).VotoGazzetta
-					- this->Team[k].at(j).Esp - 0.5
-					* this->Team[k].at(j).Amm - 2
-					* this->Team[k].at(j).Autoreti
-					+ this->Team[k].at(j).Assist
-					- this->Team[k].at(j).GoalSubiti;// subiti x un portiere !
-
 					LOG(
 					DBG,
 					" -> "
@@ -578,116 +569,6 @@ void Fanta::checkGiocatoSenzaVoto() {
 
 					DEBUG("Giocato senza voto --> " << this->Team[k].at(j).Cognome.c_str() << " - giocatore di movimento.");
 
-					/*
-					 *
-					 */
-					//QString answer;
-					//
-					//try {
-					//
-					//	answer
-					//	= this->questionMessage(
-					//	QString::fromStdString(
-					//			this->Team[k].at(j).Cognome));
-					//
-					//	DEBUG(this->Team[k].at(j).Cognome.c_str() << " ha giocato piu' di 25 minuti ? " << answer.toStdString().c_str());
-					//
-					//} catch (...) {
-					//	LOG(FATAL,
-					//	"Exception caught in Fanta::checkGiocatoSenzaVoto()!");
-					//}
-					/***/
-
-					//if (answer == "Yes") { // giocato piu' di 25'
-					//DEBUG(this->Team[k].at(j).Cognome << ". VotoGazzetta = _" << this->Team[k].at(j).VotoGazzetta << "_");
-					//DEBUG(this->Team[k].at(j).Cognome << ". FantaVotoGazzetta = _" << this->Team[k].at(j).FantaVotoGazzetta << "_");
-					/* TODO
-					 * controllare il regolamento
-					 * riguardante i giocatori
-					 * senza voto
-					 */
-					this->Team[k].at(j).VotoGazzetta = 6.0;
-					this->Team[k].at(j).FantaVotoGazzetta
-					= this->Team[k].at(j).VotoGazzetta
-					- this->Team[k].at(j).Esp - 0.5
-					* this->Team[k].at(j).Amm - 2
-					* this->Team[k].at(j).Autoreti
-					+ this->Team[k].at(j).Assist;
-
-					/*
-					 * goal
-					 */
-					if (this->Team[k].at(j).Ruolo2 == 1) { // D
-
-						this->Team[k].at(j).FantaVotoGazzetta += 4.5 * this->Team[k].at(j).GoalFatti;
-
-					} else if (this->Team[k].at(j).Ruolo2 == 2) { // C
-
-						if (this->Team[k].at(j).Ruolo == 4) { // T
-
-							this->Team[k].at(j).FantaVotoGazzetta += 3.5 * this->Team[k].at(j).GoalFatti;
-
-						} else if (this->Team[k].at(j).Ruolo == 2) { // C
-
-							this->Team[k].at(j).FantaVotoGazzetta += 4.0 * this->Team[k].at(j).GoalFatti;
-
-						} else {
-							/*
-							 * TODO
-							 */
-						}
-					} else if (this->Team[k].at(j).Ruolo2 == 3) { // A
-
-						if (this->Team[k].at(j).Ruolo == 4) { // T
-
-							this->Team[k].at(j).FantaVotoGazzetta += 3.5 * this->Team[k].at(j).GoalFatti;
-
-						} else if (this->Team[k].at(j).Ruolo == 3) { // A
-
-							this->Team[k].at(j).FantaVotoGazzetta += 3.0 * this->Team[k].at(j).GoalFatti;
-
-						} else {
-							/*
-							 * TODO
-							 */
-						}
-					}
-
-					//DEBUG(this->Team[k].at(j).Cognome << ". VotoGazzetta = _" << this->Team[k].at(j).VotoGazzetta << "_");
-					//DEBUG(this->Team[k].at(j).Cognome << ". FantaVotoGazzetta = _" << this->Team[k].at(j).FantaVotoGazzetta << "_");
-
-					//} else if (answer == "No") { // giocato meno di 25' --> sostituire
-					//
-					//	DEBUG("da sostituire.");
-					//
-					//	this->Team[k].at(j).daSostituire = 1;// viene marcato per l'eliminazione
-					//
-					//	LOG(DBG,
-					//	" -> "
-					//	+ QString::fromStdString(this->Team[k].at(j).Cognome)
-					//	+ " ("
-					//	+ QString::fromStdString(this->Team[k].at(j).Squadra)
-					//	+ ") non ha giocato 25' : verra' effettuata una sostituzione.");
-					//
-					//} else {
-					//	/* TODO
-					//	 * IMPOSSIBILE?
-					//	 * answer is neither Yes or No !!!!!!
-					//	 * * * * * * * * * * * * * * * * * * * */
-					//}
-					//} else { // da sostituire
-					//
-					//	DEBUG("da sostituire.");
-					//
-					//	this->Team[k].at(j).daSostituire = 1;// viene marcato per l'eliminazione
-					//
-					//	LOG(DBG,
-					//	" -> "
-					//	+ QString::fromStdString(this->Team[k].at(j).Cognome)
-					//	+ " ("
-					//	+ QString::fromStdString(this->Team[k].at(j).Squadra)
-					//	+ ") non ha giocato 25' : verra' effettuata una sostituzione.");
-
 					LOG(
 					DBG,
 					" -> "
@@ -699,10 +580,62 @@ void Fanta::checkGiocatoSenzaVoto() {
 					+ QString::fromStdString(
 							my::toString<float>(
 									this->Team[k].at(j).FantaVotoGazzetta)));
-
 				}
 
-                continue;
+				this->Team[k].at(j).VotoGazzetta = 6.0;
+				this->Team[k].at(j).FantaVotoGazzetta
+				= this->Team[k].at(j).VotoGazzetta
+				- this->Team[k].at(j).Esp - 0.5
+				* this->Team[k].at(j).Amm - 2
+				* this->Team[k].at(j).Autoreti
+				+ this->Team[k].at(j).Assist;
+
+				/*
+				 * goal
+				 */
+				if (this->Team[k].at(j).Ruolo2 == 0) { // P
+
+					this->Team[k].at(j).FantaVotoGazzetta -= this->Team[k].at(j).GoalSubiti;// subiti x un portiere !
+
+				} else if (this->Team[k].at(j).Ruolo2 == 1) { // D
+
+					this->Team[k].at(j).FantaVotoGazzetta += 4.5 * this->Team[k].at(j).GoalFatti;
+
+				} else if (this->Team[k].at(j).Ruolo2 == 2) { // C
+
+					if (this->Team[k].at(j).Ruolo == 4) { // T
+
+						this->Team[k].at(j).FantaVotoGazzetta += 3.5 * this->Team[k].at(j).GoalFatti;
+
+					} else if (this->Team[k].at(j).Ruolo == 2) { // C
+
+						this->Team[k].at(j).FantaVotoGazzetta += 4.0 * this->Team[k].at(j).GoalFatti;
+
+					} else {
+						/*
+						 * TODO
+						 */
+					}
+				} else if (this->Team[k].at(j).Ruolo2 == 3) { // A
+
+					if (this->Team[k].at(j).Ruolo == 4) { // T
+
+						this->Team[k].at(j).FantaVotoGazzetta += 3.5 * this->Team[k].at(j).GoalFatti;
+
+					} else if (this->Team[k].at(j).Ruolo == 3) { // A
+
+						this->Team[k].at(j).FantaVotoGazzetta += 3.0 * this->Team[k].at(j).GoalFatti;
+
+					} else {
+						/*
+						 * TODO
+						 */
+					}
+				}
+
+				//DEBUG(this->Team[k].at(j).Cognome << ". VotoGazzetta = _" << this->Team[k].at(j).VotoGazzetta << "_");
+				//DEBUG(this->Team[k].at(j).Cognome << ". FantaVotoGazzetta = _" << this->Team[k].at(j).FantaVotoGazzetta << "_");
+				continue;
 
 			} else if ( this->Team[k].at(j).VotoGazzetta == -1 ) { // se S.V. ma senza bonus/malus
 
@@ -743,7 +676,7 @@ void Fanta::checkGiocatoSenzaVoto() {
 
 				} else { // da sostituire
 
-					DEBUG("da sostituire.");
+					DEBUG(this->Team[k].at(j).Cognome << " da sostituire.");
 
 					this->Team[k].at(j).daSostituire = 1;// viene marcato per l'eliminazione
 
@@ -754,8 +687,6 @@ void Fanta::checkGiocatoSenzaVoto() {
 					+ QString::fromStdString(this->Team[k].at(j).Squadra)
 					+ ") non ha giocato 25' : verra' effettuata una sostituzione.");
 				}
-
-				continue;
 			} // if ... else if ...
 		} // loop giocatori
 	} // loop squadre
@@ -1119,7 +1050,7 @@ void Fanta::substitutions() {
 					//DEBUG("primo loop - j = " << j);
 
 					if (moduloPossibile[j]) {
-						DEBUG( "nuovo modulo : " << labelModuli[j].c_str() );
+						DEBUG( "nuovo modulo " << k << " : " << labelModuli[j].c_str() );
 						foundNewModule = true;
 						newModuloPosition = j;
 						break;
@@ -1132,13 +1063,43 @@ void Fanta::substitutions() {
 						//DEBUG("secondo loop - j = " << j);
 
 						if (moduloPossibile[j]) {
-							DEBUG( "nuovo modulo : " << labelModuli[j].c_str() );
+							DEBUG( "nuovo modulo " << k << " : " << labelModuli[j].c_str() );
 							foundNewModule = true;
 							newModuloPosition = j;
 							break;
 						}
 					}
 				}
+
+				//while (!foundNewModule) {
+                //
+				//	for (unsigned int j = moduloPosition; j < 7; j++) {
+                //
+				//		DEBUG("primo loop - j = " << j);
+                //
+				//		if (moduloPossibile[j]) {
+				//			DEBUG( "nuovo modulo " << k << " : " << labelModuli[j].c_str() );
+				//			foundNewModule = true;
+				//			newModuloPosition = j;
+				//			DEBUG( "before first break");
+				//			break;
+				//		}
+				//	}
+                //
+				//	for (unsigned int j = moduloPosition; j >= 0; j--) {
+                //
+				//		DEBUG("secondo loop - j = " << j);
+                //
+				//		if (moduloPossibile[j]) {
+				//			DEBUG( "nuovo modulo " << k << " : " << labelModuli[j].c_str() );
+				//			foundNewModule = true;
+				//			newModuloPosition = j;
+				//			DEBUG( "before second break");
+				//			break;
+				//		}
+				//	}
+				//}
+
 
 				if (!foundNewModule) {
 					DEBUG("Non trovato nuovo modulo compatibile!");
