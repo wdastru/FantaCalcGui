@@ -118,7 +118,7 @@ void Fanta::initialize() {
 	Fanta::NonHaGiocato.Cognome_Sost = "---";
 	Fanta::NonHaGiocato.Squadra = "---";
 	Fanta::NonHaGiocato.Squadra_Sost = "---";
-	Fanta::NonHaGiocato.Ruolo = -1;
+	Fanta::NonHaGiocato.Ruolo2 = -1;
 	Fanta::NonHaGiocato.VotoGazzetta = 0.0;
 	Fanta::NonHaGiocato.FantaVotoGazzetta = 3.0;
 	Fanta::NonHaGiocato.FantaVoto = 3.0;
@@ -138,7 +138,7 @@ void Fanta::initialize() {
 	Fanta::fakePlayer.Cognome_Sost = "---";
 	Fanta::fakePlayer.Squadra = "---";
 	Fanta::fakePlayer.Squadra_Sost = "---";
-	Fanta::fakePlayer.Ruolo = -1;
+	Fanta::fakePlayer.Ruolo2 = -1;
 	Fanta::fakePlayer.VotoGazzetta = 0.0;
 	Fanta::fakePlayer.FantaVotoGazzetta = 3.0;
 	Fanta::fakePlayer.FantaVoto = 3.0;
@@ -258,6 +258,7 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 		// goal e rigori
 		if (STR_MOD->msk(str, DELIM, ColRuolo2) == "P") {
 			tmpPlayer.Ruolo = 0;
+			tmpPlayer.Ruolo2 = 0;
 			tmpPlayer.GoalSubiti = fabs(
 			atof(STR_MOD->msk(str, DELIM, ColGoalSubiti).c_str()));
 			tmpPlayer.GoalFatti = 0;
@@ -266,6 +267,7 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 			tmpPlayer.RigoreSbagliato = 0;
 		} else if (STR_MOD->msk(str, DELIM, ColRuolo2) == "D") {
 			tmpPlayer.Ruolo = 1;
+			tmpPlayer.Ruolo2 = 1;
 			tmpPlayer.GoalFatti = atof(
 			STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 4.5;
 			tmpPlayer.GoalSubiti = 0;
@@ -273,13 +275,15 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 			atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3); /* WHAT TODO ??? */
 			tmpPlayer.RigoreParato = 0;
 		} else if (STR_MOD->msk(str, DELIM, ColRuolo2) == "C") {
-			tmpPlayer.Ruolo = 2;
+			tmpPlayer.Ruolo2 = 2;
 			if (STR_MOD->msk(str, DELIM, ColRuolo) == "T") {
+				tmpPlayer.Ruolo = 4;
 				tmpPlayer.GoalFatti = atof(
 				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3.5;
 				tmpPlayer.RigoreSbagliato = fabs(
 				atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3); /* WHAT TODO ??? */
 			} else if (STR_MOD->msk(str, DELIM, ColRuolo) == "C") {
+				tmpPlayer.Ruolo = 2;
 				tmpPlayer.GoalFatti = atof(
 				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 4;
 				tmpPlayer.RigoreSbagliato = fabs(
@@ -292,13 +296,15 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 			tmpPlayer.GoalSubiti = 0;
 			tmpPlayer.RigoreParato = 0;
 		} else if (STR_MOD->msk(str, DELIM, ColRuolo2) == "A") {
-			tmpPlayer.Ruolo = 3;
+			tmpPlayer.Ruolo2 = 3;
 			if (STR_MOD->msk(str, DELIM, ColRuolo) == "T") {
+				tmpPlayer.Ruolo = 4;
 				tmpPlayer.GoalFatti = atof(
 				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3.5;
 				tmpPlayer.RigoreSbagliato = fabs(
 				atoi(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3); /* WHAT TODO ??? */
 			} else if (STR_MOD->msk(str, DELIM, ColRuolo) == "A") {
+				tmpPlayer.Ruolo = 3;
 				tmpPlayer.GoalFatti = atof(
 				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3;
 				tmpPlayer.RigoreSbagliato = fabs(
@@ -380,7 +386,7 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 		for (size_t kk = 0; kk < 2; kk++) {
 			for (size_t i = 0; i < Team[kk].size(); i++) {
 				if (tmpPlayer.Cognome == Fanta::Team[kk].at(i).Cognome
-						&& tmpPlayer.Ruolo == Fanta::Team[kk].at(i).Ruolo) {
+						&& tmpPlayer.Ruolo2 == Fanta::Team[kk].at(i).Ruolo2) {
 					Fanta::Team[k].push_back(this->fakePlayer);
 					return PLAYER_REPEATED;
 				}
@@ -536,7 +542,7 @@ void Fanta::checkGiocatoSenzaVoto() {
 
 			if (this->Team[k].at(j).VotoGazzetta == -1) { // se S.V.
 
-				if (this->Team[k].at(j).Ruolo == 0) { // se e' un portiere
+				if (this->Team[k].at(j).Ruolo2 == 0) { // se e' un portiere
 
 					DEBUG("Giocato senza voto --> " << this->Team[k].at(j).Cognome.c_str() << " - portiere.");
 
@@ -561,7 +567,7 @@ void Fanta::checkGiocatoSenzaVoto() {
 							my::toString<float>(
 									this->Team[k].at(j).FantaVotoGazzetta)));
 
-				} else if (this->Team[k].at(j).Ruolo > 0) { //se non e' un portiere
+				} else if (this->Team[k].at(j).Ruolo2 > 0) { //se non e' un portiere
 
 					DEBUG("Giocato senza voto --> " << this->Team[k].at(j).Cognome.c_str() << " - non portiere.");
 
@@ -594,8 +600,46 @@ void Fanta::checkGiocatoSenzaVoto() {
 						- this->Team[k].at(j).Esp - 0.5
 						* this->Team[k].at(j).Amm - 2
 						* this->Team[k].at(j).Autoreti
-						+ this->Team[k].at(j).Assist + 3
-						* this->Team[k].at(j).GoalFatti;
+						+ this->Team[k].at(j).Assist;
+
+						/*
+						 * goal
+						 */
+						if (this->Team[k].at(j).Ruolo2 == 1) { // D
+
+							this->Team[k].at(j).FantaVotoGazzetta += 4.5 * this->Team[k].at(j).GoalFatti;
+
+						} else if (this->Team[k].at(j).Ruolo2 == 2) { // C
+
+							if (this->Team[k].at(j).Ruolo == 4) { // T
+
+								this->Team[k].at(j).FantaVotoGazzetta += 3.5 * this->Team[k].at(j).GoalFatti;
+
+							} else if (this->Team[k].at(j).Ruolo == 2) { // C
+
+								this->Team[k].at(j).FantaVotoGazzetta += 4.0 * this->Team[k].at(j).GoalFatti;
+
+							} else {
+								/*
+								 * TODO
+								 */
+							}
+						} else if (this->Team[k].at(j).Ruolo2 == 3) { // A
+
+							if (this->Team[k].at(j).Ruolo == 4) { // T
+
+								this->Team[k].at(j).FantaVotoGazzetta += 3.5 * this->Team[k].at(j).GoalFatti;
+
+							} else if (this->Team[k].at(j).Ruolo == 3) { // A
+
+								this->Team[k].at(j).FantaVotoGazzetta += 3.0 * this->Team[k].at(j).GoalFatti;
+
+							} else {
+								/*
+								 * TODO
+								 */
+							}
+						}
 
 						if (this->Team[k].at(j).FantaVotoGazzetta == 6.0) { // no Bonus/Malus
 							this->Team[k].at(j).VotoGazzetta = 5.5;
@@ -740,7 +784,7 @@ void Fanta::orderByRuolo() {
 
 					for (size_t j = 0; j < this->Team[k].size(); j++) // loop sui giocatori
 							{
-						if (this->Team[k].at(j).Ruolo == i
+						if (this->Team[k].at(j).Ruolo2 == i
 								&& this->Fanta::teamOrderedByRuolo[k][i].size()
 										< this->rosa[i]) {
 							Fanta::teamOrderedByRuolo[k][i].push_back(
@@ -762,7 +806,7 @@ void Fanta::orderByRuolo() {
 		//		for (size_t j = 0; j < Fanta::teamOrderedByRuolo[k][i].size();
 		//		j++) {
 		//			DEBUG(this->getTeamName(k).c_str() << " : " <<
-		//			this->teamOrderedByRuolo[k][i].at(j).Ruolo << " " <<
+		//			this->teamOrderedByRuolo[k][i].at(j).Ruolo2 << " " <<
 		//			this->teamOrderedByRuolo[k][i].at(j).Cognome.c_str() << ".");
 		//		}
 		//	}
@@ -843,7 +887,7 @@ void Fanta::substitutions() {
 	//		for (size_t j = 0; j < Fanta::teamOrderedByRuolo[k][i].size();
 	//		j++) {
 	//			DEBUG(this->getTeamName(k).c_str() << " : " <<
-	//			this->teamOrderedByRuolo[k][i].at(j).Ruolo << " " <<
+	//			this->teamOrderedByRuolo[k][i].at(j).Ruolo2 << " " <<
 	//			this->teamOrderedByRuolo[k][i].at(j).Cognome.c_str() << ".");
 	//		}
 	//	}
@@ -1125,7 +1169,7 @@ void Fanta::substitutions() {
 	//		for (size_t j = 0; j < Fanta::teamOrderedByRuolo[k][i].size();
 	//				j++) {
 	//			DEBUG(this->getTeamName(k).c_str() << " : " <<
-	//					this->teamOrderedByRuolo[k][i].at(j).Ruolo << " " <<
+	//					this->teamOrderedByRuolo[k][i].at(j).Ruolo2 << " " <<
 	//					this->teamOrderedByRuolo[k][i].at(j).Cognome.c_str() << ".");
 	//		}
 	//	}
@@ -1259,7 +1303,7 @@ void Fanta::substitutions() {
 	//		for (size_t j = 0; j < Fanta::teamOrderedByRuolo[k][i].size();
 	//				j++) {
 	//			DEBUG(this->getTeamName(k).c_str() << " : " <<
-	//					this->teamOrderedByRuolo[k][i].at(j).Ruolo << " " <<
+	//					this->teamOrderedByRuolo[k][i].at(j).Ruolo2 << " " <<
 	//					this->teamOrderedByRuolo[k][i].at(j).Cognome.c_str() << ".");
 	//		}
 	//	}
@@ -1282,7 +1326,7 @@ void Fanta::substitutions() {
 	//		for (size_t j = 0; j < Fanta::teamOrderedByRuolo[k][i].size();
 	//				j++) {
 	//			DEBUG(this->getTeamName(k).c_str() << " : " <<
-	//					this->teamOrderedByRuolo[k][i].at(j).Ruolo << " " <<
+	//					this->teamOrderedByRuolo[k][i].at(j).Ruolo2 << " " <<
 	//					this->teamOrderedByRuolo[k][i].at(j).Cognome.c_str() << ".");
 	//		}
 	//	}
@@ -1773,7 +1817,7 @@ void Fanta::bSort(std::vector<Fanta::player> & vect) {
 					swap(vect.at(i), vect.at(i + 1));
 				else if (vect.at(i).VotoGazzetta
 						== vect.at(i + 1).VotoGazzetta) {
-					if (vect.at(i).Ruolo < vect.at(i + 1).Ruolo) // poi per Ruolo
+					if (vect.at(i).Ruolo2 < vect.at(i + 1).Ruolo2) // poi per Ruolo
 						swap(vect.at(i), vect.at(i + 1));
 				}
 			}
