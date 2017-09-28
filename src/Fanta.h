@@ -33,10 +33,12 @@ private:
 	int distanza[2][4];		// giocatori che mancano per arrivare al modulo
 	unsigned int disponibili[2][4];	// giocatori in panchina che possono essere usati
 
-	unsigned int inCampoModuli[7][4];		// giocatori effettivamenti scesi in campo nei moduli possibili
-	int distanzaModuli[7][4];		// giocatori che mancano per arrivare ai moduli possibili
+	unsigned int inCampoModuli[7][4];			// giocatori effettivamenti scesi in campo nei moduli possibili
+	int distanzaModuli[7][4];					// giocatori che mancano per arrivare ai moduli possibili
 	unsigned int disponibiliModuli[7][4];		// giocatori in panchina che possono essere usati per i moduli possibili
-	signed int distanzaTotaleModuli[7]; // distanza dei giocatori in campo dai moduli possibili
+	unsigned int originalsOutModuli[7][4];		// giocatori orginariamente titolari che escono  per i moduli possibili
+	signed int distanzaTotaleModuli[7]; 		// distanza dei giocatori in campo dai moduli possibili
+	unsigned int originalsOutTotaleModuli[7]; 	// giocatori totali orginariamente titolari che escono  per i moduli possibili
 
 	double Total[2];
 	signed int ruoloDaSostituire[2][10]; // ruoli da sostituire
