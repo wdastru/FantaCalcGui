@@ -862,6 +862,40 @@ void Fanta::substitutions() {
 	}
 
 	/*
+	 *  4 - 3 - 3
+     *	1 - 4 - 3 - 3
+     *	1 - 2 - 2 - 2
+     *	CANNAVARO Paolo
+     *	BENTANCUR Rodrigo
+     *	POLITANO Matteo
+     *	CALHANOGLU Hakan
+     *	SAMIR
+     *	STORARI Marco
+     *	PERIN Mattia
+     *	PAROLO Marco
+     *	LAPADULA Gianluca
+     *	PAZZINI Giampaolo
+     *	ALEX SANDRO
+     *	FREULER Remo
+     *	BONUCCI Leonardo
+     *	SAPONARA Riccardo
+     *	STRINIC Ivan
+     *	D'ALESSANDRO Marco
+     *	GASPAR Bruno
+     *	KARSDORP Rick
+     *	CUADRADO Juan
+     *	CUTRONE Patrik
+     *	DONNARUMMA Gianluigi
+     *	JOAO MARIO
+     *	GOMEZ Alejandro
+     *	BORINI Fabio
+     *	N'KOULOU Nicolas
+     *	141
+     *	347-2375356
+     *	Sat 23 Sep 2017 - 10:32:24
+	 */
+
+	/*
 	 *  sposta i 'NON HA GIOCATO' al fondo dei giocatori in campo
 	 */
 	for (size_t k = 0; k < 2; k++) // squadra
@@ -880,18 +914,19 @@ void Fanta::substitutions() {
 		}
 	}
 
-	//for (size_t k = 0; k < 2; k++) // squadra
-	//{
-	//	for (size_t i = 0; i < 4; i++) // ruolo
-	//	{
-	//		for (size_t j = 0; j < Fanta::teamOrderedByRuolo[k][i].size();
-	//		j++) {
-	//			DEBUG(this->getTeamName(k).c_str() << " : " <<
-	//			this->teamOrderedByRuolo[k][i].at(j).Ruolo2 << " " <<
-	//			this->teamOrderedByRuolo[k][i].at(j).Cognome.c_str() << ".");
-	//		}
-	//	}
-	//}
+	for (size_t k = 0; k < 2; k++) // squadra
+	{
+		for (size_t i = 0; i < 4; i++) // ruolo
+		{
+			for (size_t j = 0; j < Fanta::teamOrderedByRuolo[k][i].size();
+			j++) {
+				DEBUG(this->getTeamName(k).c_str() << " : " <<
+				this->teamOrderedByRuolo[k][i].at(j).Ruolo2 << " " <<
+				this->teamOrderedByRuolo[k][i].at(j).Cognome.c_str() << " (" <<
+				this->teamOrderedByRuolo[k][i].at(j).Cognome_Sost.c_str() << ").");
+			}
+		}
+	}
 
 	/*
 	 * determina cosa c'è e cosa serve
@@ -1044,26 +1079,29 @@ void Fanta::substitutions() {
 				}
 
 				/*
-				 * check per modulo che conservi il più possibile i titolari
+				 * check per modulo che :
+				 * 1 - abbia una distanza minore o uguale a tre (permetta quindi di giocare in 11)
+				 * 2 - abbia i giocatori disponibili per effettuare le sostituziooni
+				 * 3 - conservi i titolari
 				 */
 				for (size_t j = 0; j < 7; j++) {
 
-					if (Fanta::distanzaTotaleModuli[j] > 3
+					if (Fanta::distanzaTotaleModuli[j] > 3										// condizione 1
 							|| (
-									static_cast<signed int>(Fanta::disponibiliModuli[j][0])
-									< Fanta::distanzaModuli[j][0]
-									|| static_cast<signed int>(Fanta::disponibiliModuli[j][1])
-											< Fanta::distanzaModuli[j][1]
-									|| static_cast<signed int>(Fanta::disponibiliModuli[j][2])
-											< Fanta::distanzaModuli[j][2]
-									|| static_cast<signed int>(Fanta::disponibiliModuli[j][3])
-											< Fanta::distanzaModuli[j][3]
+									static_cast<signed int>(Fanta::disponibiliModuli[j][0])		// condizione 2
+									< Fanta::distanzaModuli[j][0]                               // condizione 2
+									|| static_cast<signed int>(Fanta::disponibiliModuli[j][1])  // condizione 2
+											< Fanta::distanzaModuli[j][1]                       // condizione 2
+									|| static_cast<signed int>(Fanta::disponibiliModuli[j][2])  // condizione 2
+											< Fanta::distanzaModuli[j][2]                       // condizione 2
+									|| static_cast<signed int>(Fanta::disponibiliModuli[j][3])  // condizione 2
+											< Fanta::distanzaModuli[j][3]                       // condizione 2
 								)
-							|| Fanta::originalsOutTotaleModuli[j] > 0 ) {
+							|| Fanta::originalsOutTotaleModuli[j] > 0 ) {						// condizione 3
 						moduloPossibile[j] = false;
 					}
 
-					DEBUG("A - modulo " << j << " (" << labelModuli[j].c_str() << ") possibile? : " << moduloPossibile[j]);
+					DEBUG("modulo " << j << " (" << labelModuli[j].c_str() << ") possibile? : " << moduloPossibile[j]);
 				}
 
 				/*
@@ -1098,64 +1136,6 @@ void Fanta::substitutions() {
 						}
 					}
 				}
-				/***/
-
-				/*
-				 * check per modulo che conservi il più possibile i titolari
-				 */
-				//if (!foundNewModule) {
-					for (size_t j = 0; j < 7; j++) {
-
-						if (Fanta::distanzaTotaleModuli[j] > 3
-								|| (
-										static_cast<signed int>(Fanta::disponibiliModuli[j][0])
-										< Fanta::distanzaModuli[j][0]
-										|| static_cast<signed int>(Fanta::disponibiliModuli[j][1])
-												< Fanta::distanzaModuli[j][1]
-										|| static_cast<signed int>(Fanta::disponibiliModuli[j][2])
-												< Fanta::distanzaModuli[j][2]
-										|| static_cast<signed int>(Fanta::disponibiliModuli[j][3])
-												< Fanta::distanzaModuli[j][3])
-									) {
-							moduloPossibile[j] = false;
-						}
-
-						DEBUG("B - modulo " << j << " (" << labelModuli[j].c_str() << ") possibile? : " << moduloPossibile[j]);
-					}
-
-					/*
-					 * Ricerca nuovo modulo
-					 */
-					newModuloPosition = moduloPosition; // modulo originario, se non si trova nulla rimane quello
-					while (!foundNewModule) {
-
-						for (unsigned int j = moduloPosition; j < 7; j++) {
-
-							DEBUG("primo loop - j = " << j);
-
-							if (moduloPossibile[j]) {
-								DEBUG( "nuovo modulo " << k << " : " << labelModuli[j].c_str() );
-								foundNewModule = true;
-								newModuloPosition = j;
-								DEBUG( "before first break");
-								break;
-							}
-						}
-
-						for (unsigned int j = moduloPosition; j >= 0; j--) {
-
-							DEBUG("secondo loop - j = " << j);
-
-							if (moduloPossibile[j]) {
-								DEBUG( "nuovo modulo " << k << " : " << labelModuli[j].c_str() );
-								foundNewModule = true;
-								newModuloPosition = j;
-								DEBUG( "before second break");
-								break;
-							}
-						}
-					}
-				//}
 				/***/
 
 				if (!foundNewModule) {
