@@ -51,6 +51,7 @@ private:
 
 	unsigned int moduli[7][4];
 	bool moduloPossibile[7];
+	bool moduloRaggiungibile[7];
 	std::string labelModuli[7];
 	std::vector<QString> subsForModuleChange[2];
 	std::vector<QString> subs[2];
@@ -93,6 +94,8 @@ private:
 	void orderByRuolo();
 	std::vector<Fanta::player> teamOrderedByRuolo[2][4];
 	void fillWithNonHaGiocato();
+	void findModuliRaggiungibili(unsigned int);
+	void raggiungibile(unsigned int, signed int, signed int, signed int);
 	void substitutions();
 	void calculateFantaVoto();
 	void calculateDefenseMean();
@@ -153,7 +156,8 @@ public:
 	 void printPlayersInfo(unsigned int);
 	 void printPlayersInfo_toFile(unsigned int, ofstream &);
 	 void printPlayersInfo_toHtml(unsigned int, ofstream &);
-	 void printFormationPor2Att(unsigned int);
+	 void printFormationPor2Att(
+	 unsigned int);
 	 void printFormationPor2Att_toHtml(unsigned int, ofstream &);
 	 void printFormationAtt2Por(unsigned int);
 	 void printFormationAtt2Por_toHtml(unsigned int, ofstream &);
