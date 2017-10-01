@@ -835,7 +835,6 @@ void Fanta::fillWithNonHaGiocato() {
 			}
 		}
 	}
-
 }
 void Fanta::substitutions() {
 
@@ -872,24 +871,13 @@ void Fanta::substitutions() {
 
 			for (size_t j = 0; j < xx; j++) {
 				for (size_t t = 0; t < xx - j; t++) {
-					if (Fanta::teamOrderedByRuolo[k][i].at(t).Cognome == "---")
+					if (
+							Fanta::teamOrderedByRuolo[k][i].at(t).Cognome == "---" && 	// l'AND e' per evitare che scambi di posto
+							Fanta::teamOrderedByRuolo[k][i].at(t + 1).Cognome != "---"	// due giocatori che non hanno giocato
+									)
 						swap(Fanta::teamOrderedByRuolo[k][i].at(t),
 								Fanta::teamOrderedByRuolo[k][i].at(t + 1));
 				}
-			}
-		}
-	}
-
-	for (size_t k = 0; k < 2; k++) // squadra
-	{
-		for (size_t i = 0; i < 4; i++) // ruolo
-		{
-			for (size_t j = 0; j < Fanta::teamOrderedByRuolo[k][i].size();
-			j++) {
-				DEBUG(this->getTeamName(k).c_str() << " : " <<
-				this->teamOrderedByRuolo[k][i].at(j).Ruolo2 << " " <<
-				this->teamOrderedByRuolo[k][i].at(j).Cognome.c_str() << " (" <<
-				this->teamOrderedByRuolo[k][i].at(j).Cognome_Sost.c_str() << ").");
 			}
 		}
 	}
