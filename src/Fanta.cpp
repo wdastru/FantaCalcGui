@@ -862,40 +862,6 @@ void Fanta::substitutions() {
 	}
 
 	/*
-	 *  4 - 3 - 3
-     *	1 - 4 - 3 - 3
-     *	1 - 2 - 2 - 2
-     *	CANNAVARO Paolo
-     *	BENTANCUR Rodrigo
-     *	POLITANO Matteo
-     *	CALHANOGLU Hakan
-     *	SAMIR
-     *	STORARI Marco
-     *	PERIN Mattia
-     *	PAROLO Marco
-     *	LAPADULA Gianluca
-     *	PAZZINI Giampaolo
-     *	ALEX SANDRO
-     *	FREULER Remo
-     *	BONUCCI Leonardo
-     *	SAPONARA Riccardo
-     *	STRINIC Ivan
-     *	D'ALESSANDRO Marco
-     *	GASPAR Bruno
-     *	KARSDORP Rick
-     *	CUADRADO Juan
-     *	CUTRONE Patrik
-     *	DONNARUMMA Gianluigi
-     *	JOAO MARIO
-     *	GOMEZ Alejandro
-     *	BORINI Fabio
-     *	N'KOULOU Nicolas
-     *	141
-     *	347-2375356
-     *	Sat 23 Sep 2017 - 10:32:24
-	 */
-
-	/*
 	 *  sposta i 'NON HA GIOCATO' al fondo dei giocatori in campo
 	 */
 	for (size_t k = 0; k < 2; k++) // squadra
