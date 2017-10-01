@@ -94,7 +94,7 @@ private:
 	void orderByRuolo();
 	std::vector<Fanta::player> teamOrderedByRuolo[2][4];
 	void fillWithNonHaGiocato();
-	void findModuliRaggiungibili(unsigned int);
+	void findModuliRaggiungibili(unsigned int, unsigned int);
 	void raggiungibile(unsigned int, signed int, signed int, signed int);
 	void substitutions();
 	void calculateFantaVoto();

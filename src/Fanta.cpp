@@ -872,44 +872,44 @@ void Fanta::raggiungibile(unsigned int k, signed int d, signed int c, signed int
 	}
 }
 
-void Fanta::findModuliRaggiungibili(unsigned int k) {
+void Fanta::findModuliRaggiungibili(unsigned int k, unsigned int modPos) {
 
-	DEBUG("");
+	DEBUG("modPos : " << modPos);
 
-	if (Fanta::modulo[k][1] - 1 >= 3) { // D -1
+	if (Fanta::moduli[modPos][1] - 1 >= 3) { // D -1
 
-		if (Fanta::modulo[k][3] + 1 <= 3) { // A +1
+		if (Fanta::moduli[modPos][3] + 1 <= 3) { // A +1
 
 			Fanta::raggiungibile(k, -1, 0, 1);
 		}
 
-		if (Fanta::modulo[k][2] + 1 <= 5) { // C +1
+		if (Fanta::moduli[modPos][2] + 1 <= 5) { // C +1
 
 			Fanta::raggiungibile(k, -1, 1, 0);
 		}
 	}
 
-	if (Fanta::modulo[k][2] - 1 >= 3) { // C -1
+	if (Fanta::moduli[modPos][2] - 1 >= 3) { // C -1
 
-		if (Fanta::modulo[k][3] + 1 <= 3) { // A +1
+		if (Fanta::moduli[modPos][3] + 1 <= 3) { // A +1
 
 			Fanta::raggiungibile(k, 0, -1, 1);
 		}
 
-		if (Fanta::modulo[k][1] + 1 <= 5) { // D +1
+		if (Fanta::moduli[modPos][1] + 1 <= 5) { // D +1
 
 			Fanta::raggiungibile(k, 1, -1, 0);
 		}
 	}
 
-	if (Fanta::modulo[k][3] - 1 >= 1) { // A -1
+	if (Fanta::moduli[modPos][3] - 1 >= 1) { // A -1
 
-		if (Fanta::modulo[k][2] + 1 <= 5) { // C +1
+		if (Fanta::moduli[modPos][2] + 1 <= 5) { // C +1
 
 			Fanta::raggiungibile(k, 0, 1, -1);
 		}
 
-		if (Fanta::modulo[k][1] + 1 <= 5) { // D +1
+		if (Fanta::moduli[modPos][1] + 1 <= 5) { // D +1
 
 			Fanta::raggiungibile(k, 1, 0, -1);
 		}
@@ -1053,7 +1053,7 @@ void Fanta::substitutions() {
 					Fanta::distanzaTotaleModuli[j] = 0;
 				}
 
-				Fanta::findModuliRaggiungibili(k);
+				Fanta::findModuliRaggiungibili(k, moduloPosition);
 
 				/*
 				 * esplora i moduli possibili
