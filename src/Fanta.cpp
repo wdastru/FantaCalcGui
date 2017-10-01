@@ -1145,30 +1145,33 @@ void Fanta::substitutions() {
 				 * Ricerca nuovo modulo
 				 */
 				newModuloPosition = moduloPosition; // modulo originario, se non si trova nulla rimane quello
-				while (!foundNewModule) {
 
-					for (unsigned int j = moduloPosition; j < 7; j++) {
+				for (unsigned int j = moduloPosition; j < 7; j++) {
 
-						DEBUG("primo loop - j = " << j);
+					DEBUG("primo loop - j = " << j);
 
-						if (moduloPossibile[j]) {
-							DEBUG( "nuovo modulo " << k << " : " << labelModuli[j].c_str() );
-							foundNewModule = true;
-							newModuloPosition = j;
-							DEBUG( "before first break");
-							break;
-						}
+					if (moduloPossibile[j]) {
+						DEBUG(
+								"nuovo modulo " << k << " : " << labelModuli[j].c_str());
+						foundNewModule = true;
+						newModuloPosition = j;
+						DEBUG("before first break");
+						break;
 					}
+				}
 
-					for (unsigned int j = moduloPosition; j >= 0; j--) {
+				if (!foundNewModule) {
+
+					for (signed int j = moduloPosition; j >= 0; j--) {
 
 						DEBUG("secondo loop - j = " << j);
 
 						if (moduloPossibile[j]) {
-							DEBUG( "nuovo modulo " << k << " : " << labelModuli[j].c_str() );
+							DEBUG(
+									"nuovo modulo " << k << " : " << labelModuli[j].c_str());
 							foundNewModule = true;
 							newModuloPosition = j;
-							DEBUG( "before second break");
+							DEBUG("before second break");
 							break;
 						}
 					}
