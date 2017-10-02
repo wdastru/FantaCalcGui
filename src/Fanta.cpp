@@ -1341,6 +1341,8 @@ void Fanta::substitutions() {
 						Fanta::modulo[k][3] =
 								Fanta::moduli[newModuloPosition][3];
 
+						sendNGToBack();
+
 						distanza = distanzaTotaleModuli[newModuloPosition];
 						Fanta::distanza[k][0] =
 								Fanta::distanzaModuli[newModuloPosition][0];
