@@ -1050,45 +1050,6 @@ void Fanta::substitutions() {
 
 		signed int newModuloPosition = moduloPosition;
 
-
-
-		//for (size_t j = 0; j < 7; j++) /* inizializzazione */
-		//	Fanta::moduloRaggiungibile[j] = false;
-        //
-		//Fanta::findModuliRaggiungibili (0);
-        //
-		//for (size_t j = 0; j < 7; j++) /* inizializzazione */
-		//	Fanta::moduloRaggiungibile[j] = false;
-        //
-		//Fanta::findModuliRaggiungibili(1);
-        //
-		//for (size_t j = 0; j < 7; j++) /* inizializzazione */
-		//	Fanta::moduloRaggiungibile[j] = false;
-        //
-		//Fanta::findModuliRaggiungibili(2);
-        //
-		//for (size_t j = 0; j < 7; j++) /* inizializzazione */
-		//	Fanta::moduloRaggiungibile[j] = false;
-        //
-		//Fanta::findModuliRaggiungibili(3);
-        //
-		//for (size_t j = 0; j < 7; j++) /* inizializzazione */
-		//	Fanta::moduloRaggiungibile[j] = false;
-        //
-		//Fanta::findModuliRaggiungibili(4);
-        //
-		//for (size_t j = 0; j < 7; j++) /* inizializzazione */
-		//	Fanta::moduloRaggiungibile[j] = false;
-        //
-		//Fanta::findModuliRaggiungibili(5);
-        //
-		//for (size_t j = 0; j < 7; j++) /* inizializzazione */
-		//	Fanta::moduloRaggiungibile[j] = false;
-        //
-		//Fanta::findModuliRaggiungibili(6);
-        //
-		//exit(1);
-
 		if (distanza == 0) {
 			continue;
 		} else {
@@ -1144,9 +1105,9 @@ void Fanta::substitutions() {
 							}										// l'uso successivo
 						}											//
 
-						for (size_t j = 0; j < vect.size(); j++) {
-							DEBUG("vect.at(" << j << ") : " << vect.at(j));
-						}
+						//for (size_t j = 0; j < vect.size(); j++) {
+						//	DEBUG("vect.at(" << j << ") : " << vect.at(j));
+						//}
 
 						for (size_t j = 0; j < 7; j++) {					/* inizializzazione */
 							Fanta::moduloRaggiungibile[j] = false;
