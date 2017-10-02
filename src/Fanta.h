@@ -96,6 +96,7 @@ private:
 	void fillWithNonHaGiocato();
 	void findModuliRaggiungibili(unsigned int);
 	void raggiungibile(unsigned int, signed int, signed int, signed int);
+	void sendNGToBack();
 	void substitutions();
 	void calculateFantaVoto();
 	void calculateDefenseMean();

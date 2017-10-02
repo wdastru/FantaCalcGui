@@ -937,6 +937,35 @@ void Fanta::findModuliRaggiungibili(unsigned int modPos) {
 	return;
 }
 
+void Fanta::sendNGToBack() {
+
+	DEBUG("");
+
+	/*
+	 *  sposta i 'NON HA GIOCATO' al fondo dei giocatori in campo
+	 */
+	for (size_t k = 0; k < 2; k++) // squadra
+			{
+		for (size_t i = 0; i < 4; i++) // ruolo
+				{
+			size_t xx = Fanta::modulo[k][i] - 1;
+
+			for (size_t j = 0; j < xx; j++) {
+				for (size_t t = 0; t < xx - j; t++) {
+					if (
+							Fanta::teamOrderedByRuolo[k][i].at(t).Cognome == "---" && 	// l'AND e' per evitare che scambi di posto
+							Fanta::teamOrderedByRuolo[k][i].at(t + 1).Cognome != "---"	// due giocatori che non hanno giocato
+									)
+						swap(Fanta::teamOrderedByRuolo[k][i].at(t),
+								Fanta::teamOrderedByRuolo[k][i].at(t + 1));
+				}
+			}
+		}
+	}
+
+	return;
+}
+
 void Fanta::substitutions() {
 
 	DEBUG("");
@@ -961,27 +990,7 @@ void Fanta::substitutions() {
 		}
 	}
 
-	/*
-	 *  sposta i 'NON HA GIOCATO' al fondo dei giocatori in campo
-	 */
-	for (size_t k = 0; k < 2; k++) // squadra
-			{
-		for (size_t i = 0; i < 4; i++) // ruolo
-				{
-			size_t xx = Fanta::modulo[k][i] - 1;
-
-			for (size_t j = 0; j < xx; j++) {
-				for (size_t t = 0; t < xx - j; t++) {
-					if (
-							Fanta::teamOrderedByRuolo[k][i].at(t).Cognome == "---" && 	// l'AND e' per evitare che scambi di posto
-							Fanta::teamOrderedByRuolo[k][i].at(t + 1).Cognome != "---"	// due giocatori che non hanno giocato
-									)
-						swap(Fanta::teamOrderedByRuolo[k][i].at(t),
-								Fanta::teamOrderedByRuolo[k][i].at(t + 1));
-				}
-			}
-		}
-	}
+	sendNGToBack();
 
 	/*
 	 * determina cosa c'è e cosa serve
