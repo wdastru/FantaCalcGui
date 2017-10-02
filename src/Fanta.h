@@ -33,10 +33,12 @@ private:
 	int distanza[2][4];		// giocatori che mancano per arrivare al modulo
 	unsigned int disponibili[2][4];	// giocatori in panchina che possono essere usati
 
-	unsigned int inCampoModuli[7][4];		// giocatori effettivamenti scesi in campo nei moduli possibili
-	int distanzaModuli[7][4];		// giocatori che mancano per arrivare ai moduli possibili
+	unsigned int inCampoModuli[7][4];			// giocatori effettivamenti scesi in campo nei moduli possibili
+	int distanzaModuli[7][4];					// giocatori che mancano per arrivare ai moduli possibili
 	unsigned int disponibiliModuli[7][4];		// giocatori in panchina che possono essere usati per i moduli possibili
-	signed int distanzaTotaleModuli[7]; // distanza dei giocatori in campo dai moduli possibili
+	unsigned int originalsOutModuli[7][4];		// giocatori orginariamente titolari che escono  per i moduli possibili
+	signed int distanzaTotaleModuli[7]; 		// distanza dei giocatori in campo dai moduli possibili
+	unsigned int originalsOutTotaleModuli[7]; 	// giocatori totali orginariamente titolari che escono  per i moduli possibili
 
 	double Total[2];
 	signed int ruoloDaSostituire[2][10]; // ruoli da sostituire
@@ -49,10 +51,11 @@ private:
 
 	unsigned int moduli[7][4];
 	bool moduloPossibile[7];
+	bool moduloRaggiungibile[7];
 	std::string labelModuli[7];
 	std::vector<QString> subsForModuleChange[2];
 	std::vector<QString> subs[2];
-	std::vector<QString> newModule[2];
+	std::vector<QString> newModuleString[2];
 
 	signed int scoreModuli[7];
 
@@ -91,6 +94,9 @@ private:
 	void orderByRuolo();
 	std::vector<Fanta::player> teamOrderedByRuolo[2][4];
 	void fillWithNonHaGiocato();
+	void findModuliRaggiungibili(unsigned int);
+	void raggiungibile(unsigned int, signed int, signed int, signed int);
+	void sendNGToBack();
 	void substitutions();
 	void calculateFantaVoto();
 	void calculateDefenseMean();
@@ -151,7 +157,8 @@ public:
 	 void printPlayersInfo(unsigned int);
 	 void printPlayersInfo_toFile(unsigned int, ofstream &);
 	 void printPlayersInfo_toHtml(unsigned int, ofstream &);
-	 void printFormationPor2Att(unsigned int);
+	 void printFormationPor2Att(
+	 unsigned int);
 	 void printFormationPor2Att_toHtml(unsigned int, ofstream &);
 	 void printFormationAtt2Por(unsigned int);
 	 void printFormationAtt2Por_toHtml(unsigned int, ofstream &);
