@@ -1041,6 +1041,45 @@ void Fanta::substitutions() {
 
 		signed int newModuloPosition = moduloPosition;
 
+
+
+		//for (size_t j = 0; j < 7; j++) /* inizializzazione */
+		//	Fanta::moduloRaggiungibile[j] = false;
+        //
+		//Fanta::findModuliRaggiungibili (0);
+        //
+		//for (size_t j = 0; j < 7; j++) /* inizializzazione */
+		//	Fanta::moduloRaggiungibile[j] = false;
+        //
+		//Fanta::findModuliRaggiungibili(1);
+        //
+		//for (size_t j = 0; j < 7; j++) /* inizializzazione */
+		//	Fanta::moduloRaggiungibile[j] = false;
+        //
+		//Fanta::findModuliRaggiungibili(2);
+        //
+		//for (size_t j = 0; j < 7; j++) /* inizializzazione */
+		//	Fanta::moduloRaggiungibile[j] = false;
+        //
+		//Fanta::findModuliRaggiungibili(3);
+        //
+		//for (size_t j = 0; j < 7; j++) /* inizializzazione */
+		//	Fanta::moduloRaggiungibile[j] = false;
+        //
+		//Fanta::findModuliRaggiungibili(4);
+        //
+		//for (size_t j = 0; j < 7; j++) /* inizializzazione */
+		//	Fanta::moduloRaggiungibile[j] = false;
+        //
+		//Fanta::findModuliRaggiungibili(5);
+        //
+		//for (size_t j = 0; j < 7; j++) /* inizializzazione */
+		//	Fanta::moduloRaggiungibile[j] = false;
+        //
+		//Fanta::findModuliRaggiungibili(6);
+        //
+		//exit(1);
+
 		if (distanza == 0) {
 			continue;
 		} else {
@@ -1078,8 +1117,11 @@ void Fanta::substitutions() {
 
 					if (level == 0) {
 
-						for (size_t j = 0; j < 7; j++)					/* inizializzazione */
-							Fanta::moduloRaggiungibile[j] == false;
+						for (size_t j = 0; j < 7; j++) {					/* inizializzazione */
+							Fanta::moduloRaggiungibile[j] = false;
+							Fanta::moduloPossibile[j] = true;
+						}
+
 
 						DEBUG("first level");
 						Fanta::findModuliRaggiungibili(moduloPosition);
@@ -1093,11 +1135,17 @@ void Fanta::substitutions() {
 							}										// l'uso successivo
 						}											//
 
-						for (size_t j = 0; j < 7; j++) 					/* inizializzazione */
-							Fanta::moduloRaggiungibile[j] == false;
+						for (size_t j = 0; j < vect.size(); j++) {
+							DEBUG("vect.at(" << j << ") : " << vect.at(j));
+						}
+
+						for (size_t j = 0; j < 7; j++) {					/* inizializzazione */
+							Fanta::moduloRaggiungibile[j] = false;
+							Fanta::moduloPossibile[j] = true;
+						}
 
 						for (size_t j = 0; j < vect.size(); j++) {
-							Fanta::findModuliRaggiungibili(j);
+							Fanta::findModuliRaggiungibili(vect.at(j));
 						}
 					}
 
@@ -1252,12 +1300,10 @@ void Fanta::substitutions() {
 
 									QString sub =
 											QString::fromStdString(
-													Fanta::teamOrderedByRuolo[k][i].at(
-															Fanta::modulo[k][i]).Cognome)
+													Fanta::teamOrderedByRuolo[k][i].at(m).Cognome)
 													+ " ("
 													+ QString::fromStdString(
-															Fanta::teamOrderedByRuolo[k][i].at(
-																	Fanta::modulo[k][i]).Squadra)
+															Fanta::teamOrderedByRuolo[k][i].at(m).Squadra)
 													+ ") per cambio di modulo.";
 
 									Fanta::subsForModuleChange[k].push_back(
