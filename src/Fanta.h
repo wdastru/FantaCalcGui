@@ -55,7 +55,7 @@ private:
 	std::string labelModuli[7];
 	std::vector<QString> subsForModuleChange[2];
 	std::vector<QString> subs[2];
-	std::vector<QString> newModule[2];
+	std::vector<QString> newModuleString[2];
 
 	signed int scoreModuli[7];
 

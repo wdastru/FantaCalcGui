@@ -1312,7 +1312,7 @@ void Fanta::substitutions() {
 							}
 						}
 
-						Fanta::newModule[k].push_back(
+						Fanta::newModuleString[k].push_back(
 								"Nuovo modulo "
 										+ QString::number(
 												Fanta::moduli[newModuloPosition][1])
@@ -1479,20 +1479,20 @@ void Fanta::substitutions() {
 	LOG(DBG, " =====================");
 
 	for (size_t k = 0; k < 2; k++) {
-		if (Fanta::newModule[k].size() == 1) {
+		if (Fanta::newModuleString[k].size() == 1) {
 			LOG(DBG,
 			"<br> -> " + QString::fromStdString(this->getTeamName(k)) + " :");
-			LOG(DBG, newModule[k].front());
-		} else if (Fanta::newModule[k].size() > 1) {
+			LOG(DBG, newModuleString[k].front());
+		} else if (Fanta::newModuleString[k].size() > 1) {
 
-			if (Fanta::newModule[k].size() > 1) {
+			if (Fanta::newModuleString[k].size() > 1) {
 				LOG(DBG,
 				"<br> -> " + QString::fromStdString(this->getTeamName(k)) + " :");
 
 				LOG(WARN, "Trovato più di un muovo modulo!");
 
-				for (size_t j = 0; j < Fanta::newModule[k].size(); j++) {
-					LOG(WARN, newModule[k].at(j));
+				for (size_t j = 0; j < Fanta::newModuleString[k].size(); j++) {
+					LOG(WARN, newModuleString[k].at(j));
 				}
 
 			}
