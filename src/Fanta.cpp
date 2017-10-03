@@ -990,7 +990,46 @@ void Fanta::substitutions() {
 		}
 	}
 
-	sendNGToBack();
+	/*
+	 * TODO:
+	 * 3 - 4 - 3
+     * 1 - 3 - 4 - 3
+     * 1 - 2 - 2 - 2
+     * PERIN Mattia
+     * DONNARUMMA Gianluigi
+     * STORARI Marco (x)
+     * ALEX SANDRO
+     * SAMIR
+     * CANNAVARO Paolo
+     * GASPAR Bruno (x)
+     * N'KOULOU Nicolas
+     * STRINIC Ivan
+     * BONUCCI Leonardo
+     * KARSDORP Rick (x)
+     * BENTANCUR Rodrigo
+     * FREULER Remo
+     * D'ALESSANDRO Marco (x)
+     * SAPONARA Riccardo (x)
+     * PAROLO Marco
+     * CALHANOGLU Hakan (x)
+     * JOAO MARIO
+     * CUADRADO Juan
+     * PAZZINI Giampaolo
+     * LAPADULA Gianluca (x)
+     * GOMEZ Alejandro
+     * BORINI Fabio (x)
+     * POLITANO Matteo (x)
+     * CUTRONE Patrik (x)
+     * 141
+     * 347-2375356
+     * Sat 23 Sep 2017 - 10:32:24
+     *
+     * con qs formazione il software passa a due attaccanti
+     * Dovrebbe uscire GOMEZ, ma con */ sendNGToBack(); /* in questa posizione avviene lo scambio GOMEZ <-> LAPADULA
+     * per cui ad uscire è LAPADULA.
+     *
+     * CHE FARE?
+   	 */
 
 	/*
 	 * determina cosa c'è e cosa serve
