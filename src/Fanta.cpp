@@ -991,45 +991,34 @@ void Fanta::substitutions() {
 	}
 
 	/*
-	 * TODO:
-	 * 3 - 4 - 3
-     * 1 - 3 - 4 - 3
-     * 1 - 2 - 2 - 2
-     * PERIN Mattia
-     * DONNARUMMA Gianluigi
-     * STORARI Marco (x)
-     * ALEX SANDRO
-     * SAMIR
-     * CANNAVARO Paolo
-     * GASPAR Bruno (x)
-     * N'KOULOU Nicolas
-     * STRINIC Ivan
-     * BONUCCI Leonardo
-     * KARSDORP Rick (x)
-     * BENTANCUR Rodrigo
-     * FREULER Remo
-     * D'ALESSANDRO Marco (x)
-     * SAPONARA Riccardo (x)
-     * PAROLO Marco
-     * CALHANOGLU Hakan (x)
-     * JOAO MARIO
-     * CUADRADO Juan
-     * PAZZINI Giampaolo
-     * LAPADULA Gianluca (x)
-     * GOMEZ Alejandro
-     * BORINI Fabio (x)
-     * POLITANO Matteo (x)
-     * CUTRONE Patrik (x)
-     * 141
-     * 347-2375356
-     * Sat 23 Sep 2017 - 10:32:24
-     *
-     * con qs formazione il software passa a due attaccanti
-     * Dovrebbe uscire GOMEZ, ma con */ sendNGToBack(); /* in questa posizione avviene lo scambio GOMEZ <-> LAPADULA
-     * per cui ad uscire è LAPADULA.
-     *
-     * CHE FARE?
-   	 */
+	 * 				DONNARUMMA Gianluigi
+	 * 	PERIN Mattia
+	 * x	STORARI Marco
+	 * 				BONUCCI Leonardo
+	 * 				ALEX SANDRO
+	 * 				STRINIC Ivan
+	 * 	x	GASPAR Bruno
+	 * x	KARSDORP Rick
+	 * 	CANNAVARO Paolo
+	 * 	N'KOULOU Nicolas
+	 * 	SAMIR
+	 * x	SAPONARA Riccardo
+	 * 				PAROLO Marco
+	 * 				CUADRADO Juan
+	 * 				BENTANCUR Rodrigo
+	 * 			x	D'ALESSANDRO Marco
+	 * 				JOAO MARIO
+	 * x	CALHANOGLU Hakan
+	 * 	FREULER Remo
+	 * 			x	POLITANO Matteo
+	 * 			x	BORINI Fabio
+	 * x	CUTRONE Patrik
+	 * x	LAPADULA Gianluca
+	 * 	GOMEZ Alejandro
+	 * 	PAZZINI Giampaolo
+	 *
+	 * perchè non passa al 3 5 2 ?
+	 */
 
 	/*
 	 * determina cosa c'è e cosa serve
@@ -1341,8 +1330,6 @@ void Fanta::substitutions() {
 						Fanta::modulo[k][3] =
 								Fanta::moduli[newModuloPosition][3];
 
-						sendNGToBack();
-
 						distanza = distanzaTotaleModuli[newModuloPosition];
 						Fanta::distanza[k][0] =
 								Fanta::distanzaModuli[newModuloPosition][0];
@@ -1397,6 +1384,9 @@ void Fanta::substitutions() {
 
 		}
 	}
+
+	sendNGToBack(); /* prima delle sostituzioni da avvenire lo "scivolamento"
+					/* dei giocatori senza voto alla fine dei titolari del modulo scelto
 
 	//for (size_t k = 0; k < 2; k++) // squadra
 	//		{
