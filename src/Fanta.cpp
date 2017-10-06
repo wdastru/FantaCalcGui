@@ -966,6 +966,94 @@ void Fanta::sendNGToBack() {
 	return;
 }
 
+/*
+ * moduli raggiungibili
+ *
+ *
+ *  modPos : 0
+ *  5-4-1
+ *
+ *  modulo 0 (1-5-4-1) raggiungibile? : 0
+ *  modulo 1 (1-4-5-1) raggiungibile? : 1
+ *  modulo 2 (1-5-3-2) raggiungibile? : 1
+ *  modulo 3 (1-4-4-2) raggiungibile? : 1
+ *  modulo 4 (1-3-5-2) raggiungibile? : 0
+ *  modulo 5 (1-4-3-3) raggiungibile? : 0
+ *  modulo 6 (1-3-4-3) raggiungibile? : 0
+ *
+ *
+ *  modPos : 1
+ *  4-5-1
+ *
+ *  modulo 0 (1-5-4-1) raggiungibile? : 1
+ *  modulo 1 (1-4-5-1) raggiungibile? : 0
+ *  modulo 2 (1-5-3-2) raggiungibile? : 0
+ *  modulo 3 (1-4-4-2) raggiungibile? : 1
+ *  modulo 4 (1-3-5-2) raggiungibile? : 1
+ *  modulo 5 (1-4-3-3) raggiungibile? : 0
+ *  modulo 6 (1-3-4-3) raggiungibile? : 0
+ *
+ *
+ *  modPos : 2
+ *  5-3-2
+ *
+ *  modulo 0 (1-5-4-1) raggiungibile? : 1
+ *  modulo 1 (1-4-5-1) raggiungibile? : 0
+ *  modulo 2 (1-5-3-2) raggiungibile? : 0
+ *  modulo 3 (1-4-4-2) raggiungibile? : 1
+ *  modulo 4 (1-3-5-2) raggiungibile? : 0
+ *  modulo 5 (1-4-3-3) raggiungibile? : 1
+ *  modulo 6 (1-3-4-3) raggiungibile? : 0
+ *
+ *
+ *  modPos : 3
+ *  4-4-2
+ *
+ *  modulo 0 (1-5-4-1) raggiungibile? : 1
+ *  modulo 1 (1-4-5-1) raggiungibile? : 1
+ *  modulo 2 (1-5-3-2) raggiungibile? : 1
+ *  modulo 3 (1-4-4-2) raggiungibile? : 0
+ *  modulo 4 (1-3-5-2) raggiungibile? : 1
+ *  modulo 5 (1-4-3-3) raggiungibile? : 1
+ *  modulo 6 (1-3-4-3) raggiungibile? : 1
+ *
+ *
+ *  modPos : 4
+ *  3-5-2
+ *
+ *  modulo 0 (1-5-4-1) raggiungibile? : 0
+ *  modulo 1 (1-4-5-1) raggiungibile? : 1
+ *  modulo 2 (1-5-3-2) raggiungibile? : 0
+ *  modulo 3 (1-4-4-2) raggiungibile? : 1
+ *  modulo 4 (1-3-5-2) raggiungibile? : 0
+ *  modulo 5 (1-4-3-3) raggiungibile? : 0
+ *  modulo 6 (1-3-4-3) raggiungibile? : 1
+ *
+ *
+ *  modPos : 5
+ *  4-3-3
+ *
+ *  modulo 0 (1-5-4-1) raggiungibile? : 0
+ *  modulo 1 (1-4-5-1) raggiungibile? : 0
+ *  modulo 2 (1-5-3-2) raggiungibile? : 1
+ *  modulo 3 (1-4-4-2) raggiungibile? : 1
+ *  modulo 4 (1-3-5-2) raggiungibile? : 0
+ *  modulo 5 (1-4-3-3) raggiungibile? : 0
+ *  modulo 6 (1-3-4-3) raggiungibile? : 1
+ *
+ *
+ *  modPos : 6
+ *  3-4-3
+ *
+ *  modulo 0 (1-5-4-1) raggiungibile? : 0
+ *  modulo 1 (1-4-5-1) raggiungibile? : 0
+ *  modulo 2 (1-5-3-2) raggiungibile? : 0
+ *  modulo 3 (1-4-4-2) raggiungibile? : 1
+ *  modulo 4 (1-3-5-2) raggiungibile? : 1
+ *  modulo 5 (1-4-3-3) raggiungibile? : 1
+ *  modulo 6 (1-3-4-3) raggiungibile? : 0
+ */
+
 void Fanta::substitutions() {
 
 	DEBUG("");
@@ -991,34 +1079,17 @@ void Fanta::substitutions() {
 	}
 
 	/*
-	 * 				DONNARUMMA Gianluigi
-	 * 	PERIN Mattia
-	 * x	STORARI Marco
-	 * 				BONUCCI Leonardo
-	 * 				ALEX SANDRO
-	 * 				STRINIC Ivan
-	 * 	x	GASPAR Bruno
-	 * x	KARSDORP Rick
-	 * 	CANNAVARO Paolo
-	 * 	N'KOULOU Nicolas
-	 * 	SAMIR
-	 * x	SAPONARA Riccardo
-	 * 				PAROLO Marco
-	 * 				CUADRADO Juan
-	 * 				BENTANCUR Rodrigo
-	 * 			x	D'ALESSANDRO Marco
-	 * 				JOAO MARIO
-	 * x	CALHANOGLU Hakan
-	 * 	FREULER Remo
-	 * 			x	POLITANO Matteo
-	 * 			x	BORINI Fabio
-	 * x	CUTRONE Patrik
-	 * x	LAPADULA Gianluca
-	 * 	GOMEZ Alejandro
-	 * 	PAZZINI Giampaolo
-	 *
-	 * perchè non passa al 3 5 2 ?
+	 * stampa moduli raggiungibili
 	 */
+	//for (size_t u = 0; u < 7; u++) {
+    //
+	//	for (size_t j = 0; j < 7; j++) { /* inizializzazione */
+	//		Fanta::moduloRaggiungibile[j] = false;
+	//	}
+    //
+	//	Fanta::findModuliRaggiungibili (u);
+	//}
+
 
 	/*
 	 * determina cosa c'è e cosa serve
@@ -1152,8 +1223,6 @@ void Fanta::substitutions() {
 					 */
 					for (size_t j = 0; j < 7; j++) {
 
-						DEBUG("######## START ####################");
-
 						/*
 						 * in campo, distanza e disponibili per tutti i moduli possibili
 						 */
@@ -1198,13 +1267,16 @@ void Fanta::substitutions() {
 										+ Fanta::originalsOutModuli[j][2]
 										+ Fanta::originalsOutModuli[j][3];
 
-						DEBUG("         modulo " << j << " : " << Fanta::moduli[j][0] << "-" << Fanta::moduli[j][1] << "-" << Fanta::moduli[j][2] << "-" << Fanta::moduli[j][3]);
-						DEBUG("       in campo " << j << " : " << Fanta::inCampoModuli[j][0] << "-" << Fanta::inCampoModuli[j][1] << "-" << Fanta::inCampoModuli[j][2] << "-" << Fanta::inCampoModuli[j][3]);
-						DEBUG("  originals out " << j << " : " << Fanta::originalsOutModuli[j][0] << "-" << Fanta::originalsOutModuli[j][1] << "-" << Fanta::originalsOutModuli[j][2] << "-" << Fanta::originalsOutModuli[j][3]);
-						DEBUG("       distanza " << j << " : " << Fanta::distanzaModuli[j][0] << "-" << Fanta::distanzaModuli[j][1] << "-" << Fanta::distanzaModuli[j][2] << "-" << Fanta::distanzaModuli[j][3]);
-						DEBUG("    disponibili " << j << " : " << Fanta::disponibiliModuli[j][0] << "-" << Fanta::disponibiliModuli[j][1] << "-" << Fanta::disponibiliModuli[j][2] << "-" << Fanta::disponibiliModuli[j][3]);
-						DEBUG("               distanzaTotale : " << Fanta::distanzaTotaleModuli[j]);
-						DEBUG("         originals out totale : " << Fanta::originalsOutTotaleModuli[j]);
+						if (Fanta::moduloRaggiungibile[j]) {
+							DEBUG("######## START ####################");
+							DEBUG("         modulo " << j << " : " << Fanta::moduli[j][0] << "-" << Fanta::moduli[j][1] << "-" << Fanta::moduli[j][2] << "-" << Fanta::moduli[j][3]);
+							DEBUG("       in campo " << j << " : " << Fanta::inCampoModuli[j][0] << "-" << Fanta::inCampoModuli[j][1] << "-" << Fanta::inCampoModuli[j][2] << "-" << Fanta::inCampoModuli[j][3]);
+							DEBUG("  originals out " << j << " : " << Fanta::originalsOutModuli[j][0] << "-" << Fanta::originalsOutModuli[j][1] << "-" << Fanta::originalsOutModuli[j][2] << "-" << Fanta::originalsOutModuli[j][3]);
+							DEBUG("       distanza " << j << " : " << Fanta::distanzaModuli[j][0] << "-" << Fanta::distanzaModuli[j][1] << "-" << Fanta::distanzaModuli[j][2] << "-" << Fanta::distanzaModuli[j][3]);
+							DEBUG("    disponibili " << j << " : " << Fanta::disponibiliModuli[j][0] << "-" << Fanta::disponibiliModuli[j][1] << "-" << Fanta::disponibiliModuli[j][2] << "-" << Fanta::disponibiliModuli[j][3]);
+							DEBUG("               distanzaTotale : " << Fanta::distanzaTotaleModuli[j]);
+							DEBUG("         originals out totale : " << Fanta::originalsOutTotaleModuli[j]);
+						}
 					}
 					/***/
 
