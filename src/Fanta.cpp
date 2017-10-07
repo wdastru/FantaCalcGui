@@ -838,105 +838,6 @@ void Fanta::fillWithNonHaGiocato() {
 	}
 }
 
-void Fanta::raggiungibile(unsigned int modPos, signed int d, signed int c, signed int a) {
-
-	DEBUG("");
-
-	if (
-			(d < -1 || d > 1) ||
-			(c < -1 || c > 1) ||
-			(a < -1 || a > 1)
-		) {
-
-		DEBUG("valore illegale di d, c, a");
-		return;
-	} else {
-
-		//DEBUG("d = " << d << ", c = " << c << ", a = " << a);
-		//DEBUG(
-		//		"Fanta::moduli[" << modPos << "][1] + d = " << Fanta::moduli[modPos][1] + d <<
-		//		", Fanta::moduli[" << modPos << "][2] + c = " << Fanta::moduli[modPos][2] + c <<
-		//		", Fanta::moduli[" << modPos << "][3] + a = " << Fanta::moduli[modPos][3] + a
-		//	);
-
-		for (size_t j = 0; j < 7; j++) {
-
-			if (
-					Fanta::moduli[j][1] == ( Fanta::moduli[modPos][1] + d ) &&
-					Fanta::moduli[j][2] == ( Fanta::moduli[modPos][2] + c ) &&
-					Fanta::moduli[j][3] == ( Fanta::moduli[modPos][3] + a )
-				) {
-
-				moduloRaggiungibile[j] = true;
-			}
-
-			//DEBUG("modulo " << j << " (" << labelModuli[j].c_str() << ") raggiungibile? : " << moduloRaggiungibile[j]);
-		}
-
-	}
-}
-
-void Fanta::findModuliRaggiungibili(unsigned int modPos) {
-
-	DEBUG("modPos : " << modPos);
-	DEBUG(Fanta::moduli[modPos][1] << "-" << Fanta::moduli[modPos][2] << "-" << Fanta::moduli[modPos][3]);
-
-	if (Fanta::moduli[modPos][1] - 1 >= 3) { // D -1
-
-		//DEBUG("D-1");
-
-		if (Fanta::moduli[modPos][3] + 1 <= 3) { // A +1
-
-			//DEBUG("D-1 A+1");
-			Fanta::raggiungibile(modPos, -1, 0, 1);
-		}
-
-		if (Fanta::moduli[modPos][2] + 1 <= 5) { // C +1
-
-			//DEBUG("D-1 C+1");
-			Fanta::raggiungibile(modPos, -1, 1, 0);
-		}
-	}
-
-	if (Fanta::moduli[modPos][2] - 1 >= 3) { // C -1
-
-		//DEBUG("C-1");
-
-		if (Fanta::moduli[modPos][3] + 1 <= 3) { // A +1
-
-			//DEBUG("C-1 A+1");
-			Fanta::raggiungibile(modPos, 0, -1, 1);
-		}
-
-		if (Fanta::moduli[modPos][1] + 1 <= 5) { // D +1
-
-			//DEBUG("C-1 D+1");
-			Fanta::raggiungibile(modPos, 1, -1, 0);
-		}
-	}
-
-	if (Fanta::moduli[modPos][3] - 1 >= 1) { // A -1
-
-		//DEBUG("A-1");
-		if (Fanta::moduli[modPos][2] + 1 <= 5) { // C +1
-
-			//DEBUG("A-1 C+1");
-			Fanta::raggiungibile(modPos, 0, 1, -1);
-		}
-
-		if (Fanta::moduli[modPos][1] + 1 <= 5) { // D +1
-
-			//DEBUG("A-1 D+1");
-			Fanta::raggiungibile(modPos, 1, 0, -1);
-		}
-	}
-
-	for (size_t j = 0; j < 7; j++)
-		DEBUG( "modulo " << j << " (" << labelModuli[j].c_str() << ") raggiungibile? : " << moduloRaggiungibile[j] );
-
-	return;
-}
-
 void Fanta::sendNGToBack() {
 
 	DEBUG("");
@@ -1079,19 +980,6 @@ void Fanta::substitutions() {
 	}
 
 	/*
-	 * stampa moduli raggiungibili
-	 */
-	//for (size_t u = 0; u < 7; u++) {
-    //
-	//	for (size_t j = 0; j < 7; j++) { /* inizializzazione */
-	//		Fanta::moduloRaggiungibile[j] = false;
-	//	}
-    //
-	//	Fanta::findModuliRaggiungibili (u);
-	//}
-
-
-	/*
 	 * determina cosa c'è e cosa serve
 	 */
 	for (size_t k = 0; k < 2; k++) // squadra
@@ -1167,9 +1055,6 @@ void Fanta::substitutions() {
 			if (cambioModulo) {
 				DEBUG("cambio modulo");
 
-				unsigned int level = 0;
-				do {
-
 					/*
 					 * inizializzazione variabili
 					 */
@@ -1183,40 +1068,6 @@ void Fanta::substitutions() {
 						Fanta::distanzaTotaleModuli[j] = 0;
 					}
 					/***/
-
-					if (level == 0) {
-
-						for (size_t j = 0; j < 7; j++) {					/* inizializzazione */
-							Fanta::moduloRaggiungibile[j] = false;
-							Fanta::moduloPossibile[j] = true;
-						}
-
-
-						DEBUG("first level");
-						Fanta::findModuliRaggiungibili(moduloPosition);
-					} else if (level == 1) {
-
-						DEBUG("second level");
-						std::vector<unsigned int> vect;             //
-						for (size_t j = 0; j < 7; j++) {			// il secondo livello parte dai
-							if (Fanta::moduloRaggiungibile[j]) {	// moduli trovati nel primo livello
-								vect.push_back(j);					// vect li contiene per
-							}										// l'uso successivo
-						}											//
-
-						//for (size_t j = 0; j < vect.size(); j++) {
-						//	DEBUG("vect.at(" << j << ") : " << vect.at(j));
-						//}
-
-						for (size_t j = 0; j < 7; j++) {					/* inizializzazione */
-							Fanta::moduloRaggiungibile[j] = false;
-							Fanta::moduloPossibile[j] = true;
-						}
-
-						for (size_t j = 0; j < vect.size(); j++) {
-							Fanta::findModuliRaggiungibili(vect.at(j));
-						}
-					}
 
 					/*
 					 * esplora i moduli possibili
@@ -1267,7 +1118,6 @@ void Fanta::substitutions() {
 										+ Fanta::originalsOutModuli[j][2]
 										+ Fanta::originalsOutModuli[j][3];
 
-						if (Fanta::moduloRaggiungibile[j]) {
 							DEBUG("######## START ####################");
 							DEBUG("         modulo " << j << " : " << Fanta::moduli[j][0] << "-" << Fanta::moduli[j][1] << "-" << Fanta::moduli[j][2] << "-" << Fanta::moduli[j][3]);
 							DEBUG("       in campo " << j << " : " << Fanta::inCampoModuli[j][0] << "-" << Fanta::inCampoModuli[j][1] << "-" << Fanta::inCampoModuli[j][2] << "-" << Fanta::inCampoModuli[j][3]);
@@ -1276,34 +1126,30 @@ void Fanta::substitutions() {
 							DEBUG("    disponibili " << j << " : " << Fanta::disponibiliModuli[j][0] << "-" << Fanta::disponibiliModuli[j][1] << "-" << Fanta::disponibiliModuli[j][2] << "-" << Fanta::disponibiliModuli[j][3]);
 							DEBUG("               distanzaTotale : " << Fanta::distanzaTotaleModuli[j]);
 							DEBUG("         originals out totale : " << Fanta::originalsOutTotaleModuli[j]);
-						}
 					}
 					/***/
 
 					/*
 					 * check per modulo che :
-					 * 1 - sia raggiungibile dal modulo di partenza
-					 * 2 - abbia una distanza minore o uguale a tre (permetta quindi di giocare in 11)
-					 * 3 - abbia i giocatori disponibili per effettuare le sostituziooni
-					 * 4 - conservi i titolari
+					 * 1 - abbia una distanza minore o uguale a tre (permetta quindi di giocare in 11)
+					 * 2 - abbia i giocatori disponibili per effettuare le sostituziooni
+					 * 3 - conservi i titolari
 					 */
 					for (size_t j = 0; j < 7; j++) {
 
 						if (
-								Fanta::moduloRaggiungibile[j] == false								// condizione 1
-
-								|| Fanta::distanzaTotaleModuli[j] > 3								// condizione 2
+								Fanta::distanzaTotaleModuli[j] > 3									// condizione 1
 								|| (
-										static_cast<signed int>(Fanta::disponibiliModuli[j][0])		// condizione 3
-										< Fanta::distanzaModuli[j][0]                               // condizione 3
-										|| static_cast<signed int>(Fanta::disponibiliModuli[j][1])  // condizione 3
-												< Fanta::distanzaModuli[j][1]                       // condizione 3
-										|| static_cast<signed int>(Fanta::disponibiliModuli[j][2])  // condizione 3
-												< Fanta::distanzaModuli[j][2]                       // condizione 3
-										|| static_cast<signed int>(Fanta::disponibiliModuli[j][3])  // condizione 3
-												< Fanta::distanzaModuli[j][3]                       // condizione 3
+										static_cast<signed int>(Fanta::disponibiliModuli[j][0])		// condizione 2
+												< Fanta::distanzaModuli[j][0]                               // condizione 2
+										|| static_cast<signed int>(Fanta::disponibiliModuli[j][1])  // condizione 2
+												< Fanta::distanzaModuli[j][1]                       // condizione 2
+										|| static_cast<signed int>(Fanta::disponibiliModuli[j][2])  // condizione 2
+												< Fanta::distanzaModuli[j][2]                       // condizione 2
+										|| static_cast<signed int>(Fanta::disponibiliModuli[j][3])  // condizione 2
+												< Fanta::distanzaModuli[j][3]                       // condizione 2
 									)
-								|| Fanta::originalsOutTotaleModuli[j] > 0 ) {						// condizione 4
+								|| Fanta::originalsOutTotaleModuli[j] > 0 ) {						// condizione 3
 							moduloPossibile[j] = false;
 						}
 
@@ -1413,15 +1259,6 @@ void Fanta::substitutions() {
 								Fanta::distanzaModuli[newModuloPosition][3];
 					}
 
-					//cambioModulo = false;
-
-					if (!foundNewModule) {
-						level++;
-					} else {
-						break; // DO...WHILE loop
-					}
-
-				} while (level < 2);
 			}
 
 			/***/
