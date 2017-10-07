@@ -112,7 +112,6 @@ void Fanta::initialize() {
 	for (size_t i = 0; i < 7; i++) {
 		Fanta::scoreModuli[i] = 0;
 		Fanta::moduloPossibile[i] = true;
-		Fanta::moduloRaggiungibile[i] = false;
 	}
 
 	Fanta::NonHaGiocato.Cognome = "---";
