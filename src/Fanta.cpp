@@ -198,7 +198,6 @@ std::string Fanta::getTeamName(unsigned int i) {
 }
 unsigned int Fanta::setModulo(std::string & str, size_t k) {
 
-	DEBUG("");
 	unsigned int xx = 0;
 
 	for (size_t i = 1; i < 4; i++) {
@@ -224,6 +223,8 @@ std::string Fanta::getModuloSquadra(size_t k) const {
 			+ my::toString(this->getModulo(k, 3));
 }
 unsigned int Fanta::getModulo(size_t k, size_t i) const {
+	DEBUG("modulo[" << k << "][" << i << "] : " << modulo[k][i]);
+	DEBUG("moduli[" << moduloAttivo[k] << "][" << i << "] : " << moduli[moduloAttivo[k]][i]);
 	return this->modulo[k][i];
 }
 void Fanta::setAtHome(unsigned int k) {
@@ -1139,9 +1140,9 @@ void Fanta::substitutions() {
 			distanza += Fanta::distanza[k][i];
 		} DEBUG("distanza totale " << k << " : " << distanza);
 
-		signed int moduloAttivo, newModuloAttivo;
-		moduloAttivo = newModuloAttivo = findModuloAttivo(k);
-		DEBUG("         posizione nell'array : " << moduloAttivo);
+		signed int newModuloAttivo;
+		moduloAttivo[k] = newModuloAttivo = findModuloAttivo(k);
+		DEBUG("         posizione nell'array : " << moduloAttivo[k]);
 
 		if (distanza == 0) {
 			continue;
@@ -1186,9 +1187,9 @@ void Fanta::substitutions() {
 				/*
 				 * Ricerca nuovo modulo
 				 */
-				newModuloAttivo = moduloAttivo; // modulo originario, se non si trova nulla rimane quello
+				newModuloAttivo = moduloAttivo[k]; // modulo originario, se non si trova nulla rimane quello
 
-				for (unsigned int j = moduloAttivo; j < 7; j++) {
+				for (unsigned int j = moduloAttivo[k]; j < 7; j++) {
 
 					DEBUG("primo loop - j = " << j);
 
@@ -1204,7 +1205,7 @@ void Fanta::substitutions() {
 
 				if (!foundNewModule) {
 
-					for (signed int j = moduloAttivo; j >= 0; j--) {
+					for (signed int j = moduloAttivo[k]; j >= 0; j--) {
 
 						DEBUG("secondo loop - j = " << j);
 
