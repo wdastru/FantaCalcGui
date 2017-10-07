@@ -954,6 +954,72 @@ void Fanta::sendNGToBack() {
  *  modulo 6 (1-3-4-3) raggiungibile? : 0
  */
 
+void Fanta::calculateMetrics(unsigned int k) {
+
+	DEBUG("");
+
+	/*
+	 * esplora i moduli possibili
+	 */
+	for (size_t j = 0; j < 7; j++) {
+
+		/*
+		 * in campo, distanza e disponibili per tutti i moduli possibili
+		 */
+		for (size_t i = 0; i < 4; i++) { // ruolo
+
+			for (size_t m = Fanta::moduli[j][i];
+					m < Fanta::modulo[k][i]; m++) {
+
+				if (Fanta::teamOrderedByRuolo[k][i].at(m).Cognome
+						!= "---") {
+					Fanta::originalsOutModuli[j][i]++;
+				}
+			}
+
+			for (size_t m = 0; m < Fanta::moduli[j][i]; m++) {
+
+				if (Fanta::teamOrderedByRuolo[k][i].at(m).Cognome
+						!= "---")
+					Fanta::inCampoModuli[j][i]++;
+			}
+
+			for (size_t m = Fanta::moduli[j][i]; m < rosa[i];
+					m++) {
+				if (Fanta::teamOrderedByRuolo[k][i].at(m).Cognome
+						!= "---")
+					Fanta::disponibiliModuli[j][i]++;
+			}
+
+			Fanta::distanzaModuli[j][i] = Fanta::moduli[j][i]
+					- Fanta::inCampoModuli[j][i];
+		}
+
+		Fanta::distanzaTotaleModuli[j] =
+				Fanta::distanzaModuli[j][0]
+						+ Fanta::distanzaModuli[j][1]
+						+ Fanta::distanzaModuli[j][2]
+						+ Fanta::distanzaModuli[j][3];
+
+		Fanta::originalsOutTotaleModuli[j] =
+				Fanta::originalsOutModuli[j][0]
+						+ Fanta::originalsOutModuli[j][1]
+						+ Fanta::originalsOutModuli[j][2]
+						+ Fanta::originalsOutModuli[j][3];
+
+			DEBUG("######## START ####################");
+			DEBUG("         modulo " << j << " : " << Fanta::moduli[j][0] << "-" << Fanta::moduli[j][1] << "-" << Fanta::moduli[j][2] << "-" << Fanta::moduli[j][3]);
+			DEBUG("       in campo " << j << " : " << Fanta::inCampoModuli[j][0] << "-" << Fanta::inCampoModuli[j][1] << "-" << Fanta::inCampoModuli[j][2] << "-" << Fanta::inCampoModuli[j][3]);
+			DEBUG("  originals out " << j << " : " << Fanta::originalsOutModuli[j][0] << "-" << Fanta::originalsOutModuli[j][1] << "-" << Fanta::originalsOutModuli[j][2] << "-" << Fanta::originalsOutModuli[j][3]);
+			DEBUG("       distanza " << j << " : " << Fanta::distanzaModuli[j][0] << "-" << Fanta::distanzaModuli[j][1] << "-" << Fanta::distanzaModuli[j][2] << "-" << Fanta::distanzaModuli[j][3]);
+			DEBUG("    disponibili " << j << " : " << Fanta::disponibiliModuli[j][0] << "-" << Fanta::disponibiliModuli[j][1] << "-" << Fanta::disponibiliModuli[j][2] << "-" << Fanta::disponibiliModuli[j][3]);
+			DEBUG("               distanzaTotale : " << Fanta::distanzaTotaleModuli[j]);
+			DEBUG("         originals out totale : " << Fanta::originalsOutTotaleModuli[j]);
+	}
+
+	return;
+}
+
 void Fanta::substitutions() {
 
 	DEBUG("");
@@ -1068,65 +1134,7 @@ void Fanta::substitutions() {
 					}
 					/***/
 
-					/*
-					 * esplora i moduli possibili
-					 */
-					for (size_t j = 0; j < 7; j++) {
-
-						/*
-						 * in campo, distanza e disponibili per tutti i moduli possibili
-						 */
-						for (size_t i = 0; i < 4; i++) { // ruolo
-
-							for (size_t m = Fanta::moduli[j][i];
-									m < Fanta::modulo[k][i]; m++) {
-
-								if (Fanta::teamOrderedByRuolo[k][i].at(m).Cognome
-										!= "---") {
-									Fanta::originalsOutModuli[j][i]++;
-								}
-							}
-
-							for (size_t m = 0; m < Fanta::moduli[j][i]; m++) {
-
-								if (Fanta::teamOrderedByRuolo[k][i].at(m).Cognome
-										!= "---")
-									Fanta::inCampoModuli[j][i]++;
-							}
-
-							for (size_t m = Fanta::moduli[j][i]; m < rosa[i];
-									m++) {
-								if (Fanta::teamOrderedByRuolo[k][i].at(m).Cognome
-										!= "---")
-									Fanta::disponibiliModuli[j][i]++;
-							}
-
-							Fanta::distanzaModuli[j][i] = Fanta::moduli[j][i]
-									- Fanta::inCampoModuli[j][i];
-						}
-
-						Fanta::distanzaTotaleModuli[j] =
-								Fanta::distanzaModuli[j][0]
-										+ Fanta::distanzaModuli[j][1]
-										+ Fanta::distanzaModuli[j][2]
-										+ Fanta::distanzaModuli[j][3];
-
-						Fanta::originalsOutTotaleModuli[j] =
-								Fanta::originalsOutModuli[j][0]
-										+ Fanta::originalsOutModuli[j][1]
-										+ Fanta::originalsOutModuli[j][2]
-										+ Fanta::originalsOutModuli[j][3];
-
-							DEBUG("######## START ####################");
-							DEBUG("         modulo " << j << " : " << Fanta::moduli[j][0] << "-" << Fanta::moduli[j][1] << "-" << Fanta::moduli[j][2] << "-" << Fanta::moduli[j][3]);
-							DEBUG("       in campo " << j << " : " << Fanta::inCampoModuli[j][0] << "-" << Fanta::inCampoModuli[j][1] << "-" << Fanta::inCampoModuli[j][2] << "-" << Fanta::inCampoModuli[j][3]);
-							DEBUG("  originals out " << j << " : " << Fanta::originalsOutModuli[j][0] << "-" << Fanta::originalsOutModuli[j][1] << "-" << Fanta::originalsOutModuli[j][2] << "-" << Fanta::originalsOutModuli[j][3]);
-							DEBUG("       distanza " << j << " : " << Fanta::distanzaModuli[j][0] << "-" << Fanta::distanzaModuli[j][1] << "-" << Fanta::distanzaModuli[j][2] << "-" << Fanta::distanzaModuli[j][3]);
-							DEBUG("    disponibili " << j << " : " << Fanta::disponibiliModuli[j][0] << "-" << Fanta::disponibiliModuli[j][1] << "-" << Fanta::disponibiliModuli[j][2] << "-" << Fanta::disponibiliModuli[j][3]);
-							DEBUG("               distanzaTotale : " << Fanta::distanzaTotaleModuli[j]);
-							DEBUG("         originals out totale : " << Fanta::originalsOutTotaleModuli[j]);
-					}
-					/***/
+					calculateMetrics(k);
 
 					/*
 					 * check per modulo che :

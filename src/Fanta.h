@@ -94,6 +94,7 @@ private:
 	std::vector<Fanta::player> teamOrderedByRuolo[2][4];
 	void fillWithNonHaGiocato();
 	void sendNGToBack();
+	void calculateMetrics(unsigned int);
 	void substitutions();
 	void calculateFantaVoto();
 	void calculateDefenseMean();
