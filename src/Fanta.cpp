@@ -1024,19 +1024,19 @@ void Fanta::initializeMetrics() {
 
 	DEBUG("");
 
-/*
- * inizializzazione variabili
- */
-for (size_t j = 0; j < 7; j++) {
-	for (size_t i = 0; i < 4; i++) {
-		Fanta::inCampoModuli[j][i] = 0;
-		Fanta::distanzaModuli[j][i] = 0;
-		Fanta::disponibiliModuli[j][i] = 0;
-		Fanta::originalsOutModuli[j][i] = 0;
+	/*
+	 * inizializzazione variabili
+	 */
+	for (size_t j = 0; j < 7; j++) {
+		for (size_t i = 0; i < 4; i++) {
+			Fanta::inCampoModuli[j][i] = 0;
+			Fanta::distanzaModuli[j][i] = 0;
+			Fanta::disponibiliModuli[j][i] = 0;
+			Fanta::originalsOutModuli[j][i] = 0;
+		}
+		Fanta::distanzaTotaleModuli[j] = 0;
 	}
-	Fanta::distanzaTotaleModuli[j] = 0;
-}
-/***/
+	/***/
 }
 
 void Fanta::substitutions() {
