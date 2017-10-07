@@ -1039,6 +1039,13 @@ void Fanta::initializeMetrics() {
 	/***/
 }
 
+bool Fanta::nonAbbastanzaDisponibili(unsigned int j) {
+	return ( static_cast<signed int>(Fanta::disponibiliModuli[j][0]) < Fanta::distanzaModuli[j][0]
+	|| static_cast<signed int>(Fanta::disponibiliModuli[j][1]) < Fanta::distanzaModuli[j][1]
+	|| static_cast<signed int>(Fanta::disponibiliModuli[j][2]) < Fanta::distanzaModuli[j][2]
+	|| static_cast<signed int>(Fanta::disponibiliModuli[j][3]) < Fanta::distanzaModuli[j][3] );
+}
+
 void Fanta::substitutions() {
 
 	DEBUG("");
@@ -1102,7 +1109,7 @@ void Fanta::substitutions() {
 			distanza += Fanta::distanza[k][i];
 		} DEBUG("distanza totale " << k << " : " << distanza);
 
-		signed int moduloPosition = -1;
+		signed int moduloAttivo = -1;
 
 		/*
 		 * posizione del modulo attuale nell'array moduli[7]
@@ -1112,14 +1119,14 @@ void Fanta::substitutions() {
 					&& Fanta::moduli[j][1] == Fanta::modulo[k][1]
 					&& Fanta::moduli[j][2] == Fanta::modulo[k][2]
 					&& Fanta::moduli[j][3] == Fanta::modulo[k][3]) {
-				moduloPosition = j;
+				moduloAttivo = j;
 			}
 		}
 		/***/
 
-		DEBUG("         posizione nell'array : " << moduloPosition);
+		DEBUG("         posizione nell'array : " << moduloAttivo);
 
-		signed int newModuloPosition = moduloPosition;
+		signed int newModuloAttivo = moduloAttivo;
 
 		if (distanza == 0) {
 			continue;
@@ -1150,21 +1157,11 @@ void Fanta::substitutions() {
 				 */
 				for (size_t j = 0; j < 7; j++) {
 
-					if (
-							Fanta::distanzaTotaleModuli[j] > 3									// condizione 1
-							|| (
-									static_cast<signed int>(Fanta::disponibiliModuli[j][0])		// condizione 2
-											< Fanta::distanzaModuli[j][0]                               // condizione 2
-									|| static_cast<signed int>(Fanta::disponibiliModuli[j][1])  // condizione 2
-											< Fanta::distanzaModuli[j][1]                       // condizione 2
-									|| static_cast<signed int>(Fanta::disponibiliModuli[j][2])  // condizione 2
-											< Fanta::distanzaModuli[j][2]                       // condizione 2
-									|| static_cast<signed int>(Fanta::disponibiliModuli[j][3])  // condizione 2
-											< Fanta::distanzaModuli[j][3]                       // condizione 2
-								)
-							|| Fanta::originalsOutTotaleModuli[j] > 0 ) {						// condizione 3
-						moduloPossibile[j] = false;
-					}
+				if (Fanta::distanzaTotaleModuli[j] > 3				// condizione 1
+				|| Fanta::nonAbbastanzaDisponibili(j) == true		// condizione 2
+						|| Fanta::originalsOutTotaleModuli[j] > 0) {// condizione 3
+					moduloPossibile[j] = false;
+				}
 
 					DEBUG(
 							"modulo " << j << " (" << labelModuli[j].c_str() << ") possibile? : " << moduloPossibile[j]);
@@ -1174,9 +1171,9 @@ void Fanta::substitutions() {
 				/*
 				 * Ricerca nuovo modulo
 				 */
-				newModuloPosition = moduloPosition; // modulo originario, se non si trova nulla rimane quello
+				newModuloAttivo = moduloAttivo; // modulo originario, se non si trova nulla rimane quello
 
-				for (unsigned int j = moduloPosition; j < 7; j++) {
+				for (unsigned int j = moduloAttivo; j < 7; j++) {
 
 					DEBUG("primo loop - j = " << j);
 
@@ -1184,7 +1181,7 @@ void Fanta::substitutions() {
 						DEBUG(
 								"nuovo modulo " << k << " : " << labelModuli[j].c_str());
 						foundNewModule = true;
-						newModuloPosition = j;
+						newModuloAttivo = j;
 						DEBUG("before first break");
 						break;
 					}
@@ -1192,7 +1189,7 @@ void Fanta::substitutions() {
 
 				if (!foundNewModule) {
 
-					for (signed int j = moduloPosition; j >= 0; j--) {
+					for (signed int j = moduloAttivo; j >= 0; j--) {
 
 						DEBUG("secondo loop - j = " << j);
 
@@ -1200,7 +1197,7 @@ void Fanta::substitutions() {
 							DEBUG(
 									"nuovo modulo " << k << " : " << labelModuli[j].c_str());
 							foundNewModule = true;
-							newModuloPosition = j;
+							newModuloAttivo = j;
 							DEBUG("before second break");
 							break;
 						}
@@ -1220,11 +1217,11 @@ void Fanta::substitutions() {
 						/*
 						 * salva stringa di sostituzione per cambio modulo
 						 */
-						if (Fanta::moduli[newModuloPosition][i]
+						if (Fanta::moduli[newModuloAttivo][i]
 								> Fanta::modulo[k][i]) { // solo per ruolo dove aumenta il numero di giocatori
 
 							for (unsigned int m = Fanta::modulo[k][i];
-									m < Fanta::moduli[newModuloPosition][i];
+									m < Fanta::moduli[newModuloAttivo][i];
 									m++) {
 
 								QString sub =
@@ -1244,32 +1241,32 @@ void Fanta::substitutions() {
 					Fanta::newModuleString[k].push_back(
 							"Nuovo modulo "
 									+ QString::number(
-											Fanta::moduli[newModuloPosition][1])
+											Fanta::moduli[newModuloAttivo][1])
 									+ "-"
 									+ QString::number(
-											Fanta::moduli[newModuloPosition][2])
+											Fanta::moduli[newModuloAttivo][2])
 									+ "-"
 									+ QString::number(
-											Fanta::moduli[newModuloPosition][3]));
+											Fanta::moduli[newModuloAttivo][3]));
 
 					Fanta::modulo[k][0] =
-							Fanta::moduli[newModuloPosition][0];
+							Fanta::moduli[newModuloAttivo][0];
 					Fanta::modulo[k][1] =
-							Fanta::moduli[newModuloPosition][1];
+							Fanta::moduli[newModuloAttivo][1];
 					Fanta::modulo[k][2] =
-							Fanta::moduli[newModuloPosition][2];
+							Fanta::moduli[newModuloAttivo][2];
 					Fanta::modulo[k][3] =
-							Fanta::moduli[newModuloPosition][3];
+							Fanta::moduli[newModuloAttivo][3];
 
-					distanza = distanzaTotaleModuli[newModuloPosition];
+					distanza = distanzaTotaleModuli[newModuloAttivo];
 					Fanta::distanza[k][0] =
-							Fanta::distanzaModuli[newModuloPosition][0];
+							Fanta::distanzaModuli[newModuloAttivo][0];
 					Fanta::distanza[k][1] =
-							Fanta::distanzaModuli[newModuloPosition][1];
+							Fanta::distanzaModuli[newModuloAttivo][1];
 					Fanta::distanza[k][2] =
-							Fanta::distanzaModuli[newModuloPosition][2];
+							Fanta::distanzaModuli[newModuloAttivo][2];
 					Fanta::distanza[k][3] =
-							Fanta::distanzaModuli[newModuloPosition][3];
+							Fanta::distanzaModuli[newModuloAttivo][3];
 				}
 
 			}

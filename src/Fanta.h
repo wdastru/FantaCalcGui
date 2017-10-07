@@ -95,6 +95,7 @@ private:
 	void fillWithNonHaGiocato();
 	void sendNGToBack();
 	void calculateMetrics(unsigned int);
+	bool nonAbbastanzaDisponibili(unsigned int j);
 	void initializeMetrics();
 	void substitutions();
 	void calculateFantaVoto();
