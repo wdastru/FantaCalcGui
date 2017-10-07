@@ -96,6 +96,7 @@ private:
 	void sendNGToBack();
 	void calculateMetrics(unsigned int);
 	bool nonAbbastanzaDisponibili(unsigned int j);
+	signed int findModuloAttivo(unsigned int k);
 	void initializeMetrics();
 	void substitutions();
 	void calculateFantaVoto();

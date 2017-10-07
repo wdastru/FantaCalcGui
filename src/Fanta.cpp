@@ -1040,10 +1040,33 @@ void Fanta::initializeMetrics() {
 }
 
 bool Fanta::nonAbbastanzaDisponibili(unsigned int j) {
+	DEBUG("");
+
 	return ( static_cast<signed int>(Fanta::disponibiliModuli[j][0]) < Fanta::distanzaModuli[j][0]
 	|| static_cast<signed int>(Fanta::disponibiliModuli[j][1]) < Fanta::distanzaModuli[j][1]
 	|| static_cast<signed int>(Fanta::disponibiliModuli[j][2]) < Fanta::distanzaModuli[j][2]
 	|| static_cast<signed int>(Fanta::disponibiliModuli[j][3]) < Fanta::distanzaModuli[j][3] );
+}
+
+signed int Fanta::findModuloAttivo(unsigned int k) {
+	DEBUG("");
+
+	signed int moduloAttivo = -1;
+	/*
+	 * posizione del modulo attuale nell'array moduli[7]
+	 */
+	for (size_t j = 0; j < 7; j++) {
+		if (Fanta::moduli[j][0] == Fanta::modulo[k][0]
+				&& Fanta::moduli[j][1] == Fanta::modulo[k][1]
+				&& Fanta::moduli[j][2] == Fanta::modulo[k][2]
+				&& Fanta::moduli[j][3] == Fanta::modulo[k][3]) {
+			moduloAttivo = j;
+			break;
+		}
+	}
+	/***/
+
+	return moduloAttivo;
 }
 
 void Fanta::substitutions() {
@@ -1109,24 +1132,9 @@ void Fanta::substitutions() {
 			distanza += Fanta::distanza[k][i];
 		} DEBUG("distanza totale " << k << " : " << distanza);
 
-		signed int moduloAttivo = -1;
-
-		/*
-		 * posizione del modulo attuale nell'array moduli[7]
-		 */
-		for (size_t j = 0; j < 7; j++) {
-			if (Fanta::moduli[j][0] == Fanta::modulo[k][0]
-					&& Fanta::moduli[j][1] == Fanta::modulo[k][1]
-					&& Fanta::moduli[j][2] == Fanta::modulo[k][2]
-					&& Fanta::moduli[j][3] == Fanta::modulo[k][3]) {
-				moduloAttivo = j;
-			}
-		}
-		/***/
-
+		signed int moduloAttivo, newModuloAttivo;
+		moduloAttivo = newModuloAttivo = findModuloAttivo(k);
 		DEBUG("         posizione nell'array : " << moduloAttivo);
-
-		signed int newModuloAttivo = moduloAttivo;
 
 		if (distanza == 0) {
 			continue;
