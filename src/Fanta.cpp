@@ -223,9 +223,10 @@ std::string Fanta::getModuloSquadra(size_t k) const {
 			+ my::toString(this->getModulo(k, 3));
 }
 unsigned int Fanta::getModulo(size_t k, size_t i) const {
-	DEBUG("modulo[" << k << "][" << i << "] : " << modulo[k][i]);
+	//DEBUG("modulo[" << k << "][" << i << "] : " << modulo[k][i]);
+	//return this->modulo[k][i];
 	DEBUG("moduli[" << moduloAttivo[k] << "][" << i << "] : " << moduli[moduloAttivo[k]][i]);
-	return this->modulo[k][i];
+	return this->moduli[moduloAttivo[k]][i];
 }
 void Fanta::setAtHome(unsigned int k) {
 	this->atHome[k] = 2;
@@ -1197,7 +1198,7 @@ void Fanta::substitutions() {
 						DEBUG(
 								"nuovo modulo " << k << " : " << labelModuli[j].c_str());
 						foundNewModule = true;
-						newModuloAttivo = j;
+						moduloAttivo[k] = j;
 						DEBUG("before first break");
 						break;
 					}
@@ -1213,7 +1214,7 @@ void Fanta::substitutions() {
 							DEBUG(
 									"nuovo modulo " << k << " : " << labelModuli[j].c_str());
 							foundNewModule = true;
-							newModuloAttivo = j;
+							moduloAttivo[k] = j;
 							DEBUG("before second break");
 							break;
 						}
@@ -1233,11 +1234,11 @@ void Fanta::substitutions() {
 						/*
 						 * salva stringa di sostituzione per cambio modulo
 						 */
-						if (Fanta::moduli[newModuloAttivo][i]
+						if (Fanta::moduli[moduloAttivo[k]][i]
 								> Fanta::modulo[k][i]) { // solo per ruolo dove aumenta il numero di giocatori
 
 							for (unsigned int m = Fanta::modulo[k][i];
-									m < Fanta::moduli[newModuloAttivo][i];
+									m < Fanta::moduli[moduloAttivo[k]][i];
 									m++) {
 
 								QString sub =
@@ -1257,34 +1258,33 @@ void Fanta::substitutions() {
 					Fanta::newModuleString[k].push_back(
 							"Nuovo modulo "
 									+ QString::number(
-											Fanta::moduli[newModuloAttivo][1])
+											Fanta::moduli[moduloAttivo[k]][1])
 									+ "-"
 									+ QString::number(
-											Fanta::moduli[newModuloAttivo][2])
+											Fanta::moduli[moduloAttivo[k]][2])
 									+ "-"
 									+ QString::number(
-											Fanta::moduli[newModuloAttivo][3]));
+											Fanta::moduli[moduloAttivo[k]][3]));
 
 					Fanta::modulo[k][0] =
-							Fanta::moduli[newModuloAttivo][0];
+							Fanta::moduli[moduloAttivo[k]][0];
 					Fanta::modulo[k][1] =
-							Fanta::moduli[newModuloAttivo][1];
+							Fanta::moduli[moduloAttivo[k]][1];
 					Fanta::modulo[k][2] =
-							Fanta::moduli[newModuloAttivo][2];
+							Fanta::moduli[moduloAttivo[k]][2];
 					Fanta::modulo[k][3] =
-							Fanta::moduli[newModuloAttivo][3];
+							Fanta::moduli[moduloAttivo[k]][3];
 
-					distanza = distanzaTotaleModuli[newModuloAttivo];
+					distanza = distanzaTotaleModuli[moduloAttivo[k]];
 					Fanta::distanza[k][0] =
-							Fanta::distanzaModuli[newModuloAttivo][0];
+							Fanta::distanzaModuli[moduloAttivo[k]][0];
 					Fanta::distanza[k][1] =
-							Fanta::distanzaModuli[newModuloAttivo][1];
+							Fanta::distanzaModuli[moduloAttivo[k]][1];
 					Fanta::distanza[k][2] =
-							Fanta::distanzaModuli[newModuloAttivo][2];
+							Fanta::distanzaModuli[moduloAttivo[k]][2];
 					Fanta::distanza[k][3] =
-							Fanta::distanzaModuli[newModuloAttivo][3];
+							Fanta::distanzaModuli[moduloAttivo[k]][3];
 				}
-
 			}
 
 			/***/
