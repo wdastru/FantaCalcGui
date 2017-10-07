@@ -28,6 +28,7 @@ class Fanta {
 private:
 	static Fanta * pInstance;
 	unsigned int modulo[2][4];// moduli delle squadre
+	signed int moduloAttivo[2]; // indice del modulo squadra in moduli[7]
 
 	unsigned int inCampo[2][4];		// giocatori effettivamenti scesi in campo
 	int distanza[2][4];		// giocatori che mancano per arrivare al modulo

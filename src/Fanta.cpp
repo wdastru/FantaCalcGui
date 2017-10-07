@@ -43,6 +43,7 @@ void Fanta::initialize() {
 
 	for (size_t k = 0; k < 2; k++) {
 		for (size_t j = 0; j < 4; j++) {
+			Fanta::moduloAttivo[k] = -1;
 			Fanta::modulo[k][j] = 0;
 			Fanta::inCampo[k][j] = 0;
 			Fanta::distanza[k][j] = 0;
@@ -196,6 +197,8 @@ std::string Fanta::getTeamName(unsigned int i) {
 	return this->teamName.at(i);
 }
 unsigned int Fanta::setModulo(std::string & str, size_t k) {
+
+	DEBUG("");
 	unsigned int xx = 0;
 
 	for (size_t i = 1; i < 4; i++) {
@@ -209,7 +212,11 @@ unsigned int Fanta::setModulo(std::string & str, size_t k) {
 		return EXIT_FAILURE;
 
 	else
+	{
+		moduloAttivo[k] = findModuloAttivo(k);
+		DEBUG("moduloAttivo[" << k << "] : " << moduloAttivo[k]);
 		return EXIT_SUCCESS;
+	}
 }
 std::string Fanta::getModuloSquadra(size_t k) const {
 	return my::toString(this->getModulo(k, 1)) + " - "
