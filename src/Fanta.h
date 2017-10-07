@@ -95,6 +95,7 @@ private:
 	void fillWithNonHaGiocato();
 	void sendNGToBack();
 	void calculateMetrics(unsigned int);
+	void initializeMetrics();
 	void substitutions();
 	void calculateFantaVoto();
 	void calculateDefenseMean();
