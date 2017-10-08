@@ -1161,6 +1161,8 @@ void Fanta::substitutions() {
 				|| Fanta::nonAbbastanzaDisponibili(j) == true		// condizione 2
 						|| Fanta::originalsOutTotaleModuli[j] > 0) {// condizione 3
 					moduloPossibile[j] = false;
+				} else {
+					moduloPossibile[j] = true;
 				}
 
 					DEBUG(
