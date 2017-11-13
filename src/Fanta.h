@@ -18,6 +18,8 @@
 #include "singletonQtLogger.h"
 #include "StringModifier.h"
 
+#include "ui_RinviateDialog.h"
+
 using namespace std;
 
 class Fanta {
@@ -89,6 +91,9 @@ private:
 	std::vector<Fanta::player> Team[2];
 	unsigned int rosa[4];
 	void checkGiocatoSenzaVoto();
+	std::vector<QString> rinviate;
+	QString squadreSerieA[20];
+	void partiteRinviate();
 	void checkNonHaGiocato();
 	void orderByRuolo();
 	std::vector<Fanta::player> teamOrderedByRuolo[2][4];
@@ -107,7 +112,7 @@ private:
 	void calculateScorers();
 	std::vector<std::string> scorers[2];
 	QString fileGazzetta;
-	QString questionMessage(QString);
+	QString questionMessage(QString, QString);
 
 	/*
 	 void reorderPlayers();

@@ -26,6 +26,7 @@ SET( SRCS
         src/MatchChooserCamp.cpp
         src/MatchChooserCoppa.cpp
         src/UpdatesChooser.cpp
+        src/RinviateDialog.cpp
         src/resources.rc )
 		
 SET( HDRS 
@@ -39,7 +40,9 @@ SET( HDRS
         src/MatchChooserCamp.h
         src/MatchChooserCoppa.h
         src/UpdatesChooser.h
+        src/RinviateDialog.h
         src/singletonQtLogger.h )
+        
 SET( UIS  
         src/authenticationdialog.ui
         src/ChooseFiles.ui
@@ -49,7 +52,8 @@ SET( UIS
         src/MatchChooserCamp.ui
         src/MatchChooserCoppa.ui
         src/UpdatesChooser.ui
-        src/singletonQtLogger.ui )
+        src/singletonQtLogger.ui
+		    src/RinviateDialog.ui )
 
 SET( TEST_SRCS 
         src/FCGTest.cpp
