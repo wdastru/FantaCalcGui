@@ -4,6 +4,7 @@
 //#include <QtWidgets/QDialog>
 #include <QtGui/QDialog>
 #include <QtCore/QFile>
+#include <QtGui/QCheckBox>
 
 #include "ui_RinviateDialog.h"
 
@@ -15,6 +16,7 @@ public:
 	static RinviateDialog* Inst();
 	RinviateDialog(QWidget *parent = 0);
 	virtual ~RinviateDialog();
+	std::vector<std::string> partiteRinviate();
 
 private slots:
 	void quit();
@@ -23,6 +25,8 @@ private slots:
 private:
 	static RinviateDialog* pInstance;
 	Ui::RinviateDialogClass ui;
+
+	QCheckBox *checkBox[20];
 
 };
 

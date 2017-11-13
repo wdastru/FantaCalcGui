@@ -560,7 +560,6 @@ void Fanta::execute() {
 
 	return;
 }
-
 void Fanta::partiteRinviate() {
 	LOG(DBG, "<br/> ========================");
 	LOG(DBG, " === Partite rinviate ===");
@@ -584,15 +583,14 @@ void Fanta::partiteRinviate() {
 
 	if (answer == "Yes") { // partite rinviate
 
-		RinviateDialog::Inst()->show();
 		RinviateDialog::Inst()->exec();
+		rinviate = RinviateDialog::Inst()->partiteRinviate();
 
-	//	LOG(DBG,
-	//	" -> "
-	//	+ QString::fromStdString(this->Team[k].at(j).Cognome)
-	//	+ " ("
-	//	+ QString::fromStdString(this->Team[k].at(j).Squadra)
-	//	+ ") ha giocato 25'.");
+		for (unsigned int i = 0; i < rinviate.size(); i++) {
+			DEBUG(rinviate.at(i));
+		}
+
+		LOG(DBG, " -> Rinviate le partite di ");
 
 	} else { // nessuna partita rinviata
 		LOG(DBG,
@@ -600,7 +598,6 @@ void Fanta::partiteRinviate() {
 		return;
 	}
 }
-
 void Fanta::checkGiocatoSenzaVoto() {
 
 	LOG(DBG, "<br/> ============================");

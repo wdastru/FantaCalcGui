@@ -91,7 +91,7 @@ private:
 	std::vector<Fanta::player> Team[2];
 	unsigned int rosa[4];
 	void checkGiocatoSenzaVoto();
-	std::vector<QString> rinviate;
+	std::vector<std::string> rinviate;
 	QString squadreSerieA[20];
 	void partiteRinviate();
 	void checkNonHaGiocato();
