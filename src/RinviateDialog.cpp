@@ -80,24 +80,24 @@ RinviateDialog::~RinviateDialog() {
 }
 void RinviateDialog::enableOkButton() {
 
+	DEBUG("");
+
+	bool enable = true;
 	int i = 0;
 	while (i < 20) {
 
-		if (checkBox[i]->isChecked()) {
-			if (ui.okButton->isEnabled()) {
-				ui.okButton->setEnabled(false);
-			} else {
-				ui.okButton->setEnabled(true);
-			}
-		}
+		if (checkBox[i]->isChecked())
+			enable = enable?false:true;
 
 		++i;
 	}
 
-	if (ui.okButton->isEnabled()) {
+	if (enable) {
 		DEBUG("enableOkButton abilitato");
+		ui.okButton->setEnabled(true);
 	} else {
 		DEBUG("enableOkButton disabilitato");
+		ui.okButton->setEnabled(false);
 	}
 }
 
