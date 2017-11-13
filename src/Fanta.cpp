@@ -16,6 +16,7 @@
 #include "singletonQtLogger.h"
 #include "StringModifier.h"
 #include "Repository.h"
+#include "RinviateDialog.h"
 
 Fanta * Fanta::Inst() {
 	if (pInstance == NULL) {
@@ -40,6 +41,8 @@ Fanta::~Fanta() {
 void Fanta::initialize() {
 
 	DEBUG("");
+
+	Fanta::rinviate.clear();
 
 	for (size_t k = 0; k < 2; k++) {
 		for (size_t j = 0; j < 4; j++) {
@@ -443,6 +446,13 @@ void Fanta::execute() {
 	DEBUG("");
 
 	try {
+		this->partiteRinviate();
+	} catch (...) {
+		LOG(ERR, "Exception caught in partiteRinviate().");
+		DEBUG("exception caught in partiteRinviate().");
+	}
+
+	try {
 		this->checkGiocatoSenzaVoto();
 	} catch (...) {
 		LOG(ERR, "Exception caught in checkGiocatoSenzaVoto().");
@@ -528,6 +538,50 @@ void Fanta::execute() {
 
 	return;
 }
+void Fanta::partiteRinviate() {
+	LOG(DBG, "<br/> ========================");
+	LOG(DBG, " === Partite rinviate ===");
+	LOG(DBG, " ========================<br/><br/>");
+	DEBUG("");
+
+	QString answer;
+
+	try {
+
+		QString title = "Partite rinviate";
+ 		QString message = "Ci sono state partite rinviate ?";
+		answer = this->questionMessage(title, message);
+
+		DEBUG(" Partite rinviate ? " << answer.toStdString().c_str());
+
+	} catch (...) {
+		LOG(FATAL,
+		"Exception caught in Fanta::partiteRinviate()!");
+	}
+
+	if (answer == "Yes") { // partite rinviate
+
+		RinviateDialog::Inst()->exec();
+		rinviate = RinviateDialog::Inst()->partiteRinviate();
+
+		std::string squadre;
+		for (unsigned int i = 0; i < rinviate.size(); i++) {
+			DEBUG(rinviate.at(i));
+			if ( i != rinviate.size() - 1 ) {
+				squadre += rinviate.at(i) + ", ";
+			} else {
+				squadre += rinviate.at(i) + ".";
+			}
+		}
+
+		LOG(DBG, " -> Rinviate le partite di " + QString::fromStdString(squadre) );
+
+	} else { // nessuna partita rinviata
+		LOG(DBG,
+				" Nessuna partita rinviata.");
+		return;
+	}
+}
 void Fanta::checkGiocatoSenzaVoto() {
 
 	LOG(DBG, "<br/> ============================");
@@ -540,16 +594,31 @@ void Fanta::checkGiocatoSenzaVoto() {
 		for (size_t j = 0; j < this->Team[k].size(); j++) { // loop sui giocatori
 			//	DEBUG( this->Team[k].at(j).Cognome.c_str());
 
-			if ( this->Team[k].at(j).VotoGazzetta == -1 && (
-					this->Team[k].at(j).Esp != 0 ||
-					this->Team[k].at(j).Amm != 0 ||
-					this->Team[k].at(j).Autoreti != 0 ||
-					this->Team[k].at(j).Assist != 0 ||
-					this->Team[k].at(j).GoalSubiti != 0 ||
-					this->Team[k].at(j).GoalFatti != 0
+			bool giocatoreDiPartitaRinviata = false;
+			for (unsigned int i = 0; i < rinviate.size(); i++) {
+				if (this->Team[k].at(j).Squadra == rinviate.at(i)) {
+					giocatoreDiPartitaRinviata = true;
+					break;
+				}
+			}
+
+			if (giocatoreDiPartitaRinviata) { // Partita rinviata
+
+				this->Team[k].at(j).VotoGazzetta = 6.0;
+				this->Team[k].at(j).FantaVotoGazzetta = 6.0;
+
+			} else if ( this->Team[k].at(j).VotoGazzetta == -1 && (
+
+				this->Team[k].at(j).Esp != 0 ||
+				this->Team[k].at(j).Amm != 0 ||
+				this->Team[k].at(j).Autoreti != 0 ||
+				this->Team[k].at(j).Assist != 0 ||
+				this->Team[k].at(j).GoalSubiti != 0 ||
+				this->Team[k].at(j).GoalFatti != 0
+
 			) ) { // se S.V. ma con bonus/malus
 
-				if (this->Team[k].at(j).Ruolo2 == 0) { // se e' un portiere
+			if (this->Team[k].at(j).Ruolo2 == 0) { // se e' un portiere
 
 					DEBUG("Giocato senza voto --> " << this->Team[k].at(j).Cognome.c_str() << " - portiere.");
 
@@ -643,10 +712,11 @@ void Fanta::checkGiocatoSenzaVoto() {
 
 				try {
 
-					answer
-					= this->questionMessage(
-					QString::fromStdString(
-							this->Team[k].at(j).Cognome));
+					QString title = "Ha giocato almeno 25' ?";
+					QString message = "Il giocatore \n" + QString::fromStdString(this->Team[k].at(j).Cognome)
+									+ " \nha giocato, ma non e\' stato giudicato. \nHa giocato piu\' di 25\' ?";
+
+					answer = this->questionMessage(title, message);
 
 					DEBUG(this->Team[k].at(j).Cognome.c_str() << " ha giocato piu' di 25 minuti ? " << answer.toStdString().c_str());
 
@@ -691,21 +761,14 @@ void Fanta::checkGiocatoSenzaVoto() {
 		} // loop giocatori
 	} // loop squadre
 }
-QString Fanta::questionMessage(QString playerName) {
+QString Fanta::questionMessage(QString title, QString message) {
 
 	DEBUG("");
-
-	QString title = "Ha giocato almeno 25' ?";
-
-	QString message =
-			"Il giocatore \n" + playerName
-					+ " \nha giocato, ma non e\' stato giudicato. \nHa giocato piu\' di 25\' ?";
 
 	QString answer;
 
 	QMessageBox::StandardButton reply;
-	reply = QMessageBox::question(THE_LOGGER, title, message,
-	QMessageBox::Yes | QMessageBox::No);
+	reply = QMessageBox::question(THE_LOGGER, title, message, QMessageBox::Yes | QMessageBox::No);
 	if (reply == QMessageBox::Yes) {
 		answer = "Yes";
 		DEBUG("returning " << answer.toStdString().c_str() << ".");
