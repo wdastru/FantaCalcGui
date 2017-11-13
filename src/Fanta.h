@@ -92,7 +92,6 @@ private:
 	unsigned int rosa[4];
 	void checkGiocatoSenzaVoto();
 	std::vector<std::string> rinviate;
-	QString squadreSerieA[20];
 	void partiteRinviate();
 	void checkNonHaGiocato();
 	void orderByRuolo();

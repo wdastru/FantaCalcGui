@@ -44,28 +44,6 @@ void Fanta::initialize() {
 
 	Fanta::rinviate.clear();
 
-	Fanta::squadreSerieA[0] = "ATALANTA";
-	Fanta::squadreSerieA[1] = "BENEVENTO";
-	Fanta::squadreSerieA[2] = "BOLOGNA";
-	Fanta::squadreSerieA[3] = "CAGLIARI";
-	Fanta::squadreSerieA[4] = "CHIEVO";
-	Fanta::squadreSerieA[5] = "CROTONE";
-	Fanta::squadreSerieA[6] = "FIORENTINA";
-	Fanta::squadreSerieA[7] = "GENOA";
-	Fanta::squadreSerieA[8] = "INTER";
-	Fanta::squadreSerieA[9] = "JUVENTUS";
-	Fanta::squadreSerieA[10] = "LAZIO";
-	Fanta::squadreSerieA[11] = "MILAN";
-	Fanta::squadreSerieA[12] = "NAPOLI";
-	Fanta::squadreSerieA[13] = "ROMA";
-	Fanta::squadreSerieA[14] = "SAMPDORIA";
-	Fanta::squadreSerieA[15] = "SASSUOLO";
-	Fanta::squadreSerieA[16] = "SPAL";
-	Fanta::squadreSerieA[17] = "TORINO";
-	Fanta::squadreSerieA[18] = "UDINESE";
-	Fanta::squadreSerieA[19] = "VERONA";
-
-
 	for (size_t k = 0; k < 2; k++) {
 		for (size_t j = 0; j < 4; j++) {
 			Fanta::modulo[k][j] = 0;
@@ -586,11 +564,17 @@ void Fanta::partiteRinviate() {
 		RinviateDialog::Inst()->exec();
 		rinviate = RinviateDialog::Inst()->partiteRinviate();
 
+		std::string squadre;
 		for (unsigned int i = 0; i < rinviate.size(); i++) {
 			DEBUG(rinviate.at(i));
+			if ( i != rinviate.size() - 1 ) {
+				squadre += rinviate.at(i) + ", ";
+			} else {
+				squadre += rinviate.at(i) + ".";
+			}
 		}
 
-		LOG(DBG, " -> Rinviate le partite di ");
+		LOG(DBG, " -> Rinviate le partite di " + QString::fromStdString(squadre) );
 
 	} else { // nessuna partita rinviata
 		LOG(DBG,
@@ -610,16 +594,31 @@ void Fanta::checkGiocatoSenzaVoto() {
 		for (size_t j = 0; j < this->Team[k].size(); j++) { // loop sui giocatori
 			//	DEBUG( this->Team[k].at(j).Cognome.c_str());
 
-			if ( this->Team[k].at(j).VotoGazzetta == -1 && (
-					this->Team[k].at(j).Esp != 0 ||
-					this->Team[k].at(j).Amm != 0 ||
-					this->Team[k].at(j).Autoreti != 0 ||
-					this->Team[k].at(j).Assist != 0 ||
-					this->Team[k].at(j).GoalSubiti != 0 ||
-					this->Team[k].at(j).GoalFatti != 0
+			bool giocatoreDiPartitaRinviata = false;
+			for (unsigned int i = 0; i < rinviate.size(); i++) {
+				if (this->Team[k].at(j).Squadra == rinviate.at(i)) {
+					giocatoreDiPartitaRinviata = true;
+					break;
+				}
+			}
+
+			if (giocatoreDiPartitaRinviata) { // Partita rinviata
+
+				this->Team[k].at(j).VotoGazzetta = 6.0;
+				this->Team[k].at(j).FantaVotoGazzetta = 6.0;
+
+			} else if ( this->Team[k].at(j).VotoGazzetta == -1 && (
+
+				this->Team[k].at(j).Esp != 0 ||
+				this->Team[k].at(j).Amm != 0 ||
+				this->Team[k].at(j).Autoreti != 0 ||
+				this->Team[k].at(j).Assist != 0 ||
+				this->Team[k].at(j).GoalSubiti != 0 ||
+				this->Team[k].at(j).GoalFatti != 0
+
 			) ) { // se S.V. ma con bonus/malus
 
-				if (this->Team[k].at(j).Ruolo2 == 0) { // se e' un portiere
+			if (this->Team[k].at(j).Ruolo2 == 0) { // se e' un portiere
 
 					DEBUG("Giocato senza voto --> " << this->Team[k].at(j).Cognome.c_str() << " - portiere.");
 

@@ -64,6 +64,8 @@ RinviateDialog::RinviateDialog(QWidget *parent) :
 					QApplication::translate("RinviateDialogClass", squadreSerieA[i].c_str(), 0,
 							QApplication::UnicodeUTF8));
 
+		QObject::connect(checkBox[i], SIGNAL(toggled(bool)), this, SLOT(enableOkButton()));
+
 		//DEBUG("i: " << i << " int(i / 4): " << int(i / 4));
 		//DEBUG("i: " << i << " (i % 4)   : " << (i % 4));
 
@@ -78,9 +80,19 @@ RinviateDialog::~RinviateDialog() {
 }
 void RinviateDialog::enableOkButton() {
 
+	int i = 0;
+	while (i < 20) {
 
-	//ui.okButton->setEnabled(true);
-	//ui.okButton->setEnabled(false);
+		if (checkBox[i]->isChecked()) {
+			if (ui.okButton->isEnabled()) {
+				ui.okButton->setEnabled(false);
+			} else {
+				ui.okButton->setEnabled(true);
+			}
+		}
+
+		++i;
+	}
 
 	if (ui.okButton->isEnabled()) {
 		DEBUG("enableOkButton abilitato");
