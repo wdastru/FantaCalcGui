@@ -61,7 +61,7 @@ void singletonQtLogger::Logging(QString type, QString message) {
 	} else if (type == "ERROR") {
 		this->ui.plainTextEdit->appendHtml(
 				"<span style='color:#FF0000;'> ERROR : " + message + "</span>");
-	} else if (type == "DBG") {
+	} else if (type == "DEB") {
 		if (THE_REPO->debugStatus) {
 			this->ui.plainTextEdit->appendHtml(" " + message);
 		}
@@ -192,9 +192,9 @@ void singletonQtLogger::configClicked() {
 void singletonQtLogger::onlineClicked() {
 	DEBUG("");
 
-	LOG(DBG, "<br> ========================");
-	LOG(DBG, " === Modalita' online ===");
-	LOG(DBG, " ========================<br>");
+	LOG(DEB, "<br> ========================");
+	LOG(DEB, " === Modalita' online ===");
+	LOG(DEB, " ========================<br>");
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	urls->push_back(QUrl::fromLocalFile(THE_REPO->getFileFormazioniUrl()));
@@ -236,9 +236,9 @@ void singletonQtLogger::onlineClicked() {
 	}
 }
 void singletonQtLogger::offlineClicked() {
-	LOG(DBG, "<br> =========================");
-	LOG(DBG, " === Modalita' offline ===");
-	LOG(DBG, " =========================<br>");
+	LOG(DEB, "<br> =========================");
+	LOG(DEB, " === Modalita' offline ===");
+	LOG(DEB, " =========================<br>");
 
 	NoNetFileDialog * noNetFileDialog = new NoNetFileDialog(THE_LOGGER);
 	noNetFileDialog->exec();
@@ -247,9 +247,9 @@ void singletonQtLogger::offlineClicked() {
 		THE_REPO->fileFormazioni = noNetFileDialog->getFileNameSquadre();
 		THE_REPO->fileGazzetta = noNetFileDialog->getFileNameGazzetta();
 
-		LOG(DBG,
+		LOG(DEB,
 				QObject::tr("    File gazzetta   : %1").arg(THE_REPO->fileGazzetta));
-		LOG(DBG,
+		LOG(DEB,
 				QObject::tr("    File formazioni : %1").arg(
 						THE_REPO->fileFormazioni));
 
@@ -340,18 +340,18 @@ void singletonQtLogger::goOn() {
 
 		DEBUG(QObject::tr("file name temporaneo : %1").arg(fileName).toStdString().c_str());
 
-		LOG(DBG, "<br/> =================");
-		LOG(DBG,      " === Riepilogo ===");
-		LOG(DBG,      " =================");
+		LOG(DEB, "<br/> =================");
+		LOG(DEB,      " === Riepilogo ===");
+		LOG(DEB,      " =================");
 
 		FANTA->printTitolo(FANTA->getTeamName(0) + " - " + FANTA->getTeamName(1), INFO);
 
 		FANTA->printRiepilogo();
 		FANTA->printFormations();
 
-		LOG(DBG, "<br/> ===========================");
-		LOG(DBG,      " === Dettaglio giocatori ===");
-		LOG(DBG,      " ===========================");
+		LOG(DEB, "<br/> ===========================");
+		LOG(DEB,      " === Dettaglio giocatori ===");
+		LOG(DEB,      " ===========================");
 
 		FANTA->printPlayersInfo();
 
@@ -372,9 +372,9 @@ void singletonQtLogger::setLogFileName(QString filename) {
 }
 bool singletonQtLogger::checkForUpdates() {
 
-	LOG(DBG, "<br> =============================");
-	LOG(DBG, " === Ricerca aggiornamenti ===");
-	LOG(DBG, " =============================<br>");
+	LOG(DEB, "<br> =============================");
+	LOG(DEB, " === Ricerca aggiornamenti ===");
+	LOG(DEB, " =============================<br>");
 
 	DEBUG(this->getVersion().toStdString().c_str());
 
@@ -531,7 +531,7 @@ bool singletonQtLogger::checkForUpdates() {
 		chooser->exec();
 
 	} else { // download failed
-		LOG(DBG,
+		LOG(DEB,
 		"Non e' stato possibile scaricare le informazioni relative agli aggiornamenti disponibili.");
 		return false;
 	}
@@ -541,9 +541,9 @@ bool singletonQtLogger::checkForUpdates() {
 void singletonQtLogger::on_uploadCampButton_clicked() {
 	DEBUG("");
 
-	LOG(DBG, "<br/> ==========================================");
-	LOG(DBG, " === Pubblicazione risultati campionato ===");
-	LOG(DBG, " ==========================================<br/><br/>");
+	LOG(DEB, "<br/> ==========================================");
+	LOG(DEB, " === Pubblicazione risultati campionato ===");
+	LOG(DEB, " ==========================================<br/><br/>");
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	std::vector<QString> *savePaths = new std::vector<QString>;
@@ -574,9 +574,9 @@ void singletonQtLogger::on_uploadCampButton_clicked() {
 void singletonQtLogger::on_uploadCoppaButton_clicked() {
 	DEBUG("");
 
-	LOG(DBG, "<br/> =====================================");
-	LOG(DBG, " === Pubblicazione risultati coppa ===");
-	LOG(DBG, " =====================================<br/><br/>");
+	LOG(DEB, "<br/> =====================================");
+	LOG(DEB, " === Pubblicazione risultati coppa ===");
+	LOG(DEB, " =====================================<br/><br/>");
 
 	std::vector<QUrl> * urls = new std::vector<QUrl>;
 	std::vector<QString> *savePaths = new std::vector<QString>;

@@ -78,7 +78,7 @@ void UpdatesChooser::checkRadioButtons() {
 	Downloader updateDownloader(THE_LOGGER, urls, savePaths, true);
 
 	if (updateDownloader.requestSucceded()) { // download succeded
-		LOG(DBG,
+		LOG(DEB,
 		"Download of "
 		+ pResources->at(chosenUpdate)["file"]
 		+ " succeded.");

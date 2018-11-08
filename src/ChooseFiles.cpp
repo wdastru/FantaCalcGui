@@ -596,9 +596,9 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 
 		fOut.write(str.toLatin1());
 
-		LOG(DBG, QObject::tr("<br> ====================="));
-		LOG(DBG,     QObject::tr(" === File di input ==="));
-		LOG(DBG,     QObject::tr(" =====================<br>"));
+		LOG(DEB, QObject::tr("<br> ====================="));
+		LOG(DEB,     QObject::tr(" === File di input ==="));
+		LOG(DEB,     QObject::tr(" =====================<br>"));
 
 		std::istringstream iss(str.toStdString().c_str());
 		std::string x;
@@ -608,7 +608,7 @@ bool ChooseFiles::createFileSquadreFromWebFiles() {
 		while(!iss.eof()) {
 			iss.getline(input, Limit);
 			x = std::string(input);
-			LOG(DBG, QObject::tr("    %1").arg(QString::fromStdString(x)));
+			LOG(DEB, QObject::tr("    %1").arg(QString::fromStdString(x)));
 		}
 
 		fHome.close();

@@ -60,14 +60,16 @@
 #define ERR "ERROR"
 #define FATAL "FATAL"
 #define WARN  "WARN"
-#define DBG "DBG"
+#define DEB "DEB"
 #define UPDATE "UPDATE"
 #define TOFILE  "FILE"
 #define LOG2CMDLINE qDebug()
 
 #ifdef DO_DEBUG
-#define __FILENAME__ std::string(__FILE__).substr(32,std::string::npos).c_str()
-#define DEBUG(x) do { std::cout << "(" << __FILENAME__ << ":" << __func__ << ":" << __LINE__ << ") " << x << std::endl; } while (0)
+//#define __FILENAME__ std::string(__FILE__).substr(32,std::string::npos).c_str()
+//#define __func__ __FUNCTION__
+#define FUNCTION_NAME __FILE__ << " (" << __FUNCTION__ << ":" << __LINE__ << ") "
+#define DEBUG(x) do { std::cout << "[" << FUNCTION_NAME << "] " << x << std::endl; } while (0)
 #else
 #define DEBUG(x)
 #endif
