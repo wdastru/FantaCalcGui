@@ -1195,10 +1195,12 @@ void Fanta::substitutions() {
 
 			if (distanza > 3) {
 				cambioModulo = true;
+				DEBUG("cambio modulo per distanza > 3 (" << distanza << ")" );
 			} else {
 				for (size_t i = 0; i < 4; i++) { // ruolo
 					if (Fanta::disponibili[k][i] < Fanta::distanza[k][i]) {
 						cambioModulo = true;
+						DEBUG("cambio modulo per disponibili < distanza ( ruolo " << i << " : " << Fanta::disponibili[k][i] << " < " << Fanta::distanza[k][i] << ")" );
 					}
 				}
 			}
