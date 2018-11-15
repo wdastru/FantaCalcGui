@@ -35,12 +35,13 @@ private:
 	int distanza[2][4];		// giocatori che mancano per arrivare al modulo
 	unsigned int disponibili[2][4];	// giocatori in panchina che possono essere usati
 
-	unsigned int inCampoModuli[7][4];			// giocatori effettivamenti scesi in campo nei moduli possibili
-	int distanzaModuli[7][4];					// giocatori che mancano per arrivare ai moduli possibili
-	unsigned int disponibiliModuli[7][4];		// giocatori in panchina che possono essere usati per i moduli possibili
-	unsigned int originalsOutModuli[7][4];		// giocatori orginariamente titolari che escono  per i moduli possibili
-	signed int distanzaTotaleModuli[7]; 		// distanza dei giocatori in campo dai moduli possibili
-	unsigned int originalsOutTotaleModuli[7]; 	// giocatori totali orginariamente titolari che escono  per i moduli possibili
+	unsigned int inCampoModuli[7][4];						// giocatori effettivamenti scesi in campo nei moduli possibili
+	int distanzaModuli[7][4];								// giocatori che mancano per arrivare ai moduli possibili
+	unsigned int disponibiliModuli[7][4];					// giocatori in panchina che possono essere usati per i moduli possibili
+	unsigned int originalsOutModuli[7][4];					// giocatori orginariamente titolari che escono  per i moduli possibili
+	std::vector<QString> originalsOutModuliNames[7][4];		// nomi dei giocatori orginariamente titolari che escono  per i moduli possibili
+	signed int distanzaTotaleModuli[7]; 					// distanza dei giocatori in campo dai moduli possibili
+	unsigned int originalsOutTotaleModuli[7]; 				// giocatori totali orginariamente titolari che escono  per i moduli possibili
 
 	double Total[2];
 	signed int ruoloDaSostituire[2][10]; // ruoli da sostituire
@@ -55,6 +56,7 @@ private:
 	bool moduloPossibile[7];
 	std::string labelModuli[7];
 	std::vector<QString> subsForModuleChange[2];
+	std::vector<QString> origOutForModuleChange[2];
 	std::vector<QString> subs[2];
 	std::vector<QString> newModuleString[2];
 
@@ -112,6 +114,7 @@ private:
 	std::vector<std::string> scorers[2];
 	QString fileGazzetta;
 	QString questionMessage(QString, QString);
+	std::string roleLetter(unsigned int role);
 
 	/*
 	 void reorderPlayers();

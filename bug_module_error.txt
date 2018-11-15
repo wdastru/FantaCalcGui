@@ -1,0 +1,63 @@
+nome squadra : lokomotiv
+modulo : 3 - 4 - 3
+
+P		SZCZESNY Wojciech
+P	x	SCUFFET Simone
+P	x	NICOLAS Andrade
+D  		BERESZYNSKI Bartosz
+D  		GAGLIOLO Riccardo
+D  		FELIPE Dal Belo
+D  	x	RUGANI Daniele
+D  	x	ADNAN Ali Kadhim
+D  		PASQUAL Manuel
+D  	x	DANILO Larangeira
+D  	x	HEURTAUX Thomas
+C  	x	BERNARDESCHI Federico
+C  	x	BONAVENTURA Giacomo
+C  		PAROLO Marco
+C  		LINETTY Karol
+C  	x	BARAK Antonin
+C  	x	JANKTO Jakub
+C  		PULGAR Erick
+C  	x	LEIVA Lucas
+A  		RONALDO Cristiano
+A  	x	MANDZUKIC Mario
+A  		ILICIC Josip
+A  		SIMEONE Giovanni
+A  		MILIK Arkadiusz
+A  		LASAGNA Kevin
+
+Fri 02 Nov 2018 - 16:26:17
+
+
+nome squadra : krakatoa
+modulo : 3 - 4 - 3
+
+P		KARNEZIS Orestis
+P	x	OSPINA David
+P	x	MERET Alex
+D  		CANCELO Joao
+D  		ALVES Bruno
+D  		D'AMBROSIO Danilo
+D  		TONELLI Lorenzo
+D  		FERRARI Gianmarco
+D  		PEZZELLA German
+D  	x	CACCIATORE Fabrizio
+D  	x	CRISCITO Domenico
+C  		ZIELINSKI Piotr
+C  		VERETOUT Jordan
+C  		STULAC Leo
+C  		GIACCHERINI Emanuele
+C  		ZAJC Miha
+C  		DZEMAILI Blerim
+C  		BERISHA Valon
+C  	x	PASTORE Javier
+A  		IMMOBILE Ciro
+A  		PIATEK Krzysztof
+A  		BERARDI Domenico
+A  		STEPINSKI Mariusz
+A  	x	PJACA Marko
+A  	x 	TEODORCZYK Lukasz
+
+Mon 05 Nov 2018 - 09:35:09
+

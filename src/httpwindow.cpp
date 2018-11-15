@@ -169,14 +169,12 @@ void HttpWindow::httpFinished() {
 	} else {
 
 		if (!uploadFlag) {
-			LOG(
-			DBG,
+			LOG(DEB,
 			tr("    Scaricato %1 in %2").arg(
 					QFileInfo(this->file->fileName()).fileName()).arg(
 					QFileInfo(this->file->fileName()).path()));
 		} else {
-			LOG(
-					DBG,
+			LOG(DEB,
 					tr("    Upload di %1 riuscito").arg(
 							QFileInfo(this->file->fileName()).fileName()));
 		}

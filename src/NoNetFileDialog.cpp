@@ -123,12 +123,12 @@ QString NoNetFileDialog::getFileNameGazzetta() {
 }
 void NoNetFileDialog::okClicked() {
 	this->hasBeenAborted = FALSE;
-//	LOG(DBG, "In NoNetFileDialog::okClicked().");
+//	LOG(DEB, "In NoNetFileDialog::okClicked().");
 	this->hide();
 }
 void NoNetFileDialog::cancelClicked() {
 	this->hasBeenAborted = TRUE;
-//	LOG(DBG, "In NoNetFileDialog::cancelClicked().");
+//	LOG(DEB, "In NoNetFileDialog::cancelClicked().");
 	this->close();
 }
 void NoNetFileDialog::closeEvent(QCloseEvent *event) {
