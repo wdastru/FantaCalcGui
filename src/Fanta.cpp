@@ -1222,7 +1222,7 @@ void Fanta::substitutions() {
 				for (size_t i = 0; i < 4; i++) { // ruolo
 					if (Fanta::disponibili[k][i] < Fanta::distanza[k][i]) {
 						cambioModulo = true;
-						DEBUG("cambio modulo per disponibili < distanza ( ruolo " << i << " : " << Fanta::disponibili[k][i] << " < " << Fanta::distanza[k][i] << ")" );
+						DEBUG("cambio modulo per disponibili < distanza ( ruolo " << Fanta::roleLetter(i) << " : " << Fanta::disponibili[k][i] << " < " << Fanta::distanza[k][i] << ")" );
 					}
 				}
 			}
