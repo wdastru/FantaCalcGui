@@ -29,19 +29,20 @@ class Fanta {
 
 private:
 	static Fanta * pInstance;
-	unsigned int modulo[2][4];// moduli delle squadre
+	unsigned int modulo[2][4]; // moduli delle squadre
+	unsigned int moduloIndex[2]; // indice modulo per squadra
 
 	unsigned int inCampo[2][4];		// giocatori effettivamenti scesi in campo
 	int distanza[2][4];		// giocatori che mancano per arrivare al modulo
 	unsigned int disponibili[2][4];	// giocatori in panchina che possono essere usati
 
-	unsigned int inCampoModuli[7][4];						// giocatori effettivamenti scesi in campo nei moduli possibili
-	int distanzaModuli[7][4];								// giocatori che mancano per arrivare ai moduli possibili
-	unsigned int disponibiliModuli[7][4];					// giocatori in panchina che possono essere usati per i moduli possibili
-	unsigned int originalsOutModuli[7][4];					// giocatori orginariamente titolari che escono  per i moduli possibili
-	std::vector<QString> originalsOutModuliNames[7][4];		// nomi dei giocatori orginariamente titolari che escono  per i moduli possibili
+	unsigned int inCampoModuli[2][7][4];					// giocatori effettivamenti scesi in campo nei moduli possibili, per squadra, per ruolo
+	int distanzaModuli[2][7][4];							// giocatori che mancano per arrivare ai moduli possibili, per squadra, per ruolo
+	unsigned int disponibiliModuli[2][7][4];				// giocatori in panchina che possono essere usati per i moduli possibili, per squadra, per ruolo
+	unsigned int originalsOutModuli[2][7][4];				// giocatori orginariamente titolari che escono  per i moduli possibili, per squadra, per ruolo
+	std::vector<QString> originalsOutModuliNames[2][7][4];	// nomi dei giocatori orginariamente titolari che escono  per i moduli possibili, per squadra, per ruolo
 	signed int distanzaTotaleModuli[7]; 					// distanza dei giocatori in campo dai moduli possibili
-	unsigned int originalsOutTotaleModuli[7]; 				// giocatori totali orginariamente titolari che escono  per i moduli possibili
+	unsigned int originalsOutTotaleModuli[2][7];			// giocatori totali orginariamente titolari che escono per i moduli possibili, per squadra
 
 	double Total[2];
 	signed int ruoloDaSostituire[2][10]; // ruoli da sostituire
@@ -50,14 +51,17 @@ private:
 	unsigned int defenders[2];
 	unsigned int sfide[2];
 	unsigned int goals[2];
-	unsigned int sostituzioni[2];
+	unsigned int sostituzioni[2][7];
+	unsigned int inCampoPostSubs[2][7];
+
+	unsigned int ordineSostituzioni[10];
 
 	unsigned int moduli[7][4];
 	bool moduloPossibile[7];
 	std::string labelModuli[7];
 	std::vector<QString> subsForModuleChange[2];
 	std::vector<QString> origOutForModuleChange[2];
-	std::vector<QString> subs[2];
+	std::vector<QString> subs[2][7];
 	std::vector<QString> newModuleString[2];
 
 	signed int scoreModuli[7];
@@ -98,12 +102,14 @@ private:
 	void checkNonHaGiocato();
 	void orderByRuolo();
 	std::vector<Fanta::player> teamOrderedByRuolo[2][4];
+	std::vector<Fanta::player> teamOrderedByRuoloBackup[2][4];
 	void fillWithNonHaGiocato();
-	void sendNGToBack();
+	void sendNGToBack(unsigned int squadra, unsigned int modulo[4]);
 	void calculateMetrics(unsigned int);
-	bool nonAbbastanzaDisponibili(unsigned int j);
+	//bool nonAbbastanzaDisponibili(unsigned int j, unsigned int squadra);
 	void initializeMetrics();
 	void substitutions();
+	void substitutionsForTeam(unsigned int squadra, unsigned int moduloIndex);
 	void calculateFantaVoto();
 	void calculateDefenseMean();
 	void calculateDefenseModifier();
@@ -148,7 +154,7 @@ public:
 	unsigned int getGoalDecVittTot(unsigned int) const ;
 	unsigned int getGoalDecParTot(unsigned int) const ;
 	unsigned int getAssistTot(unsigned int) const ;
-	unsigned int getSubstitutions(unsigned int) const ;
+	unsigned int getSubstitutions(unsigned int, unsigned int) const ;
 	unsigned int getGoals(unsigned int) const;
 	double getTotal(unsigned int) const;
 	std::string getScorer(unsigned int, unsigned int) const;

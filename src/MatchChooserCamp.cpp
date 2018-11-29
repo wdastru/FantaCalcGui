@@ -284,8 +284,7 @@ void MatchChooserCamp::quit() {
 
 		QString message, match, goalHome, goalAway, puntiHome, puntiAway,
 				squadraHome, squadraAway;
-		bool ritorno;
-
+		
 		for (int i = 0; i < matches.size(); ++i) {
 
 			if (matches.at(i).indexOf(chosenMatch) != -1) {
