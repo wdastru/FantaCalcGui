@@ -220,15 +220,12 @@ unsigned int Fanta::setModulo(std::string & str, size_t k) {
 		xx += this->modulo[k][i];
 	}
 
-	if (xx != 10 || this->modulo[k][1] < 3 || this->modulo[k][1] > 5 {
-			|| this->modulo[k][2] < 3 || this->modulo[k][2] > 5
-			|| this->modulo[k][3] < 1 || this->modulo[k][3] > 3)
+	if (xx != 10 || this->modulo[k][1] < 3 || this->modulo[k][1] > 5 
+		|| this->modulo[k][2] < 3 || this->modulo[k][2] > 5
+		|| this->modulo[k][3] < 1 || this->modulo[k][3] > 3)
 		return EXIT_FAILURE;
 
-	} else {
-
-
-
+	else 
 		return EXIT_SUCCESS;
 }
 std::string Fanta::getModuloSquadra(size_t k) const {
@@ -1179,7 +1176,7 @@ void Fanta::substitutionsForTeam(unsigned int squadra, unsigned int moduloIdx) {
 		//DEBUG("ordineSostituzioni[" << i << "] = " << Fanta::ordineSostituzioni[i]);
 		//DEBUG(Fanta::distanzaModuli[moduloIndex][Fanta::ordineSostituzioni[i]]);
 
-		if (Fanta::distanzaModuli[moduloIdx][Fanta::ordineSostituzioni[i]] > 0) {
+		if (Fanta::distanzaModuli[squadra][moduloIdx][Fanta::ordineSostituzioni[i]] > 0) {
 
 			Fanta::ruoloDaSostituire[squadra][sostituzione] = Fanta::ordineSostituzioni[i];
 			Fanta::distanzaModuli[squadra][moduloIdx][Fanta::ordineSostituzioni[i]]--;
@@ -1379,12 +1376,14 @@ void Fanta::substitutions() {
 				}
 			}
 		}
-
-		/*
-		* score dei moduli
-		*/
 		
-		if (cambioModulo) {
+		if (!cambioModulo) {
+
+			sendNGToBack(k, Fanta::moduli[Fanta::moduloIndex[k]]); 
+			Fanta::substitutionsForTeam(k, Fanta::moduloIndex[k]);
+
+		} else {
+
 			DEBUG("cambio modulo");
 
 			for (size_t j = 0; j < 7; j++) { // loop sui moduli
@@ -2490,7 +2489,8 @@ unsigned int Fanta::getAmmonizioniTot(unsigned int k) const {
 	for (size_t i = 0; i < 4; i++) // ruolo
 			{
 		size_t j = 0;
-		while (j < this->modulo[k][i]) {
+		while (j < this->moduli[Fanta::moduloIndex[k]][i]) {
+			DEBUG("ammonizioni : " << this->teamOrderedByRuolo[k][i].at(j).Cognome << " " << this->teamOrderedByRuolo[k][i].at(j).Amm);
 			amm += this->teamOrderedByRuolo[k][i].at(j).Amm;
 			j++;
 		}
@@ -2504,7 +2504,7 @@ unsigned int Fanta::getEspulsioniTot(unsigned int k) const {
 	for (size_t i = 0; i < 4; i++) // ruolo
 			{
 		size_t j = 0;
-		while (j < Fanta::modulo[k][i]) {
+		while (j < moduli[Fanta::moduloIndex[k]][i]) {
 			esp += Fanta::teamOrderedByRuolo[k][i].at(j).Esp;
 			j++;
 		}
@@ -2518,7 +2518,7 @@ unsigned int Fanta::getGoalDecVittTot(unsigned int k) const {
 	for (size_t i = 0; i < 4; i++) // ruolo
 			{
 		size_t j = 0;
-		while (j < Fanta::modulo[k][i]) {
+		while (j < moduli[Fanta::moduloIndex[k]][i]) {
 			GDVT += Fanta::teamOrderedByRuolo[k][i].at(j).GoalDecVitt;
 			j++;
 		}
@@ -2532,7 +2532,7 @@ unsigned int Fanta::getGoalDecParTot(unsigned int k) const {
 	for (size_t i = 0; i < 4; i++) // ruolo
 			{
 		size_t j = 0;
-		while (j < Fanta::modulo[k][i]) {
+		while (j < moduli[Fanta::moduloIndex[k]][i]) {
 			GDPT += Fanta::teamOrderedByRuolo[k][i].at(j).GoalDecPar;
 			j++;
 		}
@@ -2549,7 +2549,7 @@ unsigned int Fanta::getAssistTot(unsigned int k) const {
 	for (size_t i = 0; i < 4; i++) // ruolo
 			{
 		size_t j = 0;
-		while (j < Fanta::modulo[k][i]) {
+		while (j < moduli[Fanta::moduloIndex[k]][i]) {
 			AssTot += Fanta::teamOrderedByRuolo[k][i].at(j).Assist;
 			j++;
 		}
