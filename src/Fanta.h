@@ -101,10 +101,11 @@ private:
 	void partiteRinviate();
 	void checkNonHaGiocato();
 	void orderByRuolo();
-	std::vector<Fanta::player> teamOrderedByRuolo[2][4];
-	std::vector<Fanta::player> teamOrderedByRuoloBackup[2][4];
+	std::vector<Fanta::player> teamOrderedByRuolo[2][7][4];
+	std::vector<Fanta::player> teamOrderedByRuoloBackup[2][7][4];
 	void fillWithNonHaGiocato();
-	void sendNGToBack(unsigned int squadra, unsigned int modulo[4]);
+	void markForSubstitution();
+	void sendNGToBack(unsigned int squadra, unsigned int moduloIndex);
 	void calculateMetrics(unsigned int);
 	//bool nonAbbastanzaDisponibili(unsigned int j, unsigned int squadra);
 	void initializeMetrics();
