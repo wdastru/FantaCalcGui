@@ -41,7 +41,7 @@ private:
 	unsigned int disponibiliModuli[2][7][4];				// giocatori in panchina che possono essere usati per i moduli possibili, per squadra, per ruolo
 	unsigned int originalsOutModuli[2][7][4];				// giocatori orginariamente titolari che escono  per i moduli possibili, per squadra, per ruolo
 	std::vector<QString> originalsOutModuliNames[2][7][4];	// nomi dei giocatori orginariamente titolari che escono  per i moduli possibili, per squadra, per ruolo
-	signed int distanzaTotaleModuli[7]; 					// distanza dei giocatori in campo dai moduli possibili
+	signed int distanzaTotaleModuli[2][7]; 					// distanza dei giocatori in campo dai moduli possibili
 	unsigned int originalsOutTotaleModuli[2][7];			// giocatori totali orginariamente titolari che escono per i moduli possibili, per squadra
 
 	double Total[2];
@@ -52,6 +52,7 @@ private:
 	unsigned int sfide[2];
 	unsigned int goals[2];
 	unsigned int sostituzioni[2][7];
+	unsigned int inCampoPreSubs[2][7];
 	unsigned int inCampoPostSubs[2][7];
 
 	unsigned int ordineSostituzioni[10];
@@ -105,12 +106,11 @@ private:
 	std::vector<Fanta::player> teamOrderedByRuoloBackup[2][7][4];
 	void fillWithNonHaGiocato();
 	void markForSubstitution();
-	void sendNGToBack(unsigned int squadra, unsigned int moduloIndex);
-	void calculateMetrics(unsigned int);
-	//bool nonAbbastanzaDisponibili(unsigned int j, unsigned int squadra);
+	void sendNGToBack();
+	void calculateMetrics();
 	void initializeMetrics();
 	void substitutions();
-	void substitutionsForTeam(unsigned int squadra, unsigned int moduloIndex);
+	void substitutionsForTeam();
 	void calculateFantaVoto();
 	void calculateDefenseMean();
 	void calculateDefenseModifier();
