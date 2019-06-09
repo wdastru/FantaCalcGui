@@ -517,6 +517,13 @@ void Fanta::execute() {
 	}
 
 	try {
+		this->saveOriginals();
+	} catch (...) {
+		LOG(ERR, "Exception caught in saveOriginals().");
+		DEBUG("exception caught in saveOriginals().");
+	}
+
+	try {
 		this->fillWithNonHaGiocato();
 	} catch (...) {
 		LOG(ERR, "Exception caught in fillWithNonHaGiocato().");
@@ -556,6 +563,13 @@ void Fanta::execute() {
 	} catch (...) {
 		LOG(ERR, "Exception caught in substitutionsForTeam().");
 		DEBUG("exception caught in substitutionsForTeam().");
+	}
+
+	try {
+		this->calculateOriginalsOut();
+	} catch (...) {
+		LOG(ERR, "Exception caught in calculateOriginalsOut().");
+		DEBUG("exception caught in calculateOriginalsOut().");
 	}
 
 	try {
@@ -950,6 +964,22 @@ void Fanta::orderByRuolo() {
 	//	}
 	//}
 }
+void Fanta::saveOriginals() {
+	DEBUG("");
+	
+	for (size_t k = 0; k < 2; k++) { // squadra
+		for (size_t i = 0; i < 4; i++) { // ruolo
+			for (size_t m = 0; m < Fanta::modulo[k][i]; m++) {
+				Fanta::originals[k].push_back(Fanta::teamOrderedByRuolo[k][Fanta::modulo[k][i]][i].at(m));
+			}
+		}
+		
+		for (size_t i = 0; i < Fanta::originals[k].size(); i++)
+		{
+			DEBUG("Fanta::originals[" << k << "].at(" << i << ").Cognome : " << Fanta::originals[k].at(i).Cognome);
+		}
+	}
+}
 void Fanta::fillWithNonHaGiocato() {
 
 	DEBUG("");
@@ -984,7 +1014,7 @@ void Fanta::sendNGToBack() {
 	{
 		for (size_t j = 0; j < 7; j++) // moduli
 		{
-			//DEBUG("modulo " << labelModuli[j]);
+			DEBUG("modulo " << labelModuli[j]);
 			for (size_t i = 0; i < 4; i++) // ruolo
 			{
 				//DEBUG("Fanta::moduli[" << j << "][" << i << "] : " << Fanta::moduli[j][i]);
@@ -1124,7 +1154,7 @@ void Fanta::calculateMetrics() {
 
 	for (size_t k = 0; k < 2; k++) {
 
-		DEBUG("squadra : " << this->getTeamName(k));
+		//DEBUG("squadra : " << this->getTeamName(k));
 
 		/*
 		* esplora i moduli possibili
@@ -1142,7 +1172,7 @@ void Fanta::calculateMetrics() {
 			//	}
 			//}
 
-			DEBUG("######## START ####################");
+			//DEBUG("######## START ####################");
 
 			/*
 			* in campo, distanza e disponibili per tutti i moduli possibili
@@ -1161,25 +1191,25 @@ void Fanta::calculateMetrics() {
 						Fanta::disponibiliModuli[k][j][i]++;
 				}
 
-				for (size_t m = Fanta::moduli[j][i]; m < Fanta::modulo[k][i]; m++) {
-
-					if (Fanta::teamOrderedByRuolo[k][j][i].at(m).Cognome != "---") {
-						DEBUG("      original out : " << Fanta::teamOrderedByRuolo[k][j][i].at(m).Cognome);
-
-						QString str =
-							QString::fromStdString(
-							Fanta::teamOrderedByRuolo[k][j][i].at(m).Cognome)
-							+ " ("
-							+ QString::fromStdString(
-							Fanta::teamOrderedByRuolo[k][j][i].at(m).Squadra)
-							+ ", " 
-							+ QString::fromStdString(Fanta::roleLetter(i))
-							+ ") uscito dai titolari.";
-
-						Fanta::originalsOutModuliNames[k][j][i].push_back(str);
-						Fanta::originalsOutModuli[k][j][i]++;
-					}
-				} 
+				//for (size_t m = Fanta::moduli[j][i]; m < Fanta::modulo[k][i]; m++) {
+				//
+				//	if (Fanta::teamOrderedByRuolo[k][j][i].at(m).Cognome != "---") {
+				//		DEBUG("      original out : " << Fanta::teamOrderedByRuolo[k][j][i].at(m).Cognome);
+				//
+				//		QString str =
+				//			QString::fromStdString(
+				//			Fanta::teamOrderedByRuolo[k][j][i].at(m).Cognome)
+				//			+ " ("
+				//			+ QString::fromStdString(
+				//			Fanta::teamOrderedByRuolo[k][j][i].at(m).Squadra)
+				//			+ ", " 
+				//			+ QString::fromStdString(Fanta::roleLetter(i))
+				//			+ ") uscito dai titolari.";
+				//
+				//		Fanta::originalsOutModuliNames[k][j][i].push_back(str);
+				//		Fanta::originalsOutModuli[k][j][i]++;
+				//	}
+				//} 
 
 				Fanta::distanzaModuli[k][j][i] = Fanta::moduli[j][i] - Fanta::inCampoModuli[k][j][i];
 			}
@@ -1190,19 +1220,96 @@ void Fanta::calculateMetrics() {
 			+ Fanta::distanzaModuli[k][j][2]
 			+ Fanta::distanzaModuli[k][j][3];
 
+			//Fanta::originalsOutTotaleModuli[k][j] =
+			//	Fanta::originalsOutModuli[k][j][0]
+			//+ Fanta::originalsOutModuli[k][j][1]
+			//+ Fanta::originalsOutModuli[k][j][2]
+			//+ Fanta::originalsOutModuli[k][j][3];
+
+			//DEBUG("         modulo " << j << " : " << Fanta::moduli[j][0] << "-" << Fanta::moduli[j][1] << "-" << Fanta::moduli[j][2] << "-" << Fanta::moduli[j][3]);
+			//DEBUG("       in campo " << j << " : " << Fanta::inCampoModuli[k][j][0] << "-" << Fanta::inCampoModuli[k][j][1] << "-" << Fanta::inCampoModuli[k][j][2] << "-" << Fanta::inCampoModuli[k][j][3]);
+			//DEBUG("  originals out " << j << " : " << Fanta::originalsOutModuli[k][j][0] << "-" << Fanta::originalsOutModuli[k][j][1] << "-" << Fanta::originalsOutModuli[k][j][2] << "-" << Fanta::originalsOutModuli[k][j][3]);
+			//DEBUG("       distanza " << j << " : " << Fanta::distanzaModuli[k][j][0] << "-" << Fanta::distanzaModuli[k][j][1] << "-" << Fanta::distanzaModuli[k][j][2] << "-" << Fanta::distanzaModuli[k][j][3]);
+			//DEBUG("    disponibili " << j << " : " << Fanta::disponibiliModuli[k][j][0] << "-" << Fanta::disponibiliModuli[k][j][1] << "-" << Fanta::disponibiliModuli[k][j][2] << "-" << Fanta::disponibiliModuli[k][j][3]);
+			//DEBUG("               distanzaTotale : " << Fanta::distanzaTotaleModuli[k][j]);
+			//DEBUG("         originals out totale : " << Fanta::originalsOutTotaleModuli[k][j]);
+		}
+	}
+
+	return;
+}
+void Fanta::calculateOriginalsOut() {
+
+	for (size_t k = 0; k < 2; k++) { // squadra
+
+		DEBUG("squadra : " << this->getTeamName(k));
+
+		for (size_t j = 0; j < 7; j++) {
+
+			//for (size_t i = 0; i < 4; i++) // ruolo
+			//{
+			//	for (size_t m = 0; m < Fanta::teamOrderedByRuolo[k][j][i].size(); m++) {
+			//
+			//			DEBUG(this->getTeamName(k).c_str() << " : " <<
+			//				this->teamOrderedByRuolo[k][j][i].at(m).Ruolo2 << " " <<
+			//				this->teamOrderedByRuolo[k][j][i].at(m).Cognome.c_str() << " (" << 
+			//				this->teamOrderedByRuolo[k][j][i].at(m).Cognome_Sost.c_str() << ").");
+			//	}
+			//}
+
+			DEBUG("######## START " << Fanta::labelModuli[j] << " ####################");
+
+			for (size_t i = 0; i < 4; i++) { // ruolo
+
+				for (size_t n = Fanta::moduli[j][i]; n < Fanta::rosa[i]; n++) { // modulo
+
+					for (size_t m = 0; m < Fanta::originals[k].size(); m++) { // giocatori originali
+
+						if (Fanta::teamOrderedByRuolo[k][j][i].at(n).Cognome == Fanta::originals[k].at(m).Cognome /*|| 
+							Fanta::teamOrderedByRuolo[k][j][i].at(n).Cognome == Fanta::originals[k].at(m).Cognome_Sost ||
+							Fanta::teamOrderedByRuolo[k][j][i].at(n).Cognome_Sost == Fanta::originals[k].at(m).Cognome ||
+							Fanta::teamOrderedByRuolo[k][j][i].at(n).Cognome_Sost == Fanta::originals[k].at(m).Cognome_Sost*/ ) {
+
+								//DEBUG("      original out : " << Fanta::teamOrderedByRuolo[k][j][i].at(n).Cognome << " - " << Fanta::teamOrderedByRuolo[k][j][i].at(n).Cognome_Sost);
+
+								QString str =
+									QString::fromStdString(
+									Fanta::teamOrderedByRuolo[k][j][i].at(n).Cognome)
+									+ " ("
+									+ QString::fromStdString(
+									Fanta::teamOrderedByRuolo[k][j][i].at(n).Squadra)
+									+ ", " 
+									+ QString::fromStdString(Fanta::roleLetter(i))
+									+ ") uscito dai titolari.";
+
+								Fanta::originalsOutModuliNames[k][j][i].push_back(str);
+								Fanta::originalsOutModuli[k][j][i]++;
+						}
+					} 
+				}
+
+				//Fanta::distanzaModuli[k][j][i] = Fanta::moduli[j][i] - Fanta::inCampoModuli[k][j][i];
+			}
+
+			//Fanta::distanzaTotaleModuli[k][j] =
+			//	Fanta::distanzaModuli[k][j][0]
+			//+ Fanta::distanzaModuli[k][j][1]
+			//+ Fanta::distanzaModuli[k][j][2]
+			//+ Fanta::distanzaModuli[k][j][3];
+
 			Fanta::originalsOutTotaleModuli[k][j] =
 				Fanta::originalsOutModuli[k][j][0]
 			+ Fanta::originalsOutModuli[k][j][1]
 			+ Fanta::originalsOutModuli[k][j][2]
 			+ Fanta::originalsOutModuli[k][j][3];
 
-			DEBUG("         modulo " << j << " : " << Fanta::moduli[j][0] << "-" << Fanta::moduli[j][1] << "-" << Fanta::moduli[j][2] << "-" << Fanta::moduli[j][3]);
-			DEBUG("       in campo " << j << " : " << Fanta::inCampoModuli[k][j][0] << "-" << Fanta::inCampoModuli[k][j][1] << "-" << Fanta::inCampoModuli[k][j][2] << "-" << Fanta::inCampoModuli[k][j][3]);
+			//DEBUG("         modulo " << j << " : " << Fanta::moduli[j][0] << "-" << Fanta::moduli[j][1] << "-" << Fanta::moduli[j][2] << "-" << Fanta::moduli[j][3]);
+			//DEBUG("       in campo " << j << " : " << Fanta::inCampoModuli[k][j][0] << "-" << Fanta::inCampoModuli[k][j][1] << "-" << Fanta::inCampoModuli[k][j][2] << "-" << Fanta::inCampoModuli[k][j][3]);
 			DEBUG("  originals out " << j << " : " << Fanta::originalsOutModuli[k][j][0] << "-" << Fanta::originalsOutModuli[k][j][1] << "-" << Fanta::originalsOutModuli[k][j][2] << "-" << Fanta::originalsOutModuli[k][j][3]);
-			DEBUG("       distanza " << j << " : " << Fanta::distanzaModuli[k][j][0] << "-" << Fanta::distanzaModuli[k][j][1] << "-" << Fanta::distanzaModuli[k][j][2] << "-" << Fanta::distanzaModuli[k][j][3]);
-			DEBUG("    disponibili " << j << " : " << Fanta::disponibiliModuli[k][j][0] << "-" << Fanta::disponibiliModuli[k][j][1] << "-" << Fanta::disponibiliModuli[k][j][2] << "-" << Fanta::disponibiliModuli[k][j][3]);
-			DEBUG("               distanzaTotale : " << Fanta::distanzaTotaleModuli[k][j]);
-			DEBUG("         originals out totale : " << Fanta::originalsOutTotaleModuli[k][j]);
+			//DEBUG("       distanza " << j << " : " << Fanta::distanzaModuli[k][j][0] << "-" << Fanta::distanzaModuli[k][j][1] << "-" << Fanta::distanzaModuli[k][j][2] << "-" << Fanta::distanzaModuli[k][j][3]);
+			//DEBUG("    disponibili " << j << " : " << Fanta::disponibiliModuli[k][j][0] << "-" << Fanta::disponibiliModuli[k][j][1] << "-" << Fanta::disponibiliModuli[k][j][2] << "-" << Fanta::disponibiliModuli[k][j][3]);
+			//DEBUG("               distanzaTotale : " << Fanta::distanzaTotaleModuli[k][j]);
+			DEBUG("  originals out totale : " << Fanta::originalsOutTotaleModuli[k][j]);
 		}
 	}
 
@@ -1231,12 +1338,6 @@ void Fanta::initializeMetrics() {
 	}
 	/***/
 }
-//bool Fanta::nonAbbastanzaDisponibili(unsigned int j, unsigned int squadra) {
-//	return ( static_cast<signed int>(Fanta::disponibiliModuli[squadra][j][0]) < Fanta::distanzaModuli[squadra][j][0]
-//		  || static_cast<signed int>(Fanta::disponibiliModuli[squadra][j][1]) < Fanta::distanzaModuli[squadra][j][1]
-//		  || static_cast<signed int>(Fanta::disponibiliModuli[squadra][j][2]) < Fanta::distanzaModuli[squadra][j][2]
-//		  || static_cast<signed int>(Fanta::disponibiliModuli[squadra][j][3]) < Fanta::distanzaModuli[squadra][j][3] );
-//}
 std::string Fanta::roleLetter(unsigned int role) {
 	if (role == 0) {
 		return "P";
@@ -1263,7 +1364,8 @@ void Fanta::substitutionsForTeam() {
 		*/
 		for (size_t jj = 0; jj < 7; jj++) {
 
-			DEBUG("######## START ####################");
+			DEBUG("######## START ###################");
+			DEBUG(this->labelModuli[jj].c_str());
 
 			//for (size_t i = 0; i < 4; i++) // ruolo
 			//{
@@ -1436,8 +1538,6 @@ void Fanta::substitutions() {
 
 	for (size_t k = 0; k < 2; k++) { // squadra
 
-		DEBUG("squadra : " << this->getTeamName(k));
-		DEBUG("Fanta::moduloIndex[" << k << "] : " << Fanta::moduloIndex[k]);
 		//for (size_t i = 0; i < 4; i++) // ruolo
 		//{
 		//	for (size_t j = 0; j < Fanta::teamOrderedByRuolo[k][Fanta::moduloIndex[k]][i].size();
@@ -1480,42 +1580,36 @@ void Fanta::substitutions() {
 		//}
 		/***/
 
-		DEBUG("             modulo " << k << " : " << Fanta::moduli[Fanta::moduloIndex[k]][0] << "-" << Fanta::moduli[Fanta::moduloIndex[k]][1] << "-" << Fanta::moduli[Fanta::moduloIndex[k]][2] << "-" << Fanta::moduli[Fanta::moduloIndex[k]][3]);
-		DEBUG(" posizione nell'array : " << Fanta::moduloIndex[k]);
-		DEBUG("           in campo " << k << " : " << Fanta::inCampoModuli[k][Fanta::moduloIndex[k]][0] << "-" << Fanta::inCampoModuli[k][Fanta::moduloIndex[k]][1] << "-" << Fanta::inCampoModuli[k][Fanta::moduloIndex[k]][2] << "-" << Fanta::inCampoModuli[k][Fanta::moduloIndex[k]][3]);
-		DEBUG("           distanza " << k << " : " << Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][0] << "-" << Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][1] << "-" << Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][2] << "-" << Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][3]);
-		DEBUG("        disponibili " << k << " : " << Fanta::disponibiliModuli[k][Fanta::moduloIndex[k]][0] << "-" << Fanta::disponibiliModuli[k][Fanta::moduloIndex[k]][1] << "-" << Fanta::disponibiliModuli[k][Fanta::moduloIndex[k]][2] << "-" << Fanta::disponibiliModuli[k][Fanta::moduloIndex[k]][3]);
+		//DEBUG("squadra : " << this->getTeamName(k));
+		//DEBUG("             modulo " << k << " : " << Fanta::labelModuli[Fanta::moduloIndex[k]]);
+		//DEBUG(" posizione nell'array : " << Fanta::moduloIndex[k]);
+		//DEBUG("           in campo " << k << " : " << Fanta::inCampoModuli[k][Fanta::moduloIndex[k]][0] << "-" << Fanta::inCampoModuli[k][Fanta::moduloIndex[k]][1] << "-" << Fanta::inCampoModuli[k][Fanta::moduloIndex[k]][2] << "-" << Fanta::inCampoModuli[k][Fanta::moduloIndex[k]][3]);
+		//DEBUG("           distanza " << k << " : " << Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][0] << "-" << Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][1] << "-" << Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][2] << "-" << Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][3]);
+		//DEBUG("        disponibili " << k << " : " << Fanta::disponibiliModuli[k][Fanta::moduloIndex[k]][0] << "-" << Fanta::disponibiliModuli[k][Fanta::moduloIndex[k]][1] << "-" << Fanta::disponibiliModuli[k][Fanta::moduloIndex[k]][2] << "-" << Fanta::disponibiliModuli[k][Fanta::moduloIndex[k]][3]);
 
-		unsigned int distanza = 0;
-		for (size_t i = 0; i < 4; i++) { // ruolo
-			distanza += Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][i];
-		}
-
-		DEBUG("    distanza totale " << k << " : " << distanza);
-
-		if (distanza == 0) {
-			continue;
-		} 
+		//unsigned int distanza = 0;
+		//for (size_t i = 0; i < 4; i++) { // ruolo
+		//	distanza += Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][i];
+		//}
+		//
+		//DEBUG("    distanza totale " << k << " : " << distanza);
+		//
+		//if (distanza == 0) {
+		//	continue;
+		//} 
 
 		bool cambioModulo = false;
 
-		if (distanza > 0) {
+		if (inCampoPostSubs[k][Fanta::moduloIndex[k]] != 11) {
 			cambioModulo = true;
-			DEBUG("cambio modulo per distanza > 0 (" << distanza << ")" );
+			DEBUG("cambio modulo per giocatori < 11 (" << inCampoPostSubs[k][Fanta::moduloIndex[k]] << ")" );
 		} else {
-			for (size_t i = 0; i < 4; i++) { // ruolo
-				if (Fanta::disponibiliModuli[k][Fanta::moduloIndex[k]][i] < Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][i]) {
-					cambioModulo = true;
-					DEBUG("cambio modulo per disponibili < distanza ( ruolo " << Fanta::roleLetter(i) << " : " << Fanta::disponibiliModuli[k][Fanta::moduloIndex[k]][i] << " < " << Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][i] << ")" );
-				}
-			}
+			continue;
 		}
 
 		signed int oldModulo = Fanta::moduloIndex[k]; // modulo originario
 
 		if (cambioModulo) {
-
-			DEBUG("cambio modulo");
 
 			//for (size_t j = 0; j < 7; j++) { // loop sui moduli
 
@@ -1565,6 +1659,7 @@ void Fanta::substitutions() {
 							"trovato nuovo modulo piu' offensivo : " << labelModuli[j].c_str());
 						foundNewModule = true;
 						Fanta::moduloIndex[k] = j;
+						break;
 					}
 				}
 			}
@@ -1581,6 +1676,7 @@ void Fanta::substitutions() {
 								"trovato nuovo modulo meno offensivo : " << labelModuli[j].c_str());
 							foundNewModule = true;
 							Fanta::moduloIndex[k] = j;
+							break;
 						}
 					}
 				}
@@ -1646,15 +1742,15 @@ void Fanta::substitutions() {
 				Fanta::modulo[k][3] =
 					Fanta::moduli[Fanta::moduloIndex[k]][3];
 
-				distanza = distanzaTotaleModuli[k][Fanta::moduloIndex[k]];
-				Fanta::distanza[k][0] =
-					Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][0];
-				Fanta::distanza[k][1] =
-					Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][1];
-				Fanta::distanza[k][2] =
-					Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][2];
-				Fanta::distanza[k][3] =
-					Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][3];
+				//distanza = distanzaTotaleModuli[k][Fanta::moduloIndex[k]];
+				//Fanta::distanza[k][0] =
+				//	Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][0];
+				//Fanta::distanza[k][1] =
+				//	Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][1];
+				//Fanta::distanza[k][2] =
+				//	Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][2];
+				//Fanta::distanza[k][3] =
+				//	Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][3];
 			}
 
 			//}

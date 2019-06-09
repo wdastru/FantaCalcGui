@@ -104,10 +104,13 @@ private:
 	void orderByRuolo();
 	std::vector<Fanta::player> teamOrderedByRuolo[2][7][4];
 	std::vector<Fanta::player> teamOrderedByRuoloBackup[2][7][4];
+	std::vector<Fanta::player> originals[2];
 	void fillWithNonHaGiocato();
 	void markForSubstitution();
 	void sendNGToBack();
 	void calculateMetrics();
+	void calculateOriginalsOut();
+	void saveOriginals();
 	void initializeMetrics();
 	void substitutions();
 	void substitutionsForTeam();

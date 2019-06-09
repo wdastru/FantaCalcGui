@@ -48,9 +48,9 @@ void ChooseFiles::setupGazzettaTab(QString _fileGazzetta) {
 			i++;
 		}
 
-		for (unsigned int i=0; i<lines.size(); i++) {
-			DEBUG("lines.at(" << i << ") = " << lines.at(i).toStdString().c_str());
-		}
+		//for (unsigned int i=0; i<lines.size(); i++) {
+		//	DEBUG("lines.at(" << i << ") = " << lines.at(i).toStdString().c_str());
+		//}
 
 		int rows = 10;
 		int rowCounter = 0;
@@ -105,7 +105,7 @@ void ChooseFiles::setupFormazioniTab(QString _fileFormazioni) {
 
 			tmpLabel->setFixedHeight(this->height);
 
-			DEBUG("file(" << i << ") = " << QString::fromLatin1(buf).trimmed().toStdString().c_str());
+			//DEBUG("file(" << i << ") = " << QString::fromLatin1(buf).trimmed().toStdString().c_str());
 
 			QRadioButton * tmpButton1 = new QRadioButton();
 			QRadioButton * tmpButton2 = new QRadioButton();
