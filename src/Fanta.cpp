@@ -1602,12 +1602,13 @@ void Fanta::substitutions() {
 
 		if (inCampoPostSubs[k][Fanta::moduloIndex[k]] != 11) {
 			cambioModulo = true;
-			DEBUG("cambio modulo per giocatori < 11 (" << inCampoPostSubs[k][Fanta::moduloIndex[k]] << ")" );
+			DEBUG("cambio modulo per giocatori < 11 (" << Fanta::labelModuli[Fanta::moduloIndex[k]] << ": " << inCampoPostSubs[k][Fanta::moduloIndex[k]] << ")" );
 		} else {
 			continue;
 		}
 
 		signed int oldModulo = Fanta::moduloIndex[k]; // modulo originario
+		unsigned int maxInCampoPostSubs = inCampoPostSubs[k][oldModulo];
 
 		if (cambioModulo) {
 
@@ -1651,32 +1652,62 @@ void Fanta::substitutions() {
 
 			for (unsigned int j = oldModulo; j < 7; j++) {
 
+				if (j == oldModulo) 
+					continue;
+
 				DEBUG("ricerca modulo piu' offensivo - j = " << j);
 
 				if (Fanta::originalsOutTotaleModuli[k][j] == 0) { // nessun original è fuori squadra
-					if (Fanta::inCampoPostSubs[k][j] > Fanta::inCampoPostSubs[k][Fanta::moduloIndex[k]]) {
-						DEBUG(
-							"trovato nuovo modulo piu' offensivo : " << labelModuli[j].c_str());
+
+					/* se non si è ancora trovato
+					 * un modulo nuovo il modulo test deve
+					 * avere un numero di giocatori in campo
+					 * almeno di 1 in più rispetto al
+					 * modulo originario (checkValue = maxInCampoPostSubs + 1 se foundNewModule è false)
+					 * se un nuovo modulo è stato già trovato
+					 * allora un eventuale modulo nuovo più offensivo può anche avere 
+					 * lo stesso numero di giocatori 
+					 * (checkValue = maxInCampoPostSubs se foundNewModule è true)
+					 */
+					unsigned int checkValue = (foundNewModule) ? maxInCampoPostSubs : maxInCampoPostSubs + 1;	
+
+					if (Fanta::inCampoPostSubs[k][j] >= checkValue) {
+						
 						foundNewModule = true;
 						Fanta::moduloIndex[k] = j;
-						break;
+						maxInCampoPostSubs = Fanta::inCampoPostSubs[k][j];	// non mettere il break perchè
+																			// potrebbero esserci moduli più offensivi 
+						DEBUG(
+							"trovato nuovo modulo piu' offensivo : " << labelModuli[j].c_str() << " (" << maxInCampoPostSubs << ")");
 					}
 				}
 			}
 
-			if (!foundNewModule) {
+			if (maxInCampoPostSubs != 11) {
 
 				for (signed int j = oldModulo; j >= 0; j--) {
+
+					if (j == oldModulo) 
+						continue;
 
 					DEBUG("ricerca modulo meno offensivo - j = " << j);
 
 					if (Fanta::originalsOutTotaleModuli[k][j] == 0) { // nessun original è fuori squadra
-						if (Fanta::inCampoPostSubs[k][j] > Fanta::inCampoPostSubs[k][Fanta::moduloIndex[k]]) {
-							DEBUG(
-								"trovato nuovo modulo meno offensivo : " << labelModuli[j].c_str());
+
+						/* 
+						 * come sopra ...
+						 */
+						unsigned int checkValue = (foundNewModule) ? maxInCampoPostSubs : maxInCampoPostSubs + 1;
+
+						if (Fanta::inCampoPostSubs[k][j] >= checkValue) {
+
 							foundNewModule = true;
 							Fanta::moduloIndex[k] = j;
-							break;
+							maxInCampoPostSubs = Fanta::inCampoPostSubs[k][j];	// non mettere il break perchè
+																				// potrebbero esserci moduli più offensivi 
+							DEBUG(
+								"trovato nuovo modulo meno offensivo : " << labelModuli[j].c_str() << " (" << maxInCampoPostSubs << ")");
+
 						}
 					}
 				}
