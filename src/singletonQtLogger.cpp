@@ -94,7 +94,7 @@ void singletonQtLogger::setTitle(QString _title) {
 void singletonQtLogger::setVersion(QString _version) {
 	this->version = _version;
 	this->ui.versionLabel->setText(
-			"v" + _version + " rev. " + this->getRevision());
+			_version + " rev. " + this->getRevision());
 }
 void singletonQtLogger::setRevision(QString _revision) {
 	this->revision = _revision;
@@ -378,15 +378,24 @@ bool singletonQtLogger::checkForUpdates() {
 
 	DEBUG(this->getVersion().toStdString().c_str());
 
-#ifdef __MACH__
-	QStringList current = this->getVersion().split(QRegExp("\\\\."));
-#else
-	QStringList current = this->getVersion().split(QRegExp("\\."));
-#endif
+	if (this->getVersion().isEmpty()) {
+		DEBUG("Version string is empty.");
+		return false;
+	}
 
-	int verCurrent = current.at(0).toInt();
-	int majCurrent = current.at(1).toInt();
-	int minCurrent = current.at(2).toInt();
+	int verCurrent;
+	int majCurrent;
+	int minCurrent;
+	
+	QRegExp rx("^v([0-9]+)\\.([0-9]+)\\.([0-9]+)$");
+	QStringList current = this->getVersion().split(rx, QString::SkipEmptyParts);
+	
+	if( rx.indexIn( this->getVersion() ) >= 0 )
+	{
+		verCurrent = rx.cap(1).toInt();
+		majCurrent = rx.cap(2).toInt();
+		minCurrent = rx.cap(3).toInt();
+	}
 
 	DEBUG("verCurrent : " << verCurrent);
 	DEBUG("majCurrent : " << majCurrent);

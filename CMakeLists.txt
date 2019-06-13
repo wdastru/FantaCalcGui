@@ -16,8 +16,16 @@ EXECUTE_PROCESS(
   OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 
+# Get the tag of the current commit (if any)
+EXECUTE_PROCESS(
+  COMMAND git describe --tags --exact-match
+  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+  OUTPUT_VARIABLE GIT_TAG
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
 SET (REVISION ${GIT_COMMIT_HASH})
-SET (VERSION 3.6.3)
+SET (VERSION ${GIT_TAG})
 
 CONFIGURE_FILE(src/revision.h.in revision.h @ONLY)
 CONFIGURE_FILE(src/version.h.in version.h @ONLY)

@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
 	THE_LOGGER->setTitle(a.applicationName());
 
 	LOG(INFO,
-			QObject::tr("<br> Benvenuti in %1 v%2 (rev. %3) !!!<br>").arg(
+			QObject::tr("<br> Benvenuti in %1 %2 (rev. %3) !!!<br>").arg(
 					THE_LOGGER->getTitle()).arg(THE_LOGGER->getVersion()).arg(THE_LOGGER->getRevision()));
 
 	THE_LOGGER->checkForUpdates();
