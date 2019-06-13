@@ -30,9 +30,7 @@ Fanta * Fanta::Refresh() {
 
 	return pInstance = new Fanta();
 }
-
 Fanta * Fanta::pInstance = NULL;
-
 Fanta::Fanta() {
 	this->initialize();
 }
@@ -446,8 +444,7 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 		return PLAYER_ERROR;
 	}
 }
-unsigned int Fanta::LevenshteinDistance(const std::string& s1,
-		const std::string& s2) {
+unsigned int Fanta::LevenshteinDistance(const std::string& s1, const std::string& s2) {
 
 	const unsigned int cost_del = 1;
 	const unsigned int cost_ins = 1;
@@ -1062,94 +1059,6 @@ void Fanta::sendNGToBack() {
 
 	return;
 }
-/*
- * moduli raggiungibili
- *
- *
- *  modPos : 0
- *  5-4-1
- *
- *  modulo 0 (1-5-4-1) raggiungibile? : 0
- *  modulo 1 (1-4-5-1) raggiungibile? : 1
- *  modulo 2 (1-5-3-2) raggiungibile? : 1
- *  modulo 3 (1-4-4-2) raggiungibile? : 1
- *  modulo 4 (1-3-5-2) raggiungibile? : 0
- *  modulo 5 (1-4-3-3) raggiungibile? : 0
- *  modulo 6 (1-3-4-3) raggiungibile? : 0
- *
- *
- *  modPos : 1
- *  4-5-1
- *
- *  modulo 0 (1-5-4-1) raggiungibile? : 1
- *  modulo 1 (1-4-5-1) raggiungibile? : 0
- *  modulo 2 (1-5-3-2) raggiungibile? : 0
- *  modulo 3 (1-4-4-2) raggiungibile? : 1
- *  modulo 4 (1-3-5-2) raggiungibile? : 1
- *  modulo 5 (1-4-3-3) raggiungibile? : 0
- *  modulo 6 (1-3-4-3) raggiungibile? : 0
- *
- *
- *  modPos : 2
- *  5-3-2
- *
- *  modulo 0 (1-5-4-1) raggiungibile? : 1
- *  modulo 1 (1-4-5-1) raggiungibile? : 0
- *  modulo 2 (1-5-3-2) raggiungibile? : 0
- *  modulo 3 (1-4-4-2) raggiungibile? : 1
- *  modulo 4 (1-3-5-2) raggiungibile? : 0
- *  modulo 5 (1-4-3-3) raggiungibile? : 1
- *  modulo 6 (1-3-4-3) raggiungibile? : 0
- *
- *
- *  modPos : 3
- *  4-4-2
- *
- *  modulo 0 (1-5-4-1) raggiungibile? : 1
- *  modulo 1 (1-4-5-1) raggiungibile? : 1
- *  modulo 2 (1-5-3-2) raggiungibile? : 1
- *  modulo 3 (1-4-4-2) raggiungibile? : 0
- *  modulo 4 (1-3-5-2) raggiungibile? : 1
- *  modulo 5 (1-4-3-3) raggiungibile? : 1
- *  modulo 6 (1-3-4-3) raggiungibile? : 1
- *
- *
- *  modPos : 4
- *  3-5-2
- *
- *  modulo 0 (1-5-4-1) raggiungibile? : 0
- *  modulo 1 (1-4-5-1) raggiungibile? : 1
- *  modulo 2 (1-5-3-2) raggiungibile? : 0
- *  modulo 3 (1-4-4-2) raggiungibile? : 1
- *  modulo 4 (1-3-5-2) raggiungibile? : 0
- *  modulo 5 (1-4-3-3) raggiungibile? : 0
- *  modulo 6 (1-3-4-3) raggiungibile? : 1
- *
- *
- *  modPos : 5
- *  4-3-3
- *
- *  modulo 0 (1-5-4-1) raggiungibile? : 0
- *  modulo 1 (1-4-5-1) raggiungibile? : 0
- *  modulo 2 (1-5-3-2) raggiungibile? : 1
- *  modulo 3 (1-4-4-2) raggiungibile? : 1
- *  modulo 4 (1-3-5-2) raggiungibile? : 0
- *  modulo 5 (1-4-3-3) raggiungibile? : 0
- *  modulo 6 (1-3-4-3) raggiungibile? : 1
- *
- *
- *  modPos : 6
- *  3-4-3
- *
- *  modulo 0 (1-5-4-1) raggiungibile? : 0
- *  modulo 1 (1-4-5-1) raggiungibile? : 0
- *  modulo 2 (1-5-3-2) raggiungibile? : 0
- *  modulo 3 (1-4-4-2) raggiungibile? : 1
- *  modulo 4 (1-3-5-2) raggiungibile? : 1
- *  modulo 5 (1-4-3-3) raggiungibile? : 1
- *  modulo 6 (1-3-4-3) raggiungibile? : 0
- */
-
 void Fanta::calculateMetrics() {
 
 	for (size_t k = 0; k < 2; k++) {
@@ -1548,56 +1457,6 @@ void Fanta::substitutions() {
 		//	}
 		//}
 
-		//for (size_t i = 0; i < 4; i++) { // ruolo
-		//	Fanta::teamOrderedByRuoloBackup[k][Fanta::moduloIndex[k]][i] = Fanta::teamOrderedByRuolo[k][Fanta::moduloIndex[k]][i];
-		//}
-
-		//for (size_t i = 0; i < 4; i++) // ruolo
-		//{
-		//	for (size_t j = 0; j < Fanta::teamOrderedByRuolo[k][Fanta::moduloIndex[k]][i].size();
-		//		j++) {
-		//			DEBUG(this->getTeamName(k).c_str() << " : " <<
-		//				this->teamOrderedByRuolo[k][Fanta::moduloIndex[k]][i].at(j).Ruolo2 << " " <<
-		//				this->teamOrderedByRuolo[k][Fanta::moduloIndex[k]][i].at(j).Cognome.c_str() << " (" << 
-		//				this->teamOrderedByRuolo[k][Fanta::moduloIndex[k]][i].at(j).Cognome_Sost.c_str() << ").");
-		//	}
-		//}
-
-		//initializeMetrics();
-		//calculateMetrics(k);
-
-		/*
-		* posizione del modulo attuale nell'array moduli[7]
-		*/
-		//Fanta::moduloIndex[k] = -1;
-		//for (size_t j = 0; j < 7; j++) {
-		//	if (Fanta::moduli[j][0] == Fanta::modulo[k][0]
-		//	&& Fanta::moduli[j][1] == Fanta::modulo[k][1]
-		//	&& Fanta::moduli[j][2] == Fanta::modulo[k][2]
-		//	&& Fanta::moduli[j][3] == Fanta::modulo[k][3]) {
-		//		Fanta::moduloIndex[k] = j;
-		//	}
-		//}
-		/***/
-
-		//DEBUG("squadra : " << this->getTeamName(k));
-		//DEBUG("             modulo " << k << " : " << Fanta::labelModuli[Fanta::moduloIndex[k]]);
-		//DEBUG(" posizione nell'array : " << Fanta::moduloIndex[k]);
-		//DEBUG("           in campo " << k << " : " << Fanta::inCampoModuli[k][Fanta::moduloIndex[k]][0] << "-" << Fanta::inCampoModuli[k][Fanta::moduloIndex[k]][1] << "-" << Fanta::inCampoModuli[k][Fanta::moduloIndex[k]][2] << "-" << Fanta::inCampoModuli[k][Fanta::moduloIndex[k]][3]);
-		//DEBUG("           distanza " << k << " : " << Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][0] << "-" << Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][1] << "-" << Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][2] << "-" << Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][3]);
-		//DEBUG("        disponibili " << k << " : " << Fanta::disponibiliModuli[k][Fanta::moduloIndex[k]][0] << "-" << Fanta::disponibiliModuli[k][Fanta::moduloIndex[k]][1] << "-" << Fanta::disponibiliModuli[k][Fanta::moduloIndex[k]][2] << "-" << Fanta::disponibiliModuli[k][Fanta::moduloIndex[k]][3]);
-
-		//unsigned int distanza = 0;
-		//for (size_t i = 0; i < 4; i++) { // ruolo
-		//	distanza += Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][i];
-		//}
-		//
-		//DEBUG("    distanza totale " << k << " : " << distanza);
-		//
-		//if (distanza == 0) {
-		//	continue;
-		//} 
-
 		bool cambioModulo = false;
 
 		if (inCampoPostSubs[k][Fanta::moduloIndex[k]] != 11) {
@@ -1612,39 +1471,6 @@ void Fanta::substitutions() {
 
 		if (cambioModulo) {
 
-			//for (size_t j = 0; j < 7; j++) { // loop sui moduli
-
-			//	DEBUG("modulo " << j << " (" << labelModuli[j].c_str() << ")");
-
-			//for (size_t i = 0; i < 4; i++) { // ruolo
-			//	Fanta::teamOrderedByRuolo[k][Fanta::moduloIndex[k]][i] = Fanta::teamOrderedByRuoloBackup[k][Fanta::moduloIndex[k]][i];
-			//}
-
-			/* 
-			* prima delle sostituzioni da avvenire lo "scivolamento"
-			* dei giocatori senza voto alla fine dei titolari del modulo scelto
-			*/
-			//sendNGToBack(k, j); 
-			//Fanta::substitutionsForTeam(k, j);
-
-			//if (Fanta::distanzaTotaleModuli[j] > 3					// condizione 1
-			//	|| Fanta::nonAbbastanzaDisponibili(j) == true) {		// condizione 2
-			//		//|| Fanta::originalsOutTotaleModuli[j] > 0) {		// condizione 3
-			//		DEBUG("    Fanta::distanzaTotaleModuli[" << j << "] = " << Fanta::distanzaTotaleModuli[j]);
-			//		DEBUG("    Fanta::nonAbbastanzaDisponibili(" << j << ") = " << Fanta::nonAbbastanzaDisponibili(j));
-			//		moduloPossibile[j] = false;
-			//} else {
-			//
-			//	/* 
-			//	* si possono fare 3 sostituzioni !!!
-			//	*/
-			//
-			//}
-			//
-			//DEBUG("    possibile? : " << moduloPossibile[j]);
-			//}
-			/***/
-
 			/*
 			* Ricerca nuovo modulo
 			*/
@@ -1655,16 +1481,17 @@ void Fanta::substitutions() {
 				if (j == oldModulo) 
 					continue;
 
-				DEBUG("ricerca modulo piu' offensivo - j = " << j);
+				DEBUG("ricerca modulo piu' offensivo - " << labelModuli[j].c_str());
 
 				if (Fanta::originalsOutTotaleModuli[k][j] == 0) { // nessun original è fuori squadra
 
-					/* se non si è ancora trovato
-					 * un modulo nuovo il modulo test deve
+					/* Se non si è ancora trovato
+					 * un modulo nuovo il modulo test (j) deve
 					 * avere un numero di giocatori in campo
 					 * almeno di 1 in più rispetto al
-					 * modulo originario (checkValue = maxInCampoPostSubs + 1 se foundNewModule è false)
-					 * se un nuovo modulo è stato già trovato
+					 * modulo originario (checkValue = maxInCampoPostSubs + 1 se foundNewModule è false, 
+					 * perchè a parità di giocatori in campo prevale il modulo originario)
+					 * Se un nuovo modulo è stato già trovato
 					 * allora un eventuale modulo nuovo più offensivo può anche avere 
 					 * lo stesso numero di giocatori 
 					 * (checkValue = maxInCampoPostSubs se foundNewModule è true)
@@ -1690,7 +1517,7 @@ void Fanta::substitutions() {
 					if (j == oldModulo) 
 						continue;
 
-					DEBUG("ricerca modulo meno offensivo - j = " << j);
+					DEBUG("ricerca modulo meno offensivo - " << labelModuli[j].c_str());
 
 					if (Fanta::originalsOutTotaleModuli[k][j] == 0) { // nessun original è fuori squadra
 
@@ -1703,19 +1530,18 @@ void Fanta::substitutions() {
 
 							foundNewModule = true;
 							Fanta::moduloIndex[k] = j;
-							maxInCampoPostSubs = Fanta::inCampoPostSubs[k][j];	// non mettere il break perchè
-																				// potrebbero esserci moduli più offensivi 
+							maxInCampoPostSubs = Fanta::inCampoPostSubs[k][j];
 							DEBUG(
 								"trovato nuovo modulo meno offensivo : " << labelModuli[j].c_str() << " (" << maxInCampoPostSubs << ")");
 
+							if ( maxInCampoPostSubs == 11 ) {
+								break; // non ci saranno moduli più offensivi di questo
+							}
 						}
 					}
 				}
 			}
 			/***/
-
-			//foundNewModule = true;
-			//Fanta::moduloIndex[0] = 2;
 
 			/*
 			* Imposta nuovo modulo come modulo attuale
@@ -1772,36 +1598,8 @@ void Fanta::substitutions() {
 					Fanta::moduli[Fanta::moduloIndex[k]][2];
 				Fanta::modulo[k][3] =
 					Fanta::moduli[Fanta::moduloIndex[k]][3];
-
-				//distanza = distanzaTotaleModuli[k][Fanta::moduloIndex[k]];
-				//Fanta::distanza[k][0] =
-				//	Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][0];
-				//Fanta::distanza[k][1] =
-				//	Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][1];
-				//Fanta::distanza[k][2] =
-				//	Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][2];
-				//Fanta::distanza[k][3] =
-				//	Fanta::distanzaModuli[k][Fanta::moduloIndex[k]][3];
 			}
-
-			//}
-
-			/***/
-
-			//for (size_t j = 0; j < 7; j++) {
-			//	DEBUG("       distanza " << j << " : " << Fanta::distanzaModuli[j][0] << "-" << Fanta::distanzaModuli[j][1] << "-" << Fanta::distanzaModuli[j][2] << "-" << Fanta::distanzaModuli[j][3]);
-			//}
-			//
-			//for (size_t j = 0; j < 7; j++) {
-			//	DEBUG("       distanza " << j << " : " << Fanta::distanzaModuli[j][ordineSostituzioni[0]] << "-" << Fanta::distanzaModuli[j][ordineSostituzioni[1]] << "-" << Fanta::distanzaModuli[j][ordineSostituzioni[2]] << "-" << Fanta::distanzaModuli[j][ordineSostituzioni[3]]);
-			//}
-
-
-		} /*else {
-
-		  Fanta::substitutionsForTeam(k, Fanta::moduloIndex[k]);
-
-		  }*/
+		} 
 	}
 
 	/*
@@ -1862,25 +1660,8 @@ void Fanta::substitutions() {
 		}
 	}
 
-	//for (size_t k = 0; k < 2; k++) // squadra
-	//		{
-	//	for (size_t i = 0; i < 4; i++) // ruolo
-	//			{
-	//		for (size_t j = 0; j < Fanta::teamOrderedByRuolo[k][i].size();
-	//				j++) {
-	//			DEBUG(this->getTeamName(k).c_str() << " : " <<
-	//					this->teamOrderedByRuolo[k][i].at(j).Ruolo2 << " " <<
-	//					this->teamOrderedByRuolo[k][i].at(j).Cognome.c_str() << ".");
-	//		}
-	//	}
-	//}
-	//
-	//DEBUG("#########################################");
-
 	for (size_t k = 0; k < 2; k++) // squadra
 	{
-		//Fanta::sendNGToBack(k, Fanta::moduloIndex[k]);
-
 		for (size_t i = 0; i < 4; i++) // ruolo
 		{
 			Fanta::teamOrderedByRuolo[k][Fanta::moduloIndex[k]][i].resize(Fanta::moduli[Fanta::moduloIndex[k]][i]);
