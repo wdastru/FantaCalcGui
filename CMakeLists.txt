@@ -8,6 +8,12 @@ ADD_DEFINITIONS(${QT_DEFINITIONS})
 SET (QT_USE_QTNETWORK TRUE)
 SET (QT_USE_QTXML TRUE)
 
+SET (REVISION b21cb96)
+SET (VERSION 3.6.3)
+
+CONFIGURE_FILE(src/revision.h.in revision.h @ONLY)
+CONFIGURE_FILE(src/version.h.in version.h @ONLY)
+
 SET( SRCS 
         src/main.cpp 
         src/IniFileManager.cpp
@@ -53,7 +59,7 @@ SET( UIS
         src/MatchChooserCoppa.ui
         src/UpdatesChooser.ui
         src/singletonQtLogger.ui
-		    src/RinviateDialog.ui )
+		src/RinviateDialog.ui )
 
 SET( TEST_SRCS 
         src/FCGTest.cpp
