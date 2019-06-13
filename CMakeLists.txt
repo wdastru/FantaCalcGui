@@ -27,6 +27,8 @@ EXECUTE_PROCESS(
 SET (REVISION ${GIT_COMMIT_HASH})
 SET (VERSION ${GIT_TAG})
 
+FILE(REMOVE ${CMAKE_BINARY_DIR}/revision.h ${CMAKE_BINARY_DIR}/version.h)
+
 CONFIGURE_FILE(src/revision.h.in revision.h @ONLY)
 CONFIGURE_FILE(src/version.h.in version.h @ONLY)
 
