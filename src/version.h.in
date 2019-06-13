@@ -1,5 +1,5 @@
-#ifndef REVISION_H
-#define REVISION_H
+#ifndef VERSION_H
+#define VERSION_H
 
 a.setApplicationVersion("@VERSION@");
 

@@ -1,6 +1,6 @@
 #ifndef REVISION_H
 #define REVISION_H
 
-THE_LOGGER->setRevision("@REVISION@");
+THE_LOGGER->setRevision("@GIT_COMMIT_HASH@");
 
 #endif
