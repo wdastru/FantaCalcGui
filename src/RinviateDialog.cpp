@@ -37,18 +37,18 @@ RinviateDialog::RinviateDialog(QWidget *parent) :
 
 	std::string squadreSerieA[20];
 	squadreSerieA[0] = "ATALANTA";
-	squadreSerieA[1] = "BENEVENTO";
-	squadreSerieA[2] = "BOLOGNA";
+	squadreSerieA[1] = "BOLOGNA";
+	squadreSerieA[2] = "BRESCIA";
 	squadreSerieA[3] = "CAGLIARI";
-	squadreSerieA[4] = "CHIEVO";
-	squadreSerieA[5] = "CROTONE";
-	squadreSerieA[6] = "FIORENTINA";
-	squadreSerieA[7] = "GENOA";
-	squadreSerieA[8] = "INTER";
-	squadreSerieA[9] = "JUVENTUS";
-	squadreSerieA[10] = "LAZIO";
-	squadreSerieA[11] = "MILAN";
-	squadreSerieA[12] = "NAPOLI";
+	squadreSerieA[4] = "FIORENTINA";
+	squadreSerieA[5] = "GENOA";
+	squadreSerieA[6] = "INTER";
+	squadreSerieA[7] = "JUVENTUS";
+	squadreSerieA[8] = "LAZIO";
+	squadreSerieA[9] = "LECCE";
+	squadreSerieA[10] = "MILAN";
+	squadreSerieA[11] = "NAPOLI";
+	squadreSerieA[12] = "PARMA";
 	squadreSerieA[13] = "ROMA";
 	squadreSerieA[14] = "SAMPDORIA";
 	squadreSerieA[15] = "SASSUOLO";
@@ -56,6 +56,7 @@ RinviateDialog::RinviateDialog(QWidget *parent) :
 	squadreSerieA[17] = "TORINO";
 	squadreSerieA[18] = "UDINESE";
 	squadreSerieA[19] = "VERONA";
+
 
 	int i = 0;
 	while (i < 20) {
