@@ -272,7 +272,7 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 
 		Fanta::player tmpPlayer;
 
-		//DEBUG("ColCognome            : " << STR_MOD->msk(str, DELIM, ColCognome).c_str());
+		DEBUG("ColCognome            : " << STR_MOD->msk(str, DELIM, ColCognome).c_str());
 //		//DEBUG("ColNome_Sost          : " << STR_MOD->msk(str, DELIM, ColCognome_Sost).c_str());
 		//DEBUG("ColSquadra            : " << STR_MOD->msk(str, DELIM, ColSquadra).c_str());
 //		//DEBUG("ColSquadra_Sost       : " << STR_MOD->msk(str, DELIM, ColSquadra_Sost).c_str());
@@ -281,8 +281,8 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 //		//DEBUG("ColFantaVoto          : " << STR_MOD->msk(str, DELIM, ColFantaVoto).c_str());
 		//DEBUG("ColFantaVotoGazzetta  : " << STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta).c_str());
 		//DEBUG("ColVotoGazzetta       : " << STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str());
-		//DEBUG("ColGoalFatti          : " << STR_MOD->msk(str, DELIM, ColGoalFatti).c_str());
-		//DEBUG("ColGoalSubiti         : " << STR_MOD->msk(str, DELIM, ColGoalSubiti).c_str());
+		DEBUG("ColGoalFatti          : " << STR_MOD->msk(str, DELIM, ColGoalFatti).c_str());
+		DEBUG("ColGoalSubiti         : " << STR_MOD->msk(str, DELIM, ColGoalSubiti).c_str());
 		//DEBUG("ColAutoreti           : " << STR_MOD->msk(str, DELIM, ColAutoreti).c_str());
 //		//DEBUG("ColRigoreParato       : " << STR_MOD->msk(str, DELIM, ColRigoreParato).c_str());
 //		//DEBUG("ColRigoreSbagliato    : " << STR_MOD->msk(str, DELIM, ColRigoreSbagliato).c_str());
@@ -436,6 +436,27 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 				}
 			}
 		}
+
+		//DEBUG("Cognome            : " << tmpPlayer.Cognome);
+//		//DEBUG("Nome_Sost          : " << tmpPlayer.Cognome_Sost);
+		//DEBUG("Squadra            : " << tmpPlayer.Squadra);
+//		//DEBUG("Squadra_Sost       : " << tmpPlayer.Squadra_Sost);
+		//DEBUG("Ruolo              : " << tmpPlayer.Ruolo);
+		//DEBUG("Ruolo2             : " << tmpPlayer.Ruolo2);
+//		//DEBUG("FantaVoto          : " << tmpPlayer.FantaVoto);
+		//DEBUG("FantaVotoGazzetta  : " << tmpPlayer.FantaVotoGazzetta);
+		//DEBUG("VotoGazzetta       : " << tmpPlayer.VotoGazzetta);
+		//DEBUG("GoalFatti          : " << tmpPlayer.GoalFatti);
+		//DEBUG("GoalSubiti         : " << tmpPlayer.GoalSubiti);
+		//DEBUG("Autoreti           : " << tmpPlayer.Autoreti);
+//		//DEBUG("RigoreParato       : " << tmpPlayer.RigoreParato);
+//		//DEBUG("RigoreSbagliato    : " << tmpPlayer.RigoreSbagliato);
+		//DEBUG("GoalDecVitt        : " << tmpPlayer.GoalDecVitt);
+		//DEBUG("GoalDecPar         : " << tmpPlayer.GoalDecPar);
+		//DEBUG("Assist             : " << tmpPlayer.Assist);
+		//DEBUG("Amm                : " << tmpPlayer.Amm);
+		//DEBUG("Esp                : " << tmpPlayer.Esp);
+//		//DEBUG("daSostituire       : " << tmpPlayer.daSostituire);
 
 		Fanta::Team[k].push_back(tmpPlayer);
 		return PLAYER_OK;

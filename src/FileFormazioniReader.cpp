@@ -150,6 +150,9 @@ unsigned int FileFormazioniReader::execute() {
 
 				std::string GD = STR_MOD->msk(line, " ", i);
 				STR_MOD->toUpperCase(GD);
+
+				//DEBUG("GD : " << GD);
+
 				if ( GD == "GDV") {
 					gdv = true;
 					line.erase(line.size() - 4, 4);// toglie gdv
@@ -433,11 +436,11 @@ unsigned int FileFormazioniReader::execute() {
 					 *
 					 * * * * * * * * * * * * * * * * * * * */
 					if (gdv) {
-						v_Found.at(0) += "1\t0";
+						v_Found.at(0) += "\t1\t0";
 					} else if (gdp) {
-						v_Found.at(0) += "0\t1";
+						v_Found.at(0) += "\t0\t1";
 					} else {
-						v_Found.at(0) += "0\t0";
+						v_Found.at(0) += "\t0\t0";
 					}
 
 					//DEBUG("before switch : v_Found.at(0) = " << v_Found.at(0).c_str() << " (squadra " << k << ")");
