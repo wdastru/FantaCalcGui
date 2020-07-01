@@ -381,6 +381,8 @@ bool singletonQtLogger::checkForUpdates() {
 	if (this->getVersion().isEmpty()) {
 		DEBUG("Version string is empty.");
 		return false;
+	} else {
+		DEBUG("Version string : " << this->getVersion().toStdString());
 	}
 
 	int verCurrent;
