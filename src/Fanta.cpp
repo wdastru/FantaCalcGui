@@ -272,7 +272,7 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 
 		Fanta::player tmpPlayer;
 
-		DEBUG("ColCognome            : " << STR_MOD->msk(str, DELIM, ColCognome).c_str());
+		//DEBUG("ColCognome            : " << STR_MOD->msk(str, DELIM, ColCognome).c_str());
 //		//DEBUG("ColNome_Sost          : " << STR_MOD->msk(str, DELIM, ColCognome_Sost).c_str());
 		//DEBUG("ColSquadra            : " << STR_MOD->msk(str, DELIM, ColSquadra).c_str());
 //		//DEBUG("ColSquadra_Sost       : " << STR_MOD->msk(str, DELIM, ColSquadra_Sost).c_str());
@@ -281,8 +281,8 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 //		//DEBUG("ColFantaVoto          : " << STR_MOD->msk(str, DELIM, ColFantaVoto).c_str());
 		//DEBUG("ColFantaVotoGazzetta  : " << STR_MOD->msk(str, DELIM, ColFantaVotoGazzetta).c_str());
 		//DEBUG("ColVotoGazzetta       : " << STR_MOD->msk(str, DELIM, ColVotoGazzetta).c_str());
-		DEBUG("ColGoalFatti          : " << STR_MOD->msk(str, DELIM, ColGoalFatti).c_str());
-		DEBUG("ColGoalSubiti         : " << STR_MOD->msk(str, DELIM, ColGoalSubiti).c_str());
+		//DEBUG("ColGoalFatti          : " << STR_MOD->msk(str, DELIM, ColGoalFatti).c_str());
+		//DEBUG("ColGoalSubiti         : " << STR_MOD->msk(str, DELIM, ColGoalSubiti).c_str());
 		//DEBUG("ColAutoreti           : " << STR_MOD->msk(str, DELIM, ColAutoreti).c_str());
 //		//DEBUG("ColRigoreParato       : " << STR_MOD->msk(str, DELIM, ColRigoreParato).c_str());
 //		//DEBUG("ColRigoreSbagliato    : " << STR_MOD->msk(str, DELIM, ColRigoreSbagliato).c_str());
@@ -313,7 +313,7 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 			tmpPlayer.Ruolo = 1;
 			tmpPlayer.Ruolo2 = 1;
 			tmpPlayer.GoalFatti = atof(
-			STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 4.5;
+			STR_MOD->msk(str, DELIM, ColGoalFatti).c_str())/* / 4.5*/;
 			tmpPlayer.GoalSubiti = 0;
 			tmpPlayer.RigoreSbagliato = fabs(
 			atof(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3); /* WHAT TODO ??? */
@@ -323,13 +323,13 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 			if (STR_MOD->msk(str, DELIM, ColRuolo) == "T") {
 				tmpPlayer.Ruolo = 4;
 				tmpPlayer.GoalFatti = atof(
-				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3.5;
+				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str())/* / 3.5*/;
 				tmpPlayer.RigoreSbagliato = fabs(
 				atof(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3); /* WHAT TODO ??? */
 			} else if (STR_MOD->msk(str, DELIM, ColRuolo) == "C") {
 				tmpPlayer.Ruolo = 2;
 				tmpPlayer.GoalFatti = atof(
-				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 4;
+				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str())/* / 4.0*/;
 				tmpPlayer.RigoreSbagliato = fabs(
 				atof(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3); /* WHAT TODO ??? */
 			} else {
@@ -344,13 +344,13 @@ unsigned int Fanta::addPlayer(std::string & str, unsigned int k) {
 			if (STR_MOD->msk(str, DELIM, ColRuolo) == "T") {
 				tmpPlayer.Ruolo = 4;
 				tmpPlayer.GoalFatti = atof(
-				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3.5;
+				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str())/* / 3.5*/;
 				tmpPlayer.RigoreSbagliato = fabs(
 				atof(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3); /* WHAT TODO ??? */
 			} else if (STR_MOD->msk(str, DELIM, ColRuolo) == "A") {
 				tmpPlayer.Ruolo = 3;
 				tmpPlayer.GoalFatti = atof(
-				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str()) / 3;
+				STR_MOD->msk(str, DELIM, ColGoalFatti).c_str())/* / 3.0*/;
 				tmpPlayer.RigoreSbagliato = fabs(
 				atof(STR_MOD->msk(str, DELIM, ColRigore).c_str()) / 3); /* WHAT TODO ??? */
 			} else {

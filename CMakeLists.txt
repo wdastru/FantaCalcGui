@@ -27,10 +27,11 @@ EXECUTE_PROCESS(
 SET (REVISION ${GIT_COMMIT_HASH})
 SET (VERSION ${GIT_TAG})
 
-FILE(REMOVE ${CMAKE_BINARY_DIR}/revision.h ${CMAKE_BINARY_DIR}/version.h)
+#FILE(REMOVE ${CMAKE_BINARY_DIR}/revision.h ${CMAKE_BINARY_DIR}/version.h)
+FILE(REMOVE ${CMAKE_BINARY_DIR}/revision.h)
 
 CONFIGURE_FILE(src/revision.h.in revision.h @ONLY)
-CONFIGURE_FILE(src/version.h.in version.h @ONLY)
+#CONFIGURE_FILE(src/version.h.in version.h @ONLY)
 
 SET( SRCS 
         src/main.cpp 
@@ -80,7 +81,7 @@ SET( UIS
 		src/RinviateDialog.ui )
 
 SET( TEST_SRCS 
-        src/FCGTest.cpp
+        #src/FCGTest.cpp
         src/IniFileManager.cpp
         src/ChooseFiles.cpp
         src/Downloader.cpp
@@ -106,6 +107,6 @@ INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} )
 ADD_EXECUTABLE( FantaCalcGui ${SRCS} ${MOC_SRCS} ${UI_HDRS} )
 TARGET_LINK_LIBRARIES( FantaCalcGui ${QT_LIBRARIES} ${QT_QTNETWORK_LIBRARIES} ${QT_QTXML_LIBRARIES} )
 
-ADD_EXECUTABLE( FCGTest ${TEST_SRCS}  ${MOC_SRCS} ${UI_HDRS} )
-TARGET_LINK_LIBRARIES( FCGTest ${QT_LIBRARIES} ${QT_QTTEST_LIBRARIES} ${QT_QTNETWORK_LIBRARIES} ${QT_QTXML_LIBRARIES} )
+#ADD_EXECUTABLE( FCGTest ${TEST_SRCS}  ${MOC_SRCS} ${UI_HDRS} )
+#TARGET_LINK_LIBRARIES( FCGTest ${QT_LIBRARIES} ${QT_QTTEST_LIBRARIES} ${QT_QTNETWORK_LIBRARIES} ${QT_QTXML_LIBRARIES} )
 
